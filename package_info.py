@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from dataclasses import dataclass, field, fields, Field
 import logging
 
-import statscan as base_pkg
+import statscan as base_pkg  # TODO: update
 
 _GIT_DIR_NAME: str = '.git'
 
@@ -105,7 +105,11 @@ class VersionInfo:
                     if not isinstance((fld_type := fld.type), type):
                         raise TypeError(f"Field {key} is not a type. {fld_type=}. {value_str=}")
                     elif fld_type is datetime:
-                        value = datetime.fromisoformat(value_str)
+                        try:
+                            value = datetime.fromisoformat(value_str)
+                        except ValueError:
+                            logger.warning(f"Invalid datetime format for key {key}. {value_str=}")
+                            continue
                     else:
                         if (fld_type != v_type) and (v_type is not None):
                             logger.warning(f"Type mismatch for key {key}. Expected {fld.type}, got {v_type}. {value_str=}")
