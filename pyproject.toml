@@ -1,0 +1,51 @@
+[build-system]
+requires = [
+    "setuptools>=61.0", 
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "template-project"  # TODO: update
+authors = [
+    {name="Paul Bouillon", email="pbouill@gmail.com"},
+]
+description = "project description"  # TODO: update
+license = "GPL-3.0-or-later" 
+license-files = ["LICENSE.*"]
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = [
+    "python", 
+    "template",  # TODO: update
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Operating System :: OS Independent",
+]
+dynamic = [
+    "version", 
+    "dependencies",
+]
+
+[project.urls]  # TODO: update
+"Homepage" = "https://github.com/pbouill/template"
+"Repository" = "https://github.com/pbouill/template.git"
+"Bug Tracker" = "https://github.com/pbouill/template/issues"
+
+# Define the extras here. Users install `process[feature]`
+[project.optional-dependencies]  # TODO: update
+numpy = ["numpy"] 
+all = [
+    "template[numpy]",
+]
+
+[tool.setuptools.package-data]
+"*" = ["*.html", "*.css", "*.ico", "*.js"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}

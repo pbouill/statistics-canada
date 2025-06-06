@@ -1,0 +1,27 @@
+name: Publish to PyPI
+on:
+  workflow_run:
+    workflows: ["Build and Test"]
+    types: ["completed"]  # This workflow will run when the "Build and Test" workflow completes
+
+permissions:
+  actions: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    environment:
+      name: pypi
+      url: https://pypi.org/p/${{ vars.PYPI_PROJECT_NAME }}
+    steps:
+    - name: Fetch the build artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ vars.ARTIFACT_NAME}}
+        run-id: ${{ github.event.workflow_run.id }}
+        github-token: ${{ github.token }}
+        path: dist/
+    - name: Publish package distributions to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1

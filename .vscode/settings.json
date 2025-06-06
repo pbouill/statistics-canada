@@ -1,0 +1,19 @@
+{
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./unittests",
+        "-p",
+        "test_*.py"
+    ],
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": true,
+    "python.analysis.aiCodeActions": {
+        "addMissingImports": true,
+        "addMissingParameterTypeHints": true,
+        "addMissingReturnTypeHints": true,
+        "addMissingVariableTypeHints": true,
+        "addMissingMethodTypeHints": true,
+        "addMissingClassTypeHints": true
+    },
+}
