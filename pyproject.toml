@@ -5,18 +5,20 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "template-project"  # TODO: update
+name = "statistics-canada"
 authors = [
     {name="Paul Bouillon", email="pbouill@gmail.com"},
 ]
-description = "project description"  # TODO: update
+description = "Python bindings for the Statistics Canada Web Data Service (WDS) API"
 license = "GPL-3.0-or-later" 
 license-files = ["LICENSE.*"]
 readme = "README.md"
 requires-python = ">=3.10"
 keywords = [
     "python", 
-    "template",  # TODO: update
+    "statistics",
+    "census",
+    "canada",
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -32,17 +34,17 @@ dynamic = [
     "dependencies",
 ]
 
-[project.urls]  # TODO: update
-"Homepage" = "https://github.com/pbouill/template"
-"Repository" = "https://github.com/pbouill/template.git"
-"Bug Tracker" = "https://github.com/pbouill/template/issues"
+[project.urls]
+"Homepage" = "https://github.com/pbouill/statistics-canada"
+"Repository" = "https://github.com/pbouill/statistics-canada.git"
+"Bug Tracker" = "https://github.com/pbouill/statistics-canada/issues"
 
 # Define the extras here. Users install `process[feature]`
-[project.optional-dependencies]  # TODO: update
-numpy = ["numpy"] 
-all = [
-    "template[numpy]",
-]
+# [project.optional-dependencies]  # TODO: update
+# numpy = ["numpy"] 
+# all = [
+#     "statistics-canada[numpy]",
+# ]
 
 [tool.setuptools.package-data]
 "*" = ["*.html", "*.css", "*.ico", "*.js"]

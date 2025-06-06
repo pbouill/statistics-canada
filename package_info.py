@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from dataclasses import dataclass, field, fields, Field
 import logging
 
-import template as base_pkg
+import statscan as base_pkg
 
 _GIT_DIR_NAME: str = '.git'
 
