@@ -1,4 +1,3 @@
-import sys
 import setuptools
 from package_info import VersionInfo
 

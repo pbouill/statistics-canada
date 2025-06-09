@@ -49,5 +49,6 @@ def write_version() -> None:
 
 if __name__ == "__main__":
     write_version()
-    build.__main__.main(sys.argv[1:], 'python -m build')
+    with local_syspath():
+        build.__main__.main(sys.argv[1:], 'python -m build')
     
