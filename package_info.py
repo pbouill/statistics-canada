@@ -83,30 +83,43 @@ class VersionInfo:
     def from_version_file(cls, file_path: Optional[Path] = None) -> Self:
         '''
         Load version information from a file.
+        Raises ValueError if any required fields are missing from the file.
         '''
         file_path = file_path or VERSION_FILE
         kwargs: dict[str, Any] = {}
         kwargs['package_name'] = file_path.parent.name
         cls_fields: dict[str, Field] = {f.name: f for f in fields(cls)}
+        
+        # Set package_name from parent directory
+        kwargs['package_name'] = file_path.parent.name
+        # Track which fields we've found in the file
+        found_fields = {'package_name'}  # package_name is always set from file path
+        
         with file_path.open(mode="r") as f:
             for line in f:
                 if line.startswith("#"):
                     continue
+                if "=" not in line:
+                    continue
+                    
                 v_type = None
                 key: str
                 value_str: str
-                key, value_str = line.split("=")
-                if len(key_type :=key.split(":")) > 1:
+                key, value_str = line.split("=", 1)  # Split only on first =
+                
+                if len(key_type := key.split(":")) > 1:
                     if len(key_type) > 2:
-                        raise ValueError(f"Cannot parse key: {key[0]}. {key_type=}")
+                        raise ValueError(f"Cannot parse key: {key_type[0]}. {key_type=}")
                     for t in cls.SUPPORTED_TYPES:
                         if key_type[1].strip() == t.__name__:
                             v_type = t
                             break
                     key = key_type[0]
+                    
                 key = key.strip().replace('__', '')
                 if key == 'version':  # just a property, derived from build_time
                     continue
+                    
                 if (fld := cls_fields.get(key, None)) is not None:
                     value: Any
                     value_str = value_str.split("#")[0].strip().replace("'", "").replace('"', "")
@@ -115,16 +128,28 @@ class VersionInfo:
                     elif fld_type is datetime:
                         try:
                             value = datetime.fromisoformat(value_str)
+                            kwargs[key] = value
+                            found_fields.add(key)
                         except ValueError:
-                            logger.warning(f"Invalid datetime format for key {key}. {value_str=}")
-                            continue
+                            raise ValueError(f"Invalid datetime format for key {key}: {value_str}")
                     else:
                         if (fld_type != v_type) and (v_type is not None):
                             logger.warning(f"Type mismatch for key {key}. Expected {fld.type}, got {v_type}. {value_str=}")
-                        value = fld_type(value_str)
-                    kwargs[key] = value
+                        try:
+                            value = fld_type(value_str)
+                            kwargs[key] = value
+                            found_fields.add(key)
+                        except (ValueError, TypeError) as e:
+                            raise ValueError(f"Cannot convert value '{value_str}' to {fld_type.__name__} for field {key}: {e}")
                 else:
                     logger.warning(f"Key {key} not found in {cls.__name__}. {value_str}")
+        
+        # Check that all required fields were found
+        required_fields = {f.name for f in fields(cls)}
+        missing_fields = required_fields - found_fields
+        if missing_fields:
+            raise ValueError(f"Missing required fields in version file {file_path}: {missing_fields}")
+        
         return cls(**kwargs)
 
     
