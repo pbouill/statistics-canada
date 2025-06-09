@@ -1,4 +1,5 @@
 from pathlib import Path
+from sys import prefix
 from typing import Iterable, Optional, TextIO, Generator, Callable, Any
 from datetime import datetime, timezone
 import re
@@ -12,7 +13,7 @@ import pandas as pd
 
 import statscan.enums.auto
 from statscan.enums.geolevel import GeoLevel
-from statscan.url import GEO_ATTR_FILE_URL
+from statscan.url import GEO_ATTR_FILE_2021_URL
 from statscan.util.data import download_data, unpack_to_dataframe
 
 logger = logging.getLogger(__name__)
@@ -97,6 +98,7 @@ EnumMapSig = tuple[
     GeoAttributeColumn,  # enum_name_col
     GeoAttributeColumn,  # enum_value_col
     Optional[GeoAttributeColumn],  # enum_desc_col
+    Optional[GeoAttributeColumn],  # name/key prefix
 ]
 
 
@@ -135,7 +137,7 @@ def write_method(
         if method.fdel:
             write_method(f, method.fdel, indent=indent)
     else:
-        f.write('\n\n')
+        f.write('\n')
         lines, _ = inspect.getsourcelines(method)
         m_indent = len(lines[0]) - len(lines[0].lstrip())
         for line in lines:
@@ -144,63 +146,84 @@ def write_method(
 
 def write_enum_class(
     f: TextIO, 
-    df: pd.DataFrame, 
     cls_template: type[Enum],
-    mappping: EnumMapSig,
+    cls_name: Optional[str] = None,
+    cls_bases: Optional[tuple[type, ...]] = None,
+    df: Optional[pd.DataFrame] = None, 
+    mapping: Optional[EnumMapSig] = None,
+    skip_methods: bool = False,
     skip_auto: bool = True,
 ):
     """
     Write the enum class definition to the file.
     """
-    logger.debug(f'Writing class {cls_template.__name__} to file...')
+    cls_name = cls_name or cls_template.__name__
+    cls_bases = cls_bases or cls_template.__bases__
+
+    logger.debug(f'Writing class {cls_name} to file from template {cls_template}...')
     indent = 4
-    name_col, val_col, desc_col = mappping
+
     f.write('\n\n')
-    f.write(f'class {cls_template.__name__}({", ".join(b.__name__ for b in cls_template.__bases__)}):\n')
+    f.write(f'class {cls_name}({", ".join(b.__name__ for b in cls_bases)}):\n')
     f.write(f'    """\n')
-    f.write(f'    Automatically generated Enum for {cls_template.__name__}\n')
-    f.write(f'    Name: {name_col}\n')
-    f.write(f'    Value: {val_col}\n')
-    if desc_col:
-        f.write(f'    Description: {desc_col}\n')
+    f.write(f'    Automatically generated Enum for {cls_name}\n')
+    if mapping is not None:
+        name_col, val_col, desc_col, prefix_col = mapping
+        f.write(f'    Name: {name_col}\n')
+        f.write(f'    Value: {val_col}\n')
+        if desc_col:
+            f.write(f'    Description: {desc_col}\n')
+        if prefix_col:
+            f.write(f'    Prefix: {prefix_col}\n')
     f.write(f'    """\n')
 
-    # drop duplicate values and sort by name (do not consider description for uniqueness), but ensure all other columns are preserved...
-    sorted_unique_df = df.drop_duplicates(subset=[name_col.value, val_col.value]).sort_values(by=name_col.value)
-    
-    for _, row in sorted_unique_df.iterrows():
-        try:
-            name = row[name_col.value]
-            value = row[val_col.value]
-            desc = row[desc_col.value] if desc_col else None
-        except KeyError as e:
-            logger.error(f"Missing column in DataFrame: {e}. Columns: {df.columns.tolist()}")
-            raise e
-        key = cleanstr(name).upper()
-        entry = f'{key} = '
-        if isinstance(cls_template, StrEnum):
-            entry += f"'{value}'"
-        else:
-            entry += f'{value}  # {name}'
-        if desc:
-            entry += f" ({desc})"
-        f.write(' ' * indent + f'{entry}\n')
-    for k, v in cls_template.__dict__.items():
-        if k.startswith('__') and k.endswith('__'):  # skip dunder methods
-            continue
-        if skip_auto and (k == '_generate_next_value_'):
-            continue
-        if inspect.isfunction(v):
-            logger.debug(f'[{cls_template.__name__}] found {type(v)} {k}.')
-        elif isinstance(v, (property, staticmethod, classmethod)):
-            logger.debug(f'[{cls_template.__name__}] found {type(v)} {k}.')
-        else:
-            continue
-        write_method(
-            f=f, 
-            method=v, 
-            indent=indent, 
-        )
+    if df is not None:
+        if mapping is None:
+            raise ValueError("Mapping must be provided if DataFrame is provided.")
+        # drop duplicate values and sort by name (do not consider description for uniqueness), but ensure all other columns are preserved...
+        sorted_unique_df = df.drop_duplicates(subset=[val_col.value]).sort_values(by=name_col.value)
+        if prefix_col:
+            sorted_unique_df = sorted_unique_df.sort_values(by=[prefix_col.value, name_col.value])
+        
+        for _, row in sorted_unique_df.iterrows():
+            try:
+                name: str = row[name_col.value]
+                value = row[val_col.value]
+                desc: Optional[str] = row[desc_col.value] if desc_col else None
+                prefix: Optional[str] = row[prefix_col.value] if prefix_col else None
+            except KeyError as e:
+                logger.error(f"Missing column in DataFrame: {e}. Columns: {df.columns.tolist()}")
+                raise e
+            key = cleanstr(name.split('/')[0]).upper()
+            entry = ''
+            if prefix:
+                entry += cleanstr(prefix).upper() + '_'
+            entry += f'{key} = '
+            if isinstance(cls_template, StrEnum):
+                entry += f"'{value}'"
+            else:
+                entry += f'{value}  # {name}'
+            if desc:
+                entry += f" ({desc})"
+            f.write(' ' * indent + f'{entry}\n')
+
+    if not skip_methods:
+        for k, v in cls_template.__dict__.items():  # write the methods and properties
+            if k.startswith('__') and k.endswith('__'):  # skip dunder methods
+                continue
+            if skip_auto and (k == '_generate_next_value_'):
+                continue
+            if inspect.isfunction(v):
+                logger.debug(f'[{cls_template.__name__}] found {type(v)} {k}.')
+            elif isinstance(v, (property, staticmethod, classmethod)):
+                logger.debug(f'[{cls_template.__name__}] found {type(v)} {k}.')
+            else:
+                continue
+            write_method(
+                f=f, 
+                method=v, 
+                indent=indent, 
+            )
     logger.debug(f'...wrote class {cls_template.__name__}')
 
 
@@ -260,6 +283,7 @@ def write_province_enums(df: pd.DataFrame, overwrite: bool = False) -> Path:
         GeoAttributeColumn.PRENAME_PRANOM,  # enum_name_col
         GeoAttributeColumn.PRUID_PRIDU,  # enum_value_col
         None,  # enum_desc_col
+        None, # name/key prefix (not used for provinces)
     )
     with enum_file(
         fp=fp,
@@ -271,52 +295,126 @@ def write_province_enums(df: pd.DataFrame, overwrite: bool = False) -> Path:
     ) as f:
         write_enum_class(
             f=f,
-            df=df,
             cls_template=ProvinceTerritory,
-            mappping=mapping,
+            df=df,
+            mapping=mapping,
         )
     return fp
 
 
-# def write_census_division_enums(
-#     df: pd.DataFrame, 
-#     overwrite: bool = False,
-# ) -> Path:
-#     # first drop non-unique CDDGUID_DRIDUGD
-#     # group by PRNAME then iterate over the individual provinces with pr_prefixes
-#     mapping = (
-#         GeoAttributeColumn.CDNAME_DRNOM,  # enum_name_col
-#         GeoAttributeColumn.CDDGUID_DRIDUGD,  # enum_value_col
-#         None,  # enum_desc_col
-#         (
-#             None,  # object methods
-#             None,  # property methods
-#             [GeoLevel.geo_level],  # class methods
-#             [GeoLevel.dguid],  # static methods
-#         ),
-#     )
+class CensusDivision(Enum):
+    """
+    Enum for Canadian Census Divisions.
+    This enum is automatically generated from the GeoAttribute data.
+    """
 
-#     fp = AUTO_ENUMS_PATH / 'census_division.py'
-#     unique_df = df.drop_duplicates(subset=[GeoAttributeColumn.CDDGUID_DRIDUGD.value])
-#     with enum_file(
-#         fp=fp,
-#         imports={
-#             'enum': Enum.__name__,
-#         },
-#         overwrite=overwrite,
-#     ) as f:
-#         for (pr_name, pr_df) in unique_df.groupby(GeoAttributeColumn.PRENAME_PRANOM.value):
-#             pr_prefix = cleanstr(pr_name).replace('_', '')
-#             logger.info(f'Processing {pr_name} ({pr_prefix}) with {len(pr_df)} census divisions.')
-#     return fp
+    @staticmethod
+    def get_geo_level() -> GeoLevel:
+        """
+        Return the GeoLevel for this enum.
+        """
+        return GeoLevel.CD
+    
+    @property
+    def province_territory(self) -> ProvinceTerritory:
+        """
+        Return the ProvinceTerritory for this enum.
+        """
+        return ProvinceTerritory(int(str(self.value)[:2]))
 
+    @property
+    def dguid(self) -> str:
+        """
+        Return the DGUID for this enum.
+        """
+        return f'2021{self.get_geo_level().value}{self.value:04d}'
+
+
+def write_census_division_enums(
+    df: pd.DataFrame, 
+    overwrite: bool = False,
+) -> Path:
+    mapping = (
+        GeoAttributeColumn.CDNAME_DRNOM,  # enum_name_col
+        GeoAttributeColumn.CDUID_DRIDU,  # enum_value_col
+        None,  # enum_desc_col
+        GeoAttributeColumn.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
+    )
+    fp = AUTO_ENUMS_PATH / 'census_division.py'
+
+    with enum_file(
+        fp=fp,
+        imports={
+            'enum': Enum.__name__,
+            'statscan.enums.geolevel': GeoLevel.__name__,
+            'statscan.enums.auto.province': ProvinceTerritory.__name__,
+        },
+        overwrite=overwrite,
+    ) as f:
+        write_enum_class(f=f, cls_template=CensusDivision, df=df, mapping=mapping)
+    return fp
+
+
+class FederalElectoralDistrict(Enum):
+    """
+    Enum for Canadian Federal Electoral Districts.
+    This enum is automatically generated from the GeoAttribute data.
+    """
+
+    @staticmethod
+    def get_geo_level() -> GeoLevel:
+        """
+        Return the GeoLevel for this enum.
+        """
+        return GeoLevel.FED
+    
+    @property
+    def province_territory(self) -> ProvinceTerritory:
+        """
+        Return the ProvinceTerritory for this enum.
+        """
+        return ProvinceTerritory(int(str(self.value)[:2]))
+
+    @property
+    def dguid(self) -> str:
+        """
+        Return the DGUID for this enum.
+        """
+        return f'2021{self.get_geo_level().value}{self.value:05d}'
+    
+def write_federal_electoral_district_enums(
+    df: pd.DataFrame, 
+    overwrite: bool = False,
+) -> Path:
+    """
+    Write the federal electoral district enums to a file.
+    """
+    fp = AUTO_ENUMS_PATH / 'federal_electoral_district.py'
+    mapping = (
+        GeoAttributeColumn.FEDNAME_CEFNOM,  # enum_name_col
+        GeoAttributeColumn.FEDUID_CEFIDU,  # enum_value_col
+        None,  # enum_desc_col
+        GeoAttributeColumn.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
+    )
+    with enum_file(
+        fp=fp,
+        imports={
+            'enum': Enum.__name__,
+            'statscan.enums.geolevel': GeoLevel.__name__,
+            'statscan.enums.auto.province': ProvinceTerritory.__name__,
+        },
+        overwrite=overwrite,
+    ) as f:
+        write_enum_class(f=f, cls_template=FederalElectoralDistrict, df=df, mapping=mapping)
+    return fp
 
 
 if __name__ == '__main__':
     from statscan.util.log import configure_logging
     configure_logging(level='DEBUG')
-    attr_data_file = asyncio.run(download_data(GEO_ATTR_FILE_URL))
+    attr_data_file = asyncio.run(download_data(GEO_ATTR_FILE_2021_URL))
     df = unpack_to_dataframe(attr_data_file)
 
     write_province_enums(df=df, overwrite=True)
-    # write_census_division_enums(df=df, overwrite=True)
+    write_census_division_enums(df=df, overwrite=True)
+    write_federal_electoral_district_enums(df=df, overwrite=True)
