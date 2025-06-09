@@ -11,7 +11,7 @@ authors = [
 ]
 description = "Python bindings for the Statistics Canada Web Data Service (WDS) API"
 license = "GPL-3.0-or-later" 
-license-files = ['LICENSE', "LICENSE.*"]
+license-files = ['LICENSE']  #, "LICENSE.*"]
 readme = "README.md"
 requires-python = ">=3.10"
 keywords = [
