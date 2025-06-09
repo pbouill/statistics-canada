@@ -1,3 +1,5 @@
+# !! Note: build in a non-isolated environment to utilize the package_info module (python -m build --no-isolation)
+
 import sys
 from pathlib import Path
 import setuptools
