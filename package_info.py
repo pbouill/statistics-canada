@@ -25,12 +25,20 @@ def get_git_head_ref_hash(repo_dir: Optional[Path] = None) -> tuple[str, str]:
     Returns:
         tuple: A tuple containing the reference and commit hash.
     '''
-    repo_dir = repo_dir or Path('.')
+    repo_dir = repo_dir or PACKAGE_PATH.parent
     git_path = repo_dir / _GIT_DIR_NAME
-    with (git_path / 'HEAD').open() as f:
-        ref: str = f.read().strip().split(' ')[-1]
-    with (git_path / ref).open() as f:
-        commit_hash: str = f.read().strip()
+    try:
+        head_path = git_path / 'HEAD'
+        with head_path.open() as f:
+            ref: str = f.read().strip().split(' ')[-1]
+    except FileNotFoundError:
+        raise FileNotFoundError(f"Git repository not found in {head_path.resolve()}. Please ensure you are in a valid git repository.")
+    try:
+        ref_path = git_path / ref
+        with ref_path.open() as f:
+            commit_hash: str = f.read().strip()
+    except FileNotFoundError:
+        raise FileNotFoundError(f"Git reference not found in {ref_path.resolve()}. Please ensure you are in a valid git repository.")
     return ref, commit_hash
 
 def get_git_head_hash(repo_dir: Optional[Path] = None) -> str:
