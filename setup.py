@@ -1,26 +1,18 @@
-import sys
-from pathlib import Path
-from contextlib import contextmanager
-
 import setuptools
 
-@contextmanager
-def local_syspath():
-    local_path = Path(__file__).parent
-    original_path = sys.path.copy()
-    try:
-        if str(local_path) not in sys.path:
-            sys.path.insert(0, str(local_path))
-        yield
-    finally:
-        sys.path = original_path
 
-
-with local_syspath():
+def get_package_name_version() -> tuple[str, str]:
+    """
+    Get the package name and version from the current version info.
+    """
     from package_info import VersionInfo
     current_version = VersionInfo.get_latest()
+    return current_version.package_name, current_version.version
 
-setuptools.setup(
-    package_dir={current_version.package_name: current_version.package_name},
-    version=current_version.version,
-)
+
+if __name__ == '__main__':
+    package_name, version = get_package_name_version()
+    setuptools.setup(
+        package_dir={package_name: package_name},
+        version=version,
+    )
