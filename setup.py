@@ -1,6 +1,7 @@
 # !! Note: build in a non-isolated environment to utilize the package_info module (python -m build --no-isolation)
 
 import sys
+import os
 from pathlib import Path
 import setuptools
 from contextlib import contextmanager
@@ -13,7 +14,8 @@ def local_imports():
     This allows importing local modules without installing them.
     """
     original_sys_path = sys.path.copy()
-    sys.path.insert(0, str(Path(__file__).parent.resolve()))
+    local_path = os.environ.get('GITHUB_WORKSPACE', None) or Path(__file__).parent.resolve()
+    sys.path.insert(0, str(local_path))
     try:
         yield
     finally:

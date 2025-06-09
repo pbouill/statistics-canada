@@ -33,7 +33,7 @@ jobs:
     - name: Build package
       run: |
         # build the package
-        python -m build  --no-isolation
+        python -m build
     - name: Store artifact
       uses: actions/upload-artifact@v4
       with:
