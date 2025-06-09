@@ -464,11 +464,40 @@ def write_census_subdivision_enums(
             'enum': Enum.__name__,
             'statscan.enums.geolevel': GeoLevel.__name__,
             'statscan.enums.auto.province': ProvinceTerritory.__name__,
+            'statscan.enums.auto.census_division': CensusDivision.__name__,
         },
         overwrite=overwrite,
     ) as f:
         write_enum_class(f=f, cls_template=CensusSubDivision, df=df, mapping=mapping)
     return fp
+
+class DesignatedPlace(Enum):
+    """
+    Enum for Canadian Designated Places.
+    This enum is automatically generated from the GeoAttribute data.
+    """
+
+    @staticmethod
+    def get_geo_level() -> GeoLevel:
+        """
+        Return the GeoLevel for this enum.
+        """
+        return GeoLevel.DPL
+    
+    @property
+    def province_territory(self) -> ProvinceTerritory:
+        """
+        Return the ProvinceTerritory for this enum.
+        """
+        return ProvinceTerritory(int(str(self.value)[:2]))
+
+    @property
+    def dguid(self) -> str:
+        """
+        Return the DGUID for this enum.
+        """
+        return f'2021{self.get_geo_level().value}{self.value:06.1f}'
+
 
 
 if __name__ == '__main__':
