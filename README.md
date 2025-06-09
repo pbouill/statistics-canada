@@ -1,5 +1,6 @@
 ## Overview
 A Python project template with automated versioning and build utilities.
+see: https://www12.statcan.gc.ca/census-recensement/2021/ref/dict/fig/index-eng.cfm?ID=f1_1
 
 ## Installation
 
