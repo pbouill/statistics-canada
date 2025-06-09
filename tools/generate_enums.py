@@ -409,6 +409,68 @@ def write_federal_electoral_district_enums(
     return fp
 
 
+class CensusSubDivision(Enum):
+    """
+    Enum for Canadian Census Subdivisions.
+    This enum is automatically generated from the GeoAttribute data.
+    """
+
+    @staticmethod
+    def get_geo_level() -> GeoLevel:
+        """
+        Return the GeoLevel for this enum.
+        """
+        return GeoLevel.CSD
+    
+    @property
+    def province_territory(self) -> ProvinceTerritory:
+        """
+        Return the ProvinceTerritory for this enum.
+        """
+        return ProvinceTerritory(int(str(self.value)[:2]))
+    
+    @property
+    def census_division(self) -> CensusDivision:
+        """
+        Return the CensusDivision for this enum.
+        """
+        return CensusDivision(int(str(self.value)[:4]))
+
+    @property
+    def dguid(self) -> str:
+        """
+        Return the DGUID for this enum.
+        """
+        return f'2021{self.get_geo_level().value}{self.value:07d}'
+    
+
+def write_census_subdivision_enums(
+    df: pd.DataFrame, 
+    overwrite: bool = False,
+) -> Path:
+    """
+    Write the census subdivision enums to a file.
+    """
+    fp = AUTO_ENUMS_PATH / 'census_subdivision.py'
+    mapping = (
+        GeoAttributeColumn.CSDNAME_SDRNOM,  # enum_name_col
+        GeoAttributeColumn.CSDUID_SDRIDU,  # enum_value_col
+        None,  # enum_desc_col
+        GeoAttributeColumn.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
+    )
+    with enum_file(
+        fp=fp,
+        imports={
+            'enum': Enum.__name__,
+            'statscan.enums.geolevel': GeoLevel.__name__,
+            'statscan.enums.auto.province': ProvinceTerritory.__name__,
+        },
+        overwrite=overwrite,
+    ) as f:
+        write_enum_class(f=f, cls_template=CensusSubDivision, df=df, mapping=mapping)
+    return fp
+
+
 if __name__ == '__main__':
     from statscan.util.log import configure_logging
     configure_logging(level='DEBUG')
@@ -418,3 +480,4 @@ if __name__ == '__main__':
     write_province_enums(df=df, overwrite=True)
     write_census_division_enums(df=df, overwrite=True)
     write_federal_electoral_district_enums(df=df, overwrite=True)
+    write_census_subdivision_enums(df=df, overwrite=True)
