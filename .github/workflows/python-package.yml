@@ -33,7 +33,7 @@ jobs:
     - name: Build package
       run: |
         # build the package
-        python build_script.py
+        python -m build
     - name: Store artifact
       uses: actions/upload-artifact@v4
       with:
