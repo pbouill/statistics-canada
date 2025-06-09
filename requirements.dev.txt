@@ -8,6 +8,7 @@ setuptools>=78.1.0
 
 # typying/stubs
 types-setuptools>=78.1.0
+pandas-stubs>=2.2.3
 
 # install the local package in editable mode
 -e .
