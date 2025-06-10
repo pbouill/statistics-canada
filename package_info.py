@@ -116,7 +116,10 @@ class VersionInfo:
                             break
                     key = key_type[0]
                     
-                key = key.strip().replace('__', '')
+                key = key.strip()
+                # Remove prefix and suffix __ if present
+                if key.startswith('__') and key.endswith('__'):
+                    key = key[2:-2]
                 if key == 'version':  # just a property, derived from build_time
                     continue
                     
