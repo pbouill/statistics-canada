@@ -33,7 +33,7 @@ class TestDataUtilities(unittest.TestCase):
         # Mock the HTTP response
         mock_response = MagicMock()
         mock_response.content = b"test,data\n1,2\n3,4"
-        mock_response.raise_for_status.return_value = None
+        mock_response.raise_for_status = AsyncMock(return_value=None)
         
         # Mock the async context manager
         mock_client_instance = AsyncMock()
@@ -93,7 +93,7 @@ class TestDataUtilities(unittest.TestCase):
         # Mock the HTTP response
         mock_response = MagicMock()
         mock_response.content = b"test content"
-        mock_response.raise_for_status.return_value = None
+        mock_response.raise_for_status = AsyncMock(return_value=None)
         
         mock_client_instance = AsyncMock()
         mock_client_instance.get.return_value = mock_response
@@ -121,7 +121,7 @@ class TestDataUtilities(unittest.TestCase):
             with patch('statscan.util.data.AsyncClient') as mock_client:
                 mock_response = MagicMock()
                 mock_response.content = b"test"
-                mock_response.raise_for_status.return_value = None
+                mock_response.raise_for_status = AsyncMock(return_value=None)
                 
                 mock_client_instance = AsyncMock()
                 mock_client_instance.get.return_value = mock_response

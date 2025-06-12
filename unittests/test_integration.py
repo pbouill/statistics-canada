@@ -32,7 +32,8 @@ class TestDataIntegration(unittest.TestCase):
         # Mock HTTP response
         mock_response = mock_client.return_value.__aenter__.return_value.get.return_value
         mock_response.content = csv_content
-        mock_response.raise_for_status.return_value = None
+        # Fix for coroutine warning: properly mock the awaitable
+        mock_response.raise_for_status = unittest.mock.AsyncMock(return_value=None)
         
         async def run_integration_test():
             # Download the data
@@ -64,14 +65,14 @@ class TestEnumIntegration(unittest.TestCase):
         """Test integration between Province enum and GeoLevel."""
         try:
             from statscan.enums.auto.province import ProvinceTerritory
-            from statscan.enums.geolevel import GeoLevel
+            from statscan.enums.schema import Schema
             
             # Test that province enum works with geo level
             ontario = ProvinceTerritory.ONTARIO
             
             # Test that we can get the geo level
             geo_level = ontario.get_geo_level()
-            self.assertEqual(geo_level, GeoLevel.PR)
+            self.assertEqual(geo_level, Schema.PR)
             
             # Test DGUID generation if available
             if hasattr(ontario, 'dguid'):
@@ -135,8 +136,8 @@ class TestBuildSystemIntegration(unittest.TestCase):
         self.assertTrue(hasattr(statscan, '__version__'))
         
         # Core enums
-        from statscan.enums.geolevel import GeoLevel
-        self.assertIsNotNone(GeoLevel)
+        from statscan.enums.schema import Schema
+        self.assertIsNotNone(Schema)
         
         # Utility functions
         from statscan.util.data import download_data, unpack_to_dataframe
@@ -144,8 +145,8 @@ class TestBuildSystemIntegration(unittest.TestCase):
         self.assertTrue(callable(unpack_to_dataframe))
         
         # Census functionality
-        from statscan.census import CensusYear
-        self.assertIsNotNone(CensusYear)
+        from statscan.enums.vintage import Vintage
+        self.assertIsNotNone(Vintage)
 
 
 class TestRealWorldScenarios(unittest.TestCase):
@@ -166,18 +167,18 @@ class TestRealWorldScenarios(unittest.TestCase):
         
         # 1. Import the package
         import statscan
-        from statscan.enums.geolevel import GeoLevel
-        from statscan.census import CensusYear
+        from statscan.enums.schema import Schema
+        from statscan.enums.vintage import Vintage
         
         # 2. Check version
         version = statscan.__version__
         self.assertIsInstance(version, str)
         
         # 3. Use enums
-        canada_level = GeoLevel.CAN
+        canada_level = Schema.CAN
         self.assertEqual(canada_level, 'A0000')
         
-        census_2021 = CensusYear.CENSUS_2021
+        census_2021 = Vintage.CENSUS_2021
         self.assertEqual(census_2021.value, 2021)
         
         # 4. Work with auto-generated enums (if available)

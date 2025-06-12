@@ -36,7 +36,7 @@ async def download_data(url: str, data_dir: Path = DEFAULT_DATA_PATH, file_name:
         logger.debug(f"Downloading data from {url} to {file_path}")
         async with AsyncClient() as client:
             response = await client.get(url)
-            response.raise_for_status()
+            await response.raise_for_status()
             file_path.write_bytes(response.content)
         return file_path
     

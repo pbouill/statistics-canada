@@ -1,10 +1,9 @@
+import sys
 from pathlib import Path
-from sys import prefix
-from typing import Iterable, Optional, TextIO, Generator, Callable, Any
+from typing import Iterable, Optional, TextIO, Generator, Callable, Mapping
 from datetime import datetime, timezone
 import re
-from enum import Enum, StrEnum, auto
-import asyncio
+from enum import Enum, StrEnum
 import logging
 from contextlib import contextmanager
 import inspect
@@ -12,94 +11,37 @@ import inspect
 import pandas as pd
 
 import statscan.enums.auto
-from statscan.enums.geolevel import GeoLevel
+from statscan.enums.schema import Schema, SACType
+from statscan.enums.geocode.geocode import GeoCode, GeoAttributeColumn2021
+from statscan.enums.geocode.pr_geocode import ProvinceGeoCode
+from statscan.enums.geocode.cd_geocode import CensusDivisionGeoCode
+from statscan.enums.geocode.cma_geocode import CensusMetropolitanAreaGeoCode
 from statscan.url import GEO_ATTR_FILE_2021_URL
 from statscan.util.data import download_data, unpack_to_dataframe
 
 logger = logging.getLogger(__name__)
 
 AUTO_ENUMS_PATH = Path(statscan.enums.auto.__file__).parent
-
-
-class GeoAttributeColumn(StrEnum):
-    @staticmethod
-    def _generate_next_value_(name, start, count, last_values):
-        """
-        Return the lower-cased version of the member name.
-        """
-        return name.upper()
-
-    PRUID_PRIDU = auto()
-    PRDGUID_PRIDUGD = auto()
-    PRNAME_PRNOM = auto()
-    PRENAME_PRANOM = auto()
-    PRFNAME_PRFNOM = auto()  # French
-    PREABBR_PRAABBREV = auto()
-    PRFABBR_PRFABBREV = auto()  # French
-    CDUID_DRIDU = auto()
-    CDDGUID_DRIDUGD = auto()
-    CDNAME_DRNOM = auto()
-    CDTYPE_DRGENRE = auto()
-    FEDUID_CEFIDU = auto()
-    FEDDGUID_CEFIDUGD = auto()
-    FEDNAME_CEFNOM = auto()
-    CSDUID_SDRIDU = auto()
-    CSDDGUID_SDRIDUGD = auto()
-    CSDNAME_SDRNOM = auto()
-    CSDTYPE_SDRGENRE = auto()
-    DPLUID_LDIDU = auto()
-    DPLDGUID_LDIDUGD = auto()
-    DPLNAME_LDNOM = auto()
-    DPLTYPE_LDGENRE = auto()
-    ERUID_REIDU = auto()
-    ERDGUID_REIDUGD = auto()
-    ERNAME_RENOM = auto()
-    CCSUID_SRUIDU = auto()
-    CCSDGUID_SRUIDUGD = auto()
-    CCSNAME_SRUNOM = auto()
-    SACTYPE_CSSGENRE = auto()
-    SACCODE_CSSCODE = auto()
-    CMAPUID_RMRPIDU = auto()
-    CMAPDGUID_RMRPIDUGD = auto()
-    CMAUID_RMRIDU = auto()
-    CMADGUID_RMRIDUGD = auto()
-    CMANAME_RMRNOM = auto()
-    CMATYPE_RMRGENRE = auto()
-    CTUID_SRIDU = auto()
-    CTDGUID_SRIDUGD = auto()
-    CTCODE_SRCODE = auto()
-    CTNAME_SRNOM = auto()
-    POPCTRRAPUID_CTRPOPRRPIDU = auto()
-    POPCTRRAPDGUID_CTRPOPRRPIDUGD = auto()
-    POPCTRRAUID_CTRPOPRRIDU = auto()
-    POPCTRRADGUID_CTRPOPRRIDUGD = auto()
-    POPCTRRANAME_CTRPOPRRNOM = auto()
-    POPCTRRATYPE_CTRPOPRRGENRE = auto()
-    POPCTRRACLASS_CTRPOPRRCLASSE = auto()
-    DAUID_ADIDU = auto()
-    DADGUID_ADIDUGD = auto()
-    DARPLAMX_ADLAMX = auto()
-    DARPLAMY_ADLAMY = auto()
-    DARPLAT_ADLAT = auto()
-    DARPLONG_ADLONG = auto()
-    DBUID_IDIDU = auto()
-    DBDGUID_IDIDUGD = auto()
-    DBPOP2021_IDPOP2021 = auto()
-    DBTDWELL2021_IDTLOG2021 = auto()
-    DBURDWELL2021_IDRHLOG2021 = auto()
-    DBAREA2021_IDSUP2021 = auto()
-    DBIR2021_IDRI2021 = auto()
-    ADAUID_ADAIDU = auto()
-    ADADGUID_ADAIDUGD = auto()
-    ADACODE_ADACODE = auto()
-
+KEY_COLUMN = 'key_column'
+SUFFIX_COLUMN = 'suffix_column'
+KEY_COUNT_COLUMN = 'total_keys'
 
 EnumMapSig = tuple[
-    GeoAttributeColumn,  # enum_name_col
-    GeoAttributeColumn,  # enum_value_col
-    Optional[GeoAttributeColumn],  # enum_desc_col
-    Optional[GeoAttributeColumn],  # name/key prefix
+    GeoAttributeColumn2021 | str,  # enum_name_col
+    GeoAttributeColumn2021 | str,  # enum_value_col
+    Optional[GeoAttributeColumn2021 | str],  # enum_desc_col
+    Optional[GeoAttributeColumn2021 | str],  # name/key prefix
 ]
+
+def to_dot_path(module_path: Path) -> str:
+    # find the relative import path via sys.path
+    for p in sys.path[1:]:
+        try:
+            relative_path = module_path.relative_to(p)
+            return str(relative_path).replace('/', '.').replace('.py', '')
+        except ValueError:
+            continue
+    raise ValueError(f"Module path {module_path} is not within any sys.path directories")
 
 
 def cleanstr(s: str) -> str:
@@ -111,16 +53,20 @@ def cleanstr(s: str) -> str:
 
     for char in ("'", '"', '.'):  # Remove apostrophes, quotes, and periods
         s = s.replace(char, '')
-
     s = re.sub(r'[^\w_]+', '', s)  # Remove any characters that are not alphanumeric or underscore
     s = re.sub(r'_+', '_', s)  # Replace multiple underscores with a single underscore
-
     s = s.strip('_')  # Remove leading or trailing underscores that might have been created
-    
     if s and s[0].isdigit():  # Ensure the name does not start with a digit
         s = '_' + s
     return s
 
+
+def get_module_path(cls: type) -> Path:
+    """
+    Get the module path for a given class.
+    """
+    module_name = re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', re.sub(r'(.)([A-Z][a-z]+)', r'\1_\2', cls.__name__)).lower()
+    return AUTO_ENUMS_PATH / f'{module_name}.py'
 
 def write_method(
     f: TextIO, 
@@ -165,40 +111,87 @@ def write_enum_class(
 
     f.write('\n\n')
     f.write(f'class {cls_name}({", ".join(b.__name__ for b in cls_bases)}):\n')
-    f.write(f'    """\n')
-    f.write(f'    Automatically generated Enum for {cls_name}\n')
+    f.write(' ' * indent +'"""\n')
+    f.write(' ' * indent +f'Automatically generated Enum for {cls_name}\n')
     if mapping is not None:
         name_col, val_col, desc_col, prefix_col = mapping
-        f.write(f'    Name: {name_col}\n')
-        f.write(f'    Value: {val_col}\n')
+        
+        f.write(' ' * indent + f'Name: {name_col}\n')
+        f.write(' ' * indent + f'Value: {val_col}\n')
         if desc_col:
-            f.write(f'    Description: {desc_col}\n')
+            f.write(' ' * indent + f'Description: {desc_col}\n')
         if prefix_col:
-            f.write(f'    Prefix: {prefix_col}\n')
-    f.write(f'    """\n')
+            f.write(' ' * indent + f'Prefix: {prefix_col if isinstance(prefix_col, Enum) else "(custom)"}\n')
+        
+        # convert Enum columns to strings if they are Enums
+        if isinstance(name_col, Enum):
+            name_col = str(name_col.value)
+        if isinstance(val_col, Enum):
+            val_col = str(val_col.value)
+        if isinstance(desc_col, Enum):
+            desc_col = str(desc_col.value)
+        if isinstance(prefix_col, Enum):
+            prefix_col = str(prefix_col.value)
+    f.write(' ' * indent + f'"""\n')
+
+    # write any class attributes, use inspect to find them
+    for k, v in inspect.get_annotations(cls_template).items():
+        print(k, v, getattr(cls_template, k, None))
+        vtype = str(v).split('.')[-1]
+        print(f'[{cls_template.__name__}] {k} type: {vtype}')
+        print('' * indent + f'{k}: {type(v).__name__} = {getattr(cls_template, k, None)}')
+
 
     if df is not None:
         if mapping is None:
             raise ValueError("Mapping must be provided if DataFrame is provided.")
-        # drop duplicate values and sort by name (do not consider description for uniqueness), but ensure all other columns are preserved...
-        sorted_unique_df = df.drop_duplicates(subset=[val_col.value]).sort_values(by=name_col.value)
-        if prefix_col:
-            sorted_unique_df = sorted_unique_df.sort_values(by=[prefix_col.value, name_col.value])
-        
+        # drop duplicate values and sort by value (initially, the rows will be resorted by resolved "unique_name" later...)
+        sorted_unique_df = df.drop_duplicates(subset=[val_col]).sort_values(by=val_col)
+
+        sorted_unique_df[KEY_COLUMN] = sorted_unique_df.apply(
+            lambda row: (f'{str(row[prefix_col]).split('/')[0]}_' if prefix_col else '') + str(row[name_col]).split('/')[0],
+            axis=1
+        )
+
+        # sorted_unique_df = sorted_unique_df.assign(
+        #     **{
+        #         KEY_COLUMN: (
+        #             ((sorted_unique_df[prefix_col] + '_') if prefix_col else '') +
+        #             sorted_unique_df[name_col].str.split('/').str[0]  # split on '/' and take the first part (discard French portion)
+        #         )
+        #     }
+        # )
+
+        # drop rows where key or value is NaN
+        sorted_unique_df = sorted_unique_df.dropna(subset=[KEY_COLUMN, val_col])
+
+        # tidy up the key column
+        sorted_unique_df[KEY_COLUMN] = sorted_unique_df[KEY_COLUMN].apply(cleanstr).str.upper()
+
+        # add a suffix column to ensure unique keys where applicable
+        sorted_unique_df[SUFFIX_COLUMN] = sorted_unique_df.groupby(KEY_COLUMN).cumcount()
+        sorted_unique_df[KEY_COUNT_COLUMN] = sorted_unique_df.groupby(KEY_COLUMN)[KEY_COLUMN].transform('count')
+        sorted_unique_df[KEY_COLUMN] = sorted_unique_df.apply(
+            lambda row: row[KEY_COLUMN] + (f'_{row[SUFFIX_COLUMN]}' if row[KEY_COUNT_COLUMN] > 1 else ''),
+            axis=1
+        )
+
+        # sort by the key column
+        sorted_unique_df = sorted_unique_df.sort_values(by=KEY_COLUMN)
+
+        # cast values to numeric if we are not using StrEnum
+        if not isinstance(cls_template, StrEnum):
+            sorted_unique_df[val_col] = pd.to_numeric(sorted_unique_df[val_col], errors='coerce')
+
         for _, row in sorted_unique_df.iterrows():
             try:
-                name: str = row[name_col.value]
-                value = row[val_col.value]
-                desc: Optional[str] = row[desc_col.value] if desc_col else None
-                prefix: Optional[str] = row[prefix_col.value] if prefix_col else None
+                name: str = row[name_col]
+                value = row[val_col]
+                desc: Optional[str] = row[desc_col] if desc_col else None
             except KeyError as e:
                 logger.error(f"Missing column in DataFrame: {e}. Columns: {df.columns.tolist()}")
                 raise e
-            key = cleanstr(name.split('/')[0]).upper()
-            entry = ''
-            if prefix:
-                entry += cleanstr(prefix).upper() + '_'
-            entry += f'{key} = '
+            entry = f'{row[KEY_COLUMN]} = '
             if isinstance(cls_template, StrEnum):
                 entry += f"'{value}'"
             else:
@@ -230,7 +223,7 @@ def write_enum_class(
 @contextmanager
 def enum_file(
     fp: Path,
-    imports: dict[str, Optional[str | Iterable[str]]],
+    imports: Mapping[str, Optional[str | Iterable[str]]],
     overwrite: bool = False,
 ) -> Generator[TextIO, None, None]:
     """
@@ -253,260 +246,397 @@ def enum_file(
         logger.info(f"Enum file written to {fp}")
 
 
-class ProvinceTerritory(Enum):
+def write_module(
+    df: pd.DataFrame,
+    cls_templates: dict[type[GeoCode], EnumMapSig],
+    module_path: Optional[Path] = None,
+    imports: Optional[dict[str, Optional[str | set[str]]]] = None,
+    overwrite: bool = False,
+) -> None:
+    """
+    Write the GeoCode class definition to the file.
+    """
+    if imports is None:
+        imports = {}
+    if module_path is None:
+        first_cls = next(iter(cls_templates.keys()))
+        module_path = get_module_path(first_cls)
+    for t in cls_templates:
+        for b in t.__bases__:
+            if not b.__module__ in imports:
+                imports[b.__module__] = set()
+            if isinstance(mod_imports := imports[b.__module__], set):
+                mod_imports.add(b.__name__)
+            elif isinstance(mod_imports, str):
+                mod_imports = {mod_imports, b.__name__}
+            else:
+                raise TypeError(f"Expected set for imports[{b.__module__}], got {type(imports[b.__module__])}")
+            imports[b.__module__] = mod_imports
+
+    with enum_file(
+        fp=module_path,
+        imports=imports,
+        overwrite=overwrite,
+    ) as f:
+        for cls, mapping in cls_templates.items():
+            write_enum_class(
+                f=f, 
+                cls_template=cls,
+                df=df,
+                mapping=mapping,
+            )
+
+def update_imports_dict(
+    obj: type | Callable,
+    imports: Optional[dict[str, Optional[str | set[str]]]] = None,
+) -> dict[str, Optional[str | set[str]]]:
+    """
+    Update the imports dictionary with a module and its items.
+    """
+    imports = imports or {}
+    try:
+        obj_mod: str = obj.__module__
+        obj_name: str = obj.__name__
+    except AttributeError as e:
+        raise ValueError(f"Object {obj} does not have a __module__ or __name__ attribute. Ensure it is a class or function.") from e
+
+    if isinstance(mod_imports := imports.get(obj_mod, set()), str):
+        mod_imports = {mod_imports}
+    elif mod_imports is None:
+        raise ValueError(f'Module {obj_mod} has already been defined in the imports dict with "None", cannot append {obj_name} to import mapping.')
+    mod_imports.add(obj_name)
+    imports[obj_mod] = mod_imports
+    return imports
+
+def write_geocode_module(
+    df: pd.DataFrame,
+    cls_templates: dict[type[GeoCode], EnumMapSig],
+    module_path: Optional[Path] = None,
+    imports: Optional[dict[str, Optional[str | set[str]]]] = None,
+    overwrite: bool = False,
+):
+    imports = update_imports_dict(obj=Schema, imports=imports)
+
+    write_module(
+        df=df,
+        cls_templates=cls_templates,
+        module_path=module_path,
+        imports=imports,
+        overwrite=overwrite,
+    )
+
+
+class ProvinceTerritory(GeoCode):
     """
     Enum for Canadian provinces and territories.
     This enum is automatically generated from the GeoAttribute data.
+    see: https://www12.statcan.gc.ca/census-recensement/2021/geo/ref/domain-domaine/index2021-eng.cfm?lang=e&id=PRUID
     """
+    @classmethod
+    def get_schema(cls) -> Schema:
+        """
+        Return the Schema for this geo code type.
+        """
+        return Schema.PR
+
+    @classmethod
+    def get_nchars(cls) -> int:
+        """
+        Return the number of characters in the code for this enum.
+        """
+        return 2
     
-    @staticmethod
-    def get_geo_level() -> GeoLevel:
-        """
-        Return the GeoLevel for this enum.
-        """
-        return GeoLevel.PR
 
-    @property
-    def dguid(self) -> str:
-        """
-        Return the DGUID for this enum.
-        """
-        return f'2021{self.get_geo_level().value}{self.value:02d}'
-    
-
-def write_province_enums(df: pd.DataFrame, overwrite: bool = False) -> Path:
-    """
-    Write the province enums to a file.
-    """
-    fp = AUTO_ENUMS_PATH / 'province.py'
-    mapping: EnumMapSig = (
-        GeoAttributeColumn.PRENAME_PRANOM,  # enum_name_col
-        GeoAttributeColumn.PRUID_PRIDU,  # enum_value_col
-        None,  # enum_desc_col
-        None, # name/key prefix (not used for provinces)
-    )
-    with enum_file(
-        fp=fp,
-        imports={
-            'enum': ProvinceTerritory.__bases__[0].__name__,  # Enum or StrEnum
-            'statscan.enums.geolevel': GeoLevel.__name__,
-        },
-        overwrite=overwrite
-    ) as f:
-        write_enum_class(
-            f=f,
-            cls_template=ProvinceTerritory,
-            df=df,
-            mapping=mapping,
-        )
-    return fp
-
-
-class CensusDivision(Enum):
+class CensusDivision(ProvinceGeoCode):
     """
     Enum for Canadian Census Divisions.
     This enum is automatically generated from the GeoAttribute data.
     """
+    @classmethod
+    def get_schema(cls) -> Schema:
+        """
+        Return the Schema for this geo code type.
+        """
+        return Schema.CD
 
-    @staticmethod
-    def get_geo_level() -> GeoLevel:
+    @classmethod
+    def get_nchars(cls) -> int:
         """
-        Return the GeoLevel for this enum.
+        Return the number of characters in the code for this enum.
         """
-        return GeoLevel.CD
+        return 4
     
-    @property
-    def province_territory(self) -> ProvinceTerritory:
-        """
-        Return the ProvinceTerritory for this enum.
-        """
-        return ProvinceTerritory(int(str(self.value)[:2]))
 
-    @property
-    def dguid(self) -> str:
-        """
-        Return the DGUID for this enum.
-        """
-        return f'2021{self.get_geo_level().value}{self.value:04d}'
-
-
-def write_census_division_enums(
-    df: pd.DataFrame, 
-    overwrite: bool = False,
-) -> Path:
-    mapping = (
-        GeoAttributeColumn.CDNAME_DRNOM,  # enum_name_col
-        GeoAttributeColumn.CDUID_DRIDU,  # enum_value_col
-        None,  # enum_desc_col
-        GeoAttributeColumn.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
-    )
-    fp = AUTO_ENUMS_PATH / 'census_division.py'
-
-    with enum_file(
-        fp=fp,
-        imports={
-            'enum': Enum.__name__,
-            'statscan.enums.geolevel': GeoLevel.__name__,
-            'statscan.enums.auto.province': ProvinceTerritory.__name__,
-        },
-        overwrite=overwrite,
-    ) as f:
-        write_enum_class(f=f, cls_template=CensusDivision, df=df, mapping=mapping)
-    return fp
-
-
-class FederalElectoralDistrict(Enum):
+class FederalElectoralDistrict(ProvinceGeoCode):
     """
     Enum for Canadian Federal Electoral Districts.
     This enum is automatically generated from the GeoAttribute data.
     """
+    @classmethod
+    def get_schema(cls) -> Schema:
+        """
+        Return the Schema for this geo code type.
+        """
+        return Schema.FED
 
-    @staticmethod
-    def get_geo_level() -> GeoLevel:
+    @classmethod
+    def get_nchars(cls) -> int:
         """
-        Return the GeoLevel for this enum.
+        Return the number of characters in the code for this enum.
         """
-        return GeoLevel.FED
-    
-    @property
-    def province_territory(self) -> ProvinceTerritory:
-        """
-        Return the ProvinceTerritory for this enum.
-        """
-        return ProvinceTerritory(int(str(self.value)[:2]))
-
-    @property
-    def dguid(self) -> str:
-        """
-        Return the DGUID for this enum.
-        """
-        return f'2021{self.get_geo_level().value}{self.value:05d}'
-    
-def write_federal_electoral_district_enums(
-    df: pd.DataFrame, 
-    overwrite: bool = False,
-) -> Path:
-    """
-    Write the federal electoral district enums to a file.
-    """
-    fp = AUTO_ENUMS_PATH / 'federal_electoral_district.py'
-    mapping = (
-        GeoAttributeColumn.FEDNAME_CEFNOM,  # enum_name_col
-        GeoAttributeColumn.FEDUID_CEFIDU,  # enum_value_col
-        None,  # enum_desc_col
-        GeoAttributeColumn.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
-    )
-    with enum_file(
-        fp=fp,
-        imports={
-            'enum': Enum.__name__,
-            'statscan.enums.geolevel': GeoLevel.__name__,
-            'statscan.enums.auto.province': ProvinceTerritory.__name__,
-        },
-        overwrite=overwrite,
-    ) as f:
-        write_enum_class(f=f, cls_template=FederalElectoralDistrict, df=df, mapping=mapping)
-    return fp
+        return 5
 
 
-class CensusSubDivision(Enum):
+class CensusSubdivision(CensusDivisionGeoCode):
     """
     Enum for Canadian Census Subdivisions.
     This enum is automatically generated from the GeoAttribute data.
     """
+    @classmethod
+    def get_schema(cls) -> Schema:
+        """
+        Return the Schema for this geo code type.
+        """
+        return Schema.CSD
 
-    @staticmethod
-    def get_geo_level() -> GeoLevel:
+    @classmethod
+    def get_nchars(cls) -> int:
         """
-        Return the GeoLevel for this enum.
+        Return the number of characters in the code for this enum.
         """
-        return GeoLevel.CSD
-    
-    @property
-    def province_territory(self) -> ProvinceTerritory:
-        """
-        Return the ProvinceTerritory for this enum.
-        """
-        return ProvinceTerritory(int(str(self.value)[:2]))
-    
-    @property
-    def census_division(self) -> CensusDivision:
-        """
-        Return the CensusDivision for this enum.
-        """
-        return CensusDivision(int(str(self.value)[:4]))
+        return 7
 
-    @property
-    def dguid(self) -> str:
-        """
-        Return the DGUID for this enum.
-        """
-        return f'2021{self.get_geo_level().value}{self.value:07d}'
-    
-
-def write_census_subdivision_enums(
-    df: pd.DataFrame, 
-    overwrite: bool = False,
-) -> Path:
-    """
-    Write the census subdivision enums to a file.
-    """
-    fp = AUTO_ENUMS_PATH / 'census_subdivision.py'
-    mapping = (
-        GeoAttributeColumn.CSDNAME_SDRNOM,  # enum_name_col
-        GeoAttributeColumn.CSDUID_SDRIDU,  # enum_value_col
-        None,  # enum_desc_col
-        GeoAttributeColumn.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
-    )
-    with enum_file(
-        fp=fp,
-        imports={
-            'enum': Enum.__name__,
-            'statscan.enums.geolevel': GeoLevel.__name__,
-            'statscan.enums.auto.province': ProvinceTerritory.__name__,
-            'statscan.enums.auto.census_division': CensusDivision.__name__,
-        },
-        overwrite=overwrite,
-    ) as f:
-        write_enum_class(f=f, cls_template=CensusSubDivision, df=df, mapping=mapping)
-    return fp
-
-class DesignatedPlace(Enum):
+class DesignatedPlace(ProvinceGeoCode):
     """
     Enum for Canadian Designated Places.
     This enum is automatically generated from the GeoAttribute data.
     """
-
-    @staticmethod
-    def get_geo_level() -> GeoLevel:
+    @classmethod
+    def get_schema(cls) -> Schema:
         """
-        Return the GeoLevel for this enum.
+        Return the Schema for this geo code type.
         """
-        return GeoLevel.DPL
+        return Schema.DPL
     
-    @property
-    def province_territory(self) -> ProvinceTerritory:
+    @classmethod
+    def get_nchars(cls) -> int:
         """
-        Return the ProvinceTerritory for this enum.
+        Return the number of characters in the code for this enum.
         """
-        return ProvinceTerritory(int(str(self.value)[:2]))
+        return 6
+    
 
-    @property
-    def dguid(self) -> str:
+class EconomicRegion(ProvinceGeoCode):
+    """
+    Enum for Canadian Economic Regions.
+    This enum is automatically generated from the GeoAttribute data.
+    """
+    @classmethod
+    def get_schema(cls) -> Schema:
         """
-        Return the DGUID for this enum.
+        Return the Schema for this geo code type.
         """
-        return f'2021{self.get_geo_level().value}{self.value:06.1f}'
+        return Schema.ER
 
+    @classmethod
+    def get_nchars(cls) -> int:
+        """
+        Return the number of characters in the code for this enum.
+        """
+        return 4
+
+
+class CensusConsolidatedSubdivision(CensusDivisionGeoCode):
+    """
+    Enum for Canadian Census Agglomeration Stratified.
+    This enum is automatically generated from the GeoAttribute data.
+    """
+    @classmethod
+    def get_schema(cls) -> Schema:
+        """
+        Return the Schema for this geo code type.
+        """
+        return Schema.CCS
+    
+    @classmethod
+    def get_nchars(cls) -> int:
+        """
+        Return the number of characters in the code for this enum.
+        """
+        return 7
+
+
+class CensusMetropolitanArea(ProvinceGeoCode):
+    """
+    Enum for Canadian Census Metropolitan Areas.
+    This enum is automatically generated from the GeoAttribute data.
+    """
+    @classmethod
+    def get_schema(cls) -> Schema:
+        """Return the Schema for this geo code type."""
+        return Schema.CMA
+
+    @classmethod
+    def get_nchars(cls) -> int:
+        """
+        Return the number of characters in the code for this enum.
+        """
+        return 3
+    
+    
+class CensusTract(CensusMetropolitanAreaGeoCode):
+    """
+    Enum for Canadian Census Tracts.
+    This enum is automatically generated from the GeoAttribute data.
+    """
+    @classmethod
+    def get_schema(cls) -> Schema:
+        """
+        Return the Schema for this geo code type.
+        """
+        return Schema.CT
+    
+    @classmethod
+    def get_nchars(cls) -> int:
+        """
+        Return the number of characters in the code for this enum.
+        """
+        return 7
+
+    @classmethod
+    def get_nprecision(cls) -> int:
+        """
+        Return the number of decimal places in the code for this enum.
+        """
+        return 2
 
 
 if __name__ == '__main__':
+    import asyncio
     from statscan.util.log import configure_logging
     configure_logging(level='DEBUG')
     attr_data_file = asyncio.run(download_data(GEO_ATTR_FILE_2021_URL))
     df = unpack_to_dataframe(attr_data_file)
 
-    write_province_enums(df=df, overwrite=True)
-    write_census_division_enums(df=df, overwrite=True)
-    write_federal_electoral_district_enums(df=df, overwrite=True)
-    write_census_subdivision_enums(df=df, overwrite=True)
+    write_geocode_module(  # write the province/territory enum file
+        df=df,
+        cls_templates={
+            ProvinceTerritory: (
+                GeoAttributeColumn2021.PRENAME_PRANOM,  # enum_name_col
+                GeoAttributeColumn2021.PRUID_PRIDU,  # enum_value_col
+                None,  # enum_desc_col
+                None,  # name/key prefix (not used for provinces)
+            ),
+        },
+        # module_path=PR_ENUM_PATH,
+        overwrite=True
+    )
+
+    write_geocode_module(  # write the census division enum file
+        df=df,
+        cls_templates={
+            CensusDivision: (
+                GeoAttributeColumn2021.CDNAME_DRNOM,  # enum_name_col
+                GeoAttributeColumn2021.CDUID_DRIDU,  # enum_value_col
+                None,  # enum_desc_col
+                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
+            ),
+        },
+        overwrite=True,
+    )
+
+    write_geocode_module(  # write the federal electoral district enum file
+        df=df,
+        cls_templates={
+            FederalElectoralDistrict: (
+                GeoAttributeColumn2021.FEDNAME_CEFNOM,  # enum_name_col
+                GeoAttributeColumn2021.FEDUID_CEFIDU,  # enum_value_col
+                None,  # enum_desc_col
+                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
+            ),
+        },
+        overwrite=True,
+    )
+
+    write_geocode_module(  # write the census subdivision enum file
+        df=df,
+        cls_templates={
+            CensusSubdivision: (
+                GeoAttributeColumn2021.CSDNAME_SDRNOM,  # enum_name_col
+                GeoAttributeColumn2021.CSDUID_SDRIDU,  # enum_value_col
+                None,  # enum_desc_col
+                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
+            )
+        },
+        overwrite=True,
+    )
+
+    write_geocode_module(  # write the designated place enum file
+        df=df,
+        cls_templates={
+            DesignatedPlace: (
+                GeoAttributeColumn2021.DPLNAME_LDNOM,  # enum_name_col
+                GeoAttributeColumn2021.DPLUID_LDIDU,  # enum_value_col
+                None,  # enum_desc_col
+                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
+            )
+        },
+        overwrite=True,
+    )
+
+    write_geocode_module(  # write the economic region enum file
+        df=df,
+        cls_templates={
+            EconomicRegion: (
+                GeoAttributeColumn2021.ERNAME_RENOM,  # enum_name_col
+                GeoAttributeColumn2021.ERUID_REIDU,  # enum_value_col
+                None,  # enum_desc_col
+                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
+            )
+        },
+        overwrite=True,
+    )
+
+    write_geocode_module(
+        df=df,
+        cls_templates={
+            CensusConsolidatedSubdivision: (
+                GeoAttributeColumn2021.CCSNAME_SRUNOM,  # enum_name_col
+                GeoAttributeColumn2021.CCSUID_SRUIDU,  # enum_value_col
+                None,  # enum_desc_col
+                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
+            )
+        },
+        overwrite=True,
+    )
+
+    write_geocode_module(  # write the census metro area enum file
+        df=df[pd.to_numeric(df[GeoAttributeColumn2021.SACTYPE_CSSGENRE.value], errors='coerce') == SACType.CMA.value], 
+        cls_templates={
+            CensusMetropolitanArea: (
+                GeoAttributeColumn2021.CMANAME_RMRNOM,  # enum_name_col
+                GeoAttributeColumn2021.CMAPUID_RMRPIDU,  # enum_value_col
+                None,  # enum_desc_col
+                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
+            )
+        },
+        overwrite=True
+    )
+
+    write_geocode_module(  # write the census tract enum file
+        df=df.assign(
+            prefix=df[GeoAttributeColumn2021.PREABBR_PRAABBREV] + 
+            '_' + 
+            df[GeoAttributeColumn2021.CMANAME_RMRNOM]
+        ),
+        cls_templates={
+            CensusTract: (
+                GeoAttributeColumn2021.CTNAME_SRNOM,  # enum_name_col
+                GeoAttributeColumn2021.CTUID_SRIDU,  # enum_value_col
+                GeoAttributeColumn2021.CMANAME_RMRNOM,  # enum_desc_col
+                'prefix',  # name/key prefix (abbreviation of the province)
+            )
+        },
+        overwrite=True,
+    )
+    logger.info("All GeoCode enums have been written successfully.")

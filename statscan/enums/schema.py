@@ -1,8 +1,8 @@
+from __future__ import annotations
 from typing import Self
-from enum import StrEnum
+from enum import StrEnum, Enum
 
-
-class GeoLevel(StrEnum):
+class Schema(StrEnum):
     """
     Enum for GeoLevel values used in StatsCan DGUID.
     see: https://www12.statcan.gc.ca/census-recensement/2021/ref/dict/az/definition-eng.cfm
@@ -14,12 +14,16 @@ class GeoLevel(StrEnum):
     CSD = 'A0005'  # Census Subdivision
     DPL = 'A0006'  # Designated Place
     HR = 'A0007'  # Health Region
-    HR_NEW = 'S0504'  # Health Region (new)
     FSA = 'A0011'  # Forward Sortation Area
     ER = 'S0500'  # Economic Region
-    CMA = 'S0503'  # Census Metropolitan Area
-    CA = 'S0504'  # Census Agglomeration
+    CCS = 'S0502'  # Census Consolidated Subdivision
+    CMA = 'S0503'  # [CMADGUID] Census Metropolitan Area
+    CA = 'S0504'  # [CMADGUID] Census Agglomeration
     CT = 'S0507'  # Census Tract
+    MIZ = 'S0509'  # [CMADGUID] Metropolitan Influenced Zone
+    OUTSIDE_CA = 'S0517'  # [CMADGUID] Census Subdivision in a Territory outside a Census Agglomeration
+
+
     POPCTR = 'S0510'  # Population Centre
     DA = 'S0512'  # Dissemination Area
     ADA = 'S0516'  # Aggregated Dissemination Area
@@ -100,4 +104,25 @@ class GeoLevel(StrEnum):
         str
             The data flow for the GeoLevel.
         """
+        if self in (Schema.CMA, Schema.CA, Schema.MIZ, Schema.OUTSIDE_CA):
+            return 'DF_CMACA'
         return f'DF_{self.name.upper()}'
+    
+
+class SACType(Enum):
+    """
+    see: https://www12.statcan.gc.ca/census-recensement/2021/geo/ref/domain-domaine/index2021-eng.cfm?lang=e&id=SACtype&getgeo=Continue
+    """
+    CMA = 1  # Census Subdivision within a Census Metropolitan Area
+    CA_WITH_CT = 2  # Census Subdivision within a Census Agglomeration with Census Tract
+    CA = 3  # Census Subdivision within a Census Agglomeration without Census Tract
+    MIZ_STRONG = 4  # Census Subdivision in a Strong Metropolitan Influenced Zone (MIZ)
+    MIZ_MODERATE = 5  # Census Subdivision in a Moderate Metropolitan Influenced Zone (MIZ)
+    MIZ_WEAK = 6  # Census Subdivision in a Weak Metropolitan Influenced Zone (MIZ)
+    MIZ_NONE = 7  # Census Subdivision in a Non-Metropolitan Influenced Zone (MIZ)
+    TERRITORY_OUTSIDE_CA = 8  # Census Subdivision in a Territory outside a Census Agglomeration
+
+
+
+
+
