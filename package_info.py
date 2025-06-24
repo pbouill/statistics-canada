@@ -38,14 +38,23 @@ def get_git_head_ref_hash(repo_dir: Optional[Path] = None) -> tuple[str, str]:
         with ref_path.open() as f:
             commit_hash: str = f.read().strip()
     except FileNotFoundError:
-        print(f'Reference {ref} not found in {ref_path.resolve()}. Printing contents of last 3 valid filesystem levels:')
+        print(f'Reference {ref} not found in {ref_path.resolve()}.')
+        print('Printing contents of last 3 valid filesystem levels:')
         i = 0
         for p in ref_path.parents:
             if p.exists() and p.is_dir():
                 print(f'  [{i}] {p.resolve()}:')
                 for item in p.iterdir():
-                    print(f'    - {item.name}')
+                    print(f'    - {item.name}' + ('/' if item.is_dir() else ''))
                 i += 1
+            if i > 3:
+                break
+        
+        if (refs_dir := git_path / 'refs').exists() and refs_dir.is_dir():
+            print(f'Printing contents of refs directory: {git_path / "refs"}')
+            for item in refs_dir.iterdir():
+                print(f'  - {item.name}' + ('/' if item.is_dir() else ''))
+
         raise FileNotFoundError(f"Git reference not found in {ref_path.resolve()}. Please ensure you are in a valid git repository.")
     return ref, commit_hash
 
