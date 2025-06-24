@@ -10,7 +10,7 @@ import pandas as pd
 from httpx import Response
 import asyncio
 
-from statscan.util.data import download_data, unpack_to_dataframe, DEFAULT_DATA_PATH, DEFAULT_ENCODINGS
+from statscan.util.get_data import download_data, unpack_to_dataframe, DEFAULT_DATA_PATH, DEFAULT_ENCODINGS
 
 
 class TestDataUtilities(unittest.TestCase):

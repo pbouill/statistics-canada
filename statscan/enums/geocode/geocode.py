@@ -1,4 +1,5 @@
 from enum import Enum, StrEnum, auto
+from typing import Self
 
 from statscan.enums.schema import Schema
 
@@ -124,6 +125,42 @@ class GeoCode(Enum):
         """
         return f'{self.schema.value}{self.uid}'
     
+    @classmethod
+    def from_code(cls, code: str) -> Self:
+        """
+        Create a GeoCode instance from a string code.
+
+        Parameters
+        ----------
+        code : str
+            The string representation of the geographic code.
+
+        Returns
+        -------
+        GeoCode
+            The corresponding GeoCode enum instance.
+        """
+        if not code.startswith(schema := cls.get_schema()):
+            raise ValueError(f'Unexpected schema prefix in code: {code}. Expected prefix: {schema}')
+        uid = code[len(schema):]
+        return cls.from_uid(uid)
+    
+    @classmethod
+    def from_uid(cls, uid: str) -> Self:
+        """
+        Create a GeoCode instance from a string UID.
+
+        Parameters
+        ----------
+        uid : str
+            The unique identifier for the geographic code.
+
+        Returns
+        -------
+        GeoCode
+            The corresponding GeoCode enum instance.
+        """
+        return cls(int(uid))
 
 class FloatGeoCode(GeoCode):
     """
@@ -150,3 +187,20 @@ class FloatGeoCode(GeoCode):
         This is usually the last nchar characters of the enum value, formatted to nprecision.
         """
         return f'{self.value:0{self.get_nchars()}.{self.get_nprecision()}f}'  # Format to nprecision decimal places
+    
+    @classmethod
+    def from_uid(cls, uid: str) -> Self:
+        """
+        Create a FloatGeoCode instance from a string UID.
+
+        Parameters
+        ----------
+        uid : str
+            The unique identifier for the geographic code, formatted as a float.
+
+        Returns
+        -------
+        FloatGeoCode
+            The corresponding FloatGeoCode enum instance.
+        """
+        return cls(float(uid))

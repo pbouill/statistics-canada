@@ -7,6 +7,7 @@ on:
 permissions:
   actions: read
   id-token: write
+  contents: write
 
 jobs:
   publish:
@@ -23,5 +24,223 @@ jobs:
         run-id: ${{ github.event.workflow_run.id }}
         github-token: ${{ github.token }}
         path: dist/
+        
+    - name: Extract version from artifact
+      id: extract_version
+      run: |
+        # Read version from the stored files
+        if [ -f "dist/VERSION" ] && [ -f "dist/TAG" ]; then
+          VERSION=$(cat dist/VERSION)
+          TAG=$(cat dist/TAG)
+          echo "Extracted version from build: $VERSION"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+        else
+          echo "Version files not found, falling back to wheel filename parsing"
+          # Find the wheel file and extract version from filename
+          WHEEL_FILE=$(find dist/ -name "*.whl" | head -n 1)
+          if [ -z "$WHEEL_FILE" ]; then
+            echo "No wheel file found!"
+            exit 1
+          fi
+          
+          # Extract version from wheel filename (format: package_name-version-...)
+          VERSION=$(basename "$WHEEL_FILE" | cut -d'-' -f2)
+          echo "Extracted version from wheel: $VERSION"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=v$VERSION" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Check if tag exists
+      id: check_tag
+      run: |
+        # Use GitHub API to check if tag exists
+        TAG="${{ steps.extract_version.outputs.tag }}"
+        if curl -s -f -H "Authorization: token ${{ github.token }}" \
+           "https://api.github.com/repos/${{ github.repository }}/git/refs/tags/$TAG" > /dev/null 2>&1; then
+          echo "Tag $TAG already exists"
+          echo "tag_exists=true" >> $GITHUB_OUTPUT
+        else
+          echo "Tag $TAG does not exist"
+          echo "tag_exists=false" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Generate changelog
+      id: changelog
+      run: |
+        TAG="${{ steps.extract_version.outputs.tag }}"
+        VERSION="${{ steps.extract_version.outputs.version }}"
+        
+        # Get the latest release to find the previous tag
+        PREVIOUS_TAG=$(curl -s -H "Authorization: token ${{ github.token }}" \
+          "https://api.github.com/repos/${{ github.repository }}/releases/latest" | \
+          jq -r '.tag_name // empty')
+        
+        if [ -z "$PREVIOUS_TAG" ] || [ "$PREVIOUS_TAG" = "null" ]; then
+          echo "No previous release found, this appears to be the first release"
+          PREVIOUS_TAG=""
+          COMPARE_URL=""
+        else
+          echo "Previous release: $PREVIOUS_TAG"
+          COMPARE_URL="**Full Changelog**: https://github.com/${{ github.repository }}/compare/${PREVIOUS_TAG}...${TAG}"
+        fi
+        
+        # Check if CHANGELOG.md exists and has unreleased changes
+        if [ -f "CHANGELOG.md" ] && grep -q "## \[Unreleased\]" CHANGELOG.md; then
+          echo "Found CHANGELOG.md with unreleased changes"
+          
+          # Extract unreleased changes
+          UNRELEASED_CHANGES=$(awk '
+            /^## \[Unreleased\]/ { capture=1; next }
+            /^## / && capture { exit }
+            capture && NF > 0 { print }
+          ' CHANGELOG.md)
+          
+          if [ -n "$UNRELEASED_CHANGES" ]; then
+            CHANGELOG="## What's Changed
+
+        $UNRELEASED_CHANGES
+
+        $COMPARE_URL"
+          else
+            # Fallback to API-generated changelog if unreleased section is empty
+            CHANGELOG=$(curl -s -H "Authorization: token ${{ github.token }}" \
+              -X POST \
+              "https://api.github.com/repos/${{ github.repository }}/releases/generate-notes" \
+              -d "{\"tag_name\":\"$TAG\",\"previous_tag_name\":\"$PREVIOUS_TAG\"}" | \
+              jq -r '.body // "## What'\''s Changed\n\n* Internal improvements and maintenance"')
+          fi
+        else
+          echo "No CHANGELOG.md found or no unreleased changes, generating from API"
+          # Use GitHub's automatic release notes generation
+          if [ -n "$PREVIOUS_TAG" ]; then
+            CHANGELOG=$(curl -s -H "Authorization: token ${{ github.token }}" \
+              -X POST \
+              "https://api.github.com/repos/${{ github.repository }}/releases/generate-notes" \
+              -d "{\"tag_name\":\"$TAG\",\"previous_tag_name\":\"$PREVIOUS_TAG\"}" | \
+              jq -r '.body // "## What'\''s Changed\n\n* Internal improvements and maintenance"')
+          else
+            CHANGELOG="## What's Changed
+
+        * Initial release
+
+        This is the first release of the statistics-canada package."
+          fi
+        fi
+        
+        # Save changelog to file for use in release body
+        echo "$CHANGELOG" > changelog.md
+        
+        # Also output for use in next step  
+        echo "changelog<<EOF" >> $GITHUB_OUTPUT
+        echo "$CHANGELOG" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+        
     - name: Publish package distributions to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
+      
+    - name: Create Release
+      if: steps.check_tag.outputs.tag_exists == 'false'
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ steps.extract_version.outputs.tag }}
+        name: Release ${{ steps.extract_version.outputs.tag }}
+        body: |
+          ## Release ${{ steps.extract_version.outputs.version }}
+          
+          This release was automatically created when the package was published to PyPI.
+          
+          ${{ steps.changelog.outputs.changelog }}
+          
+          ### Installation
+          ```bash
+          pip install statistics-canada==${{ steps.extract_version.outputs.version }}
+          ```
+          
+          ### PyPI
+          📦 [View on PyPI](https://pypi.org/project/statistics-canada/${{ steps.extract_version.outputs.version }}/)
+        draft: false
+        prerelease: false
+        files: dist/*
+        
+    - name: Update repository changelog (optional)
+      if: steps.check_tag.outputs.tag_exists == 'false'
+      continue-on-error: true
+      run: |
+        # This step is optional and will not fail the workflow if it encounters issues
+        
+        # Create a temporary checkout to update CHANGELOG.md
+        git clone https://github.com/${{ github.repository }}.git temp_repo
+        cd temp_repo
+        
+        # Configure git
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        
+        VERSION="${{ steps.extract_version.outputs.version }}"
+        RELEASE_DATE=$(date '+%Y-%m-%d')
+        
+        if [ -f "CHANGELOG.md" ]; then
+          if grep -q "## \[Unreleased\]" CHANGELOG.md; then
+            echo "Moving unreleased changes to release section"
+            
+            # Replace [Unreleased] with the actual version and date
+            sed -i "s/## \[Unreleased\]/## [$VERSION] - $RELEASE_DATE/" CHANGELOG.md
+            
+            # Add a new [Unreleased] section at the top
+            # Find the line with the new release section
+            LINE_NUM=$(grep -n "## \[$VERSION\]" CHANGELOG.md | head -1 | cut -d: -f1)
+            if [ -n "$LINE_NUM" ]; then
+              # Insert new unreleased section before the current release
+              sed -i "${LINE_NUM}i\\
+        ## [Unreleased]\\
+        \\
+        " CHANGELOG.md
+            fi
+          else
+            echo "No unreleased section found, adding new release section"
+            # Find where to insert the new release (after the header)
+            if grep -q "# Changelog" CHANGELOG.md; then
+              LINE_NUM=$(grep -n "# Changelog" CHANGELOG.md | head -1 | cut -d: -f1)
+              NEXT_LINE=$((LINE_NUM + 2))  # Skip header and description
+              
+              sed -i "${NEXT_LINE}i\\
+        ## [Unreleased]\\
+        \\
+        ## [$VERSION] - $RELEASE_DATE\\
+        \\
+        * Package version $VERSION published to PyPI\\
+        " CHANGELOG.md
+            fi
+          fi
+        else
+          echo "No CHANGELOG.md found, creating one"
+          cat > CHANGELOG.md << EOF
+        # Changelog
+        
+        All notable changes to this project will be documented in this file.
+        
+        ## [Unreleased]
+        
+        ## [$VERSION] - $RELEASE_DATE
+        
+        * Package version $VERSION published to PyPI
+        
+        EOF
+        fi
+        
+        # Commit and push if there are changes
+        if git diff --quiet CHANGELOG.md; then
+          echo "No changes to CHANGELOG.md"
+        else
+          git add CHANGELOG.md
+          git commit -m "📝 Release $VERSION - Update CHANGELOG.md
+
+          - Move unreleased changes to release section
+          - Add new unreleased section for future changes"
+          git push https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git main
+          echo "CHANGELOG.md updated and pushed to repository"
+        fi
+        
+        cd ..
+        rm -rf temp_repo

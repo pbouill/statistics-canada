@@ -8,7 +8,7 @@ import tempfile
 import shutil
 from unittest.mock import patch
 
-from statscan.util.data import download_data, unpack_to_dataframe
+from statscan.util.get_data import download_data, unpack_to_dataframe
 
 
 class TestDataIntegration(unittest.TestCase):
@@ -64,7 +64,7 @@ class TestEnumIntegration(unittest.TestCase):
     def test_province_and_geolevel_integration(self):
         """Test integration between Province enum and GeoLevel."""
         try:
-            from statscan.enums.auto.province import ProvinceTerritory
+            from statscan.enums.auto.province_territory import ProvinceTerritory
             from statscan.enums.schema import Schema
             
             # Test that province enum works with geo level
@@ -87,7 +87,7 @@ class TestEnumIntegration(unittest.TestCase):
         """Test census division enum integration."""
         try:
             from statscan.enums.auto.census_division import CensusDivision
-            from statscan.enums.auto.province import ProvinceTerritory
+            from statscan.enums.auto.province_territory import ProvinceTerritory
             
             # Get a census division
             divisions = list(CensusDivision)
@@ -140,7 +140,7 @@ class TestBuildSystemIntegration(unittest.TestCase):
         self.assertIsNotNone(Schema)
         
         # Utility functions
-        from statscan.util.data import download_data, unpack_to_dataframe
+        from statscan.util.get_data import download_data, unpack_to_dataframe
         self.assertTrue(callable(download_data))
         self.assertTrue(callable(unpack_to_dataframe))
         
@@ -183,7 +183,7 @@ class TestRealWorldScenarios(unittest.TestCase):
         
         # 4. Work with auto-generated enums (if available)
         try:
-            from statscan.enums.auto.province import ProvinceTerritory
+            from statscan.enums.auto.province_territory import ProvinceTerritory
             ontario = ProvinceTerritory.ONTARIO
             self.assertIsNotNone(ontario)
         except ImportError:
@@ -200,7 +200,7 @@ class TestRealWorldScenarios(unittest.TestCase):
         mock_response.raise_for_status.return_value = None
         
         async def data_science_workflow():
-            from statscan.util.data import download_data, unpack_to_dataframe
+            from statscan.util.get_data import download_data, unpack_to_dataframe
             
             # Download data
             file_path = await download_data(

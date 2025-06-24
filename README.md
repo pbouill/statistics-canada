@@ -183,6 +183,7 @@ statscan/                 # Main package
 This package provides access to official Statistics Canada data:
 
 - [Web Data Service (WDS) API](https://www.statcan.gc.ca/en/developers/wds)
+- [WDS User Guide](https://www.statcan.gc.ca/en/developers/wds/user-guide)
 - [Census Geographic Attribute Files](https://www12.statcan.gc.ca/census-recensement/2021/geo/aip-pia/attribute-attribs/index-eng.cfm)
 - [Standard Geographical Classification (SGC)](https://www.statcan.gc.ca/en/subjects/standard/sgc/2021/index)
 

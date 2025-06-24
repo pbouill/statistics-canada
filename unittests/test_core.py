@@ -82,9 +82,9 @@ class TestURLModule(unittest.TestCase):
     def test_wds_base_url(self):
         """Test WDS base URL constant."""
         try:
-            from statscan.url import WDS_BASE_URL
-            self.assertIsInstance(WDS_BASE_URL, str)
-            self.assertTrue(WDS_BASE_URL.startswith('https://'))
+            from statscan.url import CENSUS_SDMX_BASE_URL
+            self.assertIsInstance(CENSUS_SDMX_BASE_URL, str)
+            self.assertTrue(CENSUS_SDMX_BASE_URL.startswith('https://'))
         except ImportError:
             self.skipTest("WDS_BASE_URL not available")
 
@@ -100,9 +100,9 @@ class TestPackageStructure(unittest.TestCase):
     def test_submodule_imports(self):
         """Test that submodules can be imported."""
         # Test util module
-        from statscan.util import data
-        self.assertTrue(hasattr(data, 'download_data'))
-        self.assertTrue(hasattr(data, 'unpack_to_dataframe'))
+        from statscan.util import get_data
+        self.assertTrue(hasattr(get_data, 'download_data'))
+        self.assertTrue(hasattr(get_data, 'unpack_to_dataframe'))
         
         # Test enums module
         from statscan.enums import schema
