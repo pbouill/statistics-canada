@@ -16,6 +16,25 @@ VERSION_FILE: Path = PACKAGE_PATH / '_version.py'
 
 logger  = logging.getLogger(name=__name__)
 
+def print_dir_contents(path: Path, level: int = 0, max_level: int = 1) -> None:
+    '''
+    Print the contents of a directory.
+    Args:
+        path (Path): The path to the directory.
+        level (int): The current level of recursion.
+    '''
+    print(f'{"  " * level}{path}/')
+    for item in path.iterdir():
+        if item.is_dir():
+            if level >= max_level:
+                print(f'{"  " * (level + 1)}- {item.name}/ (max level reached)')
+                continue
+            else:
+                print_dir_contents(item, level + 1, max_level)
+                continue
+        else:
+            print(f'{"  " * (level + 1)}- {item.name} ({item.stat().st_size} bytes)')
+            continue
 
 def get_git_head_ref_hash(repo_dir: Optional[Path] = None) -> tuple[str, str]:
     '''
@@ -43,17 +62,14 @@ def get_git_head_ref_hash(repo_dir: Optional[Path] = None) -> tuple[str, str]:
         i = 0
         for p in ref_path.parents:
             if p.exists() and p.is_dir():
-                print(f'  [{i}] {p.resolve()}:')
-                for item in p.iterdir():
-                    print(f'    - {item.name}' + ('/' if item.is_dir() else ''))
+                print_dir_contents(p)
                 i += 1
             if i > 3:
                 break
         
         if (refs_dir := git_path / 'refs').exists() and refs_dir.is_dir():
             print(f'Printing contents of refs directory: {git_path / "refs"}')
-            for item in refs_dir.iterdir():
-                print(f'  - {item.name}' + ('/' if item.is_dir() else ''))
+            print_dir_contents(refs_dir, max_level=2)
 
         raise FileNotFoundError(f"Git reference not found in {ref_path.resolve()}. Please ensure you are in a valid git repository.")
     return ref, commit_hash
