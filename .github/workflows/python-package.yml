@@ -36,7 +36,7 @@ jobs:
     - name: Build package
       run: |
         # build the package
-        python -m build
+        python -m build --no-isolation
     - name: Extract version from built package
       id: extract_version
       run: |
