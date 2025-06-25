@@ -5,7 +5,7 @@ This module provides classes to process and transform raw SDMX JSON responses
 into more user-friendly formats including pandas DataFrames.
 """
 
-from typing import Dict, List, Any, Optional, Union
+from typing import Any, Optional
 import pandas as pd
 from dataclasses import dataclass
 
@@ -17,7 +17,7 @@ class DimensionInfo:
     """Information about a single dimension in SDMX data."""
     id: str
     name: str
-    values: List[Dict[str, str]]
+    values: list[dict[str, str]]
     
     def get_value_name(self, index: int) -> str:
         """Get the human-readable name for a dimension value by index."""
@@ -36,8 +36,8 @@ class DimensionInfo:
 class SeriesInfo:
     """Information about a data series in SDMX response."""
     key: str
-    dimensions: Dict[str, str]  # dimension_name -> value_name
-    observations: Dict[str, Union[float, str]]  # time_period -> value
+    dimensions: dict[str, str]  # dimension_name -> value_name
+    observations: dict[str, float | str]  # time_period -> value
     
     @property
     def dimension_summary(self) -> str:
@@ -53,7 +53,7 @@ class CensusDataResponse:
     convenient access methods.
     """
     
-    def __init__(self, raw_response: Dict[str, Any]):
+    def __init__(self, raw_response: dict[str, Any]):
         """
         Initialize with raw SDMX JSON response.
         
@@ -61,18 +61,18 @@ class CensusDataResponse:
             raw_response: The raw JSON response from Statistics Canada API
         """
         self.raw_response = raw_response
-        self._dimensions: Optional[Dict[str, DimensionInfo]] = None
-        self._series_info: Optional[List[SeriesInfo]] = None
+        self._dimensions: Optional[dict[str, DimensionInfo]] = None
+        self._series_info: Optional[list[SeriesInfo]] = None
         
     @property
-    def dimensions(self) -> Dict[str, DimensionInfo]:
+    def dimensions(self) -> dict[str, DimensionInfo]:
         """Get parsed dimension information."""
         if self._dimensions is None:
             self._parse_dimensions()
         return self._dimensions or {}
     
     @property
-    def series_info(self) -> List[SeriesInfo]:
+    def series_info(self) -> list[SeriesInfo]:
         """Get parsed series information with decoded dimensions."""
         if self._series_info is None:
             self._parse_series()
@@ -124,7 +124,7 @@ class CensusDataResponse:
                         observations=observations
                     ))
     
-    def _decode_series_key(self, series_key: str) -> Dict[str, str]:
+    def _decode_series_key(self, series_key: str) -> dict[str, str]:
         """Decode a series key using dimension information."""
         decoded = {}
         key_parts = series_key.split(':')
@@ -156,17 +156,20 @@ class CensusDataResponse:
             base_row['series_key'] = series.key
             
             for time_period, value in series.observations.items():
-                row = base_row.copy()
+                row: dict[str, str | float] = {}
+                row.update(base_row)
                 row['time_period'] = time_period
                 row['value'] = value
                 rows.append(row)
         
         return pd.DataFrame(rows)
     
-    def filter_series(self, 
-                     gender: Optional[str] = None,
-                     characteristic: Optional[str] = None,
-                     statistic_type: Optional[str] = None) -> List[SeriesInfo]:
+    def filter_series(
+        self, 
+        gender: Optional[str] = None,
+        characteristic: Optional[str] = None,
+        statistic_type: Optional[str] = None
+    ) -> list[SeriesInfo]:
         """
         Filter series by dimension values.
         
@@ -195,7 +198,7 @@ class CensusDataResponse:
         
         return filtered
 
-    def filter_by_enhanced_filter(self, enhanced_filter: EnhancedStatsFilter) -> List[SeriesInfo]:
+    def filter_by_enhanced_filter(self, enhanced_filter: EnhancedStatsFilter) -> list[SeriesInfo]:
         """
         Filter series using EnhancedStatsFilter enum values.
         
@@ -236,14 +239,14 @@ class CensusDataResponse:
         
         return filtered
 
-    def get_characteristics_by_category(self) -> Dict[str, List[str]]:
+    def get_characteristics_by_category(self) -> dict[str, list[str]]:
         """
         Group available characteristics by category.
         
         Returns:
             Dict mapping category names to lists of characteristics
         """
-        characteristics = {}
+        characteristics: dict[str, list[str]] = {}
         
         for series in self.series_info:
             char = series.dimensions.get('Census Profile Characteristic', '')
@@ -317,7 +320,7 @@ class CensusDataFrame(pd.DataFrame):
                 )
         return pd.DataFrame()
     
-    def summary_stats(self) -> Dict[str, Any]:
+    def summary_stats(self) -> dict[str, Any]:
         """Get summary statistics for numeric columns."""
         numeric_cols = self.select_dtypes(include=['number']).columns
         return {

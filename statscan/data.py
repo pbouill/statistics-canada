@@ -1,4 +1,4 @@
-from typing import Optional, List, Dict, Any, Union
+from typing import Optional, Any
 from datetime import datetime
 from pydantic import BaseModel, Field, ConfigDict
 
@@ -24,7 +24,7 @@ class SDMXSender(SDMXBaseModel):
     """Represents the sender information in SDMX metadata."""
     id: str = Field(description="Sender identifier")
     name: Optional[str] = Field(None, description="Sender name")
-    names: Optional[Dict[str, str]] = Field(None, description="Localized names")
+    names: Optional[dict[str, str]] = Field(None, description="Localized names")
 
 
 class SDMXReceiver(SDMXBaseModel):
@@ -38,9 +38,9 @@ class SDMXMeta(SDMXBaseModel):
     id: str = Field(description="Message identifier")
     prepared: datetime = Field(description="Message preparation timestamp")
     test: Optional[bool] = Field(None, description="Whether this is test data")
-    content_languages: List[str] = Field(alias="contentLanguages", description="Content languages")
+    content_languages: list[str] = Field(alias="contentLanguages", description="Content languages")
     sender: SDMXSender = Field(description="Message sender")
-    receiver: Optional[List[SDMXReceiver]] = Field(None, description="Message receivers")
+    receiver: Optional[list[SDMXReceiver]] = Field(None, description="Message receivers")
 
 
 # ============================================================================
@@ -55,25 +55,25 @@ class SDMXLink(SDMXBaseModel):
 
 class SDMXObservation(SDMXBaseModel):
     """Represents an observation in SDMX data."""
-    value: Union[str, float, int, None] = Field(description="Observation value")
+    value: str | float | int | None = Field(description="Observation value")
     status: Optional[int] = Field(None, description="Observation status")
-    attributes: Optional[List[Any]] = Field(None, description="Additional attributes")
+    attributes: Optional[list[Any]] = Field(None, description="Additional attributes")
 
 
 class SDMXSeries(SDMXBaseModel):
     """Represents a data series in SDMX format."""
-    attributes: Optional[List[Any]] = Field(None, description="Series attributes")
-    annotations: Optional[List[Any]] = Field(None, description="Series annotations")
-    observations: Dict[str, List[Any]] = Field(description="Time series observations")
+    attributes: Optional[list[Any]] = Field(None, description="Series attributes")
+    annotations: Optional[list[Any]] = Field(None, description="Series annotations")
+    observations: dict[str, list[Any]] = Field(description="Time series observations")
 
 
 class SDMXDataSet(SDMXBaseModel):
     """Represents a dataset in SDMX format."""
     structure: int = Field(description="Structure reference")
     action: str = Field(description="Dataset action")
-    links: Optional[List[SDMXLink]] = Field(None, description="Related links")
-    annotations: Optional[List[int]] = Field(None, description="Annotation references")
-    series: Dict[str, SDMXSeries] = Field(description="Data series")
+    links: Optional[list[SDMXLink]] = Field(None, description="Related links")
+    annotations: Optional[list[int]] = Field(None, description="Annotation references")
+    series: dict[str, SDMXSeries] = Field(description="Data series")
 
 
 # ============================================================================
@@ -86,24 +86,24 @@ class SDMXAnnotation(SDMXBaseModel):
     title: Optional[str] = Field(None, description="Annotation title")
     type: Optional[str] = Field(None, description="Annotation type")
     text: Optional[str] = Field(None, description="Annotation text")
-    texts: Optional[Dict[str, str]] = Field(None, description="Localized text")
+    texts: Optional[dict[str, str]] = Field(None, description="Localized text")
 
 
 class SDMXConcept(SDMXBaseModel):
     """Represents a concept in SDMX structures."""
     id: str = Field(description="Concept identifier")
     name: str = Field(description="Concept name")
-    names: Dict[str, str] = Field(description="Localized names")
-    annotations: Optional[List[SDMXAnnotation]] = Field(None, description="Concept annotations")
+    names: dict[str, str] = Field(description="Localized names")
+    annotations: Optional[list[SDMXAnnotation]] = Field(None, description="Concept annotations")
 
 
 class SDMXCode(SDMXBaseModel):
     """Represents a code in SDMX code lists."""
     id: str = Field(description="Code identifier")
     name: str = Field(description="Code name")
-    names: Dict[str, str] = Field(description="Localized names")
+    names: dict[str, str] = Field(description="Localized names")
     description: Optional[str] = Field(None, description="Code description")
-    descriptions: Optional[Dict[str, str]] = Field(None, description="Localized descriptions")
+    descriptions: Optional[dict[str, str]] = Field(None, description="Localized descriptions")
 
 
 class SDMXCodeList(SDMXBaseModel):
@@ -113,12 +113,12 @@ class SDMXCodeList(SDMXBaseModel):
     agency_id: str = Field(alias="agencyID", description="Agency identifier")
     is_final: bool = Field(alias="isFinal", description="Whether the code list is final")
     name: str = Field(description="Code list name")
-    names: Dict[str, str] = Field(description="Localized names")
+    names: dict[str, str] = Field(description="Localized names")
     description: Optional[str] = Field(None, description="Code list description")
-    descriptions: Optional[Dict[str, str]] = Field(None, description="Localized descriptions")
-    annotations: Optional[List[SDMXAnnotation]] = Field(None, description="Code list annotations")
+    descriptions: Optional[dict[str, str]] = Field(None, description="Localized descriptions")
+    annotations: Optional[list[SDMXAnnotation]] = Field(None, description="Code list annotations")
     is_partial: bool = Field(alias="isPartial", description="Whether the code list is partial")
-    codes: List[SDMXCode] = Field(description="Codes in the list")
+    codes: list[SDMXCode] = Field(description="Codes in the list")
 
 
 class SDMXConceptScheme(SDMXBaseModel):
@@ -128,9 +128,9 @@ class SDMXConceptScheme(SDMXBaseModel):
     agency_id: str = Field(alias="agencyID", description="Agency identifier")
     is_final: bool = Field(alias="isFinal", description="Whether the concept scheme is final")
     name: str = Field(description="Concept scheme name")
-    names: Dict[str, str] = Field(description="Localized names")
+    names: dict[str, str] = Field(description="Localized names")
     is_partial: bool = Field(alias="isPartial", description="Whether the concept scheme is partial")
-    concepts: List[SDMXConcept] = Field(description="Concepts in the scheme")
+    concepts: list[SDMXConcept] = Field(description="Concepts in the scheme")
 
 
 class SDMXDataflow(SDMXBaseModel):
@@ -140,8 +140,8 @@ class SDMXDataflow(SDMXBaseModel):
     agency_id: str = Field(alias="agencyID", description="Agency identifier")
     is_final: bool = Field(alias="isFinal", description="Whether the dataflow is final")
     name: str = Field(description="Dataflow name")
-    names: Dict[str, str] = Field(description="Localized names")
-    annotations: Optional[List[SDMXAnnotation]] = Field(None, description="Dataflow annotations")
+    names: dict[str, str] = Field(description="Localized names")
+    annotations: Optional[list[SDMXAnnotation]] = Field(None, description="Dataflow annotations")
     structure: str = Field(description="Data structure reference")
 
 
@@ -150,7 +150,7 @@ class SDMXDimension(SDMXBaseModel):
     id: str = Field(description="Dimension identifier")
     position: int = Field(description="Dimension position")
     concept_identity: str = Field(alias="conceptIdentity", description="Concept identity reference")
-    local_representation: Optional[Dict[str, Any]] = Field(None, alias="localRepresentation", description="Local representation")
+    local_representation: Optional[dict[str, Any]] = Field(None, alias="localRepresentation", description="Local representation")
 
 
 class SDMXAttribute(SDMXBaseModel):
@@ -158,14 +158,14 @@ class SDMXAttribute(SDMXBaseModel):
     id: str = Field(description="Attribute identifier")
     assignment_status: str = Field(alias="assignmentStatus", description="Assignment status")
     concept_identity: str = Field(alias="conceptIdentity", description="Concept identity reference")
-    local_representation: Optional[Dict[str, Any]] = Field(None, alias="localRepresentation", description="Local representation")
+    local_representation: Optional[dict[str, Any]] = Field(None, alias="localRepresentation", description="Local representation")
 
 
 class SDMXDataStructureComponents(SDMXBaseModel):
     """Represents the components of a data structure."""
-    dimension_list: Optional[Dict[str, Any]] = Field(None, alias="dimensionList", description="Dimension list")
-    attribute_list: Optional[Dict[str, Any]] = Field(None, alias="attributeList", description="Attribute list")
-    measure_list: Optional[Dict[str, Any]] = Field(None, alias="measureList", description="Measure list")
+    dimension_list: Optional[dict[str, Any]] = Field(None, alias="dimensionList", description="Dimension list")
+    attribute_list: Optional[dict[str, Any]] = Field(None, alias="attributeList", description="Attribute list")
+    measure_list: Optional[dict[str, Any]] = Field(None, alias="measureList", description="Measure list")
 
 
 class SDMXDataStructure(SDMXBaseModel):
@@ -175,7 +175,7 @@ class SDMXDataStructure(SDMXBaseModel):
     agency_id: str = Field(alias="agencyID", description="Agency identifier")
     is_final: bool = Field(alias="isFinal", description="Whether the data structure is final")
     name: str = Field(description="Data structure name")
-    names: Dict[str, str] = Field(description="Localized names")
+    names: dict[str, str] = Field(description="Localized names")
     data_structure_components: SDMXDataStructureComponents = Field(alias="dataStructureComponents", description="Structure components")
 
 
@@ -186,33 +186,33 @@ class SDMXContentConstraint(SDMXBaseModel):
     agency_id: str = Field(alias="agencyID", description="Agency identifier")
     is_final: bool = Field(alias="isFinal", description="Whether the constraint is final")
     name: str = Field(description="Constraint name")
-    names: Dict[str, str] = Field(description="Localized names")
+    names: dict[str, str] = Field(description="Localized names")
     type: str = Field(description="Constraint type")
 
 
 class SDMXStructureData(SDMXBaseModel):
     """Represents the data section of an SDMX structure message."""
-    dataflows: Optional[List[SDMXDataflow]] = Field(None, description="Available dataflows")
-    concept_schemes: Optional[List[SDMXConceptScheme]] = Field(None, alias="conceptSchemes", description="Concept schemes")
-    codelists: Optional[List[SDMXCodeList]] = Field(None, description="Code lists")
-    data_structures: Optional[List[SDMXDataStructure]] = Field(None, alias="dataStructures", description="Data structures")
-    content_constraints: Optional[List[SDMXContentConstraint]] = Field(None, alias="contentConstraints", description="Content constraints")
+    dataflows: Optional[list[SDMXDataflow]] = Field(None, description="Available dataflows")
+    concept_schemes: Optional[list[SDMXConceptScheme]] = Field(None, alias="conceptSchemes", description="Concept schemes")
+    codelists: Optional[list[SDMXCodeList]] = Field(None, description="Code lists")
+    data_structures: Optional[list[SDMXDataStructure]] = Field(None, alias="dataStructures", description="Data structures")
+    content_constraints: Optional[list[SDMXContentConstraint]] = Field(None, alias="contentConstraints", description="Content constraints")
 
 
 class SDMXStructure(SDMXBaseModel):
     """Represents a structure definition in SDMX data."""
     name: str = Field(description="Structure name")
-    names: Dict[str, str] = Field(description="Localized names")
-    dimensions: Dict[str, Any] = Field(description="Structure dimensions")
-    attributes: Dict[str, Any] = Field(description="Structure attributes")
-    annotations: List[Any] = Field(description="Structure annotations")
-    data_sets: List[Any] = Field(alias="dataSets", description="Associated datasets")
+    names: dict[str, str] = Field(description="Localized names")
+    dimensions: dict[str, Any] = Field(description="Structure dimensions")
+    attributes: dict[str, Any] = Field(description="Structure attributes")
+    annotations: list[Any] = Field(description="Structure annotations")
+    data_sets: list[Any] = Field(alias="dataSets", description="Associated datasets")
 
 
 class SDMXData(SDMXBaseModel):
     """Represents the data section of an SDMX message."""
-    data_sets: List[SDMXDataSet] = Field(alias="dataSets", description="Data sets")
-    structures: Optional[List[SDMXStructure]] = Field(None, description="Data structures")
+    data_sets: list[SDMXDataSet] = Field(alias="dataSets", description="Data sets")
+    structures: Optional[list[SDMXStructure]] = Field(None, description="Data structures")
 
 
 # ============================================================================
@@ -226,7 +226,7 @@ class SDMXDataResponse(SDMXBaseModel):
     """
     meta: SDMXMeta = Field(description="Response metadata")
     data: SDMXData = Field(description="Response data")
-    errors: Optional[List[Any]] = Field(None, description="Response errors")
+    errors: Optional[list[Any]] = Field(None, description="Response errors")
 
 
 class SDMXStructureResponse(SDMXBaseModel):
@@ -242,8 +242,8 @@ class DataflowsResponse(SDMXBaseModel):
     """
     Represents a dataflows response containing available data flows.
     """
-    resources: List[Any] = Field(description="Resource list")
-    references: Dict[str, SDMXDataflow] = Field(description="Dataflow references")
+    resources: list[Any] = Field(description="Resource list")
+    references: dict[str, SDMXDataflow] = Field(description="Dataflow references")
 
 
 # ============================================================================
@@ -256,17 +256,17 @@ class SDMXResponse(SDMXBaseModel):
     Can handle both data and structure responses.
     """
     meta: Optional[SDMXMeta] = Field(None, description="Response metadata")
-    data: Optional[Union[SDMXData, SDMXStructureData]] = Field(None, description="Response data")
-    resources: Optional[List[Any]] = Field(None, description="Resources (for dataflows)")
-    references: Optional[Dict[str, Any]] = Field(None, description="References (for dataflows)")
-    errors: Optional[List[Any]] = Field(None, description="Response errors")
+    data: Optional[SDMXData | SDMXStructureData] = Field(None, description="Response data")
+    resources: Optional[list[Any]] = Field(None, description="Resources (for dataflows)")
+    references: Optional[dict[str, Any]] = Field(None, description="References (for dataflows)")
+    errors: Optional[list[Any]] = Field(None, description="Response errors")
 
 
 # ============================================================================
 # Helper Functions
 # ============================================================================
 
-def parse_sdmx_response(json_data: Dict[str, Any]) -> Union[SDMXDataResponse, SDMXStructureResponse, DataflowsResponse, SDMXResponse]:
+def parse_sdmx_response(json_data: dict[str, Any]) -> SDMXDataResponse | SDMXStructureResponse | DataflowsResponse | SDMXResponse:
     """
     Parse a JSON response from the Stats Canada API into the appropriate Pydantic model.
     
@@ -299,7 +299,7 @@ def parse_sdmx_response(json_data: Dict[str, Any]) -> Union[SDMXDataResponse, SD
     return SDMXResponse(**json_data)
 
 
-def extract_observations(series_data: Dict[str, SDMXSeries]) -> List[Dict[str, Any]]:
+def extract_observations(series_data: dict[str, SDMXSeries]) -> list[dict[str, Any]]:
     """
     Extract observations from SDMX series data into a flattened list.
     

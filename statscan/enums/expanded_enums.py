@@ -6,7 +6,7 @@ as new dimension values are discovered from actual API responses.
 """
 
 from enum import Enum
-from typing import Dict, List, Set
+from typing import Optional, Self, Any
 from statscan.enums.enhanced_stats_filter import CensusProfileCharacteristic, Gender, StatisticType
 
 
@@ -255,9 +255,9 @@ class DimensionValueDiscovery:
     """Utility class to help discover and catalog new dimension values from API responses."""
     
     def __init__(self):
-        self.discovered_values: Dict[str, Set[str]] = {}
+        self.discovered_values: dict[str, set[str]] = {}
     
-    def analyze_response(self, response_data: Dict) -> None:
+    def analyze_response(self, response_data: dict) -> None:
         """Analyze an SDMX response to discover new dimension values."""
         if 'data' not in response_data or 'structures' not in response_data['data']:
             return
@@ -297,7 +297,7 @@ class DimensionValueDiscovery:
         
         return report
     
-    def suggest_enum_additions(self, dimension_name: str) -> List[str]:
+    def suggest_enum_additions(self, dimension_name: str) -> list[str]:
         """Suggest new enum values for a specific dimension."""
         if dimension_name not in self.discovered_values:
             return []

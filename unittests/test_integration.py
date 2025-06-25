@@ -2,6 +2,7 @@
 Integration tests for the statistics-canada package.
 """
 import unittest
+import unittest.mock
 import asyncio
 from pathlib import Path
 import tempfile
@@ -23,7 +24,7 @@ class TestDataIntegration(unittest.TestCase):
         if self.temp_dir.exists():
             shutil.rmtree(self.temp_dir)
     
-    @patch('statscan.util.data.AsyncClient')
+    @patch('statscan.util.get_data.AsyncClient')
     def test_download_and_unpack_workflow(self, mock_client):
         """Test the complete workflow of downloading and unpacking data."""
         # Mock CSV data
@@ -70,15 +71,17 @@ class TestEnumIntegration(unittest.TestCase):
             # Test that province enum works with geo level
             ontario = ProvinceTerritory.ONTARIO
             
-            # Test that we can get the geo level
-            geo_level = ontario.get_geo_level()
+            # Test that we can get the schema (geo level)
+            geo_level = ontario.get_schema()
             self.assertEqual(geo_level, Schema.PR)
             
-            # Test DGUID generation if available
-            if hasattr(ontario, 'dguid'):
-                dguid = ontario.dguid
-                self.assertTrue(dguid.startswith('2021'))
-                self.assertIn('A0002', dguid)  # Province geo level code
+            # Test code generation
+            code = ontario.code
+            self.assertTrue(code.startswith('A0002'))  # Province geo level code
+            
+            # Test UID
+            uid = ontario.uid
+            self.assertEqual(uid, '35')  # Ontario's province code
                 
         except ImportError:
             self.skipTest("Province enum or GeoLevel not available")
@@ -190,14 +193,14 @@ class TestRealWorldScenarios(unittest.TestCase):
             # Acceptable if enums haven't been generated yet
             pass
     
-    @patch('statscan.util.data.AsyncClient')
+    @patch('statscan.util.get_data.AsyncClient')
     def test_data_scientist_workflow(self, mock_client):
         """Test a workflow that a data scientist might use."""
         # Mock successful download
         csv_content = b"GeoLevel,Name,Value\nPR,Ontario,14000000\nPR,Quebec,8500000\n"
         mock_response = mock_client.return_value.__aenter__.return_value.get.return_value
         mock_response.content = csv_content
-        mock_response.raise_for_status.return_value = None
+        mock_response.raise_for_status = unittest.mock.AsyncMock(return_value=None)
         
         async def data_science_workflow():
             from statscan.util.get_data import download_data, unpack_to_dataframe

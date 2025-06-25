@@ -15,11 +15,12 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from package_info import (
     VersionInfo, 
-    get_git_head_ref_hash, 
-    get_git_head_hash,
-    create_version_info,
+    get_head_ref_path,
+    get_commit_hash,
     PACKAGE_NAME,
-    VERSION_FILE
+    VERSION_FILE,
+    GitHubActionEnvVars,
+    print_dir_contents
 )
 
 
@@ -50,7 +51,7 @@ class TestVersionInfo(unittest.TestCase):
             # Check the path to determine which git file is being opened
             if 'HEAD' in str(path_instance):
                 # HEAD file contains "ref: refs/heads/main"
-                mock_file.__enter__.return_value.read.return_value = f"ref: {test_ref}"
+                mock_file.__enter__.return_value.readlines.return_value = [f"ref: {test_ref}\n"]
             else:
                 # Ref file contains the commit hash
                 mock_file.__enter__.return_value.read.return_value = test_commit_hash
@@ -86,40 +87,42 @@ class TestVersionInfo(unittest.TestCase):
         
         self.assertEqual(version, "2025.6.9.143045")
     
-    def test_get_git_head_ref_hash_success(self):
-        """Test successful git reference and hash retrieval."""
-        ref, commit_hash = get_git_head_ref_hash()
-        
-        self.assertEqual(ref, self.test_ref)
-        self.assertEqual(commit_hash, self.test_commit_hash)
-    
-    def test_get_git_head_ref_hash_no_git_dir(self):
-        """Test git hash retrieval when .git directory doesn't exist."""
-        with patch('pathlib.Path.open', side_effect=FileNotFoundError("Git repository not found")):
-            with self.assertRaises(FileNotFoundError):
-                get_git_head_ref_hash()
-    
-    def test_get_git_head_hash(self):
-        """Test that get_git_head_hash returns just the hash."""
-        hash_result = get_git_head_hash()
-        self.assertEqual(hash_result, self.test_commit_hash)
-    
-    @patch('package_info.get_git_head_ref_hash')
-    def test_create_version_info(self, mock_ref_hash):
-        """Test create_version_info function."""
-        mock_ref_hash.return_value = (self.test_ref, self.test_commit_hash)
-        
-        with patch('package_info.datetime') as mock_datetime:
-            test_time = datetime(2025, 6, 9, 12, 0, 0, tzinfo=timezone.utc)
-            mock_datetime.now.return_value = test_time
-            mock_datetime.timezone = timezone  # Keep the real timezone
+    def test_get_head_ref_path(self):
+        """Test get_head_ref_path function."""
+        # Mock git directory structure
+        with patch('pathlib.Path.exists', return_value=True):
+            ref_path = get_head_ref_path()
             
-            version_info = create_version_info()
+            # Should return a Path object
+            self.assertIsInstance(ref_path, Path)
+            self.assertIn(self.test_ref, str(ref_path))
+    
+    def test_get_head_ref_path_no_git_dir(self):
+        """Test get_head_ref_path when .git directory doesn't exist."""
+        with patch('pathlib.Path.exists', return_value=False):
+            with self.assertRaises(FileNotFoundError):
+                get_head_ref_path()
+    
+    def test_get_commit_hash(self):
+        """Test that get_commit_hash returns just the hash."""
+        with patch('pathlib.Path.exists', return_value=True):
+            hash_result = get_commit_hash()
+            self.assertEqual(hash_result, self.test_commit_hash)
+    
+    def test_version_info_manual_creation(self):
+        """Test manual VersionInfo creation with specific values."""
+        with patch('pathlib.Path.exists', return_value=True):
+            test_time = datetime(2025, 6, 9, 12, 0, 0, tzinfo=timezone.utc)
+            
+            version_info = VersionInfo(
+                build_time=test_time,
+                commit=self.test_commit_hash
+            )
             
             expected_version = "2025.6.9.120000"
-            self.assertEqual(version_info['__version__'], expected_version)
-            self.assertEqual(version_info['__build_time__'], test_time)
-            self.assertEqual(version_info['__commit__'], (self.test_ref, self.test_commit_hash))
+            self.assertEqual(version_info.version, expected_version)
+            self.assertEqual(version_info.build_time, test_time)
+            self.assertEqual(version_info.commit, self.test_commit_hash)
     
     def test_write_version_file(self):
         """Test writing version file."""
@@ -165,22 +168,24 @@ __commit__: str = '{self.test_commit_hash}'
         self.assertEqual(vi.version, "2025.6.9.120000")
     
     def test_from_version_file_missing_fields(self):
-        """Test that from_version_file raises exception when fields are missing."""
+        """Test that from_version_file works with missing fields using defaults."""
         test_file = self.temp_dir / "incomplete_version.py"
         
-        # Create a test version file missing some required fields
+        # Create a test version file missing some fields (should use defaults)
         test_content = '''# This file is automatically generated by ../package_info.py 
 __version__: str = '2025.6.9.120000'
 __build_time__: str = '2025-06-09T12:00:00+00:00'
-# Missing __commit__ field
+# Missing __commit__ field - should use default from git or environment
 '''
         test_file.write_text(test_content)
         
-        with self.assertRaises(ValueError) as context:
-            VersionInfo.from_version_file(test_file)
-        
-        self.assertIn("Missing required fields", str(context.exception))
-        self.assertIn("commit", str(context.exception))
+        with patch('pathlib.Path.exists', return_value=True):
+            vi = VersionInfo.from_version_file(test_file)
+            
+            # Should have used defaults for missing commit field
+            self.assertEqual(vi.commit, self.test_commit_hash)  # From our mock
+            self.assertIsInstance(vi.build_time, datetime)
+            self.assertEqual(vi.package_name, test_file.parent.name)
     
     def test_update_version_file_no_change(self):
         """Test update_version_file when commit hasn't changed."""
@@ -215,15 +220,14 @@ __build_time__: str = '2025-06-09T12:00:00+00:00'
             if str(path_instance).endswith('.py'):
                 return original_path_open(path_instance, *args, **kwargs)
             if 'HEAD' in str(path_instance):
-                mock_file.__enter__.return_value.read.return_value = f"ref: {test_ref}"
+                mock_file.__enter__.return_value.readlines.return_value = [f"ref: {test_ref}\n"]
             else:
                 mock_file.__enter__.return_value.read.return_value = old_commit
             return mock_file
         
-        with patch.object(Path, 'open', mock_old_commit):
+        with patch.object(Path, 'open', mock_old_commit), patch('pathlib.Path.exists', return_value=True):
             vi1 = VersionInfo()
             vi1.write_version_file(test_file)
-            print(f"DEBUG: vi1.commit = {vi1.commit}")
         
         # Now modify the mock to return new commit
         def mock_new_commit(path_instance, *args, **kwargs):
@@ -232,15 +236,13 @@ __build_time__: str = '2025-06-09T12:00:00+00:00'
             if str(path_instance).endswith('.py'):
                 return original_path_open(path_instance, *args, **kwargs)
             if 'HEAD' in str(path_instance):
-                mock_file.__enter__.return_value.read.return_value = f"ref: {test_ref}"
+                mock_file.__enter__.return_value.readlines.return_value = [f"ref: {test_ref}\n"]
             else:
                 mock_file.__enter__.return_value.read.return_value = new_commit
             return mock_file
         
-        with patch.object(Path, 'open', mock_new_commit):
+        with patch.object(Path, 'open', mock_new_commit), patch('pathlib.Path.exists', return_value=True):
             updated, vi2, path = VersionInfo.update_version_file(test_file)
-            print(f"DEBUG: vi2.commit = {vi2.commit}")
-            print(f"DEBUG: updated = {updated}")
         
         # Restart the original mock
         self.git_mock_patcher.start()
@@ -276,7 +278,48 @@ __commit__: str = 'test_commit'
         with self.assertRaises(ValueError) as context:
             VersionInfo.from_version_file(test_file)
         
-        self.assertIn("Invalid datetime format", str(context.exception))
+        # The error should be about invalid datetime format
+        self.assertIn("Invalid isoformat string", str(context.exception))
+    
+    def test_version_info_with_github_action_env(self):
+        """Test VersionInfo creation with GitHub Action environment variables."""
+        with patch.dict(os.environ, {'GITHUB_SHA': 'github_commit_hash'}):
+            vi = VersionInfo()
+            
+            # Should use the GitHub environment variable instead of git
+            self.assertEqual(vi.commit, 'github_commit_hash')
+            self.assertEqual(vi.package_name, PACKAGE_NAME)
+    
+    def test_version_info_fallback_to_git(self):
+        """Test VersionInfo falls back to git when GitHub env vars not available."""
+        # Clear GitHub environment variables
+        with patch.dict(os.environ, {}, clear=True), patch('pathlib.Path.exists', return_value=True):
+            vi = VersionInfo()
+            
+            # Should fall back to git commit hash from our mock
+            self.assertEqual(vi.commit, self.test_commit_hash)
+
+
+class TestGitHubActionEnvVars(unittest.TestCase):
+    """Test cases for GitHubActionEnvVars enum."""
+    
+    def test_enum_values(self):
+        """Test that enum values are properly set."""
+        self.assertEqual(GitHubActionEnvVars.GITHUB_REPOSITORY.value, "GITHUB_REPOSITORY")
+        self.assertEqual(GitHubActionEnvVars.GITHUB_SHA.value, "GITHUB_SHA")
+        self.assertEqual(GitHubActionEnvVars.GITHUB_REF.value, "GITHUB_REF")
+        self.assertEqual(GitHubActionEnvVars.GITHUB_WORKFLOW.value, "GITHUB_WORKFLOW")
+        self.assertEqual(GitHubActionEnvVars.GITHUB_ACTOR.value, "GITHUB_ACTOR")
+        self.assertEqual(GitHubActionEnvVars.GITHUB_WORKSPACE.value, "GITHUB_WORKSPACE")
+    
+    def test_env_value_property(self):
+        """Test env_value property returns environment variable value."""
+        with patch.dict(os.environ, {'GITHUB_SHA': 'test_sha_123'}):
+            self.assertEqual(GitHubActionEnvVars.GITHUB_SHA.env_value, 'test_sha_123')
+        
+        # Test when env var doesn't exist
+        with patch.dict(os.environ, {}, clear=True):
+            self.assertIsNone(GitHubActionEnvVars.GITHUB_SHA.env_value)
 
 
 class TestConstants(unittest.TestCase):
@@ -289,6 +332,57 @@ class TestConstants(unittest.TestCase):
         
         self.assertIsInstance(VERSION_FILE, Path)
         self.assertTrue(str(VERSION_FILE).endswith('_version.py'))
+
+
+class TestUtilityFunctions(unittest.TestCase):
+    """Test cases for utility functions."""
+    
+    def setUp(self):
+        """Set up test fixtures."""
+        self.temp_dir = Path(tempfile.mkdtemp())
+        # Create some test files and directories
+        (self.temp_dir / "file1.txt").write_text("test content")
+        (self.temp_dir / "subdir").mkdir()
+        (self.temp_dir / "subdir" / "file2.txt").write_text("more content")
+        
+    def tearDown(self):
+        """Clean up test fixtures."""
+        if self.temp_dir.exists():
+            shutil.rmtree(self.temp_dir)
+    
+    def test_print_dir_contents(self):
+        """Test print_dir_contents function."""
+        # Capture stdout to verify output
+        import io
+        import contextlib
+        
+        f = io.StringIO()
+        with contextlib.redirect_stdout(f):
+            print_dir_contents(self.temp_dir, max_level=0)
+        
+        output = f.getvalue()
+        
+        # Should contain the directory name and files
+        self.assertIn(str(self.temp_dir), output)
+        self.assertIn("file1.txt", output)
+        self.assertIn("subdir", output)
+        # Should show that max level was reached for subdirectory since max_level=0
+        self.assertIn("max level reached", output)
+    
+    def test_print_dir_contents_recursive(self):
+        """Test print_dir_contents with deeper recursion."""
+        import io
+        import contextlib
+        
+        f = io.StringIO()
+        with contextlib.redirect_stdout(f):
+            print_dir_contents(self.temp_dir, max_level=2)
+        
+        output = f.getvalue()
+        
+        # Should contain files in subdirectory too
+        self.assertIn("file2.txt", output)
+        self.assertNotIn("max level reached", output)  # Should not reach max level
 
 
 if __name__ == '__main__':

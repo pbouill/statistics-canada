@@ -4,7 +4,7 @@ This extends the basic stats_filter.py with more complete enum coverage.
 """
 
 from enum import Enum
-from typing import Optional, Self, Dict, Any
+from typing import Optional, Self, Any
 from dataclasses import dataclass
 
 
@@ -176,7 +176,7 @@ class EnhancedStatsFilter:
             statistic_type=StatisticType(int(stattype_str)) if stattype_str else None
         )
     
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary representation."""
         return {
             'gender': {
