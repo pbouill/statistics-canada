@@ -86,3 +86,19 @@ class Dimension(BaseModel):
     member: list[Member]
     footnote: list[Footnote]
     link: list[Link]
+
+
+class DimensionManager:
+    def __init__(self, dimensions: list[Dimension]):
+        self._dimensions = dimensions
+
+    
+
+    def get_dimension(self, dimension_id: int) -> Dimension | None:
+        for dimension in self.dimensions:
+            if dimension.dimensionPositionId == dimension_id:
+                return dimension
+        return None
+
+    def get_all_dimensions(self) -> list[Dimension]:
+        return self.dimensions

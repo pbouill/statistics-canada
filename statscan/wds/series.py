@@ -6,12 +6,13 @@ from statscan.enums.auto.wds.scalar import Scalar
 from statscan.enums.auto.wds.uom import UoM
 
 from .datapoint import DataPoint
+from .coordinate import Coordinate
 
 
 class Series(BaseModel):
     responseStatusCode: WDSResponseStatus
     productId: int
-    coordinate: str  # TODO: should be coordinate class?
+    coordinate: Coordinate
     vectorId: int
     frequencyCode: Frequency
     scalarFactorCode: Scalar
@@ -25,6 +26,6 @@ class Series(BaseModel):
 class ChangedSeriesData(BaseModel):
     responseStatusCode: WDSResponseStatus
     productId: int
-    coordinate: str  # TODO: should be coordinate class?
+    coordinate: Coordinate
     vectorId: int
     vectorDataPoint: list[DataPoint]
