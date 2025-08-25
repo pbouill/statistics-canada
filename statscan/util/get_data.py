@@ -1,6 +1,7 @@
 from typing import Optional, Iterable, Any
 from pathlib import Path
 import mimetypes
+from datetime import datetime, date
 
 import logging
 
@@ -9,7 +10,7 @@ from httpx import AsyncClient, Response
 
 
 from statscan.url import CENSUS_SDMX_BASE_URL, WDS_URL
-from statscan.enums.wds import Detail, Format, WDSDATAMIME, WDSMETADATAMIME
+from statscan.enums.wds.wds import Detail, Format, WDSDATAMIME, WDSMETADATAMIME
 from statscan.enums.frequency import Frequency
 from statscan.enums.stats_filter import StatsFilter
 

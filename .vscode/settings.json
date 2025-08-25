@@ -1,13 +1,13 @@
 {
-    "python.testing.unittestArgs": [
+    "python.testing.pytestArgs": [
         "-v",
-        "-s",
-        "./unittests",
-        "-p",
-        "test_*.py"
+        "./tests",
+        "--tb=short"
     ],
-    "python.testing.pytestEnabled": false,
-    "python.testing.unittestEnabled": true,
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.cwd": "${workspaceFolder}",
+    "python.envFile": "${workspaceFolder}/.env",
     "python.analysis.aiCodeActions": {
         "addMissingImports": true,
         "addMissingParameterTypeHints": true,
@@ -16,4 +16,7 @@
         "addMissingMethodTypeHints": true,
         "addMissingClassTypeHints": true
     },
+    "terminal.integrated.env.linux": {
+        "PYTHON_GIL": "0"
+    }
 }

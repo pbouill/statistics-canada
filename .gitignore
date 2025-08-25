@@ -178,4 +178,5 @@ data/
 
 # temp dev files
 scratch/
-debug_
+debug/
+debug_*

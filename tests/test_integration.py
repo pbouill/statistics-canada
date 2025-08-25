@@ -1,25 +1,24 @@
 """
 Integration tests for the statistics-canada package.
 """
-import unittest
-import unittest.mock
+import pytest
 import asyncio
 from pathlib import Path
 import tempfile
 import shutil
-from unittest.mock import patch
+from unittest.mock import patch, AsyncMock
 
 from statscan.util.get_data import download_data, unpack_to_dataframe
 
 
-class TestDataIntegration(unittest.TestCase):
+class TestDataIntegration:
     """Integration tests for data downloading and processing."""
     
-    def setUp(self):
+    def setup_method(self):
         """Set up test fixtures."""
         self.temp_dir = Path(tempfile.mkdtemp())
         
-    def tearDown(self):
+    def teardown_method(self):
         """Clean up test fixtures."""
         if self.temp_dir.exists():
             shutil.rmtree(self.temp_dir)
@@ -34,7 +33,7 @@ class TestDataIntegration(unittest.TestCase):
         mock_response = mock_client.return_value.__aenter__.return_value.get.return_value
         mock_response.content = csv_content
         # Fix for coroutine warning: properly mock the awaitable
-        mock_response.raise_for_status = unittest.mock.AsyncMock(return_value=None)
+        mock_response.raise_for_status = AsyncMock(return_value=None)
         
         async def run_integration_test():
             # Download the data
@@ -53,13 +52,13 @@ class TestDataIntegration(unittest.TestCase):
         df = asyncio.run(run_integration_test())
         
         # Verify the complete workflow
-        self.assertEqual(len(df), 2)
-        self.assertEqual(list(df.columns), ['Province', 'Code', 'Population'])
-        self.assertEqual(df.iloc[0]['Province'], 'Ontario')
-        self.assertEqual(df.iloc[1]['Code'], '24')
+        assert len(df) == 2
+        assert list(df.columns) == ['Province', 'Code', 'Population']
+        assert df.iloc[0]['Province'] == 'Ontario'
+        assert df.iloc[1]['Code'] == '24'
 
 
-class TestEnumIntegration(unittest.TestCase):
+class TestEnumIntegration:
     """Integration tests for enum functionality."""
     
     def test_province_and_geolevel_integration(self):
@@ -73,18 +72,18 @@ class TestEnumIntegration(unittest.TestCase):
             
             # Test that we can get the schema (geo level)
             geo_level = ontario.get_schema()
-            self.assertEqual(geo_level, Schema.PR)
+            assert geo_level == Schema.PR
             
             # Test code generation
             code = ontario.code
-            self.assertTrue(code.startswith('A0002'))  # Province geo level code
+            assert code.startswith('A0002')  # Province geo level code
             
             # Test UID
             uid = ontario.uid
-            self.assertEqual(uid, '35')  # Ontario's province code
+            assert uid == '35'  # Ontario's province code
                 
         except ImportError:
-            self.skipTest("Province enum or GeoLevel not available")
+            pytest.skip("Province enum or GeoLevel not available")
     
     def test_census_division_integration(self):
         """Test census division enum integration."""
@@ -94,7 +93,7 @@ class TestEnumIntegration(unittest.TestCase):
             
             # Get a census division
             divisions = list(CensusDivision)
-            self.assertGreater(len(divisions), 0)
+            assert len(divisions) > 0
             
             # Test first division
             first_division = divisions[0]
@@ -102,13 +101,13 @@ class TestEnumIntegration(unittest.TestCase):
             # Test that it has a province relationship if available
             if hasattr(first_division, 'province_territory'):
                 province = first_division.province_territory
-                self.assertIsInstance(province, ProvinceTerritory)
+                assert isinstance(province, ProvinceTerritory)
                 
         except ImportError:
-            self.skipTest("Census division enum not available")
+            pytest.skip("Census division enum not available")
 
 
-class TestBuildSystemIntegration(unittest.TestCase):
+class TestBuildSystemIntegration:
     """Test build system and packaging integration."""
     
     def test_package_version_consistency(self):
@@ -117,49 +116,49 @@ class TestBuildSystemIntegration(unittest.TestCase):
         from statscan._version import __version__
         
         # Version should be consistent
-        self.assertEqual(statscan.__version__, __version__)
+        assert statscan.__version__ == __version__
         
         # Version should be in expected format
         version_parts = __version__.split('.')
-        self.assertEqual(len(version_parts), 4)
+        assert len(version_parts) == 4
         
         # Should be able to parse as expected
         year, month, day, time_part = version_parts
-        self.assertGreaterEqual(int(year), 2025)
-        self.assertGreaterEqual(int(month), 1)
-        self.assertLessEqual(int(month), 12)
-        self.assertGreaterEqual(int(day), 1)
-        self.assertLessEqual(int(day), 31)
-        self.assertEqual(len(time_part), 6)  # HHMMSS
+        assert int(year) >= 2025
+        assert int(month) >= 1
+        assert int(month) <= 12
+        assert int(day) >= 1
+        assert int(day) <= 31
+        assert len(time_part) == 6  # HHMMSS
     
     def test_imports_work_from_installed_package(self):
         """Test that all expected imports work."""
         # Main package
         import statscan
-        self.assertTrue(hasattr(statscan, '__version__'))
+        assert hasattr(statscan, '__version__')
         
         # Core enums
         from statscan.enums.schema import Schema
-        self.assertIsNotNone(Schema)
+        assert Schema is not None
         
         # Utility functions
         from statscan.util.get_data import download_data, unpack_to_dataframe
-        self.assertTrue(callable(download_data))
-        self.assertTrue(callable(unpack_to_dataframe))
+        assert callable(download_data)
+        assert callable(unpack_to_dataframe)
         
         # Census functionality
         from statscan.enums.vintage import Vintage
-        self.assertIsNotNone(Vintage)
+        assert Vintage is not None
 
 
-class TestRealWorldScenarios(unittest.TestCase):
+class TestRealWorldScenarios:
     """Test realistic usage scenarios."""
     
-    def setUp(self):
+    def setup_method(self):
         """Set up test fixtures."""
         self.temp_dir = Path(tempfile.mkdtemp())
         
-    def tearDown(self):
+    def teardown_method(self):
         """Clean up test fixtures."""
         if self.temp_dir.exists():
             shutil.rmtree(self.temp_dir)
@@ -175,20 +174,20 @@ class TestRealWorldScenarios(unittest.TestCase):
         
         # 2. Check version
         version = statscan.__version__
-        self.assertIsInstance(version, str)
+        assert isinstance(version, str)
         
         # 3. Use enums
         canada_level = Schema.CAN
-        self.assertEqual(canada_level, 'A0000')
+        assert canada_level == 'A0000'
         
         census_2021 = Vintage.CENSUS_2021
-        self.assertEqual(census_2021.value, 2021)
+        assert census_2021.value == 2021
         
         # 4. Work with auto-generated enums (if available)
         try:
             from statscan.enums.auto.province_territory import ProvinceTerritory
             ontario = ProvinceTerritory.ONTARIO
-            self.assertIsNotNone(ontario)
+            assert ontario is not None
         except ImportError:
             # Acceptable if enums haven't been generated yet
             pass
@@ -200,7 +199,7 @@ class TestRealWorldScenarios(unittest.TestCase):
         csv_content = b"GeoLevel,Name,Value\nPR,Ontario,14000000\nPR,Quebec,8500000\n"
         mock_response = mock_client.return_value.__aenter__.return_value.get.return_value
         mock_response.content = csv_content
-        mock_response.raise_for_status = unittest.mock.AsyncMock(return_value=None)
+        mock_response.raise_for_status = AsyncMock(return_value=None)
         
         async def data_science_workflow():
             from statscan.util.get_data import download_data, unpack_to_dataframe
@@ -224,9 +223,9 @@ class TestRealWorldScenarios(unittest.TestCase):
         total_pop, num_provinces = asyncio.run(data_science_workflow())
         
         # Verify results
-        self.assertEqual(total_pop, 22500000)  # Sum of Ontario + Quebec
-        self.assertEqual(num_provinces, 2)
+        assert total_pop == 22500000  # Sum of Ontario + Quebec
+        assert num_provinces == 2
 
 
 if __name__ == '__main__':
-    unittest.main()
+    pytest.main([__file__])

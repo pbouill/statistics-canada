@@ -2,6 +2,8 @@
 
 [![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![PyPI](https://img.shields.io/pypi/dm/statistics-canada)](https://pypi.org/project/statistics-canada/)
+
 
 Python bindings for the Statistics Canada Web Data Service (WDS) API, providing easy access to Canadian census data and geographic information.
 
@@ -18,6 +20,7 @@ This package provides a Python interface to Statistics Canada's census data thro
 
 **Data Sources:**
 - [Statistics Canada Web Data Service](https://www.statcan.gc.ca/en/developers/wds)
+- [User Guide](https://www.statcan.gc.ca/en/developers/wds/user-guide)
 - [Census geographic attribute files](https://www12.statcan.gc.ca/census-recensement/2021/ref/dict/fig/index-eng.cfm?ID=f1_1)
 
 ## Installation
@@ -153,8 +156,9 @@ statscan/                 # Main package
 │       ├── pr_geocode.py # Province-specific geocoding
 │       └── ...
 └── util/                 # Utility modules
-    ├── data.py           # Data download and processing utilities
-    └── log.py            # Logging configuration
+    ├── get_data.py       # Data download and processing utilities
+    ├── log.py            # Logging configuration
+    └── pkg.py            # Package utilities
 ```
 
 ## API Reference

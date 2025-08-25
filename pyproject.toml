@@ -37,13 +37,7 @@ dynamic = [
 "Homepage" = "https://github.com/pbouill/statistics-canada"
 "Repository" = "https://github.com/pbouill/statistics-canada.git"
 "Bug Tracker" = "https://github.com/pbouill/statistics-canada/issues"
-
-# Define the extras here. Users install `process[feature]`
-# [project.optional-dependencies]  # TODO: update
-# numpy = ["numpy"] 
-# all = [
-#     "statistics-canada[numpy]",
-# ]
+"Changelog" = "https://github.com/pbouill/statistics-canada/blob/main/CHANGELOG.md"
 
 [tool.setuptools.package-data]
 "*" = ["*.html", "*.css", "*.ico", "*.js"]

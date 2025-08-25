@@ -9,7 +9,7 @@ import asyncio
 from statscan.dguid import DGUID
 from statscan.enums.auto.census_subdivision import CensusSubdivision
 from statscan.enums.auto.province_territory import ProvinceTerritory
-from statscan.enums.enhanced_stats_filter import (
+from statscan.enums.stats_filter import (
     Gender, CensusProfileCharacteristic, StatisticType, 
     EnhancedStatsFilter, CommonFilters
 )

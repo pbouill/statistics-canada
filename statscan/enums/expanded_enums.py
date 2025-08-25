@@ -7,7 +7,7 @@ as new dimension values are discovered from actual API responses.
 
 from enum import Enum
 from typing import Optional, Self, Any
-from statscan.enums.enhanced_stats_filter import CensusProfileCharacteristic, Gender, StatisticType
+from statscan.enums.stats_filter import CensusProfileCharacteristic, Gender, StatisticType
 
 
 class ExpandedGender(Enum):
@@ -333,7 +333,7 @@ async def discover_new_dimensions():
     
     for dguid in dguids:
         try:
-            response_data = await dguid.get_data(timeout=15)
+            response_data = await dguid._get_census_data(timeout=15)
             discovery.analyze_response(response_data)
         except Exception as e:
             print(f"Error getting data for {dguid}: {e}")
