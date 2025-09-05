@@ -34,7 +34,7 @@ class TestDataUtilities:
         # Mock the HTTP response
         mock_response = MagicMock()
         mock_response.content = b"test,data\n1,2\n3,4"
-        mock_response.raise_for_status = AsyncMock(return_value=None)
+        mock_response.raise_for_status.return_value = None
         
         # Mock the async context manager
         mock_client_instance = AsyncMock()
@@ -114,7 +114,7 @@ class TestDataUtilities:
         # Mock the HTTP response
         mock_response = MagicMock()
         mock_response.content = b"test content"
-        mock_response.raise_for_status = AsyncMock(return_value=None)
+        mock_response.raise_for_status.return_value = None
         
         mock_client_instance = AsyncMock()
         mock_client_instance.get.return_value = mock_response
@@ -138,7 +138,7 @@ class TestDataUtilities:
         with patch('statscan.util.get_data.AsyncClient') as mock_client:
             mock_response = MagicMock()
             mock_response.content = b"test"
-            mock_response.raise_for_status = AsyncMock(return_value=None)
+            mock_response.raise_for_status.return_value = None
             
             mock_client_instance = AsyncMock()
             mock_client_instance.get.return_value = mock_response
@@ -217,7 +217,7 @@ class TestDataUtilities:
         """Test download handling HTTP errors."""
         # Mock HTTP error response
         mock_response = MagicMock()
-        mock_response.raise_for_status = AsyncMock(side_effect=Exception("HTTP 404 Error"))
+        mock_response.raise_for_status.side_effect = Exception("HTTP 404 Error")
         
         mock_client_instance = AsyncMock()
         mock_client_instance.get.return_value = mock_response
@@ -264,7 +264,7 @@ class TestDataUtilities:
         """Test download with default parameters."""
         mock_response = MagicMock()
         mock_response.content = b"test content"
-        mock_response.raise_for_status = AsyncMock(return_value=None)
+        mock_response.raise_for_status.return_value = None
         
         mock_client_instance = AsyncMock()
         mock_client_instance.get.return_value = mock_response

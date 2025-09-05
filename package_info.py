@@ -3,7 +3,7 @@ import os
 from typing import Optional, Self, ClassVar, Any, Union, get_args, get_origin
 from pathlib import Path
 from datetime import datetime, timezone
-from dataclasses import dataclass, field, fields, Field
+from dataclasses import dataclass, field, fields, asdict, Field
 from enum import StrEnum, auto
 import logging
 
@@ -220,6 +220,9 @@ class VersionInfo:
                     f.write(f' # {fld.name}: {fld.type} = {v}\n')
         return file_path
     
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
     @classmethod
     def update_version_file(cls, file_path: Optional[Path] = None) -> tuple[bool, Self, Path]:
         '''

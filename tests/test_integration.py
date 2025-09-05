@@ -32,8 +32,8 @@ class TestDataIntegration:
         # Mock HTTP response
         mock_response = mock_client.return_value.__aenter__.return_value.get.return_value
         mock_response.content = csv_content
-        # Fix for coroutine warning: properly mock the awaitable
-        mock_response.raise_for_status = AsyncMock(return_value=None)
+        # Fix for coroutine warning: properly mock the synchronous method
+        mock_response.raise_for_status = lambda: None
         
         async def run_integration_test():
             # Download the data
@@ -199,7 +199,7 @@ class TestRealWorldScenarios:
         csv_content = b"GeoLevel,Name,Value\nPR,Ontario,14000000\nPR,Quebec,8500000\n"
         mock_response = mock_client.return_value.__aenter__.return_value.get.return_value
         mock_response.content = csv_content
-        mock_response.raise_for_status = AsyncMock(return_value=None)
+        mock_response.raise_for_status = lambda: None
         
         async def data_science_workflow():
             from statscan.util.get_data import download_data, unpack_to_dataframe

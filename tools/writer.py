@@ -34,6 +34,9 @@ def cleanstr(s: str) -> str:
     """
     Clean a string by removing leading/trailing whitespace and converting to uppercase.
     """
+    if s is None:
+        return ""
+    
     s_new = s
     try:
         for char in (' ', '-', '=', '/', '.'): # Replace certain characters underscores
@@ -129,8 +132,12 @@ class EnumEntry:
         clean_key = self.clean_key(uppercase=uppercase, prefix=prefix, suffix=suffix)
         entry_str = f'{clean_key} = {self.value}'
         key_updated = (clean_key != self.key)
-        if key_updated or self.comment:
-            entry_str += '  #' + (f' ({self.key})' if key_updated else '') + (f' {self.comment}' if self.comment else '')
+        
+        # Only show auto key if key was updated AND comment doesn't already start with parentheses
+        auto_key_needed = key_updated and not (self.comment and self.comment.strip().startswith('('))
+        
+        if auto_key_needed or self.comment:
+            entry_str += '  #' + (f' ({self.key})' if auto_key_needed else '') + (f' {self.comment}' if self.comment else '')
 
         f.write(' ' * indent + entry_str + '\n')
         return clean_key

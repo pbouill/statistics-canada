@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 from statscan.enums.wds.wds_response_status import WDSResponseStatus
 from statscan.enums.auto.wds.frequency import Frequency
@@ -10,6 +10,8 @@ from .coordinate import Coordinate
 
 
 class Series(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+    
     responseStatusCode: WDSResponseStatus
     productId: int
     coordinate: Coordinate
@@ -24,6 +26,8 @@ class Series(BaseModel):
 
 
 class ChangedSeriesData(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+    
     responseStatusCode: WDSResponseStatus
     productId: int
     coordinate: Coordinate
