@@ -173,8 +173,8 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-# data download files
-data/
+# data download files (but not test data)
+/data/
 
 # temp dev files
 scratch/
