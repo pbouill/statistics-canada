@@ -1,5 +1,6 @@
-from pydantic import BaseModel
+# from pydantic import BaseModel
 
+from .base import WDSBaseModel
 from .footnote import Footnote
 from .link import Link
 from .member import Member
@@ -78,7 +79,7 @@ example response:
 
 
 
-class Dimension(BaseModel):
+class Dimension(WDSBaseModel):
     dimensionPositionId: int
     dimensionNameEn: str
     dimensionNameFr: str
@@ -92,7 +93,9 @@ class DimensionManager:
     def __init__(self, dimensions: list[Dimension]):
         self._dimensions = dimensions
 
-    
+    @property
+    def dimensions(self) -> list[Dimension]:
+        return self._dimensions
 
     def get_dimension(self, dimension_id: int) -> Dimension | None:
         for dimension in self.dimensions:

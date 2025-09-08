@@ -5,7 +5,7 @@ All other tests should use local test data.
 """
 import pytest
 import asyncio
-from statscan.wds.client import WDS
+from statscan.wds.client import Client
 from statscan.util.get_data import download_data, get_sdmx_data
 from statscan.dguid import DGUID
 from statscan.enums.auto.census_subdivision import CensusSubdivision
@@ -19,7 +19,7 @@ class TestRealAPIConnectivity:
     async def test_wds_api_code_sets(self):
         """Test that WDS API is accessible and returns code sets."""
         try:
-            client = WDS()
+            client = Client()
             assert client.base_url is not None
             
             # Try to get code sets (basic connectivity test)
@@ -117,7 +117,7 @@ class TestFullAPIWorkflow:
         """Test a complete workflow from download to analysis."""
         try:
             # This test combines multiple API operations
-            client = WDS()
+            client = Client()
             
             # 1. Test basic API connectivity
             code_sets = await client.get_code_sets()

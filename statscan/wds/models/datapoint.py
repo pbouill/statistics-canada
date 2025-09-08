@@ -8,8 +8,10 @@ from statscan.enums.auto.wds.symbol import Symbol
 from statscan.enums.auto.wds.security_level import SecurityLevel
 from statscan.enums.wds.status import Status
 
+from .base import WDSBaseModel
 
-class DataPoint(BaseModel):
+
+class DataPoint(WDSBaseModel):
     refPer: date
     refPer2: date
     refPerRaw: date

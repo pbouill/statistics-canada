@@ -24,12 +24,13 @@ except ImportError as ie:
     _spec.loader.exec_module(_package_info)
     VersionInfo = _package_info.VersionInfo  # type: ignore[misc]
 
-from statscan.wds.client import WDS, WDSRequests
+from statscan.wds.requests import WDSRequests
+from statscan.wds.client import Client
 
 
 mcp = FastMCP('statscan')
 
-client = WDS(timeout=30)
+client = Client(timeout=30)
 
 @mcp.resource('resource://codes')
 async def get_codes() -> dict:

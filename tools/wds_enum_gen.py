@@ -1184,8 +1184,8 @@ class EnumGenerator:
                 return json.load(f)
 
         print("Fetching fresh codes data from Statistics Canada WDS API...")
-        from statscan.wds.client import WDS
-        client = WDS(timeout=30)
+        from statscan.wds.client import Client
+        client = Client(timeout=30)
         codes = await client.get_code_sets()
 
         with open(codes_file, 'w') as f:

@@ -1,12 +1,14 @@
 from typing import Iterator, Optional
 
-from pydantic import BaseModel
+# from pydantic import BaseModel
 
 from statscan.enums.auto.wds.classification_type import ClassificationType
-from statscan.enums.auto.wds.uom import UoM
+from statscan.enums.auto.wds.uom import Uom
+
+from .base import WDSBaseModel
 
 
-class Member(BaseModel):
+class Member(WDSBaseModel):
     memberId: int
     parentMemberId: int
     memberNameEn: str
