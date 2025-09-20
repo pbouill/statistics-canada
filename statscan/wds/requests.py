@@ -85,6 +85,9 @@ class WDSRequests:
             else:
                 raise TypeError(f"Response JSON is neither a dict nor a list of dicts: {type(data)}")
         elif isinstance(data, (list, dict)):
+            if isinstance(data, dict):
+                if ResponseKeys.OBJECT in data:
+                    return data[ResponseKeys.OBJECT]
             return data
         else:
             raise TypeError(f"Response JSON is neither a dict nor a list of dicts: {type(data)}")

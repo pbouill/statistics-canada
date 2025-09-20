@@ -1,0 +1,4 @@
+# natural language toolkit for enum generation/substitution
+# nltk>=3.9.1
+# spacy>=3.8.7
+pyinflect>=0.5.1

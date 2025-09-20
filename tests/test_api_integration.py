@@ -6,6 +6,7 @@ All other tests should use local test data.
 import pytest
 import asyncio
 from statscan.wds.client import Client
+from statscan.wds.models.code import CodeSets
 from statscan.util.get_data import download_data, get_sdmx_data
 from statscan.dguid import DGUID
 from statscan.enums.auto.census_subdivision import CensusSubdivision
@@ -24,11 +25,11 @@ class TestRealAPIConnectivity:
             
             # Try to get code sets (basic connectivity test)
             result = await client.get_code_sets()
-            assert isinstance(result, dict)
-            assert len(result) > 0
+            assert isinstance(result, CodeSets)
+            assert len(result.root) > 0
             
             # Verify some expected structure
-            assert any(key in result for key in ['scale', 'freq', 'symbol'])
+            assert any(key in result.root for key in ['scalar', 'frequency', 'symbol'])
             
         except Exception as e:
             pytest.skip(f"WDS API not accessible: {e}")
@@ -121,7 +122,7 @@ class TestFullAPIWorkflow:
             
             # 1. Test basic API connectivity
             code_sets = await client.get_code_sets()
-            assert len(code_sets) > 0
+            assert len(code_sets.root) > 0
             
             # 2. Test SDMX data fetch for a specific area
             dguid = DGUID(geocode=CensusSubdivision.ONT_SAUGEEN_SHORES)

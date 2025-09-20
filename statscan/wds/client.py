@@ -1,18 +1,14 @@
-from datetime import date, datetime, timezone
-from enum import Enum, auto
-from typing import Iterator, Optional
+from datetime import date, datetime
 import logging
 
-# from httpx import AsyncClient, Response, DEFAULT_TIMEOUT_CONFIG
-from httpx._client import AsyncClient, TimeoutTypes, Timeout, DEFAULT_TIMEOUT_CONFIG
-# from httpx._types import TimeoutTypes
+from httpx._client import AsyncClient, TimeoutTypes, Timeout
 
 from statscan.url import WDS_URL
+from statscan.wds.models.code import CodeSets
 
 from .requests import WDSRequests
 from .coordinate import Coordinate
-from .models.cube import Cube, Cube
-from .models.datapoint import DataPoint
+from .models.cube import Cube, CubeManager, CubeExistsError
 from .models.vector import Vector
 from .models.series import Series
 
@@ -20,54 +16,6 @@ from .models.series import Series
 DEFAULT_WDS_TIMEOUT = Timeout(30.0)  # 30 seconds
 
 logger = logging.getLogger(__name__)
-
-
-class CubeExistsError(ValueError):
-    pass
-
-
-class CubeManager:
-    def __init__(self, cubes: Optional[list[Cube]] = None):
-        self.__cubes: list[Cube] = cubes or []
-        # self.last_update: Optional[datetime] = None
-
-    @property
-    def cubes(self) -> dict[int, Cube]:
-        return {cube.productId: cube for cube in self.__cubes}
-
-    @property
-    def latest_cube(self) -> Optional[Cube]:
-        if not self.__cubes:
-            return None
-        return max(self.__cubes, key=lambda c: c.releaseTime)
-
-    def add_cube(self, cube: Cube, replace: bool = False) -> None:
-        if (existing_cube := self.cubes.get(cube.productId)) is not None:
-            if not replace:
-                raise CubeExistsError(
-                    f"Cube with product ID {cube.productId} already exists. Cannot add {cube}"
-                )
-            else:
-                self.remove_cube(existing_cube)
-        self.__cubes.append(cube)
-
-    def remove_cube(self, cube: int | Cube) -> None:
-        if isinstance(cube, int):
-            cube = self[cube]
-        self.__cubes.remove(cube)
-
-    def __getitem__(self, product_id: int) -> Cube:
-        if (cube := self.cubes.get(product_id)) is None:
-            raise KeyError(f"Cube with product ID {product_id} does not exist.")
-        return cube
-
-    def __setitem__(self, product_id: int, cube: Cube) -> None:
-        if (existing_cube := self.cubes.get(product_id)) is not None:
-            self.__cubes.remove(existing_cube)
-        self.__cubes.append(cube)
-
-    def __iter__(self):
-        return iter(self.__cubes)
 
 
 class Client(AsyncClient):
@@ -104,6 +52,10 @@ class Client(AsyncClient):
         super().__init__(base_url=base_url, timeout=timeout, **kwargs)
   
     async def update_cubes(self) -> set[int]:
+        """
+        Update the internal cube manager with the latest cubes from the WDS API.
+        Returns:
+            set[int]: A set of product IDs for the newly added cubes."""
         cubes = await self.get_all_cubes_list_lite()
         new_cubes: set[int] = set()
         for cube in cubes:
@@ -114,6 +66,17 @@ class Client(AsyncClient):
                 logger.debug(f"Cube with product ID {cube.productId} already exists. Replacing.")
                 self.cube_manager.add_cube(cube, replace=True)
         return new_cubes
+    
+    async def update_cube(self, product_id: int) -> Cube:
+        """
+        Update or add a specific cube by its product ID.
+
+        Args:
+            product_id (int): The product ID of the cube to update or add.
+        """
+        cube = await self.get_cube_metadata(product_id=product_id)
+        self.cube_manager.add_cube(cube,replace=True)
+        return cube
 
     async def update(self):
         await self.update_cubes()
@@ -372,15 +335,15 @@ class Client(AsyncClient):
 
     # TODO: implement get_full_table_download_[csv,sdmx]
 
-    async def get_code_sets(self) -> dict:
+    async def get_code_sets(self) -> CodeSets:
         """
         Get the code sets from the WDS API.
 
         Returns:
-            dict: A dictionary of code sets.
+            CodeSets: A model representing the code sets.
         """
         coro = WDSRequests.get_code_sets(client=self)
-        data = await WDSRequests.execute_and_extract(coro)
-        if not isinstance(data, dict):
-            raise TypeError(f"Expected data to be a {dict}. Got {type(data)}")
+        data = await WDSRequests.execute_and_extract(coro, model=CodeSets)
+        if not isinstance(data, CodeSets):
+            raise TypeError(f"Expected data to be a {CodeSets}. Got {type(data)}")
         return data
