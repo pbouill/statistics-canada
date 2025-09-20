@@ -30,15 +30,21 @@ class ResponseLanguage(StrEnum):
 
 
 class ResponseKeys(StrEnum):
-    OBJECT = auto()
-    STATUS = auto()
+    OBJECT = "object"
+    STATUS = "status"
 
 
 class WDSRequests:
     """
-    This class is responsible for minimal http requests to the WDS API.
-    Responses typically contain a status (str) and an object (dict).
-    see: https://www.statcan.gc.ca/en/developers/wds/user-guide
+    Low-level HTTP requests for Statistics Canada WDS API.
+    
+    📚 OFFICIAL WDS DOCUMENTATION: https://www.statcan.gc.ca/en/developers/wds/user-guide
+    
+    This class implements the exact HTTP request patterns specified in the 
+    Statistics Canada WDS User Guide. All endpoint URLs, request methods,
+    and parameter formats follow the official API specification.
+    
+    Response Format: {"status": "SUCCESS|FAILED", "object": {...}}
     """
 
     METHOD_SIG = Callable[Concatenate[AsyncClient, P], Coroutine[Any, Any, Response]]
@@ -78,14 +84,28 @@ class WDSRequests:
 
         if model:
             if isinstance(data, list):
-                return [WDSRequests.dict_to_model(item, model) for item in data]
+                # Check if this is wrapped format [{"status": "SUCCESS", "object": {...}}] or direct format [{...}]
+                if len(data) > 0 and ResponseKeys.OBJECT in data[0]:
+                    # Wrapped format: extract object field
+                    return [WDSRequests.dict_to_model(item[ResponseKeys.OBJECT], model) for item in data]
+                else:
+                    # Direct format: use items directly
+                    return [WDSRequests.dict_to_model(item, model) for item in data]
             elif isinstance(data, dict):
                 obj = data[ResponseKeys.OBJECT]
                 return WDSRequests.dict_to_model(obj, model)
             else:
                 raise TypeError(f"Response JSON is neither a dict nor a list of dicts: {type(data)}")
         elif isinstance(data, (list, dict)):
-            if isinstance(data, dict):
+            if isinstance(data, list):
+                # Check if this is wrapped format [{"status": "SUCCESS", "object": {...}}] or direct format [{...}]
+                if len(data) > 0 and ResponseKeys.OBJECT in data[0]:
+                    # Wrapped format: extract object field
+                    return [item[ResponseKeys.OBJECT] for item in data]
+                else:
+                    # Direct format: return as-is
+                    return data
+            elif isinstance(data, dict):
                 if ResponseKeys.OBJECT in data:
                     return data[ResponseKeys.OBJECT]
             return data
@@ -157,7 +177,7 @@ class WDSRequests:
         Returns:
             Response: The HTTP response from the WDS API.
         """
-        return await client.post(f"/getCubeMetadata", json={"productId": product_id})
+        return await client.post(f"/getCubeMetadata", json=[{"productId": product_id}])
 
     @staticmethod
     async def get_series_info_from_cube_pid_coord(
@@ -177,7 +197,7 @@ class WDSRequests:
         """
         return await client.post(
             f"/getSeriesInfoFromCubePidCoord",
-            json={"productId": product_id, "coordinate": coordinate},
+            json=[{"productId": product_id, "coordinate": coordinate}],
         )
 
     @staticmethod
@@ -193,7 +213,7 @@ class WDSRequests:
             Response: The HTTP response from the WDS API.
         """
         return await client.post(
-            f"/getSeriesInfoFromVector", json={"vectorId": vector_id}
+            f"/getSeriesInfoFromVector", json=[{"vectorId": vector_id}]
         )
 
     @staticmethod
@@ -243,7 +263,7 @@ class WDSRequests:
         """
         return await client.post(
             f"/getChangedSeriesDataFromCubePidCoord",
-            json={"productId": product_id, "coordinate": coordinate},
+            json=[{"productId": product_id, "coordinate": coordinate}],
         )
 
     @staticmethod
@@ -259,7 +279,7 @@ class WDSRequests:
             Response: The HTTP response from the WDS API.
         """
         return await client.post(
-            f"/getChangedSeriesDataFromVector", json={"vectorId": vector_id}
+            f"/getChangedSeriesDataFromVector", json=[{"vectorId": vector_id}]
         )
 
     @staticmethod
@@ -278,7 +298,7 @@ class WDSRequests:
         """
         return await client.post(
             f"/getDataFromCubePidCoordAndLatestNPeriods",
-            json={"productId": product_id, "coordinate": coordinate, "latestN": n},
+            json=[{"productId": product_id, "coordinate": coordinate, "latestN": n}],
         )
 
     @staticmethod
@@ -296,7 +316,7 @@ class WDSRequests:
         """
         return await client.post(
             f"/getDataFromVectorsAndLatestNPeriods",
-            json={"vectorId": [vector_id], "latestN": n},
+            json=[{"vectorId": vector_id, "latestN": n}],
         )
 
     @staticmethod

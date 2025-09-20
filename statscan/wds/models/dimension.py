@@ -85,8 +85,8 @@ class Dimension(WDSBaseModel):
     dimensionNameFr: str
     hasUom: bool
     member: list[Member]
-    footnote: list[Footnote]
-    link: list[Link]
+    footnote: list[Footnote] | None = None
+    link: list[Link] | None = None
 
 
 class DimensionManager:

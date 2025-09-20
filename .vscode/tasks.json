@@ -2,10 +2,61 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Run Enum Generator",
+            "label": "Generate WDS Enums (All)",
             "type": "shell",
             "command": "${command:python.interpreterPath}",
-            "args": ["tools/wds_enum_gen.py"],
+            "args": ["tools/wds_enum_gen.py", "--type", "all", "--verbose"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Generate ProductID Enums",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": ["tools/wds_enum_gen.py", "--type", "product", "--verbose"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Generate CodeSet Enums",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": ["tools/wds_enum_gen.py", "--type", "codeset", "--verbose"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Generate Geographic Enums",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": ["tools/generate_enums.py"],
             "group": "build",
             "presentation": {
                 "echo": true,

@@ -1,5 +1,6 @@
 from pathlib import Path
 import logging
+from tqdm import tqdm
 
 from statscan.wds.client import Client
 from statscan.wds.models.code import CodeSet, CodeSets
@@ -10,26 +11,32 @@ from tools.enum_writer import AbstractEnumWriter, EnumEntry, InvalidEnumValueErr
 logger = logging.getLogger(__name__)
 
 class CodeSetEnumWriter(AbstractEnumWriter):
-    def generate_enum_entries(self, data: CodeSet) -> list[EnumEntry]:
+    pass
+    
+    def generate_enum_entries(self, data: CodeSet, codeset_name: str = "unknown") -> list[EnumEntry]:
         entries_dict: dict[int, EnumEntry] = {}
         code_dict = data.code_dict()
-        logger.info(f"Starting first pass with {len(code_dict)} codes...")
+        total_codes = len(code_dict)
+        logger.info(f"Processing {total_codes} codes...")
 
-        # first pass, try truncation (optimized for performance)
-        for i, (code_value, code) in enumerate(code_dict.items()):
-            if i % 250 == 0:  # Reduced logging frequency for better performance
-                logger.info(f"  Processing entry {i+1}/{len(code_dict)}: code {code_value}")
+        # Use tqdm for progress tracking
+        code_iter = tqdm(code_dict.items(), desc="Processing codes", unit="code", total=total_codes)
+        
+        for code_value, code in code_iter:
             
-    
             # Handle empty or None descriptions more efficiently
             desc_en = code.desc_en or f'CODE_{code_value}'
             
-            # Apply substitution and cleaning in one pass
-            name = self.subs_engine.substitute(desc_en, truncate=True)
+            # Process text with substitution and word tracking
+            name = self.process_text_with_substitution(
+                original_text=desc_en,
+                source_identifier=f"CodeSet:{codeset_name}",
+                truncate=True
+            )
+            
             try:
                 name = EnumEntry.clean_name(name)
-            except ValueError as ve:
-                logger.warning(f'Error cleaning name for code {code_value}: {ve}')
+            except ValueError:
                 name = 'UNKNOWN'
             
             # Build comment more efficiently - avoid None concatenation
@@ -46,8 +53,13 @@ class CodeSetEnumWriter(AbstractEnumWriter):
                 raise InvalidEnumValueError(f"Duplicate code value detected: {code_value}")
             entries_dict[code_value] = EnumEntry(name=name, value=code_value, comment=desc)
 
+        logger.info(f"Completed processing {total_codes} codes")
         all_entries = list(entries_dict.values())
-        self.resolve_duplicate_names(entries=all_entries, original_names=[code.desc_en or 'UNKNOWN' for code in code_dict.values()])
+        
+        # Resolve duplicates
+        original_names = [code.desc_en or 'UNKNOWN' for code in code_dict.values()]
+        self.resolve_duplicate_names(entries=all_entries, original_names=original_names)
+        
         return all_entries
 
     async def get_all_codesets(self) -> CodeSets:
@@ -74,7 +86,7 @@ class CodeSetEnumWriter(AbstractEnumWriter):
         file_path = output_dir / filename
 
         logger.info(f"Generating enum entries for {codeset_name}...")
-        entries = self.generate_enum_entries(code_set)
+        entries = self.generate_enum_entries(code_set, codeset_name=codeset_name)
         logger.info(f"Generated {len(entries)} entries for {codeset_name}")
 
         imports = {'enum': 'Enum'}
@@ -99,12 +111,14 @@ class CodeSetEnumWriter(AbstractEnumWriter):
         gen_map = {}
         
         # Get codeset items properly (CodeSets is RootModel)
-        codeset_items = codesets.root.items()
-        total_codesets = len(list(codeset_items))
+        codeset_items = list(codesets.root.items())
+        total_codesets = len(codeset_items)
         logger.info(f"Processing {total_codesets} codesets...")
         
-        for i, (codeset_name, code_set) in enumerate(codeset_items, 1):
-            logger.info(f"[{i}/{total_codesets}] Starting {codeset_name}")
+        # Use tqdm for codeset progress tracking
+        codeset_iter = tqdm(codeset_items, desc="Processing codesets", unit="codeset")
+        
+        for codeset_name, code_set in codeset_iter:
             try:
                 gen_map[codeset_name] = self.write_codeset_enum(
                     codeset_name=codeset_name,
@@ -112,26 +126,124 @@ class CodeSetEnumWriter(AbstractEnumWriter):
                     output_dir=output_dir,
                     overwrite=overwrite,
                 )
-                logger.info(f"[{i}/{total_codesets}] Completed {codeset_name}")
+                codeset_iter.set_postfix_str(f"✓ {codeset_name}")
             except Exception as e:
-                logger.error(f"Failed to write enum for {codeset_name}: {e}", exc_info=True)
+                logger.error(f"✗ Failed {codeset_name}: {e}")
+                codeset_iter.set_postfix_str(f"✗ {codeset_name}")
         return gen_map
     
-    async def fetch_and_create_enums(
+    async def process(
         self,
         output_dir: Path,
         overwrite: bool = False,
     ) -> dict[str, Path]:
-        logger.info("Starting fetch_and_create_enums...")
+        """
+        Main processing method that fetches all codesets and generates all enums.
+        
+        Args:
+            output_dir: Output directory for generated files
+            overwrite: Whether to overwrite existing files
+            
+        Returns:
+            Dictionary mapping codeset names to generated file paths
+        """
+        logger.info("Starting CodeSet enum processing...")
+        
+        # Fetch all codesets first
         codesets = await self.get_all_codesets()
-        logger.info("Codesets fetched, starting enum generation...")
-        result = self.write_codesets_enums(
+        logger.info(f"Codesets fetched, starting enum generation for {len(codesets)} codesets...")
+        
+        # Use the existing write_codesets_enums method to avoid duplication
+        return self.write_codesets_enums(
             codesets=codesets,
             output_dir=output_dir,
-            overwrite=overwrite,
+            overwrite=overwrite
         )
-        logger.info("Enum generation completed")
-        return result
+
+    async def fetch_and_create_enums(
+        self,
+        output_dir: Path,
+        overwrite: bool = False,
+        track_words: bool = False,
+    ) -> dict[str, Path]:
+        """Legacy method for backward compatibility."""
+        # Update tracking settings
+        self.track_words = track_words
+        if track_words:
+            from tools.word_tracker import get_word_tracker
+            self.word_tracker = get_word_tracker()
+        else:
+            self.word_tracker = None
+            
+        return await self.process(output_dir=output_dir, overwrite=overwrite)
+    
+    async def process_single(
+        self,
+        codeset_name: str,
+        fp: Path,
+        overwrite: bool = False,
+    ) -> Path:
+        """
+        Process a single codeset and generate its enum.
+        
+        Args:
+            codeset_name: Name of the codeset to process
+            fp: Output file path
+            overwrite: Whether to overwrite existing files
+            
+        Returns:
+            Path to the generated file
+        """
+        logger.info(f"Starting single codeset processing: {codeset_name}")
+        
+        # Fetch all codesets first to find the target
+        codesets = await self.get_all_codesets()
+        
+        if codeset_name not in codesets:
+            available = ", ".join(sorted(codesets.keys()))
+            raise ValueError(f"Codeset '{codeset_name}' not found. Available: {available}")
+        
+        logger.info(f"Found codeset '{codeset_name}', generating enum...")
+        
+        # Use the existing write_codeset_enum method to avoid duplication
+        # Note: we need to use the output directory from fp and ensure consistent naming
+        output_dir = fp.parent
+        generated_fp = self.write_codeset_enum(
+            codeset_name=codeset_name,
+            code_set=codesets[codeset_name],
+            output_dir=output_dir,
+            overwrite=overwrite
+        )
+        
+        # If the caller specified a different filename, rename the generated file
+        if generated_fp != fp:
+            logger.info(f"Renaming {generated_fp} to {fp}")
+            generated_fp.rename(fp)
+            
+        logger.info(f"Single enum generation completed: {fp}")
+        return fp
+
+    async def fetch_and_create_single_enum(
+        self,
+        codeset_name: str,
+        fp: Path,
+        overwrite: bool = False,
+        track_words: bool = False,
+    ) -> Path:
+        """Legacy method for backward compatibility."""
+        # Update tracking settings
+        self.track_words = track_words
+        if track_words:
+            from tools.word_tracker import get_word_tracker
+            self.word_tracker = get_word_tracker()
+        else:
+            self.word_tracker = None
+            
+        return await self.process_single(
+            codeset_name=codeset_name,
+            fp=fp, 
+            overwrite=overwrite
+        )
     
 
 if __name__ == "__main__":

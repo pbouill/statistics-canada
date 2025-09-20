@@ -1,6 +1,6 @@
-from typing import Iterator, Optional
+from typing import Iterator, Optional, Any
 
-# from pydantic import BaseModel
+from pydantic import field_validator
 
 from statscan.enums.auto.wds.classification_type import ClassificationType
 from statscan.enums.auto.wds.uom import Uom
@@ -10,15 +10,32 @@ from .base import WDSBaseModel
 
 class Member(WDSBaseModel):
     memberId: int
-    parentMemberId: int
+    parentMemberId: Optional[int] = None  # API can return null
     memberNameEn: str
     memberNameFr: str
-    classificationCode: int  # TODO: should be Enum
-    classificationTypeCode: ClassificationType  # TODO: should be Enum
-    geoLevel: int  # TODO: should be Enum
-    vintage: int
+    classificationCode: Optional[int] = None  # API can return null
+    classificationTypeCode: Optional[ClassificationType | int | str] = None  # API returns string
+    geoLevel: Optional[int] = None  # API can return null
+    vintage: Optional[int] = None  # API can return null
     terminated: bool
     memberUoMCode: Optional[int] = None
+
+    @field_validator("classificationTypeCode", mode="before")
+    @classmethod
+    def convert_classification_type(cls, v: Any) -> Optional[ClassificationType | int]:
+        """Convert string classification type codes to enum values"""
+        if v is None:
+            return None
+        if isinstance(v, str):
+            try:
+                return ClassificationType(int(v))
+            except (ValueError, TypeError):
+                # If enum conversion fails, return as int
+                try:
+                    return int(v)
+                except (ValueError, TypeError):
+                    return None
+        return v
 
 
 class MemberManager:

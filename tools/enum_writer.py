@@ -22,6 +22,7 @@ import unicodedata
 
 import statscan.enums.auto
 from tools.substitution import SubstitutionEngine
+from tools.word_tracker import WordTracker, get_word_tracker
 
 logger = logging.getLogger(__name__)
 
@@ -86,34 +87,35 @@ class EnumEntry:
             if not comment:
                 comment = None
 
+    # Class-level cache for clean_name operations
+    _clean_name_cache: dict[tuple[str, bool], str] = {}
+    
     @staticmethod
     def clean_name(s: str, upper_case: bool = True) -> str:
         """
         Clean an enum name by replacing or removing invalid characters.
+        Uses caching for better performance with repeated strings.
         """
         if not isinstance(s, str):
             raise TypeError(f"Expected {str}, got {type(s)}")
         if not s:
             raise ValueError("Cannot clean empty string")
 
+        # Check cache first
+        cache_key = (s, upper_case)
+        if cache_key in EnumEntry._clean_name_cache:
+            return EnumEntry._clean_name_cache[cache_key]
+
         s_new = s
         try:
-            # Replace certain characters with underscores
-            replace_with_underscore = {
-                " ",
-                "-",
-                "=",
-                "/",
-                ".",
-                "~",
-            }
-            s_new = SubstitutionEngine.sub_chars(s_new, sub_chars=replace_with_underscore, replacement="_")
-
-            # Remove quotes
-            s_new = SubstitutionEngine.sub_chars(s_new, sub_chars={"'", '"'}, replacement="")
-
-            # also convert super/subcript to normal (e.g. ² -> 2)
-            s_new = s_new.translate(str.maketrans("⁰¹²³⁴⁵⁶⁷⁸⁹₀₁₂₃₄₅₆₇₈₉", "01234567890123456789"))
+            # Use more efficient string operations
+            # Replace certain characters with underscores in one pass
+            char_replacements = str.maketrans(" -=/.~'\"", "________")  # Fixed: equal length strings
+            s_new = s_new.translate(char_replacements)
+            
+            # Convert super/subscript to normal (e.g. ² -> 2)
+            superscript_map = str.maketrans("⁰¹²³⁴⁵⁶⁷⁸⁹₀₁₂₃₄₅₆₇₈₉", "01234567890123456789")
+            s_new = s_new.translate(superscript_map)
 
             # Handle Unicode characters - normalize and convert to ASCII equivalent
             s_new = unicodedata.normalize('NFD', s_new)
@@ -126,14 +128,22 @@ class EnumEntry:
             s_new = re.sub(r"_+", "_", s_new)
 
             # Remove leading or trailing underscores that might have been created
-            s_new = s_new.strip("_")  
-            if (s_new and s_new[0].isdigit()):  # Ensure the name does not start with a digit
+            s_new = s_new.strip("_")
+            
+            if s_new and s_new[0].isdigit():  # Ensure the name does not start with a digit
                 s_new = "_" + s_new
 
             if upper_case:
                 s_new = s_new.upper()
+                
+            # Cache the result
+            if len(EnumEntry._clean_name_cache) < 10000:  # Limit cache size
+                EnumEntry._clean_name_cache[cache_key] = s_new
+                
         except Exception as e:
-            logger.error(f"Error cleaning string '{s}': {e}")
+            logger.warning(f"Error cleaning string '{s}': {e}")
+            s_new = "UNKNOWN"
+            
         return s_new
     
     @staticmethod
@@ -194,12 +204,64 @@ class EnumEntry:
 
 
 class AbstractEnumWriter(ABC):
+    # Create a substitution engine with proper variant generation for good abbreviations
     subs_engine: SubstitutionEngine = SubstitutionEngine()
+
+    def __init__(self, track_words: bool = False):
+        """
+        Initialize the enum writer.
+        
+        Args:
+            track_words: If True, track non-substituted words for abbreviation analysis
+        """
+        self.track_words = track_words
+        self.word_tracker = get_word_tracker() if track_words else None
+
+    def process_text_with_substitution(
+        self, 
+        original_text: str, 
+        source_identifier: str = "unknown",
+        truncate: bool = True
+    ) -> str:
+        """
+        Process text through substitution engine and track words if enabled.
+        
+        Args:
+            original_text: Original text to process
+            source_identifier: Identifier for the source (e.g., "ProductID", "CodeSet:frequency")
+            truncate: Whether to apply truncation during substitution
+            
+        Returns:
+            Processed text after substitution
+        """
+        if not original_text:
+            return original_text
+        
+        # Apply substitution
+        substituted_text = self.subs_engine.substitute(original_text, truncate=truncate)
+        
+        # Track words if enabled
+        if self.track_words and self.word_tracker:
+            self.word_tracker.track_text_processing(
+                original_text=original_text,
+                substituted_text=substituted_text,
+                source=source_identifier
+            )
+        
+        return substituted_text
 
     @abstractmethod
     def generate_enum_entries(self, data: Any, *args, **kwargs) -> Iterable[EnumEntry]:
         """
         Abstract method to generate enum entries.
+        """
+        pass
+
+    @abstractmethod
+    def process(self, *args, **kwargs) -> Any:
+        """
+        Abstract method to process data end-to-end (fetch, generate, write).
+        This should be the main entry point for each enum writer.
         """
         pass
 
@@ -406,36 +468,31 @@ class AbstractEnumWriter(ABC):
             raise ValueError(f"Entries length {n_entries} does not match original names length {n_original}")
 
         if duplicates := cls.get_duplicate_names(entries):
-            logger.warning(f"Resolving {len(duplicates)} duplicate enum names...")
+            logger.info(f"Resolving {len(duplicates)} duplicate enum names...")
 
             # first pass try removing truncation
-            for idx, e in duplicates.items():
-                
+            from tqdm import tqdm
+            for idx, e in tqdm(duplicates.items(), desc="Removing truncation", unit="name"):
                 orig_name = original_names[idx]
                 name = cls.subs_engine.substitute(text=orig_name, truncate=False)
                 try:
                     e.name = EnumEntry.clean_name(name)
-                except ValueError as ve:
+                except ValueError:
                     # Handle empty names with fallback
-                    logger.warning(f"Empty name for original '{orig_name}' after removing truncation: {ve}")
                     e.name = 'UNKNOWN'
 
             # re-check for duplicates
             if duplicates := cls.get_duplicate_names(entries):
                 # final pass, add suffixes if still duplicates
-                logger.warning(
-                    f"Handling {len(duplicates)} duplicate entries in final pass..."
-                )
+                logger.info(f"Handling {len(duplicates)} duplicate entries in final pass...")
+                
                 dupe_names: dict[str, list[EnumEntry]] = {}
-                for e in duplicates.values():
+                for e in tqdm(duplicates.values(), desc="Grouping duplicates", unit="name"):
                     if e.name not in dupe_names:
                         dupe_names[e.name] = []
                     dupe_names[e.name].append(e)
 
-                for same_name, same_name_entries in dupe_names.items():
-                    logger.info(
-                        f"Processing {len(same_name_entries)} entries with duplicate name: {same_name}"
-                    )
+                for same_name, same_name_entries in tqdm(dupe_names.items(), desc="Adding suffixes", unit="group"):
                     # sort the list based on the value
                     same_name_entries.sort(key=lambda x: x.value)
                     for i, e in enumerate(same_name_entries, start=1):
@@ -449,5 +506,5 @@ class AbstractEnumWriter(ABC):
             
             # we've done all we could... raise the error
             if duplicates := cls.get_duplicate_names(entries):
-                raise InvalidEnumNameError(f'Duplicate enum names remain after resolution: {duplicates.values()}')
+                raise InvalidEnumNameError(f'Duplicate enum names remain after resolution: {list(duplicates.values())}')
             
