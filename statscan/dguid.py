@@ -10,7 +10,7 @@ from statscan.enums.geocode.geocode import GeoCode
 from statscan.enums.stats_filter import StatsFilter
 from statscan.enums.wds.wds import Detail, Format
 from statscan.enums.auto import get_geocode_from_str
-from statscan.util.get_data import get_sdmx_data, make_key
+from statscan.util.get_data import get_sdmx_data, make_census_profile_key
 from statscan.sdmx.response import SDMXResponse
 
 
@@ -51,7 +51,13 @@ class DGUID:
         return self.schema.data_flow
 
     def key(self, frequency: Frequency = Frequency.A5, stats_filter: Optional[StatsFilter] = None) -> str:
-        return make_key(frequency=frequency, dguid=str(self), stats_filter=stats_filter)
+        """
+        Generate a 5-dimension SDMX key for this DGUID.
+        
+        Returns:
+            str: A 5-dimension key compatible with Census Profile SDMX API.
+        """
+        return make_census_profile_key(dguid=str(self), frequency=frequency, stats_filter=stats_filter)
 
     def __str__(self) -> str:
         return f'{self.vintage.value}{self.geocode.code}'

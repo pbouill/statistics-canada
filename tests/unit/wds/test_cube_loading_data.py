@@ -8,7 +8,7 @@ from statscan.wds.models.cube import Cube
 def test_cube_from_api_response():
     """Test loading cube metadata from real WDS API response."""
     # Load the raw API response data
-    test_data_path = Path(__file__).parent / "raw_cube_response.json"
+    test_data_path = Path(__file__).parent.parent.parent / "data" / "raw_cube_response.json"
     with open(test_data_path, 'r') as f:
         response_data = json.load(f)
     
@@ -36,7 +36,10 @@ def test_cube_from_api_response():
     
     print(f"   Corrections: {len(cube.corrections) if cube.corrections else 0}")
     
-    return cube
+    # Assert cube was created successfully (test validation)
+    assert cube is not None
+    assert cube.cubeTitleEn  # Fixed: use correct attribute name
+    print("   ✅ Cube loaded and validated successfully")
 
 if __name__ == "__main__":
     cube = test_cube_from_api_response()

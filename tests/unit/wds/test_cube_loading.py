@@ -9,7 +9,7 @@ from statscan.wds.models.cube import Cube
 def test_cube_from_api_response():
     """Test loading cube metadata from real WDS API response."""
     # Load the raw API response data
-    test_data_path = Path(__file__).parent / "data" / "raw_cube_response.json"
+    test_data_path = Path(__file__).parent.parent.parent / "data" / "raw_cube_response.json"
     with open(test_data_path, 'r') as f:
         response_data = json.load(f)
     
@@ -49,7 +49,7 @@ def test_cube_from_api_response():
 @pytest.fixture
 def sample_cube():
     """Fixture to provide a loaded cube for testing."""
-    test_data_path = Path(__file__).parent / "data" / "raw_cube_response.json"
+    test_data_path = Path(__file__).parent.parent.parent / "data" / "raw_cube_response.json"
     with open(test_data_path, 'r') as f:
         response_data = json.load(f)
     
@@ -85,7 +85,7 @@ def test_cube_geographic_dimension(sample_cube):
 def demonstrate_cube_analysis():
     """Standalone function to demonstrate cube analysis (not a test)."""
     # Load the test data
-    test_data_path = Path(__file__).parent / "data" / "raw_cube_response.json"
+    test_data_path = Path(__file__).parent.parent.parent / "data" / "raw_cube_response.json"
     with open(test_data_path, 'r') as f:
         response_data = json.load(f)
     

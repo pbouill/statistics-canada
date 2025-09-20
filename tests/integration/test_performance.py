@@ -7,6 +7,7 @@ import asyncio
 import time
 import sys
 from pathlib import Path
+import pytest
 
 from tools.wds_productid_enum_gen import ProductIdEnumWriter
 from tools.wds_code_enum_gen import CodeSetEnumWriter
@@ -70,9 +71,12 @@ def test_substitution_engine_performance():
         else:
             print(f"  '{orig}' (no change)")
     
-    return engine1
+    # Assert that the engine works (test validation)
+    assert engine1 is not None
+    assert len(results) == len(test_strings) * iterations  # Fixed: total results should be strings * iterations
 
 
+@pytest.mark.asyncio
 async def test_product_id_performance():
     """Test ProductID enum generation performance."""
     print("\n🏭 Testing ProductID Enum Generation")
@@ -108,6 +112,7 @@ async def test_product_id_performance():
     return len(entries), gen_time
 
 
+@pytest.mark.asyncio
 async def test_code_set_performance():
     """Test a small CodeSet enum generation."""
     print("\n📊 Testing CodeSet Enum Generation")

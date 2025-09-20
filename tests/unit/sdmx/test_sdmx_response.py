@@ -17,7 +17,7 @@ TEST_SERIES_KEY = '0:0:0:0:0'
 @pytest.fixture
 def json_data() -> dict:
     """Load sample SDMX response data."""
-    data_file = Path(__file__).parent / 'data' / 'sdmx' / 'sdmx_response.json'
+    data_file = Path(__file__).parent.parent.parent / 'data' / 'sdmx' / 'sdmx_response.json'
     with data_file.open() as f:
         return json.load(f)
 

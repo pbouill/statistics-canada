@@ -8,6 +8,7 @@ import asyncio
 import time
 from pathlib import Path
 from typing import Dict, List, Set
+import pytest
 from tools.wds_productid_enum_gen import ProductIdEnumWriter
 from tools.wds_code_enum_gen import CodeSetEnumWriter
 from tools.substitution import SubstitutionEngine
@@ -67,6 +68,7 @@ def compare_enum_entries(old_entries: List[EnumEntry], new_entries: List[EnumEnt
     }
 
 
+@pytest.mark.asyncio
 async def test_product_id_equivalence():
     """Test ProductID enum generation equivalence."""
     print("🏭 Testing ProductID Enum Equivalence")
@@ -127,6 +129,7 @@ async def test_product_id_equivalence():
     return comparison
 
 
+@pytest.mark.asyncio
 async def test_code_set_equivalence():
     """Test CodeSet enum generation equivalence."""
     print("\n📊 Testing CodeSet Enum Equivalence") 
@@ -208,7 +211,7 @@ def test_enum_entry_properties():
         print("  ✅ Valid entry creation works")
     except Exception as e:
         print(f"  ❌ Valid entry creation failed: {e}")
-        return False
+        assert False, f"Valid entry creation failed: {e}"
     
     # Test name validation
     try:
@@ -216,7 +219,7 @@ def test_enum_entry_properties():
         print("  ✅ Name validation works")
     except Exception as e:
         print(f"  ❌ Name validation failed: {e}")
-        return False
+        assert False, f"Name validation failed: {e}"
     
     # Test name cleaning
     try:
@@ -228,9 +231,10 @@ def test_enum_entry_properties():
             print(f"  ⚠️  Name cleaning result differs: got '{cleaned}', expected '{expected}'")
     except Exception as e:
         print(f"  ❌ Name cleaning failed: {e}")
-        return False
+        assert False, f"Name cleaning failed: {e}"
     
-    return True
+    print("  ✅ All EnumEntry tests passed")
+    assert True  # Test passed
 
 
 async def main():

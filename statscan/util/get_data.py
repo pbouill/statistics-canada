@@ -79,14 +79,71 @@ def make_key(frequency: Frequency, dguid: str | Iterable[str], stats_filter: Opt
     Args:
         frequency (Frequency): The frequency of the data.
         dguid (str | Iterable[str]): The dguid(s) to include in the key.
+        stats_filter (StatsFilter, optional): Statistical filter for the statistics.
     
     Returns:
         str: The formatted key string.
+        
+    Note:
+        This function is deprecated for SDMX usage. Use make_census_profile_key() instead
+        for Census Profile SDMX API calls which require 5 dimensions.
     """
     stats_filter = stats_filter or StatsFilter()
     if not isinstance(dguid, str):
         dguid = '+'.join(dguid)
     return f'{frequency.name}.{dguid}.{stats_filter}'
+
+
+def make_census_profile_key(
+    dguid: str | Iterable[str], 
+    frequency: Frequency = Frequency.A5,
+    stats_filter: Optional[StatsFilter] = None,
+    time_period: str = "2021",
+    characteristic: str = "1", 
+    gender_statistic: str = "1"
+) -> str:
+    """
+    Create a 5-dimension key for the Census Profile SDMX API.
+    
+    The Census Profile SDMX API requires exactly 5 dimensions in this order:
+    1. Reference Area (DGUID)
+    2. Time Period (year)
+    3. Frequency (e.g., A5 for annual) 
+    4. Characteristic (statistic type)
+    5. Gender/Statistic (demographic breakdown)
+    
+    Args:
+        dguid (str | Iterable[str]): The DGUID(s) for geographic area(s).
+        frequency (Frequency): The frequency (default: A5).
+        stats_filter (StatsFilter, optional): Additional filter (currently unused).
+        time_period (str): The time period/year (default: "2021").
+        characteristic (str): The characteristic dimension (default: "1").
+        gender_statistic (str): The gender/statistic dimension (default: "1").
+        
+    Returns:
+        str: The 5-dimension key string (e.g., "2021A000535570.2021.A5.1.1").
+        
+    Examples:
+        >>> make_census_profile_key("2021A000535570")
+        "2021A000535570.2021.A5.1.1"
+        
+        >>> make_census_profile_key(["2021A000535570", "2021A000535571"])  
+        "2021A000535570+2021A000535571.2021.A5.1.1"
+    """
+    # Handle multiple DGUIDs
+    if not isinstance(dguid, str):
+        dguid = '+'.join(dguid)
+    
+    # Build the 5-dimension key
+    key_parts = [
+        dguid,                    # Dimension 1: Reference Area (DGUID)
+        time_period,              # Dimension 2: Time Period  
+        frequency.name,           # Dimension 3: Frequency
+        characteristic,           # Dimension 4: Characteristic
+        gender_statistic          # Dimension 5: Gender/Statistic
+    ]
+    
+    return '.'.join(key_parts)
 
 
 async def get_sdmx_data(
@@ -104,25 +161,56 @@ async def get_sdmx_data(
     client_kwargs: Optional[dict[str, Any]] = None,
 ) -> Response:
     """
-    Get SDMX data from the WDS API.
+    Get SDMX data from the Census Profile SDMX API.
     
     Args:
-        flow_ref (str | Iterable[str]): The flow reference(s) to query.
-        dguid (str | Iterable[str]): The dguid(s) for the data.
-        stats_filter (StatsFilter, optional): Statistical filter for the statistics.
-        base_url (str): The base URL for the WDS API.
-        resource (str): The resource to query.
-        agency (str): The agency to query.
+        flow_ref (str): The dataflow reference to query (e.g., 'DF_CSD', 'DF_CD', 'DF_PR').
+        dguid (str | Iterable[str]): The DGUID(s) for the geographic area(s).
+        frequency (Frequency): The frequency of the data (default: A5 for annual).
+        stats_filter (StatsFilter, optional): Statistical filter for additional dimensions.
+        base_url (str): The base URL for the Census Profile SDMX API.
+        resource (str): Deprecated - kept for compatibility but not used.
+        agency (str): Deprecated - kept for compatibility but not used.
         detail (Detail, optional): The level of detail for the data.
         format (Format, optional): The format of the data to return.
+        parameters (dict, optional): Additional query parameters.
+        timeout (float, optional): Request timeout in seconds.
+        client_kwargs (dict, optional): Additional arguments for the HTTP client.
+        
     Returns:
-        dict[str, Any]: The SDMX data as a dictionary.
+        Response: The HTTP response containing SDMX data.
+        
+    Raises:
+        HTTPError: If the API request fails.
+        
+    Note:
+        This function uses the Statistics Canada Census Profile SDMX API which requires
+        exactly 5 dimensions in the key. The API expects the following dimension order:
+        1. Reference Area (DGUID)
+        2. Time Period (year) 
+        3. Frequency (e.g., A5)
+        4. Characteristic (statistic type)
+        5. Gender/Statistic (demographic breakdown)
+        
+        Available dataflows include:
+        - DF_CSD: Census subdivisions
+        - DF_CD: Census divisions  
+        - DF_PR: Provinces/territories
+        - DF_CMACA: Census metropolitan areas
+        - And others (see get_dataflows() for complete list)
     """
 
-    stats_filter = stats_filter or StatsFilter()
-    key = make_key(frequency=frequency, dguid=dguid, stats_filter=stats_filter)
-    url = f'{base_url}/{resource}/{agency},{flow_ref}/{key}'
+    # Generate the 5-dimension key required by the Census Profile SDMX API
+    key = make_census_profile_key(
+        dguid=dguid, 
+        frequency=frequency, 
+        stats_filter=stats_filter
+    )
+    
+    # Use the correct URL structure for Census Profile SDMX API
+    url = f'{base_url}/data/{flow_ref}/{key}'
 
+    # Add format/detail parameters if specified
     for p in (format, detail):
         if p is not None:
             parameters = p.add_to_params(parameters)
@@ -131,7 +219,7 @@ async def get_sdmx_data(
     if timeout is not None:
         client_kwargs['timeout'] = timeout
 
-    logger.debug(f'Fetching SDMX data from {url} with parameters {parameters}')
+    logger.debug(f'Fetching Census Profile SDMX data from {url} with parameters {parameters}')
     async with AsyncClient(**client_kwargs) as client:  # type: ignore[arg-type]
         response = await client.get(url, params=parameters)
     response.raise_for_status()

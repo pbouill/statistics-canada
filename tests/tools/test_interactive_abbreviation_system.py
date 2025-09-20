@@ -11,7 +11,7 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-from tools.interactive_abbreviation_manager import InteractiveAbbreviationManager
+from tools.cli.interactive_abbreviation_manager import InteractiveAbbreviationManager
 from tools.word_tracker import WordTracker
 
 

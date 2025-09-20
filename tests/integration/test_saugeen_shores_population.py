@@ -48,7 +48,7 @@ class TestSaugeenShoresPopulation:
         assert self.dguid.vintage.value == Vintage.CENSUS_2021.value
         
         # Load local test data instead of making web request
-        test_data_path = Path(__file__).parent / "data" / "sdmx" / "sdmx_response.json"
+        test_data_path = Path(__file__).parent.parent / "data" / "sdmx" / "sdmx_response.json"
         with open(test_data_path, 'r') as f:
             test_data = json.load(f)
         

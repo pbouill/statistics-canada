@@ -150,6 +150,10 @@ class Attributes(Base):
     def all_attributes(self) -> list[Attribute]:
         """Get all attributes (series + observation)."""
         return self.series + self.observation
+    
+    def get_attribute_by_id(self, key: str) -> Attribute:
+        """Get an attribute by its ID."""
+        for attribute in self.series + self.observation:
             if attribute.id == key:
                 return attribute
         raise KeyError(f"Attribute with ID '{key}' not found.")
