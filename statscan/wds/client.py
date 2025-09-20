@@ -1,5 +1,6 @@
 from datetime import date, datetime
 import logging
+from typing import Any
 
 from httpx._client import AsyncClient, TimeoutTypes, Timeout
 
@@ -10,7 +11,7 @@ from .requests import WDSRequests
 from .coordinate import Coordinate
 from .models.cube import Cube, CubeManager, CubeExistsError
 from .models.vector import Vector
-from .models.series import Series
+from .models.series import Series, ChangedSeriesData
 
 
 DEFAULT_WDS_TIMEOUT = Timeout(30.0)  # 30 seconds
@@ -20,7 +21,16 @@ logger = logging.getLogger(__name__)
 
 class Client(AsyncClient):
     """
-    Implemented per the WDS User Guide: https://www.statcan.gc.ca/en/developers/wds/user-guide
+    Statistics Canada Web Data Service (WDS) API Client.
+    
+    📚 OFFICIAL DOCUMENTATION: https://www.statcan.gc.ca/en/developers/wds/user-guide
+    
+    This client implements all WDS API endpoints as specified in the official
+    Statistics Canada WDS User Guide. All method implementations follow the
+    exact specifications and parameter requirements documented in the guide.
+    
+    For API usage, endpoints, rate limits, and troubleshooting, always refer
+    to the official WDS User Guide at the URL above.
     """
 
     def __init__(
@@ -125,9 +135,12 @@ class Client(AsyncClient):
             product_id=product_id
         )
         data = await WDSRequests.execute_and_extract(coro, model=Cube)
-        if not isinstance(data, Cube):
-            raise TypeError(f"Expected data to be a {Cube}. Got {type(data)}")
-        return data
+        if isinstance(data, list) and len(data) == 1:
+            return data[0]
+        elif isinstance(data, Cube):
+            return data
+        else:
+            raise TypeError(f"Expected data to be a {Cube} or list[{Cube}] with one item. Got {type(data)}")
 
     async def get_series_info_from_cube_pid_coord(
         self, product_id: int, coordinate: str | Coordinate
@@ -237,7 +250,7 @@ class Client(AsyncClient):
 
     async def get_data_from_cube_pid_coord_and_latest_n_periods(
         self, product_id: int, coordinate: str | Coordinate, n: int
-    ) -> Series:
+    ) -> ChangedSeriesData:
         """
         Get data from a cube product ID, coordinate, and the latest N periods.
 
@@ -247,7 +260,7 @@ class Client(AsyncClient):
             n (int): The number of latest periods to retrieve.
 
         Returns:
-            Series: The Series object populated with the returned information.
+            ChangedSeriesData: The ChangedSeriesData object populated with the returned information.
         """
         coro = WDSRequests.get_data_from_cube_pid_coord_and_latest_n_periods(
             client=self, 
@@ -255,9 +268,16 @@ class Client(AsyncClient):
             coordinate=str(coordinate), 
             n=n
         )
-        data = await WDSRequests.execute_and_extract(coro, model=Series)
-        if not isinstance(data, Series):
-            raise TypeError(f"Expected data to be a {Series}. Got {type(data)}")
+        data = await WDSRequests.execute_and_extract(coro, model=ChangedSeriesData)
+        
+        # Handle list response (API returns list with one item)
+        if isinstance(data, list):
+            if len(data) != 1:
+                raise ValueError(f"Expected exactly one ChangedSeriesData object, got {len(data)}")
+            data = data[0]
+        
+        if not isinstance(data, ChangedSeriesData):
+            raise TypeError(f"Expected data to be a {ChangedSeriesData}. Got {type(data)}")
         return data
 
     async def get_data_from_vector_and_latest_n_periods(
@@ -347,3 +367,167 @@ class Client(AsyncClient):
         if not isinstance(data, CodeSets):
             raise TypeError(f"Expected data to be a {CodeSets}. Got {type(data)}")
         return data
+
+    # =======================
+    # Geographic & Population Methods 
+    # =======================
+
+    async def get_population(self, identifier: str | int, product_id: int = 98100002) -> int | None:
+        """
+        Get population for a location by name or member ID.
+        
+        Args:
+            identifier: Location name (str) or member ID (int)
+            product_id: Product ID for population data (default: 98100002)
+            
+        Returns:
+            Population count or None if not found
+            
+        Example:
+            client = Client()
+            population = await client.get_population("Saugeen Shores")
+            population = await client.get_population(2314)  # by member ID
+        """
+        from .geographic import GeographicEntity
+        
+        if isinstance(identifier, int):
+            # Direct member ID lookup
+            entity = await GeographicEntity.from_member_id(identifier, self)
+            return entity.population if entity else None
+        else:
+            # Name-based lookup requires cube metadata for search
+            try:
+                cube = await self.get_cube_metadata(product_id)
+                if not cube.dimensions:
+                    return None
+                    
+                # Find geographic dimension and search members
+                geo_dim = None
+                for dim in cube.dimensions:
+                    if 'geography' in dim.dimensionNameEn.lower() or 'geographic' in dim.dimensionNameEn.lower():
+                        geo_dim = dim
+                        break
+                
+                if not geo_dim or not geo_dim.member:
+                    return None
+                
+                # Search for matching member
+                search_lower = identifier.lower()
+                for member in geo_dim.member:
+                    if search_lower in member.memberNameEn.lower():
+                        entity = await GeographicEntity.from_member_id(member.memberId, self)
+                        return entity.population if entity else None
+                        
+            except Exception:
+                pass
+                
+        return None
+
+    async def get_location_data(
+        self, 
+        identifier: str | int, 
+        format: str = "population", 
+        periods: int = 1,
+        product_id: int = 98100002
+    ) -> Any:
+        """
+        Get location data in various formats.
+        
+        Args:
+            identifier: Location name or member ID
+            format: 'population', 'array', 'dataframe', or 'entity'
+            periods: Number of time periods to retrieve
+            product_id: Product ID to query
+            
+        Returns:
+            Data in the requested format
+            
+        Example:
+            client = Client()
+            pop = await client.get_location_data("Saugeen Shores", "population")
+            df = await client.get_location_data(2314, "dataframe", periods=5)
+        """
+        from .geographic import GeographicEntity
+        import pandas as pd
+        import numpy as np
+        
+        # Get the geographic entity
+        if isinstance(identifier, int):
+            entity = await GeographicEntity.from_member_id(identifier, self)
+        else:
+            # Name-based lookup
+            pop = await self.get_population(identifier, product_id)
+            if pop is None:
+                return None
+            # Find the member ID from population lookup (this is inefficient, but works)
+            # Better implementation would cache the member lookup
+            try:
+                cube = await self.get_cube_metadata(product_id)
+                if cube.dimensions:
+                    geo_dim = next((d for d in cube.dimensions if 'geography' in d.dimensionNameEn.lower()), None)
+                    if geo_dim and geo_dim.member:
+                        search_lower = identifier.lower()
+                        for member in geo_dim.member:
+                            if search_lower in member.memberNameEn.lower():
+                                entity = await GeographicEntity.from_member_id(member.memberId, self)
+                                break
+                        else:
+                            return None
+                    else:
+                        return None
+                else:
+                    return None
+            except Exception:
+                return None
+                
+        if not entity:
+            return None
+            
+        if format == "population":
+            return entity.population
+        elif format == "array":
+            return await entity.get_data_as_array(self, periods)
+        elif format == "dataframe":
+            return await entity.get_data_as_dataframe(self, periods)
+        elif format == "entity":
+            return entity
+        else:
+            raise ValueError(f"Unknown format: {format}")
+
+    async def search_locations(self, query: str, product_id: int = 98100002) -> list[tuple[int, str]]:
+        """
+        Search for locations by partial name match.
+        
+        Args:
+            query: Search query string
+            product_id: Product ID to search in (default: 98100002)
+            
+        Returns:
+            List of (member_id, name) tuples
+            
+        Example:
+            client = Client()
+            results = await client.search_locations("saugeen")
+            # Returns: [(2314, "Saugeen Shores")]
+        """
+        try:
+            cube = await self.get_cube_metadata(product_id)
+            if not cube.dimensions:
+                return []
+                
+            # Find geographic dimension
+            geo_dim = next((d for d in cube.dimensions if 'geography' in d.dimensionNameEn.lower()), None)
+            if not geo_dim or not geo_dim.member:
+                return []
+            
+            # Search members
+            query_lower = query.lower()
+            matches = []
+            for member in geo_dim.member:
+                if query_lower in member.memberNameEn.lower():
+                    matches.append((member.memberId, member.memberNameEn))
+                    
+            return matches[:10]  # Limit results
+            
+        except Exception:
+            return []

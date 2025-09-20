@@ -272,17 +272,67 @@ class CustomModel(Base):
   - **Test File Naming**: Tests must be named `test_*.py` and use pytest conventions (`test_*` functions, proper fixtures)
   - **Documentation Placement**: Official docs (architecture, system guides) → `docs/`, session notes/debug reports → `scratch/`
 - **Version dependencies**: Pandas 2.3+, Python 3.11+ strictly enforced in pyproject.toml
-- **Modern Python Typing**: Use native Python 3.11+ type hints exclusively (project requires Python 3.11+):
-  - ✅ `str | int | None` instead of `Union[str, int, None]`
-  - ✅ `list[str]` instead of `List[str]`
-  - ✅ `dict[str, int]` instead of `Dict[str, int]`
-  - ✅ `tuple[str, ...]` instead of `Tuple[str, ...]`
-  - ✅ `set[str]` instead of `Set[str]`
-  - ✅ `str | None` instead of `Optional[str]`
-  - ✅ `type[MyClass]` instead of `Type[MyClass]`
-  - 🚨 **NEVER import Union, List, Dict, Tuple, Set, Optional, Type from typing** - use built-in generics
-  - 🚨 **ALWAYS use lowercase built-in types**: `list`, `dict`, `tuple`, `set` not capitalized versions
-  - 🚨 **CRITICAL RULE**: Any use of old typing imports (List, Dict, etc.) is a coding error that must be fixed immediately
+
+## 🚨 **CRITICAL TYPING REQUIREMENTS - PYTHON 3.11+ ONLY** 🚨
+
+**ABSOLUTE REQUIREMENT**: ALL code must use modern Python 3.11+ native type annotations. Legacy typing imports are FORBIDDEN.
+
+### ✅ **REQUIRED MODERN SYNTAX (Python 3.11+)**:
+```python
+# Built-in generics (PEP 585) - REQUIRED
+list[str]                    # ✅ CORRECT
+dict[str, int]              # ✅ CORRECT  
+tuple[str, ...]             # ✅ CORRECT
+set[str]                    # ✅ CORRECT
+type[MyClass]               # ✅ CORRECT
+
+# Union types (PEP 604) - REQUIRED
+str | int                   # ✅ CORRECT
+str | None                  # ✅ CORRECT
+dict[str, Any] | None       # ✅ CORRECT
+list[dict[str, Any]]        # ✅ CORRECT
+
+# Reduced typing imports
+from typing import Any      # ✅ Only when needed
+```
+
+### 🚫 **FORBIDDEN LEGACY SYNTAX (Python 3.8-3.10)**:
+```python
+# Legacy typing imports - FORBIDDEN
+from typing import List, Dict, Tuple, Set, Union, Optional, Type  # 🚫 NEVER
+
+# Legacy syntax patterns - FORBIDDEN
+List[str]                   # 🚫 WRONG - use list[str]
+Dict[str, int]             # 🚫 WRONG - use dict[str, int]
+Tuple[str, ...]            # 🚫 WRONG - use tuple[str, ...]
+Set[str]                   # 🚫 WRONG - use set[str]
+Union[str, int]            # 🚫 WRONG - use str | int
+Optional[str]              # 🚫 WRONG - use str | None
+Type[MyClass]              # 🚫 WRONG - use type[MyClass]
+```
+
+### � **MIGRATION EXAMPLES**:
+```python
+# OLD (forbidden) → NEW (required)
+def old_function(items: List[Dict[str, Any]]) -> Optional[str]:  # 🚫 WRONG
+def new_function(items: list[dict[str, Any]]) -> str | None:     # ✅ CORRECT
+
+# OLD (forbidden) → NEW (required)  
+data: Dict[str, Union[int, str]] = {}                          # � WRONG
+data: dict[str, int | str] = {}                                # ✅ CORRECT
+
+# OLD (forbidden) → NEW (required)
+from typing import List, Dict, Optional                         # 🚫 WRONG
+# Only import what's actually needed from typing:
+from typing import Any                                          # ✅ CORRECT
+```
+
+### 🚨 **ENFORCEMENT RULES**:
+- **Linting Error**: Any use of `List`, `Dict`, `Union`, `Optional`, etc. from typing is a linting error that MUST be fixed immediately
+- **Code Review**: All PRs will be rejected if they contain legacy typing syntax
+- **CI/CD**: Automated checks prevent legacy typing from being merged
+- **Zero Tolerance**: No exceptions - the project requires Python 3.11+ so we must use modern syntax exclusively
+- **Auto-Fix Command**: Use modern type annotations in all new code and fix any legacy patterns found during linting
 - **WDS Focus Areas**: The codebase currently emphasizes:
   - **WDS Client**: `statscan/wds/client.py` - 30+ async endpoints for direct Statistics Canada API access
   - **WDS Enum Generation**: `tools/wds_*_enum_gen.py` - Real-time enum generation from WDS API data  
