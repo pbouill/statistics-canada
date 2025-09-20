@@ -8,7 +8,7 @@ with optional word tracking and abbreviation analysis.
 
 import asyncio
 from pathlib import Path
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, Union, cast
 import logging
 from datetime import datetime
 
@@ -36,11 +36,10 @@ class UnifiedEnumProcessor:
             track_words: If True, enable word tracking across all generators
         """
         self.track_words = track_words
-        self.generators: Dict[str, Union[ProductIdEnumWriter, CodeSetEnumWriter]] = {}
         
         # Initialize generators with word tracking
-        self.generators['product'] = ProductIdEnumWriter(track_words=track_words)
-        self.generators['codeset'] = CodeSetEnumWriter(track_words=track_words)
+        self.product_generator = ProductIdEnumWriter(track_words=track_words)
+        self.codeset_generator = CodeSetEnumWriter(track_words=track_words)
         
         # Reset word tracker if tracking is enabled
         if track_words:
@@ -66,14 +65,14 @@ class UnifiedEnumProcessor:
         if include_types is None:
             include_types = ["product", "codeset"]
         
-        results = {}
+        results: Dict[str, Union[Path, Dict[str, Path]]] = {}
         
         logger.info(f"🔄 Starting unified enum processing for: {', '.join(include_types)}")
         
         if "product" in include_types:
             logger.info("🏭 Processing ProductID enums...")
             product_file = output_dir / "product_id.py"
-            results["product"] = await self.generators["product"].process(
+            results["product"] = await self.product_generator.process(
                 fp=product_file, 
                 overwrite=overwrite
             )
@@ -82,11 +81,15 @@ class UnifiedEnumProcessor:
         if "codeset" in include_types:
             logger.info("📊 Processing CodeSet enums...")
             codeset_dir = output_dir / "codesets"
-            results["codeset"] = await self.generators["codeset"].process(
+            codeset_result = await self.codeset_generator.process(
                 output_dir=codeset_dir, 
                 overwrite=overwrite
             )
-            logger.info(f"✅ CodeSet processing complete: {len(results['codeset'])} files")
+            results["codeset"] = cast(Union[Path, Dict[str, Path]], codeset_result)
+            if isinstance(results["codeset"], dict):
+                logger.info(f"✅ CodeSet processing complete: {len(results['codeset'])} files")
+            else:
+                logger.info(f"✅ CodeSet processing complete: {results['codeset']}")
         
         return results
     
@@ -109,7 +112,7 @@ class UnifiedEnumProcessor:
         """
         logger.info(f"🎯 Processing specific codeset: {codeset_name}")
         
-        result = await self.generators["codeset"].process_single(
+        result = await self.codeset_generator.process_single(
             codeset_name=codeset_name,
             fp=output_file,
             overwrite=overwrite
@@ -156,25 +159,11 @@ class UnifiedEnumProcessor:
         if output_file is None:
             output_file = Path("scratch/unified_abbreviation_analysis.md")
         
-        # Use enhanced markdown report if available, fall back to basic report
-        try:
-            from tools.enhanced_word_tracker import EnhancedWordTracker
-            if isinstance(word_tracker, EnhancedWordTracker):
-                report = word_tracker.generate_enhanced_markdown_report(
-                    output_file=output_file,
-                    include_contexts=include_contexts,
-                    include_morphological=True
-                )
-            else:
-                report = word_tracker.generate_abbreviation_report(
-                    output_file=output_file,
-                    include_contexts=include_contexts
-                )
-        except ImportError:
-            report = word_tracker.generate_abbreviation_report(
-                output_file=output_file,
-                include_contexts=include_contexts
-            )
+        # Generate abbreviation analysis report
+        report = word_tracker.generate_abbreviation_report(
+            output_file=output_file,
+            include_contexts=include_contexts
+        )
         
         logger.info(f"📄 Word analysis report generated: {output_file}")
         return report

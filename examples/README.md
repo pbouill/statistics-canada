@@ -1,150 +1,125 @@
 # Statistics Canada WDS API Examples
 
-This directory contains **4 focused examples** plus **4 discovery/evaluation tools** that demonstrate the complete capabilities of the Statistics Canada Web Data Service (WDS) API through the `statscan` package.
+This directory contains examples demonstrating the Statistics Canada Web Data Service (WDS) API through the `statscan` package.
 
-## 📚 Example Structure
+## 🚀 Core Examples
 
-### 1. `basic_usage.py` - Foundation Concepts
-**Start here for new users**
-- WDS client initialization and basic API patterns
-- Product discovery and cube metadata retrieval
+### `client_overview.py` - **START HERE**
+Complete demonstration of the WDS Client capabilities:
+- All WDS API endpoints
+- Geographic location methods  
+- Population data retrieval
+- Search functionality
+- Data format options
+
+**Run:** `python client_overview.py`
+
+### `basic_usage.py` - Foundation Concepts
+Learn the fundamentals:
+- Client initialization and configuration
+- Product discovery and cube metadata
 - Simple coordinate-based data requests
-- Working with WDS enums and response parsing
-- Error handling best practices
+- WDS enums and response parsing
+- Error handling patterns
 
-**Run with:** `python basic_usage.py`
+**Run:** `python basic_usage.py`
 
-### 2. `demographic_analysis.py` - Real-World Use Cases
-**Municipal and population analysis**
-- Comprehensive demographic analysis workflows
-- Saugeen Shores, Ontario case study (municipal-level analysis)
-- Age, gender, and household demographic breakdowns
-- Comparative analysis across geographic areas
-- Practical demographic reporting patterns
+### `demographic_analysis.py` - Real-World Case Study
+Municipal demographic analysis using Saugeen Shores, Ontario:
+- Population, age, and gender analysis
+- Household and dwelling statistics
+- Geographic hierarchy navigation
+- Comparative demographic reporting
+- DataFrame-based data processing
 
-**Run with:** `python demographic_analysis.py`
+**Run:** `python demographic_analysis.py`
 
-### 3. `geographic_discovery.py` - Location-Based Data
-**Understanding Canada's geographic hierarchy**
+### `geographic_discovery.py` - Location Data
+Understanding Canada's geographic structure:
+- Geographic hierarchy exploration (national → provincial → municipal)
 - Product discovery by geographic focus
-- Exploring cube dimensional structures
-- Canada's geographic hierarchy (national → provincial → municipal)
-- Building coordinates for specific locations
-- Geographic coordinate validation and testing
+- Cube dimensional structure analysis
+- Location-based coordinate building
+- Geographic validation techniques
 
-**Run with:** `python geographic_discovery.py`
+**Run:** `python geographic_discovery.py`
 
-### 4. `advanced_coordinates.py` - Complex Queries
-**Sophisticated statistical analysis**
+### `advanced_coordinates.py` - Complex Queries
+Advanced statistical analysis patterns:
 - Multi-dimensional coordinate construction
-- Parameter-based coordinate building
-- Time series analysis with coordinate manipulation
-- Complex filtering and data aggregation
-- Coordinate validation and debugging techniques
+- Time series analysis techniques
+- Complex filtering and aggregation
+- Parameter-based query building
+- Coordinate validation and debugging
 
-**Run with:** `python advanced_coordinates.py`
+**Run:** `python advanced_coordinates.py`
 
-## � Discovery & Evaluation Tools
+## 🔧 Discovery & Debugging Tools
 
 ### `population_evaluator.py` - Complete Pipeline Testing
-**Debug and validate population data workflows**
+Debug and validate population data workflows:
 - Test coordinates from construction to data retrieval
 - Validate geographic member IDs and locations
-- Debug coordinate construction issues
-- Interactive mode for exploration
-- Complete pipeline evaluation (523 lines of debugging power)
+- Interactive exploration mode
+- Complete pipeline evaluation
 
 **Usage:**
 ```bash
-python examples/population_evaluator.py --coordinate "2314.1.0.0.0.0.0.0.0.0" --quick
-python examples/population_evaluator.py --location "Saugeen Shores"
-python examples/population_evaluator.py --interactive
+python population_evaluator.py --coordinate "2314.1.0.0.0.0.0.0.0.0" --quick
+python population_evaluator.py --location "Saugeen Shores"  
+python population_evaluator.py --interactive
 ```
 
-### `population_evaluator_demo.py` - Tool Demonstration
-**Learn how to use the population evaluator**
-- Demonstrates various evaluation scenarios
-- Shows coordinate testing patterns
-- Examples of common debugging workflows
-- Quick reference for evaluator usage
-
-**Run with:** `python examples/population_evaluator_demo.py`
+### `population_evaluator_demo.py` - Tool Tutorial
+Learn how to use the population evaluator tool with practical examples.
 
 ### `wds_coordinate_discovery.py` - Structure Analysis
-**Discover WDS cube coordinate patterns**
-- Analyze cube dimensional structures (310 lines)
+Analyze WDS cube dimensional structures:
 - Discover coordinate patterns across products
-- Generate coordinate enum code
-- Export structure analysis to JSON
-- Identify common dimension patterns
-
-**Run with:** `python examples/wds_coordinate_discovery.py`
+- Generate dimensional analysis reports
+- Export structure data to JSON
 
 ### `wds_geographic_discovery.py` - Location Discovery
-**Find valid geographic member IDs**
-- Test ranges of geographic member IDs (282 lines)
+Find and validate geographic member IDs:
+- Test ranges of geographic identifiers
 - Discover major cities and populations
-- Validate specific locations
-- Generate geographic location enums
-- Export discovery results
+- Generate geographic location mappings
 
 **Usage:**
 ```bash
-python examples/wds_geographic_discovery.py --known
-python examples/wds_geographic_discovery.py --range 1 1000
-python examples/wds_geographic_discovery.py --major-cities
+python wds_geographic_discovery.py --known
+python wds_geographic_discovery.py --range 1 1000
+python wds_geographic_discovery.py --major-cities
 ```
 
-## �🚀 Getting Started
+## 🏃 Quick Start
 
-1. **Prerequisites:**
+1. **Setup:**
    ```bash
-   # Ensure virtual environment is activated
+   # Activate virtual environment
    source .venv/bin/activate
    
-   # Install package in development mode
+   # Install dependencies
    pip install -r requirements.dev.txt
    ```
 
-2. **Run examples in order:**
+2. **Learning Path:**
    ```bash
-   python examples/basic_usage.py           # Learn fundamentals
-   python examples/demographic_analysis.py  # See real-world patterns
-   python examples/geographic_discovery.py  # Understand geography
-   python examples/advanced_coordinates.py  # Master complex queries
+   python examples/client_overview.py        # Complete overview
+   python examples/basic_usage.py           # Learn fundamentals  
+   python examples/demographic_analysis.py  # Real-world patterns
+   python examples/geographic_discovery.py  # Geographic concepts
+   python examples/advanced_coordinates.py  # Complex queries
    ```
 
-## 📖 Learning Path
+## 📖 Key Concepts
 
-**Core Examples (Start Here):**
-- **New to Statistics Canada data?** → Start with `basic_usage.py`
-- **Need demographic analysis?** → Go to `demographic_analysis.py`  
-- **Working with geographic data?** → Use `geographic_discovery.py`
-- **Building complex queries?** → Check `advanced_coordinates.py`
-
-**Discovery & Debugging Tools:**
-- **Testing coordinates/locations?** → Use `population_evaluator.py`
-- **Need to understand cube structure?** → Run `wds_coordinate_discovery.py`
-- **Looking for geographic member IDs?** → Try `wds_geographic_discovery.py`
-- **Learning the evaluation tools?** → Start with `population_evaluator_demo.py`
-
-## 🎯 Key Concepts Covered
-
-- **WDS Client Usage**: Async API patterns, error handling
-- **Product Discovery**: Finding relevant statistical products
+- **WDS Client**: Single class providing all API functionality
+- **Product Discovery**: Finding relevant statistical datasets  
 - **Coordinate Systems**: Building queries for specific data subsets
-- **Geographic Hierarchy**: Understanding Canada's administrative structure
-- **Demographic Analysis**: Population, age/gender, household analysis
+- **Geographic Hierarchy**: Canada's administrative structure
+- **Demographic Analysis**: Population and household statistics
 - **Time Series**: Multi-period data analysis
-- **Data Validation**: Coordinate testing and debugging
+- **Data Validation**: Testing and debugging techniques
 
-## 💡 Previous Examples Consolidated
-
-This streamlined structure replaces **17 previous example files** with **8 focused examples** (4 core + 4 discovery tools):
-
-- **Removed duplicates**: Multiple Saugeen Shores variations → Integrated into `demographic_analysis.py`
-- **Consolidated features**: Scattered demos → Organized by use case
-- **Eliminated redundancy**: Overlapping functionality → Clear learning progression
-- **Improved clarity**: Better documentation and error handling
-
-Each example is self-contained but builds on concepts from previous examples, providing a clear learning path from basic usage to advanced statistical analysis.
+Each example builds on concepts from previous examples, providing a clear progression from basic usage to advanced statistical analysis.

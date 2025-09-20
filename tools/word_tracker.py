@@ -392,15 +392,10 @@ class WordTracker:
     
     def save_tracking_data(self, output_file: Path):
         """Save tracking data to JSON file for further analysis."""
-        data = {
-            'session_id': self.session_id,
-            'timestamp': datetime.now(timezone.utc).isoformat(),
-            'total_words': len(self.word_stats),
-            'word_stats': {}
-        }
+        word_stats_dict: dict[str, dict] = {}
         
         for word, stats in self.word_stats.items():
-            data['word_stats'][word] = {
+            word_stats_dict[word] = {
                 'frequency': stats.frequency,
                 'contexts': list(stats.contexts)[:10],  # Limit contexts to save space
                 'sources': list(stats.sources),
@@ -409,6 +404,13 @@ class WordTracker:
                 'priority_score': stats.priority_score,
                 'total_potential_savings': stats.total_potential_savings
             }
+        
+        data = {
+            'session_id': self.session_id,
+            'timestamp': datetime.now(timezone.utc).isoformat(),
+            'total_words': len(self.word_stats),
+            'word_stats': word_stats_dict
+        }
         
         output_file.parent.mkdir(parents=True, exist_ok=True)
         with output_file.open('w', encoding='utf-8') as f:
@@ -446,14 +448,10 @@ _global_word_tracker: Optional[WordTracker] = None
 
 
 def get_word_tracker():
-    """Get the global word tracker instance (enhanced version if available)."""
+    """Get the global word tracker instance."""
     global _global_word_tracker
     if _global_word_tracker is None:
-        try:
-            from tools.enhanced_word_tracker import EnhancedWordTracker
-            _global_word_tracker = EnhancedWordTracker()
-        except ImportError:
-            _global_word_tracker = WordTracker()
+        _global_word_tracker = WordTracker()
     return _global_word_tracker
 
 
