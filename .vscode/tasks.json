@@ -5,7 +5,7 @@
             "label": "Generate WDS Enums (All)",
             "type": "shell",
             "command": "${command:python.interpreterPath}",
-            "args": ["tools/wds_enum_gen.py", "--type", "all", "--verbose"],
+            "args": ["tools/cli/wds_enum_gen.py", "--type", "all", "--verbose"],
             "group": "build",
             "presentation": {
                 "echo": true,
@@ -22,7 +22,7 @@
             "label": "Generate ProductID Enums",
             "type": "shell",
             "command": "${command:python.interpreterPath}",
-            "args": ["tools/wds_enum_gen.py", "--type", "product", "--verbose"],
+            "args": ["tools/cli/wds_enum_gen.py", "--type", "product", "--verbose"],
             "group": "build",
             "presentation": {
                 "echo": true,
@@ -39,7 +39,7 @@
             "label": "Generate CodeSet Enums",
             "type": "shell",
             "command": "${command:python.interpreterPath}",
-            "args": ["tools/wds_enum_gen.py", "--type", "codeset", "--verbose"],
+            "args": ["tools/cli/wds_enum_gen.py", "--type", "codeset", "--verbose"],
             "group": "build",
             "presentation": {
                 "echo": true,

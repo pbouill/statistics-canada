@@ -87,6 +87,21 @@ This ensures proper dependency isolation and prevents version conflicts.
 - **Integration Tests**: Require internet access for WDS API calls - mark with `@pytest.mark.integration`
 - **Legacy Compatibility**: `python tests/run_tests.py` provides unittest fallback but new tests should be pure pytest
 
+### CLI Tools Organization
+**Critical**: Tool organization follows a strict separation between core functionality and CLI interfaces:
+- **`tools/`**: Core classes, modules, and data processing utilities (9 core components)
+  - Enum writer classes (`wds_*_enum_gen.py`)
+  - Core functionality (`word_tracker.py`, `substitution.py`, `abbreviations.py`)
+  - Data processing (`generate_enums.py`, `wds_coordinate_discovery.py`)
+  - Supporting modules (`enum_writer.py`)
+- **`tools/cli/`**: Command-line interfaces and interactive tools (4 CLI scripts)
+  - Entry point (`main.py`)
+  - WDS CLI interface (`wds_enum_gen.py`)
+  - Interactive tools (`interactive_abbreviation_manager.py`)
+  - Batch processors (`unified_enum_processor.py`)
+- **Design Principle**: CLI scripts **use** core classes but contain no business logic themselves
+- **Import Pattern**: CLI scripts import from parent `tools/` directory: `from tools.wds_code_enum_gen import CodeSetEnumWriter`
+
 ### Code Generation Workflow
 **Critical**: Geographic enumerations are auto-generated from Statistics Canada data:
 ```bash
@@ -103,15 +118,15 @@ python tools/generate_enums.py  # Downloads census data and regenerates enums/au
 - **`tools/word_tracker.py`**: Word tracking system for identifying new abbreviation opportunities during enum generation
 - **`tools/find_abbreviation_opportunities.py`**: Comprehensive analysis tool for discovering and prioritizing potential abbreviations
 - **`tools/review_abbreviations.py`**: Quality assurance tool for validating abbreviation dictionary integrity
-- **`tools/interactive_abbreviation_manager.py`**: Enhanced interactive system for adding new abbreviations and applying consolidation opportunities
-- **`tools/unified_enum_processor.py`**: Single entry point for processing all enum types with consistent word tracking
+- **`tools/cli/interactive_abbreviation_manager.py`**: Enhanced interactive system for adding new abbreviations and applying consolidation opportunities
+- **`tools/cli/unified_enum_processor.py`**: Single entry point for processing all enum types with consistent word tracking
 - **Morphological Extension**: Root words like "empl" automatically cover "employ", "employment", "employed", "employees", etc.
 - **Testing Coverage**: Use `SubstitutionEngine._generate_variants_static("word")` to test morphological coverage before adding new abbreviations
 - **Performance Impact**: Proper abbreviations reduce enum identifier length from 150+ chars to manageable names
 - **Word Tracking Workflow**: 
-  1. Run `python tools/unified_enum_processor.py --track-words` to collect word frequency data across all generators
+  1. Run `python tools/cli/unified_enum_processor.py --track-words` to collect word frequency data across all generators
   2. Use `python tools/find_abbreviation_opportunities.py` for comprehensive analysis with smart suggestions
-  3. Run `python tools/interactive_abbreviation_manager.py` for user-friendly abbreviation selection and implementation
+  3. Run `python tools/cli/interactive_abbreviation_manager.py` for user-friendly abbreviation selection and implementation
   4. Validate changes with morphological testing and conflict detection before committing
 - **Interactive Enhancement**: Discovered abbreviation opportunities are automatically integrated into user workflow with smart suggestions, conflict detection, and quality validation
 
@@ -222,14 +237,22 @@ class CustomModel(Base):
 
 **🎯 ENHANCED FILE PLACEMENT RULES**:
 
-**`tools/` - PRODUCTION CODE GENERATION ONLY (11 Core Tools)**:
-- ✅ **Main Interface**: `main.py` - Single entry point for all tools
+**`tools/` - CORE CLASSES AND MODULES (9 Core Tools)**:
 - ✅ **Geographic Enums**: `generate_enums.py` - Census data processing
-- ✅ **WDS Enums**: `wds_enum_gen.py`, `wds_code_enum_gen.py`, `wds_productid_enum_gen.py`
-- ✅ **Abbreviation System**: `abbreviations.py`, `substitution.py`, `interactive_abbreviation_manager.py`
-- ✅ **Utilities**: `enum_writer.py`, `word_tracker.py`, `unified_enum_processor.py`
+- ✅ **WDS Enum Classes**: `wds_code_enum_gen.py`, `wds_productid_enum_gen.py` - Core enum writer classes
+- ✅ **Abbreviation System**: `abbreviations.py`, `substitution.py` - Core functionality
+- ✅ **Utilities**: `enum_writer.py`, `word_tracker.py`, `wds_coordinate_discovery.py` - Supporting modules
+- ❌ **NEVER**: CLI scripts, interactive tools, command-line interfaces
 - ❌ **NEVER**: Demo scripts, example code, educational content
 - ❌ **NEVER**: Debug scripts, investigation files, temporary analysis
+
+**`tools/cli/` - COMMAND-LINE INTERFACE SCRIPTS (4 CLI Tools)**:
+- ✅ **Main CLI Interface**: `main.py` - Entry point for all CLI operations
+- ✅ **WDS CLI**: `wds_enum_gen.py` - Command-line interface for WDS enum generation
+- ✅ **Interactive Tools**: `interactive_abbreviation_manager.py` - User-facing interactive systems
+- ✅ **Batch Processors**: `unified_enum_processor.py` - Automated workflow scripts
+- ❌ **NEVER**: Core classes or business logic (belongs in parent `tools/`)
+- ❌ **NEVER**: Demo code, debug scripts, temporary analysis
 
 **`examples/` - USER EDUCATION & DEMONSTRATIONS**:
 - ✅ **Usage demonstrations**: How to use the package for real tasks
@@ -367,7 +390,7 @@ from typing import Any                                          # ✅ CORRECT
     - All others: Alphabetical by key (single-word roots for morphological extension)
   - **Quality Checks**: Always run morphological validation before accepting abbreviation changes
   - **Opportunity Analysis**: Use word tracking during enum generation to identify potential new abbreviations:
-    1. Run `python tools/wds_enum_gen.py --track-words` to collect word frequency data
+    1. Run `python tools/cli/wds_enum_gen.py --track-words` to collect word frequency data
     2. Use `python tools/find_abbreviation_opportunities.py` for comprehensive analysis and prioritized recommendations
     3. Implement high-impact abbreviations following morphological validation procedures
     4. Validate changes with `python tools/review_abbreviations.py` before committing
