@@ -102,6 +102,40 @@
             "options": {
                 "cwd": "${workspaceFolder}"
             }
+        },
+        {
+            "label": "Check Empty Files (Dry Run)",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": ["tools/cli/check_empty_files.py", "--dry-run"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Clean Empty Files (Interactive)",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": ["tools/cli/check_empty_files.py"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated"
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
         }
     ]
 }

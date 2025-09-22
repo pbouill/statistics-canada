@@ -1,7 +1,10 @@
 from datetime import date, datetime
 import logging
-from typing import Any
+import asyncio
+import functools
+from typing import Any, Callable, TypeVar
 
+from httpx import ConnectError, TimeoutException, NetworkError
 from httpx._client import AsyncClient, TimeoutTypes, Timeout
 
 from statscan.url import WDS_URL
@@ -14,7 +17,45 @@ from .models.vector import Vector
 from .models.series import Series, ChangedSeriesData
 
 
-DEFAULT_WDS_TIMEOUT = Timeout(30.0)  # 30 seconds
+# Conservative timeout configuration for reliable operation in all environments
+DEFAULT_WDS_TIMEOUT = Timeout(
+    connect=30.0,   # Connection timeout - increased for reliability
+    read=90.0,      # Read timeout - generous for large responses
+    write=30.0,     # Write timeout - increased for reliability
+    pool=15.0       # Pool timeout - increased for connection management
+)
+
+T = TypeVar('T')
+
+
+def retry_on_network_error(max_retries: int = 2, delay: float = 1.0):
+    """Decorator to retry async functions on network errors."""
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
+        @functools.wraps(func)
+        async def wrapper(*args, **kwargs):
+            last_exception = None
+            
+            for attempt in range(max_retries):
+                try:
+                    return await func(*args, **kwargs)
+                except (ConnectError, TimeoutException, NetworkError) as e:
+                    last_exception = e
+                    if attempt < max_retries - 1:
+                        retry_delay = delay * (attempt + 1)
+                        logging.getLogger(__name__).warning(
+                            f"{func.__name__} failed (attempt {attempt + 1}/{max_retries}): {e}. "
+                            f"Retrying in {retry_delay:.1f}s..."
+                        )
+                        await asyncio.sleep(retry_delay)
+                    else:
+                        logging.getLogger(__name__).error(
+                            f"{func.__name__} failed after {max_retries} attempts: {e}"
+                        )
+            
+            # Re-raise the last exception if all retries failed
+            raise last_exception
+        return wrapper
+    return decorator
 
 logger = logging.getLogger(__name__)
 
@@ -121,6 +162,7 @@ class Client(AsyncClient):
             raise TypeError(f"Expected data to be a {list} of {Cube}. Got {type(data)}")
         return data
 
+    @retry_on_network_error()
     async def get_cube_metadata(self, product_id: int) -> Cube:
         """
         Get metadata for a specific cube product ID.
@@ -194,6 +236,7 @@ class Client(AsyncClient):
             raise TypeError(f"Expected data to be a {list} of {Cube}. Got {type(data)}")
         return data
 
+    @retry_on_network_error()
     async def get_all_cubes_list_lite(self) -> list[Cube]:
         """
         Get a lightweight list of all cubes.
@@ -355,6 +398,7 @@ class Client(AsyncClient):
 
     # TODO: implement get_full_table_download_[csv,sdmx]
 
+    @retry_on_network_error()
     async def get_code_sets(self) -> CodeSets:
         """
         Get the code sets from the WDS API.

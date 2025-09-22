@@ -48,5 +48,6 @@ dependencies = {file = ["requirements.txt"]}
 [tool.pytest.ini_options]
 markers = [
     "dependency: tests that require network or external dependencies",
+    "network: tests that make live network calls to generate fixtures",
     "slow: tests that take a long time to run"
 ]

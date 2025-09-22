@@ -158,20 +158,3 @@ class Attributes(Base):
                 return attribute
         raise KeyError(f"Attribute with ID '{key}' not found.")
     
-    def get_attribute_by_name(self, name: str, language: str = 'en') -> Optional[Attribute]:
-        """Get an attribute by its name or display name."""
-        for attribute in self.series:
-            if attribute.name == name or attribute.get_display_name(language) == name:
-                return attribute
-        return None
-    
-    @property
-    def series_attribute_ids(self) -> list[str]:
-        """Get all series attribute IDs."""
-        return [attr.id for attr in self.series]
-    
-    @property
-    def series_attribute_names(self) -> list[str]:
-        """Get all series attribute names."""
-        return [attr.name for attr in self.series]
-
