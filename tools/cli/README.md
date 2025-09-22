@@ -52,6 +52,23 @@ Unified processor for all enum types with word tracking capabilities.
 python tools/cli/unified_enum_processor.py --track-words
 ```
 
+### `check_empty_files.py`
+Codebase maintenance tool for finding and cleaning up empty files.
+
+```bash
+# Dry run - only show empty files
+python tools/cli/check_empty_files.py --dry-run
+
+# Interactive cleanup - ask before deleting files
+python tools/cli/check_empty_files.py
+
+# Include intentionally empty files (py.typed, __init__.py)
+python tools/cli/check_empty_files.py --dry-run --include-intentionally-empty
+
+# Additional options
+python tools/cli/check_empty_files.py --help
+```
+
 ## VS Code Tasks
 
 The following VS Code tasks are configured to run these CLI tools:
@@ -60,6 +77,8 @@ The following VS Code tasks are configured to run these CLI tools:
 - **Generate ProductID Enums**: `Ctrl+Shift+P` → "Tasks: Run Task" → "Generate ProductID Enums"  
 - **Generate CodeSet Enums**: `Ctrl+Shift+P` → "Tasks: Run Task" → "Generate CodeSet Enums"
 - **Generate Geographic Enums**: `Ctrl+Shift+P` → "Tasks: Run Task" → "Generate Geographic Enums"
+- **Check Empty Files (Dry Run)**: `Ctrl+Shift+P` → "Tasks: Run Task" → "Check Empty Files (Dry Run)"
+- **Clean Empty Files (Interactive)**: `Ctrl+Shift+P` → "Tasks: Run Task" → "Clean Empty Files (Interactive)"
 
 ## Design Principle
 
