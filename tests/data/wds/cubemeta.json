@@ -1,0 +1,291 @@
+[
+    {
+        "status": "SUCCESS",
+        "object": {
+            "responseStatusCode": 0,
+            "productId": "10100001",
+            "cansimId": "183-0021",
+            "cubeTitleEn": "Federal public sector employment reconciliation of Treasury Board of Canada Secretariat, Public Service Commission of Canada and Statistics Canada statistical universes, as at December 31",
+            "cubeTitleFr": "Emploi du secteur public fédéral rapprochement des univers statistiques du Secrétariat du Conseil du Trésor du Canada, de la Commission de la fonction publique du Canada et de Statistique Canada, au 31 décembre",
+            "cubeStartDate": "1999-01-01",
+            "cubeEndDate": "2011-01-01",
+            "frequencyCode": 12,
+            "nbSeriesCube": 14,
+            "nbDatapointsCube": 182,
+            "releaseTime": "2012-08-01T08:30",
+            "archiveStatusCode": "1",
+            "archiveStatusEn": "ARCHIVED -  a cube publicly available but no longer being updated",
+            "archiveStatusFr": "ARCHIVÉ - un cube qui est disponible au public mais n'étant plus mis à jour",
+            "subjectCode": [
+                "1002",
+                "360301"
+            ],
+            "surveyCode": [
+                "1713"
+            ],
+            "dimension": [
+                {
+                    "dimensionPositionId": 1,
+                    "dimensionNameEn": "Geography",
+                    "dimensionNameFr": "Géographie",
+                    "hasUom": false,
+                    "member": [
+                        {
+                            "memberId": 1,
+                            "parentMemberId": null,
+                            "memberNameEn": "Canada",
+                            "memberNameFr": "Canada",
+                            "classificationCode": null,
+                            "classificationTypeCode": null,
+                            "geoLevel": null,
+                            "vintage": null,
+                            "terminated": 0,
+                            "memberUomCode": null
+                        }
+                    ]
+                },
+                {
+                    "dimensionPositionId": 2,
+                    "dimensionNameEn": "Federal public sector employment",
+                    "dimensionNameFr": "Groupes d'emplois du secteur public fédéral",
+                    "hasUom": true,
+                    "member": [
+                        {
+                            "memberId": 1,
+                            "parentMemberId": null,
+                            "memberNameEn": "Federal public sector employees, as per Statistics Canada's statistical universe",
+                            "memberNameFr": "Employé(e)s du secteur public fédéral, selon l'univers statistique de Statistique Canada",
+                            "classificationCode": null,
+                            "classificationTypeCode": null,
+                            "geoLevel": null,
+                            "vintage": null,
+                            "terminated": 0,
+                            "memberUomCode": 249
+                        },
+                        {
+                            "memberId": 2,
+                            "parentMemberId": 1,
+                            "memberNameEn": "Federal government business enterprise employees, as per Statistics Canada's statistical universe",
+                            "memberNameFr": "Employé(e)s des entreprises publiques fédérales, selon l'univers statistique de Statistique Canada",
+                            "classificationCode": null,
+                            "classificationTypeCode": null,
+                            "geoLevel": null,
+                            "vintage": null,
+                            "terminated": 0,
+                            "memberUomCode": 249
+                        },
+                        {
+                            "memberId": 3,
+                            "parentMemberId": 1,
+                            "memberNameEn": "Federal government employees, as per Statistics Canada's statistical universe",
+                            "memberNameFr": "Employé(e)s de l'administration publique fédéral, selon l'univers statistique de Statistique Canada",
+                            "classificationCode": null,
+                            "classificationTypeCode": null,
+                            "geoLevel": null,
+                            "vintage": null,
+                            "terminated": 0,
+                            "memberUomCode": 249
+                        },
+                        {
+                            "memberId": 4,
+                            "parentMemberId": 3,
+                            "memberNameEn": "Employees common to Treasury Board of Canada Secretariat, Public Service Commission of Canada and Statistics Canada statistical universes",
+                            "memberNameFr": "Employé(e)s commun(e)s aux univers statistiques du Secrétariat du Conseil du Trésor du Canada, de la Commission de la fonction publique du Canada et de Statistique Canada",
+                            "classificationCode": null,
+                            "classificationTypeCode": null,
+                            "geoLevel": null,
+                            "vintage": null,
+                            "terminated": 0,
+                            "memberUomCode": 249
+                        },
+                        {
+                            "memberId": 5,
+                            "parentMemberId": 3,
+                            "memberNameEn": "Employees of other federal government agencies in the Public Service Commission of Canada universe",
+                            "memberNameFr": "Employé(e)s des autres sociétés et organismes de l'administration publique fédérale qui font partie de l'univers statistique de la Commission de la fonction publique du Canada",
+                            "classificationCode": null,
+                            "classificationTypeCode": null,
+                            "geoLevel": null,
+                            "vintage": null,
+                            "terminated": 0,
+                            "memberUomCode": 249
+                        },
+                        {
+                            "memberId": 6,
+                            "parentMemberId": 3,
+                            "memberNameEn": "Student employees as per Public Service Commission's statistical universe",
+                            "memberNameFr": "Étudiant(e)s employé(e)s selon l'univers statistique de la Commission de la fonction publique du Canada",
+                            "classificationCode": null,
+                            "classificationTypeCode": null,
+                            "geoLevel": null,
+                            "vintage": null,
+                            "terminated": 0,
+                            "memberUomCode": 249
+                        },
+                        {
+                            "memberId": 7,
+                            "parentMemberId": 3,
+                            "memberNameEn": "Employees not appointed by the Public Service Commission of Canada",
+                            "memberNameFr": "Employé(e)s qui ne sont pas nommé(e)s par la Commission de la fonction publique du Canada",
+                            "classificationCode": null,
+                            "classificationTypeCode": null,
+                            "geoLevel": null,
+                            "vintage": null,
+                            "terminated": 0,
+                            "memberUomCode": 249
+                        },
+                        {
+                            "memberId": 8,
+                            "parentMemberId": 3,
+                            "memberNameEn": "Employees of other federal government agencies for which the Treasury Board of Canada Secretariat is not the employer",
+                            "memberNameFr": "Employé(e)s des autres sociétés et organismes de l'administration publique fédérale dont le Secrétariat du Conseil du Trésor du Canada n'est pas l'employeur.",
+                            "classificationCode": null,
+                            "classificationTypeCode": null,
+                            "geoLevel": null,
+                            "vintage": null,
+                            "terminated": 0,
+                            "memberUomCode": 249
+                        },
+                        {
+                            "memberId": 9,
+                            "parentMemberId": 3,
+                            "memberNameEn": "Department of National Defence military personnel",
+                            "memberNameFr": "Personnel militaire de la Défense nationale",
+                            "classificationCode": null,
+                            "classificationTypeCode": null,
+                            "geoLevel": null,
+                            "vintage": null,
+                            "terminated": 0,
+                            "memberUomCode": 249
+                        },
+                        {
+                            "memberId": 10,
+                            "parentMemberId": 9,
+                            "memberNameEn": "National Defence regular forces",
+                            "memberNameFr": "Force régulière de la Défense nationale",
+                            "classificationCode": null,
+                            "classificationTypeCode": null,
+                            "geoLevel": null,
+                            "vintage": null,
+                            "terminated": 0,
+                            "memberUomCode": 249
+                        },
+                        {
+                            "memberId": 11,
+                            "parentMemberId": 9,
+                            "memberNameEn": "National Defence reserve forces",
+                            "memberNameFr": "Force de réserve de la Défense nationale",
+                            "classificationCode": null,
+                            "classificationTypeCode": null,
+                            "geoLevel": null,
+                            "vintage": null,
+                            "terminated": 0,
+                            "memberUomCode": 249
+                        },
+                        {
+                            "memberId": 12,
+                            "parentMemberId": 3,
+                            "memberNameEn": "Royal Canadian Mounted Police uniformed personnel",
+                            "memberNameFr": "Personnel en uniforme de la Gendarmerie royale du Canada",
+                            "classificationCode": null,
+                            "classificationTypeCode": null,
+                            "geoLevel": null,
+                            "vintage": null,
+                            "terminated": 0,
+                            "memberUomCode": 249
+                        },
+                        {
+                            "memberId": 13,
+                            "parentMemberId": null,
+                            "memberNameEn": "Federal government employees, as per Treasury Board of Canada Secretariat's statistical universe",
+                            "memberNameFr": "Employé(e)s de l'administration publique fédéral, selon l'univers statistique du Secrétariat du Conseil du Trésor du Canada",
+                            "classificationCode": null,
+                            "classificationTypeCode": null,
+                            "geoLevel": null,
+                            "vintage": null,
+                            "terminated": 0,
+                            "memberUomCode": 249
+                        },
+                        {
+                            "memberId": 14,
+                            "parentMemberId": null,
+                            "memberNameEn": "Federal government employees, as per Public Service Commission of Canada's statistical universe",
+                            "memberNameFr": "Employé(e)s de l'administration publique fédéral, selon l'univers statistique de la Commission de la fonction publique du Canada",
+                            "classificationCode": null,
+                            "classificationTypeCode": null,
+                            "geoLevel": null,
+                            "vintage": null,
+                            "terminated": 0,
+                            "memberUomCode": 249
+                        }
+                    ]
+                }
+            ],
+            "footnote": [
+                {
+                    "footnoteId": 1,
+                    "footnotesEn": "This reconciliation statement provides data as at December 31 and is not precisely comparable to annual average data.",
+                    "footnotesFr": "Cet état des concordances fourni des données au 31 décembre et n'est pas précisément comparable à la moyenne annuelle.",
+                    "link": {
+                        "footnoteId": 1,
+                        "dimensionPositionId": 0,
+                        "memberId": 0
+                    }
+                },
+                {
+                    "footnoteId": 6,
+                    "footnotesEn": "In this reconciliation table, the Treasury Board of Canada Secretariat's universe was defined as per Part I of Schedule I of the Public Service Staff Relations Act. However, in accordance with the new Financial Administration Act (FAA), the Treasury Board of Canada Secretariat now defines federal public service as being composed of the core public administration and separate agencies or the sum of Schedule I, IV and V of the FAA. This reconciliation table will be revised to reflect the new definition.",
+                    "footnotesFr": "Dans ce tableau de rapprochement, l'univers du Secrétariat du conseil du trésor du Canada a été définit d'après la Partie I de l'annexe I de la Loi sur les relations de travail dans la fonction publique. Toutefois, conformément à la nouvelle Loi sur la gestion des finances publiques (LGFP), le Secrétariat du conseil du trésor du Canada définit maintenant la fonction publique fédérale comme étant composé de l'administration publique centrale et d'organismes distincts, c'est-à-dire les annexes I, IV et V de la LGFP. Ce tableau de rapprochement sera révisé pour refléter cette nouvelle définition.",
+                    "link": {
+                        "footnoteId": 6,
+                        "dimensionPositionId": 0,
+                        "memberId": 0
+                    }
+                },
+                {
+                    "footnoteId": 2,
+                    "footnotesEn": "Included are employees of entities such as Canadian Food Inspection Agency, National Energy Board and Office of the Superintendant of Financial Institutions Canada.",
+                    "footnotesFr": "Comprend les employés d'entités telles que l'Agence canadienne d'inspection des aliments, l'Office nationale de l'énergie et le Bureau du surintendant des institutions financières du Canada.",
+                    "link": {
+                        "footnoteId": 2,
+                        "dimensionPositionId": 2,
+                        "memberId": 5
+                    }
+                },
+                {
+                    "footnoteId": 3,
+                    "footnotesEn": "Included are employees of entities such as Canada Revenue Agency, Canadian Broadcasting Corporation, and the National Research Council of Canada.",
+                    "footnotesFr": "Comprend les employés d'entités telles que l'Agence du revenu du Canada, la Société radio Canada, et le Conseil national de recherches du Canada.",
+                    "link": {
+                        "footnoteId": 3,
+                        "dimensionPositionId": 2,
+                        "memberId": 8
+                    }
+                },
+                {
+                    "footnoteId": 4,
+                    "footnotesEn": "Treasury Board of Canada Secretariat federal government employees data are a product of Employees common to Treasury Board of Canada Secretariat, Public Service Commission of Canada and Statistics Canada statistical universes plus Employees not appointed by the Public Service Commission of Canada.",
+                    "footnotesFr": "Du point de vue du Secrétariat du Conseil du Trésor du Canada, l'emploi de l'administration publique fédérale est la somme des Employé(e)s commun(e)s aux univers statistiques du Secrétariat du Conseil du Trésor du Canada, de la Commission de la fonction publique du Canada et de Statistique Canada et des Employé(e)s qui ne sont pas nommé(e)s par la Commission de la fonction publique du Canada.",
+                    "link": {
+                        "footnoteId": 4,
+                        "dimensionPositionId": 2,
+                        "memberId": 13
+                    }
+                },
+                {
+                    "footnoteId": 5,
+                    "footnotesEn": "Public Service Commission of Canada federal government employees data are a product of Employees common to Treasury Board of Canada Secretariat, Public Service Commission of Canada and Statistics Canada statistical universes plus Employees of other federal government agencies in the Public Service Commission of Canada universe plus Public Service Commission of Canada student employees.",
+                    "footnotesFr": "Du point de vue de la Commission de la fonction publique du Canada, l'emploi de l'administration publique fédérale est la somme des Employé(e)s commun(e)s aux univers statistiques du Secrétariat du Conseil du Trésor du Canada, de la Commission de la fonction publique du Canada et de Statistique Canada, des Employé(e)s des autres sociétés et organismes de l'administration publique fédérale qui font partie de l'univers statistique de la Commission de la fonction publique du Canada et des Étudiant(e)s employé(e)s par la Commission de la fonction publique du Canada.",
+                    "link": {
+                        "footnoteId": 5,
+                        "dimensionPositionId": 2,
+                        "memberId": 14
+                    }
+                }
+            ],
+            "correctionFootnote": [],
+            "correction": [],
+            "issueDate": "2012-08-01"
+        }
+    }
+]
