@@ -58,15 +58,19 @@ class CodeSet(RootModel):
     def codes(self) -> Iterator[Code]:
         """Iterate over codes in this codeset."""
         return iter(self.root)
-        
-    def has_code(self, code_value: int) -> bool:
-        """Check if the codeset contains the specified code value."""
-        return any(code.value == code_value for code in self.root)
     
-    def get_code(self, code_value: int) -> Optional[Code]:
-        """Get a specific code by its value."""
+    def find_code(
+        self, 
+        value: int | None = None, 
+        desc_en: str | None = None,
+        desc_fr: str | None = None,
+    ) -> Code | None:
+        if all(v is None for v in (value, desc_en, desc_fr)):
+            raise ValueError("At least one of value, desc_en, or desc_fr must be provided.")
         for code in self.root:
-            if code.value == code_value:
+            if ((value is not None and code.value == value) or
+                (desc_en is not None and code.desc_en == desc_en) or
+                (desc_fr is not None and code.desc_fr == desc_fr)):
                 return code
         return None
     
@@ -76,7 +80,7 @@ class CodeSet(RootModel):
     
     def __contains__(self, code_value: int) -> bool:
         """Support 'code_value in codeset' syntax."""
-        return self.has_code(code_value)
+        return code_value in self.code_dict()
         
     def __len__(self) -> int:
         """Return the number of codes in this codeset."""
@@ -84,7 +88,7 @@ class CodeSet(RootModel):
     
     def __getitem__(self, index: int) -> Code:
         """Support indexing like codeset[0]."""
-        return self.root[index]
+        return self.code_dict()[index]
 
 
 class CodeSets(RootModel):
@@ -106,8 +110,8 @@ class CodeSets(RootModel):
                         
     def has_code(self, code_value: int) -> bool:
         """Check if any codeset contains the specified code value."""
-        return any(codeset.has_code(code_value) for codeset in self.root.values())
-    
+        return any(code_value in codeset for codeset in self.root.values())
+
     def get_codeset(self, name: str) -> Optional[CodeSet]:
         """Get a specific codeset by name."""
         return self.root.get(name)
