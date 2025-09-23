@@ -77,15 +77,88 @@ This ensures proper dependency isolation and prevents version conflicts.
 - **Primary Framework**: All tests MUST use pytest and be placed in the `tests/` directory
 - **Test Execution**: Use `python -m pytest tests/ -v` for running tests
 - **Test Compatibility**: All test files must be pytest-compatible (use `test_*.py` naming convention)
-- **Test Organization**: 
-  - `tests/unit/`: Unit tests for individual components
-  - `tests/integration/`: Integration tests requiring external API calls
-  - `tests/data/`: Test data files and fixtures
-  - `tests/`: Root level for cross-cutting tests and utilities
-- **Async Testing**: Uses `pytest-asyncio` for async test methods with `@pytest.mark.asyncio` decorator
-- **Fixtures**: Use pytest fixtures for setup/teardown and shared test data
-- **Integration Tests**: Require internet access for WDS API calls - mark with `@pytest.mark.integration`
-- **Legacy Compatibility**: `python tests/run_tests.py` provides unittest fallback but new tests should be pure pytest
+
+#### Enhanced Test Organization Structure
+**🎯 NEW IMPROVED TEST ARCHITECTURE**:
+
+**`tests/` - Root Directory**:
+- **`conftest.py`**: Central fixture imports for both WDS and SDMX fixtures
+- **`fixtures.py`**: Enhanced fixture system with raw response data and specialized extractors
+- **`test_fixture_paths.py`**: Centralized StrEnum classes for file path management
+
+**`tests/wds/` - WDS API Testing**:
+- **`test_network_fixtures.py`**: **NETWORK-BASED TESTS** that generate fixtures for subsequent tests
+  - Makes live WDS API calls to generate test data
+  - Saves both raw httpx responses AND processed data
+  - Uses `TestFixtureManager` for consistent file naming and metadata
+  - Must run FIRST to generate fixtures for other tests
+- **`test_end_user_functionality.py`**: Advanced functionality tests using generated fixtures
+  - Uses specialized extraction fixtures (e.g., `wds_individual_code_set_scalar`)
+  - Tests DataFrame conversion, filtering, and real-world usage patterns
+  - Can run WITHOUT network access using fixture data
+
+**`tests/sdmx/` - SDMX Testing (Secondary Priority)**:
+- **`test_network_fixtures.py`**: Minimal SDMX fixture generation (mostly uses existing data)
+- **`test_end_user_functionality.py`**: SDMX parsing and compatibility tests
+
+**`tests/data/` - Organized Test Data**:
+- **`tests/data/wds/`**: WDS-specific test fixtures
+  - `raw_*.json`: Complete httpx responses with metadata
+  - `*.json`: Processed data for end-user testing
+- **`tests/data/sdmx/`**: SDMX-specific test fixtures
+
+#### Advanced Fixture System
+**🚀 ENHANCED FIXTURE ARCHITECTURE**:
+
+**Raw Response Fixtures**: Store complete httpx responses with metadata
+- `wds_raw_code_sets`: Raw API response with httpx metadata
+- `wds_raw_cubes_list`: Raw cubes list with full API context
+- `wds_raw_cube_metadata`: Raw cube metadata with request parameters
+
+**Processed Data Fixtures**: Clean data optimized for end-user testing
+- `wds_processed_code_sets`: Clean code sets without httpx metadata
+- `wds_processed_cubes_list`: Sample cubes list for testing
+
+**Specialized Extraction Fixtures**: Extract specific data for model testing
+- `wds_individual_code_set_scalar`: Just scalar codes for individual model tests
+- `wds_cube_basic_info`: Basic cube information extraction
+- `wds_census_cubes_only`: Filtered census cubes (productId 98xxx)
+- `wds_population_cubes_only`: Population-related cubes only
+
+**Path Management**: 
+- **`TestFixturePaths`**: StrEnum classes (`WDSFixturePaths`, `SDMXFixturePaths`) manage file naming
+- **`TestFixtureManager`**: Utility class for saving/loading fixtures with metadata
+- **Templated paths**: Support parameterized filenames (e.g., `cube_metadata_{product_id}.json`)
+
+#### Test Execution Workflow
+**CRITICAL EXECUTION ORDER**:
+1. **Network Tests First**: Run `tests/*/test_network_fixtures.py` to generate raw data
+2. **Functionality Tests**: Run `tests/*/test_end_user_functionality.py` using generated fixtures
+3. **Advanced Tests**: Can pull from existing fixtures without network calls
+
+**Test Markers**:
+- **`@pytest.mark.network`**: Requires internet access, generates fixtures
+- **`@pytest.mark.asyncio`**: Async test methods for WDS client calls
+- **Integration Tests**: Network tests that require live API access
+
+**Legacy Compatibility**: `python tests/run_tests.py` provides unittest fallback but new tests should be pure pytest
+
+#### Test Isolation and Best Practices
+- **Test isolation**: Each test should create its own WDS client instance
+- **Test placement**: ALL tests must be placed in the `tests/` directory structure, never in root or other locations
+- **Pytest compatibility**: All test files must follow pytest conventions (`test_*.py` files, `test_*` functions, pytest fixtures)
+- **File Organization Guidelines**:
+  - **`tests/`**: Proper unit/integration tests that validate functionality (pytest-compatible, `test_*.py` files)
+  - **`examples/`**: Educational demos and usage examples for users (showcase functionality, not validate it)  
+  - **`docs/`**: Official package documentation (architecture, API docs, system guides) - version controlled
+  - **`scratch/`**: Debug files, temporary outputs, experimental code, session reports, and test data - NOT version controlled
+  - **🚨 CRITICAL RULES - NO EXCEPTIONS 🚨**: 
+    - If it validates/asserts functionality → `tests/`
+    - If it demonstrates/shows usage → `examples/`
+    - If it documents the package/system → `docs/` 
+    - **If it's temporary/generated/debug → `scratch/` (NEVER ROOT)**
+  - **Test File Naming**: Tests must be named `test_*.py` and use pytest conventions (`test_*` functions, proper fixtures)
+  - **Documentation Placement**: Official docs (architecture, system guides) → `docs/`, session notes/debug reports → `scratch/`
 
 ### CLI Tools Organization
 **Critical**: Tool organization follows a strict separation between core functionality and CLI interfaces:
@@ -263,14 +336,18 @@ class CustomModel(Base):
 
 **`tests/` - VALIDATION & TESTING**:
 - ✅ **Unit tests**: `test_*.py` files with pytest conventions
-- ✅ **Integration tests**: API connectivity validation
-- ✅ **Test utilities**: Shared testing infrastructure
+- ✅ **Integration tests**: API connectivity validation with `@pytest.mark.network`
+- ✅ **Test utilities**: Enhanced fixture system with `TestFixtureManager`
+- ✅ **Path management**: `test_fixture_paths.py` with StrEnum classes
+- ✅ **Network fixtures**: Generate raw httpx responses and processed data
+- ✅ **Specialized extractors**: Individual model testing fixtures
 - ❌ **NEVER**: Demo code, debug scripts, temporary analysis
 
-**`tests/data/` - TEST DATA FILES ONLY**:
-- ✅ **JSON data**: API responses, test fixtures
-- ✅ **CSV data**: Sample datasets for testing  
-- ✅ **Static files**: Configuration, schema files
+**`tests/data/` - ORGANIZED TEST FIXTURES**:
+- ✅ **`wds/`**: WDS-specific fixtures with `raw_*.json` and processed data
+- ✅ **`sdmx/`**: SDMX-specific test fixtures (secondary priority)
+- ✅ **JSON metadata**: Each fixture includes `_test_metadata` for tracking
+- ✅ **Response simulation**: Raw fixtures include `httpx_metadata`
 - ❌ **NEVER**: Python scripts, executable code, utilities
 
 **Key Decision Matrix**:
@@ -278,7 +355,7 @@ class CustomModel(Base):
 - Demonstrates usage for users → `examples/`  
 - Temporary/debug/investigation → `scratch/`
 - Documents the system → `docs/`
-- Generates production code → `tools/`
+- Generates/cleans production code → `tools/`
 - **Test isolation**: Each test should create its own WDS client instance
 - **Test placement**: ALL tests must be placed in the `tests/` directory structure, never in root or other locations
 - **Pytest compatibility**: All test files must follow pytest conventions (`test_*.py` files, `test_*` functions, pytest fixtures)
