@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+* 🚀 Enhanced Release Pipeline System + Fix README Examples (#12) @pbouill
+
 * 📚 Major README Update: WDS-Focused Documentation with Comprehensive Examples (#10) @pbouill
 
 * 📚 Major README Update: WDS-Focused Documentation with Comprehensive Examples (#10) @pbouill
