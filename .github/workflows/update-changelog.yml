@@ -1,17 +1,14 @@
-name: Update Changelog
+name: Prepare Release Changelog
 
 on:
-  pull_request:
-    types: [closed]
+  push:
     branches: [main]
 
 permissions:
   contents: write
-  pull-requests: read
 
 jobs:
-  update-changelog:
-    if: github.event.pull_request.merged == true
+  prepare-release-changelog:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
@@ -24,44 +21,33 @@ jobs:
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        
-    - name: Update CHANGELOG.md
+    
+    - name: Check if this is a merge from dev branch
+      id: check_merge
       run: |
-        chmod +x .github/scripts/update_changelog.sh
-        .github/scripts/update_changelog.sh "${{ github.event.pull_request.number }}" "${{ github.event.pull_request.title }}" "${{ github.event.pull_request.user.login }}"
-        
-    - name: Check for changes and commit
-      run: |
-        if git diff --quiet CHANGELOG.md; then
-          echo "No changes to CHANGELOG.md"
+        # Check if this push was a merge from dev branch
+        COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+        if [[ "$COMMIT_MESSAGE" == *"Merge"* && "$COMMIT_MESSAGE" == *"dev"* ]]; then
+          echo "This appears to be a merge from dev branch"
+          echo "is_dev_merge=true" >> $GITHUB_OUTPUT
         else
-          echo "Changes detected in CHANGELOG.md"
-          git add CHANGELOG.md
-          git commit -m "📝 Add PR #${{ github.event.pull_request.number }} to changelog
-
-          - ${{ github.event.pull_request.title }}
-          
-          Co-authored-by: ${{ github.event.pull_request.user.login }} <${{ github.event.pull_request.user.login }}@users.noreply.github.com>"
-          
-          git push origin main
-          echo "CHANGELOG.md updated and pushed"
+          echo "This is not a merge from dev branch"  
+          echo "is_dev_merge=false" >> $GITHUB_OUTPUT
         fi
-        
-    - name: Add comment to PR
-      if: success()
-      uses: actions/github-script@v7
-      with:
-        script: |
-          const { owner, repo } = context.repo;
-          const prNumber = context.payload.pull_request.number;
+    
+    - name: Prepare changelog for release
+      if: steps.check_merge.outputs.is_dev_merge == 'true'
+      run: |
+        if [ -f "CHANGELOG.md" ] && grep -q "## \[Unreleased\]" CHANGELOG.md; then
+          echo "Preparing unreleased changes for upcoming release..."
           
-          await github.rest.issues.createComment({
-            owner,
-            repo,
-            issue_number: prNumber,
-            body: `📝 **Changelog Updated!**
-            
-            This PR has been automatically added to the [CHANGELOG.md](https://github.com/${owner}/${repo}/blob/main/CHANGELOG.md) file.
-            
-            The entry will be included in the next release notes. 🚀`
-          });
+          # Get current date
+          RELEASE_DATE=$(date '+%Y-%m-%d')
+          
+          # The version will be determined during the build process
+          # For now, we just ensure the unreleased section exists and is ready
+          echo "Changelog is ready for version assignment during release process"
+          echo "No changes needed - version will be set during PyPI publish workflow"
+        else
+          echo "No CHANGELOG.md or unreleased section found"
+        fi

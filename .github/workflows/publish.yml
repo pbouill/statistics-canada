@@ -1,7 +1,7 @@
 name: Publish to PyPI
 on:
   workflow_run:
-    workflows: ["Build and Test"]
+    workflows: ["Build and Test (Release)"]
     types: ["completed"]
     branches: ["main"]  # Only run when the workflow completed on main branch
 
@@ -136,9 +136,24 @@ jobs:
         echo "changelog<<EOF" >> $GITHUB_OUTPUT
         echo "$CHANGELOG" >> $GITHUB_OUTPUT
         echo "EOF" >> $GITHUB_OUTPUT
+
+    - name: Prepare PyPI distribution files
+      run: |
+        # Create a separate directory for PyPI distribution files only
+        mkdir -p pypi-dist
+        
+        # Copy only actual distribution files (.whl, .tar.gz) to PyPI directory
+        # This excludes VERSION and TAG metadata files that cause PyPI errors
+        find dist/ -type f \( -name "*.whl" -o -name "*.tar.gz" \) -exec cp {} pypi-dist/ \;
+        
+        echo "Files prepared for PyPI upload:"
+        ls -la pypi-dist/
         
     - name: Publish package distributions to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        packages-dir: pypi-dist/
+        skip-existing: true
       
     - name: Create Release
       if: steps.check_tag.outputs.tag_exists == 'false'
