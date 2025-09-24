@@ -11,13 +11,12 @@
 
 ```python
 import asyncio
-import pandas as pd
-from statscan.wds.client import WDS
+from statscan.wds.client import Client
 from statscan.enums.auto.province_territory import ProvinceTerritory
 
 async def get_population_data():
     """Get population data for Canadian provinces."""
-    client = WDS()
+    client = Client()
     
     # Fetch all available data cubes
     cubes = await client.get_all_cubes_list()
@@ -54,7 +53,7 @@ cubes = asyncio.run(get_population_data())
 ## 🌟 Key Features
 
 ### 🔗 **WDS API Integration** (Primary)
-- **`WDS()` Client**: Async HTTP client with 30+ endpoints
+- **`Client()` Class**: Async HTTP client with 30+ endpoints
 - **Type-safe responses**: Pydantic models for all API responses  
 - **Automatic retries**: Built-in error handling and rate limiting
 - **Real-time data**: Live access to latest Statistics Canada releases
@@ -99,11 +98,11 @@ pip install -e .
 
 ```python
 import asyncio
-from statscan.wds.client import WDS
+from statscan.wds.client import Client
 
 async def explore_data():
     """Explore available Statistics Canada datasets."""
-    client = WDS()
+    client = Client()
     
     # Get all available data cubes
     cubes = await client.get_all_cubes_list()
@@ -125,6 +124,7 @@ async def explore_data():
     
     return cubes
 
+# Run the example
 cubes = asyncio.run(explore_data())
 ```
 
@@ -133,11 +133,11 @@ cubes = asyncio.run(explore_data())
 ```python
 import asyncio
 import pandas as pd
-from statscan.wds.client import WDS
+from statscan.wds.client import Client
 
 async def canada_population():
     """Get population summary for Canada."""
-    client = WDS()
+    client = Client()
     
     # Canada population cube (provinces and territories)
     product_id = 98100001
@@ -167,6 +167,7 @@ async def canada_population():
     except Exception as e:
         print(f"❌ Error: {e}")
 
+# Run the example
 df_canada = asyncio.run(canada_population())
 ```
 
@@ -175,12 +176,12 @@ df_canada = asyncio.run(canada_population())
 ```python
 import asyncio
 import pandas as pd
-from statscan.wds.client import WDS
+from statscan.wds.client import Client
 from statscan.enums.auto.province_territory import ProvinceTerritory
 
 async def municipal_data():
     """Explore municipal population datasets."""
-    client = WDS()
+    client = Client()
     
     # Municipal population cube (census subdivisions)
     product_id = 98100002
@@ -196,8 +197,7 @@ async def municipal_data():
             {'city': 'Toronto', 'province': ProvinceTerritory.ONTARIO},
             {'city': 'Montreal', 'province': ProvinceTerritory.QUEBEC},
             {'city': 'Vancouver', 'province': ProvinceTerritory.BRITISH_COLUMBIA},
-            {'city': 'Calgary', 'province': ProvinceTerritory.ALBERTA},
-            {'city': 'Saugeen Shores', 'province': ProvinceTerritory.ONTARIO}
+            {'city': 'Calgary', 'province': ProvinceTerritory.ALBERTA}
         ]
         
         city_data = []
@@ -216,6 +216,7 @@ async def municipal_data():
         print(df.to_string(index=False))
         return df
 
+# Run the example
 df_cities = asyncio.run(municipal_data())
 ```
 
@@ -248,51 +249,37 @@ print(f"  Ontario Code: {ontario.value} ({ontario.name})")
 print(f"  Quebec Code:  {quebec.value} ({quebec.name})")
 ```
 
-### ⚡ **Advanced WDS API Usage**
+### ⚡ **Advanced API Usage**
 
 ```python
 import asyncio
-from statscan.wds.client import WDS
+from statscan.wds.client import Client
 
-async def advanced_wds_usage():
+async def advanced_api_usage():
     """Demonstrate advanced WDS API capabilities."""
-    client = WDS()
+    client = Client()
     
     try:
-        # 1. Get cube metadata (when POST endpoints are available)
-        print("🔍 Advanced WDS API Features:")
-        
-        # 2. Explore available code sets
-        print("📝 Getting code sets...")
-        try:
-            # This requires POST endpoint recovery
-            # code_sets = await client.get_code_sets()
-            # print(f"Available code sets: {len(code_sets)}")
-            print("Code sets available when POST endpoints recover")
-        except Exception as e:
-            print(f"Code sets: {e}")
-        
-        # 3. Get series data (when POST endpoints are available) 
-        print("📊 Data extraction capabilities:")
-        print("- get_series_info_from_cube_pid_coord() - Extract specific data series")
-        print("- get_data_from_cube_pid_coord_and_latest_n_periods() - Time series data")
-        print("- get_cube_metadata() - Full cube structure and dimensions")
-        
-        # 4. Show available cubes with focus on census data
+        # Show available cubes with focus on census data
         cubes = await client.get_all_cubes_list()
         census_cubes = [c for c in cubes 
                        if c.productId >= 98100000 and c.productId < 99000000]
         
-        print(f"\n📋 Census 2021 Data Cubes ({len(census_cubes)} available):")
+        print(f"📊 Total available datasets: {len(cubes)}")
+        print(f"📋 Census 2021 Data Cubes: {len(census_cubes)}")
+        print(f"\n🔝 Featured Census Datasets:")
+        
         for cube in census_cubes[:10]:  # Show first 10
             print(f"  {cube.productId}: {cube.cubeTitleEn[:60]}...")
             
         return census_cubes
         
     except Exception as e:
-        print(f"❌ Error in advanced usage: {e}")
+        print(f"❌ Error in API usage: {e}")
+        return []
 
-census_data = asyncio.run(advanced_wds_usage())
+# Run the example
+census_data = asyncio.run(advanced_api_usage())
 ```
 
 ## 🎯 Core WDS API Endpoints
@@ -427,7 +414,7 @@ statscan/                           # 📦 Main Package
 
 ### WDS Client (Primary)
 
-**`WDS()`** - Main async client for Statistics Canada Web Data Service
+**`Client()`** - Main async client for Statistics Canada Web Data Service
 
 **Data Discovery Methods:**
 - `get_all_cubes_list()` - Browse all available datasets

@@ -1,0 +1,251 @@
+name: Update Changelog on Dev Branch
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [ "dev" ]
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  check-changes:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    outputs:
+      has-package-changes: ${{ steps.check.outputs.has_changes }}
+      skip-changelog: ${{ steps.check.outputs.skip }}
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: Check if PR contains package changes
+      id: check
+      env:
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+      run: |
+        echo "Checking PR #$PR_NUMBER for package-relevant changes"
+        
+        # Get list of changed files in this PR
+        CHANGED_FILES=$(gh pr view $PR_NUMBER --json files --jq '.files[].path')
+        
+        echo "Changed files:"
+        echo "$CHANGED_FILES"
+        
+        # Define patterns for package-relevant changes
+        PACKAGE_PATTERNS=(
+          "^statscan/"
+          "^pyproject.toml$"
+          "^setup.py$"
+          "^requirements.*\.txt$"
+          "^README.md$"
+          "^LICENSE$"
+        )
+        
+        # Define patterns to skip (infrastructure/tooling only)
+        SKIP_PATTERNS=(
+          "^\.github/"
+          "^docs/"
+          "^tests/.*\.py$"
+          "^tools/"
+          "^examples/"
+          "^scratch/"
+          "\.md$"
+          "\.yml$"
+          "\.yaml$"
+        )
+        
+        HAS_PACKAGE_CHANGES=false
+        HAS_ONLY_SKIP_CHANGES=true
+        
+        # Check each changed file
+        while IFS= read -r file; do
+          if [ -z "$file" ]; then
+            continue
+          fi
+          
+          echo "Checking file: $file"
+          
+          # Check if file matches package patterns
+          for pattern in "${PACKAGE_PATTERNS[@]}"; do
+            if [[ "$file" =~ $pattern ]]; then
+              echo "  ✅ Matches package pattern: $pattern"
+              HAS_PACKAGE_CHANGES=true
+              HAS_ONLY_SKIP_CHANGES=false
+              break
+            fi
+          done
+          
+          # Check if file should be skipped for changelog
+          SHOULD_SKIP=false
+          for pattern in "${SKIP_PATTERNS[@]}"; do
+            if [[ "$file" =~ $pattern ]]; then
+              echo "  ⏭️  Matches skip pattern: $pattern"
+              SHOULD_SKIP=true
+              break
+            fi
+          done
+          
+          # If file doesn't match skip patterns, it's potentially relevant
+          if [ "$SHOULD_SKIP" = false ]; then
+            HAS_ONLY_SKIP_CHANGES=false
+          fi
+          
+        done <<< "$CHANGED_FILES"
+        
+        echo "Analysis results:"
+        echo "  HAS_PACKAGE_CHANGES: $HAS_PACKAGE_CHANGES"
+        echo "  HAS_ONLY_SKIP_CHANGES: $HAS_ONLY_SKIP_CHANGES"
+        
+        if [ "$HAS_PACKAGE_CHANGES" = true ]; then
+          echo "✅ PR contains package changes - changelog update recommended"
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+          echo "skip=false" >> $GITHUB_OUTPUT
+        elif [ "$HAS_ONLY_SKIP_CHANGES" = true ]; then
+          echo "⏭️  PR contains only infrastructure changes - skipping changelog"
+          echo "has_changes=false" >> $GITHUB_OUTPUT
+          echo "skip=true" >> $GITHUB_OUTPUT
+        else
+          echo "❓ PR contains mixed changes - updating changelog to be safe"
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+          echo "skip=false" >> $GITHUB_OUTPUT
+        fi
+      env:
+        GH_TOKEN: ${{ github.token }}
+
+  update-changelog:
+    needs: check-changes
+    if: needs.check-changes.outputs.skip-changelog == 'false'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Generate App Token
+      id: app-token
+      uses: actions/create-github-app-token@v1
+      with:
+        app-id: ${{ secrets.CHANGELOG_BOT_APP_ID }}
+        private-key: ${{ secrets.CHANGELOG_BOT_PRIVATE_KEY }}
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ steps.app-token.outputs.token }}
+        fetch-depth: 0
+
+    - name: Configure Git
+      run: |
+        git config user.name "seawall-changelog-bot[bot]"
+        git config user.email "seawall-changelog-bot[bot]@users.noreply.github.com"
+
+    - name: Check for changes and update via GitHub API
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ steps.app-token.outputs.token }}
+        script: |
+          const fs = require('fs');
+          const path = require('path');
+          
+          // Get PR information
+          const prNumber = context.payload.pull_request.number;
+          const prTitle = context.payload.pull_request.title;
+          const prAuthor = context.payload.pull_request.user.login;
+          const prUrl = context.payload.pull_request.html_url;
+          const mergedAt = context.payload.pull_request.merged_at;
+          const mergeDate = new Date(mergedAt).toISOString().split('T')[0];
+          
+          console.log(`Processing PR #${prNumber}: ${prTitle}`);
+          console.log(`Author: ${prAuthor}`);
+          console.log(`Merged: ${mergeDate}`);
+          
+          // Read current changelog
+          const changelogPath = 'CHANGELOG.md';
+          let changelogContent = '';
+          let changelogSha = '';
+          
+          try {
+            const response = await github.rest.repos.getContent({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              path: changelogPath,
+            });
+            
+            changelogContent = Buffer.from(response.data.content, 'base64').toString('utf8');
+            changelogSha = response.data.sha;
+            console.log('✅ Successfully read existing changelog');
+          } catch (error) {
+            console.log('📝 No existing changelog found, creating new one');
+            changelogContent = `# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+`;
+          }
+          
+          // Create changelog entry
+          const changelogEntry = `- ${prTitle} ([#${prNumber}](${prUrl})) by @${prAuthor}`;
+          
+          // Check if entry already exists
+          if (changelogContent.includes(`[#${prNumber}]`)) {
+            console.log(`⏭️  Entry for PR #${prNumber} already exists in changelog`);
+            return;
+          }
+          
+          // Find the [Unreleased] section and add the entry
+          const unreleasedRegex = /(## \[Unreleased\]\s*\n)([\s\S]*?)(?=\n## |\n$|$)/;
+          const match = changelogContent.match(unreleasedRegex);
+          
+          if (match) {
+            const beforeUnreleased = changelogContent.substring(0, match.index + match[1].length);
+            const unreleasedContent = match[2];
+            const afterUnreleased = changelogContent.substring(match.index + match[0].length);
+            
+            // Add new entry at the top of unreleased section
+            const newUnreleasedContent = unreleasedContent.trim() ? 
+              `${changelogEntry}\n${unreleasedContent}` : 
+              `${changelogEntry}\n`;
+            
+            const newChangelogContent = beforeUnreleased + newUnreleasedContent + afterUnreleased;
+            
+            // Update changelog via GitHub API
+            try {
+              await github.rest.repos.createOrUpdateFileContents({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                path: changelogPath,
+                message: `📝 Add PR #${prNumber} to changelog
+
+${changelogEntry}
+
+[skip ci]`,
+                content: Buffer.from(newChangelogContent).toString('base64'),
+                sha: changelogSha,
+                branch: context.ref.replace('refs/heads/', ''),
+              });
+              
+              console.log('✅ Successfully updated changelog');
+            } catch (error) {
+              console.error('❌ Failed to update changelog:', error);
+              throw error;
+            }
+          } else {
+            console.error('❌ Could not find [Unreleased] section in changelog');
+            throw new Error('Invalid changelog format');
+          }
+
+  skip-changelog:
+    needs: check-changes
+    if: needs.check-changes.outputs.skip-changelog == 'true'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Log skip reason
+      run: |
+        echo "⏭️  Skipping changelog update for PR #${{ github.event.pull_request.number }}"
+        echo "Reason: PR contains only infrastructure/tooling changes"
+        echo "Changed files are not relevant to package functionality"
