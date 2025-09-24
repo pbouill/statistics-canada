@@ -525,6 +525,7 @@ from typing import Any                                          # ✅ CORRECT
 3. **Validate Current Status**: Check phase implementation status (🟢 Active, 🟠 Ready, 🔵 Proposed) before making changes
 4. **Update Documentation**: When implementing new systems, update BOTH code AND visual documentation
 5. **Cross-Reference Files**: Ensure Mermaid diagrams reflect actual workflow filenames and current architecture
+6. **🚨 CRITICAL - Verify Implementation Details**: Always cross-check Mermaid diagrams against actual workflow file contents - job names, stage descriptions, Python versions, and logic must match exactly
 
 ### **Documentation Update Triggers**
 **⚡ IMMEDIATE UPDATE REQUIRED** when changes involve:
@@ -547,8 +548,9 @@ from typing import Any                                          # ✅ CORRECT
 1. **Update Implementation Status**: Change phase indicators (🔵 → 🟠 → 🟢) as appropriate
 2. **Document Decisions**: Add rationale for architectural choices to maintain context
 3. **Update Visual Charts**: Ensure Mermaid diagrams reflect current implementation
-4. **Note Testing Status**: Update testing framework and validation procedures
-5. **Flag Dependencies**: Highlight any prerequisite steps for future phases
+4. **🚨 Validate Diagram Accuracy**: Cross-check all Mermaid stage descriptions, job names, and technical details against actual workflow file contents
+5. **Note Testing Status**: Update testing framework and validation procedures
+6. **Flag Dependencies**: Highlight any prerequisite steps for future phases
 
 ## 🤖 **ADVANCED CHANGELOG AUTOMATION SYSTEM**
 
