@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+* 📚 Major README Update: WDS-Focused Documentation with Comprehensive Examples (#10) @pbouill
+
 * 🔬 Final Test: API-based Workflow with GitHub App Auth (#9) @pbouill
 
 * Add enhanced statistics filter and expanded enums for census data (#1) @pbouill
