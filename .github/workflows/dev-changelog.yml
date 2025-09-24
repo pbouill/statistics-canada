@@ -1,0 +1,72 @@
+name: Update Changelog (Dev)
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [dev]
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  update-changelog:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Configure Git
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        
+    - name: Update CHANGELOG.md
+      run: |
+        chmod +x .github/scripts/update_changelog.sh
+        .github/scripts/update_changelog.sh "${{ github.event.pull_request.number }}" "${{ github.event.pull_request.title }}" "${{ github.event.pull_request.user.login }}"
+        
+    - name: Check for changes and commit
+      run: |
+        if git diff --quiet CHANGELOG.md; then
+          echo "No changes to CHANGELOG.md"
+        else
+          echo "Changes detected in CHANGELOG.md"
+          git add CHANGELOG.md
+          git commit -m "📝 Add PR #${{ github.event.pull_request.number }} to changelog
+
+          - ${{ github.event.pull_request.title }}
+          
+          Co-authored-by: ${{ github.event.pull_request.user.login }} <${{ github.event.pull_request.user.login }}@users.noreply.github.com>"
+          
+          # Pull latest changes before pushing to avoid race conditions
+          echo "Pulling latest changes to avoid conflicts..."
+          git pull --rebase origin dev
+          
+          echo "Pushing changelog updates to dev branch..."
+          git push origin dev
+          echo "CHANGELOG.md updated and pushed to dev"
+        fi
+        
+    - name: Add comment to PR
+      if: success()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const { owner, repo } = context.repo;
+          const prNumber = context.payload.pull_request.number;
+          
+          await github.rest.issues.createComment({
+            owner,
+            repo,
+            issue_number: prNumber,
+            body: `📝 **Changelog Updated on Dev Branch!**
+            
+            This PR has been automatically added to the [CHANGELOG.md](https://github.com/${owner}/${repo}/blob/dev/CHANGELOG.md) file on the \`dev\` branch.
+            
+            The entry will be included in the next release when \`dev\` is merged to \`main\`. 🚀`
+          });
