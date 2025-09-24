@@ -16,13 +16,17 @@ This guide sets up a GitHub App for changelog automation that can work across mu
    - **Homepage URL**: `https://github.com/pbouill` (your profile URL)
    - **Webhook**: Uncheck "Active" (we don't need webhooks)
 
-3. **Configure Permissions**:
+3. **Configure Permissions** (Fine-grained Security):
    - **Repository permissions**:
-     - ✅ **Contents**: `Write` (to modify CHANGELOG.md)
-     - ✅ **Pull requests**: `Read` (to read PR information)
-     - ✅ **Metadata**: `Read` (required by GitHub)
+     - ✅ **Contents**: `Write` (to modify changelog files)
+       - **File-specific access**: Restrict to `CHANGELOG.md` and `changelog.md` files only
+       - This is much more secure than full repository write access
+     - ✅ **Pull requests**: `Read` (to read PR information for changelog entries)
+     - ✅ **Metadata**: `Read` (required by GitHub for basic repository information)
    - **Organization permissions**: Leave all as "No access"
    - **Account permissions**: Leave all as "No access"
+   
+   **Security Note**: By restricting Contents access to only changelog files, the app cannot modify any other repository content, making it much safer than broad repository access.
 
 4. **Where can this GitHub App be installed?**:
    - Select "Only on this account" (or "Any account" if you want to use it for other organizations)
@@ -87,11 +91,21 @@ The generic workflow can be copied to any repository with the same two secrets:
 Before testing, verify:
 
 - [ ] GitHub App created with name `changelog-bot-pbouill` (or similar)
-- [ ] App has **Contents: Write** and **Pull requests: Read** permissions
+- [ ] App has **Contents: Write** permission (restricted to changelog files only)
+- [ ] App has **Pull requests: Read** permission  
+- [ ] App has **Metadata: Read** permission (required by GitHub)
 - [ ] App is installed on target repositories
 - [ ] `CHANGELOG_BOT_APP_ID` secret added to each repository
 - [ ] `CHANGELOG_BOT_PRIVATE_KEY` secret added to each repository (full `.pem` file contents)
 - [ ] Workflow file references correct secret names
+
+## Security Validation
+
+With file-specific permissions, verify:
+- [ ] App can only access `CHANGELOG.md` and `changelog.md` files
+- [ ] App cannot access other repository files (source code, configs, etc.)
+- [ ] App has minimal necessary permissions for changelog automation
+- [ ] Branch protection bypass works only for changelog file changes
 
 ## Step 6: Test Setup
 
