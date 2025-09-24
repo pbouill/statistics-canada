@@ -1,7 +1,7 @@
-# GitHub App Setup for Changelog Automation
+# Generic GitHub App Setup for Multi-Repository Changelog Automation
 
 ## Overview
-This guide sets up a GitHub App specifically for changelog automation that can bypass branch protection rules on the `dev` branch.
+This guide sets up a GitHub App for changelog automation that can work across multiple repositories and bypass branch protection rules on development branches.
 
 ## Step 1: Create GitHub App
 
@@ -11,9 +11,9 @@ This guide sets up a GitHub App specifically for changelog automation that can b
 
 2. **Create New GitHub App**:
    - Click "New GitHub App"
-   - **GitHub App name**: `changelog-bot-statistics-canada` (must be globally unique)
-   - **Description**: `Automated changelog updates for statistics-canada repository`
-   - **Homepage URL**: `https://github.com/pbouill/statistics-canada`
+   - **GitHub App name**: `changelog-bot-pbouill` (must be globally unique - use your username)
+   - **Description**: `Multi-repository automated changelog updates`
+   - **Homepage URL**: `https://github.com/pbouill` (your profile URL)
    - **Webhook**: Uncheck "Active" (we don't need webhooks)
 
 3. **Configure Permissions**:
@@ -25,27 +25,31 @@ This guide sets up a GitHub App specifically for changelog automation that can b
    - **Account permissions**: Leave all as "No access"
 
 4. **Where can this GitHub App be installed?**:
-   - Select "Only on this account"
+   - Select "Only on this account" (or "Any account" if you want to use it for other organizations)
 
 5. **Create the App**:
    - Click "Create GitHub App"
-   - **Save the App ID** - you'll need this for `CHANGELOG_APP_ID`
+   - **Save the App ID** - you'll need this for `CHANGELOG_BOT_APP_ID`
 
 ## Step 2: Generate Private Key
 
 1. **In your new GitHub App page**:
    - Scroll down to "Private keys"
    - Click "Generate a private key"
-   - **Download and save the `.pem` file** - you'll need this for `CHANGELOG_APP_PRIVATE_KEY`
+   - **Download and save the `.pem` file** - you'll need this for `CHANGELOG_BOT_PRIVATE_KEY`
 
-## Step 3: Install App on Repository
+## Step 3: Install App on Repositories
 
 1. **Install the App**:
    - In your GitHub App page, click "Install App" in the left sidebar
    - Click "Install" next to your account name
-   - Select "Only select repositories"
-   - Choose **statistics-canada** repository
+   - Select "All repositories" (recommended for multi-repo use) OR "Only select repositories"
+   - If selecting specific repositories, choose the ones where you want changelog automation
    - Click "Install"
+
+2. **For Multiple Repositories**:
+   - You can add more repositories later by going to the App's installation page
+   - Navigate to Settings → Applications → Installed GitHub Apps → Configure next to your app
 
 ## Step 4: Add Secrets to Repository
 
@@ -55,26 +59,39 @@ This guide sets up a GitHub App specifically for changelog automation that can b
 
 2. **Add App ID Secret**:
    - Click "New repository secret"
-   - **Name**: `CHANGELOG_APP_ID`
+   - **Name**: `CHANGELOG_BOT_APP_ID`
    - **Secret**: Paste the App ID from Step 1.5
    - Click "Add secret"
 
 3. **Add Private Key Secret**:
    - Click "New repository secret"
-   - **Name**: `CHANGELOG_APP_PRIVATE_KEY`
+   - **Name**: `CHANGELOG_BOT_PRIVATE_KEY`
    - **Secret**: Open the `.pem` file from Step 2.2 and paste the ENTIRE contents (including `-----BEGIN RSA PRIVATE KEY-----` and `-----END RSA PRIVATE KEY-----`)
    - Click "Add secret"
 
-## Step 5: Verification Checklist
+## Step 5: Copy Workflow to Other Repositories
+
+The generic workflow can be copied to any repository with the same two secrets:
+
+1. **Copy the workflow file**: `.github/workflows/dev-changelog.yml` (or rename to `changelog.yml`)
+2. **Add the same two secrets** to each repository:
+   - `CHANGELOG_BOT_APP_ID`
+   - `CHANGELOG_BOT_PRIVATE_KEY`
+3. **Optionally customize** the workflow environment variables for each repo:
+   - `CHANGELOG_FILE`: Default is `CHANGELOG.md`
+   - `CHANGELOG_SCRIPT`: Custom script path if you have one
+   - Target branches: Add/remove branches in the `on.pull_request.branches` list
+
+## Step 6: Verification Checklist
 
 Before testing, verify:
 
-- [ ] GitHub App created with name `changelog-bot-statistics-canada`
+- [ ] GitHub App created with name `changelog-bot-pbouill` (or similar)
 - [ ] App has **Contents: Write** and **Pull requests: Read** permissions
-- [ ] App is installed on `statistics-canada` repository only
-- [ ] `CHANGELOG_APP_ID` secret added to repository
-- [ ] `CHANGELOG_APP_PRIVATE_KEY` secret added to repository (full `.pem` file contents)
-- [ ] Workflow file `dev-changelog.yml` references correct secret names
+- [ ] App is installed on target repositories
+- [ ] `CHANGELOG_BOT_APP_ID` secret added to each repository
+- [ ] `CHANGELOG_BOT_PRIVATE_KEY` secret added to each repository (full `.pem` file contents)
+- [ ] Workflow file references correct secret names
 
 ## Step 6: Test Setup
 
