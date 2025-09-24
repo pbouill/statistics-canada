@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+* Release: Merge dev to main for PyPI publishing (#11) @pbouill
+
 * 📚 Major README Update: WDS-Focused Documentation with Comprehensive Examples (#10) @pbouill
 
 * 📚 Major README Update: WDS-Focused Documentation with Comprehensive Examples (#10) @pbouill
