@@ -1,0 +1,1 @@
+# SDMX compatibility tests

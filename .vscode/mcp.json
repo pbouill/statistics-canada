@@ -1,0 +1,9 @@
+{
+        "servers": {
+            "statscan": {
+                "type": "stdio",
+                "command": "${workspaceFolder}/.venv/bin/python",
+                "args": ["statscan/mcp_server.py"]
+            }
+        }
+    }

@@ -17,7 +17,7 @@ from statscan.enums.geocode.pr_geocode import ProvinceGeoCode
 from statscan.enums.geocode.cd_geocode import CensusDivisionGeoCode
 from statscan.enums.geocode.cma_geocode import CensusMetropolitanAreaGeoCode
 from statscan.url import GEO_ATTR_FILE_2021_URL
-from statscan.util.data import download_data, unpack_to_dataframe
+from statscan.util.get_data import download_data, unpack_to_dataframe
 
 logger = logging.getLogger(__name__)
 

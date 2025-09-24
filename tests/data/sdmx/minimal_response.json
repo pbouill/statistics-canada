@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "name": "Test SDMX Response",
+    "version": "1.0",
+    "source": "test_fixture"
+  },
+  "data": {
+    "structure": {
+      "dimensions": [],
+      "attributes": []
+    },
+    "dataSets": []
+  },
+  "_test_metadata": {
+    "source": "minimal_fixture",
+    "description": "Basic SDMX structure for parsing tests",
+    "note": "SDMX is secondary priority - WDS API is primary"
+  }
+}

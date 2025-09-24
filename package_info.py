@@ -1,11 +1,14 @@
 # This file provides basic mappings for the build process
-from typing import Optional, Self, ClassVar, Any
+import os
+from typing import Optional, Self, ClassVar, Any, Union, get_args, get_origin
 from pathlib import Path
 from datetime import datetime, timezone
-from dataclasses import dataclass, field, fields, Field
+from dataclasses import dataclass, field, fields, asdict, Field
+from enum import StrEnum, auto
 import logging
 
-import statscan as base_pkg  # TODO: update
+import statscan as base_pkg
+
 
 _GIT_DIR_NAME: str = '.git'
 
@@ -17,31 +20,83 @@ VERSION_FILE: Path = PACKAGE_PATH / '_version.py'
 logger  = logging.getLogger(name=__name__)
 
 
-def get_git_head_ref_hash(repo_dir: Optional[Path] = None) -> tuple[str, str]:
+class GitHubActionEnvVars(StrEnum):
     '''
-    Get the current git commit hash and reference.
-    Args:
-        repo_dir (Path): The path to the git repository. If None, uses the current directory.
-    Returns:
-        tuple: A tuple containing the reference and commit hash.
+    Environment variables used in GitHub Actions.
     '''
-    repo_dir = repo_dir or PACKAGE_PATH.parent
-    git_path = repo_dir / _GIT_DIR_NAME
-    try:
-        head_path = git_path / 'HEAD'
-        with head_path.open() as f:
-            ref: str = f.read().strip().split(' ')[-1]
-    except FileNotFoundError:
-        raise FileNotFoundError(f"Git repository not found in {head_path.resolve()}. Please ensure you are in a valid git repository.")
-    try:
-        ref_path = git_path / ref
-        with ref_path.open() as f:
-            commit_hash: str = f.read().strip()
-    except FileNotFoundError:
-        raise FileNotFoundError(f"Git reference not found in {ref_path.resolve()}. Please ensure you are in a valid git repository.")
-    return ref, commit_hash
 
-def get_git_head_hash(repo_dir: Optional[Path] = None) -> str:
+    @staticmethod
+    def _generate_next_value_(name: str, start: int, count: int, last_values: list[Any]) -> str:
+        return name.upper()
+
+    GITHUB_REPOSITORY = auto()  # The owner and repository name. For example, octocat/Hello-World.
+    GITHUB_SHA = auto()  # The commit SHA that triggered the workflow.
+    GITHUB_REF = auto()  # The branch or tag ref that triggered the workflow.
+    GITHUB_WORKFLOW = auto()  # The name of the workflow.
+    GITHUB_ACTOR = auto()  # The name of the person or app that initiated the workflow.
+    GITHUB_WORKSPACE = auto()  # The GitHub workspace directory path.
+
+    @property
+    def env_value(self) -> Optional[str]:
+        '''
+        Get the value of the environment variable.
+        Returns:
+            str: The value of the environment variable.
+        '''
+        return os.getenv(self.value)
+
+
+def print_dir_contents(path: Path, level: int = 0, max_level: int = 1) -> None:
+    '''
+    Print the contents of a directory.
+    Args:
+        path (Path): The path to the directory.
+        level (int): The current level of recursion.
+    '''
+    print(f'{"  " * level}{path}/')
+    for item in path.iterdir():
+        if item.is_dir():
+            if level >= max_level:
+                print(f'{"  " * (level + 1)}- {item.name}/ (max level reached)')
+                continue
+            else:
+                print_dir_contents(item, level + 1, max_level)
+                continue
+        else:
+            print(f'{"  " * (level + 1)}- {item.name} ({item.stat().st_size} bytes)')
+            continue
+
+def get_head_ref_path(git_path: Optional[Path] = None) -> Path:
+    '''
+    Get the current git HEAD reference.
+    Args:
+        git_path (Path): The path to the git repository. If None, uses the current directory.
+    Returns:
+        str: The current git HEAD reference.
+    '''
+    git_path = git_path or (PACKAGE_PATH.parent / _GIT_DIR_NAME)
+    head_path = git_path / 'HEAD'
+    
+    if not head_path.exists():
+        raise FileNotFoundError(f'HEAD file path "{head_path.resolve()}" not found. Please ensure you are in a valid git repository.')
+
+    ref: Optional[str] = None
+    with head_path.open() as f:
+        for l in f.readlines():
+            if l.startswith('ref:'):
+                # Extract the reference path from the line
+                ref = l.split(':', 1)[1].strip()
+                break
+    if ref is None:
+        raise ValueError(f'No reference found in HEAD file at {head_path.resolve()}.')
+    
+    ref_path = git_path / ref
+    if not ref_path.exists():
+        raise FileNotFoundError(f'Reference file "{ref_path.resolve()}" not found. Please ensure the reference exists in the git repository.')
+
+    return ref_path
+
+def get_commit_hash(repo_path: Optional[Path] = None) -> str:
     '''
     Get the current git commit hash.
     Args:
@@ -49,31 +104,27 @@ def get_git_head_hash(repo_dir: Optional[Path] = None) -> str:
     Returns:
         str: The current git commit hash.
     '''
-    return get_git_head_ref_hash(repo_dir=repo_dir)[1]
+    repo_path = repo_path or PACKAGE_PATH.parent
+    git_path = repo_path / _GIT_DIR_NAME
 
-def create_version_info() -> dict[str, Any]:
-    '''
-    Get the version number and build metadata.
-    Returns:
-        dict: A dictionary of name-value pairs containing the version number and build metadata.
-    '''
-    version_time: datetime = datetime.now(tz=timezone.utc)
-    return {
-        '__version__': f'{version_time.year}.{version_time.month}.{version_time.day}.{version_time.hour:02d}{version_time.minute:02d}{version_time.second:02d}',
-        '__build_time__': version_time,
-        '__commit__': get_git_head_ref_hash(),
-    }
+    if not git_path.exists():
+        raise FileNotFoundError(f"Git repository not found in {git_path.resolve()}. Please ensure you are in a valid git repository.")
+    
+    git_ref_path = get_head_ref_path(git_path=git_path)
+
+    with git_ref_path.open() as f:
+        return f.read().strip()
 
 @dataclass
 class VersionInfo:
     SUPPORTED_TYPES: ClassVar = (int, float, str, bool)
     package_name: str = PACKAGE_NAME
-    build_time: datetime = field(default_factory=lambda: datetime.now(tz=timezone.utc))
-    commit: str = field(default_factory=get_git_head_hash)
+    build_time: Optional[datetime] = field(default_factory=lambda: datetime.now(tz=timezone.utc))
+    commit: Optional[str] = field(default_factory=lambda: GitHubActionEnvVars.GITHUB_SHA.env_value or get_commit_hash())
 
     @property  # type: ignore[no-redef]
-    def version(self) -> str:
-        return self.version_str_from_datetime(self.build_time)
+    def version(self) -> Optional[str]:
+        return self.version_str_from_datetime(dt=self.build_time) if self.build_time else None
 
     @classmethod
     def version_str_from_datetime(cls, dt: datetime) -> str:
@@ -87,14 +138,9 @@ class VersionInfo:
         '''
         file_path = file_path or VERSION_FILE
         kwargs: dict[str, Any] = {}
-        kwargs['package_name'] = file_path.parent.name
+
         cls_fields: dict[str, Field] = {f.name: f for f in fields(cls)}
-        
-        # Set package_name from parent directory
-        kwargs['package_name'] = file_path.parent.name
-        # Track which fields we've found in the file
-        found_fields = {'package_name'}  # package_name is always set from file path
-        
+
         with file_path.open(mode="r") as f:
             for line in f:
                 if line.startswith("#"):
@@ -117,43 +163,41 @@ class VersionInfo:
                     key = key_type[0]
                     
                 key = key.strip()
-                # Remove prefix and suffix __ if present
+
                 if key.startswith('__') and key.endswith('__'):
                     key = key[2:-2]
-                if key == 'version':  # just a property, derived from build_time
-                    continue
                     
                 if (fld := cls_fields.get(key, None)) is not None:
                     value: Any
                     value_str = value_str.split("#")[0].strip().replace("'", "").replace('"', "")
-                    if not isinstance((fld_type := fld.type), type):
-                        raise TypeError(f"Field {key} is not a type. {fld_type=}. {value_str=}")
-                    elif fld_type is datetime:
-                        try:
-                            value = datetime.fromisoformat(value_str)
-                            kwargs[key] = value
-                            found_fields.add(key)
-                        except ValueError:
-                            raise ValueError(f"Invalid datetime format for key {key}: {value_str}")
+                    
+                    # check if the field type is a union
+                    if get_origin(fld.type) is Union:
+                        # If it's a Union, we need to check the types inside it
+                        fld_types = get_args(fld.type)
                     else:
-                        if (fld_type != v_type) and (v_type is not None):
-                            logger.warning(f"Type mismatch for key {key}. Expected {fld.type}, got {v_type}. {value_str=}")
-                        try:
-                            value = fld_type(value_str)
-                            kwargs[key] = value
-                            found_fields.add(key)
-                        except (ValueError, TypeError) as e:
-                            raise ValueError(f"Cannot convert value '{value_str}' to {fld_type.__name__} for field {key}: {e}")
-                else:
-                    logger.warning(f"Key {key} not found in {cls.__name__}. {value_str}")
-        
-        # Check that all required fields were found
-        required_fields = {f.name for f in fields(cls)}
-        missing_fields = required_fields - found_fields
-        if missing_fields:
-            raise ValueError(f"Missing required fields in version file {file_path}: {missing_fields}")
-        
-        return cls(**kwargs)
+                        fld_types = (fld.type,)
+                    if v_type is not None:
+                        if v_type in cls.SUPPORTED_TYPES:
+                            if v_type is bool:
+                                if value_str.lower() in ('true', '1'):
+                                    value = True
+                                elif value_str.lower() in ('false', '0'):
+                                    value = False
+                                else:
+                                    raise ValueError(f"Invalid boolean value for key {key}: {value_str}")
+                            else:
+                                value = v_type(value_str)
+                        else:
+                            raise TypeError(f"Unsupported type {v_type} for key {key}. Supported types are: {cls.SUPPORTED_TYPES}")
+                    
+                    if v_type in fld_types:
+                        kwargs[key] = value
+                        continue
+                    elif (datetime in fld_types) and isinstance(value, str):
+                        kwargs[key] = datetime.fromisoformat(value)
+                        continue
+        return cls(package_name=file_path.parent.name, **kwargs)
 
     
     def write_version_file(self, file_path: Optional[Path] = None) -> Path:
@@ -167,14 +211,18 @@ class VersionInfo:
             for fld in fields(self):
                 if fld.name == 'package_name':  # package name is derived from the version file path
                     continue
-                if not isinstance(fld_type := fld.type, type):
-                    raise TypeError(f"Field {fld.name} is not a type. {fld_type=}")
                 v = getattr(self, fld.name)
                 if isinstance(v, datetime):
                     v = v.isoformat()
-                f.write(f"__{fld.name}__: {type(v).__name__} = '{str(v)}'\n")
+                if isinstance(v, self.SUPPORTED_TYPES):
+                    f.write(f"__{fld.name}__: {type(v).__name__} = '{str(v)}'\n")
+                else:
+                    f.write(f' # {fld.name}: {fld.type} = {v}\n')
         return file_path
     
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
     @classmethod
     def update_version_file(cls, file_path: Optional[Path] = None) -> tuple[bool, Self, Path]:
         '''
@@ -205,13 +253,14 @@ if __name__ == '__main__':
     print(f'Version: {VERSION}')
     if VERSION_FILE.exists():
         print(f'Version File: {VERSION_FILE}')
-        VersionInfo.update_version_file(file_path=VERSION_FILE)
         updated, vi, fp = VersionInfo.update_version_file(file_path=VERSION_FILE)
         if updated:
             print(f'Updated Version File: {fp}')
         else:
             print(f'Version File is up to date: {fp}')
     else:
+        print(f'Version File does not exist: {VERSION_FILE}. Creating new version file.')
         vi = VersionInfo()
+        vi.write_version_file()
     print(vi)
     

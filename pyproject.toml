@@ -37,16 +37,24 @@ dynamic = [
 "Homepage" = "https://github.com/pbouill/statistics-canada"
 "Repository" = "https://github.com/pbouill/statistics-canada.git"
 "Bug Tracker" = "https://github.com/pbouill/statistics-canada/issues"
-
-# Define the extras here. Users install `process[feature]`
-# [project.optional-dependencies]  # TODO: update
-# numpy = ["numpy"] 
-# all = [
-#     "statistics-canada[numpy]",
-# ]
+"Changelog" = "https://github.com/pbouill/statistics-canada/blob/main/CHANGELOG.md"
 
 [tool.setuptools.package-data]
 "*" = ["*.html", "*.css", "*.ico", "*.js"]
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
+
+[tool.pytest.ini_options]
+markers = [
+    "dependency: tests that require network or external dependencies",
+    "network: tests that make live network calls to generate fixtures",
+    "mock: tests that use mocked responses instead of live API calls",
+    "slow: tests that take a long time to run"
+]
+# Configure pytest-asyncio to use session-scoped event loops
+# This allows session-scoped async fixtures to work properly
+asyncio_default_fixture_loop_scope = "session"
+asyncio_default_test_loop_scope = "session"
+
+# Network tests are automatically prioritized by pytest_collection_modifyitems hook
