@@ -1,3 +1,0 @@
-# GitHub App Changelog Test
-This file was created to test the GitHub App changelog automation.
-Timestamp: Tue 23 Sep 2025 11:39:21 PM EDT

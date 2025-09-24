@@ -23,17 +23,6 @@ jobs:
     name: "PR Status Summary"
     runs-on: ubuntu-latest
     needs: quality-assurance  
-    if: always()
-    
+     # DEPRECATED: This workflow is replaced by pr-dev.yml and release-pipeline.yml
+     # This file is archived and no longer used. All PR checks are now handled by pr-dev.yml and release-pipeline.yml.
     steps:
-      - name: PR Quality Status
-        run: |
-          echo "🔍 PR Quality Checks Complete"
-          echo "Status: ${{ needs.quality-assurance.result }}"
-          
-          if [[ "${{ needs.quality-assurance.result }}" == "success" ]]; then
-            echo "✅ All quality checks passed - PR ready for review"
-          else
-            echo "❌ Quality checks failed - please review the issues above"
-            exit 1
-          fi

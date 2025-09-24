@@ -1,0 +1,12 @@
+name: PR Checks (dev)
+
+on:
+  pull_request:
+    branches:
+      - dev
+    types: [opened, synchronize, reopened]
+
+jobs:
+  qa-qc:
+    uses: ./.github/workflows/qa-qc-checks.yml
+    secrets: inherit

@@ -1,0 +1,36 @@
+name: Release Changelog Preparation
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+    # Only trigger if PR is from dev to main
+    paths:
+      - 'CHANGELOG.md'
+      - 'statscan/**'
+      - 'pyproject.toml'
+      - 'requirements*.txt'
+      - 'setup.py'
+
+jobs:
+  prepare-release-changelog:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.base.ref == 'main' && github.event.pull_request.head.ref == 'dev'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0
+      - name: Prepare release changelog
+        run: echo "Update CHANGELOG.md for release section here"
+      - name: Commit and tag changelog update
+        run: |
+          git config user.name "seawall-changelog-bot"
+          git config user.email "seawall-changelog-bot@users.noreply.github.com"
+          git add CHANGELOG.md
+          git commit -m "chore: prepare changelog for release [skip ci]"
+          TAG="changelog-release-${{ github.event.pull_request.number }}"
+          git tag "$TAG"
+          git push origin dev --tags

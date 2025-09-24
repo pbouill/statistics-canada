@@ -2,334 +2,55 @@ name: Release Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
     paths:
-      # Only trigger for actual package changes, not infrastructure
       - 'statscan/**'
       - 'pyproject.toml'
-      - 'setup.py'
       - 'requirements*.txt'
-      - 'README.md'
-      - 'LICENSE'
-
-permissions:
-  contents: write
-  id-token: write
-  actions: read
-
-# Ensure only one release pipeline runs at a time
-concurrency:
-  group: release-pipeline
-  cancel-in-progress: false
+      - 'setup.py'
 
 jobs:
-  # First job: Check if this is a changelog-only commit
-  check-changes:
-    runs-on: ubuntu-latest
-    outputs:
-      skip-pipeline: ${{ steps.check.outputs.skip }}
-      changelog-commit: ${{ steps.check.outputs.changelog_commit }}
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 2
-        
-    - name: Check if this is a changelog-only commit
-      id: check
-      run: |
-        COMMIT_MSG=$(git log -1 --pretty=format:'%s')
-        
-        if [[ "$COMMIT_MSG" == *"📝 Add PR #"* ]] || [[ "$COMMIT_MSG" == *"Release "* ]] || [[ "$COMMIT_MSG" == *"changelog"* ]]; then
-          echo "This appears to be a changelog-only commit: $COMMIT_MSG"
-          echo "skip=true" >> $GITHUB_OUTPUT
-          echo "changelog_commit=true" >> $GITHUB_OUTPUT
-        else
-          echo "This is a regular commit that should trigger release pipeline: $COMMIT_MSG"
-          echo "skip=false" >> $GITHUB_OUTPUT
-          echo "changelog_commit=false" >> $GITHUB_OUTPUT
-        fi
+  qa-qc:
+    uses: ./.github/workflows/qa-qc-checks.yml
+    secrets: inherit
+    with:
+      build-required: true
+      python-versions: '["3.11", "3.12"]'
 
-  # Second job: Build and test
-  build-and-test:
-    needs: check-changes
-    if: needs.check-changes.outputs.skip-pipeline == 'false'
-    runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.extract_version.outputs.version }}
-      tag: ${{ steps.extract_version.outputs.tag }}
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ vars.PYTHON_BUILD_VERSION || '3.11' }}
-        
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install --upgrade flake8 build wheel setuptools
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        
-    - name: Lint with flake8
-      run: |
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-        
-    - name: Build package
-      run: |
-        python -m build --no-isolation
-        
-    - name: Extract version from built package
-      id: extract_version
-      run: |
-        WHEEL_FILE=$(find dist/ -name "*.whl" | head -n 1)
-        if [ -z "$WHEEL_FILE" ]; then
-          echo "No wheel file found!"
-          exit 1
-        fi
-        
-        VERSION=$(basename "$WHEEL_FILE" | cut -d'-' -f2)
-        echo "Extracted version: $VERSION"
-        echo "version=$VERSION" >> $GITHUB_OUTPUT
-        echo "tag=v$VERSION" >> $GITHUB_OUTPUT
-        
-    - name: Store version info
-      run: |
-        echo "${{ steps.extract_version.outputs.version }}" > dist/VERSION
-        echo "${{ steps.extract_version.outputs.tag }}" > dist/TAG
-        
-    - name: Store build artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: ${{ vars.ARTIFACT_NAME || 'python-package' }}
-        path: dist/
-        retention-days: 7
-
-  # Third job: Update changelog
   prepare-changelog:
-    needs: [check-changes, build-and-test]
-    if: needs.check-changes.outputs.skip-pipeline == 'false'
+    needs: qa-qc
     runs-on: ubuntu-latest
-    outputs:
-      changelog-updated: ${{ steps.update.outputs.updated }}
     steps:
-    - name: Generate App Token
-      id: app-token
-      uses: actions/create-github-app-token@v1
-      with:
-        app-id: ${{ secrets.CHANGELOG_BOT_APP_ID }}
-        private-key: ${{ secrets.CHANGELOG_BOT_PRIVATE_KEY }}
-        
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        token: ${{ steps.app-token.outputs.token }}
-        fetch-depth: 0
-        
-    - name: Configure Git
-      run: |
-        git config user.name "seawall-changelog-bot[bot]"
-        git config user.email "seawall-changelog-bot[bot]@users.noreply.github.com"
-        
-    - name: Update changelog for release
-      id: update
-      run: |
-        VERSION="${{ needs.build-and-test.outputs.version }}"
-        RELEASE_DATE=$(date '+%Y-%m-%d')
-        
-        if [ -f "CHANGELOG.md" ]; then
-          if grep -q "## \[Unreleased\]" CHANGELOG.md; then
-            echo "Moving unreleased changes to version $VERSION"
-            
-            # Replace [Unreleased] with the actual version and date
-            sed -i "s/## \[Unreleased\]/## [$VERSION] - $RELEASE_DATE/" CHANGELOG.md
-            
-            # Add a new [Unreleased] section at the top
-            LINE_NUM=$(grep -n "## \[$VERSION\]" CHANGELOG.md | head -1 | cut -d: -f1)
-            if [ -n "$LINE_NUM" ]; then
-              sed -i "${LINE_NUM}i## [Unreleased]" CHANGELOG.md
-              sed -i "${LINE_NUM}i\\" CHANGELOG.md
-            fi
-            
-            echo "updated=true" >> $GITHUB_OUTPUT
-          else
-            echo "No unreleased section found, skipping changelog update"
-            echo "updated=false" >> $GITHUB_OUTPUT
-          fi
-        else
-          echo "No CHANGELOG.md found, skipping changelog update"
-          echo "updated=false" >> $GITHUB_OUTPUT
-        fi
-        
-    - name: Commit changelog changes
-      if: steps.update.outputs.updated == 'true'
-      run: |
-        git add CHANGELOG.md
-        git commit -m "📝 Release ${{ needs.build-and-test.outputs.version }} - Update CHANGELOG.md [skip ci]"
-        git push
+      - name: Prepare changelog
+        run: echo "Prepare changelog logic here"
 
-  # Fourth job: Publish to PyPI
   publish-to-pypi:
-    needs: [check-changes, build-and-test, prepare-changelog]
-    if: needs.check-changes.outputs.skip-pipeline == 'false'
+    needs: prepare-changelog
     runs-on: ubuntu-latest
-    environment:
-      name: pypi
-      url: https://pypi.org/p/${{ vars.PYPI_PROJECT_NAME || 'statistics-canada' }}
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-        
-    - name: Fetch build artifacts
-      uses: actions/download-artifact@v4
-      with:
-        name: ${{ vars.ARTIFACT_NAME || 'python-package' }}
-        path: dist/
-        
-    - name: Check if version already exists on PyPI
-      id: check_pypi
-      run: |
-        VERSION="${{ needs.build-and-test.outputs.version }}"
-        PACKAGE_NAME="${{ vars.PYPI_PROJECT_NAME || 'statistics-canada' }}"
-        
-        if curl -s -f "https://pypi.org/pypi/$PACKAGE_NAME/$VERSION/json" > /dev/null 2>&1; then
-          echo "Version $VERSION already exists on PyPI"
-          echo "exists=true" >> $GITHUB_OUTPUT
-        else
-          echo "Version $VERSION does not exist on PyPI"
-          echo "exists=false" >> $GITHUB_OUTPUT
-        fi
-        
-    - name: Prepare PyPI distribution files
-      if: steps.check_pypi.outputs.exists == 'false'
-      run: |
-        mkdir -p pypi-dist
-        find dist/ -type f \( -name "*.whl" -o -name "*.tar.gz" \) -exec cp {} pypi-dist/ \;
-        echo "Files prepared for PyPI upload:"
-        ls -la pypi-dist/
-        
-    - name: Publish to PyPI
-      if: steps.check_pypi.outputs.exists == 'false'
-      uses: pypa/gh-action-pypi-publish@release/v1
-      with:
-        packages-dir: pypi-dist/
-        skip-existing: true
+      - name: Publish to PyPI
+        run: echo "PyPI publish logic here"
 
-  # Fifth job: Create GitHub release
   create-github-release:
-    needs: [check-changes, build-and-test, prepare-changelog, publish-to-pypi]
-    if: needs.check-changes.outputs.skip-pipeline == 'false' && success()
+    needs: publish-to-pypi
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      
-    - name: Fetch build artifacts
-      uses: actions/download-artifact@v4
-      with:
-        name: ${{ vars.ARTIFACT_NAME || 'python-package' }}
-        path: dist/
-        
-    - name: Check if tag already exists
-      id: check_tag
-      run: |
-        TAG="${{ needs.build-and-test.outputs.tag }}"
-        if git ls-remote --tags origin | grep -q "refs/tags/$TAG$"; then
-          echo "Tag $TAG already exists"
-          echo "exists=true" >> $GITHUB_OUTPUT
-        else
-          echo "Tag $TAG does not exist"
-          echo "exists=false" >> $GITHUB_OUTPUT
-        fi
+      - name: Create GitHub Release
+        run: echo "GitHub release logic here"
 
-    # Rollback job: revert changelog update in dev if release fails
-    rollback-changelog:
-      needs: [prepare-changelog, publish-to-pypi, create-github-release]
-      if: failure()
-      runs-on: ubuntu-latest
-      steps:
-      - name: Checkout dev branch
-        uses: actions/checkout@v4
-        with:
-          ref: dev
-          fetch-depth: 0
-      - name: Revert changelog update
-        run: |
-          # Find the last changelog update commit (tagged by dev-changelog.yml)
-          TAG=$(git tag --list 'changelog-update-*' | tail -n 1)
-          if [ -n "$TAG" ]; then
-            git revert $TAG --no-edit
-            git push origin dev
-          else
-            echo "No changelog update tag found, skipping revert."
-          fi
+  rollback-changelog:
+    if: failure()
+    needs: [prepare-changelog, publish-to-pypi, create-github-release]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Rollback changelog update
+        run: echo "Rollback changelog logic here"
 
-    # Rollback job: revert main branch changes if release fails
-    rollback-main:
-      needs: [publish-to-pypi, create-github-release]
-      if: failure()
-      runs-on: ubuntu-latest
-      steps:
-      - name: Checkout main branch
-        uses: actions/checkout@v4
-        with:
-          ref: main
-          fetch-depth: 0
-      - name: Revert last commit on main
-        run: |
-          git revert HEAD --no-edit
-          git push origin main
-        
-    - name: Generate release notes from changelog
-      id: release_notes
-      run: |
-        VERSION="${{ needs.build-and-test.outputs.version }}"
-        
-        if [ -f "CHANGELOG.md" ] && grep -q "## \[$VERSION\]" CHANGELOG.md; then
-          echo "Extracting release notes from CHANGELOG.md"
-          
-          NOTES=$(awk "
-            /^## \[$VERSION\]/ { capture=1; next }
-            /^## / && capture { exit }
-            capture && NF > 0 { print }
-          " CHANGELOG.md)
-          
-          if [ -n "$NOTES" ]; then
-            echo "Found release notes in changelog"
-            echo "notes<<EOF" >> $GITHUB_OUTPUT
-            echo "$NOTES" >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
-          else
-            echo "No release notes found for version $VERSION"
-            echo "notes=* Package version $VERSION published to PyPI" >> $GITHUB_OUTPUT
-          fi
-        else
-          echo "No changelog found or version section missing"
-          echo "notes=* Package version $VERSION published to PyPI" >> $GITHUB_OUTPUT
-        fi
-        
-    - name: Create GitHub Release
-      if: steps.check_tag.outputs.exists == 'false'
-      uses: softprops/action-gh-release@v2
-      with:
-        tag_name: ${{ needs.build-and-test.outputs.tag }}
-        name: Release ${{ needs.build-and-test.outputs.tag }}
-        body: |
-          ## Release ${{ needs.build-and-test.outputs.version }}
-          
-          ${{ steps.release_notes.outputs.notes }}
-          
-          ### Installation
-          ```bash
-          pip install ${{ vars.PYPI_PROJECT_NAME || 'statistics-canada' }}==${{ needs.build-and-test.outputs.version }}
-          ```
-          
-          ### PyPI
-          📦 [View on PyPI](https://pypi.org/project/${{ vars.PYPI_PROJECT_NAME || 'statistics-canada' }}/${{ needs.build-and-test.outputs.version }}/)
-        draft: false
-        prerelease: false
-        files: dist/*
-        make_latest: true
+  rollback-main:
+    if: failure()
+    needs: [publish-to-pypi, create-github-release]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Rollback main branch
+        run: echo "Rollback main branch logic here"

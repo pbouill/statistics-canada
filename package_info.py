@@ -7,17 +7,36 @@ from dataclasses import dataclass, field, fields, asdict, Field
 from enum import StrEnum, auto
 import logging
 
-import statscan as base_pkg
+# Import the package - try multiple methods if needed
+logger = logging.getLogger(name=__name__)
+
+def try_resolve_import(pkg_name: str):
+    import sys
+    import importlib
+    # first check if parent dir is in path
+    
+    parent_dir = Path(__file__).parent
+    if str(parent_dir) not in sys.path:
+        logger.debug(f'Adding {parent_dir} to sys.path for import resolution')
+        sys.path.insert(0, str(parent_dir))
+    
+    return importlib.import_module(pkg_name)
+
+try:
+    import statscan as base_pkg
+except ImportError as e:
+    if e.name:
+        base_pkg = try_resolve_import(e.name)
+    else:
+        raise e
 
 
+# Set package constants
 _GIT_DIR_NAME: str = '.git'
-
 PACKAGE_NAME: str = base_pkg.__name__
 PACKAGE_PATH: Path = Path(base_pkg.__file__).parent
 VERSION: Optional[str] = base_pkg.__version__
 VERSION_FILE: Path = PACKAGE_PATH / '_version.py'
-
-logger  = logging.getLogger(name=__name__)
 
 
 class GitHubActionEnvVars(StrEnum):
