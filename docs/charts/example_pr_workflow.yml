@@ -1,0 +1,55 @@
+# Example: PR Workflow Using Shared QA/QC
+# This shows how a PR workflow would integrate with the shared qa-qc-checks.yml
+
+name: "PR Quality Checks"
+
+on:
+  pull_request:
+    branches: [ "dev" ]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  # Use shared QA/QC workflow without build steps
+  quality-assurance:
+    uses: ./.github/workflows/qa-qc-checks.yml
+    with:
+      build-required: false  # PRs don't need build steps
+      python-versions: '["3.11", "3.12", "3.13"]'
+  
+  # Optional: Additional PR-specific checks
+  pr-specific-checks:
+    needs: quality-assurance
+    runs-on: ubuntu-latest
+    if: needs.quality-assurance.outputs.quality-status == 'success'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Check PR requirements
+      run: |
+        echo "✅ Quality checks passed"
+        echo "🔍 Checking PR-specific requirements..."
+        
+        # Add PR-specific validation here
+        # - Check that PR has proper description
+        # - Validate branch naming conventions
+        # - Check for breaking changes documentation
+        
+        echo "✅ PR requirements validated"
+    
+    - name: Comment on PR
+      if: success()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: '✅ Quality checks passed! This PR is ready for review.'
+          })

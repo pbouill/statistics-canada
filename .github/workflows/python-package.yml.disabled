@@ -1,0 +1,96 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Build and Test (Release)
+
+on:
+  push:
+    branches: [ "main" ]
+  # NOTE: PRs should target 'dev' branch, not 'main'
+  # This workflow only runs on pushes to main (typically from dev merges)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.extract_version.outputs.version }}
+      tag: ${{ steps.extract_version.outputs.tag }}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Set up Python ${{ vars.PYTHON_BUILD_VERSION }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ vars.PYTHON_BUILD_VERSION }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install --upgrade flake8 build wheel setuptools
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Build package
+      run: |
+        # build the package
+        python -m build --no-isolation
+    - name: Extract version from built package
+      id: extract_version
+      run: |
+        # Find the wheel file and extract version from filename
+        WHEEL_FILE=$(find dist/ -name "*.whl" | head -n 1)
+        if [ -z "$WHEEL_FILE" ]; then
+          echo "No wheel file found!"
+          exit 1
+        fi
+        
+        # Extract version from wheel filename (format: package_name-version-...)
+        VERSION=$(basename "$WHEEL_FILE" | cut -d'-' -f2)
+        echo "Extracted version: $VERSION"
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "tag=v$VERSION" >> $GITHUB_OUTPUT
+    - name: Store version info
+      run: |
+        echo "${{ steps.extract_version.outputs.version }}" > dist/VERSION
+        echo "${{ steps.extract_version.outputs.tag }}" > dist/TAG
+    - name: Store artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ vars.ARTIFACT_NAME}}
+        path: dist/
+
+  test:
+    needs: [build]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        # Install test dependencies
+        python -m pip install pytest pytest-asyncio pytest-dependency pytest-mock
+    - name: Fetch the build artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ vars.ARTIFACT_NAME}}
+        path: dist/
+    - name: Install package from wheel
+      run: |
+        # install the package from the wheel
+        pip install dist/*.whl
+    - name: Run tests
+      run: |
+        # run the tests
+        python -m pytest tests/ -v --tb=short
