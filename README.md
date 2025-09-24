@@ -130,6 +130,10 @@ cubes = asyncio.run(explore_data())
 
 ### 🇨🇦 **Get Canada Population Summary**
 
+<!-- Note: Previous examples included city-level population data (e.g., Saugeen Shores) 
+     but were removed for brevity. This simplified example focuses on national-level data 
+     that's easier to understand and test. -->
+
 ```python
 import asyncio
 import pandas as pd

@@ -41,7 +41,7 @@ jobs:
           
           echo "Checking file: $file"
           
-          # Package-relevant patterns
+          # Package-relevant patterns (shared logic available in .github/scripts/file-patterns.sh for future refactoring)
           if [[ "$file" =~ ^statscan/ ]] || \
              [[ "$file" =~ ^pyproject\.toml$ ]] || \
              [[ "$file" =~ ^setup\.py$ ]] || \

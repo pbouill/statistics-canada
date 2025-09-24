@@ -75,8 +75,8 @@ flowchart TD
     
     %% Apply Styles Based on Implementation Status
     class FILTER,CHANGELOG active
-    class PIPELINE,STAGE1,STAGE2,STAGE3,STAGE4,STAGE5 active
-    class QA,RELEASE_QA active
+    class PIPELINE,STAGE1,STAGE2,STAGE3,STAGE4,STAGE5 ready
+    class QA,RELEASE_QA proposed
     class ROLLBACK1,ROLLBACK2 failure
     class SUCCESS success
     class DEPLOY_DECISION decision
