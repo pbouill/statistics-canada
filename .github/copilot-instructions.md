@@ -614,3 +614,12 @@ x-accepted-github-permissions: 'issues=write; pull_requests=write'
 - **Permission Optimization**: Minimize required permissions for maximum security
 - **Multi-file Support**: Extend to other automated file updates (version bumps, documentation)
 - **Release Integration**: Auto-generate release notes from changelog entries
+
+## 🚨 Changelog Update & Rollback Mechanism (Release Pipeline)
+
+- The changelog is updated in the `dev` branch immediately after a PR is merged, and the changelog update commit is tagged (e.g., `changelog-update-<PR#>`).
+- When a release PR is merged to `main`, the release pipeline runs. If any stage fails (PyPI publish or GitHub release):
+  - The pipeline triggers a rollback job to revert the changelog update in `dev` using the tag.
+  - The pipeline also triggers a rollback job to revert the last commit(s) in `main`.
+- This ensures the changelog and main branch remain consistent and prevents incomplete releases from polluting history.
+- All rollback logic is implemented in `.github/workflows/release-pipeline.yml` and `.github/workflows/dev-changelog.yml`.

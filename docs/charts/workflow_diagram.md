@@ -21,7 +21,7 @@ flowchart TD
     
     %% Smart Changelog (Phase 1 - ACTIVE)
     MERGE --> FILTER{📋 File Change Analysis<br/>dev-changelog.yml<br/>ACTIVE}
-    FILTER -->|Package Changes<br/>statscan/, pyproject.toml, etc.| CHANGELOG[📝 Update Changelog<br/>UNRELEASED section]
+    FILTER -->|Package Changes<br/>statscan/, pyproject.toml, etc.| CHANGELOG[📝 Update Changelog<br/>UNRELEASED section<br/>Tag changelog update commit]
     FILTER -->|Infrastructure Only<br/>.github/, docs/, tools/, etc.| SKIP[⏭️ Skip Changelog]
     
     %% Release Decision Point
@@ -49,8 +49,8 @@ flowchart TD
     STAGE4 --> STAGE5[🏷️ Stage 5: create-github-release<br/>Tag & Release Creation<br/>Automated release notes]
     
     %% Success/Failure Paths
-    STAGE4 -->|❌ PyPI Fail| ROLLBACK1[🔄 Rollback Changelog<br/>Revert UNRELEASED section<br/>Preserve git history]
-    STAGE5 -->|❌ GitHub Fail| ROLLBACK2[🔄 Partial Rollback<br/>PyPI Success, GitHub Fail<br/>Manual tag required]
+    STAGE4 -->|❌ PyPI Fail| ROLLBACK1[🔄 Rollback Changelog in dev<br/>Revert changelog update commit<br/>Preserve git history]
+    STAGE5 -->|❌ GitHub Fail| ROLLBACK2[🔄 Rollback main branch<br/>Revert last commit(s) in main]
     STAGE5 -->|✅ Success| SUCCESS[🎉 Release Complete<br/>Package Published<br/>GitHub Release Created]
     
     %% Rollback Recovery
