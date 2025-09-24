@@ -244,6 +244,44 @@ jobs:
           echo "Tag $TAG does not exist"
           echo "exists=false" >> $GITHUB_OUTPUT
         fi
+
+    # Rollback job: revert changelog update in dev if release fails
+    rollback-changelog:
+      needs: [prepare-changelog, publish-to-pypi, create-github-release]
+      if: failure()
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout dev branch
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0
+      - name: Revert changelog update
+        run: |
+          # Find the last changelog update commit (tagged by dev-changelog.yml)
+          TAG=$(git tag --list 'changelog-update-*' | tail -n 1)
+          if [ -n "$TAG" ]; then
+            git revert $TAG --no-edit
+            git push origin dev
+          else
+            echo "No changelog update tag found, skipping revert."
+          fi
+
+    # Rollback job: revert main branch changes if release fails
+    rollback-main:
+      needs: [publish-to-pypi, create-github-release]
+      if: failure()
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Revert last commit on main
+        run: |
+          git revert HEAD --no-edit
+          git push origin main
         
     - name: Generate release notes from changelog
       id: release_notes

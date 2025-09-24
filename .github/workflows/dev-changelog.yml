@@ -157,12 +157,12 @@ jobs:
         
         # Commit the changes
         git add CHANGELOG.md
-        git commit -m "📝 Add PR #$PR_NUMBER to changelog
-
-        $CHANGELOG_ENTRY
-
-        [skip ci]"
+        git commit -m "📝 Add PR #$PR_NUMBER to changelog"
+        # Tag the changelog update commit for rollback
+        COMMIT_HASH=$(git rev-parse HEAD)
+        git tag changelog-update-$PR_NUMBER $COMMIT_HASH
         git push
+        git push origin changelog-update-$PR_NUMBER
 
   skip-changelog:
     needs: check-changes
