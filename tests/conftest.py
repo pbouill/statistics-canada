@@ -8,6 +8,16 @@ that support raw response data and specialized data extraction.
 import pytest
 from unittest.mock import patch
 
+
+def pytest_addoption(parser):
+    """Add custom command-line options for pytest."""
+    parser.addoption(
+        "--no-mock",
+        action="store_true",
+        default=False,
+        help="Disable mocking and run network tests instead"
+    )
+
 from statscan.wds.client import Client as WDSClient
 from statscan.wds.requests import WDSRequests, ResponseKeys
 from statscan.wds.models.cube import Cube

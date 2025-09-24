@@ -49,6 +49,7 @@ dependencies = {file = ["requirements.txt"]}
 markers = [
     "dependency: tests that require network or external dependencies",
     "network: tests that make live network calls to generate fixtures",
+    "mock: tests that use mocked responses instead of live API calls",
     "slow: tests that take a long time to run"
 ]
 # Configure pytest-asyncio to use session-scoped event loops

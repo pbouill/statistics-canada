@@ -1,5 +1,6 @@
 import json
 from unittest.mock import AsyncMock
+from enum import StrEnum, auto
 
 import pytest
 from httpx import Response, Request
@@ -29,6 +30,8 @@ class MockWDSResponse(Response):
             json=json_data,
         )
 
+class WDSTestDependencies(StrEnum):
+    CODESETS = auto()
 
 class TestWDSClient:
     """Test WDS Client functionality using mocked responses with local test data."""
@@ -36,20 +39,30 @@ class TestWDSClient:
     @mock_method(WDSRequests.get_code_sets)
     @pytest.mark.dependency(name='codesets')
     @pytest.mark.asyncio
-    async def test_update_codesets_mocked(self, mock_method: AsyncMock, wds_client: Client, codesets_data: dict):
+    async def test_update_codesets_mocked(self, mock_get_code_sets, request: pytest.FixtureRequest, wds_client: Client, codesets_data: dict):
         """Test update_codesets using mocked responses."""
+        # Skip if --no-mock option is used
+        if request.config.getoption("--no-mock"):
+            pytest.skip("Mocking disabled via --no-mock, use network test instead")
+        
         # Set up the mock to use our mock method
         async def mock_side_effect(client: Client):
             return MockWDSResponse(codesets_data)
-        mock_method.side_effect = mock_side_effect
+        mock_get_code_sets.side_effect = mock_side_effect
 
         codeset_names = await wds_client.update_codesets()
         assert isinstance(codeset_names, set)
-        mock_method.assert_called_once_with(client=wds_client)
+        mock_get_code_sets.assert_called_once_with(client=wds_client)
 
     @pytest.mark.dependency(name='codesets')
     @pytest.mark.asyncio
-    async def test_update_codesets_network(self, wds_client: Client):
+    @pytest.mark.network
+    async def test_update_codesets_network(self, request: pytest.FixtureRequest, wds_client: Client):
+        """Test update_codesets with real network calls - only runs when network tests are enabled."""
+        # Skip if mocking is enabled (default behavior unless --no-mock is used)
+        if not request.config.getoption("--no-mock"):
+            pytest.skip("Mocking enabled (default), use --no-mock to run network tests")
+        
         codeset_names = await wds_client.update_codesets()
         assert isinstance(codeset_names, set)
 
