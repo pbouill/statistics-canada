@@ -13,8 +13,10 @@ This guide sets up a GitHub App for changelog automation that can work across mu
    - Click "New GitHub App"
    - **GitHub App name**: `changelog-bot-pbouill` (must be globally unique - use your username)
    - **Description**: `Multi-repository automated changelog updates`
-   - **Homepage URL**: `https://github.com/pbouill` (your profile URL)
+   - **Homepage URL**: `https://github.com/pbouill` (your GitHub profile - simple and professional)
    - **Webhook**: Uncheck "Active" (we don't need webhooks)
+   - **Request user authorization (OAuth) during installation**: Leave unchecked
+   - **Expire user authorization tokens**: Leave unchecked
 
 3. **Configure Permissions** (Fine-grained Security):
    - **Repository permissions**:
@@ -29,7 +31,9 @@ This guide sets up a GitHub App for changelog automation that can work across mu
    **Security Note**: By restricting Contents access to only changelog files, the app cannot modify any other repository content, making it much safer than broad repository access.
 
 4. **Where can this GitHub App be installed?**:
-   - Select "Only on this account" (or "Any account" if you want to use it for other organizations)
+   - ✅ **Select "Any account"** (Recommended - allows future flexibility)
+   - This enables use across different organizations and collaboration scenarios
+   - You can always control where it's actually installed through the installation process
 
 5. **Create the App**:
    - Click "Create GitHub App"

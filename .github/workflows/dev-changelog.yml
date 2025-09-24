@@ -17,8 +17,8 @@ env:
   # Configuration - can be overridden per repository
   CHANGELOG_FILE: 'CHANGELOG.md'
   CHANGELOG_SCRIPT: '.github/scripts/update_changelog.sh'
-  BOT_NAME: 'changelog-bot[bot]'
-  BOT_EMAIL: 'changelog-bot[bot]@users.noreply.github.com'
+  BOT_NAME: 'seawall-changelog-bot[bot]'
+  BOT_EMAIL: 'seawall-changelog-bot[bot]@users.noreply.github.com'
 
 jobs:
   update-changelog:
