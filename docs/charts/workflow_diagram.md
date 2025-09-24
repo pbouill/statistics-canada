@@ -38,15 +38,15 @@ flowchart TD
     RELEASE_QA -->|❌ Fail| RELEASE_FIX[🔧 Fix Release Issues]
     RELEASE_FIX --> RELEASE_QA
     
-    %% Complete Release Pipeline (release-pipeline-new.yml)
-    RELEASE_MERGE --> PIPELINE[🚀 Release Pipeline<br/>release-pipeline-new.yml<br/>READY]
+    %% Complete Release Pipeline (release-pipeline.yml)
+    RELEASE_MERGE --> PIPELINE[🚀 Release Pipeline<br/>release-pipeline.yml<br/>ACTIVE]
     
-    %% Pipeline Stages
-    PIPELINE --> STAGE1[📊 Stage 1: Change Detection<br/>File Pattern Analysis<br/>Skip if infrastructure-only]
-    STAGE1 --> STAGE2[🏗️ Stage 2: Build & Test<br/>Multi-Python Matrix<br/>3.11, 3.12, 3.13]
-    STAGE2 --> STAGE3[📝 Stage 3: Changelog Prep<br/>Convert UNRELEASED → VERSION<br/>Extract version from wheel]
-    STAGE3 --> STAGE4[📦 Stage 4: PyPI Publishing<br/>Wheel Upload & Validation<br/>Conflict detection]
-    STAGE4 --> STAGE5[🏷️ Stage 5: GitHub Release<br/>Tag & Release Notes<br/>Changelog-based notes]
+    %% Pipeline Stages (release-pipeline.yml jobs)
+    PIPELINE --> STAGE1[📊 Stage 1: check-changes<br/>Commit Message Analysis<br/>Skip if changelog-only commit]
+    STAGE1 --> STAGE2[🏗️ Stage 2: build-and-test<br/>Python 3.11 Build<br/>Lint, Build, Extract Version]
+    STAGE2 --> STAGE3[📝 Stage 3: prepare-changelog<br/>Convert UNRELEASED → VERSION<br/>GitHub App commits]
+    STAGE3 --> STAGE4[📦 Stage 4: publish-to-pypi<br/>Wheel Upload & Validation<br/>PyPI publishing]
+    STAGE4 --> STAGE5[🏷️ Stage 5: create-github-release<br/>Tag & Release Creation<br/>Automated release notes]
     
     %% Success/Failure Paths
     STAGE4 -->|❌ PyPI Fail| ROLLBACK1[🔄 Rollback Changelog<br/>Revert UNRELEASED section<br/>Preserve git history]
@@ -75,8 +75,8 @@ flowchart TD
     
     %% Apply Styles Based on Implementation Status
     class FILTER,CHANGELOG active
-    class PIPELINE,STAGE1,STAGE2,STAGE3,STAGE4,STAGE5 ready
-    class QA,RELEASE_QA proposed
+    class PIPELINE,STAGE1,STAGE2,STAGE3,STAGE4,STAGE5 active
+    class QA,RELEASE_QA active
     class ROLLBACK1,ROLLBACK2 failure
     class SUCCESS success
     class DEPLOY_DECISION decision
@@ -85,29 +85,32 @@ flowchart TD
 
 ## Workflow File Cross-Reference
 
-### Active Workflows (🟢)
+### Active Workflows (🟢) - Production Ready
 - **`dev-changelog.yml`** - Smart changelog with file filtering
   - **Trigger**: PR merge to dev branch
   - **Features**: Package vs infrastructure file detection
   - **Status**: Phase 1 - ACTIVE
 
-### Ready Workflows (🟠)
-- **`release-pipeline-new.yml`** - Complete 5-stage release pipeline
+- **`release-pipeline.yml`** - Complete 5-stage release pipeline
   - **Trigger**: Push to main branch
   - **Features**: Build, test, changelog prep, PyPI publish, GitHub release
-  - **Status**: Phase 2 - READY for deployment
+  - **Status**: Phase 2 - ACTIVE
 
-### Proposed Workflows (🔵)
+- **`pr-checks.yml`** - PR quality validation
+  - **Trigger**: Pull requests to dev/main
+  - **Features**: Uses shared QA/QC workflow for validation
+  - **Status**: Phase 3 - ACTIVE
+
 - **`qa-qc-checks.yml`** - Shared quality assurance
-  - **Type**: Reusable workflow
+  - **Type**: Reusable workflow (called by pr-checks.yml and release-pipeline.yml)
   - **Parameters**: `build-required` (false for PRs, true for releases)
   - **Features**: Linting, testing, optional building
-  - **Status**: Implemented, ready for integration
+  - **Status**: Phase 3 - ACTIVE
 
-### Legacy Workflows (⚪)
-- **`dev-changelog-old.yml`** - Original changelog (backup)
-- **`python-package.yml`** - Legacy build workflow
-- **`publish.yml`** - Legacy publish workflow
+### Removed Workflows (Cleanup Complete)
+- **All legacy/duplicate workflows removed** - 16+ files cleaned up
+- **All `.disabled` workflows removed** - Can restore from git history if needed
+- **Result**: Clean, minimal, conflict-free system with only 4 essential workflows
 
 ## Key Features
 

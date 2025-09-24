@@ -7,6 +7,7 @@ that support raw response data and specialized data extraction.
 
 import pytest
 from unittest.mock import patch
+from httpx import Timeout
 
 
 def pytest_addoption(parser):
@@ -19,10 +20,6 @@ def pytest_addoption(parser):
     )
 
 from statscan.wds.client import Client as WDSClient
-from statscan.wds.requests import WDSRequests, ResponseKeys
-from statscan.wds.models.cube import Cube
-from statscan.wds.models.code import CodeSets
-
 from tests.data_store import WDSDataPaths, SESSION_DATA_SAVED_ATTR
 from tests.wds.test_requests import TestCodeSets, TestCubesListLite, TestCubeMeta
 
@@ -68,27 +65,18 @@ def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo):
 @pytest.fixture(scope="session")
 def wds_client() -> WDSClient:
     """
-    Provides a WDS client instance configured to use local test data
-    instead of making actual web requests.
+    Provides a WDS client instance configured with relaxed timeout settings
+    for reliable test execution in CI/CD environments.
     """
-    client = WDSClient()
+    # Relaxed timeout configuration for test reliability in CI environments
+    test_timeout = Timeout(
+        connect=60.0,   # Extended connection timeout for slow CI environments
+        read=180.0,     # Extended read timeout for large API responses
+        write=60.0,     # Extended write timeout for reliability
+        pool=30.0       # Extended pool timeout for connection management
+    )
     
-    # # Override the client's HTTP methods to use local data
-    # async def mock_get_codesets() -> CodeSets:
-    #     data= WDSDataPaths.CODESETS.load()
-    #     return WDSRequests.dict_to_model(data=data[ResponseKeys.OBJECT], model=CodeSets)
-    #     # return CodeSets.model_validate(data)
-    
-    # async def mock_get_cubeslistlite():
-    #     data = WDSDataPaths.CUBESLIST_LITE.load()
-    #     cubes = [WDSRequests.dict_to_model(data=item[ResponseKeys.OBJECT], model=Cube) for item in data]
-    #     return cubes
-
-    # # Replace the client methods with mock versions
-    # client.get_code_sets = mock_get_codesets
-    # client.get_all_cubes_list_lite = mock_get_cubeslistlite
-    
-    return client
+    return WDSClient(timeout=test_timeout)
 
 @pytest.fixture(scope="session")
 def codesets_data(request: pytest.FixtureRequest) -> dict:
