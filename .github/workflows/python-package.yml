@@ -6,8 +6,8 @@ name: Build and Test (Release)
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  # NOTE: PRs should target 'dev' branch, not 'main'
+  # This workflow only runs on pushes to main (typically from dev merges)
 
 jobs:
   build:

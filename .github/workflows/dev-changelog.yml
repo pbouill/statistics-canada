@@ -1,51 +1,102 @@
-name: Update Changelog (Dev)
+name: Update Changelog
 
 on:
   pull_request:
     types: [closed]
-    branches: [dev]
+    branches: 
+      - dev
+      - develop
+      - development
+      - main  # Optional: support main branch changelog updates too
 
 permissions:
   contents: write
   pull-requests: read
-  # Additional permissions for bypassing branch protection
-  actions: read
-  checks: read
-  statuses: read
+
+env:
+  # Configuration - can be overridden per repository
+  CHANGELOG_FILE: 'CHANGELOG.md'
+  CHANGELOG_SCRIPT: '.github/scripts/update_changelog.sh'
+  BOT_NAME: 'seawall-changelog-bot[bot]'
+  BOT_EMAIL: 'seawall-changelog-bot[bot]@users.noreply.github.com'
 
 jobs:
   update-changelog:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
+    - name: Generate App Token
+      id: app-token
+      uses: actions/create-github-app-token@v1
+      with:
+        # Use generic secret names that work across repositories
+        app-id: ${{ secrets.CHANGELOG_BOT_APP_ID }}
+        private-key: ${{ secrets.CHANGELOG_BOT_PRIVATE_KEY }}
+        
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
-        # Use GITHUB_TOKEN with enhanced permissions
-        token: ${{ secrets.GITHUB_TOKEN }}
-        # Ensure we're working with the dev branch
-        ref: dev
+        token: ${{ steps.app-token.outputs.token }}
+        # Dynamically use the target branch from the PR
+        ref: ${{ github.event.pull_request.base.ref }}
         
     - name: Configure Git
       run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
-        # Configure git to use the GitHub token for authenticated operations
-        git config --global url."https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
+        git config user.name "${{ env.BOT_NAME }}"
+        git config user.email "${{ env.BOT_EMAIL }}"
         
-    - name: Update CHANGELOG.md
+    - name: Update Changelog
       run: |
-        chmod +x .github/scripts/update_changelog.sh
-        .github/scripts/update_changelog.sh "${{ github.event.pull_request.number }}" "${{ github.event.pull_request.title }}" "${{ github.event.pull_request.user.login }}"
+        # Check if custom changelog script exists, otherwise use inline logic
+        if [ -f "${{ env.CHANGELOG_SCRIPT }}" ]; then
+          echo "Using custom changelog script: ${{ env.CHANGELOG_SCRIPT }}"
+          chmod +x "${{ env.CHANGELOG_SCRIPT }}"
+          "${{ env.CHANGELOG_SCRIPT }}" "${{ github.event.pull_request.number }}" "${{ github.event.pull_request.title }}" "${{ github.event.pull_request.user.login }}"
+        else
+          echo "Using built-in changelog logic"
+          # Built-in changelog update logic
+          CHANGELOG="${{ env.CHANGELOG_FILE }}"
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_AUTHOR="${{ github.event.pull_request.user.login }}"
+          TARGET_BRANCH="${{ github.event.pull_request.base.ref }}"
+          
+          # Create changelog if it doesn't exist
+          if [ ! -f "$CHANGELOG" ]; then
+            echo "# Changelog" > "$CHANGELOG"
+            echo "" >> "$CHANGELOG"
+            echo "All notable changes to this project will be documented in this file." >> "$CHANGELOG"
+            echo "" >> "$CHANGELOG"
+            echo "## [Unreleased]" >> "$CHANGELOG"
+            echo "" >> "$CHANGELOG"
+          fi
+          
+          # Simple approach: add entry at top of file after first line
+          TEMP_FILE=$(mktemp)
+          head -n 1 "$CHANGELOG" > "$TEMP_FILE"
+          echo "" >> "$TEMP_FILE"
+          echo "## [Unreleased]" >> "$TEMP_FILE"
+          echo "" >> "$TEMP_FILE"
+          echo "### Changed" >> "$TEMP_FILE"
+          echo "- $PR_TITLE (#$PR_NUMBER) by @$PR_AUTHOR" >> "$TEMP_FILE"
+          echo "" >> "$TEMP_FILE"
+          tail -n +2 "$CHANGELOG" | grep -v "^## \[Unreleased\]" >> "$TEMP_FILE"
+          mv "$TEMP_FILE" "$CHANGELOG"
+          
+          echo "Changelog updated for PR #$PR_NUMBER on $TARGET_BRANCH branch"
+        fi
         
     - name: Check for changes and commit
       run: |
-        if git diff --quiet CHANGELOG.md; then
-          echo "No changes to CHANGELOG.md"
+        TARGET_BRANCH="${{ github.event.pull_request.base.ref }}"
+        CHANGELOG_FILE="${{ env.CHANGELOG_FILE }}"
+        
+        if git diff --quiet "$CHANGELOG_FILE"; then
+          echo "No changes to $CHANGELOG_FILE"
         else
-          echo "Changes detected in CHANGELOG.md"
-          git add CHANGELOG.md
+          echo "Changes detected in $CHANGELOG_FILE"
+          git add "$CHANGELOG_FILE"
           git commit -m "📝 Add PR #${{ github.event.pull_request.number }} to changelog
 
           - ${{ github.event.pull_request.title }}
@@ -54,15 +105,12 @@ jobs:
           
           # Pull latest changes before pushing to avoid race conditions
           echo "Pulling latest changes to avoid conflicts..."
-          git pull --rebase origin dev
+          git pull --rebase origin "$TARGET_BRANCH"
           
-          echo "Pushing changelog updates to dev branch (bypassing branch protection)..."
-          # Configure git to use the GitHub token for authentication
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          
-          # Push with bypass (GitHub Actions should have the necessary permissions)
-          git push origin dev
-          echo "CHANGELOG.md updated and pushed to dev"
+          echo "Pushing changelog updates to $TARGET_BRANCH branch (using GitHub App with bypass permissions)..."
+          # GitHub App token has inherent bypass capabilities
+          git push origin "$TARGET_BRANCH"
+          echo "$CHANGELOG_FILE updated and pushed to $TARGET_BRANCH"
         fi
         
     - name: Add comment to PR
@@ -72,14 +120,16 @@ jobs:
         script: |
           const { owner, repo } = context.repo;
           const prNumber = context.payload.pull_request.number;
+          const targetBranch = context.payload.pull_request.base.ref;
+          const changelogFile = process.env.CHANGELOG_FILE || 'CHANGELOG.md';
           
           await github.rest.issues.createComment({
             owner,
             repo,
             issue_number: prNumber,
-            body: `📝 **Changelog Updated on Dev Branch!**
+            body: `📝 **Changelog Updated on ${targetBranch.charAt(0).toUpperCase() + targetBranch.slice(1)} Branch!**
             
-            This PR has been automatically added to the [CHANGELOG.md](https://github.com/${owner}/${repo}/blob/dev/CHANGELOG.md) file on the \`dev\` branch.
+            This PR has been automatically added to the [${changelogFile}](https://github.com/${owner}/${repo}/blob/${targetBranch}/${changelogFile}) file on the \`${targetBranch}\` branch.
             
-            The entry will be included in the next release when \`dev\` is merged to \`main\`. 🚀`
+            The entry will be included in the next release. 🚀`
           });

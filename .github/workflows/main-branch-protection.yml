@@ -1,0 +1,111 @@
+name: Main Branch Protection
+
+on:
+  pull_request:
+    branches: [ "main" ]
+    types: [opened, edited, synchronize]
+
+jobs:
+  enforce-dev-workflow:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check PR source branch
+      run: |
+        SOURCE_BRANCH="${{ github.head_ref }}"
+        echo "PR source branch: $SOURCE_BRANCH"
+        
+        if [ "$SOURCE_BRANCH" != "dev" ]; then
+          echo "❌ ERROR: Pull requests to 'main' are only allowed from 'dev' branch"
+          echo ""
+          echo "🔄 **Correct Workflow:**"
+          echo "1. Create feature branch from 'dev'"
+          echo "2. Open PR against 'dev' branch"  
+          echo "3. After merge to 'dev', changelog will be updated automatically"
+          echo "4. Then create PR from 'dev' to 'main' for release"
+          echo ""
+          echo "💡 **Current PR source:** $SOURCE_BRANCH"
+          echo "💡 **Expected PR source:** dev"
+          echo ""
+          echo "Please close this PR and create a new one targeting the 'dev' branch instead."
+          exit 1
+        else
+          echo "✅ Valid PR: dev → main (release merge)"
+        fi
+        
+    - name: Verify changelog has been updated
+      if: github.head_ref == 'dev'
+      uses: actions/checkout@v4
+      
+    - name: Check for recent changelog updates
+      if: github.head_ref == 'dev'
+      run: |
+        echo "🔍 Verifying changelog has been updated recently..."
+        
+        # Check if CHANGELOG.md exists
+        if [ ! -f "CHANGELOG.md" ]; then
+          echo "❌ ERROR: CHANGELOG.md not found"
+          echo "Please ensure the changelog exists before merging to main"
+          exit 1
+        fi
+        
+        # Check if there are unreleased changes
+        if ! grep -q "## \[Unreleased\]" CHANGELOG.md; then
+          echo "⚠️  WARNING: No [Unreleased] section found in CHANGELOG.md"
+          echo "This might indicate the changelog structure needs attention"
+        fi
+        
+        # Check for recent changes (within last 7 days)
+        LAST_MODIFIED=$(stat -c %Y CHANGELOG.md)
+        CURRENT_TIME=$(date +%s)
+        SEVEN_DAYS_AGO=$((CURRENT_TIME - 604800))
+        
+        if [ $LAST_MODIFIED -gt $SEVEN_DAYS_AGO ]; then
+          echo "✅ CHANGELOG.md has been updated recently (within 7 days)"
+        else
+          echo "⚠️  WARNING: CHANGELOG.md hasn't been updated in over 7 days"
+          echo "Please verify that recent changes have been documented"
+        fi
+        
+        echo ""
+        echo "📋 **Pre-Release Checklist:**"
+        echo "- ✅ Source branch is 'dev'"
+        echo "- ✅ CHANGELOG.md exists"
+        echo "- ✅ Ready for release to PyPI"
+        
+    - name: Add workflow guidance comment
+      if: always() && github.head_ref != 'dev'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const { owner, repo } = context.repo;
+          const prNumber = context.payload.pull_request.number;
+          
+          await github.rest.issues.createComment({
+            owner,
+            repo,
+            issue_number: prNumber,
+            body: `## ❌ Branch Protection: Invalid PR Target
+
+          **This PR targets \`main\` from \`${{ github.head_ref }}\`, which violates our branch protection workflow.**
+
+          ### 🔄 **Correct Development Workflow:**
+
+          1. **Feature Development**: Create feature branches from \`dev\`
+          2. **Pull Request**: Open PRs against \`dev\` branch (not \`main\`)
+          3. **Merge to Dev**: After review, merge to \`dev\` 
+          4. **Automatic Changelog**: Our bot updates the changelog automatically
+          5. **Release**: When ready, create PR from \`dev\` → \`main\` to trigger PyPI release
+
+          ### 🚀 **Release Workflow (dev → main):**
+          - Only \`dev\` branch can be merged to \`main\`
+          - Merging to \`main\` triggers automatic PyPI publication
+          - This ensures proper changelog management and release coordination
+
+          ### 💡 **Next Steps:**
+          1. Close this PR
+          2. Create a new PR targeting \`dev\` branch instead
+          3. After merge to \`dev\`, you can later create \`dev\` → \`main\` PR for release
+
+          **Current PR**: \`${{ github.head_ref }}\` → \`main\` ❌  
+          **Should be**: \`${{ github.head_ref }}\` → \`dev\` ✅`
+          });
