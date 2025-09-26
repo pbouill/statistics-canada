@@ -30,7 +30,7 @@ classifiers = [
 ]
 dynamic = [
     "version", 
-    "dependencies",
+    "dependencies"
 ]
 
 [project.urls]
@@ -39,10 +39,24 @@ dynamic = [
 "Bug Tracker" = "https://github.com/pbouill/statistics-canada/issues"
 "Changelog" = "https://github.com/pbouill/statistics-canada/blob/main/CHANGELOG.md"
 
+[tool.setuptools.packages.find]
+where = ["."] # Look for packages in the current directory
+exclude = [
+    ".*",
+    "data*",
+    "dist*",
+    "docs*",
+    "examples*",
+    "scratch*",
+    "tests*",
+    "tools*"
+]
+
 [tool.setuptools.package-data]
 "*" = ["*.html", "*.css", "*.ico", "*.js"]
 
 [tool.setuptools.dynamic]
+version = {attr = "_version.__version__"}
 dependencies = {file = ["requirements.txt"]}
 
 [tool.pytest.ini_options]
