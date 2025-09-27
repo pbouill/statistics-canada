@@ -9,7 +9,7 @@ on:
 jobs:
   qa-qc:
     if: ${{ github.actor != 'github-actions[bot]' }}
-    uses: ./.github/workflows/qaqc.yml
+    uses: "${{ github.workflows }}/qaqc.yml"
     with:
       test: true
       build: false
