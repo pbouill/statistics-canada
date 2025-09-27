@@ -8,7 +8,7 @@ class Symbol(Enum):
     """
     Automatically generated Enum for Symbol
     """
+
     NONE = 0  # none  // aucun
     PRELIM = 1  # preliminary  // provisoire
     REV = 3  # revised  // révisé
-

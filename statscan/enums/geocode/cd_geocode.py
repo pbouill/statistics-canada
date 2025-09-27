@@ -10,7 +10,7 @@ class CensusDivisionGeoCode(ProvinceGeoCode):
     access province-level information while also providing specific details
     related to census divisions.
     """
-    
+
     @property
     def cduid(self) -> str:
         """

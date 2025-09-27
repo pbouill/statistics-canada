@@ -1,6 +1,4 @@
-
-
-from pydantic import BaseModel, ConfigDict
+from pydantic import ConfigDict
 
 from statscan.enums.wds.wds_response_status import WDSResponseStatus
 
@@ -11,7 +9,7 @@ from .datapoint import DataPoint
 
 class Vector(WDSBaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True)
-    
+
     responseStatusCode: WDSResponseStatus
     productId: int
     coordinate: Coordinate

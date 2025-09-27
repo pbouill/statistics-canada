@@ -8,8 +8,11 @@ class ProductID(Enum):
     """
     Automatically generated Enum for ProductID
     """
+
     FED_PUBLIC_SECTOR_EMPLOY_RECONCIL_OF_TREASURY_BOARD_OF_CANADA_SECRET_PUBLIC_SVC_COMM_OF_CANADA_AND_STAT_CANADA_STAT_UNIVERSES_AS_AT_DEC_31 = 10100001  # Federal public sector employment reconciliation of Treasury Board of Canada Secretariat, Public Service Commission of Canada and Statistics Canada statistical universes, as at December 31  // Emploi du secteur public fédéral rapprochement des univers statistiques du Secrétariat du Conseil du Trésor du Canada, de la Commission de la fonction publique du Canada et de Statistique Canada, au 31 décembre
-    CENTRAL_GOV_DEBT = 10100002  # Central government debt  // Dette du gouvernement central
+    CENTRAL_GOV_DEBT = (
+        10100002  # Central government debt  // Dette du gouvernement central
+    )
     GOV_OF_CAN_DEBT_SEC_GROSS_NEW_ISSUES_RETIRE_AND_NET_NEW_ISSUES_PAR_EVAL_BANK_OF_CAN = 10100003  # Government of Canada debt securities: Gross new issues, retirements and net new issues, par value, Bank of Canada  // Titres d’emprunt du gouvernement du Canada : émissions brutes, remboursements et émissions nettes, valeur nominale, Banque du Canada
     CHART_BANK_TOT_CLAIMS_AND_LIAB_BOOKED_WORLDWIDE_VIS_A_VIS_NON_RES_BANK_OF_CAN = 10100004  # Chartered banks, total claims and liabilities booked worldwide vis-à-vis non-residents, Bank of Canada  // Banques à charte, ensembles des créances et engagements comptabilisés dans le monde au nom de non-résidents, Banque du Canada
     CAN_CLASS_OF_FUNC_OF_GOV = 10100005  # Canadian Classification of Functions of Government (CCOFOG) by consolidated government component  // Classification canadienne des fonctions des administrations publiques (CCFAP) par composante des administrations publiques consolidées
@@ -85,7 +88,9 @@ class ProductID(Enum):
     BANK_OF_CAN_POS_OF_MEMBERS_OF_THE_CAN_PAYMENTS_ASSOC_AND_BUY_BACK_TRANSPORT_WITH_PRI_DEALERS_MON_AVG_OF_DLY_DATA = 10100082  # Bank of Canada, positions of members of the Canadian Payments Association and buy-back transactions with primary dealers, monthly averages of daily data  // Banque du Canada, positions des membres de l'Association canadienne des paiements et opérations de vente de rachat avec les négociants principaux, moyenne mensuelle des données quotidiennes
     BANK_OF_CAN_POS_OF_MEMBERS_OF_THE_CAN_PAYMENTS_ASSOC_AND_BUY_BACK_TRANSPORT_WITH_PRI_DEALERS_WKLY_AVG_OF_DLY_DATA = 10100083  # Bank of Canada, positions of members of the Canadian Payments Association and buy-back transactions with primary dealers, weekly averages of daily data  // Banque du Canada, positions des membres de l'Association canadienne des paiements et opérations de vente de rachat avec les négociants principaux, moyenne hebdomadaire des données quotidiennes
     CURR_OUTSIDE_BANK_AND_CHART_BANK_DEPOSITS_WEDNESDAYS = 10100084  # Currency outside banks and chartered bank deposits, Wednesdays  // Monnaie hors banques et dépôts dans banques à charte, les mercredis
-    FIN_MKT_STAT = 10100085  # Financial market statistics  // Statistiques du marché financier
+    FIN_MKT_STAT = (
+        10100085  # Financial market statistics  // Statistiques du marché financier
+    )
     CHART_BANK_REGIONAL_DIST_OF_ASSET_AND_LIAB_AT_END_OF_PERIOD_CAN_PROV_AND_INTL = 10100086  # Chartered banks, regional distribution of assets and liabilities, at end of period, Canada, provinces and international  // Banques à charte, répartition régionale de l'actif et du passif, en fin de période, Canada, provinces et international
     FGN_EX_RATES_USA = 10100087  # Foreign exchange rates, United States  // Taux de change étranger, États-Unis
     CHART_BANK_ASSET_EXCL_INVEST_DEALER_SUBS_AVG_OF_WEDNESDAYS = 10100088  # Chartered banks, assets excluding investment dealer subsidiaries, average of Wednesdays  // Banques à charte, avoirs à l'exclusion des courtiers en valeurs mobilières, moyenne mensuelle des mercredis
@@ -219,9 +224,13 @@ class ProductID(Enum):
     HIGH_INC_TAX_FILERS_IN_CAN_SPECIFIC_GEOGRAPHIC_AREA_THRESHOLDS = 11100056  # High income tax filers in Canada, specific geographic area thresholds  // Les déclarants à revenu élevé, au Canada, seuils régionaux particuliers
     ASSET_AND_DEBTS_BY_AFTER_TAX_INC_QUINTILE_CAN_PROV_AND_SEL_CEN_METRO_AREAS_SURV_OF_FIN_SEC = 11100057  # Assets and debts by after-tax income quintile, Canada, provinces and selected census metropolitan areas, Survey of Financial Security  // Actifs et dettes selon les quintiles de revenu après impôt, Canada, provinces et certaines régions métropolitaines de recensement, enquête sur la sécurité financière
     FED_AND_PROV_EFFECTIVE_TAX_RATES_OF_CEN_FAM = 11100058  # Federal and provincial effective tax rates of census families  // Taux d'imposition effectifs fédéraux et provinciaux des familles de recensement
-    FIVE_YR_INC_MOB = 11100059  # Five-year income mobility  // Mobilité du revenu sur cinq ans
+    FIVE_YR_INC_MOB = (
+        11100059  # Five-year income mobility  // Mobilité du revenu sur cinq ans
+    )
     CAN_INC_SURV_CIS_PERS_IN_LOW_INC_CAN_AND_PROV = 11100060  # Canadian Income Survey (CIS), persons in low income, Canada and provinces  // Enquête canadienne sur le revenu (ECR), personnes à faible revenu, Canada et provinces
-    ONE_YR_INC_MOB = 11100061  # One-year income mobility  // Mobilité de revenu sur un an
+    ONE_YR_INC_MOB = (
+        11100061  # One-year income mobility  // Mobilité de revenu sur un an
+    )
     REG_PENS_PLAN = 11100062  # Registered pension plans (RPPs), active members and market value of assets by special retirement conditions  // Régimes de pension agréés (RPA), d'adhérents actifs et valeur marchande de l'actif selon les conditions donnant droit à la retraite spéciale
     REG_PENS_PLANS_RPPS_ACT_MEMBERS_AND_MKT_VALUE_OF_ASSET_BY_AGE_AND_SVC_COND_FOR_SPEC_RETIRE = 11100063  # Registered pension plans (RPPs), active members and market value of assets by age and service condition for special retirement  // Régimes de pension agréés (RPA), d'adhérents actifs et valeur marchande de l'actifs selon les conditions d'âge et d'années de service ouvrant droit à la retraite spéciale
     REG_PENS_PLAN_RPPS_ACT_MEMBERS_AND_MKT_EVAL_OF_ASSET_BY_DEATH_BFT_AFTER_RETIRE = 11100064  # Registered pension plans (RPPs), active members and market value of assets by death benefits after retirement  // Régimes de pension agréés (RPA), d'adhérents actifs et valeur marchande de l'actif selon les prestations de décès après la retraite
@@ -280,13 +289,17 @@ class ProductID(Enum):
     DETAILED_FOOD_SPEND_CAN_REG_AND_PROV = 11100125  # Detailed food spending, Canada, regions and provinces  // Dépenses alimentaires détaillées, Canada, régions et provinces
     HH_SPEND_THREE_TERR_AND_SEL_METRO_AREAS = 11100126  # Household spending, three territories and selected metropolitan areas  // Dépenses des ménages, trois territoires et certaines régions métropolitaines
     DWEL_CHAR_AND_HH_EQUIP_AS_OF_DEC_31_THREE_TERR_AND_SEL_METRO_AREAS = 11100127  # Dwelling characteristics and household equipment as of December 31, three territories and selected metropolitan areas  // Caractéristiques du logement et équipement ménager au 31 décembre, trois territoires et certaines régions métropolitaines
-    SUMMARY_OF_CHARIT_DONORS = 11100130  # Summary of charitable donors  // Dons de charité sommaire
+    SUMMARY_OF_CHARIT_DONORS = (
+        11100130  # Summary of charitable donors  // Dons de charité sommaire
+    )
     TRUST_PENS_FUNDS_REV_AND_EXP_BIENNIAL = 11100132  # Trusteed pension funds, revenues and expenditures, biennial  // Caisses de retraite en fiducie, revenus et dépenses, bi-annuel
     REG_PENS_PLAN_RPP_ACT_MEMBERS_BY_AREA_OF_EMPLOY = 11100133  # Registered pension plan (RPP) active members by area of employment  // Adhérents actifs aux régimes de pension agréés (RPA) selon la région d'emploi
     GINI_COEFFICIENTS_OF_ADJ_MKT_TOT_AND_AFTER_TAX_INC = 11100134  # Gini coefficients of adjusted market, total and after-tax income  // Coefficients de Gini du revenu ajusté du marché, total et après impôt
     LOW_INC_STAT_BY_AGE_SEX_AND_ECON_FAM_TYPE = 11100135  # Low income statistics by age, sex and economic family type  // Statistiques du faible revenu selon l'âge, le sexe et le type de famille économique
     LOW_INC_STAT_BY_ECON_FAM_TYPE = 11100136  # Low income statistics by economic family type  // Statistiques du faible revenu selon le type de famille économique
-    CONS_BANKRUPTCIES_ANN = 11100137  # Consumer bankruptcies, Annual  // Faillites de consommateurs, Annuel
+    CONS_BANKRUPTCIES_ANN = (
+        11100137  # Consumer bankruptcies, Annual  // Faillites de consommateurs, Annuel
+    )
     CONS_BANKRUPTCIES_MON = 11100138  # Consumer bankruptcies, Monthly  // Faillites de consommateurs, Mensuel
     HH_SPEND_ON_RX_DRUGS_AS_A_PERCENTAGE_OF_AFTER_TAX_INC_CAN_AND_PROV = 11100139  # Household spending on prescription drugs as a percentage of after-tax income, Canada and provinces  // Dépenses des ménages consacrées aux médicaments prescrits, en pourcentage du revenu net d'impôt, Canada et provinces
     DIST_OF_EARN = 11100142  # Distribution of earnings  // Répartition des gains
@@ -332,7 +345,9 @@ class ProductID(Enum):
     PERS_IN_LOW_INC_BY_AGE_AND_SEX_OF_MAJ_INC_EARN = 11100182  # Persons in low income by age and sex of major income earner  // Personnes à faible revenu selon l'âge et le sexe du soutien économique principal
     PERS_IN_LOW_INC_BY_ECON_FAM_TYPE = 11100183  # Persons in low income by economic family type  // Personnes à faible revenu selon le type de famille économique
     TRANSPORT_INTO_AND_OUT_OF_LOW_INC = 11100184  # Transitions into and out of low income  // Transitions du statut de faible revenu
-    PERSISTENCE_OF_LOW_INC = 11100185  # Persistence of low income  // La persistance du faible revenu
+    PERSISTENCE_OF_LOW_INC = (
+        11100185  # Persistence of low income  // La persistance du faible revenu
+    )
     LOW_INC_MEAS_BY_HH_SIZE_AND_INC_SRC = 11100186  # Low income measures by household size and income source  // Mesures de faible revenu selon la taille du ménage et la source de revenu
     MKT_BASKET_MEAS_THRESHOLDS = 11100187  # Market Basket Measure Thresholds (2011 base) by Market Basket Measure region  // Seuils de la Mesure du panier de consommation (base de 2011) selon la région de la Mesure du panier de consommation
     MKT_INC_GOV_TRANSPORT_TOTAL_INC_INC_TAX_AND_AFTER_TAX_INC_BY_ECON_FAM_TYPE = 11100190  # Market income, government transfers, total income, income tax and after-tax income by economic family type  // Revenu du marché, transferts gouvernementaux, revenu total, impôt sur le revenu et revenu après impôt selon le type de famille économique
@@ -531,9 +546,15 @@ class ProductID(Enum):
     CIMT_DEFAULT_VIEW_01_INVISIBLE_3 = 12100151  # CIMT - Default view 01 - INVISIBLE  // CIMT - Default view 01 - INVISIBLE
     CIMT_DEFAULT_VIEW_01_INVISIBLE_4 = 12100152  # CIMT - Default view 01 - INVISIBLE  // CIMT - Default view 01 - INVISIBLE
     CIMT_DEFAULT_VIEW_01 = 12100153  # CIMT - Default view 01  // CIMT - Default view 01
-    CIMT_DEFAULT_VIEW_01_1 = 12100154  # CIMT - Default view 01  // CIMT - Default view 01
-    CIMT_DEFAULT_VIEW_01_2 = 12100155  # CIMT - Default view 01  // CIMT - Default view 01
-    CIMT_DEFAULT_VIEW_01_3 = 12100156  # CIMT - Default view 01  // CIMT - Default view 01
+    CIMT_DEFAULT_VIEW_01_1 = (
+        12100154  # CIMT - Default view 01  // CIMT - Default view 01
+    )
+    CIMT_DEFAULT_VIEW_01_2 = (
+        12100155  # CIMT - Default view 01  // CIMT - Default view 01
+    )
+    CIMT_DEFAULT_VIEW_01_3 = (
+        12100156  # CIMT - Default view 01  // CIMT - Default view 01
+    )
     BAL_OF_INTL_PAYMENTS_CURR_ACCT_TRADE_IN_SVC_BY_PRINCIPAL_TRADING_PTNR_QTR = 12100157  # Balance of international payments, current account, trade in services by principal trading partners, quarterly  // Balance des paiements internationaux, compte courant, commerce des services par principaux partenaires commerciaux, trimestriel
     TRADE_IN_GOODS_BY_EXPORTER_CHAR_BY_COUNTRY_OF_DEST_AND_REL_PARTIES = 12100158  # Trade in goods by exporter characteristics, by country of destination and related parties  // Commerce de biens selon les caractéristiques des exportateurs, selon le pays de destination et les parties apparentées
     TRADE_IN_GOODS_BY_EXPORTER_CHAR_BY_IND_AND_REL_PARTIES = 12100159  # Trade in goods by exporter characteristics, by industry and related parties  // Commerce de biens selon les caractéristiques des exportateurs, selon l'industrie et les parties apparentées
@@ -906,7 +927,9 @@ class ProductID(Enum):
     LOW_BIRTH_WEIGHT_BABIES_BY_INUIT_REG = 13100398  # Low birth weight babies, by Inuit region  // Bébés de faible poids à la naissance, par région inuite
     LIV_BIRTHS_AND_INFANT_MORT_BY_INUIT_REG = 13100399  # Live births and infant mortality, by Inuit region  // Naissances vivantes et mortalité infantile, par région inuite
     PERINATAL_MORT_BY_INUIT_REG = 13100400  # Perinatal mortality, by Inuit region  // Mortalité périnatale, par région inuite
-    MORT_BY_INUIT_REG = 13100401  # Mortality, by Inuit region  // Mortalité, par région inuite
+    MORT_BY_INUIT_REG = (
+        13100401  # Mortality, by Inuit region  // Mortalité, par région inuite
+    )
     POTENTIAL_YR_OF_LIFE_LOST_BY_INUIT_REG = 13100402  # Potential years of life lost, by Inuit region  // Années potentielles de vie perdues, par région inuite
     LIFE_EXPECT_AT_BIRTH_AND_AT_AGE_65_BY_SEX_FIVE_YR_AVG_CAN_AND_INUIT_REG = 13100403  # Life expectancy, at birth and at age 65, by sex, five-year average, Canada and Inuit regions  // Espérance de vie, à la naissance et à 65 ans, selon le sexe, moyenne de cinq ans, Canada et régions inuites
     LOW_BIRTH_WEIGHT_BABIES_BY_PROV_AND_TERR = 13100404  # Low birth weight babies, by province and territory  // Bébés de faible poids à la naissance, par province et territoire
@@ -920,7 +943,9 @@ class ProductID(Enum):
     PREMATURE_AND_POTENTIALLY_AVOIDABLE_MORT_BY_PROV_AND_TERR_THREE_YR_AVG = 13100412  # Premature and potentially avoidable mortality, by province and territory, three-year average  // Mortalité prématurée et potentiellement évitable, par province et territoire, moyenne de trois ans
     PREMATURE_AND_POTENTIALLY_AVOIDABLE_MORT = 13100413  # Premature and potentially avoidable mortality  // Mortalité prématurée et potentiellement évitable
     LIV_BIRTHS_BY_PLACE_OF_RES_OF_MOTHER = 13100414  # Live births, by place of residence of mother  // Naissances vivantes, selon le lieu de résidence de la mère
-    LIV_BIRTHS_BY_MON = 13100415  # Live births, by month  // Naissances vivantes, selon le mois
+    LIV_BIRTHS_BY_MON = (
+        13100415  # Live births, by month  // Naissances vivantes, selon le mois
+    )
     LIV_BIRTHS_BY_AGE_OF_MOTHER = 13100416  # Live births, by age of mother  // Naissances vivantes, selon l'âge de la mère
     MEAN_AGE_OF_MOTHER_AT_TIME_OF_DEL = 13100417  # Mean age of mother at time of delivery (live births)  // Âge moyen de la mère à l'accouchement (naissances vivantes)
     CRUDE_BIRTH_RATE_AGE_SPECIFIC_FERTILITY_RATES_AND_TOT_FERTILITY_RATE = 13100418  # Crude birth rate, age-specific fertility rates and total fertility rate (live births)  // Taux brut de natalité, taux de fécondité par groupe d'âge et indice synthétique de fécondité (naissances vivantes)
@@ -969,18 +994,26 @@ class ProductID(Enum):
     HH_FOOD_INSECURITY_BY_PRESENCE_OF_CHILD_IN_THE_HH_AND_FOOD_INSECURITY_STS = 13100462  # Household food insecurity, by presence of children in the household and food insecurity status  // Insécurité alimentaire du ménage, selon la présence d'enfants dans le ménage et le niveau d'insécurité alimentaire
     HH_FOOD_INSECURITY_BY_AGE_GRP_AND_FOOD_INSECURITY_STS = 13100463  # Household food insecurity, by age group and food insecurity status  // Insécurité alimentaire du ménage, selon le groupe d'âge et le niveau d'insécurité alimentaire
     HLTH_IND_TWO_YR_PERIOD_EST_CEN_METRO_AREAS = 13100464  # Health indicators, two-year period estimates, census metropolitan areas  // Indicateurs de la santé, estimations pour une période de deux ans, régions métropolitaines de recensement
-    MENTAL_HLTH_IND = 13100465  # Mental health indicators  // Indicateurs de la santé mentale
-    HLTH_AGING_IND = 13100466  # Healthy aging indicators  // Indicateurs de vieillissement en santé
+    MENTAL_HLTH_IND = (
+        13100465  # Mental health indicators  // Indicateurs de la santé mentale
+    )
+    HLTH_AGING_IND = (
+        13100466  # Healthy aging indicators  // Indicateurs de vieillissement en santé
+    )
     NEURO_COND_IN_HH_POP = 13100467  # Neurological conditions in household population  // Problèmes neurologiques dans la population à domicile
     NEURO_COND_IN_INST = 13100468  # Neurological conditions in institutions  // Problèmes neurologiques dans les établissements
     BODY_MASS_IDX_MEAS_ADULTS = 13100469  # Body mass index, measured, adults  // Indice de masse corporelle mesuré chez les adultes
     BODY_MASS_IDX_MEAS_CHILD_AND_YOUTH = 13100470  # Body mass index, measured, children and youth  // Indice de masse corporelle mesuré chez les enfants et les jeunes
     PARTICIPATION_IN_PHYS_ACT_CHILD = 13100471  # Participation in physical activities, children  // Participation des enfants à des activités physiques
-    HH_FOOD_INSECURITY = 13100472  # Household food insecurity  // Insécurité alimentaire du ménage
+    HH_FOOD_INSECURITY = (
+        13100472  # Household food insecurity  // Insécurité alimentaire du ménage
+    )
     PARTICIPATION_IN_SEDENTARY_ACT_YOUTH = 13100473  # Participation in sedentary activities, youth  // Particpation des jeunes à des activités sédentaires
     VITAMIN_AND_MINERAL_SUPP_CONS_IN_THE_PAST_MON_BY_AGE_GRP = 13100474  # Vitamin and mineral supplements consumption in the past month, by age group  // Consommation de suppléments de vitamines et de minéraux au cours du dernier mois, selon le groupe d'âge
     REP_OCCASION_OF_FOOD_CONS = 13100475  # Reported occasion of food consumption  // Consommation alimentaire selon l'occasion déclarée
-    LOCATION_OF_FOOD_PREPARATION = 13100476  # Location of food preparation  // Lieu de préparation des aliments
+    LOCATION_OF_FOOD_PREPARATION = (
+        13100476  # Location of food preparation  // Lieu de préparation des aliments
+    )
     TOT_ENERGY_INTAKE_FROM_FAT_BY_DIETARY_AGE_SEX_REF_INTAKE_GRP = 13100477  # Total energy intake from fat, by dietary age-sex reference intake group  // Apport énergétique total provenant des lipides, selon le groupe âge-sexe des apports nutritionnels de référence
     TOT_ENERGY_INTAKE_FROM_PROTEIN_BY_DIETARY_AGE_SEX_REF_INTAKE_GRP = 13100478  # Total energy intake from protein, by dietary age-sex reference intake group  // Apport énergétique total provenant des protéines selon le groupe âge-sexe des apports nutritionnels de référence
     TOT_ENERGY_INTAKE_FROM_CARBOHYDRATES_BY_DIETARY_AGE_SEX_REF_INTAKE_GRP = 13100479  # Total energy intake from carbohydrates, by dietary age-sex reference intake group  // Apport énergétique total provenant des glucides, selon le groupe âge-sexe des apports nutritionnels de référence
@@ -992,11 +1025,15 @@ class ProductID(Enum):
     DIFFICULTIES_ACCESS_ROUTINE_OR_ON_GOING_CARE = 13100485  # Difficulties accessing routine or on-going care  // Difficultés d'accès à des soins de routine ou de suivi
     DIFFICULTIES_ACCESS_HLTH_INFO_OR_ADVICE = 13100486  # Difficulties accessing health information or advice  // Difficultés d'accès à de l'information ou des conseils en matière de santé
     DIFFICULTIES_ACCESS_IMMEDIATE_CARE_FOR_A_MIN_HLTH_PROB = 13100487  # Difficulties accessing immediate care for a minor health problem  // Difficultés d'accès à des soins immédiats pour un problème de santé mineur
-    BODY_MASS_IDX_BMI = 13100488  # Body mass index (BMI)  // Indice de masse corporelle (IMC)
+    BODY_MASS_IDX_BMI = (
+        13100488  # Body mass index (BMI)  // Indice de masse corporelle (IMC)
+    )
     PERC_HLTH = 13100489  # Perceived health  // Santé perçue
     LEISURE_TIME_PHYS_ACT = 13100490  # Leisure-time physical activity  // Activité physique durant les loisirs
     PAP_SMEAR = 13100491  # Pap smear  // Test de Pap
-    INFLUENZA_IMMUNIZATION = 13100492  # Influenza immunization  // Vaccination contre la grippe
+    INFLUENZA_IMMUNIZATION = (
+        13100492  # Influenza immunization  // Vaccination contre la grippe
+    )
     PATIENT_SATISFACTION_WITH_ANY_HLTH_CARE_SVC_RECEIVED_IN_PAST_12_MON = 13100493  # Patient satisfaction with any health care services received in past 12 months  // Satisfaction des patients à l'égard des services de soins de santé reçus au cours des 12 derniers mois
     PATIENT_SATISFACTION_WITH_MOST_RECENT_HOSPITAL_CARE_RECEIVED_IN_PAST_12_MON = 13100494  # Patient satisfaction with most recent hospital care received in past 12 months  // Satisfaction des patients à l'égard des plus récents soins hospitaliers reçus au cours des 12 derniers mois
     PATIENT_SATISFACTION_WITH_MOST_RECENT_FAM_DR_OR_OTHER_PHYSICIAN_CARE_RECEIVED_IN_PAST_12_MON = 13100495  # Patient satisfaction with most recent family doctor or other physician care received in past 12 months  // Satisfaction des patients à l'égard des plus récents soins reçus d'un médecin de famille ou d'un autre médecin au cours des 12 derniers mois
@@ -1214,12 +1251,16 @@ class ProductID(Enum):
     DEATHS_BY_MON = 13100708  # Deaths, by month  // Décès, selon le mois
     DEATHS_BY_AGE_GRP_AND_SEX = 13100709  # Deaths, by age group and sex  // Décès, selon le groupe d'âge et le sexe
     MORT_RATES_BY_AGE_GRP = 13100710  # Mortality rates, by age group  // Taux de mortalité, selon le groupe d'âge
-    DEATHS_BY_MARITAL_STS = 13100711  # Deaths, by marital status  // Décès, selon l'état matrimonial
+    DEATHS_BY_MARITAL_STS = (
+        13100711  # Deaths, by marital status  // Décès, selon l'état matrimonial
+    )
     INFANT_DEATHS_AND_MORT_RATES_BY_SEX = 13100712  # Infant deaths and mortality rates, by sex  // Mortalité infantile et taux de mortalité, selon le sexe
     INFANT_DEATHS_AND_MORT_RATES_BY_AGE_GRP = 13100713  # Infant deaths and mortality rates, by age group  // Mortalité infantile et taux de mortalité, selon le groupe d'âge
     PERINATAL_MORT = 13100714  # Perinatal mortality (late fetal deaths and early neonatal deaths)  // Mortalité périnatale (morts foetales tardives et décès néonatals précoces)
     DEATHS_BY_PLACE_OF_DEATH = 13100715  # Deaths, by place of death (hospital or non-hospital)  // Décès, selon le lieu de décès (en milieu hospitalier ou ailleurs qu'en milieu hospitalier)
-    DEATHS_SUBJECT_TO_AUTOPSY = 13100716  # Deaths subject to autopsy  // Décès assujettis à l'autopsie
+    DEATHS_SUBJECT_TO_AUTOPSY = (
+        13100716  # Deaths subject to autopsy  // Décès assujettis à l'autopsie
+    )
     LAB_FORCE_STS_FOR_PERS_WITH_DIABL_AGED_25_TO_64_YR_BY_DIABL_TYPE = 13100730  # Labour force status for persons with disabilities aged 25 to 64 years, by disability type (grouped)  // Situation d'activité pour les personnes ayant une incapacité âgées de 25 à 64 ans, selon le type d'incapacité (regroupé)
     TOT_INC_FOR_ADULTS_WITH_DIABL = 13100731  # Total income for adults with disabilities  // Revenu total des adultes avec incapacité
     OLD_AGE_SEC_PENS_AND_GUARANTEED_INC_SUPP_INC_FOR_ADULTS_WITH_DIABL = 13100732  # Old age security pension and guaranteed income supplement income for adults with disabilities  // Pension de la sécurité de la vieillesse et supplément de revenu garanti des adultes avec incapacité
@@ -1571,7 +1612,9 @@ class ProductID(Enum):
     UNION_STS_BY_GEO = 14100129  # Union status by geography  // Situation syndicale selon la géographie
     UNION_STS_BY_EDU_LVL = 14100130  # Union status by education level  // Situation syndicale selon le niveau de scolarité
     LAB_FORCE_SURV_EST_LFS_EMPLOY_BY_UNION_STS_AND_NATL_OCCUPATIONAL_CLASS_NOC_S_CAN_ANN = 14100131  # Labour Force Survey estimates (LFS), employees by union status and National Occupational Classification (NOC-S), Canada, annual  // Enquête sur la population active (EPA), employés selon la situation syndicale et la classification nationale des professions (CNP-S), Canada, annuel
-    UNION_STS_BY_IND = 14100132  # Union status by industry  // Situation syndicale selon l'industrie
+    UNION_STS_BY_IND = (
+        14100132  # Union status by industry  // Situation syndicale selon l'industrie
+    )
     UNION_STS_BY_ESTABLISH_SIZE = 14100133  # Union status by establishment size  // Situation syndicale selon la taille de l'établissement
     AVG_WKLY_EARN_AVG_HOURLY_WAGE_RATE_AND_AVG_USUAL_WKLY_HOURS_BY_UNION_STS_ANN = 14100134  # Average weekly earnings, average hourly wage rate and average usual weekly hours by union status, annual  // Salaire hebdomadaire moyen, taux de salaire horaire et heures habituelles hebdomadaires moyennes selon la situation syndicale, données annuelles
     EMPLOY_INS_BENEFICIARIES_BY_CEN_METRO_CAT_MON_UNADJUSTED_FOR_SEASONALITY_INACTIVE_1 = 14100137  # Employment insurance beneficiaries by census metropolitan category, monthly, unadjusted for seasonality, inactive  // Prestataires d'assurance-emploi par la catégorie métropolitaine de recensement, données mensuelles non désaisonnalisées, inactif
@@ -1712,8 +1755,12 @@ class ProductID(Enum):
     UNEMPL_RATE_CAN_PROV_HLTH_REG = 14100276  # Unemployment rate, Canada, provinces, health regions (2014 boundaries) and peer groups  // Taux de chômage, Canada, provinces, régions sociosanitaires (limites de 2014) et groupes de régions homologues
     TIME_LOST_IN_WORK_STOPPAGES_BY_IND_GRP = 14100277  # Time lost in work stoppages, by industry group  // Temps perdu en raison d'arrêts de travail, selon le groupe industriel
     AVG_ANN_PERCENTAGE_CHANGES_IN_BASE_RATES_FOR_NEW_SETTLEMENTS_COV_COLLECTIVE_BARGAINING_UNITS_OF_500_OR_MORE_EMPLOY = 14100278  # Average annual percentage changes in base rates for new settlements covering collective bargaining units of 500 or more employees  // Variations annuelles moyennes des taux de base, en pourcentage, dans les nouvelles conventions visant tous les groupes de négociations des 500 travailleurs ou plus
-    HELP_WANTED_IDX_ANN = 14100279  # Help-wanted index, annual  // L'indice de l'offre d'emploi, annuel
-    HELP_WANTED_IDX_MON = 14100280  # Help-wanted index, monthly  // L'indice de l'offre d'emploi, mensuel
+    HELP_WANTED_IDX_ANN = (
+        14100279  # Help-wanted index, annual  // L'indice de l'offre d'emploi, annuel
+    )
+    HELP_WANTED_IDX_MON = (
+        14100280  # Help-wanted index, monthly  // L'indice de l'offre d'emploi, mensuel
+    )
     MAJ_WAGE_SETTLEMENTS_BY_MAJ_IND_DIV_EMPLOY_AND_SOC_DEV_CAN = 14100281  # Major wage settlements, by major industry division, Employment and Social Development Canada - Labour Program  // Grands règlements salariaux, selon le grand secteur industriel, Emploi et Développement social Canada - Programme du Travail
     MAJ_WAGE_SETTLEMENTS_BY_REG_AND_OR_JURISDICTION_EMPLOY_AND_SOC_DEV_CAN = 14100282  # Major wage settlements, by region and/or jurisdiction, Employment and Social Development Canada - Labour Program  // Grands règlements salariaux, par région et/ou sphère de compétence, Emploi et Développement social Canada - Programme du Travail
     SRC_OF_INC_OF_ADULTS_WITH_AND_WITHOUT_DIABL = 14100283  # Sources of income of adults with and without disabilities  // Sources de revenus des adultes avec et sans incapacité
@@ -1984,12 +2031,16 @@ class ProductID(Enum):
     PRI_PROD_OF_IRON_AND_STEEL_AND_NET_SHIP_OF_STEEL_SHAPES_TO_CONS_IND = 16100059  # Primary production of iron and steel and net shipments of steel shapes to consuming industries  // La production primaire du fer et de l'acier et les livraisons nettes de l'acier dirigées aux industries consommatrices
     FOOTWEAR_PROD = 16100060  # Footwear production  // Production de chaussure
     EDIBLE_OILS_AND_FATS_WITH_DATA_FOR_YR_1995 = 16100061  # Edible oils and fats, with data for years 1995 - 2001  // Comestibles d'huile et de corps gras, avec des données pour les années 1995 - 2001
-    PROD_AND_STOCKS_OF_COFFEE = 16100062  # Production and stocks of coffee  // Production et stocks de café
+    PROD_AND_STOCKS_OF_COFFEE = (
+        16100062  # Production and stocks of coffee  // Production et stocks de café
+    )
     PROD_OF_IND_CHEM_AND_SYNTHETIC_RESINS = 16100063  # Production of industrial chemicals and synthetic resins  // Production de produits chimiques industriels et de résines synthétiques
     SUGAR = 16100064  # Sugar (cane and beet) statistics  // Statistiques du sucre (canne et betterave)
     PROD_OF_NEW_MOTOR_VEHIC = 16100066  # Production of new motor vehicles  // Production de véhicules automobiles neufs
     NEWSPRINT_PROD = 16100067  # Newsprint production  // Production de papier journal
-    PROD_OF_GYPSUM_PROD = 16100068  # Production of gypsum products  // Production de produits de gypse
+    PROD_OF_GYPSUM_PROD = (
+        16100068  # Production of gypsum products  // Production de produits de gypse
+    )
     PROD_AND_SHIP_OF_PHONOGRAPH_REC_AND_PRE_REC_TAPES = 16100069  # Production and shipments of phonograph records and pre-recorded tapes  // Production et livraisons de disques de phonographe et rubans pré-enregistrés
     PROD_AND_STOCKS_OF_TEA_COFFEE_COCOA_AND_PROC_CHEESE = 16100070  # Production and stocks of tea, coffee, cocoa and process cheese  // Production et stocks de thé, café et cacao et de fromage fondu
     FOOTWEAR_PROD_BY_TYPE_OF_FOOTWEAR = 16100071  # Footwear production, by type of footwear  // Production de chaussure, selon le type chaussure
@@ -2017,7 +2068,9 @@ class ProductID(Enum):
     DOM_TYPE_MECH_REFRIGERATORS_AND_FREEZERS = 16100094  # Domestic type mechanical refrigerators and freezers  // Réfrigérateurs et congélateurs mécaniques ménagers
     PROD_SALES_AND_STOCKS_OF_ELEC_HH_APPL = 16100095  # Production, sales and stocks of electric household appliances  // Production, ventes et stocks d'appareils électroménagers
     EDIBLE_OILS_AND_FATS_WITH_DATA_FOR_YR_1949 = 16100096  # Edible oils and fats, with data for years 1949 - 1995  // Fabricants d'aliments comestibles d'huile et de corps gras, avec des données pour les années 1949 - 1995
-    CONFECTIONERY_STAT = 16100097  # Confectionery statistics  // Statistique sur la confiserie
+    CONFECTIONERY_STAT = (
+        16100097  # Confectionery statistics  // Statistique sur la confiserie
+    )
     BISCUITS_AND_CONES_PROD_SEMI_ANN = 16100098  # Biscuits and cones production, semi-annual  // Production de biscuits et de cornets, données semi-annuelles
     SOFT_DRINK_PROD_MON_WITH_DATA_FOR_YR_1976 = 16100099  # Soft drinks production, monthly, with data for years 1976 - 1995  // Production de boissons gazeuses, données mensuelles, pour les années 1976 - 1995
     SOFT_DRINK_PROD_ANN = 16100100  # Soft drinks production, annual  // Production de boissons gazeuses, données annuelles
@@ -2025,7 +2078,9 @@ class ProductID(Enum):
     PROD_AND_SHIP_OF_FLOOR_TILES = 16100102  # Production and shipments of floor tiles  // Production et livraisons de carreaux et dalles pour sols
     FAC_SHIP_TO_DOM_CUST_ONLY_OF_HIGH_PRES_DEC_LAMINATE_SHEET = 16100103  # Factory shipments to domestic customers only of high pressure decorative laminate sheet  // Livraisons à la manufacture, aux clients canadiens seulement, de feuilles ornementales stratifiées sous haute pression
     NET_SHIP_OF_STEEL_SHAPES = 16100104  # Net shipments of steel shapes  // Livraisons nettes de profilés d'acier
-    PROC_CHEESE_PROD = 16100105  # Process cheese production  // Production de fromage refait
+    PROC_CHEESE_PROD = (
+        16100105  # Process cheese production  // Production de fromage refait
+    )
     PROD_AND_SHIP_OF_SUGAR = 16100106  # Production and shipments of sugar  // Production et livraisons du sucre
     FOOTWEAR_PROD_QTR = 16100107  # Footwear production, quarterly  // Production de chaussures, données trimestrielles
     FOOTWEAR_PROD_MON = 16100108  # Footwear production, monthly  // Production de chaussures, données mensuelles
@@ -2165,7 +2220,9 @@ class ProductID(Enum):
     COMP_OF_POP_CHANGE_BY_CEN_DIV_2016_BOUNDARIES_INACTIVE = 17100140  # Components of population change by census division, 2016 boundaries, inactive  // Composantes de l'accroissement démographique, selon la division de recensement, limites de 2016, inactif
     INTERPROVINCIAL_AND_INTRAPROVINCIAL_MIG_BY_CEN_METRO_AREA_AND_CEN_AGGLOMERATION_OF_ORIG_AND_DEST_2016_BOUNDARIES_INACTIVE = 17100141  # Interprovincial and intraprovincial migrants, by census metropolitan area and census agglomeration of origin and destination, 2016 boundaries, inactive  // Migrants interprovinciaux et intraprovinciaux, selon la région métropolitaine de recensement et l'agglomération de recensement, limites de 2016, inactif
     POP_EST_JULY_1_BY_CEN_SUBDIVISION_2016_BOUNDARIES_INACTIVE = 17100142  # Population estimates, July 1, by census subdivision, 2016 boundaries, inactive  // Estimations de la population, 1er juillet, selon la subdivision de recensement, limites de 2016, inactif
-    IDX_OF_REMOTENESS_2016 = 17100143  # Index of Remoteness, 2016  // Indice d'éloignement, 2016
+    IDX_OF_REMOTENESS_2016 = (
+        17100143  # Index of Remoteness, 2016  // Indice d'éloignement, 2016
+    )
     PROJ_POP_BY_INDIG_ID_AGE_GRP_SEX_AREA_OF_RES_PROV_AND_TERR_AND_PROJ_SCENARIO_CAN = 17100144  # Projected population by Indigenous identity, age group, sex, area of residence, provinces and territories, and projection scenario, Canada  // Population projetée selon l'identité autochtone, le groupe d'âge, le sexe, la région de résidence, les provinces et les territoires, et le scénario de projection, Canada
     PROJ_POP_BY_INDIG_ID = 17100145  # Projected population by Indigenous identity (variant prioritizing the Registered or Treaty Indian status), age group, sex, area of residence, provinces and territories, and projection scenario, Canada  // Population projetée selon l'identité autochtone (variante donnant préséance au statut d'Indien inscrit ou des traités), le groupe d'âge, le sexe, la région de résidence, les provinces et les territoires, et le scénario de projection, Canada
     PROJ_POP_BY_RACIALIZED_GRP_GEN_STS_AND_OTHER_SEL_CHAR = 17100146  # Projected population by racialized group, generation status and other selected characteristics  // Population projetée selon le groupe racisé, le statut des générations, et certaines caractéristiques sélectionnées
@@ -2242,7 +2299,9 @@ class ProductID(Enum):
     MACH_AND_EQUIP_PRICE_IDX_BY_COMM_QTR_INACTIVE = 18100057  # Machinery and equipment price index, by commodity, quarterly, inactive  // Indice des prix des machines et du matériel, selon le produit, trimestriel, inactif
     MACH_AND_EQUIP_PRICE_IDX_BY_IND_OF_PURCH_QTR_INACTIVE = 18100058  # Machinery and equipment price index, by industry of purchase, quarterly, inactive  // Indice des prix des machines et du matériel, par industrie d'achat, trimestriel, inactif
     COMM_SOFT_PRICE_IDX_MON = 18100061  # Commercial software price index, monthly  // Indice des prix des logiciels commerciaux, mensuel
-    COMP_PRICE_IDX = 18100062  # Computer price index  // Indice des prix des ordinateurs
+    COMP_PRICE_IDX = (
+        18100062  # Computer price index  // Indice des prix des ordinateurs
+    )
     COMP_PERIPH_PRICE_IDX = 18100063  # Computer peripheral price index (2011=100)  // Indice des prix des périphériques des ordinateurs (2011=100)
     COMM_AND_IND_MACH_AND_EQUIP_RENT_AND_LEASE_SVC_PRICE_IDX_QTR_INACTIVE = 18100064  # Commercial and industrial machinery and equipment rental and leasing services price index, quarterly, inactive  // Indice des prix des services de location et de location à bail de machines et de matériel d'usage commercial et industriel, trimestriel, inactif
     COMM_RENT_SVC_PRICE_IDX_QTR_INACTIVE = 18100065  # Commercial rents services price index, quarterly, inactive  // Indice des prix des services des loyers commerciaux, trimestriel, inactif
@@ -2269,7 +2328,9 @@ class ProductID(Enum):
     MACH_AND_EQUIP_PRICE_IDX_MEPI_BY_IND_OF_PURCH_1971_100 = 18100087  # Machinery and equipment price indexes (MEPI), by industry of purchase (1971=100)  // Indices des prix des machines et du matériel (IPMM), selon les achats des industries (1971=100)
     MACH_AND_EQUIP_PRICE_IDX_MEPI_QTR_1971_100 = 18100088  # Machinery and equipment price indexes (MEPI), quarterly (1971=100)  // Indices des prix des machines et du matériel (IPMM), trimestriel (1971=100)
     MACH_AND_EQUIP_PRICE_IDX_MEPI_BY_COMM_LVL_323_SPEC_PURPOSE_1971_100 = 18100089  # Machinery and equipment price indexes (MEPI), by commodity level 323, special purpose (1971=100)  // Indices de prix des machines et matériel (IPMM), par produit niveau L323, machines et matériel, usage spécialisé (1971=100)
-    SEL_FIN_IDX_1 = 18100090  # Selected financial indexes  // Certains indices financiers
+    SEL_FIN_IDX_1 = (
+        18100090  # Selected financial indexes  // Certains indices financiers
+    )
     RES_AND_NONRESIDENTIAL_CONST_BLDG_MAT_PRICE_IDX_BY_ACT_GRP = 18100091  # Residential and nonresidential construction building material price indexes, by activity groups  // Indices des prix des matériaux de la construction résidentielle et non résidentielle, selon les catégories d'activité
     ELEC_UTIL_CONST_PRICE_IDX_EUCPI_1971_100 = 18100092  # Electric utility construction price indexes (EUCPI) (1971=100)  // Indices des prix de la construction dans les services d'électricité (IPCSE) (1971=100)
     CHEM_AND_MINERAL_PROC_PLT_IDX = 18100093  # Chemical and mineral process plant indexes  // Indices des prix des installations de traitement des produits chimiques et minéraux
@@ -2344,9 +2405,13 @@ class ProductID(Enum):
     IND_PROD_PRICE_IDX_FOR_CHEM_PROD_AND_MISCELLANEOUS_MFG_PROD_IND_1981_100 = 18100165  # Industrial product price indexes for chemical products and miscellaneous manufactured products industries (1981=100)  // Indices des prix des produits industriels pour les industries des produits chimiques et les produits manufacturés divers (1981=100)
     INVEST_BANK_SVC_PRICE_IDX_ANN = 18100166  # Investment banking services price index, annual  // Indice des prix des services bancaires d'investissement, annuel
     IND_PROD_PRICE_IDX_BY_IND_AND_IND_GRP_1981_100 = 18100167  # Industrial product price indexes, by industry and industry group (1981=100)  // Indices des prix des produits industriels, selon l'industrie et le groupe industriel (1981=100)
-    IRON_ORE_IDX_MON = 18100168  # Iron ore index, monthly  // Indices de minerai de fer, mensuel
+    IRON_ORE_IDX_MON = (
+        18100168  # Iron ore index, monthly  // Indices de minerai de fer, mensuel
+    )
     RES_PROP_PRICE_IDX_QTR_INACTIVE = 18100169  # Residential property price index, quarterly, inactive  // Indice des prix des propriétés résidentielles, trimestriel, inactif
-    IRON_ORE_IDX_ANN = 18100170  # Iron ore index, annual  // Indice de minerai de fer, annuel
+    IRON_ORE_IDX_ANN = (
+        18100170  # Iron ore index, annual  // Indice de minerai de fer, annuel
+    )
     RES_PROP_PRICE_IDX_ANN_WEIGHTS_INACTIVE = 18100171  # Residential property price index, annual weights, inactive  // Indice des prix des propriétés résidentielles, pondérations annuelles, inactif
     IND_SELLING_PRICE_IDX_BY_IND_AND_SEL_COMM_BASED_ON_THE_STD_IND_CLASS_1970 = 18100172  # Industry selling price indexes, by industry and selected commodities based on the Standard Industrial Classification, 1970 (SIC)  // Indices des prix de vente dans l'industrie, selon l'industrie et pour certains produits fondées sur la Classification types des industries, 1970 (CTI)
     RET_SVC_PRICE_IDX_RELATIVE_IMPORTANCE = 18100173  # Retail services price index, relative importance  // Indice des prix des services du commerce de détail, importance relative
@@ -2386,7 +2451,9 @@ class ProductID(Enum):
     COMP_PERIPH_PRICE_IDX_MON = 18100208  # Computer peripheral price index, monthly  // Indice des prix des périphériques d'ordinateurs, mensuel
     SMART_PHONE_PRICE_IDX_MON = 18100209  # Smart phone price index, monthly  // Indice des prix des téléphones intelligents, mensuel
     NEW_HOUSING_PRICE_IDX_ANN_WEIGHTS = 18100210  # New housing price index, annual weights  // Indice des prix des logements neufs, pondérations annuelles
-    CANNABIS_CONS_PRICES = 18100211  # Cannabis consumer prices  // Prix du cannabis pour les consommateurs
+    CANNABIS_CONS_PRICES = (
+        18100211  # Cannabis consumer prices  // Prix du cannabis pour les consommateurs
+    )
     FREIGHT_RAIL_SVC_PRICE_IDX_MON = 18100212  # Freight Rail Services Price Index, monthly  // Indice des prix des services de transport ferroviaire de marchandises, mensuel
     IND_PRICE_IDX_FOR_MACH_AND_EQUIP_MOTOR_VEHIC_AND_OTHER_TRANSPORT_EQUIP_2002_100 = 18100213  # Industry price indexes for machinery and equipment, motor vehicles and other transport equipment (2002=100)  // Indices des prix de l'industrie pour machines et matériel, véhicules automobiles et autre matériel de transport (2002=100)
     IND_PRICE_IDX_FOR_ELEC_AND_COMM_PROD_NONMETALLIC_MINERAL_PROD_PETRO_AND_COAL_PROD_2002_100 = 18100214  # Industry price indexes for electrical and communication products, nonmetallic mineral products, petroleum and coal products (2002=100)  // Indices des prix de l'industrie pour produits électriques et de communication, produits minéraux nonmétalliques, produits du pétrole et charbon (2002=100)
@@ -2536,7 +2603,9 @@ class ProductID(Enum):
     SURV_OF_LG_RET_INACTIVE = 20100073  # Survey of large retailers, inactive  // Enquête sur les détaillants majeurs, inactif
     WHOLE_TRADE_SALES = 20100074  # Wholesale trade, sales  // Commerce de gros, ventes
     ANN_WHOLE_TRADE_SURV_FIN_EST_BY_THE_NORTH_AMERICAN_IND_CLASS_SYS = 20100075  # Annual wholesale trade survey, financial estimates by the North American Industry Classification System (NAICS), inactive  // Enquête annuelle sur le commerce de gros, estimations financières par le Système de classification des industries de l'Amérique du Nord (SCIAN), inactif
-    WHOLE_TRADE_INVENT = 20100076  # Wholesale trade, inventories  // Commerce de gros, stocks
+    WHOLE_TRADE_INVENT = (
+        20100076  # Wholesale trade, inventories  // Commerce de gros, stocks
+    )
     ANN_WHOLE_TRADE_SURV_FIN_EST = 20100077  # Annual wholesale trade survey, financial estimates  // Enquête annuelle sur le commerce de gros, estimations financières
     RET_SALES_PRICE_AND_VOL_SEASONALLY_ADJ_INACTIVE = 20100078  # Retail sales, price, and volume, seasonally adjusted, inactive  // Ventes au détail, prix et volume, désaisonnalisées, inactif
     HIST_REAL_TIME_REL_OF_RET_SALES_PRICE_AND_VOL_INACTIVE = 20100079  # Historical (real-time) releases of retail sales, price, and volume, inactive  // Diffusions historiques (temps réel) des ventes au détail, prix et volume, inactif
@@ -2727,7 +2796,9 @@ class ProductID(Enum):
     MOT_PICT_THEAT_SUMMARY_STAT = 21100178  # Motion picture theatres, summary statistics  // Cinémas, statistiques sommaires
     MOT_PICT_THEAT_IND_EXP = 21100179  # Motion picture theatres, industry expenditures  // Cinémas, dépenses de l'industrie
     MOT_PICT_THEAT_THEAT_OPER = 21100180  # Motion picture theatres, theatre operations  // Cinémas, exploitation du cinéma
-    MOT_PICT_THEAT_SALES = 21100181  # Motion picture theatres, sales  // Cinémas, ventes
+    MOT_PICT_THEAT_SALES = (
+        21100181  # Motion picture theatres, sales  // Cinémas, ventes
+    )
     PERF_ART_SUMMARY_STAT = 21100182  # Performing arts, summary statistics  // Arts de la scène, statistiques sommaires
     PERF_ART_IND_EXP = 21100183  # Performing arts, industry expenditures  // Arts de la scène, dépenses de l'industrie
     PERF_ART_SAL_EXP_AND_VOL_STAT_NOT_FOR_PROFIT = 21100184  # Performing arts, salary expenses and volunteer statistics, not-for-profit  // Arts de la scène, statistiques sur les dépenses en salaires et le bénévolat, à but non lucratif
@@ -2809,7 +2880,9 @@ class ProductID(Enum):
     CYBER_SEC_MEAS_ENT_HAVE_IN_PLACE_BY_IND_AND_SIZE_OF_ENT = 22100001  # Cyber security measures enterprises have in place by industry and size of enterprise  // Mesures de cybersécurité mises en place par les entreprises par industrie et taille de l’entreprise
     INET_SVC_PROV_SUMMARY_STAT_BY_IND = 22100002  # Internet service providers, summary statistics by industry  // Fournisseurs de services internet, statistique sommaires, selon l'industrie
     TELECOM_STAT_BY_OPER_AND_FIN_DETAIL_AND_NORTH_AMERICAN_IND_CLASS = 22100003  # Telecommunications statistics, by operating and financial detail and North American Industrial Classification (NAICS)  // Statistiques de télécommunications, selon le détail d'exploitation et financier et le Système de classification des industries de l'Amérique du Nord (SCIAN)
-    TV_BCAST_IND = 22100004  # Television broadcasting industry  // Industries de la télédiffusion
+    TV_BCAST_IND = (
+        22100004  # Television broadcasting industry  // Industries de la télédiffusion
+    )
     RADIO_BCAST_IND_BY_OPER_AND_FIN_DETAIL = 22100005  # Radio broadcasting industry by operating and financial detail  // Industries de la radiodiffusion selon le détail d'exploitation et financier
     RADIO_BCAST_IND_BY_TYPE_OF_BCAST = 22100006  # Radio broadcasting industry, by type of broadcaster  // Industries de la radiodiffusion, selon le type de diffuseur
     HH_ACCESS_TO_THE_INET_AT_HOME_BY_HH_INC_QUARTILE_AND_GEO_INACTIVE = 22100007  # Household access to the Internet at home, by household income quartile and geography, inactive  // Accès d'un ménage à Internet au domicile, selon le quartile de revenu du ménage et la géographie, inactif
@@ -2895,8 +2968,12 @@ class ProductID(Enum):
     SOFT_DEV_AND_COMP_SVC_IND_EXP = 22100088  # Software development and computer services, industry expenditures  // Développement de logiciels et les services informatiques, dépenses de l'industrie
     SOFT_DEV_AND_COMP_SVC_SALES_BY_TYPE_OF_CLI = 22100089  # Software development and computer services, sales by type of client  // Développement de logiciels et les services informatiques, ventes selon le type de client
     COMP_SUMMARY_OF_TELEPHONE_STAT = 22100090  # Comparative summary of telephone statistics  // Statistique comparée du téléphone
-    TELEPHONE_STAT_ANN = 22100091  # Telephone statistics, annual  // Statistique du téléphone, annuel
-    TELEPHONE_STAT_MON = 22100092  # Telephone statistics, monthly  // Statistique du téléphone, mensuel
+    TELEPHONE_STAT_ANN = (
+        22100091  # Telephone statistics, annual  // Statistique du téléphone, annuel
+    )
+    TELEPHONE_STAT_MON = (
+        22100092  # Telephone statistics, monthly  // Statistique du téléphone, mensuel
+    )
     TV_VIEWING_TIME_BY_VIEWER_DEMO_CHAR_SIGNAL_SRC_AND_CONT_OF_PROG = 22100093  # Television viewing time, by viewer demographic characteristics, signal source and content of programme  // Heures d'écoute à la télévision, selon les caractéristiques démographiques des téléspectateurs, l'origine du signal et le contenu d'émission
     AVG_HOURS_PER_WKLY_OF_TV_VIEWING_BY_SEL_AGE_GRP = 22100094  # Average hours per week of television viewing, by selected age groups  // Nombre moyen hebdomadaire d'heures d'écoute de la télévision, selon des groupes d'âge séléctionés
     AVG_HOURS_PER_WKLY_OF_TV_VIEWING_BY_SEX_AND_SEL_AGE_GRP = 22100095  # Average hours per week of television viewing, by sex and selected age groups  // Nombre moyen hebdomadaire d'heures d'écoute de la télévision, selon le sexe et des groupes d'âge séléctionés
@@ -3253,7 +3330,9 @@ class ProductID(Enum):
     TRVL_SURV_OF_RES_OF_CAN_REALLOCATED_EXP_BY_TRVL_CHAR_2011 = 24100022  # Travel survey of residents of Canada, reallocated expenditures, by travel characteristics, 2011 - 2012  // Enquête sur les voyages des résidents du Canada, dépenses redistribuées, selon les caractéristiques des voyages, 2011 - 2012
     TRVL_SURV_OF_RES_OF_CAN_TYPE_OF_EXP_BY_VISIT_DURATION = 24100023  # Travel survey of residents of Canada, type of expenditures, by visit duration  // Enquête sur les voyages des résidents du Canada, types de dépenses, par la durée de la visite
     TYPE_OF_EXP_MADE_BY_CAN_RES_BY_PROV_VISITED_AND_VISIT_DURATION_INACTIVE = 24100024  # Type of expenditures made by Canadian residents, by province visited and visit duration, inactive  // type de dépenses faites par les résidents du Canada, par province visitée et durée de la visite, inactif
-    TRVL_PRICE_IDX_ANN = 24100025  # Travel price index, annual  // Indice de prix des voyages, annuel
+    TRVL_PRICE_IDX_ANN = (
+        24100025  # Travel price index, annual  // Indice de prix des voyages, annuel
+    )
     TRVL_PRICE_IDX_QTR = 24100026  # Travel price index, quarterly  // Indice de prix des voyage, trimestriel
     NUM_OF_DOM_TRIPS_MADE_BY_CAN_RES_BY_TRIP_CHAR_INACTIVE = 24100027  # Number of domestic trips made by Canadian residents, by trip characteristics, inactive  // Nombre de voyages domestiques faits par les résidents du Canada, par caractéristiques des voyages, inactif
     NUM_OF_DOM_TRIPS_MADE_BY_CAN_RES_BY_TRVL_CHAR_INACTIVE = 24100028  # Number of domestic trips made by Canadian residents, by traveller characteristics, inactive  // Nombre de voyages domestiques faits par les résidents du Canada, par caractéristiques des voyageurs, inactif
@@ -3322,7 +3401,9 @@ class ProductID(Enum):
     SUPP_AND_DEMAND_OF_PRI_AND_SEC_ENERGY_IN_NAT_UNITS = 25100030  # Supply and demand of primary and secondary energy in natural units  // Disponibilité et écoulement d'énergie primaire et secondaire en unités naturelles
     CONS_OF_SOLID_WOOD_WASTE_AND_SPEND_PULPING_LIQUOR_FOR_ENERGY_PROD_ANN = 25100031  # Consumption of solid wood waste and spent pulping liquor for energy production, annual  // Consommation de déchets de bois et de lessive de pâte épuisée pour la production d'énergie, annuel
     NAT_GAS_UTIL_MON_RECPT_AND_DISP = 25100032  # Natural gas utilities, monthly receipts and disposition  // Gaz naturel, arrivages et utilisation, mensuel
-    NAT_GAS_MON_SALES = 25100033  # Natural gas, monthly sales  // Gaz naturel, ventes mensuelles
+    NAT_GAS_MON_SALES = (
+        25100033  # Natural gas, monthly sales  // Gaz naturel, ventes mensuelles
+    )
     NAT_GAS_TO_AND_FROM_THE_USA_MON_EXPORTS_AND_IMPORTS_CAN = 25100034  # Natural gas to and from the United States, monthly exports and imports, Canada  // Gaz naturel avec les États-Unis, commerce d'exportation et d'importation mensuel, Canada
     CAN_NAT_GAS_CARRIERS_MON_OPER_STAT = 25100035  # Canadian natural gas carriers, monthly operating statistics  // Gaz naturel canadien, statistiques d'exploitation des transporteurs, mensuel
     NAT_GAS_LIQUIDS_AND_SULPHUR_PROD_FROM_PROC_PLT_MON_SUPP = 25100036  # Natural gas liquids and sulphur products from processing plants, monthly supply  // Produits de liquides du gaz naturel et de soufre en provenance des usines de traitement, approvisionnement mensuel
@@ -3337,7 +3418,9 @@ class ProductID(Enum):
     COAL_COKE_PLT_MON_STAT = 25100045  # Coal coke plant, monthly statistics  // Usines de coke de charbon, statistiques mensuelles
     COAL_MON_PROD_AND_EXPORTS = 25100046  # Coal, monthly production and exports  // Charbon, production et exportations, mensuel
     NAT_GAS_MON_SUPP_AND_DISP = 25100047  # Natural gas, monthly supply and disposition  // Gaz naturel, approvisionnements et utilisations mensuel
-    COAL_AND_COKE_STAT = 25100048  # Coal and coke statistics  // Statistiques du charbon et du coke
+    COAL_AND_COKE_STAT = (
+        25100048  # Coal and coke statistics  // Statistiques du charbon et du coke
+    )
     ELEC_PWR_STAT_WITH_DATA_FOR_YR_1950_1984 = 25100049  # Electric power statistics, with data for years 1950 - 1984  // Statistiques de l'énergie électrique, avec des données pour les années 1950 - 1984
     INTL_OIL_PROD_AND_PROVED_RESERVES = 25100050  # International oil production and proved reserves  // Production et réserves prouvées du pétrole internationales
     INTL_NAT_GAS_PROD_AND_PROVED_RESERVES = 25100051  # International natural gas production and proved reserves  // Production et réserves prouvées du gaz naturel internationales
@@ -3810,7 +3893,9 @@ class ProductID(Enum):
     EST_AREAS_YIELD_PROD_OF_CORN_FOR_GRAIN_AND_SOYBEANS_USING_GENETICALLY_MOD_SEED_IN_METRIC_AND_IMPERIAL_UNITS = 32100042  # Estimated areas, yield, production of corn for grain and soybeans, using genetically modified seed, in metric and imperial units  // Estimations de la superficie, du rendement, de la production de maïs-grain et de soya, en utilisant des semences génétiquement modifiées, en unités métriques et impériales
     FORAGE_SEED_USAGE_BY_TYPE_OF_SEED = 32100043  # Forage seed usage by type of seed  // Utilisation des semences fourragères selon le type de semences
     NORMALIZED_DIFF_VEGETATION_IDX_AT_ONE_KILOMETRE_RESOLUTION_BY_LAND_USE_TYPE_FOR_AGRICULTURAL_AREAS_OF_CAN = 32100044  # Normalized difference vegetation indices at one kilometre resolution by land use type for agricultural areas of Canada  // Indices de végétation par différence normalisée à un kilomètre de résolution selon le type d'utilisation du sol pour les zones agricoles du Canada
-    FARM_CASH_RECPT_ANN = 32100045  # Farm cash receipts, annual  // Recettes monétaires agricoles, annuel
+    FARM_CASH_RECPT_ANN = (
+        32100045  # Farm cash receipts, annual  // Recettes monétaires agricoles, annuel
+    )
     FARM_CASH_RECPT_QTR = 32100046  # Farm cash receipts, quarterly  // Recettes monétaires agricoles, trimestriel
     EVAL_PER_ACRE_OF_FARM_LAND_AND_BLDG_AT_JULY_1 = 32100047  # Value per acre of farm land and buildings at July 1  // Valeur par acre des terrains et bâtiments agricoles, 1 juillet
     AGRIC_EVAL_ADDED_ACCT = 32100048  # Agriculture value added account  // Compte de la valeur ajoutée agricole
@@ -3819,8 +3904,12 @@ class ProductID(Enum):
     FARM_DEBT_OUTSTANDING_CLASS_BY_LEND = 32100051  # Farm Debt Outstanding, classified by lender  // La dette agricole en cours, classée par source de crédit
     NET_FARM_INC = 32100052  # Net farm income  // Revenu agricole net
     SUPP_AND_DISP_OF_FOOD_IN_CAN = 32100053  # Supply and disposition of food in Canada  // Offre et utilisation d'aliments au Canada
-    FOOD_AVAIL_IN_CAN = 32100054  # Food available in Canada  // Aliments disponibles au Canada
-    FARM_INC_IN_KIND_IN_CAN = 32100055  # Farm income in kind in Canada  // Revenu agricole en nature
+    FOOD_AVAIL_IN_CAN = (
+        32100054  # Food available in Canada  // Aliments disponibles au Canada
+    )
+    FARM_INC_IN_KIND_IN_CAN = (
+        32100055  # Farm income in kind in Canada  // Revenu agricole en nature
+    )
     BAL_SHEET_OF_THE_AGRICULTURAL_SECT_AS_AT_DEC_31ST = 32100056  # Balance sheet of the agricultural sector as at December 31st  // Bilan du secteur agricole, au 31 décembre
     TOT_AND_AVG_OFF_FARM_INC_BY_SRC = 32100057  # Total and average off-farm income by source  // Revenu hors ferme total et moyen selon la source et bénéfice net d'exploitation total
     TOT_AND_AVG_OFF_FARM_INC_AND_NET_OPER_INC_OF_FARM_FAM = 32100058  # Total and average off-farm income and net operating income of farm families  // Revenu hors ferme total et moyen selon la source et bénéfice net d'exploitation total et moyen des familles agricoles
@@ -3896,7 +3985,9 @@ class ProductID(Enum):
     NUM_OF_SHEEP_AND_LAMBS_ON_FARM = 32100129  # Number of sheep and lambs on farms  // Moutons et agneaux, nombre dans les fermes
     NUM_OF_CATTLE_BY_CLASS_AND_FARM_TYPE = 32100130  # Number of cattle, by class and farm type  // Nombre de bovins, selon la classe et le type d'exploitation agricole
     MILLED_WHEAT_AND_WHEAT_FLOUR_PROD_CAN_AND_USA = 32100131  # Milled wheat and wheat flour produced, Canada and United States  // Blé moulu et farine de blé produite, Canada et États-Unis
-    PROD_OF_BUTTERFAT = 32100132  # Production of butterfat  // Production de la matière grasse
+    PROD_OF_BUTTERFAT = (
+        32100132  # Production of butterfat  // Production de la matière grasse
+    )
     REP_OF_PROC_EGGS_PROD = 32100133  # Report of processed eggs production  // Rapport de la production d'oeufs transformés
     LAYING_TYPE_PULLET_CHICK_PLACEMENTS = 32100134  # Laying type pullet, chick placements  // Placements de poussins femelles du type de ponte
     REP_OF_PROC_EGGS_PROD_IN_CAN = 32100135  # Report of processed eggs production in Canada  // Rapport de la production d'oeufs transformés au Canada
@@ -4023,7 +4114,9 @@ class ProductID(Enum):
     PEACHES_PEARS_GRAPES_PLUMS_AND_PRUNES_PROD_AND_EVAL = 32100266  # Peaches, pears, grapes, plums and prunes, production and value  // Pêches, poires, raisins, prunes et pruneaux, production et valeur
     RASPBERRIES_AND_STRAWBERRIES_PROD_AND_EVAL = 32100267  # Raspberries and strawberries, production and value  // Framboises et fraises, production et valeur
     PASTURE_AREA = 32100268  # Pasture area  // Superficie des pâturages
-    CUSTOMS_EXPORTS_OF_WHEAT_FLOUR = 32100269  # Customs exports of wheat flour  // Volume dédouané de farine de blé
+    CUSTOMS_EXPORTS_OF_WHEAT_FLOUR = (
+        32100269  # Customs exports of wheat flour  // Volume dédouané de farine de blé
+    )
     SUPP_AND_DISP_OF_CORN_CAN_AND_SEL_PROV = 32100270  # Supply and disposition of corn, Canada and selected provinces  // Bilan du maïs, Canada et certaines provinces
     CAN_FERTILIZER_MKT_INVENT_BY_PROD_TYPE = 32100271  # Canadian fertilizer market inventories, by product type  // Stocks d'engrais au Canada, selon le type de produit
     CAN_FERTILIZER_PROD_BY_PROD_TYPE_AND_FERTILIZER_YR = 32100272  # Canadian fertilizer production, by product type and fertilizer year  // Production d'engrais au Canada, selon le type de produit et la campagne de fertilisation
@@ -4033,7 +4126,9 @@ class ProductID(Enum):
     FARM_CASH_RECPT = 32100276  # Farm cash receipts  // Recettes monétaires agricoles
     TOT_CASH_RECPT_FROM_FARM_OPER = 32100277  # Total cash receipts from farming operations  // Total des recettes monétaires provenant de l'exploitation agricole
     FARM_OPER_EXP_AND_DEPR_CHARGES_BY_ITEM = 32100278  # Farm operating expenses and depreciation charges, by item  // Dépenses d'exploitation et d'amortissement, par article
-    IDX_OF_FARM_PROD = 32100279  # Index of farm production  // Indice de la production agricole
+    IDX_OF_FARM_PROD = (
+        32100279  # Index of farm production  // Indice de la production agricole
+    )
     SUB_IDX_OF_CROP_AND_LIVESTOCK_PROD = 32100280  # Sub-indexes of crop and livestock production  // Sous-indices de la production des cultures et du bétail
     FARM_WAGES = 32100281  # Farm wages  // Salaires agricoles
     FOOD_AVAIL_BY_MAJ_GRP_IN_CAN = 32100282  # Food available by major groups in Canada  // Aliments disponibles selon les principaux groupes au Canada
@@ -4066,7 +4161,9 @@ class ProductID(Enum):
     FIELD_CROPS_AND_HAY_CEN_OF_AGRIC_2021 = 32100309  # Field crops and hay, Census of Agriculture, 2021  // Grandes cultures et foin, Recensement de l’agriculture, 2021
     AVG_FARM_EVAL_OF_MILK_AND_OTHER_SEL_DAIRY_PROD = 32100310  # Average farm value of milk and other selected dairy products  // Valeur moyenne à la ferme de la production du lait et de certaines autres produits laitiers
     AVG_FARM_EVAL_OF_MILK_CREAM_AND_FARM_BUTTER_SOLD_BY_FARM = 32100311  # Average farm value of milk, cream and farm butter, sold by farmers  // Valeur moyenne à la ferme de la production du lait, de la crème et du beurre fermier vendus par les agriculteurs
-    INSPECTED_SLAUGHTER_OF_LIVESTOCK = 32100312  # Inspected slaughter of livestock  // Abattage inspecte de bétail
+    INSPECTED_SLAUGHTER_OF_LIVESTOCK = (
+        32100312  # Inspected slaughter of livestock  // Abattage inspecte de bétail
+    )
     CANNED_MEATS_AND_LARD_PROD_SUPP_AND_DISAPPEARANCE = 32100313  # Canned meats and lard, production, supply and disappearance  // Viandes en boîtes et saindoux, production, approvisionnement et écoulement
     WOOL_PROD_AND_SUPP = 32100314  # Wool, production and supply  // Laine, production et approvisionnement
     FRUITS_CEN_OF_AGRIC_2021 = 32100315  # Fruits, Census of Agriculture, 2021  // Fruits, Recensement de l’agriculture, 2021
@@ -4088,12 +4185,16 @@ class ProductID(Enum):
     HOG_BARLEY_RATIO_LIV_BASIS_WINNIPEG_MON = 32100331  # Hog, barley ratio, live basis, Winnipeg, monthly  // Rapports de l'orge aux porcs sur pieds, Winnipeg, données mensuelles
     HOG_BARLEY_RATIO_LIV_BASIS_WINNIPEG_ANN = 32100332  # Hog, barley ratio, live basis, Winnipeg, annual  // Rapports de l'orge aux porcs sur pieds, Winnipeg, données annuelles
     NUTR_IN_THE_FOOD_SUPP_BY_SRC_OF_NUTR_EQUIVALENT_AND_COMM = 32100333  # Nutrients in the food supply, by source of nutritional equivalent and commodity  // Éléments nutritifs à partir de l'approvisionnement alimentaire, selon la source de l'équivalent nutritif et les produits de base
-    CATTLE_PRICES_STEERS = 32100334  # Cattle prices, steers  // Prix des bovins, bouvillons
+    CATTLE_PRICES_STEERS = (
+        32100334  # Cattle prices, steers  // Prix des bovins, bouvillons
+    )
     CATTLE_WEIGHTED_AVG_PRICES_STEERS = 32100335  # Cattle, weighted average prices, steers  // Prix moyens pondérés des bovins, bouvillons
     HOGS_STAT_SOWS_FARROWED_PIGS_BORN_AND_SOWS_BRED_TO_FARROW = 32100336  # Hogs statistics, sows farrowed, pigs born and sows bred to farrow  // Statistiques de porcs, truies ayant mis bas, porcelets nés et truies devant mettre bas
     HOGS_STAT_SUPP_AND_DISP_OF_HOGS = 32100337  # Hogs statistics, supply and disposition of hogs  // Statistiques de porcs, disponibilité et écoulement des porcs
     HOGS_STAT_NUM_OF_FARM_REP_AND_AVG_NUM_OF_HOGS_PER_FARM = 32100338  # Hogs statistics, number of farms reporting and average number of hogs per farm  // Statistiques de porcs, nombre de fermes déclarantes et nombre moyen de porcs par ferme
-    HOGS_STAT_PRICES = 32100339  # Hogs statistics, prices  // Statistiques de porcs, prix
+    HOGS_STAT_PRICES = (
+        32100339  # Hogs statistics, prices  // Statistiques de porcs, prix
+    )
     HOGS_STAT_WEIGHTED_AVG_PRICES = 32100340  # Hogs statistics, weighted average prices  // Statistiques de porcs, prix moyens pondérés
     HOGS_AND_PIGS_STAT_INVENT_NUM_BY_CLASS_AND_QTR_USA_AND_CAN = 32100341  # Hogs and pigs statistics, inventory number by class and quarter, United States and Canada  // Statistiques de porcs, nombre de porcs par catégorie selon le trimestre, États-Unis et Canada
     HOGS_AND_PIGS_STAT_INVENT_NUM_BY_CLASS_AND_QTR_USA = 32100342  # Hogs and pigs statistics, inventory number by class and quarter, United States  // Statistiques de porcs, nombre de porcs par catégorie selon le trimestre, États-Unis
@@ -4103,7 +4204,9 @@ class ProductID(Enum):
     AVG_FLEECE_WEIGHT = 32100350  # Average fleece weight  // Poids moyen des toisons
     PROD_DEL_OF_MAJ_GRAINS = 32100351  # Producer deliveries of major grains  // Livraisons des producteurs des principaux grains
     CRUSH_STAT_OF_MAJ_OILSEEDS = 32100352  # Crushing statistics of major oilseeds  // Statistiques des broyages des principaux oléagineux
-    PROD_AND_EVAL_OF_HONEY = 32100353  # Production and value of honey  // Production et valeur du miel
+    PROD_AND_EVAL_OF_HONEY = (
+        32100353  # Production and value of honey  // Production et valeur du miel
+    )
     PROD_AND_EVAL_OF_MAPLE_PROD = 32100354  # Production and value of maple products  // Production et valeur des produits de l'érable
     FIELD_VEG_CEN_OF_AGRIC_2021 = 32100355  # Field vegetables, Census of Agriculture, 2021  // Légumes de champ, Recensement de l’agriculture, 2021
     AREA_PROD_AND_SALES_OF_MUSHROOMS = 32100356  # Area, production and sales of mushrooms  // Superficie, production et ventes de champignon
@@ -4367,10 +4470,16 @@ class ProductID(Enum):
     BFT_PAYMENTS_OF_ALL_LIFE_INS_COMP = 33100132  # Benefit payments of all life insurance companies  // Prestations versées par les sociétés d'assurance sur la vie
     ORDINARY_SALES_RESULTS_OF_LIFE_INS_IN_CAN = 33100133  # Ordinary sales results of life insurance in Canada  // Résultats des ventes ordinaires de polices d'assurance-vie au Canada
     ORDINARY_SALES_RESULTS_OF_LIFE_INS_IN_CAN_30_COMP_PARTICIPATING = 33100134  # Ordinary sales results of life insurance in Canada (30 companies participating)  // Résultats des ventes ordinaires de polices d'assurance-vie au Canada (30 compagnies participant à l'enquête)
-    LIFE_INS_SALES = 33100135  # Life insurance sales  // Contrats d'assurance sur la vie
+    LIFE_INS_SALES = (
+        33100135  # Life insurance sales  // Contrats d'assurance sur la vie
+    )
     ACT_ENT_WITH_ONE_OR_MORE_EMPLOY = 33100136  # Active enterprises with one or more employees  // Entreprises actives avec un employé ou plus
-    EMPLOY_ENT_BIRTHS = 33100137  # Employer enterprise births  // Naissance d'entreprises avec employés
-    EMPLOY_ENT_DEATHS = 33100138  # Employer enterprise deaths  // Décès d'entreprises avec employés
+    EMPLOY_ENT_BIRTHS = (
+        33100137  # Employer enterprise births  // Naissance d'entreprises avec employés
+    )
+    EMPLOY_ENT_DEATHS = (
+        33100138  # Employer enterprise deaths  // Décès d'entreprises avec employés
+    )
     NUM_OF_EMPLOY_ENT_NEWLY_BORN_HAVING_SURVIVED_ONE_YR = 33100139  # Number of employer enterprises newly born having survived one year  // Nombre d'entreprises avec employés nouvellement nées ayant survécu une année
     NUM_OF_EMPLOY_ENT_NEWLY_BORN_HAVING_SURVIVED_TWO_YR = 33100140  # Number of employer enterprises newly born having survived two years  // Nombre d'entreprises avec employés nouvellement nées ayant survécu deux années
     NUM_OF_PERS_EMPLOY_IN_EMPLOY_ENT_NEWLY_BORN = 33100141  # Number of persons employed in employer enterprises newly born  // Nombre de personnes employées dans les entreprises avec employés nouvellement nées
@@ -4689,7 +4798,9 @@ class ProductID(Enum):
     INTEL_PROP_AWARE_HAD_BY_SM_AND_MED_ENT = 33100463  # Intellectual property awareness had by small and medium enterprises  // Connaissances relatives à la propriété intellectuelle des petites et moyennes entreprises
     INTEL_PROP_HELD_BY_SM_AND_MED_ENT = 33100464  # Intellectual property held by small and medium enterprises  // Propriété intellectuelle détenue par les petites et moyennes entreprises
     EFFECT_OF_COVID_19_ON_FIN_OF_SM_AND_MED_ENT = 33100465  # Effect of COVID-19 on financing of small and medium enterprises  // Effet de la COVID-19 sur le financement des petites et moyennes entreprises
-    WEIGHTED_ENT_COUNTS = 33100466  # Weighted enterprise counts  // Nombre pondéré d’entreprises
+    WEIGHTED_ENT_COUNTS = (
+        33100466  # Weighted enterprise counts  // Nombre pondéré d’entreprises
+    )
     REASONS_FOR_NOT_ADOPTING_ADV_TECH_BY_SM_AND_MED_ENT = 33100467  # Reasons for not adopting advanced technologies by small and medium enterprises  // Raisons données par les petites et moyennes entreprises pour ne pas adopter de technologies de pointe
     BUS_OR_ORG_EXPECT_OVER_THE_NEXT_THREE_MON_FIRST_QTR_OF_2022 = 33100468  # Business or organization expectations over the next three months, first quarter of 2022  // Attentes des entreprises ou des organismes pour les trois prochains mois, premier trimestre de 2022
     BUS_OR_ORG_OBSTACLES_OVER_THE_NEXT_THREE_MON_FIRST_QTR_OF_2022 = 33100469  # Business or organization obstacles over the next three months, first quarter of 2022  // Obstacles à surmonter par les entreprises ou organismes au cours des trois prochains mois, premier trimestre de 2022
@@ -5674,11 +5785,15 @@ class ProductID(Enum):
     ADULT_CORRECT_SVC_ADMISSIONS_TO_PROV_AND_TERR_PROG = 35100128  # Adult correctional services, admissions to provincial and territorial programs  // Services correctionnels pour adultes, admissions à des programmes provinciaux et territoriaux
     ADULT_CORRECT_SVC_ADMISSIONS_TO_FED_PROG = 35100129  # Adult correctional services, admissions to federal programs  // Services correctionnels pour adultes, admissions à des programmes fédéraux
     ADULT_CORRECT_SVC_OPER_EXP_FOR_PROV_TERR_AND_FED_PROG = 35100130  # Adult correctional services, operating expenditures for provincial, territorial and federal programs  // Services correctionnels pour adultes, dépenses d'exploitation au titre des programmes provinciaux, territoriaux et fédéraux
-    CRIMES_BY_ACT_OFFENCES = 35100131  # Crimes, by actual offences  // Crimes, selon les infractions réelles
+    CRIMES_BY_ACT_OFFENCES = (
+        35100131  # Crimes, by actual offences  // Crimes, selon les infractions réelles
+    )
     POLICE_REP_HATE_CRIME_BY_TYPE_OF_MOTIV_NUM_OF_INCIDENTS_AND_YR_TO_DATE_TOT_PRELIM_QTR_DATA_CAN_AND_REG = 35100132  # Police-reported hate crime, by type of motivation, number of incidents and year to date total, preliminary quarterly data, Canada and regions  // Crimes haineux déclarés par la police, selon le type de motif, nombre d'affaires et total cumulé de l'année à ce jour, données trimestrielles provisoires, Canada et régions
     CRIME_STAT_BY_DETAILED_OFFENCES = 35100133  # Crime statistics, by detailed offences  // Statistiques des crimes, par infractions détaillées
     ADULT_AND_YOUTH_CHARGED_BY_DETAILED_OFFENCES = 35100134  # Adult and youth charged, by detailed offences  // Adultes et jeunes accusés, par infractions détaillées
-    NUM_OF_POLICE_OFFICERS = 35100135  # Number of police officers  // Nombre de policiers
+    NUM_OF_POLICE_OFFICERS = (
+        35100135  # Number of police officers  // Nombre de policiers
+    )
     NUM_AND_PERCENTAGE_OF_POLICE_OFFICERS_BY_SEX_FOR_CAN_PROV_AND_TERR = 35100136  # Number and percentage of police officers, by sex for Canada, provinces and territories  // Nombre et pourcentage de policiers, selon le sexe pour le Canada, les provinces et les territoires
     NUM_OF_SHELTERS_OPER_AND_RESP_TO_THE_TRANSPORT_HOME_SURV_BY_AREA_OF_SVC = 35100137  # Number of shelters operating and responding to the transition home survey, by area of service  // Nombre de refuges en activité et de refuges qui ont répondu à l'enquête sur les maisons d'hébergement, selon la région desservie
     NUM_OF_SHELTERS_OPER_AND_RESP_TO_TRANSPORT_HOME_SURV_BY_FAC_TYPE = 35100138  # Number of shelters operating and responding to transition home survey, by facility type  // Nombre de refuges en activité et qui ont répondu à l'enquête sur les maisons d'hébergement, selon le type d'établissement
@@ -5975,7 +6090,9 @@ class ProductID(Enum):
     LONG_RUN_PROV_AND_TERR_DATA = 36100229  # Long-run provincial and territorial data  // Données provinciale et territoriale à long terme
     TOUR_DEMAND_IN_CAN_CONSTANT_PRICES = 36100230  # Tourism demand in Canada, constant prices  // Demande touristiques au Canada, prix constants
     SUPP_OF_TOUR_COMM_CONSTANT_PRICES = 36100231  # Supply of tourism commodities, constant prices  // Offre de biens et services touristiques, prix constants
-    JOBS_GEN_BY_TOUR = 36100232  # Jobs generated by tourism  // Emplois générés par le tourisme
+    JOBS_GEN_BY_TOUR = (
+        36100232  # Jobs generated by tourism  // Emplois générés par le tourisme
+    )
     TOUR_DEMAND_IMPLICIT_PRICE_IDX_SEASONALLY_ADJ = 36100233  # Tourism demand, implicit price indexes, seasonally adjusted  // Demande touristique, indices implicites de prix, désaisonnalisées
     TOUR_GDP_CONSTANT_PRICES = 36100234  # Tourism gross domestic product, constant prices  // Produit intérieur brut touristique, prix constants
     TOUR_SHARE_OF_GDP_AT_BASIC_PRICES = 36100235  # Tourism share of gross domestic product at basic prices  // Part du tourisme au produit intérieur brut aux prix de base
@@ -6125,7 +6242,9 @@ class ProductID(Enum):
     GDP_GDP_AT_FACT_COST_BY_STD_IND_CLASS_1980_SIC_QTR = 36100379  # Gross domestic product (GDP) at factor cost, by Standard Industrial Classification, 1980 (SIC), quarterly  // Produit intérieur brut (PIB) au coût des facteurs, selon la Classification type des industries, 1980 (CTI), trimestriel
     GDP_GDP_AT_FACT_COST_BY_SEL_IND = 36100380  # Gross domestic product (GDP) at factor cost, by selected industries  // Produit intérieur brut (PIB) au coût des facteurs, selon les industries sélectionnées
     GDP_GDP_AT_FACT_COST_BY_IND = 36100381  # Gross domestic product (GDP) at factor cost, by industry  // Produit intérieur brut (PIB) au coût des facteurs, selon l'industrie
-    GROSS_OUTPUT_BY_IND = 36100382  # Gross output, by industry  // Production brute, selon l'industrie
+    GROSS_OUTPUT_BY_IND = (
+        36100382  # Gross output, by industry  // Production brute, selon l'industrie
+    )
     REAL_DOM_PROD_BY_IND_OF_ORIG_QTR = 36100383  # Real domestic product, by industry of origin, quarterly  // Produit intérieur réel, selon l'industrie d'origine, trimestriel
     REAL_DOM_PROD_BY_IND_OF_ORIG_ANN = 36100384  # Real domestic product, by industry of origin, annual  // Produit intérieur réel, selon l'industrie d'origine, annuel
     IND_PROD_IDX_BY_IND = 36100385  # Industrial production indexes, by industry  // Indices de la production industrielle, selon l'industrie
@@ -6322,8 +6441,12 @@ class ProductID(Enum):
     PENS_SAT_ACCT_PENS_ASSET_AT_MKT_EVAL_BY_TYPE_OF_PLAN = 36100576  # Pension satellite account, pension assets at market value, by type of plan  // Compte satellite des pensions, actifs de retraite selon la valeur marchande, par catégorie de régime
     PENS_SAT_ACCT_FIN_FLOWS_BY_TYPE_OF_PLAN = 36100577  # Pension satellite account, financial flows, by type of plan  // Compte satellite de pensions, flux financiers, par catégorie de régime
     FIN_FLOW_ACCT = 36100578  # Financial Flow Accounts  // Comptes des flux financiers
-    FIN_MKT_SUMMARY = 36100579  # Financial market summary  // Sommaire du marché financier
-    NATL_BAL_SHEET_ACCT = 36100580  # National Balance Sheet Accounts  // Comptes du bilan national
+    FIN_MKT_SUMMARY = (
+        36100579  # Financial market summary  // Sommaire du marché financier
+    )
+    NATL_BAL_SHEET_ACCT = (
+        36100580  # National Balance Sheet Accounts  // Comptes du bilan national
+    )
     INTL_INVEST_POS_CAN_PORTFOLIO_INVEST_ABD_AT_MARKET_VALUE_BY_CURR_QTR = 36100581  # International investment position, Canadian portfolio investment abroad at market value, by currency, quarterly  // Bilan des investissements internationaux, investissements de portefeuille canadiens à l'étranger à la valeur au marché, par devise, trimestriel
     ACT_OF_MULTINAT_ENT_IN_CAN_FGN_MULTINAT_BY_ULTIMATE_INVEST_COUNTRY_AND_IND = 36100582  # Activities of multinational enterprises in Canada, foreign multinationals, by ultimate investor country and industry  // Activités des entreprises multinationales au Canada, multinationales étrangères, selon le pays investisseur ultime et l’industrie
     INTL_TRANSPORT_IN_SEC_NET_PORTFOLIO_TRANSPORT_IN_CAN_EQUITY_AND_INVEST_FUND_SHARES_BY_NORTH_AMERICAN_IND_CLASS_SYSTEM = 36100583  # International transactions in securities, net portfolio transactions in Canadian equity and investment fund shares, by North American Industry Classification System (NAICS), monthly  // Opérations internationales en valeurs mobilières, opérations de portefeuille nettes en actions canadiennes et parts de fonds d'investissements, selon le Système de classification des industries de l'Amérique du Nord (SCIAN), mensuel
@@ -6342,7 +6465,9 @@ class ProductID(Enum):
     CANNABIS_CONS_AND_PROD_PRICES = 36100598  # Cannabis consumer and producer prices  // Prix à la consommation et à la production du cannabis
     CANNABIS_IND_PROD_ACCT = 36100599  # Cannabis industry production account  // Compte de production de l’industrie du cannabis
     CANNABIS_SUPP_USE_AND_GDP = 36100600  # Cannabis supply, use and gross domestic product  // Offre et consommation de cannabis, produit intérieur brut
-    CANNABIS_INC_ACCT = 36100601  # Cannabis income account  // Compte des revenus du cannabis
+    CANNABIS_INC_ACCT = (
+        36100601  # Cannabis income account  // Compte des revenus du cannabis
+    )
     DEBT_SEC_ISSUES_BY_SECT_CURR_MATURITY_TYPE_OF_INTEREST_RATE_AND_MKT_OF_ISSUANCE = 36100602  # Debt securities issues by sector, currency, maturity, type of interest rate and market of issuance (net transactions), quarterly  // Titres d'emprunt émis par secteur, devise, échéance, type de taux d'intérêt, et marché d'émission (transactions nettes), trimestriel
     HH_FINAL_CONS_EXP_OF_CANNABIS_INACTIVE = 36100603  # Household final consumption expenditure of cannabis, inactive  // Dépenses de consommation finale des ménages en cannabis, inactif
     ACT_OF_MULTINAT_ENT_IN_CAN_CAN_AND_FGN_MULTINAT_BY_SECT_AND_IND = 36100604  # Activities of multinational enterprises in Canada, Canadian and foreign multinationals, by sector and industry  // Activités des entreprises multinationales au Canada, multinationales canadiennes et étrangères, selon le secteur et l'industrie
@@ -6379,7 +6504,9 @@ class ProductID(Enum):
     JOBS_HOURS_WORKED_AND_LAB_INC_OF_EMPLOY_IN_TOUR_IND_BY_WORK_ACT_SEX_IMMIGR_STS_AND_OCC = 36100636  # Jobs, hours worked and labour income of employees in tourism industries, by work activity, sex, immigrant status and occupation  // Emplois, heures travaillées et revenus du travail des employés dans les industries du tourisme, selon le travail, le sexe, le statut d'immigrant et la profession
     JOBS_HOURS_WORKED_AND_LAB_INC_OF_EMPLOY_IN_TOUR_IND_BY_AGE_GRP_AND_OCC = 36100637  # Jobs, hours worked and labour income of employees in tourism industries, by age group and occupation  // Emplois, heures travaillées et revenus du travail des employés dans les industries du tourisme, selon le groupe d'âge et la profession
     TOUR_SECT_S_SHARE_OF_JOBS_AND_EMPLOY_INC_INACTIVE = 36100638  # Tourism sector's share of jobs and employment income, inactive  // Part de l'emploi et des revenus d'emploi du secteur du tourisme, inactif
-    CRED_LIAB_OF_HH = 36100639  # Credit liabilities of households  // Passifs de crédit des ménages
+    CRED_LIAB_OF_HH = (
+        36100639  # Credit liabilities of households  // Passifs de crédit des ménages
+    )
     CRED_LIAB_OF_PRIV_NON_FIN_CORPORATIONS = 36100640  # Credit liabilities of private non-financial corporations  // Passifs de crédits des sociétés non-financières privées
     CRED_ASSET_OF_THE_FIN_CORPORATIONS_SECT = 36100641  # Credit assets of the financial corporations sector  // Actifs de crédits du secteur des sociétés financières
     NEW_ISSUANCES_OF_SEC_BY_TYPE_OF_USE_OF_PROC_AND_BY_IND_MON = 36100642  # New issuances of securities by type of use of proceeds and by industry, monthly  // Nouvelles émissions de titres financiers selon la catégorie d’emploi du produit et l’industrie, mensuel
@@ -6508,7 +6635,9 @@ class ProductID(Enum):
     TOT_EXP_ON_UNI_EDU_BY_TYPE_OF_EXP = 37100062  # Total expenditures on university education, by type of expenditure  // Dépenses totales au titre de l'enseignement universitaire selon et le type de dépenses
     SCHOOL_BOARD_REV_BY_DIRECT_SRC_OF_FUNDS_AND_GEO = 37100063  # School board revenues, by direct source of funds and geography  // Revenus des commissions scolaires selon la source directe des fonds et la géographie
     SCHOOL_BOARD_EXP_BY_FUNC_AND_ECON_CLASS = 37100064  # School board expenditures, by function and economic classification  // Dépenses des commissions scolaires selon la rubrique et la classification économique
-    SCHOOL_BOARD_EXP = 37100065  # School board expenditures  // Dépenses des commissions scolaires
+    SCHOOL_BOARD_EXP = (
+        37100065  # School board expenditures  // Dépenses des commissions scolaires
+    )
     PUB_AND_PRIV_ELEM_AND_SEC_EDU_EXP = 37100066  # Public and private elementary and secondary education expenditures  // Dépenses publiques et privées au titre de l'éducation primaire et secondaire
     PUB_AND_PRIV_ELEM_AND_SEC_EDU_EXP_BY_DIRECT_SRC_OF_FUNDS = 37100067  # Public and private elementary and secondary education expenditures, by direct source of funds  // Dépenses publiques et privées au titre de l'éducation primaire et secondaire, selon la source directe des fonds
     FED_PROV_AND_TERR_GOV_EXP_ON_CULT_BY_CULT_ACT = 37100068  # Federal, provincial and territorial government expenditures on culture, by culture activity  // Dépenses des administrations fédérales, provinciales et territoriales au titre de la culture, selon l'activité culturelle
@@ -6749,10 +6878,14 @@ class ProductID(Enum):
     PURCH_TO_FEED_SHELTER_OR_WATCH_BIRDS_BY_HH_INC = 38100016  # Purchases to feed, shelter or watch birds, by household income  // Achats dans le but de nourrir ou d'abriter ou d'observer des oiseaux, par revenu de ménage
     INDOOR_AIR_QUAL = 38100018  # Indoor air quality  // Qualité de l'air l'interieur
     AIR_COND = 38100019  # Air conditioners  // Climatiseurs
-    PARKS_AND_GREEN_SPACES = 38100020  # Parks and green spaces  // Parcs et espaces verts
+    PARKS_AND_GREEN_SPACES = (
+        38100020  # Parks and green spaces  // Parcs et espaces verts
+    )
     PARKS_AND_GREEN_SPACES_BY_TYPE_OF_DWEL = 38100021  # Parks and green spaces, by type of dwelling  // Parcs et espaces verts, par type de logement
     PARKS_AND_GREEN_SPACES_BY_HH_INC = 38100022  # Parks and green spaces, by household income  // Parcs et espaces verts, par revenu de ménage
-    ENV_ENGAGEMENT = 38100023  # Environmental engagement  // Participation environnementale
+    ENV_ENGAGEMENT = (
+        38100023  # Environmental engagement  // Participation environnementale
+    )
     ENV_ENGAGEMENT_BY_TYPE_OF_HH = 38100024  # Environmental engagement, by type of household  // Participation environnementale, par type de ménage
     HOMEGROWN_FRUIT_HERBS_VEG_AND_FLOWERS = 38100025  # Homegrown fruit, herbs, vegetables and flowers  // Culture de fruits, de fines herbes, de légumes ou de fleurs à la maison
     HOMEGROWN_FRUIT_HERBS_VEG_AND_FLOWERS_BY_TENURE_AND_TYPE_OF_DWEL = 38100026  # Homegrown fruit, herbs, vegetables and flowers, by tenure and type of dwelling  // Culture de fruits, de fines herbes, de légumes ou de fleurs à la maison, par mode d'occupation et type de logement
@@ -6836,7 +6969,9 @@ class ProductID(Enum):
     TIMBER_ASSET = 38100106  # Timber assets (area)  // Actifs en bois (superficie)
     TIMBER_ASSET_VOL = 38100107  # Timber assets (volume)  // Actifs en bois (volume)
     DIRECT_PLUS_INDIRECT_ENERGY_INTENSITY_BY_IND = 38100108  # Direct plus indirect energy intensity, by industry  // Intensité directe et indirecte en énergie, selon les industries
-    ENERGY_USE_BY_SECT = 38100109  # Energy use, by sector  // Utilisation de l'énergie, selon le secteur
+    ENERGY_USE_BY_SECT = (
+        38100109  # Energy use, by sector  // Utilisation de l'énergie, selon le secteur
+    )
     DIRECT_PLUS_INDIRECT_GHG_EMISS_INTENSITY = 38100110  # Direct plus indirect greenhouse gas emissions intensity  // Intensité directe et indirecte en émissions de gaz à effet de serre
     GHG_EMISS_BY_SECT = 38100111  # Greenhouse gas emissions, by sector  // Émissions de gaz à effet de serre (équivalents de dioxyde de carbone), selon le secteur
     SEL_AGRICULTURAL_ACT_ALL_MAJ_DRAINAGE_AREAS_AND_SUB_DRAINAGE_AREAS_WITH_AGRIC = 38100112  # Selected agricultural activities, all major drainage areas and sub-drainage areas with agriculture  // Certaines activités agricoles, toutes les aires de drainage principales et sous-aires de drainage avec agriculture
@@ -6845,7 +6980,9 @@ class ProductID(Enum):
     DIRECT_AND_INDIRECT_HH_ENERGY_USE_AND_HH_GHG_EMISS = 38100115  # Direct and indirect household energy use and household greenhouse gas emissions  // Utilisation de l'énergie et émissions de gaz à effet de serre directes et indirectes par les ménages
     SEL_AGRICULTURAL_ACT_CAN_ECOZONES_AND_ECOREGIONS_WITH_AGRIC = 38100116  # Selected agricultural activities, Canada, ecozones and ecoregions with agriculture  // Certaines activités agricoles, Canada, écozones et écorégions avec agriculture
     RADON_AWARE_AND_TEST_2007 = 38100117  # Radon awareness and testing, 2007  // Connaissance du radon et de ses tests, 2007
-    WATER_USE_IN_CAN = 38100118  # Water use in Canada  // Utilisation de l'eau au Canada
+    WATER_USE_IN_CAN = (
+        38100118  # Water use in Canada  // Utilisation de l'eau au Canada
+    )
     POP_SERV_BY_MUNIC_WASTEWATER_SYS = 38100119  # Population served by municipal wastewater systems  // Population desservie par les systèmes de traitement des eaux usées municipales
     DIST_OF_OPER_EXP_ON_POLLUTION_ABATEMENT_AND_CTRL = 38100120  # Distribution of operating expenditures on pollution abatement and control (end-of-pipe) and pollution prevention, inactive  // Répartition des dépenses d'exploitation visant les procédés de lutte contre la pollution (procédés en bout de chaîne) et au chapitre de la prévention de la pollution, inactif
     PARTICIPATION_IN_OUTDOOR_ACT = 38100121  # Participation in outdoor activities  // Participation à des activités de plein air
@@ -6871,7 +7008,9 @@ class ProductID(Enum):
     ENERGY_USE_AND_GHG_EMISS_ASSOC_WITH_TOUR_BY_PROD = 38100141  # Energy use and greenhouse gas emissions associated with tourism, by product  // Utilisation d'énergie et émissions de gaz à effet de serre associées au tourisme, par produit
     DISP_OF_BOXES_FROM_ONLINE_PURCH = 38100142  # Disposal of boxes from online purchases  // Élimination des boîtes d'achats en ligne
     DISP_OF_BOXES_FROM_ONLINE_PURCH_BY_HH_INC = 38100143  # Disposal of boxes from online purchases, by household income  // Élimination des boîtes d'achats en ligne par revenu de ménage
-    SINGLE_USE_PLASTICS = 38100144  # Single-use plastics  // Articles de plastique à usage unique
+    SINGLE_USE_PLASTICS = (
+        38100144  # Single-use plastics  // Articles de plastique à usage unique
+    )
     CAP_AND_OPER_EXP_ON_RES_MGMT_ACT_BY_IND = 38100145  # Capital and operating expenditures on resource management activities by industry  // Dépenses en immobilisations et d'exploitation sur les activités de gestion des ressources selon l'industrie
     CAP_AND_OPER_EXP_ON_RES_MGMT_ACT_BY_GEOGRAPHIC_REG = 38100146  # Capital and operating expenditures on resource management activities by geographic region  // Dépenses en immobilisations et d'exploitation sur les activités de gestion des ressources selon la région géographique
     RES_MGMT_ACT_BY_IND = 38100147  # Resource management activities by industry  // Activités de gestion des ressources selon l'industrie
@@ -6891,7 +7030,9 @@ class ProductID(Enum):
     SALT_MARSH_ECO_COND_ACCT = 38100162  # Salt marsh ecosystem condition account  // Compte de la condition écosystémique des marais salés
     EXTENT_AND_GROWTH_OF_CONTIGUOUSLY_SETTLED_AREAS = 38100163  # Extent and growth of contiguously settled areas  // Étendue et croissance des zones habitées contiguës
     AGROECOSYSTEM_COND_ACCT = 38100164  # Agroecosystem condition account  // Compte de la condition des agroécosystèmes
-    AGROECOSYSTEM_EXTENT = 38100165  # Agroecosystem extent  // Étendue des agroécosystèmes
+    AGROECOSYSTEM_EXTENT = (
+        38100165  # Agroecosystem extent  // Étendue des agroécosystèmes
+    )
     SEL_POP_CHAR_OF_PPL_LIV_IN_RES_BASED_COMM_BY_RES_IND = 38100166  # Selected population characteristics of people living in resource-based communities, by resource industry  // Certaines caractéristiques de population des personnes vivant dans les collectivités dont l'économie est basée sur les ressources, selon l'industrie des ressources
     RES_BASED_COMM_STS_AND_PROPORTION_OF_INC_AND_EMPLOY_FROM_A_RES_IND_BY_RES_IND_2016 = 38100167  # Resource-based community status and proportion of income and employment from a resource industry, by resource industry, 2016  // Statut de collectivité dont l’économie est basée sur les ressources et proportions du revenu et de l’emploi provenant d’une industrie des ressources, selon l’industrie des ressources, 2016
     RES_BASED_COMM_STS_AND_PROPORTION_OF_INC_AND_EMPLOY_FROM_A_RES_IND_BY_RES_IND_2021 = 38100168  # Resource-based community status and proportion of income and employment from a resource industry, by resource industry, 2021  // Statut de collectivité dont l’économie est basée sur les ressources et proportions du revenu et de l’emploi provenant d’une industrie des ressources, selon l’industrie des ressources, 2021
@@ -6910,7 +7051,9 @@ class ProductID(Enum):
     IN_HOUSE_RES_AND_DEV_ACT_REL_TO_THE_ENV_AND_CLEAN_TECH_PROD_BY_IND = 38100181  # In-house research and development activities related to the environmental and clean technology products by industry  // Activités de recherche et développement intra-muros relatives aux produits environnementaux et de technologies propres selon l'industrie
     OCEAN_COND_ACCT_BY_FISH_UNIT = 38100182  # Ocean condition account by fishing unit  // Compte des conditions océaniques par unité de pêche
     OCEAN_COND_ACCT_BY_MARINE_BIOREGION = 38100183  # Ocean condition account by marine bioregion  // Compte des conditions océaniques par biorégion marine
-    EMERG_PREP = 38100184  # Emergency preparedness  // Préparation aux situations d’urgence
+    EMERG_PREP = (
+        38100184  # Emergency preparedness  // Préparation aux situations d’urgence
+    )
     PERC_OF_RISK_FROM_FLOODING = 38100185  # Perception of risk from flooding  // Perception du risque d'inondation
     IMPACT_OF_EXTREME_WEATHER_EVENTS_AND_NAT_DISASTERS_ON_HH = 38100186  # Impact of extreme weather events and natural disasters on households  // Impact des phénomènes météorologiques extrêmes et des catastrophes naturelles sur les ménages
     VEGETATION_COV_IN_LG_URBAN_AREAS = 38100187  # Vegetation cover in large urban areas  // Couverture végétale dans les grandes zones urbaines
@@ -6942,10 +7085,14 @@ class ProductID(Enum):
     RAIL_ACCIDENT_RANKINGS_FOR_TOP_COMM_PKG_TYPES_AND_INIT_EVENTS_TRANSPORT_CAN = 38100259  # Rail accident rankings for top commodities, package types and initiating events, Transport Canada  // Classement du nombre d'accidents ferroviaires pour les principaux produits, types d'emballages et événements déclencheurs, Transports Canada
     FAC_ACCIDENT_RANKINGS_FOR_TOP_COMM_PKG_TYPES_AND_INIT_EVENTS_TRANSPORT_CAN = 38100260  # Facility accident rankings for top commodities, package types and initiating events, Transport Canada  // Classement du nombre d'accidents dans les établissements pour les principaux produits, types d'emballages et événements déclencheurs, Transports Canada
     AIR_ACCIDENT_RANKINGS_FOR_TOP_COMM_PKG_TYPES_AND_INIT_EVENTS_TRANSPORT_CAN = 38100261  # Air accident rankings for top commodities, package types and initiating events, Transport Canada  // Classement du nombre d'accidents aériens pour les principaux produits, types d'emballages et événements déclencheurs, Transports Canada
-    METAL_PROD_IN_CAN = 38100262  # Metal production in Canada  // Production de métaux au Canada
+    METAL_PROD_IN_CAN = (
+        38100262  # Metal production in Canada  // Production de métaux au Canada
+    )
     PRINCIPAL_STAT_OF_THE_MINERAL_IND = 38100263  # Principal statistics of the mineral industries  // Statistiques principales des industries minérales
     MINERAL_IND = 38100264  # Mineral industries, including metals, non-metallic metals and fuels  // Les industries minérales, inclus métaux, métaux non-métalliques et combustibles
-    MINERAL_PROD_IN_CAN = 38100265  # Mineral production in Canada  // Production de minéraux au Canada
+    MINERAL_PROD_IN_CAN = (
+        38100265  # Mineral production in Canada  // Production de minéraux au Canada
+    )
     PRINCIPAL_STAT_OF_MINERAL_IND_BY_NORTH_AMERICAN_IND_CLASS_SYS = 38100266  # Principal statistics of mineral industries, by North American Industry Classification System (NAICS)  // Statistiques principales des industries minérales, selon le Système de classification des industries de l'Amérique du Nord (SCIAN)
     OPER_AND_MAINT_COSTS_OF_DRINK_WATER_PLT_BY_PROD_VOL_AND_MAIN_SRC_WATER_TYPE = 38100269  # Operation and maintenance costs of drinking water plants by production volume and main source water type  // Coûts de fonctionnement et d'entretien des usines de traitement de l'eau potable selon le volume de production et le type principal de source d'eau
     POTABLE_WATER_VOL_AND_POP_SERV_FROM_DRINK_WATER_PLT_BY_TREATMENT_CAT = 38100270  # Potable water volumes and population served from drinking water plants, by treatment category  // Volumes d'eau potable et population desservie par des usines de traitement de l'eau potable, selon la catégorie de traitement
@@ -7098,7 +7245,9 @@ class ProductID(Enum):
     TYPE_OF_DIFFICULTY_ENCOUNTERED_BY_PARENTS_AND_GUARDIANS_IN_FINDING_A_CHILD_CARE_ARRG_CHILD_AGED_0_TO_5_YR = 42100008  # Type of difficulty encountered by parents and guardians in finding a child care arrangement, children aged 0 to 5 years  // Type de difficulté rencontrée par les parents et les tuteurs dans la recherche d’un mode de garde, enfants âgés de 0 à 5 ans
     CONSEQUENCES_OF_HAVING_ENCOUNTERED_DIFFICULTIES_IN_FINDING_A_CHILD_CARE_ARRG_CHILD_AGED_0_TO_5_YR = 42100009  # Consequences of having encountered difficulties in finding a child care arrangement, children aged 0 to 5 years  // Conséquences d’avoir rencontré des difficultés dans la recherche d’un mode de garde, enfants âgés de 0 à 5 ans
     REASONS_FOR_NOT_USING_ANY_CHILD_CARE_ARRG_CHILD_AGED_0_TO_5_YR = 42100010  # Reasons for not using any child care arrangement, children aged 0 to 5 years  // Raisons de ne pas avoir recours à un mode de garde, enfants âgés de 0 à 5 ans
-    NUM_OF_CHILD_IN_CAN = 42100012  # Number of children in Canada  // Nombre d’enfants au Canada
+    NUM_OF_CHILD_IN_CAN = (
+        42100012  # Number of children in Canada  // Nombre d’enfants au Canada
+    )
     NUM_OF_CHILD_WITH_EMPLOY_MOTHERS_AND_WITH_ALL_PARENTS_EMPLOY_INACTIVE = 42100013  # Number of children with employed mothers and with all parents employed, inactive  // Nombre d’enfants dont la mère a un emploi et dont tous les parents ont un emploi, inactif
     NUM_OF_STUD_ENROL_IN_KINDERGARTEN = 42100014  # Number of students enrolled in kindergarten  // Nombre d’élèves inscrits à la maternelle
     NUM_OF_PERS_EMPLOY_IN_THE_CHILD_CARE_SECT_INACTIVE = 42100015  # Number of persons employed in the child care sector, inactive  // Nombre de personnes employées dans le secteur de la garde d'enfants, inactif
@@ -7422,7 +7571,9 @@ class ProductID(Enum):
     WAITLIST_STS_INCL_LENGTH_OF_TIME_BY_TENURE_INCL_SOC_AND_AFFORD_HOUSING = 46100058  # Waitlist status including length of time, by tenure including social and affordable housing  // Statut de liste d’attente ainsi que la durée, selon le mode d’occupation, y compris les logements sociaux et abordables
     HOUSING_SUITABILITY_AND_DWEL_COND_BY_TENURE_INCL_SOC_AND_AFFORD_HOUSING_INACTIVE = 46100059  # Housing suitability and dwelling condition, by tenure including social and affordable housing, inactive  // Taille convenable du logement et état du logement, selon le mode d’occupation, y compris les logements sociaux et abordables, inactif
     DWEL_AND_NEIGHBOURHOOD_SATISFACTION_BY_TENURE_INCL_SOC_AND_AFFORD_HOUSING_AND_STRUCT_TYPE_OF_DWEL_INACTIVE = 46100060  # Dwelling and neighbourhood satisfaction, by tenure including social and affordable housing and structural type of dwelling, inactive  // Satisfaction à l’égard du logement et du quartier, selon le mode d’occupation, y compris les logements sociaux et abordables et le type de construction résidentielle, inactif
-    IND_REL_TO_MOT = 46100061  # Indicators related to moving  // Indicateurs liés au déménagement
+    IND_REL_TO_MOT = (
+        46100061  # Indicators related to moving  // Indicateurs liés au déménagement
+    )
     RES_PROP_BUYERS_DEMO_DATA_FIRST_TIME_HOME_BUYER_STS_AND_PRICE_TO_INC_RATIO = 46100062  # Residential property buyers: Demographic data, first-time home buyer status, and price-to-income ratio  // Acheteurs de propriétés résidentielles: données démographiques, statut d'acheteur d'une première maison et ratio prix-revenu
     HH_CHAR_BY_TENURE_INCL_FIRST_TIME_HOMEBUYER_STS_INACTIVE = 46100063  # Household characteristics, by tenure including first-time homebuyer status, inactive  // Caractéristiques des ménages, selon le mode d'occupation, y compris le statut d'accédant à la propriété, inactif
     HOUSING_IND_BY_TENURE_INCL_FIRST_TIME_HOMEBUYER_STS_INACTIVE = 46100064  # Housing indicators, by tenure including first-time homebuyer status, inactive  // Indicateurs de logement, selon le mode d'occupation, y compris le statut d'accédant à la propriété, inactif
@@ -7981,4 +8132,3 @@ class ProductID(Enum):
     FIELD_OF_STUDIES_AND_LOCATION_OF_POSTSEC_STUDIES_OF_HLTH_PROFESS_BY_OCC_AND_FIRST_OFFICIAL_LANG_SPOKEN_CANADA_QUEBEC_NB_CANADA_OUTSIDE_QUEBEC_AND_NB_PROV_AND_TERR_ECON_REGIONS = 98100661  # Field of studies and location of postsecondary studies of healthcare professionals, by occupation and first official language spoken: Canada, Quebec, New Brunswick, Canada outside Quebec and New Brunswick, provinces and territories, economic regions  // Principal domaine et lieu des études postsecondaires des professionnels de la santé, selon la profession et la première langue officielle parlée : Canada, Québec, Nouveau-Brunswick, Canada hors Québec et Nouveau-Brunswick, provinces et territoires, régions économiques
     USE_OF_ENGLISH_AND_FRENCH_AT_WORK_BY_HLTH_PROFESS_BY_OCC_AND_FIRST_OFF_LANG_CANADA_QUEBEC_NB_CANADA_OUTSIDE_QUEBEC_AND_NB_PROV_AND_TERR_ECON_REGIONS = 98100662  # Use of English and French at work by healthcare professionals, by occupation and first official language: Canada, Quebec, New Brunswick, Canada outside Quebec and New Brunswick, provinces and territories, economic regions  // Utilisation du français et de l'anglais au travail par les professionnels de la santé, par profession et première langue officielle parlée : Canada, Québec, Nouveau-Brunswick, Canada hors Québec et Nouveau-Brunswick, provinces et territoires, régions économiques
     AGE_GENDER_AND_KNOW_OF_OFF_LANG_OF_HLTH_PROFESS_BY_FIRST_OFF_LANG_SPOKEN_CANADA_PROV_AND_TERR = 98100663  # Age, gender and knowledge of official languages of healthcare professionals, by first official language spoken: Canada, provinces and territories  // Âge, genre et connaissance des langues officielles des professionnels de la santé, selon la première langue officielle parlée : Canada, provinces et territoires
-

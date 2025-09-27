@@ -2,14 +2,14 @@ from datetime import date, datetime
 import logging
 from enum import StrEnum, auto
 from typing import (
-    Any, 
-    Callable, 
-    Concatenate, 
-    Coroutine, 
-    Optional, 
-    ParamSpec, 
+    Any,
+    Callable,
+    Concatenate,
+    Coroutine,
+    Optional,
+    ParamSpec,
     TypeVar,
-    overload
+    overload,
 )
 
 from httpx._client import AsyncClient, Response
@@ -37,13 +37,13 @@ class ResponseKeys(StrEnum):
 class WDSRequests:
     """
     Low-level HTTP requests for Statistics Canada WDS API.
-    
+
     📚 OFFICIAL WDS DOCUMENTATION: https://www.statcan.gc.ca/en/developers/wds/user-guide
-    
-    This class implements the exact HTTP request patterns specified in the 
+
+    This class implements the exact HTTP request patterns specified in the
     Statistics Canada WDS User Guide. All endpoint URLs, request methods,
     and parameter formats follow the official API specification.
-    
+
     Response Format: {"status": "SUCCESS|FAILED", "object": {...}}
     """
 
@@ -63,7 +63,7 @@ class WDSRequests:
 
     @staticmethod
     async def execute_and_extract(
-        coro: Coroutine[Any, Any, Response], 
+        coro: Coroutine[Any, Any, Response],
         model: Optional[type[_T]] = None,
     ) -> _T | list[_T] | dict | list[dict]:
         """
@@ -80,14 +80,17 @@ class WDSRequests:
         resp.raise_for_status()
 
         data = resp.json()
-        logger.debug(f'Response code: {resp.status_code}, Response JSON: {data}')
+        logger.debug(f"Response code: {resp.status_code}, Response JSON: {data}")
 
         if model:
             if isinstance(data, list):
                 # Check if this is wrapped format [{"status": "SUCCESS", "object": {...}}] or direct format [{...}]
                 if len(data) > 0 and ResponseKeys.OBJECT in data[0]:
                     # Wrapped format: extract object field
-                    return [WDSRequests.dict_to_model(item[ResponseKeys.OBJECT], model) for item in data]
+                    return [
+                        WDSRequests.dict_to_model(item[ResponseKeys.OBJECT], model)
+                        for item in data
+                    ]
                 else:
                     # Direct format: use items directly
                     return [WDSRequests.dict_to_model(item, model) for item in data]
@@ -95,7 +98,9 @@ class WDSRequests:
                 obj = data[ResponseKeys.OBJECT]
                 return WDSRequests.dict_to_model(obj, model)
             else:
-                raise TypeError(f"Response JSON is neither a dict nor a list of dicts: {type(data)}")
+                raise TypeError(
+                    f"Response JSON is neither a dict nor a list of dicts: {type(data)}"
+                )
         elif isinstance(data, (list, dict)):
             if isinstance(data, list):
                 # Check if this is wrapped format [{"status": "SUCCESS", "object": {...}}] or direct format [{...}]
@@ -110,8 +115,10 @@ class WDSRequests:
                     return data[ResponseKeys.OBJECT]
             return data
         else:
-            raise TypeError(f"Response JSON is neither a dict nor a list of dicts: {type(data)}")
-        
+            raise TypeError(
+                f"Response JSON is neither a dict nor a list of dicts: {type(data)}"
+            )
+
     @staticmethod
     def dict_to_model(data: dict, model: type[_T]) -> _T:
         """
@@ -127,16 +134,15 @@ class WDSRequests:
         try:
             return model.model_validate(obj=data)
         except Exception as e:
-            data_str = '\n'.join([f"{k}:{v}" for k, v in data.items()])
+            data_str = "\n".join([f"{k}:{v}" for k, v in data.items()])
             logger.error(f"Error converting dict to {model}: {e}.\nData:\n{data_str}")
             raise e
-
 
     @staticmethod
     async def get_changed_series_list(client: AsyncClient) -> Response:
         """
-        Users can choose to ask for what series have changed today. This can be invoked 
-        at any time of day and will reflect the list of series that have been updated at 
+        Users can choose to ask for what series have changed today. This can be invoked
+        at any time of day and will reflect the list of series that have been updated at
         8:30am EST on a given release up until midnight that same day.
 
         Args:
@@ -152,8 +158,8 @@ class WDSRequests:
         client: AsyncClient, change_date: datetime | date
     ) -> Response:
         """
-        Users can also query what has changed at the table/cube level on a specific day 
-        by adding an ISO date to the end of the URL. This date can be any date from 
+        Users can also query what has changed at the table/cube level on a specific day
+        by adding an ISO date to the end of the URL. This date can be any date from
         today into the past.
 
         Args:
@@ -177,14 +183,14 @@ class WDSRequests:
         Returns:
             Response: The HTTP response from the WDS API.
         """
-        return await client.post(f"/getCubeMetadata", json=[{"productId": product_id}])
+        return await client.post("/getCubeMetadata", json=[{"productId": product_id}])
 
     @staticmethod
     async def get_series_info_from_cube_pid_coord(
         client: AsyncClient, product_id: int, coordinate: str
     ) -> Response:  # TODO: perhaps coord should be a class
         """
-        Users can also request series metadata either by CubePidCoord or Vector as seen 
+        Users can also request series metadata either by CubePidCoord or Vector as seen
         earlier using getSeriesInfoFromVector.
 
         Args:
@@ -196,7 +202,7 @@ class WDSRequests:
             Response: The HTTP response from the WDS API.
         """
         return await client.post(
-            f"/getSeriesInfoFromCubePidCoord",
+            "/getSeriesInfoFromCubePidCoord",
             json=[{"productId": product_id, "coordinate": coordinate}],
         )
 
@@ -213,15 +219,15 @@ class WDSRequests:
             Response: The HTTP response from the WDS API.
         """
         return await client.post(
-            f"/getSeriesInfoFromVector", json=[{"vectorId": vector_id}]
+            "/getSeriesInfoFromVector", json=[{"vectorId": vector_id}]
         )
 
     @staticmethod
     async def get_all_cubes_list(client: AsyncClient) -> Response:
         """
-        Users can query the output database to provide a complete inventory of data 
-        tables available through this Statistics Canada API. This command accesses a 
-        comprehensive list of details about each table including information at the 
+        Users can query the output database to provide a complete inventory of data
+        tables available through this Statistics Canada API. This command accesses a
+        comprehensive list of details about each table including information at the
         dimension level.
 
         Args:
@@ -230,14 +236,14 @@ class WDSRequests:
         Returns:
             Response: The HTTP response from the WDS API.
         """
-        return await client.get(f"/getAllCubesList")
+        return await client.get("/getAllCubesList")
 
     @staticmethod
     async def get_all_cubes_list_lite(client: AsyncClient) -> Response:
         """
-        Users can query the output database to provide a complete inventory of data 
-        tables available through this Statistics Canada API. This command accesses a 
-        list of details about each table.  Unlike getAllCubesList, this method does not 
+        Users can query the output database to provide a complete inventory of data
+        tables available through this Statistics Canada API. This command accesses a
+        list of details about each table.  Unlike getAllCubesList, this method does not
         return dimension or footnote information.
 
         Args:
@@ -246,7 +252,7 @@ class WDSRequests:
         Returns:
             Response: The HTTP response from the WDS API.
         """
-        return await client.get(f"/getAllCubesListLite")
+        return await client.get("/getAllCubesListLite")
 
     @staticmethod
     async def get_changed_series_data_from_cube_pid_coord(
@@ -262,7 +268,7 @@ class WDSRequests:
             Response: The HTTP response from the WDS API.
         """
         return await client.post(
-            f"/getChangedSeriesDataFromCubePidCoord",
+            "/getChangedSeriesDataFromCubePidCoord",
             json=[{"productId": product_id, "coordinate": coordinate}],
         )
 
@@ -279,7 +285,7 @@ class WDSRequests:
             Response: The HTTP response from the WDS API.
         """
         return await client.post(
-            f"/getChangedSeriesDataFromVector", json=[{"vectorId": vector_id}]
+            "/getChangedSeriesDataFromVector", json=[{"vectorId": vector_id}]
         )
 
     @staticmethod
@@ -297,7 +303,7 @@ class WDSRequests:
             Response: The HTTP response from the WDS API.
         """
         return await client.post(
-            f"/getDataFromCubePidCoordAndLatestNPeriods",
+            "/getDataFromCubePidCoordAndLatestNPeriods",
             json=[{"productId": product_id, "coordinate": coordinate, "latestN": n}],
         )
 
@@ -315,7 +321,7 @@ class WDSRequests:
             Response: The HTTP response from the WDS API.
         """
         return await client.post(
-            f"/getDataFromVectorsAndLatestNPeriods",
+            "/getDataFromVectorsAndLatestNPeriods",
             json=[{"vectorId": vector_id, "latestN": n}],
         )
 
@@ -324,7 +330,7 @@ class WDSRequests:
         client: AsyncClient, vector_ids: list[int], start: datetime, end: datetime
     ) -> Response:
         """
-        For users that require accessing data according to a certain date range, this 
+        For users that require accessing data according to a certain date range, this
         method allows access by date range and vector.
 
         Args:
@@ -337,7 +343,7 @@ class WDSRequests:
             Response: The HTTP response from the WDS API.
         """
         return await client.post(
-            url=f"/getBulkVectorDataByRange",
+            url="/getBulkVectorDataByRange",
             json={
                 "vectorIds": vector_ids,
                 "startDataPointReleaseDate": start.isoformat(),
@@ -347,13 +353,10 @@ class WDSRequests:
 
     @staticmethod
     async def get_data_from_vector_by_reference_period_range(
-        client: AsyncClient, 
-        vector_ids: list[int], 
-        start: date, 
-        end: date
+        client: AsyncClient, vector_ids: list[int], start: date, end: date
     ) -> Response:
         """
-        For users that require accessing data according to a certain reference period 
+        For users that require accessing data according to a certain reference period
         range, this method allows access by reference period range and vector.
 
         Args:
@@ -366,7 +369,7 @@ class WDSRequests:
             Response: The HTTP response from the WDS API.
         """
         return await client.get(
-            url=f"/getDataFromVectorByReferencePeriodRange",
+            url="/getDataFromVectorByReferencePeriodRange",
             params={
                 "vectorIds": vector_ids,
                 "startRefPeriod": start.isoformat(),
@@ -376,13 +379,11 @@ class WDSRequests:
 
     @staticmethod
     async def get_full_table_download_csv(
-        client: AsyncClient, 
-        table_id: int, 
-        language: ResponseLanguage
+        client: AsyncClient, table_id: int, language: ResponseLanguage
     ) -> Response:
         """
-        For users who require the full table/cube of extracted time series, a static 
-        file download is available via a return link. The CSV version also lets users 
+        For users who require the full table/cube of extracted time series, a static
+        file download is available via a return link. The CSV version also lets users
         select either the English (en) or French (fr) versions.
 
         Args:
@@ -397,12 +398,11 @@ class WDSRequests:
 
     @staticmethod
     async def get_full_table_download_sdmx(
-        client: AsyncClient, 
-        table_id: int
+        client: AsyncClient, table_id: int
     ) -> Response:
         """
-        For users who require the full table/cube of extracted time series, a static 
-        file download is available via a return a link. For SDMX full table download, 
+        For users who require the full table/cube of extracted time series, a static
+        file download is available via a return a link. For SDMX full table download,
         language selection is not required (bilingual format).
 
         Args:
@@ -417,9 +417,9 @@ class WDSRequests:
     @staticmethod
     async def get_code_sets(client: AsyncClient) -> Response:
         """
-        Code Sets provide additional information to describe the information such as 
-        scales, frequencies and symbols. Use method getCodeSets to access the most 
-        recent version of the code sets with descriptions (English and French) for all 
+        Code Sets provide additional information to describe the information such as
+        scales, frequencies and symbols. Use method getCodeSets to access the most
+        recent version of the code sets with descriptions (English and French) for all
         possible codes.
 
         Args:
@@ -428,4 +428,4 @@ class WDSRequests:
         Returns:
             Response: The HTTP response from the WDS API.
         """
-        return await client.get(f"/getCodeSets")
+        return await client.get("/getCodeSets")

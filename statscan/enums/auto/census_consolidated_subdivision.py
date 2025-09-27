@@ -12,6 +12,7 @@ class CensusConsolidatedSubdivision(CensusDivisionGeoCode):
     Value: CCSUID_SRUIDU
     Prefix: PREABBR_PRAABBREV
     """
+
     ALTA_ATHABASCA_COUNTY = 4813044  # Athabasca County
     ALTA_BARRHEAD_COUNTY_NO_11 = 4813018  # Barrhead County No. 11
     ALTA_BEAVER_COUNTY = 4810016  # Beaver County
@@ -33,8 +34,12 @@ class CensusConsolidatedSubdivision(CensusDivisionGeoCode):
     ALTA_FORTY_MILE_COUNTY_NO_8 = 4801008  # Forty Mile County No. 8
     ALTA_GRANDE_PRAIRIE_COUNTY_NO_1 = 4819006  # Grande Prairie County No. 1
     ALTA_GREENVIEW_NO_16 = 4818015  # Greenview No. 16
-    ALTA_IMPROVEMENT_DISTRICT_NO_12_JASPER_PARK = 4815037  # Improvement District No. 12 Jasper Park
-    ALTA_IMPROVEMENT_DISTRICT_NO_24_WOOD_BUFFALO = 4816051  # Improvement District No. 24 Wood Buffalo
+    ALTA_IMPROVEMENT_DISTRICT_NO_12_JASPER_PARK = (
+        4815037  # Improvement District No. 12 Jasper Park
+    )
+    ALTA_IMPROVEMENT_DISTRICT_NO_24_WOOD_BUFFALO = (
+        4816051  # Improvement District No. 24 Wood Buffalo
+    )
     ALTA_KNEEHILL_COUNTY = 4805041  # Kneehill County
     ALTA_LACOMBE_COUNTY = 4808022  # Lacombe County
     ALTA_LAC_LA_BICHE_COUNTY = 4812037  # Lac la Biche County
@@ -129,7 +134,9 @@ class CensusConsolidatedSubdivision(CensusDivisionGeoCode):
     BC_COLUMBIA_SHUSWAP_F = 5939044  # Columbia-Shuswap F
     BC_COMOX_VALLEY_A = 5926021  # Comox Valley A
     BC_COMOX_VALLEY_B_LAZO_NORTH = 5926022  # Comox Valley B (Lazo North)
-    BC_COMOX_VALLEY_C_PUNTLEDGE_BLACK_CREEK = 5926024  # Comox Valley C (Puntledge - Black Creek)
+    BC_COMOX_VALLEY_C_PUNTLEDGE_BLACK_CREEK = (
+        5926024  # Comox Valley C (Puntledge - Black Creek)
+    )
     BC_COWICHAN_VALLEY_B = 5919046  # Cowichan Valley B
     BC_COWICHAN_VALLEY_F = 5919033  # Cowichan Valley F
     BC_COWICHAN_VALLEY_G = 5919015  # Cowichan Valley G
@@ -202,19 +209,39 @@ class CensusConsolidatedSubdivision(CensusDivisionGeoCode):
     BC_SQUAMISH_LILLOOET_C = 5931017  # Squamish-Lillooet C
     BC_STIKINE_REGION = 5957022  # Stikine Region
     BC_STRATHCONA_C = 5924054  # Strathcona C
-    BC_STRATHCONA_D_OYSTER_BAY_BUTTLE_LAKE = 5924042  # Strathcona D (Oyster Bay - Buttle Lake)
+    BC_STRATHCONA_D_OYSTER_BAY_BUTTLE_LAKE = (
+        5924042  # Strathcona D (Oyster Bay - Buttle Lake)
+    )
     BC_SUNSHINE_COAST_A = 5929018  # Sunshine Coast A
     BC_SURREY = 5915004  # Surrey
-    BC_THOMPSON_NICOLA_A_WELLS_GRAY_COUNTRY = 5933068  # Thompson-Nicola A (Wells Gray Country)
-    BC_THOMPSON_NICOLA_B_THOMPSON_HEADWATERS = 5933070  # Thompson-Nicola B (Thompson Headwaters)
-    BC_THOMPSON_NICOLA_E_BONAPARTE_PLATEAU = 5933032  # Thompson-Nicola E (Bonaparte Plateau)
-    BC_THOMPSON_NICOLA_I_BLUE_SKY_COUNTRY = 5933037  # Thompson-Nicola I (Blue Sky Country)
-    BC_THOMPSON_NICOLA_J_COPPER_DESERT_COUNTRY = 5933039  # Thompson-Nicola J (Copper Desert Country)
+    BC_THOMPSON_NICOLA_A_WELLS_GRAY_COUNTRY = (
+        5933068  # Thompson-Nicola A (Wells Gray Country)
+    )
+    BC_THOMPSON_NICOLA_B_THOMPSON_HEADWATERS = (
+        5933070  # Thompson-Nicola B (Thompson Headwaters)
+    )
+    BC_THOMPSON_NICOLA_E_BONAPARTE_PLATEAU = (
+        5933032  # Thompson-Nicola E (Bonaparte Plateau)
+    )
+    BC_THOMPSON_NICOLA_I_BLUE_SKY_COUNTRY = (
+        5933037  # Thompson-Nicola I (Blue Sky Country)
+    )
+    BC_THOMPSON_NICOLA_J_COPPER_DESERT_COUNTRY = (
+        5933039  # Thompson-Nicola J (Copper Desert Country)
+    )
     BC_THOMPSON_NICOLA_L_GRASSLANDS = 5933060  # Thompson-Nicola L (Grasslands)
-    BC_THOMPSON_NICOLA_M_BEAUTIFUL_NICOLA_VALLEY_NORTH = 5933008  # Thompson-Nicola M (Beautiful Nicola Valley - North)
-    BC_THOMPSON_NICOLA_N_BEAUTIFUL_NICOLA_VALLEY_SOUTH = 5933012  # Thompson-Nicola N (Beautiful Nicola Valley - South)
-    BC_THOMPSON_NICOLA_O_LOWER_NORTH_THOMPSON = 5933072  # Thompson-Nicola O (Lower North Thompson)
-    BC_THOMPSON_NICOLA_P_RIVERS_AND_THE_PEAKS = 5933044  # Thompson-Nicola P (Rivers and the Peaks)
+    BC_THOMPSON_NICOLA_M_BEAUTIFUL_NICOLA_VALLEY_NORTH = (
+        5933008  # Thompson-Nicola M (Beautiful Nicola Valley - North)
+    )
+    BC_THOMPSON_NICOLA_N_BEAUTIFUL_NICOLA_VALLEY_SOUTH = (
+        5933012  # Thompson-Nicola N (Beautiful Nicola Valley - South)
+    )
+    BC_THOMPSON_NICOLA_O_LOWER_NORTH_THOMPSON = (
+        5933072  # Thompson-Nicola O (Lower North Thompson)
+    )
+    BC_THOMPSON_NICOLA_P_RIVERS_AND_THE_PEAKS = (
+        5933044  # Thompson-Nicola P (Rivers and the Peaks)
+    )
     BC_VANCOUVER = 5915022  # Vancouver
     MAN_ALEXANDER = 4601071  # Alexander
     MAN_ALONSA = 4617026  # Alonsa
@@ -232,11 +259,17 @@ class CensusConsolidatedSubdivision(CensusDivisionGeoCode):
     MAN_DELORAINE_WINCHESTER = 4605038  # Deloraine-Winchester
     MAN_DE_SALABERRY = 4602032  # De Salaberry
     MAN_DIVISION_NO_17_UNORGANIZED = 4617092  # Division No. 17, Unorganized
-    MAN_DIVISION_NO_18_UNORGANIZED_EAST_PART = 4618091  # Division No. 18, Unorganized, East Part
-    MAN_DIVISION_NO_18_UNORGANIZED_WEST_PART = 4618093  # Division No. 18, Unorganized, West Part
+    MAN_DIVISION_NO_18_UNORGANIZED_EAST_PART = (
+        4618091  # Division No. 18, Unorganized, East Part
+    )
+    MAN_DIVISION_NO_18_UNORGANIZED_WEST_PART = (
+        4618093  # Division No. 18, Unorganized, West Part
+    )
     MAN_DIVISION_NO_19_UNORGANIZED = 4619045  # Division No. 19, Unorganized
     MAN_DIVISION_NO_1_UNORGANIZED = 4601094  # Division No.  1, Unorganized
-    MAN_DIVISION_NO_20_UNORGANIZED_SOUTH_PART = 4620066  # Division No. 20, Unorganized, South Part
+    MAN_DIVISION_NO_20_UNORGANIZED_SOUTH_PART = (
+        4620066  # Division No. 20, Unorganized, South Part
+    )
     MAN_DIVISION_NO_21_UNORGANIZED = 4621078  # Division No. 21, Unorganized
     MAN_DIVISION_NO_22_UNORGANIZED = 4622046  # Division No. 22, Unorganized
     MAN_DIVISION_NO_23_UNORGANIZED = 4623062  # Division No. 23, Unorganized
@@ -610,7 +643,9 @@ class CensusConsolidatedSubdivision(CensusDivisionGeoCode):
     ONT_LONDON = 3539036  # London
     ONT_LOYALIST = 3511005  # Loyalist
     ONT_LUCAN_BIDDULPH = 3539060  # Lucan Biddulph
-    ONT_MACDONALD_MEREDITH_AND_ABERDEEN_ADDITIONAL = 3557051  # Macdonald, Meredith and Aberdeen Additional
+    ONT_MACDONALD_MEREDITH_AND_ABERDEEN_ADDITIONAL = (
+        3557051  # Macdonald, Meredith and Aberdeen Additional
+    )
     ONT_MACHAR = 3549054  # Machar
     ONT_MADAWASKA_VALLEY = 3547030  # Madawaska Valley
     ONT_MADOC = 3512036  # Madoc
@@ -645,7 +680,9 @@ class CensusConsolidatedSubdivision(CensusDivisionGeoCode):
     ONT_NIPISSING_UNORGANIZED_NORTH_PART = 3548094  # Nipissing, Unorganized, North Part
     ONT_NIPISSING_UNORGANIZED_SOUTH_PART = 3548091  # Nipissing, Unorganized, South Part
     ONT_NORFOLK_COUNTY = 3528052  # Norfolk County
-    ONT_NORTHEASTERN_MANITOULIN_AND_THE_ISLANDS = 3551017  # Northeastern Manitoulin and the Islands
+    ONT_NORTHEASTERN_MANITOULIN_AND_THE_ISLANDS = (
+        3551017  # Northeastern Manitoulin and the Islands
+    )
     ONT_NORTHERN_BRUCE_PENINSULA = 3541069  # Northern Bruce Peninsula
     ONT_NORTH_ALGONA_WILBERFORCE = 3547070  # North Algona Wilberforce
     ONT_NORTH_DUMFRIES = 3530004  # North Dumfries
@@ -665,7 +702,9 @@ class CensusConsolidatedSubdivision(CensusDivisionGeoCode):
     ONT_OSHAWA = 3518013  # Oshawa
     ONT_OTONABEE_SOUTH_MONAGHAN = 3515005  # Otonabee-South Monaghan
     ONT_OTTAWA = 3506008  # Ottawa
-    ONT_PARRY_SOUND_UNORGANIZED_CENTRE_PART = 3549096  # Parry Sound, Unorganized, Centre Part
+    ONT_PARRY_SOUND_UNORGANIZED_CENTRE_PART = (
+        3549096  # Parry Sound, Unorganized, Centre Part
+    )
     ONT_PELHAM = 3526028  # Pelham
     ONT_PERTH_EAST = 3531030  # Perth East
     ONT_PERTH_SOUTH = 3531013  # Perth South
@@ -721,8 +760,12 @@ class CensusConsolidatedSubdivision(CensusDivisionGeoCode):
     ONT_THOROLD = 3526037  # Thorold
     ONT_THUNDER_BAY = 3558004  # Thunder Bay
     ONT_THUNDER_BAY_UNORGANIZED = 3558090  # Thunder Bay, Unorganized
-    ONT_TIMISKAMING_UNORGANIZED_EAST_PART = 3554091  # Timiskaming, Unorganized, East Part
-    ONT_TIMISKAMING_UNORGANIZED_WEST_PART = 3554094  # Timiskaming, Unorganized, West Part
+    ONT_TIMISKAMING_UNORGANIZED_EAST_PART = (
+        3554091  # Timiskaming, Unorganized, East Part
+    )
+    ONT_TIMISKAMING_UNORGANIZED_WEST_PART = (
+        3554094  # Timiskaming, Unorganized, West Part
+    )
     ONT_TIMMINS = 3556027  # Timmins
     ONT_TINY = 3543068  # Tiny
     ONT_TORONTO = 3520005  # Toronto
@@ -775,7 +818,9 @@ class CensusConsolidatedSubdivision(CensusDivisionGeoCode):
     PEI_NORTH_SHORE = 1102067  # North Shore
     PEI_OLEARY = 1103065  # O'Leary
     PEI_SOURIS = 1101035  # Souris
-    PEI_STANLEY_BRIDGE_HOPE_RIVER_BAYVIEW_CAVENDISH_AND_NORTH_RUSTICO = 1102045  # Stanley Bridge, Hope River, Bayview, Cavendish and North Rustico
+    PEI_STANLEY_BRIDGE_HOPE_RIVER_BAYVIEW_CAVENDISH_AND_NORTH_RUSTICO = (
+        1102045  # Stanley Bridge, Hope River, Bayview, Cavendish and North Rustico
+    )
     PEI_ST_PETERS = 1101037  # St. Peters
     PEI_SUMMERSIDE = 1103025  # Summerside
     PEI_THREE_RIVERS = 1101045  # Three Rivers
@@ -1032,7 +1077,9 @@ class CensusConsolidatedSubdivision(CensusDivisionGeoCode):
     QUE_NICOLET = 2450072  # Nicolet
     QUE_NORMANDIN = 2492040  # Normandin
     QUE_NORMÉTAL = 2487115  # Normétal
-    QUE_NOTRE_DAME_AUXILIATRICE_DE_BUCKLAND = 2419010  # Notre-Dame-Auxiliatrice-de-Buckland
+    QUE_NOTRE_DAME_AUXILIATRICE_DE_BUCKLAND = (
+        2419010  # Notre-Dame-Auxiliatrice-de-Buckland
+    )
     QUE_NOTRE_DAME_DES_NEIGES = 2411045  # Notre-Dame-des-Neiges
     QUE_NOTRE_DAME_DE_BONSECOURS = 2480015  # Notre-Dame-de-Bonsecours
     QUE_NOTRE_DAME_DE_HAM = 2439015  # Notre-Dame-de-Ham
@@ -1041,7 +1088,9 @@ class CensusConsolidatedSubdivision(CensusDivisionGeoCode):
     QUE_NOTRE_DAME_DE_STANBRIDGE = 2446100  # Notre-Dame-de-Stanbridge
     QUE_NOTRE_DAME_DU_BON_CONSEIL = 2449080  # Notre-Dame-du-Bon-Conseil
     QUE_NOTRE_DAME_DU_MONT_CARMEL = 2437235  # Notre-Dame-du-Mont-Carmel
-    QUE_NOTRE_DAME_DU_SACRÉ_COEUR_DISSOUDUN = 2433085  # Notre-Dame-du-Sacré-Coeur-d'Issoudun
+    QUE_NOTRE_DAME_DU_SACRÉ_COEUR_DISSOUDUN = (
+        2433085  # Notre-Dame-du-Sacré-Coeur-d'Issoudun
+    )
     QUE_NOYAN = 2456015  # Noyan
     QUE_OGDEN = 2445020  # Ogden
     QUE_OKA = 2472032  # Oka
@@ -1111,7 +1160,9 @@ class CensusConsolidatedSubdivision(CensusDivisionGeoCode):
     QUE_SAINTE_BRIGITTE_DES_SAULTS = 2449085  # Sainte-Brigitte-des-Saults
     QUE_SAINTE_BÉATRIX = 2462020  # Sainte-Béatrix
     QUE_SAINTE_CATHERINE_DE_HATLEY = 2445060  # Sainte-Catherine-de-Hatley
-    QUE_SAINTE_CATHERINE_DE_LA_JACQUES_CARTIER = 2422005  # Sainte-Catherine-de-la-Jacques-Cartier
+    QUE_SAINTE_CATHERINE_DE_LA_JACQUES_CARTIER = (
+        2422005  # Sainte-Catherine-de-la-Jacques-Cartier
+    )
     QUE_SAINTE_CHRISTINE = 2448020  # Sainte-Christine
     QUE_SAINTE_CHRISTINE_DAUVERGNE = 2434105  # Sainte-Christine-d'Auvergne
     QUE_SAINTE_CLAIRE = 2419055  # Sainte-Claire
@@ -1253,7 +1304,9 @@ class CensusConsolidatedSubdivision(CensusDivisionGeoCode):
     QUE_SAINT_FLAVIEN = 2433052  # Saint-Flavien
     QUE_SAINT_FORTUNAT = 2431030  # Saint-Fortunat
     QUE_SAINT_FRANÇOIS_DASSISE = 2406055  # Saint-François-d'Assise
-    QUE_SAINT_FRANÇOIS_DE_LA_RIVIÈRE_DU_SUD = 2418060  # Saint-François-de-la-Rivière-du-Sud
+    QUE_SAINT_FRANÇOIS_DE_LA_RIVIÈRE_DU_SUD = (
+        2418060  # Saint-François-de-la-Rivière-du-Sud
+    )
     QUE_SAINT_FRANÇOIS_DE_LÎLE_DORLÉANS = 2420005  # Saint-François-de-l'Île-d'Orléans
     QUE_SAINT_FRANÇOIS_XAVIER_DE_BROMPTON = 2442020  # Saint-François-Xavier-de-Brompton
     QUE_SAINT_FRÉDÉRIC = 2427065  # Saint-Frédéric

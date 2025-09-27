@@ -6,7 +6,7 @@ import pytest
 
 def mock_method(method: Callable[..., Any]) -> Callable[..., Any]:
     """Decorator that patches methods using method references for refactor-safety.
-    
+
     Automatically applies @pytest.mark.mock marker for consistent test categorization.
 
     Args:
@@ -21,12 +21,12 @@ def mock_method(method: Callable[..., Any]) -> Callable[..., Any]:
         async def test_something(self, mock_get_code_sets, ...):
     """
     target = f"{method.__module__}.{method.__qualname__}"
-    
+
     def decorator(func):
         # Apply the patch decorator
         patched_func = patch(target)(func)
         # Apply the mock marker
         marked_func = pytest.mark.mock(patched_func)
         return marked_func
-    
+
     return decorator

@@ -1,7 +1,7 @@
 """
 Some default abbreviation mappings for enum generation.
 
-Note: 
+Note:
     Many abbreviations are extended via morphogenic variants.
     Sensible root words can be tested with:
         tools.substitution.SubstitutionEngine._generate_variants_static()
@@ -39,7 +39,9 @@ DEFAULT_ABBREVIATIONS = {
     "osb": ["oriented strandboard"],
     "ppe": ["personal protective equipment"],
     "real": ["real estate"],
-    "suppr": ["suppressed to meet the confidentiality requirements of the statistics act"],
+    "suppr": [
+        "suppressed to meet the confidentiality requirements of the statistics act"
+    ],
     "ui": ["user interface"],
     "ux": ["user experience"],
     "who": ["world health organization"],

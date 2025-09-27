@@ -8,6 +8,7 @@ class Subject(Enum):
     """
     Automatically generated Enum for Subject
     """
+
     GOV = 10  # Government  // Gouvernement
     INC_PENS_SPEND_AND_WEALTH = 11  # Income, pensions, spending and wealth  // Revenu, pensions, dépenses et richesse
     INTL_TRADE = 12  # International trade  // Commerce international
@@ -20,7 +21,9 @@ class Subject(Enum):
     STAT_METH = 19  # Statistical methods  // Méthodes statistiques
     RET_AND_WHOLE = 20  # Retail and wholesale  // Commerce de détail et de gros
     BUS_AND_CONS_SVC_AND_CULT = 21  # Business and consumer services and culture  // Services aux entreprises et aux consommateurs et culture
-    DGTL_ECON_AND_SOC = 22  # Digital economy and society  // Économie et société numériques
+    DGTL_ECON_AND_SOC = (
+        22  # Digital economy and society  // Économie et société numériques
+    )
     TRANSPORT = 23  # Transportation  // Transport
     TRVL_AND_TOUR = 24  # Travel and tourism  // Voyages et tourisme
     ENERGY = 25  # Energy  // Énergie
@@ -30,7 +33,9 @@ class Subject(Enum):
     CONST = 34  # Construction  // Construction
     CRIME_AND_JUSTICE = 35  # Crime and justice  // Crime et justice
     ECON_ACCT = 36  # Economic accounts  // Comptes économiques
-    EDU_TRAIN_AND_LEARN = 37  # Education, training and learning  // Éducation, formation et apprentissage
+    EDU_TRAIN_AND_LEARN = (
+        37  # Education, training and learning  // Éducation, formation et apprentissage
+    )
     ENV = 38  # Environment  // Environnement
     FAM_HH_AND_MARITAL_STS = 39  # Families, households and marital status  // Familles, ménages et état matrimonial
     INDIG_PPL = 41  # Indigenous peoples  // Peuples autochtones
@@ -42,7 +47,9 @@ class Subject(Enum):
     GOV_BAL_SHEETS = 1001  # Government/Balance sheets  // Gouvernement/Bilans
     GOV_EMPLOY_AND_REMUN = 1002  # Government/Employment and remuneration  // Gouvernement/Emploi et rémunération
     GOV_GOV_BUS_ENT = 1003  # Government/Government business enterprises  // Gouvernement/Entreprises publiques
-    GOV_MONETARY_AUTH = 1004  # Government/Monetary authorities  // Gouvernement/Autorités monétaires
+    GOV_MONETARY_AUTH = (
+        1004  # Government/Monetary authorities  // Gouvernement/Autorités monétaires
+    )
     GOV_REV_AND_EXP = 1005  # Government/Revenue and expenditures  // Gouvernement/Recettes et dépenses
     GOV_OTHER_CONT_REL_TO_GOV = 1099  # Government/Other content related to Government  // Gouvernement/Autre contenu lié au Gouvernement
     INC_PENS_SPEND_AND_WEALTH_HH_AND_FAM_ASSET_DEBTS_AND_WEALTH = 1101  # Income, pensions, spending and wealth/Household and family assets, debts and wealth  // Revenu, pensions, dépenses et richesse/Actif, endettement et richesse des ménages et des familles
@@ -63,18 +70,30 @@ class Subject(Enum):
     INTL_TRADE_OTHER_CONT_REL_TO_INTL_TRADE = 1299  # International trade/Other content related to International trade  // Commerce international/Autre contenu lié au Commerce international
     HLTH_DIABL = 1301  # Health/Disability  // Santé/Incapacité
     HLTH_DISEASES_AND_PHYS_HLTH_COND = 1302  # Health/Diseases and physical health conditions  // Santé/Maladies et état de santé physique
-    HLTH_ENV_FACT = 1303  # Health/Environmental factors  // Santé/Facteurs environnementaux
-    HLTH_HLTH_CARE_SVC = 1304  # Health/Health care services  // Santé/Services de soins de santé
-    HLTH_LIFE_EXPECT_AND_DEATHS = 1305  # Health/Life expectancy and deaths  // Santé/Espérance de vie et décès
+    HLTH_ENV_FACT = (
+        1303  # Health/Environmental factors  // Santé/Facteurs environnementaux
+    )
+    HLTH_HLTH_CARE_SVC = (
+        1304  # Health/Health care services  // Santé/Services de soins de santé
+    )
+    HLTH_LIFE_EXPECT_AND_DEATHS = (
+        1305  # Health/Life expectancy and deaths  // Santé/Espérance de vie et décès
+    )
     HLTH_LIFESTYLE_AND_SOC_COND = 1306  # Health/Lifestyle and social conditions  // Santé/Mode de vie et conditions sociales
-    HLTH_MENTAL_HLTH_AND_WELL_BEING = 1307  # Health/Mental health and well-being  // Santé/Santé mentale et bien-être
-    HLTH_PREG_AND_BIRTHS = 1308  # Health/Pregnancy and births  // Santé/Grossesses et naissances
+    HLTH_MENTAL_HLTH_AND_WELL_BEING = (
+        1307  # Health/Mental health and well-being  // Santé/Santé mentale et bien-être
+    )
+    HLTH_PREG_AND_BIRTHS = (
+        1308  # Health/Pregnancy and births  // Santé/Grossesses et naissances
+    )
     HLTH_PREV_AND_DETECT_OF_DISEASE = 1309  # Health/Prevention and detection of disease  // Santé/Prévention et détection de la maladie
     HLTH_HLTH_MEAS = 1310  # Health/Health measures  // Santé/Mesures de la santé
     HLTH_ORAL_HLTH = 1311  # Health/Oral health  // Santé/Santé buccodentaire
     HLTH_OTHER_CONT_REL_TO_HLTH = 1399  # Health/Other content related to Health  // Santé/Autre contenu lié à la Santé
     LAB_EARN_WAGES_AND_NON_WAGE_BFT = 1401  # Labour/Earnings, wages and non-wage benefits  // Travail/Gains, salaires et avantages sociaux
-    LAB_EMPLOY_AND_UNEMPL = 1402  # Labour/Employment and unemployment  // Travail/Emploi et chômage
+    LAB_EMPLOY_AND_UNEMPL = (
+        1402  # Labour/Employment and unemployment  // Travail/Emploi et chômage
+    )
     LAB_EMPLOY_INS_SOC_ASSIST_AND_OTHER_TRANSPORT = 1403  # Labour/Employment insurance, social assistance and other transfers  // Travail/Assurance-emploi, aide sociale et autres transferts
     LAB_HOURS_OF_WORK_AND_WORK_ARRG = 1404  # Labour/Hours of work and work arrangements  // Travail/Heures de travail et conditions de travail
     LAB_JOB_TRAIN_AND_APPRTC_PROG = 1405  # Labour/Job training and apprenticeship programs  // Travail/Formation professionnelle et programmes pour apprentis
@@ -87,15 +106,21 @@ class Subject(Enum):
     LAB_WORKPLACE_ORG_INNOV_AND_PERF = 1412  # Labour/Workplace organization, innovation and performance  // Travail/Organisation du milieu de travail, innovation et rendement
     LAB_WORKPLACE_HLTH_AND_WORK_ABS = 1413  # Labour/Workplace health and work absences  // Travail/Santé du milieu de travail et absences du travail
     LAB_OTHER_CONT_REL_TO_LAB = 1499  # Labour/Other content related to Labour  // Travail/Autre contenu lié au Travail
-    LANG_KNOW_OF_LANG = 1504  # Languages/Knowledge of languages  // Langues/Connaissances des langues
+    LANG_KNOW_OF_LANG = (
+        1504  # Languages/Knowledge of languages  // Langues/Connaissances des langues
+    )
     LANG_LANG_GRP = 1507  # Languages/Language groups  // Langues/Groupes linguistiques
-    LANG_USE_OF_LANG = 1508  # Languages/Use of languages  // Langues/Utilisation des langues
+    LANG_USE_OF_LANG = (
+        1508  # Languages/Use of languages  // Langues/Utilisation des langues
+    )
     LANG_OTHER_CONT_REL_TO_LANG = 1599  # Languages/Other content related to Languages  // Langues/Autre contenu lié aux Langues
     MANUFACT_CHEM_PLASTICS_AND_RUBBER = 1601  # Manufacturing/Chemicals, plastics and rubber  // Fabrication/Produits chimiques, plastique et en caoutchouc
     MANUFACT_FOOD_BEV_AND_TOBACCO = 1602  # Manufacturing/Food, beverage and tobacco  // Fabrication/Aliments, boissons et tabac
     MANUFACT_MACH_COMP_AND_ELEC = 1603  # Manufacturing/Machinery, computers and electronics  // Fabrication/Machines, produits informatiques et électroniques
     MANUFACT_NON_METALLIC_MINERAL_AND_METAL = 1604  # Manufacturing/Non-metallic mineral and metal  // Fabrication/Minéraux non métalliques et métaux
-    MANUFACT_PETRO_AND_COAL = 1605  # Manufacturing/Petroleum and coal  // Fabrication/Pétrole et charbon
+    MANUFACT_PETRO_AND_COAL = (
+        1605  # Manufacturing/Petroleum and coal  // Fabrication/Pétrole et charbon
+    )
     MANUFACT_TEXT_CLOTH_AND_LEATHER = 1606  # Manufacturing/Textiles, clothing and leather  // Fabrication/Textiles, vêtements et cuir
     MANUFACT_TRANSPORT_EQUIP = 1607  # Manufacturing/Transportation equipment  // Fabrication/Matériel de transport
     MANUFACT_WOOD_PAPER_AND_PRINT = 1608  # Manufacturing/Wood, paper and printing  // Fabrication/Bois, papier et impression
@@ -128,7 +153,9 @@ class Subject(Enum):
     STAT_METH_INFER_AND_FOUNDATIONS = 1908  # Statistical methods/Inference and foundations  // Méthodes statistiques/Inférence et fondements
     STAT_METH_QUAL_ASSUR = 1909  # Statistical methods/Quality assurance  // Méthodes statistiques/Assurance de la qualité
     STAT_METH_RESPONSE_AND_NONRESPONSE = 1910  # Statistical methods/Response and nonresponse  // Méthodes statistiques/Réponse et non-réponse
-    STAT_METH_SIMULATIONS = 1911  # Statistical methods/Simulations  // Méthodes statistiques/Simulations
+    STAT_METH_SIMULATIONS = (
+        1911  # Statistical methods/Simulations  // Méthodes statistiques/Simulations
+    )
     STAT_METH_STAT_TECH = 1912  # Statistical methods/Statistical techniques  // Méthodes statistiques/Techniques statistiques
     STAT_METH_SURV_DESIGN = 1913  # Statistical methods/Survey design  // Méthodes statistiques/Plan de sondage
     STAT_METH_TIME_SERIES = 1914  # Statistical methods/Time series  // Méthodes statistiques/Séries chronologiques
@@ -149,11 +176,19 @@ class Subject(Enum):
     DGTL_ECON_AND_SOC_E_COMM = 2209  # Digital economy and society/E-commerce  // Économie et société numériques/Commerce électronique
     DGTL_ECON_AND_SOC_PRICE_IDX_FOR_DGTL_ECON_GOODS_AND_SVC = 2210  # Digital economy and society/Price indexes for digital economy goods and services  // Économie et société numériques/Indices des prix des biens et services liés à l'économie numérique
     DGTL_ECON_AND_SOC_OTHER_CONT_REL_TO_DGTL_ECON_AND_SOC = 2299  # Digital economy and society/Other content related to Digital economy and society  // Économie et société numériques/Autre contenu lié à l'Économie et société numériques
-    TRANSPORT_AIR_TRANSPORT = 2301  # Transportation/Air transportation  // Transport/Transport aérien
+    TRANSPORT_AIR_TRANSPORT = (
+        2301  # Transportation/Air transportation  // Transport/Transport aérien
+    )
     TRANSPORT_COURIERS_AND_MESSENGERS = 2302  # Transportation/Couriers and messengers  // Transport/Messageries et services de messagers
-    TRANSPORT_RAIL_TRANSPORT = 2303  # Transportation/Rail transportation  // Transport/Transport ferroviaire
-    TRANSPORT_ROAD_TRANSPORT = 2304  # Transportation/Road transportation  // Transport/Transport routier
-    TRANSPORT_WATER_TRANSPORT = 2306  # Transportation/Water transportation  // Transport/Transport maritime
+    TRANSPORT_RAIL_TRANSPORT = (
+        2303  # Transportation/Rail transportation  // Transport/Transport ferroviaire
+    )
+    TRANSPORT_ROAD_TRANSPORT = (
+        2304  # Transportation/Road transportation  // Transport/Transport routier
+    )
+    TRANSPORT_WATER_TRANSPORT = (
+        2306  # Transportation/Water transportation  // Transport/Transport maritime
+    )
     TRANSPORT_OTHER_CONT_REL_TO_TRANSPORT = 2399  # Transportation/Other content related to Transportation  // Transport/Autre contenu lié au Transport
     TRVL_AND_TOUR_DOM_TRVL = 2401  # Travel and tourism/Domestic travel  // Voyages et tourisme/Voyages intérieurs
     TRVL_AND_TOUR_INTL_TRVL = 2402  # Travel and tourism/International travel  // Voyages et tourisme/Voyages internationaux
@@ -176,7 +211,9 @@ class Subject(Enum):
     AGRIC_AND_FOOD_FARM_BUS = 3202  # Agriculture and food/Farm business  // Agriculture et alimentation/Entreprise agricole
     AGRIC_AND_FOOD_FARM_CHAR = 3203  # Agriculture and food/Farm characteristics  // Agriculture et alimentation/Caractéristiques de la ferme
     AGRIC_AND_FOOD_ANIMAL_PROD = 3204  # Agriculture and food/Animal production  // Agriculture et alimentation/Production animale
-    AGRIC_AND_FOOD_FOOD = 3205  # Agriculture and food/Food  // Agriculture et alimentation/Alimentation
+    AGRIC_AND_FOOD_FOOD = (
+        3205  # Agriculture and food/Food  // Agriculture et alimentation/Alimentation
+    )
     AGRIC_AND_FOOD_LAND_USE = 3206  # Agriculture and food/Land use  // Agriculture et alimentation/Utilisation des terres
     AGRIC_AND_FOOD_AGRICULTURAL_GEO = 3207  # Agriculture and food/Agricultural geography  // Agriculture et alimentation/Géographie agricole
     AGRIC_AND_FOOD_FARM_POP = 3208  # Agriculture and food/Farm population  // Agriculture et alimentation/Population agricole
@@ -190,17 +227,27 @@ class Subject(Enum):
     CONST_MACH_AND_EQUIP = 3402  # Construction/Machinery and equipment  // Construction/Machines et matériel
     CONST_NON_RES_CONST = 3403  # Construction/Non-residential construction  // Construction/Construction non résidentielle
     CONST_INVEST_IN_CONST = 3405  # Construction/Investment in construction  // Construction/Investissements en construction
-    CONST_PROP_EVAL = 3406  # Construction/Property values  // Construction/Valeurs des propriétés
+    CONST_PROP_EVAL = (
+        3406  # Construction/Property values  // Construction/Valeurs des propriétés
+    )
     CONST_CAP_AND_REP_EXP = 3407  # Construction/Capital and repair expenditures  // Construction/Dépenses en immobilisations et réparations
-    CONST_HOUSING_STARTS = 3408  # Construction/Housing starts  // Construction/Mises en chantier
-    CONST_BLDG_PERMITS = 3409  # Construction/Building permits  // Construction/Permis de bâtir
+    CONST_HOUSING_STARTS = (
+        3408  # Construction/Housing starts  // Construction/Mises en chantier
+    )
+    CONST_BLDG_PERMITS = (
+        3409  # Construction/Building permits  // Construction/Permis de bâtir
+    )
     CONST_INFRA = 3410  # Construction/Infrastructure  // Construction/Infrastructure
     CONST_OTHER_CONT_REL_TO_CONST = 3499  # Construction/Other content related to Construction  // Construction/Autre contenu lié à la Construction
     CRIME_AND_JUSTICE_CORRECT_SVC = 3501  # Crime and justice/Correctional services  // Crime et justice/Services correctionnels
-    CRIME_AND_JUSTICE_COURTS = 3502  # Crime and justice/Courts  // Crime et justice/Tribunaux
+    CRIME_AND_JUSTICE_COURTS = (
+        3502  # Crime and justice/Courts  // Crime et justice/Tribunaux
+    )
     CRIME_AND_JUSTICE_CRIMES_AND_OFFENCES = 3503  # Crime and justice/Crimes and offences  // Crime et justice/Crimes et infractions
     CRIME_AND_JUSTICE_POLICE_SVC = 3504  # Crime and justice/Police services  // Crime et justice/Services de police
-    CRIME_AND_JUSTICE_VICTIM = 3505  # Crime and justice/Victimization  // Crime et justice/Victimisation
+    CRIME_AND_JUSTICE_VICTIM = (
+        3505  # Crime and justice/Victimization  // Crime et justice/Victimisation
+    )
     CRIME_AND_JUSTICE_COMM_SAFETY = 3506  # Crime and justice/Community safety  // Crime et justice/Sécurité communautaire
     CRIME_AND_JUSTICE_OTHER_CONT_REL_TO_CRIME_AND_JUSTICE = 3599  # Crime and justice/Other content related to Crime and justice  // Crime et justice/Autre contenu lié au Crime et la justice
     ECON_ACCT_STOCK_AND_CONS_OF_FIXED_CAP = 3601  # Economic accounts/Stock and consumption of fixed capital  // Comptes économiques/Stock et consommation de capital fixe
@@ -224,13 +271,19 @@ class Subject(Enum):
     EDU_TRAIN_AND_LEARN_POSTSEC_EDU = 3715  # Education, training and learning/Postsecondary education  // Éducation, formation et apprentissage/Études postsecondaires
     EDU_TRAIN_AND_LEARN_STUD_PATHWAYS = 3716  # Education, training and learning/Student pathways  // Éducation, formation et apprentissage/Cheminement des étudiants
     EDU_TRAIN_AND_LEARN_OTHER_CONT_REL_TO_EDU_TRAIN_AND_LEARN = 3799  # Education, training and learning/Other content related to Education, training and learning  // Éducation, formation et apprentissage/Autre contenu lié à l'Éducation, la formation et l'apprentissage
-    ENV_AIR_AND_CLIMATE = 3801  # Environment/Air and climate  // Environnement/Air et climat
+    ENV_AIR_AND_CLIMATE = (
+        3801  # Environment/Air and climate  // Environnement/Air et climat
+    )
     ENV_LAND_OCEANS_ECO_AND_BIODIV = 3802  # Environment/Land, oceans, ecosystems and biodiversity  // Environnement/Terres, océans, écosystèmes et biodiversité
     ENV_ENV_PROTECT_TECH_AND_PRACT = 3803  # Environment/Environmental protection, technology and practices  // Environnement/Protection de l’environnement et technologies et pratiques environnementales
     ENV_ENV_ECON_ACCT = 3805  # Environment/Environmental-economic accounts  // Environnement/Comptes économiques et environnementaux
-    ENV_WATER_AND_WASTEWATER = 3806  # Environment/Water and wastewater  // Environnement/Eau et eaux usées
+    ENV_WATER_AND_WASTEWATER = (
+        3806  # Environment/Water and wastewater  // Environnement/Eau et eaux usées
+    )
     ENV_SOLID_WASTE_AND_HAZ_SUBST = 3807  # Environment/Solid waste and hazardous substances  // Environnement/Déchets solides et substances dangereuses
-    ENV_NAT_DISASTERS = 3810  # Environment/Natural disasters  // Environnement/Désastres naturels
+    ENV_NAT_DISASTERS = (
+        3810  # Environment/Natural disasters  // Environnement/Désastres naturels
+    )
     ENV_OTHER_CONT_REL_TO_ENV = 3899  # Environment/Other content related to Environment  // Environnement/Autre contenu lié à l'Environnement
     FAM_HH_AND_MARITAL_STS_FAM = 3902  # Families, households and marital status/Families  // Familles, ménages et état matrimonial/Familles
     FAM_HH_AND_MARITAL_STS_HH = 3903  # Families, households and marital status/Households  // Familles, ménages et état matrimonial/Ménages
@@ -246,17 +299,21 @@ class Subject(Enum):
     INDIG_PPL_LIV_ARRG_AND_HOUSING = 4106  # Indigenous peoples/Living arrangements and housing  // Peuples autochtones/Situation des particuliers et logement
     INDIG_PPL_LAB_AND_EMPLOY = 4107  # Indigenous peoples/Labour and employment  // Peuples autochtones/Travail et emploi
     INDIG_PPL_INC_AND_SPEND = 4108  # Indigenous peoples/Income and spending  // Peuples autochtones/Revenu et dépenses
-    INDIG_PPL_INDIG_POP_PROFILES = 4109  # Indigenous peoples/Indigenous population profiles  // Peuples autochtones/Profils de la population autochtone 
+    INDIG_PPL_INDIG_POP_PROFILES = 4109  # Indigenous peoples/Indigenous population profiles  // Peuples autochtones/Profils de la population autochtone
     INDIG_PPL_INDIG_CHILD = 4110  # Indigenous peoples/Indigenous children  // Peuples autochtones/Enfants autochtones
     INDIG_PPL_OTHER_CONT_REL_TO_INDIG_PPL = 4199  # Indigenous peoples/Other content related to Indigenous peoples  // Peuples autochtones/Autre contenu lié aux Peuples autochtones
     CHILD_AND_YOUTH_CHILD_DEV_AND_BEHAV = 4201  # Children and youth/Child development and behaviour  // Enfants et jeunes/Développement et comportement de l'enfant
-    CHILD_AND_YOUTH_EDU = 4202  # Children and youth/Education  // Enfants et jeunes/Éducation
-    CHILD_AND_YOUTH_HLTH_OF_CHILD_AND_YOUTH = 4203  # Children and youth/Health of children and youth  // Enfants et jeunes/Santé des enfants et des jeunes 
+    CHILD_AND_YOUTH_EDU = (
+        4202  # Children and youth/Education  // Enfants et jeunes/Éducation
+    )
+    CHILD_AND_YOUTH_HLTH_OF_CHILD_AND_YOUTH = 4203  # Children and youth/Health of children and youth  // Enfants et jeunes/Santé des enfants et des jeunes
     CHILD_AND_YOUTH_IMMIGR_CHILD_AND_YOUTH = 4204  # Children and youth/Immigrant children and youth  // Enfants et jeunes/Enfants et jeunes immigrants
     CHILD_AND_YOUTH_LAB_MKT_ACT_FOR_YOUTH = 4205  # Children and youth/Labour market activities for youth  // Enfants et jeunes/Activités sur le marché du travail pour les jeunes
     CHILD_AND_YOUTH_LOW_INC_FAM = 4206  # Children and youth/Low income families  // Enfants et jeunes/Familles à faible revenu
     CHILD_AND_YOUTH_VIOLENCE_AMONG_CHILD_AND_YOUTH = 4209  # Children and youth/Violence among children and youth  // Enfants et jeunes/Violence chez les enfants et les jeunes
-    CHILD_AND_YOUTH_CHILD_CARE = 4210  # Children and youth/Child care  // Enfants et jeunes/Soins aux enfants
+    CHILD_AND_YOUTH_CHILD_CARE = (
+        4210  # Children and youth/Child care  // Enfants et jeunes/Soins aux enfants
+    )
     CHILD_AND_YOUTH_YOUTH_CRIME_AND_JUSTICE = 4211  # Children and youth/Youth crime and justice  // Enfants et jeunes/Crime et justice chez les jeunes
     CHILD_AND_YOUTH_CHILD_AT_HOME = 4213  # Children and youth/Children at home  // Enfants et jeunes/Présence d'enfants à la maison
     CHILD_AND_YOUTH_OTHER_CONT_REL_TO_CHILD_AND_YOUTH = 4299  # Children and youth/Other content related to Children and youth  // Enfants et jeunes/Autre contenu lié aux Enfants et les jeunes
@@ -274,15 +331,21 @@ class Subject(Enum):
     OLDER_ADULTS_AND_POP_AGING_ELDER_ABUSE_AND_VICTIM = 4405  # Older adults and population aging/Elder abuse and victimization  // Adultes âgés et vieillissement démographique/Victimisation et abus envers les adultes âgés
     OLDER_ADULTS_AND_POP_AGING_HOUSING_AND_FAM_AND_HH_CHAR_OF_OLDER_ADULTS = 4406  # Older adults and population aging/Housing and family and household characteristics of older adults  // Adultes âgés et vieillissement démographique/Logement et caractéristiques familiales et du ménage des adultes âgés
     OLDER_ADULTS_AND_POP_AGING_OTHER_CONT_REL_TO_OLDER_ADULTS_AND_POP_AGING = 4499  # Older adults and population aging/Other content related to Older adults and population aging  // Adultes âgés et vieillissement démographique/Autre contenu lié aux Adultes âgés et le vieillissement démographique
-    SOC_AND_COMM_RELIG = 4501  # Society and community/Religion  // Société et communauté/Religion
+    SOC_AND_COMM_RELIG = (
+        4501  # Society and community/Religion  // Société et communauté/Religion
+    )
     SOC_AND_COMM_RURAL_CAN = 4502  # Society and community/Rural Canada  // Société et communauté/Canada rural
     SOC_AND_COMM_CIVIC_PARTICIPATION = 4503  # Society and community/Civic participation  // Société et communauté/Participation communautaire
-    SOC_AND_COMM_TIME_USE = 4504  # Society and community/Time use  // Société et communauté/Emploi du temps
+    SOC_AND_COMM_TIME_USE = (
+        4504  # Society and community/Time use  // Société et communauté/Emploi du temps
+    )
     SOC_AND_COMM_VOL_AND_DONATING = 4505  # Society and community/Volunteering and donating  // Société et communauté/Don et bénévolat
     SOC_AND_COMM_SEX_GENDER_AND_SEX_ORIENT = 4506  # Society and community/Sex, gender and sexual orientation  // Société et communauté/Sexe, genre et orientation sexuelle
     SOC_AND_COMM_EQUITY_AND_INCL = 4507  # Society and community/Equity and inclusion  // Société et communauté/Égalité et inclusion
     SOC_AND_COMM_SOC_AND_PERS_NET = 4508  # Society and community/Social and personal networks  // Société et communauté/Réseaux sociaux et personnels
-    SOC_AND_COMM_CANNABIS = 4509  # Society and community/Cannabis  // Société et communauté/Cannabis
+    SOC_AND_COMM_CANNABIS = (
+        4509  # Society and community/Cannabis  // Société et communauté/Cannabis
+    )
     SOC_AND_COMM_COVID_19_PANDEMIC = 4510  # Society and community/COVID-19 pandemic  // Société et communauté/Pandémie de COVID-19
     SOC_AND_COMM_CAN_MILITARY_EXP = 4511  # Society and community/Canadian military experience  // Société et communauté/Expérience militaire Canadienne
     SOC_AND_COMM_OTHER_CONT_REL_TO_SOC_AND_COMM = 4599  # Society and community/Other content related to Society and community  // Société et communauté/Autre contenu lié à la Société et la communauté
@@ -291,7 +354,9 @@ class Subject(Enum):
     HOUSING_HOUSING_PRICE_IDX = 4603  # Housing/Housing price indexes  // Logement/Indices des prix des logements
     HOUSING_HOUSING_AND_LIV_ARRG = 4604  # Housing/Housing and living arrangements  // Logement/Logement et situation dans le ménage
     HOUSING_RES_CONST_AND_INVEST = 4605  # Housing/Residential construction and investment  // Logement/Construction résidentielle et investissements
-    HOUSING_VACANCY_RATES = 4606  # Housing/Vacancy rates  // Logement/Taux d'inoccupation
+    HOUSING_VACANCY_RATES = (
+        4606  # Housing/Vacancy rates  // Logement/Taux d'inoccupation
+    )
     HOUSING_OTHER_CONT_REL_TO_HOUSING = 4699  # Housing/Other content related to Housing  // Logement/Autre contenu lié au Logement
     INC_PENS_SPEND_AND_WEALTH_HH_AND_FAM_ASSET_DEBTS_AND_WEALTH_HH_AND_FAM_DEBT = 110101  # Income, pensions, spending and wealth/Household and family assets, debts and wealth/Household and family debt  // Revenu, pensions, dépenses et richesse/Actif, endettement et richesse des ménages et des familles/Endettement des ménages et des familles
     INC_PENS_SPEND_AND_WEALTH_HH_AND_FAM_ASSET_DEBTS_AND_WEALTH_NET_WORTH = 110102  # Income, pensions, spending and wealth/Household and family assets, debts and wealth/Net worth  // Revenu, pensions, dépenses et richesse/Actif, endettement et richesse des ménages et des familles/Valeur nette
@@ -423,7 +488,7 @@ class Subject(Enum):
     POP_AND_DEMO_POP_PROJ_OTHER_CONT_REL_TO_POP_PROJ = 171199  # Population and demography/Population projections/Other content related to Population projections  // Population et démographie/Projections démographiques/Autre contenu lié aux Projections démographiques
     POP_AND_DEMO_CEN_COUNTS_AGE_SEX_AT_BIRTH_AND_GENDER = 171201  # Population and demography/Census counts/Age, sex at birth and gender  // Population et démographie/Chiffres du recensement/Âge, sexe à la naissance et genre
     POP_AND_DEMO_CEN_COUNTS_TOT_POP = 171202  # Population and demography/Census counts/Total population  // Population et démographie/Chiffres du recensement/Population totale
-    POP_AND_DEMO_CEN_COUNTS_FAM_HH_AND_MARITAL_STS = 171203  # Population and demography/Census counts/Families, households and marital status  // Population et démographie/Chiffres du recensement/Familles, ménages et état matrimonial 
+    POP_AND_DEMO_CEN_COUNTS_FAM_HH_AND_MARITAL_STS = 171203  # Population and demography/Census counts/Families, households and marital status  // Population et démographie/Chiffres du recensement/Familles, ménages et état matrimonial
     POP_AND_DEMO_CEN_COUNTS_MOB_AND_MIG = 171204  # Population and demography/Census counts/Mobility and migration  // Population et démographie/Chiffres du recensement/Mobilité et migration
     POP_AND_DEMO_CEN_COUNTS_DWEL_COUNTS_AND_TYPES = 171205  # Population and demography/Census counts/Dwelling counts and types  // Population et démographie/Chiffres du recensement/Chiffres et types de logements
     POP_AND_DEMO_CEN_COUNTS_OTHER_CONT_REL_TO_CEN_COUNTS = 171299  # Population and demography/Census counts/Other content related to Census counts  // Population et démographie/Chiffres du recensement/Autre contenu lié aux Chiffres du recensement
@@ -465,7 +530,9 @@ class Subject(Enum):
     TRANSPORT_ROAD_TRANSPORT_PASS_KILOMETRES = 230404  # Transportation/Road transportation/Passenger-kilometres  // Transport/Transport routier/Passagers-kilomètres
     TRANSPORT_ROAD_TRANSPORT_VEHIC_KILOMETRES = 230405  # Transportation/Road transportation/Vehicle-kilometres  // Transport/Transport routier/Véhicules-kilomètres
     TRANSPORT_ROAD_TRANSPORT_OTHER_CONT_REL_TO_ROAD_TRANSPORT = 230499  # Transportation/Road transportation/Other content related to Road transportation  // Transport/Transport routier/Autre contenu lié au Transport routier
-    ENERGY_FOSSIL_FUELS_COAL = 250701  # Energy/Fossil fuels/Coal  // Énergie/Énergies fossiles/Charbon
+    ENERGY_FOSSIL_FUELS_COAL = (
+        250701  # Energy/Fossil fuels/Coal  // Énergie/Énergies fossiles/Charbon
+    )
     ENERGY_FOSSIL_FUELS_CRUDE_OIL_AND_NAT_GAS = 250702  # Energy/Fossil fuels/Crude oil and natural gas  // Énergie/Énergies fossiles/Pétrole brut et gaz naturel
     ENERGY_FOSSIL_FUELS_PETRO_PROD = 250703  # Energy/Fossil fuels/Petroleum products  // Énergie/Énergies fossiles/Produits pétroliers
     ENERGY_FOSSIL_FUELS_OTHER_CONT_REL_TO_FOSSIL_FUELS = 250799  # Energy/Fossil fuels/Other content related to Fossil fuels  // Énergie/Énergies fossiles/Autre contenu lié aux Énergies fossiles
@@ -473,7 +540,7 @@ class Subject(Enum):
     SCI_AND_TECH_INNOV_AND_BUS_STRAT_PROD_AND_PROC = 270302  # Science and technology/Innovation and business strategy/Products and processes  // Sciences et technologie/Innovation et stratégies d'entreprise/Produits et processus
     SCI_AND_TECH_INNOV_AND_BUS_STRAT_ENT_AND_SUBS_ACT = 270303  # Science and technology/Innovation and business strategy/Enterprise and subsidiary activities  // Sciences et technologie/Innovation et stratégies d'entreprise/Activités des entreprises et des filiales
     SCI_AND_TECH_INNOV_AND_BUS_STRAT_ORG_AND_MGMT_PRACT = 270304  # Science and technology/Innovation and business strategy/Organizational and management practices  // Sciences et technologie/Innovation et stratégies d'entreprise/Pratiques organisationnelles et de gestion
-    SCI_AND_TECH_INNOV_AND_BUS_STRAT_IND_ACT = 270305  # Science and technology/Innovation and business strategy/Industrial activities  // Sciences et technologie/Innovation et stratégies d'entreprise/Activités industrielles 
+    SCI_AND_TECH_INNOV_AND_BUS_STRAT_IND_ACT = 270305  # Science and technology/Innovation and business strategy/Industrial activities  // Sciences et technologie/Innovation et stratégies d'entreprise/Activités industrielles
     SCI_AND_TECH_INNOV_AND_BUS_STRAT_PATENTS_COPYRIGHTS_AND_TRADEMARKS = 270306  # Science and technology/Innovation and business strategy/Patents, copyrights and trademarks  // Sciences et technologie/Innovation et stratégies d'entreprise/Brevets, droits d'auteur et marques de commerce
     SCI_AND_TECH_INNOV_AND_BUS_STRAT_OTHER_CONT_REL_TO_INNOV_AND_BUS_STRAT = 270399  # Science and technology/Innovation and business strategy/Other content related to Innovation and business strategy  // Sciences et technologie/Innovation et stratégies d'entreprise/Autre contenu lié à l'Innovation et les stratégies d'entreprise
     SCI_AND_TECH_RES_AND_DEV_INST_EXP_AND_ACT = 270501  # Science and technology/Research and development/Institutional expenditures and activities  // Sciences et technologie/Recherche et développement/Dépenses et activités du secteur institutionnel
@@ -630,4 +697,3 @@ class Subject(Enum):
     SOC_AND_COMM_CAN_MILITARY_EXP_CURRENTLY_SERV_MEMBERS = 451101  # Society and community/Canadian military experience/Currently serving members  // Société et communauté/Expérience militaire Canadienne/Membres actifs
     SOC_AND_COMM_CAN_MILITARY_EXP_VET = 451102  # Society and community/Canadian military experience/Veterans  // Société et communauté/Expérience militaire Canadienne/Anciens combattants
     SOC_AND_COMM_CAN_MILITARY_EXP_OTHER_CONT_REL_TO_CAN_MILITARY_EXP = 451199  # Society and community/Canadian military experience/Other content related to Canadian military experience  // Société et communauté/Expérience militaire Canadienne/Autre contenu lié à l'expérience militaire Canadienne
-

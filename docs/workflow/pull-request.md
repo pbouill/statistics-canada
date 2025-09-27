@@ -86,6 +86,7 @@ flowchart TD
 ## Workflow File Cross-Reference
 
 ### Active Workflows (🟢) - Production Ready
+
 - **`dev-changelog.yml`** - Smart changelog with file filtering
   - **Trigger**: PR merge to dev branch
   - **Features**: Package vs infrastructure file detection
@@ -108,6 +109,7 @@ flowchart TD
   - **Status**: Phase 3 - ACTIVE
 
 ### Removed Workflows (Cleanup Complete)
+
 - **All legacy/duplicate workflows removed** - 16+ files cleaned up
 - **All `.disabled` workflows removed** - Can restore from git history if needed
 - **Result**: Clean, minimal, conflict-free system with only 4 essential workflows
@@ -115,9 +117,11 @@ flowchart TD
 ## Key Features
 
 ### 1. File-Based Intelligence
+
 Both changelog and release pipeline use smart file pattern matching:
 
 **Package Files** (trigger workflows):
+
 - `statscan/` - Main package code
 - `pyproject.toml` - Package configuration
 - `setup.py` - Setup configuration  
@@ -125,6 +129,7 @@ Both changelog and release pipeline use smart file pattern matching:
 - `README.md`, `LICENSE` - Package documentation
 
 **Infrastructure Files** (skip workflows):
+
 - `.github/` - Workflow definitions
 - `docs/` - Documentation
 - `tools/` - Development tools
@@ -133,6 +138,7 @@ Both changelog and release pipeline use smart file pattern matching:
 - `tests/*.py` - Test files
 
 ### 2. Shared QA/QC Workflow
+
 The `qa-qc-checks.yml` workflow can be reused:
 
 ```yaml
@@ -148,6 +154,7 @@ with:
 ```
 
 ### 3. Rollback Mechanisms
+
 - **Changelog Rollback**: Reverts version section back to UNRELEASED
 - **Partial Rollback**: Handles PyPI success but GitHub release failure
 - **Investigation Path**: Returns to release decision point for retry

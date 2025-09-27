@@ -1,4 +1,3 @@
-
 from statscan.enums.geocode.geocode import GeoCode
 from statscan.enums.auto import ProvinceTerritory
 
@@ -20,7 +19,7 @@ class ProvinceGeoCode(GeoCode):
         str
             The unique identifier for the province or territory.
         """
-        return self.uid[:ProvinceTerritory.get_nchars()]
+        return self.uid[: ProvinceTerritory.get_nchars()]
 
     @property
     def province_territory(self) -> ProvinceTerritory:
@@ -32,5 +31,3 @@ class ProvinceGeoCode(GeoCode):
             The enum instance for the province or territory.
         """
         return ProvinceTerritory(int(self.pruid))
-
-

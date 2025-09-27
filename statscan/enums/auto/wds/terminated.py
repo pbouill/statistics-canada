@@ -8,6 +8,6 @@ class Terminated(Enum):
     """
     Automatically generated Enum for Terminated
     """
+
     ACT = 0  # active  // actif
     TERMINATED = 1  # terminated  // terminé
-

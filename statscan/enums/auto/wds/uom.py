@@ -8,6 +8,7 @@ class Uom(Enum):
     """
     Automatically generated Enum for Uom
     """
+
     CODE_0 = 0
     _1981_100 = 1  # 1981=100  // 1981=100
     _199712_100 = 10  # 199712=100  // 199712=100
@@ -20,23 +21,33 @@ class Uom(Enum):
     DOLLARS_PER_DOZEN = 106  # Dollars per dozen  // Dollars par douzaine
     DOLLARS_PER_HOUR = 107  # Dollars per hour  // Dollars par heure
     DOLLARS_PER_HUNDREDWEIGHT = 108  # Dollars per hundredweight  // Dollars par quintal
-    DOLLARS_PER_HUNDREDWEIGHT_1 = 109  # Dollars per hundredweight  // Dollars par poids de cent douze livres
+    DOLLARS_PER_HUNDREDWEIGHT_1 = (
+        109  # Dollars per hundredweight  // Dollars par poids de cent douze livres
+    )
     _1997_100 = 11  # 1997=100  // 1997=100
-    DOLLARS_PER_HUNDREDWEIGHT_2 = 110  # Dollars per hundredweight  // Dollars par poids de cent livres
-    DOLLARS_PER_HUNDREDWEIGHT_3 = 111  # Dollars per hundredweight  // Dollars par quintaux
+    DOLLARS_PER_HUNDREDWEIGHT_2 = (
+        110  # Dollars per hundredweight  // Dollars par poids de cent livres
+    )
+    DOLLARS_PER_HUNDREDWEIGHT_3 = (
+        111  # Dollars per hundredweight  // Dollars par quintaux
+    )
     DOLLARS_PER_HUNDREDWEIGHT_OF_MILK = 112  # Dollars per hundredweight of milk  // Dollars par poids de cent douze livres de lait
     DOLLARS_PER_KILOGRAM = 113  # Dollars per kilogram  // Dollars par kilogramme
     DOLLARS_PER_KILOLITRE = 114  # Dollars per kilolitre  // Dollars par kilolitre
     DOLLARS_PER_KILOMETRE = 115  # Dollars per kilometre  // Dollars par kilomètre
     DOLLARS_PER_LITRE = 116  # Dollars per litre  // Dollars par litre
-    DOLLARS_PER_METRIC_TONNE = 117  # Dollars per metric tonne  // Dollars par tonne métrique
+    DOLLARS_PER_METRIC_TONNE = (
+        117  # Dollars per metric tonne  // Dollars par tonne métrique
+    )
     DOLLARS_PER_PERS = 118  # Dollars per person  // Dollars par personne
     DOLLARS_PER_POUND = 119  # Dollars per pound  // Dollars par livre
     _1999_100 = 12  # 1999=100  // 1999=100
     DOLLARS_PER_TON = 120  # Dollars per ton  // Dollars par tonne
     DOLLARS_PER_TONNE = 121  # Dollars per tonne  // Dollars par tonne métrique
     DOLLARS_PER_TONNES = 122  # Dollars per tonnes  // Dollars par tonnes métriques
-    DOLLARS_PER_UNIT_OF_REAL_GDP = 123  # Dollars per unit of real GDP  // Dollars par unité de PIB réel
+    DOLLARS_PER_UNIT_OF_REAL_GDP = (
+        123  # Dollars per unit of real GDP  // Dollars par unité de PIB réel
+    )
     DOLLARS_1972_100 = 124  # Dollars, 1972=100  // Dollars, 1972=100
     DOLLARS_1981_100 = 125  # Dollars, 1981=100  // Dollars, 1981=100
     DOLLARS_1982_100 = 126  # Dollars, 1982=100  // Dollars, 1982=100
@@ -44,7 +55,9 @@ class Uom(Enum):
     DOLLARS_1992 = 128  # Dollars, 1992  // Dollars, 1992
     DOZENS = 129  # Dozens  // Douzaines
     _2000_100 = 13  # 2000=100  // 2000=100
-    DOZENS_PER_PERS_PER_YR = 130  # Dozens per person, per year  // Douzaines par personne, par année
+    DOZENS_PER_PERS_PER_YR = (
+        130  # Dozens per person, per year  // Douzaines par personne, par année
+    )
     DURATION = 131  # Duration  // Durée
     EGGS = 132  # Eggs  // Oeufs
     EMPLOY = 133  # Employees  // Employés
@@ -65,7 +78,9 @@ class Uom(Enum):
     GRAMS = 147  # Grams  // Grammes
     HEAD = 148  # Head  // Tête
     HECTARES = 149  # Hectares  // Hectares
-    _2002_2003_CONSTANT_DOLLARS = 15  # 2002/2003 constant dollars  // Dollars constants de 2002-2003
+    _2002_2003_CONSTANT_DOLLARS = (
+        15  # 2002/2003 constant dollars  // Dollars constants de 2002-2003
+    )
     HIGH_95_CONFIDENCE_INTERVAL = 150  # High 95% confidence interval  // Limite supérieure de l'intervalle de confiance de 95 %
     HOGS = 151  # Hogs  // Porcs
     HOURS = 152  # Hours  // Heures
@@ -75,11 +90,15 @@ class Uom(Enum):
     HUNDREDWEIGHT_1 = 156  # Hundredweight  // Poids de cent livres
     HUNDREDWEIGHT_2 = 157  # Hundredweight  // Quintaux
     HUNDREDWEIGHT_PER_ACRE = 158  # Hundredweight per acre  // Quintaux par acre
-    HUNDREDWEIGHT_PER_HARVESTED_ACRES = 159  # Hundredweight per harvested acres  // Quintaux à l'acre récolté
+    HUNDREDWEIGHT_PER_HARVESTED_ACRES = (
+        159  # Hundredweight per harvested acres  // Quintaux à l'acre récolté
+    )
     _200212_100 = 16  # 200212=100  // 200212=100
     IDX = 160  # Index  // Indice
     IDX_1926_100 = 161  # Index, 1926=100  // Indice, 1926=100
-    IDX_1948_100_1968_100 = 162  # Index, 1948=100/1968=100  // Indices, 1948=100/1968=100
+    IDX_1948_100_1968_100 = (
+        162  # Index, 1948=100/1968=100  // Indices, 1948=100/1968=100
+    )
     IDX_1961_100 = 163  # Index, 1961=100  // Indice, 1961=100
     IDX_1967_100 = 164  # Index, 1967=100  // Indice, 1967=100
     IDX_1971_100 = 165  # Index, 1971=100  // Indice, 1971=100
@@ -114,7 +133,9 @@ class Uom(Enum):
     KILOCALORIES = 191  # Kilocalories  // Kilocalories
     KILOGRAMS = 192  # Kilograms  // Kilogrammes
     KILOGRAMS_PER_HECTARE = 193  # Kilograms per hectare  // Kilogrammes par hectare
-    KILOGRAMS_PER_PERS_PER_YR = 194  # Kilograms per person, per year  // Kilogrammes par personne, par année
+    KILOGRAMS_PER_PERS_PER_YR = (
+        194  # Kilograms per person, per year  // Kilogrammes par personne, par année
+    )
     KILOLITRES = 195  # Kilolitres  // Kilolitres
     KILOMETRES = 196  # Kilometres  // Kilomètres
     KILOMETRES_PER_HOUR = 197  # Kilometres per hour  // Kilomètres par heure
@@ -127,7 +148,9 @@ class Uom(Enum):
     LINES = 202  # Lines  // Lignes
     LITRES = 203  # Litres  // Litres
     LITRES_ABSOLUTE_ALC = 204  # Litres absolute alcohol  // Litres d'alcool absolu
-    LITRES_PER_PERS_PER_YR = 205  # Litres per person, per year  // Litres par personne, par année
+    LITRES_PER_PERS_PER_YR = (
+        205  # Litres per person, per year  // Litres par personne, par année
+    )
     LOW_95_CONFIDENCE_INTERVAL = 206  # Low 95% confidence interval  // Limite inférieure de l'intervalle de confiance de 95 %
     MEAN_NUM = 207  # Mean number  // Nombre moyen
     MEGALITRES = 208  # Megalitres  // Mégalitres
@@ -151,13 +174,19 @@ class Uom(Enum):
     NIACIN_EQUIVALENT = 224  # Niacin equivalent  // Équivalent en niacine
     NIGHTS = 225  # Nights  // Nuitées
     NUM_IN_THOUSANDS = 226  # Number in thousands  // Nombre en milliers
-    NUM_OF_FARM_REP = 227  # Number of farms reporting  // Nombre d'exploitations déclarantes
+    NUM_OF_FARM_REP = (
+        227  # Number of farms reporting  // Nombre d'exploitations déclarantes
+    )
     NUM_OF_VISITS = 228  # Number of visits  // Nombre de visites
-    NUM_PER_SQUARE_KILOMETRE = 229  # Number per square kilometre  // Nombre par kilomètre carré
+    NUM_PER_SQUARE_KILOMETRE = (
+        229  # Number per square kilometre  // Nombre par kilomètre carré
+    )
     _2012_CONSTANT_DOLLARS = 23  # 2012 constant dollars  // Dollars constants de 2012
     OTHER_BRITISH_AND_FGN_BORN_PERS = 230  # Other British- and foreign-born persons  // Personnes nées dans un autre pays britannique et à l'étranger
     OTHER_BRITISH_BORN_PERS = 231  # Other British-born persons  // Personnes nées dans un autre pays britannique
-    OVEN_DRY_METRIC_TONNES = 232  # Oven-dry metric tonnes  // Tonnes métriques séchées au four
+    OVEN_DRY_METRIC_TONNES = (
+        232  # Oven-dry metric tonnes  // Tonnes métriques séchées au four
+    )
     PAIRS = 233  # Pairs  // Paires
     PASS_KILOMETRES = 234  # Passenger-kilometres  // Passagers-kilomètres
     PASS_KILOMETRES_1 = 235  # Passenger-kilometres  // Voyageur-kilomètres
@@ -166,8 +195,12 @@ class Uom(Enum):
     PASS_MILES = 238  # Passengers-miles  // Voyageurs-mille
     PERCENT = 239  # Percent  // Pourcent
     _2012_01_100 = 24  # 2012/01=100  // 2012/01=100
-    PERCENT_CHANGE = 240  # Percent change (1986=100)  // Variation en pourcentage (1986=100)
-    PERCENT_CHANGE_1992_100 = 241  # Percent change (1992=100)  // Variation en pourcentage (1992=100)
+    PERCENT_CHANGE = (
+        240  # Percent change (1986=100)  // Variation en pourcentage (1986=100)
+    )
+    PERCENT_CHANGE_1992_100 = (
+        241  # Percent change (1992=100)  // Variation en pourcentage (1992=100)
+    )
     PERCENTAGE = 242  # Percentage  // Pourcentage
     PERCENTAGE_OF_GROSS_DOM_INC = 243  # Percentage of gross domestic income  // Pourcentage du revenu intérieur brut
     PERCENTAGE_OF_GDP = 244  # Percentage of gross domestic product  // Pourcentage du produit intérieur brut
@@ -189,15 +222,27 @@ class Uom(Enum):
     RATE_PER_1000_LEGALLY_MARRIED_FEMALES = 259  # Rate per 1,000 legally married females  // Taux pour 1 000 femmes mariées légalement
     ACCESS_LINES = 26  # Access lines  // Lignes d'accès
     RATE_PER_1000_LEGALLY_MARRIED_MALES = 260  # Rate per 1,000 legally married males  // Taux pour 1 000 hommes mariés légalement
-    RATE_PER_1000_LIV_BIRTHS = 261  # Rate per 1,000 live births  // Taux pour 1 000 naissances vivantes
+    RATE_PER_1000_LIV_BIRTHS = (
+        261  # Rate per 1,000 live births  // Taux pour 1 000 naissances vivantes
+    )
     RATE_PER_1000_MALES = 262  # Rate per 1,000 males  // Taux pour 1 000 hommes
-    RATE_PER_1000_MARRIAGES = 263  # Rate per 1,000 marriages  // Taux pour 1 000 mariages
-    RATE_PER_1000_TOT_BIRTHS = 264  # Rate per 1,000 total births  // Taux pour 1 000 naissances totales
-    RATE_PER_100000_POP = 265  # Rate per 100,000 population  // Taux pour 100 000 personnes
+    RATE_PER_1000_MARRIAGES = (
+        263  # Rate per 1,000 marriages  // Taux pour 1 000 mariages
+    )
+    RATE_PER_1000_TOT_BIRTHS = (
+        264  # Rate per 1,000 total births  // Taux pour 1 000 naissances totales
+    )
+    RATE_PER_100000_POP = (
+        265  # Rate per 100,000 population  // Taux pour 100 000 personnes
+    )
     RATES_PER_1000_FEMALES = 266  # Rates per 1,000 females  // Taux pour 1 000 femmes
     RATES_PER_1000_POP = 267  # Rates per 1,000 population  // Taux pour 1 000 personnes
-    RATES_PER_1000_UNMARRIED_FEMALES = 268  # Rates per 1,000 unmarried females  // Taux pour 1 000 femmes non mariées
-    RATES_PER_1000_UNMARRIED_MALES = 269  # Rates per 1,000 unmarried males  // Taux pour 1 000 hommes non mariés
+    RATES_PER_1000_UNMARRIED_FEMALES = (
+        268  # Rates per 1,000 unmarried females  // Taux pour 1 000 femmes non mariées
+    )
+    RATES_PER_1000_UNMARRIED_MALES = (
+        269  # Rates per 1,000 unmarried males  // Taux pour 1 000 hommes non mariés
+    )
     ACCIDENTS = 27  # Accidents  // Accidents
     RATIO = 270  # Ratio  // Rapport
     RATIO_1 = 271  # Ratio  // Ratio
@@ -219,14 +264,18 @@ class Uom(Enum):
     TONNE_MILES = 286  # Tonne-miles  // Tonne-mille
     TONNES = 287  # Tonnes  // Tonnes
     TONNES_1 = 288  # Tonnes  // Tonnes métriques
-    TONNES_OF_OIL_EQUIVALENT = 289  # Tonnes of oil equivalent  // Équivalent des tonnes du pétrole
+    TONNES_OF_OIL_EQUIVALENT = (
+        289  # Tonnes of oil equivalent  // Équivalent des tonnes du pétrole
+    )
     AGE_SEX_STD_RATE_PER_100000_POP = 29  # Age-sex-standardized rate per 100,000 population  // Taux normalisé selon l'âge et le sexe pour 100 000 personnes
     TONNES_PER_THOUSAND_CURR_DOLLARS_OF_PROD = 290  # Tonnes per thousand current dollars of production  // Tonnes par millier de dollars courants de production
     TONS = 291  # Tons  // Tonnes
     TONS_1 = 292  # Tons  // Tonnes impériales
     TONS_PER_ACRE = 293  # Tons per acre  // Tonnes par acre
     TROY_OUNCES = 294  # Troy ounces  // Onces troy
-    TWENTY_FEET_EQUIVALENT_UNITS = 295  # Twenty feet equivalent units  // Unités équivalent à vingt pieds
+    TWENTY_FEET_EQUIVALENT_UNITS = (
+        295  # Twenty feet equivalent units  // Unités équivalent à vingt pieds
+    )
     US_DOLLARS_PER_UNIT_OF_REAL_GDP = 296  # US dollars per unit of real GDP  // Dollars américains par unité de PIB réel
     USA_DOLLARS = 297  # United States Dollars  // Dollars des États-Unis
     USA_DOLLARS_1 = 298  # United States dollars  // Dollars des États-Unis
@@ -244,16 +293,28 @@ class Uom(Enum):
     YR = 308  # Years  // Années
     DOLLARS_2002 = 309  # Dollars, 2002  // Dollars, 2002
     AGREEMENTS = 31  # Agreements  // Conventions
-    MICROGRAMS_PER_LITRE = 310  # Micrograms per litre (µg/L)  // Microgrammes par litre (µg/L)
+    MICROGRAMS_PER_LITRE = (
+        310  # Micrograms per litre (µg/L)  // Microgrammes par litre (µg/L)
+    )
     MINUTES_PER_DLY = 311  # Minutes per day  // Minutes par jour
-    NANOGRAMS_PER_MILLILITRE = 312  # Nanograms per millilitre (ng/mL)  // Nanogrammes par millilitre (ng/mL)
-    NANOMOLES_PER_LITRE = 313  # Nanomoles per litre (nmol/L)  // Nanomoles par litre (nmol/L)
+    NANOGRAMS_PER_MILLILITRE = (
+        312  # Nanograms per millilitre (ng/mL)  // Nanogrammes par millilitre (ng/mL)
+    )
+    NANOMOLES_PER_LITRE = (
+        313  # Nanomoles per litre (nmol/L)  // Nanomoles par litre (nmol/L)
+    )
     _2013_CONSTANT_DOLLARS = 314  # 2013 constant dollars  // Dollars constants de 2013
     DOLLARS_PER_HEAD = 315  # Dollars per head  // Dollars par pomme
     QUARTS = 316  # Quarts  // Pintes
-    DOLLARS_PER_THOUSAND_CUBIC_METRES = 317  # Dollars per thousand cubic metres  // Dollars par millier de mètres cubes
-    LITRES_PER_PERS_PER_DLY = 318  # Litres per person per day  // Litres par personne par jour
-    TWENTY_FEET_EQUIVALENT_UNITS_1 = 319  # Twenty feet equivalent units   // Unités équivalent à vingt pieds 
+    DOLLARS_PER_THOUSAND_CUBIC_METRES = (
+        317  # Dollars per thousand cubic metres  // Dollars par millier de mètres cubes
+    )
+    LITRES_PER_PERS_PER_DLY = (
+        318  # Litres per person per day  // Litres par personne par jour
+    )
+    TWENTY_FEET_EQUIVALENT_UNITS_1 = (
+        319  # Twenty feet equivalent units   // Unités équivalent à vingt pieds
+    )
     AVG_HOURS_PER_DLY = 32  # Average hours per day  // Moyenne des heures par jour
     GIGAJOULES_PER_THOUSAND_CUBIC_METRES = 320  # Gigajoules per thousand cubic metres  // Gigajoules par millier de mètres cubes
     _2007_CHAINED_DOLLARS = 321  # 2007 chained dollars  // Dollars enchaînés 2007
@@ -264,16 +325,22 @@ class Uom(Enum):
     NUM_OF_GROSS = 326  # Number of gross  // Nombre en grosses
     VOL_IN_HECTOLITRES = 327  # Volume in hectolitres  // Volume en hectolitres
     WEIGHT_IN_KILOGRAMS_OF_NAMED_SUBST = 328  # Weight in kilograms of named substance  // Poids en kilogrammes de la matière mentionnée
-    WEIGHT_IN_AIR_DRY_KILOGRAMS = 329  # Weight in air dry kilograms  // Poids en kilogrammes séchés à l'air
+    WEIGHT_IN_AIR_DRY_KILOGRAMS = (
+        329  # Weight in air dry kilograms  // Poids en kilogrammes séchés à l'air
+    )
     BANKRUPTCIES = 33  # Bankruptcies  // Faillites
-    VOL_IN_LITRES_OF_PURE_ALC = 330  # Volume in litres of pure alcohol  // Volume en litres d'alcool pur
+    VOL_IN_LITRES_OF_PURE_ALC = (
+        330  # Volume in litres of pure alcohol  // Volume en litres d'alcool pur
+    )
     VOL_IN_LITRES = 331  # Volume in litres  // Volume en litres
     AREA_IN_SQUARE_METRES = 332  # Area in square metres  // Superficie en mètres carrés
     VOL_IN_CUBIC_METRES = 333  # Volume in cubic metres  // Volume en mètres cubes
     LENGTH_IN_METRES = 334  # Length in metres  // Longueurs en mètres
     MEGAWATT_HOUR = 335  # Megawatt-Hour  // Mégawattheure
     NUM_OF_PKG = 336  # Number of packages  // Nombre de paquets
-    THOUSANDS_OF_CUBIC_METRES = 337  # Thousands of cubic metres  // Milliers de mètres cubes
+    THOUSANDS_OF_CUBIC_METRES = (
+        337  # Thousands of cubic metres  // Milliers de mètres cubes
+    )
     WEIGHT_IN_METRIC_TONNE = 338  # Weight in metric tonne  // Poids en tonne métrique
     METRIC_TONNE_AIR_DRY = 339  # Metric tonne air dry  // Tonne métrique séchée à l'air
     BARRELS = 34  # Barrels  // Barils
@@ -286,21 +353,31 @@ class Uom(Enum):
     _2014_100 = 346  # 2014=100  // 2014=100
     IDX_201612_100 = 347  # Index, 201612=100  // Indice, 201612=100
     IDX_2012_100 = 348  # Index, 2012=100  // Indice, 2012=100
-    AVAIL_SEAT_KILOMETRES = 349  # Available seat-kilometres  // Sièges-kilomètres disponibles
+    AVAIL_SEAT_KILOMETRES = (
+        349  # Available seat-kilometres  // Sièges-kilomètres disponibles
+    )
     BARRELS_PER_DLY = 35  # Barrels per day  // Barils par jour
     _2016_CONSTANT_DOLLARS = 350  # 2016 constant dollars  // Dollars constants de 2016
     IDX_2014_100 = 351  # Index, 2014=100  // Indice, 2014=100
-    NANOGRAMS_PER_LITRE = 352  # Nanograms per litre (ng/L)  // Nanogrammes par litre (ng/L)
+    NANOGRAMS_PER_LITRE = (
+        352  # Nanograms per litre (ng/L)  // Nanogrammes par litre (ng/L)
+    )
     MICROMOLES_PER_MILLIMOLE = 353  # Micromoles per millimole (µmol/mmol)  // Micromoles par millimole (µmol/mmol)
-    MICROMOLES_PER_LITRE = 354  # Micromoles per litre (µmol/L)  // Micromoles par litre (µmol/L)
-    MILLIGRAMS_PER_LITRE = 355  # Milligrams per Litre (mg/L)  // Milligrammes par litre (mg/L)
+    MICROMOLES_PER_LITRE = (
+        354  # Micromoles per litre (µmol/L)  // Micromoles par litre (µmol/L)
+    )
+    MILLIGRAMS_PER_LITRE = (
+        355  # Milligrams per Litre (mg/L)  // Milligrammes par litre (mg/L)
+    )
     MICROGRAMS_PER_CUBIC_METRE = 356  # Micrograms per cubic metre (µg/m3)  // Microgrammes par mètre cube (µg/m3)
     M_FT_B_M = 357  # M.ft.b.m  // Milliers de PMP
     BASIS_POINTS = 358  # Basis points  // Points de base
     DOLLARS_PER_GRAM = 359  # Dollars per gram  // Dollars par gramme
     BFT_PERIOD = 36  # Benefit periods  // Périodes de prestations
     CENTIMETRES = 360  # Centimetres  // Centimètres
-    KILOGRAMS_PER_METRE_SQUARED = 361  # Kilograms per metre squared  // Kilogrammes par mètre carré
+    KILOGRAMS_PER_METRE_SQUARED = (
+        361  # Kilograms per metre squared  // Kilogrammes par mètre carré
+    )
     MILLILITRES_PER_KILOGRAM_PER_MINUTE = 362  # Millilitres per kilogram per minute  // Millilitres par kilogramme par minute
     MILLIMETRES_OF_MERCURY = 363  # Millimetres of mercury  // Millimtres de mercure
     BEATS_PER_MINUTE = 364  # Beats per minute  // Battements par minute
@@ -316,14 +393,20 @@ class Uom(Enum):
     IDX_2017_100 = 373  # Index, 2017=100  // Indice, 2017=100
     IDX_2015_100 = 374  # Index, 2015=100  // Indice, 2015=100
     _1997_CHAINED_DOLLARS = 375  # 1997 chained dollars  // En dollars enchaînés 1997
-    NUM_IDX_OF_CHANGE = 376  # Number, indices of change  // Nombre, indices de variation
+    NUM_IDX_OF_CHANGE = (
+        376  # Number, indices of change  // Nombre, indices de variation
+    )
     PER_DOLLAR_OF_OUTPUT = 377  # Per dollar of output  // Par dollar de production
-    PER_MILLION_DOLLARS_OF_OUTPUT = 378  # Per million dollars of output  // Par million de dollar de production
+    PER_MILLION_DOLLARS_OF_OUTPUT = (
+        378  # Per million dollars of output  // Par million de dollar de production
+    )
     AVG_YR = 379  # Average years  // Moyenne des années
     BIRTHS = 38  # Births  // Naissances
     GRAMS_PER_DLY = 380  # Grams per day  // Grammes par jour
     _2012_CHAINED_DOLLARS = 381  # 2012 chained dollars  // Dollars enchaînes 2012
-    CHAINED = 382  # Chained (2012) dollars per hour  // Dollars enchaînés (2012) par heure
+    CHAINED = (
+        382  # Chained (2012) dollars per hour  // Dollars enchaînés (2012) par heure
+    )
     _2012_100 = 383  # 2012=100  // 2012=100
     UNITS_PER_LITRE = 384  # Units per litre  // Unités par litre
     CENTS_PER_DOZEN = 385  # Cents per dozen  // Cents par douzaine
@@ -337,7 +420,9 @@ class Uom(Enum):
     LITRES_PER_LITRE = 392  # Litres per litre  // Litres par litre
     FEMTOLITRES = 393  # Femtolitres  // Femtolitres
     NANOMOLES_PER_MILLIMOLE = 394  # Nanomoles per millimole (nmol/mmol)  // Nanomoles par millimole (nmol/mmol)
-    RATE_PER_100000_LIV_BIRTHS = 395  # Rate per 100,000 live births  // Taux pour 100 000 naissances vivantes
+    RATE_PER_100000_LIV_BIRTHS = (
+        395  # Rate per 100,000 live births  // Taux pour 100 000 naissances vivantes
+    )
     PERCENTAGE_POINT = 396  # Percentage point  // Point de pourcentage
     AGE_STD_RATE_PER_100000_PERS_YR_AT_RISK = 397  # Age-standardized rate per 100,000 person-years at risk  // Taux normalisés selon l’âge pour 100 000 années-personnes à risque
     IDX_2018_100 = 398  # Index, 2018=100  // Indice, 2018=100
@@ -350,7 +435,9 @@ class Uom(Enum):
     IDX_202001_100 = 403  # Index, 202001=100  // Indice, 202001=100
     _2019_CONSTANT_DOLLARS = 404  # 2019 constant dollars  // Dollars constants de 2019
     INCIDENTS = 405  # Incidents  // Incidents
-    TONNES_PER_THOUSAND_DOLLARS = 406  # Tonnes per thousand dollars  // Tonnes par milliers de dollars
+    TONNES_PER_THOUSAND_DOLLARS = (
+        406  # Tonnes per thousand dollars  // Tonnes par milliers de dollars
+    )
     IDX_EVAL = 407  # Index value (2019=0)  // Valeur de l’index (2019=0)
     MEGAJOULES = 408  # Megajoules  // Mégajoules
     FULL_CORDS = 409  # Full cords  // Pleines cordes
@@ -358,19 +445,29 @@ class Uom(Enum):
     METRES = 410  # Metres  // Mètres
     GRAMS_PER_ONE_MILLION_PPL_PER_DLY = 411  # Grams per one million people per day  // Grammes par million de personnes par jour
     KILONEWTONS = 412  # Kilonewtons (kN)  // Kilonewtons (kN)
-    FORCE_PER_UNIT_MASS = 413  # Force per unit mass (m/s2)  // Force par unite de masse (m/s2)
-    KILOWATT_PER_KILOGRAM = 414  # Kilowatt per kilogram (kW/kg)  // Kilowatt par kilogramme (kW/kg)
+    FORCE_PER_UNIT_MASS = (
+        413  # Force per unit mass (m/s2)  // Force par unite de masse (m/s2)
+    )
+    KILOWATT_PER_KILOGRAM = (
+        414  # Kilowatt per kilogram (kW/kg)  // Kilowatt par kilogramme (kW/kg)
+    )
     METERS_PER_SEC = 415  # Meters per second (m/s)  // Mètres par seconde (m/s)
     MILLIGRAMS_PER_CUBIC_CENTIMETER = 416  # Milligrams per cubic centimeter (mg/cm³)  // Milligrammes par centimètre cube (mg/cm³)
     SQUARE_MILLIMETERS = 417  # Square millimeters (mm2)  // Millimètres carré (mm2)
     TRVL = 418  # Travellers  // Voyageurs
     VISITORS = 419  # Visitors  // Visiteurs
     BUSHELS = 42  # Bushels  // Boisseaux
-    MILLIMOLES_PER_LITRE_MMOL_L = 420  # Millimoles per litre (mmol/L)  // Millimoles par litre (mmol/L)
-    WATTS_PER_KILOGRAM = 421  # Watts per kilogram (W/kg)  // Watts par kilogramme (W/kg)
+    MILLIMOLES_PER_LITRE_MMOL_L = (
+        420  # Millimoles per litre (mmol/L)  // Millimoles par litre (mmol/L)
+    )
+    WATTS_PER_KILOGRAM = (
+        421  # Watts per kilogram (W/kg)  // Watts par kilogramme (W/kg)
+    )
     AVG = 422  # Average  // Moyenne
     AVG_NUM = 423  # Average number  // Nombre moyen
-    RATE_PER_1000_MARRIED_PERS = 424  # Rate per 1,000 married persons  // Taux pour 1 000 personnes mariées
+    RATE_PER_1000_MARRIED_PERS = (
+        424  # Rate per 1,000 married persons  // Taux pour 1 000 personnes mariées
+    )
     _2020_CONSTANT_DOLLARS = 425  # 2020 constant dollars  // Dollars constants de 2020
     IDX_2019_100 = 426  # Index, 2019=100  // Indice, 2019=100
     _202204_100 = 427  # 202204=100  // 202204=100
@@ -384,7 +481,9 @@ class Uom(Enum):
     IDX_2021_100 = 434  # Index, 2021=100  // Indice, 2021=100
     _198901_100 = 435  # 198901=100  // 198901=100
     COUNT = 436  # Count  // Nombre
-    KILOMETRES_PER_SQUARE_KILOMETRE = 437  # Kilometres per square kilometre  // Kilomètres par kilomètre carré
+    KILOMETRES_PER_SQUARE_KILOMETRE = (
+        437  # Kilometres per square kilometre  // Kilomètres par kilomètre carré
+    )
     _202304_100 = 438  # 202304=100  // 202304=100
     _2022_CONSTANT_DOLLARS = 439  # 2022 constant dollars  // Dollars constants de 2022
     BUS = 44  # Businesses  // Entreprises
@@ -394,20 +493,30 @@ class Uom(Enum):
     COUNT_PER_HECTARE = 443  # Count per hectare  // Nombre par hectare
     AVG_NUM_OF_WKLY = 444  # Average number of weeks  // Nombre moyen de semaines
     CHAINED_2017_DOLLARS_IN_THOUSANDS = 445  # Chained (2017) dollars in thousands  // Dollars enchaînés (2017) en milliers
-    CHAINED_2017_DOLLARS_PER_HOUR = 446  # Chained (2017) dollars per hour  // Dollars enchaînés (2017) par heure
+    CHAINED_2017_DOLLARS_PER_HOUR = (
+        446  # Chained (2017) dollars per hour  // Dollars enchaînés (2017) par heure
+    )
     BOOLEAN = 447  # Boolean  // Booléen
     RATE_PER_1000_POP = 448  # Rate per 1,000 population  // Taux pour 1 000 habitants
     _2023_CONSTANT_DOLLARS = 449  # 2023 constant dollars  // Dollars constants de 2023
     CALVES = 45  # Calves  // Veaux
-    MILLIONS_OF_CUBIC_METERS = 450  # Millions of cubic meters  // Millions de mètres cubes
+    MILLIONS_OF_CUBIC_METERS = (
+        450  # Millions of cubic meters  // Millions de mètres cubes
+    )
     IDX_2023_100 = 451  # Index, 2023=100  // Indice, 2023=100
     _202404_100 = 452  # 202404=100  // 202404=100
-    CUBIC_METRES_PER_SQUARE_METRE = 453  # Cubic metres per square metre  // Mètres cubes par mètre carré
+    CUBIC_METRES_PER_SQUARE_METRE = (
+        453  # Cubic metres per square metre  // Mètres cubes par mètre carré
+    )
     IDX_202407_100 = 454  # Index, 202407=100  // Indice, 202407=100
     _2024_CONSTANT_DOLLARS = 455  # 2024 constant dollars  // Dollars constants de 2024
     ARBITRARY_UNIT = 456  # Arbitrary Unit  // Unité arbitraire
-    MILLIGRAM_PER_CUBIC_METER = 457  # Milligram per cubic meter (mg/m3)  // Milligramme par mètre cube (mg/m3)
-    RATE_PER_10000_POP = 458  # Rate per 10,000 population  // Taux pour 10 000 personnes
+    MILLIGRAM_PER_CUBIC_METER = (
+        457  # Milligram per cubic meter (mg/m3)  // Milligramme par mètre cube (mg/m3)
+    )
+    RATE_PER_10000_POP = (
+        458  # Rate per 10,000 population  // Taux pour 10 000 personnes
+    )
     DISPONIBLE = 459  # disponible  // disponible
     CAN_100 = 46  # Canada = 100  // Canada = 100
     AVAIL = 460  # Available  // Available
@@ -424,12 +533,18 @@ class Uom(Enum):
     CENTS_PER_CUBIC_METRE = 56  # Cents per cubic metre  // Cents par mètre cube
     CENTS_PER_LITRE = 57  # Cents per litre  // Cents par litre
     CENTS_PER_POUND = 58  # Cents per pound  // Cents par livre
-    CENTS_PER_POUND_OF_BUTTER_FAT = 59  # Cents per pound of butter fat  // Cents par livre de gras de beurre
+    CENTS_PER_POUND_OF_BUTTER_FAT = (
+        59  # Cents per pound of butter fat  // Cents par livre de gras de beurre
+    )
     _1992_CONSTANT_DOLLARS_PER_SQUARE_KILOMETRE = 6  # 1992 constant dollars per square kilometre  // Dollars constants de 1992 par kilomètre carré
     CHAINED_2002_DOLLARS = 60  # Chained (2002) dollars  // Dollars enchaînés (2002)
-    CHAINED_2002_DOLLARS_PER_HOUR = 61  # Chained (2002) dollars per hour  // Dollars enchaînés (2002) par heure
+    CHAINED_2002_DOLLARS_PER_HOUR = (
+        61  # Chained (2002) dollars per hour  // Dollars enchaînés (2002) par heure
+    )
     CHAINED_2007_DOLLARS_IN_THOUSANDS = 62  # Chained (2007) dollars in thousands  // Dollars enchaînés (2007) en milliers
-    CHAINED_2007_DOLLARS_PER_HOUR = 63  # Chained (2007) dollars per hour  // Dollars enchaînés (2007) par heure
+    CHAINED_2007_DOLLARS_PER_HOUR = (
+        63  # Chained (2007) dollars per hour  // Dollars enchaînés (2007) par heure
+    )
     CHICKS = 64  # Chicks  // Poussins
     CHILD = 65  # Children  // Enfants
     CIGARETTES = 66  # Cigarettes  // Cigarettes
@@ -438,7 +553,9 @@ class Uom(Enum):
     CORPORATIONS = 69  # Corporations  // Corporations
     _1992_100 = 7  # 1992=100  // 1992=100
     CORPORATIONS_1 = 70  # Corporations  // Sociétés
-    CRUDE_RATE_PER_100000_POP = 71  # Crude rate per 100,000 population  // Taux brut pour 100 000 personnes
+    CRUDE_RATE_PER_100000_POP = (
+        71  # Crude rate per 100,000 population  // Taux brut pour 100 000 personnes
+    )
     CUBIC_METRES = 72  # Cubic metres  // Mètres cubes
     CUBIC_METRES_DRY = 73  # Cubic metres dry  // Mètres cubes sec
     CUBIC_YARDS = 74  # Cubic yards  // Verges cubes
@@ -450,24 +567,41 @@ class Uom(Enum):
     _199412_100 = 8  # 199412=100  // 199412=100
     DOLLAR_PER_100_POUND = 80  # Dollar per 100 pound  // Dollar par 100 livre
     DOLLARS = 81  # Dollars  // Dollars
-    DOLLARS_PER_1_81_KILOGRAMS = 82  # Dollars per 1.81 kilograms  // Dollars par 1,81 kilogrammes
-    DOLLARS_PER_10_KILOGRAMS = 83  # Dollars per 10 kilograms  // Dollars par 10 kilogrammes
+    DOLLARS_PER_1_81_KILOGRAMS = (
+        82  # Dollars per 1.81 kilograms  // Dollars par 1,81 kilogrammes
+    )
+    DOLLARS_PER_10_KILOGRAMS = (
+        83  # Dollars per 10 kilograms  // Dollars par 10 kilogrammes
+    )
     DOLLARS_PER_10_LITRES = 84  # Dollars per 10 litres  // Dollars par 10 litres
-    DOLLARS_PER_10_X_400_GRAMS = 85  # Dollars per 10 x 400 grams  // Dollars par 10 x 400 grammes
+    DOLLARS_PER_10_X_400_GRAMS = (
+        85  # Dollars per 10 x 400 grams  // Dollars par 10 x 400 grammes
+    )
     DOLLARS_PER_10000_FEET = 86  # Dollars per 10,000 feet  // Dollars par 10 000 pieds
-    DOLLARS_PER_15_KILOGRAMS = 87  # Dollars per 15 kilograms  // Dollars par 15 kilogrammes
-    DOLLARS_PER_2_KILOGRAMS = 88  # Dollars per 2 kilograms  // Dollars par 2 kilogrammes
+    DOLLARS_PER_15_KILOGRAMS = (
+        87  # Dollars per 15 kilograms  // Dollars par 15 kilogrammes
+    )
+    DOLLARS_PER_2_KILOGRAMS = (
+        88  # Dollars per 2 kilograms  // Dollars par 2 kilogrammes
+    )
     NULL = 888  # Null  // Null
-    DOLLARS_PER_2_5_KILOGRAMS = 89  # Dollars per 2.5 kilograms  // Dollars par 2,5 kilogrammes
+    DOLLARS_PER_2_5_KILOGRAMS = (
+        89  # Dollars per 2.5 kilograms  // Dollars par 2,5 kilogrammes
+    )
     _1996_100 = 9  # 1996=100  // 1996=100
-    DOLLARS_PER_20_KILOGRAMS = 90  # Dollars per 20 kilograms  // Dollars par 20 kilogrammes
+    DOLLARS_PER_20_KILOGRAMS = (
+        90  # Dollars per 20 kilograms  // Dollars par 20 kilogrammes
+    )
     DOLLARS_PER_20_LITRES = 91  # Dollars per 20 litres  // Dollars par 20 litres
     DOLLARS_PER_205_LITRES = 92  # Dollars per 205 litres  // Dollars par 205 litres
     DOLLARS_PER_22_7_LITRES = 93  # Dollars per 22.7 litres  // Dollars par 22,7 litres
-    DOLLARS_PER_25_KILOGRAMS = 94  # Dollars per 25 kilograms  // Dollars par 25 kilogrammes
-    DOLLARS_PER_3_KILOGRAMS = 95  # Dollars per 3 kilograms  // Dollars par 3 kilogrammes
+    DOLLARS_PER_25_KILOGRAMS = (
+        94  # Dollars per 25 kilograms  // Dollars par 25 kilogrammes
+    )
+    DOLLARS_PER_3_KILOGRAMS = (
+        95  # Dollars per 3 kilograms  // Dollars par 3 kilogrammes
+    )
     DOLLARS_PER_3_3_LITRES = 96  # Dollars per 3.3 litres  // Dollars par 3,3 litres
     DOLLARS_PER_4_LITRES = 97  # Dollars per 4 litres  // Dollars par 4 litres
     DOLLARS_PER_4_45_LITRES = 98  # Dollars per 4.45 litres  // Dollars par 4,45 litres
     DOLLARS_PER_5_LITRES = 99  # Dollars per 5 litres  // Dollars par 5 litres
-

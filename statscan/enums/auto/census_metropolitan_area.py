@@ -12,6 +12,7 @@ class CensusMetropolitanArea(ProvinceGeoCode):
     Value: CMAPUID_RMRPIDU
     Prefix: PREABBR_PRAABBREV
     """
+
     ALTA_CALGARY = 48825  # Calgary
     ALTA_EDMONTON = 48835  # Edmonton
     ALTA_LETHBRIDGE = 48810  # Lethbridge
@@ -39,7 +40,9 @@ class CensusMetropolitanArea(ProvinceGeoCode):
     ONT_KITCHENER_CAMBRIDGE_WATERLOO = 35541  # Kitchener - Cambridge - Waterloo
     ONT_LONDON = 35555  # London
     ONT_OSHAWA = 35532  # Oshawa
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART = 35505  # Ottawa - Gatineau (Ontario part / partie de l'Ontario)
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART = (
+        35505  # Ottawa - Gatineau (Ontario part / partie de l'Ontario)
+    )
     ONT_PETERBOROUGH = 35529  # Peterborough
     ONT_ST_CATHARINES_NIAGARA = 35539  # St. Catharines - Niagara
     ONT_THUNDER_BAY = 35595  # Thunder Bay
@@ -47,7 +50,9 @@ class CensusMetropolitanArea(ProvinceGeoCode):
     ONT_WINDSOR = 35559  # Windsor
     QUE_DRUMMONDVILLE = 24447  # Drummondville
     QUE_MONTRÉAL = 24462  # Montréal
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC = 24505  # Ottawa - Gatineau (partie du Québec / Quebec part)
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC = (
+        24505  # Ottawa - Gatineau (partie du Québec / Quebec part)
+    )
     QUE_QUÉBEC = 24421  # Québec
     QUE_SAGUENAY = 24408  # Saguenay
     QUE_SHERBROOKE = 24433  # Sherbrooke

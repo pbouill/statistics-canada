@@ -12,7 +12,7 @@ from ..coordinate import Coordinate
 
 class Series(WDSBaseModel):
     # model_config = ConfigDict(arbitrary_types_allowed=True)
-    
+
     responseStatusCode: WDSResponseStatus
     productId: int
     coordinate: Coordinate
@@ -28,7 +28,7 @@ class Series(WDSBaseModel):
 
 class ChangedSeriesData(WDSBaseModel):
     # model_config = ConfigDict(arbitrary_types_allowed=True)
-    
+
     responseStatusCode: WDSResponseStatus
     productId: int
     coordinate: Coordinate

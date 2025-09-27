@@ -6,7 +6,7 @@ from .link import Link
 from .member import Member
 
 
-'''
+"""
 example response:
 [
     {
@@ -71,12 +71,7 @@ example response:
         "issueDate":"2021-04-13"
     }
 ]
-'''
-
-
-
-
-
+"""
 
 
 class Dimension(WDSBaseModel):

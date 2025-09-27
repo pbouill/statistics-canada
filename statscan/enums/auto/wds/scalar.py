@@ -8,6 +8,7 @@ class Scalar(Enum):
     """
     Automatically generated Enum for Scalar
     """
+
     UNITS = 0  # units  // unités
     TENS = 1  # tens  // dizaines
     HUNDREDS = 2  # hundreds  // centaines
@@ -18,4 +19,3 @@ class Scalar(Enum):
     TENS_OF_MILLIONS = 7  # tens of millions  // dizaines de millions
     HUNDREDS_OF_MILLIONS = 8  # hundreds of millions  // centaines de millions
     BILLIONS = 9  # billions  // milliards
-

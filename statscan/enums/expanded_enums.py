@@ -6,19 +6,18 @@ as new dimension values are discovered from actual API responses.
 """
 
 from enum import Enum
-from typing import Optional, Self, Any
-from statscan.enums.stats_filter import CensusProfileCharacteristic, Gender, StatisticType
 
 
 class ExpandedGender(Enum):
     """Expanded gender enum with additional categories that may be found in data."""
+
     TOTAL_GENDER = 1
     MALE = 2
     FEMALE = 3
     # Add as discovered:
     # GENDER_DIVERSE = 4
     # NON_BINARY = 5
-    
+
     @property
     def description(self) -> str:
         descriptions = {
@@ -32,16 +31,16 @@ class ExpandedGender(Enum):
 class ExpandedCensusProfileCharacteristic(Enum):
     """
     Expanded census profile characteristics based on comprehensive 2021 Census Profile.
-    
+
     This enum should be expanded as new characteristics are discovered in the data.
     The values below represent the most commonly used characteristics.
     """
-    
+
     # Population and Demographics (1-99)
     POPULATION_COUNT = 1
     POPULATION_DENSITY_PER_KM2 = 2
     POPULATION_CHANGE_2016_TO_2021 = 3
-    
+
     # Age Characteristics (100-199)
     TOTAL_AGE_GROUPS = 100
     AGE_0_TO_4 = 101
@@ -67,7 +66,7 @@ class ExpandedCensusProfileCharacteristic(Enum):
     AGE_0_TO_14 = 160
     AGE_15_TO_64 = 161
     AGE_65_AND_OVER = 162
-    
+
     # Household Characteristics (200-299)
     TOTAL_HOUSEHOLDS = 200
     AVERAGE_HOUSEHOLD_SIZE = 201
@@ -79,7 +78,7 @@ class ExpandedCensusProfileCharacteristic(Enum):
     COUPLES_WITHOUT_CHILDREN = 210
     COUPLES_WITH_CHILDREN = 211
     LONE_PARENT_FAMILIES = 212
-    
+
     # Dwelling Characteristics (300-399)
     TOTAL_DWELLINGS = 300
     OCCUPIED_DWELLINGS = 301
@@ -87,7 +86,7 @@ class ExpandedCensusProfileCharacteristic(Enum):
     DWELLINGS_OWNED = 310
     DWELLINGS_RENTED = 311
     DWELLINGS_BAND_HOUSING = 312
-    
+
     # Housing Types (400-499)
     SINGLE_DETACHED_HOUSE = 400
     SEMI_DETACHED_HOUSE = 401
@@ -96,7 +95,7 @@ class ExpandedCensusProfileCharacteristic(Enum):
     APARTMENT_LESS_THAN_5_STOREYS = 404
     OTHER_SINGLE_ATTACHED = 405
     MOVABLE_DWELLING = 406
-    
+
     # Marital Status (500-599)
     TOTAL_MARITAL_STATUS = 500
     MARRIED = 501
@@ -106,7 +105,7 @@ class ExpandedCensusProfileCharacteristic(Enum):
     SEPARATED = 505
     DIVORCED = 506
     WIDOWED = 507
-    
+
     # Language Characteristics (600-699)
     MOTHER_TONGUE_ENGLISH = 600
     MOTHER_TONGUE_FRENCH = 601
@@ -116,14 +115,14 @@ class ExpandedCensusProfileCharacteristic(Enum):
     KNOWLEDGE_OF_OFFICIAL_LANGUAGES_FRENCH_ONLY = 611
     KNOWLEDGE_OF_OFFICIAL_LANGUAGES_BOTH = 612
     KNOWLEDGE_OF_OFFICIAL_LANGUAGES_NEITHER = 613
-    
+
     # Immigration and Citizenship (700-799)
     TOTAL_IMMIGRANTS = 700
     RECENT_IMMIGRANTS_2016_2021 = 701
     NON_IMMIGRANTS = 702
     CANADIAN_CITIZENS = 703
     NOT_CANADIAN_CITIZENS = 704
-    
+
     # Indigenous Identity (800-899)
     TOTAL_INDIGENOUS_IDENTITY = 800
     INDIGENOUS_IDENTITY = 801
@@ -131,7 +130,7 @@ class ExpandedCensusProfileCharacteristic(Enum):
     FIRST_NATIONS = 803
     METIS = 804
     INUK_INUIT = 805
-    
+
     # Visible Minority (900-999)
     TOTAL_VISIBLE_MINORITY = 900
     VISIBLE_MINORITY = 901
@@ -146,7 +145,7 @@ class ExpandedCensusProfileCharacteristic(Enum):
     WEST_ASIAN = 910
     KOREAN = 911
     JAPANESE = 912
-    
+
     # Education (1000-1099)
     NO_CERTIFICATE_DIPLOMA_DEGREE = 1000
     HIGH_SCHOOL_DIPLOMA = 1001
@@ -159,20 +158,20 @@ class ExpandedCensusProfileCharacteristic(Enum):
     DEGREE_IN_MEDICINE_DENTISTRY_VETERINARY_MEDICINE = 1008
     MASTER_DEGREE = 1009
     EARNED_DOCTORATE = 1010
-    
+
     # Employment (1100-1199)
     LABOUR_FORCE_15_YEARS_AND_OVER = 1100
     EMPLOYMENT_RATE = 1101
     UNEMPLOYMENT_RATE = 1102
     PARTICIPATION_RATE = 1103
-    
+
     # Income (1200-1299)
     MEDIAN_HOUSEHOLD_INCOME = 1200
     AVERAGE_HOUSEHOLD_INCOME = 1201
     MEDIAN_INDIVIDUAL_INCOME = 1202
     AVERAGE_INDIVIDUAL_INCOME = 1203
     LOW_INCOME_MEASURE_AFTER_TAX = 1204
-    
+
     @property
     def description(self) -> str:
         """Get human-readable description of the characteristic."""
@@ -187,7 +186,7 @@ class ExpandedCensusProfileCharacteristic(Enum):
             ExpandedCensusProfileCharacteristic.MEDIAN_HOUSEHOLD_INCOME: "Median total household income",
         }
         return descriptions.get(self, f"Census characteristic {self.value}")
-    
+
     @property
     def category(self) -> str:
         """Get the category this characteristic belongs to."""
@@ -223,17 +222,18 @@ class ExpandedCensusProfileCharacteristic(Enum):
 
 class ExpandedStatisticType(Enum):
     """Expanded statistic types found in census data."""
-    COUNT = 1                    # Absolute count/number
-    PERCENTAGE = 2              # Percentage of total
-    RATE = 3                    # Rate (e.g., per 1,000 or 100,000)
-    MEDIAN = 4                  # Median value
-    AVERAGE = 5                 # Mean/average value
-    RATIO = 6                   # Ratio between two values
-    INDEX = 7                   # Index value (e.g., relative to base year)
-    DENSITY = 8                 # Density measure (per square km, etc.)
-    CHANGE = 9                  # Change from previous period
-    PERCENT_CHANGE = 10         # Percentage change
-    
+
+    COUNT = 1  # Absolute count/number
+    PERCENTAGE = 2  # Percentage of total
+    RATE = 3  # Rate (e.g., per 1,000 or 100,000)
+    MEDIAN = 4  # Median value
+    AVERAGE = 5  # Mean/average value
+    RATIO = 6  # Ratio between two values
+    INDEX = 7  # Index value (e.g., relative to base year)
+    DENSITY = 8  # Density measure (per square km, etc.)
+    CHANGE = 9  # Change from previous period
+    PERCENT_CHANGE = 10  # Percentage change
+
     @property
     def description(self) -> str:
         descriptions = {
@@ -246,46 +246,46 @@ class ExpandedStatisticType(Enum):
             ExpandedStatisticType.INDEX: "Index value relative to base",
             ExpandedStatisticType.DENSITY: "Density measure per area unit",
             ExpandedStatisticType.CHANGE: "Absolute change from previous period",
-            ExpandedStatisticType.PERCENT_CHANGE: "Percentage change from previous period"
+            ExpandedStatisticType.PERCENT_CHANGE: "Percentage change from previous period",
         }
         return descriptions.get(self, "Unknown statistic type")
 
 
 class DimensionValueDiscovery:
     """Utility class to help discover and catalog new dimension values from API responses."""
-    
+
     def __init__(self):
         self.discovered_values: dict[str, set[str]] = {}
-    
+
     def analyze_response(self, response_data: dict) -> None:
         """Analyze an SDMX response to discover new dimension values."""
-        if 'data' not in response_data or 'structures' not in response_data['data']:
+        if "data" not in response_data or "structures" not in response_data["data"]:
             return
-        
-        structures = response_data['data']['structures']
+
+        structures = response_data["data"]["structures"]
         if not structures:
             return
-        
+
         structure = structures[0]
-        if 'dimensions' not in structure or 'series' not in structure['dimensions']:
+        if "dimensions" not in structure or "series" not in structure["dimensions"]:
             return
-        
-        series_dims = structure['dimensions']['series']
-        
+
+        series_dims = structure["dimensions"]["series"]
+
         for dim in series_dims:
-            dim_name = dim.get('name', dim.get('id', 'Unknown'))
+            dim_name = dim.get("name", dim.get("id", "Unknown"))
             if dim_name not in self.discovered_values:
                 self.discovered_values[dim_name] = set()
-            
-            values = dim.get('values', [])
+
+            values = dim.get("values", [])
             for value in values:
-                value_name = value.get('name', value.get('id', 'Unknown'))
+                value_name = value.get("name", value.get("id", "Unknown"))
                 self.discovered_values[dim_name].add(value_name)
-    
+
     def get_dimension_report(self) -> str:
         """Generate a report of discovered dimension values."""
         report = "Discovered Dimension Values:\n\n"
-        
+
         for dim_name, values in self.discovered_values.items():
             report += f"{dim_name} ({len(values)} values):\n"
             sorted_values = sorted(list(values))
@@ -294,24 +294,24 @@ class DimensionValueDiscovery:
             if len(values) > 10:
                 report += f"  ... and {len(values) - 10} more\n"
             report += "\n"
-        
+
         return report
-    
+
     def suggest_enum_additions(self, dimension_name: str) -> list[str]:
         """Suggest new enum values for a specific dimension."""
         if dimension_name not in self.discovered_values:
             return []
-        
+
         values = list(self.discovered_values[dimension_name])
-        
+
         # Generate enum-style names
         enum_suggestions = []
         for value in values:
             # Convert to enum-style name (uppercase, underscores)
-            enum_name = value.upper().replace(' ', '_').replace('-', '_')
-            enum_name = ''.join(c for c in enum_name if c.isalnum() or c == '_')
+            enum_name = value.upper().replace(" ", "_").replace("-", "_")
+            enum_name = "".join(c for c in enum_name if c.isalnum() or c == "_")
             enum_suggestions.append(enum_name)
-        
+
         return enum_suggestions
 
 
@@ -320,41 +320,40 @@ async def discover_new_dimensions():
     """Example of how to discover new dimension values from API responses."""
     from statscan.dguid import DGUID
     from statscan.enums.auto.census_subdivision import CensusSubdivision
-    
+
     # Create discovery utility
     discovery = DimensionValueDiscovery()
-    
+
     # Get data from a few different areas
     dguids = [
         DGUID(geocode=CensusSubdivision.ONT_TORONTO),
         DGUID(geocode=CensusSubdivision.ONT_SAUGEEN_SHORES),
         # Add more as needed
     ]
-    
+
     for dguid in dguids:
         try:
             response_data = await dguid._get_census_data(timeout=15)
             discovery.analyze_response(response_data)
         except Exception as e:
             print(f"Error getting data for {dguid}: {e}")
-    
+
     # Generate report
     report = discovery.get_dimension_report()
     print(report)
-    
+
     # Get suggestions for specific dimensions
     gender_suggestions = discovery.suggest_enum_additions("Gender")
     print(f"Gender enum suggestions: {gender_suggestions}")
-    
+
     char_suggestions = discovery.suggest_enum_additions("Census Profile Characteristic")
     print(f"Characteristic enum suggestions (first 10): {char_suggestions[:10]}")
 
 
 if __name__ == "__main__":
-    import asyncio
-    
+
     print("This is a template file for expanding enums.")
     print("Run discover_new_dimensions() to analyze actual API responses.")
-    
+
     # Uncomment to run discovery:
     # asyncio.run(discover_new_dimensions())

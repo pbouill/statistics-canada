@@ -8,6 +8,7 @@ class Survey(Enum):
     """
     Automatically generated Enum for Survey
     """
+
     BUS_REG = 1105  # Business Register  // Registre des entreprises
     AVG_FAIR_MKT_EVAL_PURCH_PRICE_FOR_NEW_HOMES_IN_CAN = 1141  # Average Fair Market Value/Purchase Price for New Homes in Canada - Data from GST Administrative Records  // Juste valeur marchande/prix d'achat pour les habitations neuves au Canada - données produites à partir des dossiers administratifs de la TPS
     SURV_OF_ENV_GOODS_AND_SVC = 1209  # Survey of Environmental Goods and Services  // Enquête sur les biens et services environnementaux
@@ -46,11 +47,15 @@ class Survey(Enum):
     LOC_GOV_REV_AND_EXP_FIN_MGMT_SYS_BASIS_EST_DATA = 1739  # Local Government Revenue and Expenditure - Financial Management System Basis - Estimates Data  // Recettes et dépenses des administrations locales - Système de gestion financière - prévisions
     OFF_CAN_GOV_TRVL_SURV = 1803  # Official Canadian Government Travel Survey  // Enquête officielle du gouvernement canadien sur les voyages
     FIN_FLOW_ACCT = 1804  # Financial Flow Accounts  // Comptes des flux financiers
-    NATL_BAL_SHEET_ACCT = 1806  # National Balance Sheet Accounts  // Comptes du bilan national
+    NATL_BAL_SHEET_ACCT = (
+        1806  # National Balance Sheet Accounts  // Comptes du bilan national
+    )
     NATL_GDP_BY_INC_AND_BY_EXP_ACCT = 1901  # National Gross Domestic Product by Income and by Expenditure Accounts  // Comptes nationaux du produit intérieur brut en termes de revenus et de dépenses
     PROV_AND_TERR_GDP_BY_INC_AND_BY_EXP_ACCT = 1902  # Provincial and Territorial Gross Domestic Product by Income and by Expenditure Accounts  // Comptes provinciaux et territoriaux du produit intérieur brut en termes de revenus et de dépenses
     ANN_ENV_PROTECT_EXP_SURV = 1903  # Annual Environmental Protection Expenditures Survey  // Enquête annuelle sur les dépenses de protection de l'environnement
-    NATL_TOUR_IND = 1910  # National Tourism Indicators  // Indicateurs nationaux du tourisme
+    NATL_TOUR_IND = (
+        1910  # National Tourism Indicators  // Indicateurs nationaux du tourisme
+    )
     ELEC_UTIL_FIN_REP_ANN = 2001  # Electric Utility Financial Report Annual  // Rapport financier des services d'électricité annuel
     MON_COKE_SUPP_AND_DISP_SURV = 2003  # Monthly Coke Supply and Disposition Survey  // Enquête mensuelle sur l'approvisionnement et l'écoulement du coke
     RET_COMM_SURV = 2008  # Retail Commodity Survey  // Enquête sur les marchandises vendues au détail
@@ -60,13 +65,17 @@ class Survey(Enum):
     ANN_SURV_OF_MANUFACT_AND_LOGGING_IND = 2103  # Annual Survey of Manufacturing and Logging Industries  // Enquête annuelle sur les industries manufacturières et de l'exploitation forestière
     STEEL_PIPE_AND_TUBING = 2105  # Steel Pipe and Tubing  // Tuyaux et tubes en acier
     STEEL_WIRE_AND_SPEC_WIRE_PROD = 2106  # Steel Wire and Specified Wire Products  // Fil d'acier et certains produits de fil métallique
-    ANN_SURV_OF_FOREST = 2107  # Annual Survey of Forestry  // Enquête annuelle de la foresterie
+    ANN_SURV_OF_FOREST = (
+        2107  # Annual Survey of Forestry  // Enquête annuelle de la foresterie
+    )
     SALES_OF_PAINTS_VARNISHES_AND_LACQUERS = 2108  # Sales of Paints, Varnishes and Lacquers  // Ventes de peintures, vernis et laqués
     GYPSUM_PROD = 2109  # Gypsum Products  // Produits de gypse
     MINERAL_WOOL = 2110  # Mineral Wool Including Fibrous Glass Insulation  // Laine minérale y compris les isolants en fibre de verre
     PROD_SALES_AND_STOCKS_OF_MAJ_APPL = 2112  # Production, Sales and Stocks of Major Appliances  // Productions, ventes et stocks d'appareils ménagers
     DOM_WASHING_MACH_AND_CLOTH_DRYERS = 2113  # Domestic Washing Machines and Clothes Dryers  // Machines à laver et sécheuses à linge
-    DOM_ELEC_APPL = 2114  # Domestic Electrical Appliances  // Appareils électriques ménagers
+    DOM_ELEC_APPL = (
+        2114  # Domestic Electrical Appliances  // Appareils électriques ménagers
+    )
     PIG_IRON = 2115  # Pig Iron  // Fonte en gueuses
     STEEL_PRI_FORMS_STEEL_CASTINGS_AND_PIG_IRON = 2116  # Steel Primary Forms, Steel Castings and Pig Iron  // Acier formes primaires, moulages d'acier et fonte en gueuses
     ELEC_LAMPS = 2117  # Electric Lamps (Light Sources)  // Lampes électriques (sources de lumière)
@@ -79,11 +88,17 @@ class Survey(Enum):
     FLOOR_TILES = 2125  # Floor Tiles  // Carreaux et dalles de parquet
     PROC_CHEESE = 2126  # Process Cheese  // Fromage fondu
     PROD_AND_SALES_OF_PHONOGRAPH_REC_AND_PRE_REC_TAPES_IN_CAN = 2130  # Production and Sales of Phonograph Records and Pre-Recorded Tapes in Canada  // Production et ventes de disques de phonographe et de rubans pré-enregistrés au Canada
-    STEEL_PRI_FORMS_WKLY = 2131  # Steel Primary Forms Weekly  // Acier en formes primaires (hebdomadaire)
+    STEEL_PRI_FORMS_WKLY = (
+        2131  # Steel Primary Forms Weekly  // Acier en formes primaires (hebdomadaire)
+    )
     SAWMILLS = 2134  # Sawmills  // Scieries
     PROD_SHIP_AND_STOCKS_ON_HAND_OF_SAWMILLS_IN_BC = 2135  # Production, Shipments and Stocks on Hand of Sawmills in British Columbia  // Production, livraisons et stocks en mains des scieries en Colombie-Britannique
-    PULPWOOD_AND_WOOD_RESIDUE = 2136  # Pulpwood and Wood Residue  // Bois à pâte et déchets de bois
-    CONST_TYPE_PLYWOOD = 2138  # Construction Type Plywood  // Contreplaqués de construction
+    PULPWOOD_AND_WOOD_RESIDUE = (
+        2136  # Pulpwood and Wood Residue  // Bois à pâte et déchets de bois
+    )
+    CONST_TYPE_PLYWOOD = (
+        2138  # Construction Type Plywood  // Contreplaqués de construction
+    )
     CEMENT_SURV = 2140  # Cement Survey  // Enquête de ciment
     PARTICLEBOARD_OSB_AND_FIBREBOARD = 2141  # Particleboard, Oriented Strandboard and Fibreboard  // Panneaux de particules, de lamelles orientées et de fibres
     PROD_AND_DISP_OF_TOBACCO_PROD = 2142  # Production and Disposition of Tobacco Products  // Production et écoulement des produits du tabac
@@ -94,7 +109,9 @@ class Survey(Enum):
     MON_REF_PETRO_PROD = 2150  # Monthly Refined Petroleum Products  // Produits pétroliers raffinés (rapport mensuel)
     MON_ELEC_SUPP_AND_DISP_SURV = 2151  # Monthly Electricity Supply and Disposition Survey  // Enquête mensuelle sur l'approvisionnement et l'écoulement de l'électricité
     BUS_COND_SURV_FOR_THE_MANUFACT_IND = 2152  # Business Conditions Survey for the Manufacturing Industries  // Enquête sur les perspectives  du monde des affaires pour les industries manufacturières
-    PROD_OF_SEL_BISCUITS = 2154  # Production of Selected Biscuits  // Production de certains biscuits
+    PROD_OF_SEL_BISCUITS = (
+        2154  # Production of Selected Biscuits  // Production de certains biscuits
+    )
     TEA_AND_COFFEE = 2156  # Tea and Coffee  // Thé et café
     SEMI_ANN_SHIP_OF_OFF_FURN_PROD = 2161  # Semi-annual Shipments of Office Furniture Products  // Livraisons semestrielles des produits de meubles de bureau
     QTR_IND_CONS_OF_ENERGY_SURV = 2166  # Quarterly Industrial Consumption of Energy Survey  // Enquête trimestrielle sur la consommation industrielle d'énergie
@@ -114,18 +131,26 @@ class Survey(Enum):
     ANN_ELEC_PWR_GEN_STN_SURV = 2193  # Annual Electric Power Generating Stations Survey  // Enquête annuelle sur les centrales d'énergie électrique
     ANN_ELEC_SUPP_AND_DISP_SURV = 2194  # Annual Electricity Supply and Disposition Survey  // Enquête annuelle sur l'approvisionnement et l'écoulement de l'électricité
     ANN_SURV_OF_ELEC_PWR_THERM_GEN_STN_FUEL_CONS = 2196  # Annual Survey of Electric Power Thermal Generating Station Fuel Consumption  // Enquête annuelle sur la consommation de combustibles de centrales thermiques d'énergie électrique
-    CRUDE_OIL_AND_NAT_GAS = 2198  # Crude Oil and Natural Gas  // Pétrole brut et gaz naturel
+    CRUDE_OIL_AND_NAT_GAS = (
+        2198  # Crude Oil and Natural Gas  // Pétrole brut et gaz naturel
+    )
     CAN_INTL_MERCH_TRADE = 2201  # Canadian International Merchandise Trade (Customs Basis)  // Commerce international de marchandises du Canada (base douanière)
     CAN_INTL_MERCH_TRADE_BAL_OF_PAYMENTS_BASIS = 2202  # Canadian International Merchandise Trade (Balance of Payments Basis)  // Commerce international de marchandises du Canada (base de la balance de paiements)
     INTL_MERCH_TRADE_PRICE_IDX = 2203  # International Merchandise Trade Price Index  // Indice des prix du commerce international de marchandises
     CONS_PRICE_IDX = 2301  # Consumer Price Index  // Indice des prix à la consommation
-    PRECAST_CONCRETE_PRICE_IDX = 2303  # Precast Concrete Price Indexes  // Indices des prix du béton préfabriqué
+    PRECAST_CONCRETE_PRICE_IDX = (
+        2303  # Precast Concrete Price Indexes  // Indices des prix du béton préfabriqué
+    )
     FAB_STRUCT_STEEL_PRICE_IDX = 2304  # Fabricated Structural Steel Price Indexes  // Indices des prix de l'acier de charpente semi-ouvré
     FARM_INPUT_PRICE_IDX = 2305  # Farm Input Price Index  // Indice des prix des entrées dans l'agriculture
-    RAW_MAT_PRICE_IDX = 2306  # Raw Materials Price Index  // Indice des prix des matières brutes
+    RAW_MAT_PRICE_IDX = (
+        2306  # Raw Materials Price Index  // Indice des prix des matières brutes
+    )
     CONST_UNION_WAGE_RATE_IDX = 2307  # Construction Union Wage Rate Index  // Indice des taux de salaires syndicaux dans la construction
     RES_BLDG_CONST_INPUT_PRICE_IDX = 2308  # Residential Building Construction Input Price Indexes  // Indices des prix des entrées dans la construction résidentielle
-    NEW_HOUSING_PRICE_IDX = 2310  # New Housing Price Index  // Indice des prix des logements neufs
+    NEW_HOUSING_PRICE_IDX = (
+        2310  # New Housing Price Index  // Indice des prix des logements neufs
+    )
     HIGHWAY_CONST_PRICE_IDX = 2311  # Highway Construction Price Indexes  // Indices des prix de la construction routière
     MACH_AND_EQUIP_PRICE_IDX = 2312  # Machinery and Equipment Price Index  // Indice des prix des machines et du matériel
     CHEM_AND_MINERAL_PROC_PLT_PRICE_IDX = 2314  # Chemical and Mineral Process Plant Price Indexes  // Indices des prix des installations de traitement des produits chimiques et minéraux
@@ -146,7 +171,9 @@ class Survey(Enum):
     TRVL_ACCOM_SVC_PRICE_IDX = 2336  # Traveller Accommodation Services Price Index  // Indice des prix des services d'hébergement des voyageurs
     MON_WHOLE_TRADE_SURV = 2401  # Monthly Wholesale Trade Survey  // Enquête mensuelle sur le commerce de gros
     MON_NEW_MOTOR_VEHIC_SALES_SURV = 2402  # Monthly New Motor Vehicle Sales Survey  // Enquête mensuelle sur les ventes de véhicules automobiles neufs
-    VEND_MACH_OPER = 2404  # Vending Machine Operators  // Exploitants de distributeurs automatiques
+    VEND_MACH_OPER = (
+        2404  # Vending Machine Operators  // Exploitants de distributeurs automatiques
+    )
     DIRECT_SELLING_IN_CAN = 2405  # Direct Selling in Canada  // Vente directe au Canada
     RET_TRADE_SURV = 2406  # Retail Trade Survey (Monthly)  // Enquête sur le commerce de détail (mensuelle)
     MON_RET_TRADE_SURV = 2408  # Monthly Retail Trade Survey (Department Store Organizations)  // Enquête mensuelle sur le commerce de détail - Organismes des grands magasins
@@ -181,17 +208,27 @@ class Survey(Enum):
     CORPORATIONS_RETURNS_ACT = 2503  # Corporations Returns Act  // Loi sur les déclarations des personnes morales
     QTR_SURV_OF_FIN_INST = 2504  # Quarterly Survey of Financial Institutions  // Enquête trimestrielle sur les institutions financières
     CRED_UNION = 2505  # Credit Unions  // Caisses d'épargne et de crédit
-    CORPORATION_FIN_STAT = 2506  # Corporation Financial Statistics  // Statistique financière des sociétés
-    CORPORATION_TAX_STAT = 2507  # Corporation Taxation Statistics  // Statistique fiscale des sociétés
+    CORPORATION_FIN_STAT = (
+        2506  # Corporation Financial Statistics  // Statistique financière des sociétés
+    )
+    CORPORATION_TAX_STAT = (
+        2507  # Corporation Taxation Statistics  // Statistique fiscale des sociétés
+    )
     FIN_AND_TAX_STAT_FOR_ENT = 2510  # Financial and Taxation Statistics for Enterprises  // Statistiques financières et fiscales des entreprises
     SURV_OF_DEPOSIT_ACCEPT_INTERMED_CHART_BANK_TRUST_COMP_CAISSES_POP_AND_CRED_UNION = 2513  # Survey of Deposit-accepting Intermediaries: Chartered Banks, Trust Companies, Caisses Populaires and Credit Unions  // Enquête auprès des intermédiaires financiers de dépôts : banques à charte, sociétés de fiducie, caisses populaires et coopératives de crédit
     BIANN_SURV_OF_SUPP_OF_BUS_FIN = 2514  # Biannual Survey of Suppliers of Business Financing  // Enquête semestrielle auprès des fournisseurs de services de financement aux entreprises
-    LAB_COST_SURV = 2601  # Labour Cost Survey  // Enquête sur les coûts de main-d'oeuvre
-    EST_OF_LAB_INC = 2602  # Estimates of Labour Income  // Estimations du revenu du travail
+    LAB_COST_SURV = (
+        2601  # Labour Cost Survey  // Enquête sur les coûts de main-d'oeuvre
+    )
+    EST_OF_LAB_INC = (
+        2602  # Estimates of Labour Income  // Estimations du revenu du travail
+    )
     SURV_OF_EMPLOY_PAYROLLS_AND_MAN_HOURS = 2603  # Survey of Employment, Payrolls and Man-hours  // Enquête sur l'emploi, la rémunération et les heures-hommes
     EMPLOY_INS_STAT = 2604  # Employment Insurance Statistics - Monthly  // Statistiques de l'assurance-emploi - Mensuel
     NATL_WORK_INJURIES_STAT_PROG = 2605  # National Work Injuries Statistics Program  // Programme national de statistiques sur les accidents de travail
-    HELP_WANTED_IDX_SURV = 2606  # Help Wanted Index Survey  // Enquête sur l'indice de l'offre d'emploi
+    HELP_WANTED_IDX_SURV = (
+        2606  # Help Wanted Index Survey  // Enquête sur l'indice de l'offre d'emploi
+    )
     QTR_EST_OF_TRUST_PENS_FUNDS = 2607  # Quarterly Estimates of Trusteed Pension Funds  // Estimations trimestrielles relatives aux caisses de retraite en fiducie
     CEN_OF_TRUST_PENS_FUNDS = 2608  # Census of Trusteed Pension Funds  // Recensement des Caisses de retraite en fiducie
     PENS_PLAN_IN_CAN = 2609  # Pension Plans in Canada  // Régimes de pension au Canada
@@ -199,15 +236,23 @@ class Survey(Enum):
     SURV_OF_EMPLOY_PAYROLLS_AND_HOURS = 2612  # Survey of Employment, Payrolls and Hours  // Enquête sur l'emploi, la rémunération et les heures de travail
     BUS_PAYROLLS_SURV = 2614  # Business Payrolls Survey  // Enquête sur la rémunération auprès des entreprises
     WORKPLACE_AND_EMPLOY_SURV = 2615  # Workplace and Employee Survey  // Enquête sur le milieu de travail et les employés
-    SURV_OF_FIN_SEC = 2620  # Survey of Financial Security  // Enquête sur la sécurité financière
-    AIRPORT_ACT_SURV = 2701  # Airport Activity Survey  // Enquête sur l'activité aéroportuaire
+    SURV_OF_FIN_SEC = (
+        2620  # Survey of Financial Security  // Enquête sur la sécurité financière
+    )
+    AIRPORT_ACT_SURV = (
+        2701  # Airport Activity Survey  // Enquête sur l'activité aéroportuaire
+    )
     AIR_PASS_ORIG_AND_DEST_DOM_JOURNEYS = 2702  # Air Passenger Origin and Destination, Domestic Journeys  // Origine et destination des passagers aériens, voyages intérieurs
     AIR_PASS_ORIG_AND_DEST_CAN_U_S_A = 2703  # Air Passenger Origin and Destination, Canada-U.S.A.  // Origine et destination des passagers aériens, Canada - États-Unis
     COUPON_PASS_ORIG_AND_DEST_REP = 2704  # Coupon Passenger Origin and Destination Report - Other Unit Toll Services  // Relevé de l'origine et de la destination des passagers d'après le coupon
-    AIR_CHARTER_STAT = 2705  # Air Charter Statistics  // Statistiques des affrètements aériens
+    AIR_CHARTER_STAT = (
+        2705  # Air Charter Statistics  // Statistiques des affrètements aériens
+    )
     FARE_BASIS_SURV = 2708  # Fare Basis Survey  // Enquête sur la base tarifaire
     QTR_CIV_AVIATION_SURV = 2712  # Quarterly Civil Aviation Survey  // Enquête trimestrielle sur l'aviation civile
-    ANN_CIV_AVIATION_SURV = 2713  # Annual Civil Aviation Survey  // Enquête annuelle sur l'aviation civile
+    ANN_CIV_AVIATION_SURV = (
+        2713  # Annual Civil Aviation Survey  // Enquête annuelle sur l'aviation civile
+    )
     AIRCRAFT_MVMT_STAT = 2715  # Aircraft Movement Statistics  // Statistiques relatives aux mouvements des aéronefs
     QTR_SURV_OF_TELECOM = 2721  # Quarterly Survey of Telecommunications  // Enquête trimestrielle des télécommunications
     ANN_SURV_OF_TELECOM = 2722  # Annual Survey of Telecommunications  // Enquête annuelle des télécommunications
@@ -218,14 +263,20 @@ class Survey(Enum):
     RAILWAY_OPER_STAT_SURV = 2735  # Railway Operating Statistics Survey  // Enquête sur les statistiques de l'exploitation ferroviaire
     RAIL_COMM_ORIG_AND_DEST_STAT = 2736  # Rail Commodity Origin and Destination Statistics  // Statistiques sur l'origine et la destination des marchandises transportées par chemin de fer
     TRUCK_COMM_ORIG_AND_DEST_SURV = 2741  # Trucking Commodity Origin and Destination Survey  // Enquête sur l'origine et la destination des marchandises transportées par camion
-    ANN_TRUCK_SURV = 2742  # Annual Trucking Survey  // Enquête annuelle sur le camionnage
+    ANN_TRUCK_SURV = (
+        2742  # Annual Trucking Survey  // Enquête annuelle sur le camionnage
+    )
     PASS_BUS_STAT = 2743  # Passenger Bus Statistics  // Statistique du transport des voyageurs par autobus
     INTERCITY_AND_RURAL_PASS_BUS_SURV = 2744  # Intercity and Rural Passenger Bus Survey  // Enquête sur le transport interurbain et rural de voyageurs par autobus
     MON_PASS_BUS_AND_URBAN_TRANSPORT_SURV = 2745  # Monthly Passenger Bus and Urban Transit Survey  // Enquête mensuelle sur le transport de passagers par autobus et le transport urbain
     GAS_AND_OTHER_PETRO_FUELS_SOLD = 2746  # Gasoline and Other Petroleum Fuels Sold  // Essence et autres combustibles de pétrole vendus
     VEHIC_REG = 2747  # Vehicle Registrations  // Immatriculations de véhicules
-    QTR_TRUCK_SURV = 2748  # Quarterly Trucking Survey  // Enquête trimestrielle sur le camionnage
-    FUEL_CONS_SURV = 2749  # Fuel Consumption Survey  // Enquête sur la consommation de carburant
+    QTR_TRUCK_SURV = (
+        2748  # Quarterly Trucking Survey  // Enquête trimestrielle sur le camionnage
+    )
+    FUEL_CONS_SURV = (
+        2749  # Fuel Consumption Survey  // Enquête sur la consommation de carburant
+    )
     COASTWISE_SHIP_SURV = 2751  # Coastwise Shipping Survey  // Enquête sur le cabotage
     FIN_SURV_OF_CAN_WATER_CARRIERS = 2753  # Financial Survey of Canadian Water Carriers  // Enquête financière des transporteurs par eau canadiens
     MARINE_INTL_FREIGHT_ORIG_AND_DEST_SURV = 2791  # Marine International Freight Origin and Destination Survey  // Enquête sur l'origine et la destination des marchandises au titre du transport maritime international
@@ -235,7 +286,9 @@ class Survey(Enum):
     BLDG_PERMITS = 2802  # Building Permits  // Permis de bâtir
     ANN_CAP_AND_REP_EXP_SURV_ACT_PRELIM_ACT_AND_INTENT = 2803  # Annual Capital and Repair Expenditures Survey: Actual, Preliminary Actual and Intentions  // Enquête annuelle sur les dépenses en immobilisations et réparations : réelles, provisoires, perspectives
     STOCK_AND_CONS_OF_FIXED_NON_RES_CAP = 2820  # Stock and Consumption of Fixed Non-residential Capital  // Stock et consommation de capital fixe non résidentiel
-    CAP_UTILIZATION_RATES = 2821  # Capacity Utilization Rates  // Taux d'utilisation de la capacité
+    CAP_UTILIZATION_RATES = (
+        2821  # Capacity Utilization Rates  // Taux d'utilisation de la capacité
+    )
     SURV_ON_FLUID_PWR_PROD_MFG_IN_CAN = 2917  # Survey on Fluid Power Products Manufactured in Canada  // Enquête sur les dispositifs de transmission d'énergie par fluide fabriqués au Canada
     PROV_WAGE_AND_SAL_SURV = 2920  # Provincial Wage and Salary Survey  // Enquête sur les traitements et salaires dans les provinces
     SURV_OF_CAN_TOUR_ATTR = 2925  # Survey of Canada's Tourist Attractions  // Enquête sur les attractions touristiques du Canada
@@ -269,15 +322,21 @@ class Survey(Enum):
     ELEM_SEC_SCHOOL_ENROL = 3128  # Elementary/Secondary School Enrolment  // Effectifs des écoles primaires et secondaires
     MIN_AND_SEC_LANG_EDU_ELEM_AND_SEC_IND_SCHOOLS = 3129  # Minority and Second Language Education, Elementary and Secondary Independent Schools  // Enseignement dans la langue de la minorité et dans la langue seconde - Écoles primaires et secondaires indépendantes
     DEG_DIPL_AND_CERT_GRANTED_BY_UNI = 3131  # Degrees, Diplomas and Certificates Granted by Universities  // Grades, diplômes et certificats décernés par les universités
-    PERIOD_PUB_SURV = 3139  # Periodical Publishing Survey  // Enquête sur l'édition du périodique
+    PERIOD_PUB_SURV = (
+        3139  # Periodical Publishing Survey  // Enquête sur l'édition du périodique
+    )
     SURV_OF_FED_GOV_EXP_IN_SUPP_OF_EDU = 3140  # Survey of Federal Government Expenditures in Support of Education  // Enquête sur les dépenses du gouvernement fédéral au titre de l'éducation
     PROV_EXP_ON_EDU_IN_REFORM_AND_CORRECT_INST = 3141  # Provincial Expenditures on Education in Reform and Correctional Institutions  // Dépenses provinciales au titre de l'éducation dans les maisons de réhabilitation et de correction
     TRADE_VOC_ENROL_SURV = 3142  # Trade/Vocational Enrolment Survey  // Enquête sur les effectifs des programmes de formation professionnelle au niveau des métiers
     EDU_PRICE_IDX = 3144  # Education Price Index  // Indice des prix a l'enseignement
     FIN_INFO_OF_CLG = 3146  # Financial Information of Colleges  // Information financière des collèges
-    CONT_EDU_SURV = 3147  # Continuing Education Survey  // Enquête sur l'éducation permanente
+    CONT_EDU_SURV = (
+        3147  # Continuing Education Survey  // Enquête sur l'éducation permanente
+    )
     INTL_TRVL_SURV_ELEC_QUEST_AND_AIR_EXIT_SURV = 3152  # International Travel Survey: Electronic questionnaires and Air Exit Survey  // Enquête sur les voyages internationaux : questionnaires électroniques et Enquête sur les départs aériens
-    RADIO_LISTEN_DATABANK = 3153  # Radio Listening Databank  // Banque de données sur l'écoute de la radio
+    RADIO_LISTEN_DATABANK = (
+        3153  # Radio Listening Databank  // Banque de données sur l'écoute de la radio
+    )
     REG_APPRTC_INFO_SYS = 3154  # Registered Apprenticeship Information System  // Système d'information sur les apprentis inscrits
     SCHOOL_LEAVERS_SURV = 3156  # School Leavers Survey  // Enquête auprès des sortants
     NATL_APPRTC_SURV = 3160  # National Apprenticeship Survey  // Enquête nationale auprès des apprentis
@@ -286,7 +345,9 @@ class Survey(Enum):
     SURV_ON_EDU_IN_THE_MIN_LANG_AND_SEC_LANG_AT_THE_POSTSEC_LVL = 3166  # Survey on Education in the Minority-Language and Second-Language at the Postsecondary Level  // Enquête sur l'enseignement  dans la langue de la minorité et dans la langue seconde au niveau postsecondaire
     SURV_OF_ACT_WITH_INTL_FIN_INST = 3167  # Survey of Activity with International Financial Institutions  // Enquête sur l'activité dans le secteur des institutions financières Internationales
     HOSPITAL_MORBIDITY_DATABASE = 3203  # Hospital Morbidity Database  // Base de données sur la morbidité hospitalière
-    MENTAL_HLTH_STAT = 3204  # Mental Health Statistics  // La statistique de l'hygiène mentale
+    MENTAL_HLTH_STAT = (
+        3204  # Mental Health Statistics  // La statistique de l'hygiène mentale
+    )
     CAN_CANCER_REG = 3207  # Canadian Cancer Registry  // Registre canadien du cancer
     ANN_RETURN_OF_HLTH_CARE_FAC = 3208  # Annual Return of Health Care Facilities - Hospitals  // Rapport annuel des établissements de santé - Hôpitaux
     THERA_ABORTION_SURV = 3209  # Therapeutic Abortion Survey  // Enquête sur les avortements thérapeutiques
@@ -300,14 +361,24 @@ class Survey(Enum):
     VITAL_STAT_STILLBIRTH_DATABASE = 3234  # Vital Statistics - Stillbirth Database  // Statistique de l'état civil - Base de données sur les mortinaissances
     VITAL_STAT_DIVORCE_DATABASE = 3235  # Vital Statistics - Divorce Database  // Statistique de l'état civil - Base de données sur les divorces
     NATL_POP_HLTH_SURV_HH_COMP_XSECT = 3236  # National Population Health Survey: Household Component, Cross-sectional  // Enquête nationale sur la santé de la population : Volet ménages - transversal
-    INDIG_PPL_SURV = 3250  # Indigenous Peoples Survey  // Enquête auprès des peuples autochtones
-    CAN_SURV_ON_DIABL = 3251  # Canadian Survey on Disability  // Enquête canadienne sur l'incapacité
+    INDIG_PPL_SURV = (
+        3250  # Indigenous Peoples Survey  // Enquête auprès des peuples autochtones
+    )
+    CAN_SURV_ON_DIABL = (
+        3251  # Canadian Survey on Disability  // Enquête canadienne sur l'incapacité
+    )
     HLTH_AND_ACT_LIMIT_SURV_INST_COMP = 3252  # Health and Activity Limitation Survey : Institutional Component  // Enquête sur la santé et les limitations d'activités : Établissements
-    POLICE_ADMIN_SURV = 3301  # Police Administration Survey  // Enquête sur l'administration policière
+    POLICE_ADMIN_SURV = (
+        3301  # Police Administration Survey  // Enquête sur l'administration policière
+    )
     UNIFORM_CRIME_REP_SURV = 3302  # Uniform Crime Reporting Survey  // Programme de déclaration uniforme de la criminalité
-    ADULT_CORRECT_SVC = 3306  # Adult Correctional Services  // Services correctionnels pour adultes
+    ADULT_CORRECT_SVC = (
+        3306  # Adult Correctional Services  // Services correctionnels pour adultes
+    )
     LEGAL_AID_SURV = 3308  # Legal Aid Survey  // Enquête sur l'aide juridique
-    YOUTH_COURT_SURV = 3309  # Youth Court Survey  // Enquête sur les tribunaux de la jeunesse
+    YOUTH_COURT_SURV = (
+        3309  # Youth Court Survey  // Enquête sur les tribunaux de la jeunesse
+    )
     COURTS_RES_EXP_AND_PERS_SURV = 3310  # Courts Resources, Expenditures and Personnel Survey  // Enquête des ressources, dépenses et personnel des tribunaux
     INT_CRIMINAL_COURT_SURV = 3312  # Integrated Criminal Court Survey  // Enquête intégrée sur les tribunaux de juridiction criminelle
     CORRECT_KEY_IND_REP_FOR_ADULTS_AND_YOUTH = 3313  # Corrections Key Indicator Report for Adults and Youth  // Rapport sur les indicateurs clés des services correctionnels pour les adultes et les jeunes
@@ -320,10 +391,14 @@ class Survey(Enum):
     ADULT_AND_YOUTH_RECIDIVISM_IN_CAN_SPEC_STUD = 3327  # Adult and Youth Recidivism in Canada Special Study  // Étude spéciale sur la récidive chez les adultes et les jeunes au Canada
     SURV_OF_RES_FAC_FOR_VICTIM_OF_ABUSE = 3328  # Survey of Residential Facilities for Victims of Abuse  // Enquête sur les établissements d'hébergement pour les victimes de violence
     FIELD_CROP_REP_SERIES = 3401  # Field Crop Reporting Series  // Série de rapports sur les grandes cultures
-    MON_MILLER_S_SURV = 3403  # Monthly Miller's Survey  // Enquête mensuelle auprès des minotiers
+    MON_MILLER_S_SURV = (
+        3403  # Monthly Miller's Survey  // Enquête mensuelle auprès des minotiers
+    )
     MON_CRUSH_OPER_SURV = 3404  # Monthly Crushing Operations Survey  // Enquête mensuelle sur les opérations de trituration
     LEAF_TOBACCO_AREA_PROD_AND_EVAL = 3405  # Leaf Tobacco Area, Production and Value  // Superficie récoltée, production et valeur du tabac en feuilles
-    FRUITS_AND_VEG_SURV = 3407  # Fruits and Vegetables Survey  // Enquête sur les fruits et légumes
+    FRUITS_AND_VEG_SURV = (
+        3407  # Fruits and Vegetables Survey  // Enquête sur les fruits et légumes
+    )
     MUSHROOM_GROWERS_SURV = 3411  # Mushroom Growers' Survey  // Enquête relative aux producteurs de champignons
     MAPLE_PROD = 3414  # Maple Products  // Produits de l'érable
     ANN_GREENHOUSE_SOD_AND_NURSERY_SURV = 3416  # Annual Greenhouse, Sod and Nursery Survey  // Enquête annuelle sur les cultures de serre, les pépinières et les gazonnières
@@ -337,7 +412,9 @@ class Survey(Enum):
     DAIRY_FAC_PROD_AND_STOCKS_SURV = 3430  # Dairy Factory Production and Stocks Survey  // Enquête sur la production et stocks des fabriques laitières
     INVENT_STMNT_OF_BUTTER_AND_CHEESE = 3431  # Inventory Statement of Butter and Cheese  // Inventaire du beurre et du fromage
     MILK_SOLD_OFF_FARM_AND_CASH_RECPT_FROM_THE_SALE_OF_MILK = 3432  # Milk Sold Off Farms and Cash Receipts from the Sale of Milk  // Ventes de lait hors ferme et recettes monétaires provenant des ventes de lait
-    SURV_OF_LIVESTOCK_SLAUGHTER = 3434  # Survey of Livestock Slaughter  // Relevé des abattages de bestiaux
+    SURV_OF_LIVESTOCK_SLAUGHTER = (
+        3434  # Survey of Livestock Slaughter  // Relevé des abattages de bestiaux
+    )
     WOOL_PRICE_SURV = 3435  # Wool Price Survey  // Enquête sur les prix de la laine
     FARM_PROD_PRICES_SURV = 3436  # Farm Product Prices Survey  // Enquête sur les prix des produits agricoles
     FARM_CASH_RECPT = 3437  # Farm Cash Receipts  // Recettes monétaires agricoles
@@ -345,12 +422,16 @@ class Survey(Enum):
     NATL_FARM_SURV = 3439  # National Farm Survey  // Enquête nationale sur les fermes
     PROC_SUPP_REP_OF_FROZEN_VEG_INTENT_FOR_RE_MFG = 3441  # Processors Supplementary Report of Frozen Vegetables Intended for Re-manufacture  // Rapport supplémentaire des conditionneurs de légumes congelés sur les stocks destinés à la retransformation
     FORAGE_SEED_USAGE_SURV = 3442  # Forage Seed Usage Survey  // Enquête sur l'utilisation des semences fourragères
-    ANN_MILLER_S_SURV = 3443  # Annual Miller's Survey  // Enquête annuelle auprès des minotiers
+    ANN_MILLER_S_SURV = (
+        3443  # Annual Miller's Survey  // Enquête annuelle auprès des minotiers
+    )
     BIANN_POTATO_AREA_AND_YIELD_SURV = 3446  # Biannual Potato Area and Yield Survey  // Enquête semestrielle sur la superficie et le rendement des pommes de terre
     AGRIC_TAX_DATA_PROG = 3447  # Agriculture Taxation Data Program  // Programme des données fiscales agricoles
     SURV_OF_WAGE_RATES_FOR_HIRED_FARM_LAB = 3449  # Survey of Wage Rates for Hired Farm Labour  // Enquête sur les taux des salaires de la main-d'oeuvre agricole salariée
     FARM_FIN_SURV = 3450  # Farm Financial Survey  // Enquête financière sur les fermes
-    SEED_CORN_TRADE_SURV = 3451  # Seed Corn Trade Survey  // Enquête sur le commerce des semences de maïs
+    SEED_CORN_TRADE_SURV = (
+        3451  # Seed Corn Trade Survey  // Enquête sur le commerce des semences de maïs
+    )
     LIVESTOCK_SURV = 3460  # Livestock Survey  // Enquête sur le bétail
     FARM_INPUTS_MGMT_SURV = 3461  # Farm Inputs Management Survey  // Enquête sur la gestion des intrants agricoles
     COMM_STOCKS_OF_CORN_AND_SOYBEANS_SURV = 3464  # Commercial Stocks of Corn and Soybeans Survey  // Enquête sur les stocks commerciaux de maïs et de soya
@@ -358,18 +439,28 @@ class Survey(Enum):
     EVAL_OF_FARM_CAP = 3471  # Value of Farm Capital  // Valeur du capital agricole
     FARM_DEBT_OUTSTANDING = 3472  # Farm Debt Outstanding  // Dette agricole en cours
     NET_FARM_INC = 3473  # Net Farm Income  // Revenu agricole net
-    FARM_INC_IN_KIND_BY_ITEM = 3474  # Farm Income in Kind, by Item  // Revenu agricole en nature, par article
+    FARM_INC_IN_KIND_BY_ITEM = (
+        3474  # Farm Income in Kind, by Item  // Revenu agricole en nature, par article
+    )
     FOOD_AVAILABILITY = 3475  # Food Availability (per person)  // Disponibilité des aliments (par personne)
     COMM_STOCKS_OF_THE_MAJ_SPEC_CROPS_SURV = 3476  # Commercial Stocks of the Major Special Crops Survey  // Enquête sur les stocks commerciaux des principales cultures spéciales
     AQUACULT_PROD_AND_EVAL_ANN = 3479  # Aquaculture, production and value, Annual  // Production et valeur de l'aquaculture, annuelle
     SURV_OF_CONS_FIN = 3501  # Survey of Consumer Finances (Small Sample)  // Enquête sur les finances des consommateurs (petit échantillon)
     SURV_OF_CONS_FIN_1 = 3502  # Survey of Consumer Finances  // Enquête sur les finances des consommateurs
-    FOOD_EXP_SURV = 3503  # Food Expenditure Survey  // Enquête sur les dépenses alimentaires
-    SURV_OF_FAM_EXP = 3504  # Survey of Family Expenditures  // Enquête sur les dépenses des familles
+    FOOD_EXP_SURV = (
+        3503  # Food Expenditure Survey  // Enquête sur les dépenses alimentaires
+    )
+    SURV_OF_FAM_EXP = (
+        3504  # Survey of Family Expenditures  // Enquête sur les dépenses des familles
+    )
     HH_FAC_AND_EQUIP_SURV = 3505  # Household Facilities and Equipment Survey  // Enquête sur l'équipement ménager
     HH_FAC_BY_INC_AND_OTHER_CHAR = 3506  # Household Facilities by Income and Other Characteristics  // Equipement ménager selon le revenu et d'autres caractéristiques
-    SHELTER_COST_SURV = 3507  # Shelter Cost Survey  // Enquête sur les frais de logement
-    SURV_OF_HH_SPEND = 3508  # Survey of Household Spending  // Enquête sur les dépenses des ménages
+    SHELTER_COST_SURV = (
+        3507  # Shelter Cost Survey  // Enquête sur les frais de logement
+    )
+    SURV_OF_HH_SPEND = (
+        3508  # Survey of Household Spending  // Enquête sur les dépenses des ménages
+    )
     QTR_DEMO_EST = 3601  # Quarterly Demographic Estimates  // Estimations démographiques trimestrielles
     POP_PROJ_FOR_CAN_PROV_AND_TERR = 3602  # Population Projections for Canada, Provinces and Territories  // Projections démographiques pour le Canada, les provinces et les territoires
     EST_OF_TOT_POP_FOR_CAN_THE_PROV_AND_THE_TERR = 3603  # Estimates of Total Population for Canada, the Provinces and the Territories  // Estimations de la population totale pour le Canada, les provinces et les territoires
@@ -379,32 +470,60 @@ class Survey(Enum):
     PRELIM_EST_OF_POP_FOR_CEN_DIV_AND_CEN_METRO_AREAS = 3607  # Preliminary Estimates of Population for Census Divisions and Census Metropolitan Areas (Regression method)  // Estimations provisoires de la population des divisions et régions métropolitaines de recensement (Méthode de régression)
     ANN_DEMO_EST_SUBPROV_AREAS = 3608  # Annual Demographic Estimates : Subprovincial Areas  // Estimations démographiques annuelles : régions infraprovinciales
     LAB_FORCE_SURV = 3701  # Labour Force Survey  // Enquête sur la population active
-    SURV_OF_ANN_WORK_PAT = 3801  # Survey of Annual Work Patterns  // Enquête sur l'activité annuelle
+    SURV_OF_ANN_WORK_PAT = (
+        3801  # Survey of Annual Work Patterns  // Enquête sur l'activité annuelle
+    )
     FUEL_CONS = 3802  # Fuel Consumption  // Consommation de carburant
     CRIME_SURV = 3803  # Crime Survey  // Enquête sur les actes criminels
-    SURV_OF_WORK_HIST = 3804  # Survey of Work History  // Enquête sur les antécédents de travail
-    ABS_FROM_WORK_SURV = 3805  # Absence from Work Survey  // Enquête sur l'absence du travail
+    SURV_OF_WORK_HIST = (
+        3804  # Survey of Work History  // Enquête sur les antécédents de travail
+    )
+    ABS_FROM_WORK_SURV = (
+        3805  # Absence from Work Survey  // Enquête sur l'absence du travail
+    )
     SURV_OF_VOL_WORKERS = 3806  # Survey of Volunteer Workers  // Enquête auprès des travailleurs bénévoles
-    SURV_OF_CHILD_CARE = 3807  # Survey of Child Care  // Enquête sur la garde des enfants
+    SURV_OF_CHILD_CARE = (
+        3807  # Survey of Child Care  // Enquête sur la garde des enfants
+    )
     SURV_ON_THE_IMPORTANCE_OF_NAT_TO_CANADIANS = 3808  # Survey on the Importance of Nature to Canadians  // Enquête sur l'importance de la faune et les secteurs naturels pour les Canadiens
     TRVL_SURV_OF_RES_OF_CAN = 3810  # Travel Survey of Residents of Canada  // Enquête sur les voyages des résidents du Canada
     TRVL_TO_WORK_SURV = 3812  # Travel to Work Survey  // Enquête sur les déplacements entre le domicile et le lieu du travail
-    SURV_OF_SMOKING_HABITS = 3813  # Survey of Smoking Habits  // Enquête sur l'habitude de fumer
-    CURR_POP_PROFILE = 3814  # Current Population Profile  // Profil de la population actuelle
+    SURV_OF_SMOKING_HABITS = (
+        3813  # Survey of Smoking Habits  // Enquête sur l'habitude de fumer
+    )
+    CURR_POP_PROFILE = (
+        3814  # Current Population Profile  // Profil de la population actuelle
+    )
     SURV_OF_LEISURE_TIME_ACT_AND_READING_HABITS = 3815  # Survey of Leisure Time Activities and Reading Habits  // Activités de loisirs et habitudes de lecture
-    SURV_OF_JOB_OPPORT = 3821  # Survey of Job Opportunities  // Enquête sur les perspectives d'emploi
+    SURV_OF_JOB_OPPORT = (
+        3821  # Survey of Job Opportunities  // Enquête sur les perspectives d'emploi
+    )
     TOUR_ATTITUDE_AND_MOTIV_STUD = 3822  # Tourism Attitude and Motivation Study  // Enquête sur les attitudes et les motivations à l'égard du tourisme
     POSTSEC_STUD_SURV = 3823  # Postsecondary Student Survey  // Enquête auprès des étudiants du niveau postsecondaire
-    ON_CHILD_HLTH_STUD = 3824  # Ontario Child Health Study  // Étude sur la santé des jeunes Ontariens
-    HLTH_PROMO_SURV = 3828  # Health Promotion Survey  // Enquête sur la promotion de la santé
-    SURV_OF_UNION_MEMBERSHIP = 3830  # Survey of Union Membership  // Enquête sur l'adhésion syndicale
+    ON_CHILD_HLTH_STUD = (
+        3824  # Ontario Child Health Study  // Étude sur la santé des jeunes Ontariens
+    )
+    HLTH_PROMO_SURV = (
+        3828  # Health Promotion Survey  // Enquête sur la promotion de la santé
+    )
+    SURV_OF_UNION_MEMBERSHIP = (
+        3830  # Survey of Union Membership  // Enquête sur l'adhésion syndicale
+    )
     SURV_ON_WORK_REDUCTION = 3831  # Survey on Work Reduction  // Enquête sur la réduction des heures de travail
     VICTIM_OF_CRIMES_SURV = 3837  # Victims of Crimes Survey - Edmonton  // Enquête sur les actes criminels à Edmonton
     SURV_OF_AB_APPRTC_AND_JOURNEYMEN = 3842  # Survey of Alberta Apprentices and Journeymen  // Enquête auprès des apprentis et des manoeuvres en Alberta
-    SURV_OF_DISPL_WORKERS = 3845  # Survey of Displaced Workers  // Enquête auprès des travailleurs déplacés
-    NATL_CHILD_CARE_SURV = 3848  # National Child Care Survey  // Enquête nationale des soins aux enfants
-    SURV_OF_SELF_EMPLOY = 3850  # Survey of Self-employment  // Enquête sur le travail independant
-    SURV_OF_MAT_LEAVE = 3851  # Survey of Maternity Leave  // Enquête sur les congés de maternité
+    SURV_OF_DISPL_WORKERS = (
+        3845  # Survey of Displaced Workers  // Enquête auprès des travailleurs déplacés
+    )
+    NATL_CHILD_CARE_SURV = (
+        3848  # National Child Care Survey  // Enquête nationale des soins aux enfants
+    )
+    SURV_OF_SELF_EMPLOY = (
+        3850  # Survey of Self-employment  // Enquête sur le travail independant
+    )
+    SURV_OF_MAT_LEAVE = (
+        3851  # Survey of Maternity Leave  // Enquête sur les congés de maternité
+    )
     SURV_OF_EDU_ATTAINMENT = 3852  # Survey of Educational Attainment (Alberta)  // Enquête sur le niveau d'instruction (Alberta)
     LAB_MKT_ACT_SURV = 3853  # Labour Market Activity Survey  // Enquête sur l'activité
     EDU_SURV = 3862  # Education Survey  // Enquête sur les études
@@ -418,7 +537,9 @@ class Survey(Enum):
     SURV_ON_AGEING_AND_IND = 3885  # Survey on Ageing and Independence  // Enquête sur le vieillissement et l'autonomie
     HOMEOWNER_REP_AND_RENO_SURV = 3886  # Homeowner Repair and Renovation Survey  // Enquête sur les réparations et les rénovations effectuées par les propriétaires-occupants
     SURV_OF_LAB_AND_INC_DYN = 3889  # Survey of Labour and Income Dynamics  // Enquête sur la dynamique du travail et du revenu
-    GEN_SOC_SURV = 3894  # General Social Survey - Health  // Enquête sociale générale - Santé
+    GEN_SOC_SURV = (
+        3894  # General Social Survey - Health  // Enquête sociale générale - Santé
+    )
     VIOLENCE_AGAINST_WOMEN_SURV = 3896  # Violence Against Women Survey  // Enquête sur la violence envers les femmes
     SELF_SUFF_PROJ = 3898  # Self-Sufficiency Project  // Projet de l'autosuffisance
     CEN_OF_POP = 3901  # Census of Population  // Recensement de la population
@@ -438,20 +559,26 @@ class Survey(Enum):
     SURV_OF_INNOV = 4218  # Survey of Innovation  // Enquête sur l'innovation
     SURV_OF_BIOTECH_USE_IN_CAN_IND = 4221  # Survey of Biotechnology Use in Canadian Industries  // Enquête sur l'utilisation de la biotechnologie aux industries canadiennes
     SURV_OF_INTEL_PROP_COMM_IN_THE_HIGHER_EDU_SECT = 4222  # Survey of Intellectual Property Commercialization in the Higher Education Sector  // Enquête sur la commercialisation de la propriété intellectuelle dans le secteur de l'enseignement supérieur
-    SURV_OF_ADV_TECH = 4223  # Survey of Advanced Technology  // Enquête sur les technologies de pointe
+    SURV_OF_ADV_TECH = (
+        4223  # Survey of Advanced Technology  // Enquête sur les technologies de pointe
+    )
     SURV_OF_INNOV_ADV_TECH_AND_PRACT_IN_THE_CONST_AND_REL_IND = 4224  # Survey of Innovation, Advanced Technologies and Practices in the Construction and Related Industries  // Enquête sur l'innovation, les technologies et pratiques dans les industries de la construction et les industries connexes
     SURV_OF_DGTL_TECH_AND_INET_USE = 4225  # Survey of Digital Technology and Internet Use  // Enquête sur la technologie numérique et l'utilisation d'Internet
     BIOTECH_USE_AND_DEV_SURV = 4226  # Biotechnology Use and Development Survey  // Enquête sur l'utilisation et le développement de la biotechnologie
     INC_EST_FOR_SUBPROV_AREAS = 4301  # Income Estimates for Subprovincial Areas  // Estimations du revenu dans les secteurs infraprovinciaux
     ANN_SURV_OF_INET_SVC_PROV_AND_REL_SVC = 4303  # Annual Survey of Internet Service Providers and Related Services  // Enquête annuelle sur les fournisseurs de services Internet  et les autres services connexes
     SURV_OF_PERS_NOT_IN_THE_LAB_FORCE = 4400  # Survey of Persons Not in the Labour Force  // Enquête sur les personnes n'étant pas sur le marché du travail
-    YOUTH_SMOKING_SURV = 4401  # Youth Smoking Survey  // Enquête sur le tabagisme chez les jeunes
+    YOUTH_SMOKING_SURV = (
+        4401  # Youth Smoking Survey  // Enquête sur le tabagisme chez les jeunes
+    )
     SURV_OF_HH_ENERGY_USE = 4403  # Survey of Household Energy Use  // Enquête sur l'utilisation de l'énergie par les ménages
     RENT_REP_AND_RENO_EXP_SURV = 4404  # Rental Repair and Renovation Expenditure Survey  // Enquête sur les dépenses de réparation et de rénovation de logements en location
     PROG_FOR_THE_INTL_ASSESS_OF_ADULT_COMP = 4406  # Programme for the International Assessment of Adult Competencies  // Programme pour l'évaluation internationale des compétences des adultes
     NATL_PRIV_VEHIC_USE_SURV = 4407  # National Private Vehicle Use Survey  // Enquête nationale sur l'utilisation des véhicules privés
     CAN_ALC_AND_OTHER_DRUGS_SURV = 4408  # Canada's Alcohol and Other Drugs Survey  // Enquête Canadienne sur la consommation d'alcool et autres drogues
-    SURV_ON_SMOKING_IN_CAN = 4409  # Survey on Smoking in Canada  // Enquête sur le tabagisme au Canada
+    SURV_ON_SMOKING_IN_CAN = (
+        4409  # Survey on Smoking in Canada  // Enquête sur le tabagisme au Canada
+    )
     TRACK_STUD_OF_FED_EMPLOY = 4410  # Tracking Study of Federal Employees  // Enquête de suivi d'anciens fonctionnaires fédéraux
     RCMP_PUB_COMPLAINTS_COMM = 4412  # RCMP Public Complaints Commission (PCC) Survey  // Enquête sur la commission des plaints du public (CPP) contre la GRC
     SUN_EXP_SURV = 4419  # Sun Exposure Survey  // Enquête sur l'exposition au soleil
@@ -463,7 +590,9 @@ class Survey(Enum):
     GEN_SOC_SURV_GIVING_VOL_AND_PARTICIPATING = 4430  # General Social Survey - Giving, Volunteering and Participating  // Enquête sociale générale - Dons, bénévolat et participation
     CAN_INET_USE_SURV = 4432  # Canadian Internet Use Survey  // Enquête canadienne sur l'utilisation de l'Internet
     ON_ADULT_LIT_SURV = 4433  # Ontario Adult Literacy Survey  // Enquête sur l'alphabétisation des adultes en Ontario
-    YOUTH_IN_TRANSPORT_SURV = 4435  # Youth in Transition Survey  // Enquête auprès des jeunes en transition
+    YOUTH_IN_TRANSPORT_SURV = (
+        4435  # Youth in Transition Survey  // Enquête auprès des jeunes en transition
+    )
     SURV_OF_1995_GRAD_WHO_MOT_TO_THE_USA = 4436  # Survey of 1995 Graduates Who Moved to the United States  // Enquête auprès des diplômés de 1995 qui sont déménagés aux États-Unis
     PUB_SVC_EMPLOY_SURV = 4438  # Public Service Employee Survey  // Sondage auprès des fonctionnaires fédéraux
     TRVL_ACT_AND_MOTIV_SURV = 4439  # Travel Activities and Motivation Survey  // Enquête sur les activités et les préférences en matière de voyages
@@ -472,15 +601,21 @@ class Survey(Enum):
     SURV_OF_APPROACHES_TO_EDU_PLAN = 4442  # Survey of Approaches to Educational Planning  // Enquête sur les approches en matière de planification des études
     COMM_EMPLOY_INNOV_PROJ = 4445  # Community Employment Innovation Project  // Projet d'innovation en emploi communautaire
     POST_SEC_EDU_PARTICIPATION_SURV = 4446  # Post-Secondary Education Participation Survey  // Enquête sur la participation aux études postsecondaires
-    COMP_SECT_SURV = 4449  # Compensation Sector Survey  // Sondage secteur de la rémunération
+    COMP_SECT_SURV = (
+        4449  # Compensation Sector Survey  // Sondage secteur de la rémunération
+    )
     NATL_LONG_SURV_OF_CHILD_AND_YOUTH = 4450  # National Longitudinal Survey of Children and Youth  // Enquête longitudinale nationale sur les enfants et les jeunes
     GEN_SOC_SURV_EDU_WORK_AND_RETIRE = 4500  # General Social Survey -  Education, Work and Retirement  // Enquête sociale générale -  Les études, le travail et la retraite
-    GEN_SOC_SURV_FAM = 4501  # General Social Survey - Family  // Enquête sociale générale - Famille
+    GEN_SOC_SURV_FAM = (
+        4501  # General Social Survey - Family  // Enquête sociale générale - Famille
+    )
     GEN_SOC_SURV_CAREGIVING_AND_CARE_RECEIVING = 4502  # General Social Survey - Caregiving and Care Receiving  // Enquête sociale générale - Les soins donnés et reçus
     TIME_USE_SURV = 4503  # Time Use Survey  // Enquête sur l'emploi du temps
     GEN_SOC_SURV_VICTIM = 4504  # General Social Survey - Victimization  // Enquête sociale générale - Victimisation
     GEN_SOC_SURV_ACCESS_TO_AND_USE_OF_INFO_COMM_TECH = 4505  # General Social Survey - Access to and Use of Information Communication Technology  // Enquête sociale générale - L'accès et l'utilisation des technologies de l'information et des communications
-    ETHNIC_DIV_SURV = 4508  # Ethnic Diversity Survey  // Enquête sur la diversité ethnique
+    ETHNIC_DIV_SURV = (
+        4508  # Ethnic Diversity Survey  // Enquête sur la diversité ethnique
+    )
     ANN_SURV_OF_THE_AQUACULT_IND = 4701  # Annual Survey of the Aquaculture Industry  // Enquête annuelle auprès de l'industrie de l'aquaculture
     SURV_OF_THE_CONST_IND = 4702  # Survey of the Construction Industry  // Enquête de l'industrie de construction
     SURV_OF_THE_COURIERS_AND_LOC_MESSENGERS_IND = 4703  # Survey of the Couriers and Local Messengers Industry  // Enquête sur l'industrie de messageries et des services locaux de messagers
@@ -506,7 +641,9 @@ class Survey(Enum):
     NATL_POP_HLTH_SURV_NORTH_COMP = 5004  # National Population Health Survey: North Component  // Enquête nationale sur la santé de la population : Volet nord
     FRONTIER_COUNTS = 5005  # Frontier Counts  // Dénombrement à la frontière
     SURV_OF_IMPROV_AND_INNOV_IN_CONST_INVEST = 5010  # Survey of Improvement and Innovation in Construction Investments  // Enquête sur l'amélioration et l'innovation dans le domaine des investissements en construction
-    NATL_GRAD_SURV = 5012  # National Graduates Survey  // Enquête nationale auprès des diplômés
+    NATL_GRAD_SURV = (
+        5012  # National Graduates Survey  // Enquête nationale auprès des diplômés
+    )
     RETIRE_SAV_DATA = 5013  # Retirement Savings Data  // Données sur l'épargne-retraite
     INVEST_IN_BLDG_CONST = 5014  # Investment in Building Construction  // Investissement en construction de bâtiments
     MENTAL_HLTH_AND_ACCESS_TO_CARE_SURV = 5015  # Mental Health and Access to Care Survey (MHACS)  // Enquête sur la santé mentale et l'accès aux soins (ESMAS)
@@ -519,22 +656,38 @@ class Survey(Enum):
     GEN_SOC_SURV_SOC_ID = 5024  # General Social Survey - Social Identity  // Enquête sociale générale - Identité sociale
     MON_CIV_AVIATION_SURV = 5026  # Monthly Civil Aviation Survey  // Enquête mensuelle sur l'aviation civile
     MON_SURV_OF_LG_RET = 5027  # Monthly Survey of Large Retailers  // Enquête mensuelle sur les grands détaillants
-    FIN_PERF_DATA = 5028  # Financial Performance Data  // Données sur la performance financière
+    FIN_PERF_DATA = (
+        5028  # Financial Performance Data  // Données sur la performance financière
+    )
     BAL_SHEET_OF_THE_AGRICULTURAL_SECT_AT_DEC_31 = 5029  # Balance Sheet of the Agricultural Sector at December 31  // Bilan du secteur agricole au 31 décembre
-    AGRIC_EVAL_ADDED_ACCT = 5030  # Agriculture Value Added Account  // Compte de la valeur ajoutée agricole
+    AGRIC_EVAL_ADDED_ACCT = (
+        5030  # Agriculture Value Added Account  // Compte de la valeur ajoutée agricole
+    )
     FARM_BUS_CASH_FLOWS = 5031  # Farm Business Cash Flows  // Mouvements de l'encaisse des entreprises agricoles
     COMP_AND_PERIPH_PRICE_IDX = 5032  # Computer and peripherals price indexes  // Indices des prix des ordinateurs et des périphériques
     SURV_OF_COMM_AND_INST_ENERGY_USE = 5034  # Survey of Commercial and Institutional Energy Use  // Enquête sur l'utilisation commerciale et institutionnelle d'énergie
-    VICTIM_SVC_SURV = 5035  # Victim Services Survey  // Enquête sur les services aux victimes
-    NATL_COMP_SURV = 5036  # National Compensation Survey  // Enquête nationale sur la compensation
+    VICTIM_SVC_SURV = (
+        5035  # Victim Services Survey  // Enquête sur les services aux victimes
+    )
+    NATL_COMP_SURV = (
+        5036  # National Compensation Survey  // Enquête nationale sur la compensation
+    )
     PILOT_SURV_ON_POLICE_REP_HATE_CRIMES = 5037  # Pilot Survey on Police-Reported Hate Crimes  // Enquête pilote sur les crimes haineux déclarés par la police
-    FUNC_FOOD_AND_NAT_HLTH_PROD_SURV = 5038  # Functional Foods and Natural Health Products Survey  // Enquête sur les aliments fonctionnels et les produits de santé naturels 
-    PROD_OF_POULTRY_AND_EGGS = 5039  # Production of Poultry and Eggs  // Production de volaille et d'oeufs
-    FARM_PROD_PRICE_IDX = 5040  # Farm Product Price Index  // Indice des prix des produits agricoles
+    FUNC_FOOD_AND_NAT_HLTH_PROD_SURV = 5038  # Functional Foods and Natural Health Products Survey  // Enquête sur les aliments fonctionnels et les produits de santé naturels
+    PROD_OF_POULTRY_AND_EGGS = (
+        5039  # Production of Poultry and Eggs  // Production de volaille et d'oeufs
+    )
+    FARM_PROD_PRICE_IDX = (
+        5040  # Farm Product Price Index  // Indice des prix des produits agricoles
+    )
     TELECOM_SVC_PROD_PRICE_IDX = 5041  # Telecommunications services producer price indexes  // Indices des prix à la production des services de télécommunications
     LAB_PROD_MEAS = 5042  # Labour Productivity Measures - National (Quarterly)  // Mesures de la productivité du travail - National (trimestrielles)
-    FARM_MGMT_SURV = 5044  # Farm Management Survey  // Enquête sur la gestion des fermes
-    CULT_SVC_TRADE = 5045  # Culture Services Trade  // Commerce de services de la culture
+    FARM_MGMT_SURV = (
+        5044  # Farm Management Survey  // Enquête sur la gestion des fermes
+    )
+    CULT_SVC_TRADE = (
+        5045  # Culture Services Trade  // Commerce de services de la culture
+    )
     FEED_GRAIN_PURCH_SURV = 5046  # Feed Grain Purchases Survey  // Enquête sur les achats de grains fourragers
     ANN_IND_CONS_OF_ENERGY_SURV = 5047  # Annual Industrial Consumption of Energy Survey  // Enquête annuelle sur la consommation industrielle d'énergie
     ABORIG_ENT_SURV = 5048  # Aboriginal Entrepreneurs Survey  // Enquête sur les entrepreneurs autochtones
@@ -554,8 +707,12 @@ class Survey(Enum):
     WAGE_SURV_OF_SEASONAL_WORKERS_IN_THE_HORTICULT_SECT = 5062  # Wage Survey of Seasonal Workers in the Horticultural Sector  // Enquête sur les salaires des employés saisonniers du secteur horticole
     PRICE_SURV_OF_ASSIST_DEV_FOR_PERS_WITH_DIABL = 5063  # Price Survey of Assistive Devices For Persons With Disabilities  // Enquête sur les prix des appareils fonctionnels pour les personnes ayant des incapacités
     COURIERS_AND_MESSENGERS_SVC_PRICE_IDX = 5064  # Couriers and Messengers Services Price Index  // Indice des prix des services de messageries et de services de messagers
-    SURV_OF_PRINCIPALS = 5065  # Survey of Principals  // Enquête auprès des directeurs d'école
-    FUTURE_TO_DISC_PROJ = 5066  # Future to Discover Project  // Projet « Un avenir à découvrir »
+    SURV_OF_PRINCIPALS = (
+        5065  # Survey of Principals  // Enquête auprès des directeurs d'école
+    )
+    FUTURE_TO_DISC_PROJ = (
+        5066  # Future to Discover Project  // Projet « Un avenir à découvrir »
+    )
     COMM_SURV = 5067  # Communities Survey  // Enquête sur les communautés
     COMM_SOFT_PRICE_IDX = 5068  # Commercial Software Price Index  // Indice des prix des logiciels commerciaux
     SURV_OF_PPL_LIV_ON_RESERVES = 5069  # Survey of People Living On Reserves  // Enquête auprès des personnes vivant dans les réserves
@@ -575,16 +732,26 @@ class Survey(Enum):
     CAN_FOOD_INSPECTION_AGN_EMPLOY_SURV = 5086  # Canadian Food Inspection Agency Employee Survey  // Sondage auprès des employés de l'Agence canadienne d'inspection des aliments
     CAN_REV_AGN_EMPLOY_SURV = 5087  # Canada Revenue Agency Employee Survey  // Sondage auprès des employé(e)s de l'Agence du revenu du Canada
     CULT_TRADE = 5088  # Culture Trade - Goods  // Commerce de biens de la culture
-    ANN_HEAD_OFF_SURV = 5089  # Annual Head Office Survey  // Enquête annuelle auprès des sièges sociaux
-    LANG_IND_SURV = 5090  # Language Industry Survey  // Enquête sur l'industrie de la langue
+    ANN_HEAD_OFF_SURV = (
+        5089  # Annual Head Office Survey  // Enquête annuelle auprès des sièges sociaux
+    )
+    LANG_IND_SURV = (
+        5090  # Language Industry Survey  // Enquête sur l'industrie de la langue
+    )
     SURV_OF_SVC_IND_PERIOD_PUB = 5091  # Survey of Service Industries: Periodical Publishers  // Enquête sur les industries de services: éditeurs de périodiques
-    GEOMATICS_IND_SURV = 5092  # Geomatics Industry Survey  // Enquête sur le secteur de la géomatique
+    GEOMATICS_IND_SURV = (
+        5092  # Geomatics Industry Survey  // Enquête sur le secteur de la géomatique
+    )
     SURV_OF_REG_COMP_COST = 5093  # Survey of Regulatory Compliance Cost  // Enquête sur le coût de la mise en conformité à la réglementation
-    SURV_OF_BUS_INCUBATION = 5095  # Survey of Business Incubation  // Enquête sur l'incubation d'entreprise
+    SURV_OF_BUS_INCUBATION = (
+        5095  # Survey of Business Incubation  // Enquête sur l'incubation d'entreprise
+    )
     FED_SCI_EXP_INTENT_TO_BFT_DEV_COUNTRIES = 5096  # Federal Science Expenditures Intended to Benefit Developing Countries  // Dépenses fédérales en sciences à l'intention des pays en voie de développement
     RES_AND_DEV_IN_CAN_IND_INTENT_TO_DIRECTLY_BFT_DEV_COUNTRIES = 5097  # Research and Development in Canadian Industry Intended to Directly Benefit Developing Countries  // Recherche et développement dans l'industrie canadienne à l'intention des pays en voie de développement
     SURV_ON_THE_VITALITY_OF_OFF_LANG_MIN = 5099  # Survey on the Vitality of Official-Language Minorities  // Enquête sur la vitalité des minorités de langue officielle
-    CROP_PROTECT_SURV = 5100  # Crop Protection Survey  // Enquête sur la protection des cultures
+    CROP_PROTECT_SURV = (
+        5100  # Crop Protection Survey  // Enquête sur la protection des cultures
+    )
     BC_SMOKING_SURV = 5101  # British Columbia Smoking Survey  // Enquête sur le tabagisme en Colombie-Britannique
     ELEM_SEC_EDU_SURV = 5102  # Elementary-Secondary Education Survey  // Enquête sur l'enseignement primaire et secondaire
     LAB_PROD_MEAS_PROV_AND_TERR_ANN = 5103  # Labour Productivity Measures - Provinces and Territories (Annual)  // Mesures de la productivité du travail - Provinces et territoires (annuelles)
@@ -592,15 +759,21 @@ class Survey(Enum):
     SURV_OF_PAYDAY_LOAN_SVC = 5105  # Survey of Payday Loan Services  // Enquête sur les services de prêts sur salaire
     WHOLE_SVC_PRICE_IDX = 5106  # Wholesale Services Price Index  // Indice des prix des services du commerce de gros
     LIVESTOCK_FARM_PRACT_SURV = 5107  # Livestock Farm Practices Survey  // Enquête sur les pratiques des fermes d'élevage
-    ABORIG_CHILD_S_SURV = 5108  # Aboriginal Children's Survey  // Enquête sur les enfants autochtones
+    ABORIG_CHILD_S_SURV = (
+        5108  # Aboriginal Children's Survey  // Enquête sur les enfants autochtones
+    )
     HIGHER_EDU_RES_AND_DEV_EST = 5109  # Higher Education Research and Development Estimates  // Estimation des dépenses de R-D dans le domaine de l'enseignement supérieur
     SAT_ACCT_OF_NON_PROFIT_INST_AND_VOL = 5110  # Satellite Account of Non-profit Institutions and Volunteering  // Compte satellite des organismes sans but lucratif du secteur bénévole
     HLTH_RES_AND_DEV_EXP_BY_THERA_CLASS = 5113  # Health Research and Development Expenditures by Therapeutic Class  // Dépenses de recherche et développement dans le domaine de la santé selon la catégorie thérapeutique
     CAN_SYS_OF_ENV_ECON_ACCT = 5114  # Canadian System of Environmental-Economic Accounts - Natural Resource Asset Accounts  // Système de comptabilité économique et environnementale du Canada - Comptes des actifs en ressources naturelles
     CAN_SYS_OF_ENV_ECON_ACCT_PHYS_FLOW_ACCT = 5115  # Canadian System of Environmental-Economic Accounts - Physical Flow Accounts  // Système de comptabilité économique et environnementale du Canada - Comptes des flux physiques
-    INTL_YOUTH_SURV = 5117  # International Youth Survey  // Enquête internationale auprès des jeunes
+    INTL_YOUTH_SURV = (
+        5117  # International Youth Survey  // Enquête internationale auprès des jeunes
+    )
     YOUTH_SHELTER_PILOT_SURV = 5119  # Youth Shelter Pilot Survey  // Enquête pilote sur les centres d'hébergements pour jeunes
-    IND_WATER_SURV = 5120  # Industrial Water Survey  // Enquête sur l'eau dans les industries
+    IND_WATER_SURV = (
+        5120  # Industrial Water Survey  // Enquête sur l'eau dans les industries
+    )
     BUS_COND_SURV_FOR_HER_INST_PERF_ART_AND_REC_AND_ENT_IND = 5121  # Business Conditions Survey for Heritage Institutions, Performing Arts, and Recreation and Entertainment Industries  // Enquête sur les perspectives du monde des affaires pour le secteur : des établissements du patrimoine; des arts de la scène; de divertissement et de loisirs
     SURV_OF_CAN_ATTITUDES_TOWARD_LEARN = 5122  # Survey of Canadian Attitudes toward Learning  // Enquête sur les attitudes des Canadiens à l'égard de l'apprentissage
     COMM_RENT_SVC_PRICE_IDX = 5123  # Commercial Rents Services Price Index  // Indice des prix des services des loyers commerciaux
@@ -608,12 +781,16 @@ class Survey(Enum):
     CAN_CORONER_AND_MED_EXAMINER_DATABASE = 5125  # Canadian Coroner and Medical Examiner Database  // Base canadienne de données des coroners et des médecins légistes
     POP_PROJ_ON_IMMIGR_AND_DIV_FOR_CAN_AND_ITS_REG = 5126  # Population projections on immigration and diversity for Canada and its regions  // Projections démographiques pour le Canada et ses régions sur les thèmes de l'immigration et de la diversité
     AIR_QUAL_IND = 5127  # Air Quality Indicators  // Indicateurs de la qualité de l'air
-    FRESHWATER_QUAL_IND = 5128  # Freshwater Quality Indicator  // Indicateur de la qualité de l'eau douce
+    FRESHWATER_QUAL_IND = (
+        5128  # Freshwater Quality Indicator  // Indicateur de la qualité de l'eau douce
+    )
     GHG_EMISS_IND = 5129  # Greenhouse Gas Emissions Indicator  // Indicateur des émissions de gaz à effet de serre
     PROJ_OF_THE_INDIG_POP_AND_HH_IN_CAN = 5131  # Projections of the Indigenous populations and households in Canada  // Projections des populations et des ménages autochtones au Canada
     ANN_SURV_OF_SVC_IND_SPEC_SPORT_EVENT_PROMO_ART_AND_REL_IND = 5132  # Annual Survey of Service Industries: Spectator Sports, Event Promoters, Artists and Related Industries  // Enquête annuelle sur les industries de services : sports-spectacles, promoteurs d'événements, artistes et industries connexes
     SURV_OF_FRAUD_AGAINST_BUS = 5133  # Survey of Fraud Against Businesses  // Enquête sur la fraude contre les entreprises
-    LANG_OF_WORK_SURV = 5134  # Language of Work Survey  // Sondage sur la langue de travail
+    LANG_OF_WORK_SURV = (
+        5134  # Language of Work Survey  // Sondage sur la langue de travail
+    )
     RET_SVC_PRICE_IDX = 5135  # Retail Services Price Index  // Indice des prix des services du commerce de détail
     FOR_HIRE_MOTOR_CARRIER_FREIGHT_SVC_PRICE_IDX = 5136  # For-hire Motor Carrier Freight Services Price Index  // Indice des prix des services de camionnage pour compte d'autrui
     COMM_AND_IND_MACH_AND_EQUIP_RENT_AND_LEASE_SVC_PRICE_IDX = 5137  # Commercial and Industrial Machinery and Equipment Rental and Leasing Services Price Index  // Indice des prix des services de location et de location à bail de machines et de matériel d'usage commercial et industriel
@@ -624,10 +801,14 @@ class Survey(Enum):
     EXPORT_IMPORT_PRICE_REP = 5142  # Export Import Price Report  // Rapport sur les prix des exportations et des importations
     SURV_OF_CLG_AND_INST = 5143  # Survey of Colleges and Institutes  // Enquête sur les collèges et les instituts
     LONG_AND_INTL_STUD_OF_ADULTS = 5144  # Longitudinal and International Study of Adults  // Étude longitudinale et internationale des adultes
-    AGRICULTURAL_WATER_SURV = 5145  # Agricultural Water Survey  // Enquête sur l'eau dans l'agriculture
+    AGRICULTURAL_WATER_SURV = (
+        5145  # Agricultural Water Survey  // Enquête sur l'eau dans l'agriculture
+    )
     CAN_COMM_HLTH_SURV_HLTH_AGING = 5146  # Canadian Community Health Survey - Healthy Aging  // Enquête sur la santé dans les collectivités canadiennes - Vieillissement en santé
     STAFFING_AND_NON_PARTISANSHIP_SURV = 5147  # Staffing and Non-Partisanship Survey  // Sondage sur la dotation et l'impartialité politique
-    FERTILIZER_SHIP_SURV = 5148  # Fertilizer Shipments Survey  // Enquête sur les expéditions d'engrais
+    FERTILIZER_SHIP_SURV = (
+        5148  # Fertilizer Shipments Survey  // Enquête sur les expéditions d'engrais
+    )
     BIENNIAL_DRINK_WATER_PLT_SURV = 5149  # Biennial Drinking Water Plants Survey  // Enquête biennale sur les usines de traitement de l'eau potable
     SURV_ON_FIN_OF_CO_OPER = 5150  # Survey on Financing of Co-operatives  // Enquête sur le financement des coopératives
     ACCESS_AND_SUPP_TO_EDU_AND_TRAIN_SURV = 5151  # Access and Support to Education and Training Survey  // Enquête sur l'accès et le soutien à l'éducation et la formation
@@ -637,12 +818,16 @@ class Survey(Enum):
     INVEST_IN_NEW_HOUSING_CONST = 5155  # Investment in New Housing Construction  // Investissement dans la construction de logements neufs
     AGRIC_FRAME_UPDATE_SURV = 5156  # Agriculture Frame Update Survey  // Enquête sur la mise à jour de la base de sondage agricole
     ENT_IND_DATABASE = 5157  # Entrepreneurship Indicators Database  // Base de données des indicateurs d'entrepreneuriat
-    SURV_OF_OLDER_WORKERS = 5158  # Survey of Older Workers  // Enquête sur les travailleurs âgés
+    SURV_OF_OLDER_WORKERS = (
+        5158  # Survey of Older Workers  // Enquête sur les travailleurs âgés
+    )
     CAN_FIN_CAPABILITY_SURV = 5159  # Canadian Financial Capability Survey  // Enquête canadienne sur les capacités financières
     SURV_ON_LIV_WITH_CHRON_DISEASES_IN_CAN = 5160  # Survey on Living with Chronic Diseases in Canada  // Enquête sur les personnes ayant une maladie chronique au Canada
     ON_MAT_DEPR_SURV = 5161  # Ontario Material Deprivation Survey  // Enquête sur la privation matérielle en Ontario
     NU_HOUSING_NEEDS_SURV = 5162  # Nunavut Housing Needs Survey  // Enquête sur les besoins en logements au Nunavut
-    SURV_OF_IND_PROC = 5163  # Survey of Industrial Processes  // Enquête sur les processus industriels
+    SURV_OF_IND_PROC = (
+        5163  # Survey of Industrial Processes  // Enquête sur les processus industriels
+    )
     PARKS_CAN_EMPLOY_SURV = 5164  # Parks Canada Employee Survey  // Sondage auprès des employés de Parcs Canada
     PUB_SVC_FIN_COMM_SURV = 5165  # Public Service Financial Community Survey  // Enquête sur la communauté financière de la fonction publique
     CAN_USA_BORDER_SURV = 5166  # Canada-United States Border Survey  // Enquête sur la frontière canado-américaine
@@ -653,16 +838,24 @@ class Survey(Enum):
     SURV_OF_INNOV_AND_BUS_STRAT = 5171  # Survey of Innovation and Business Strategy  // Enquête sur l'innovation et les stratégies d'entreprise
     LIFE_AFTER_SVC_SURV = 5172  # Life After Service Survey  // Enquête sur la vie après le service militaire
     CAN_CORE_PUB_INFRA_SURV = 5173  # Canada's Core Public Infrastructure Survey  // Enquête sur les infrastructures publiques essentielles du Canada
-    GOV_FIN_STAT = 5174  # Government Finance Statistics  // Statistiques de finances publiques
+    GOV_FIN_STAT = (
+        5174  # Government Finance Statistics  // Statistiques de finances publiques
+    )
     PREP_FOOD_AND_BEV_SALES_SURV = 5175  # Prepared Food and Beverage Sales Survey  // Enquête sur les ventes d'aliments et de boissons prêts à servir
     CROP_COND_ASSESS_PROG = 5177  # Crop Condition Assessment Program  // Programme d'évaluation de l'état des cultures
-    NATL_HH_SURV = 5178  # National Household Survey  // Enquête nationale auprès des ménages
-    SURV_OF_YOUNG_CANADIANS = 5179  # Survey of Young Canadians  // Enquête sur les jeunes Canadiens
+    NATL_HH_SURV = (
+        5178  # National Household Survey  // Enquête nationale auprès des ménages
+    )
+    SURV_OF_YOUNG_CANADIANS = (
+        5179  # Survey of Young Canadians  // Enquête sur les jeunes Canadiens
+    )
     WORKPLACE_SURV = 5180  # Workplace Survey  // Enquête sur le milieu de travail
     ELEC_DISP = 5181  # Electricity Disposition - Quarterly Residential Sector  // Écoulement de l'électricité - Trimestriel Secteur résidentiel
     SURV_ON_LIV_WITH_NEURO_COND_IN_CAN = 5182  # Survey on Living with Neurological Conditions in Canada  // Enquête sur les personnes ayant des problèmes neurologiques au Canada
     SURV_OF_INTEL_PROP_MGMT = 5183  # Survey of Intellectual Property Management  // Enquête sur la gestion de la propriété intellectuelle
-    PILOT_SURV_ON_TOBACCO_USE = 5184  # Pilot Survey on Tobacco Use  // Enquête pilote sur l'usage du tabac
+    PILOT_SURV_ON_TOBACCO_USE = (
+        5184  # Pilot Survey on Tobacco Use  // Enquête pilote sur l'usage du tabac
+    )
     CHILD_NATL_IMMUNIZATION_COV_SURV = 5185  # Childhood National Immunization Coverage Survey  // Enquête nationale sur la couverture vaccinale des enfants
     QTR_SURV_OF_CAP_EXP = 5186  # Quarterly Survey of Capital Expenditures - Oil and Gas Activities  // Relevé trimestriel des dépenses en immobilisations - Activités pétrolières et gazières
     SURV_OF_NEURO_COND_IN_INST_IN_CAN = 5187  # Survey of Neurological Conditions in Institutions in Canada  // Enquête sur les problèmes neurologiques dans les établissements au Canada
@@ -679,7 +872,9 @@ class Survey(Enum):
     HAZ_WASTE_MGMT_IND_SURV = 5199  # Hazardous Waste Management Industry Survey  // Enquête sur l'industrie de la gestion des déchets dangereux
     CAN_INC_SURV = 5200  # Canadian Income Survey  // Enquête canadienne sur le revenu
     COMM_NOISE_AND_HLTH_STUD = 5201  # Community Noise and Health Study  // Étude sur le bruit ambiant et la santé
-    JOB_VACANCY_STAT = 5202  # Job Vacancy Statistics  // Statistiques sur les postes vacants
+    JOB_VACANCY_STAT = (
+        5202  # Job Vacancy Statistics  // Statistiques sur les postes vacants
+    )
     LONG_TERM_CARE_FAC_SURV = 5203  # Long-term Care Facilities Survey  // Enquête sur les établissements de soins de longue durée
     SURV_ON_THE_USE_OF_PUB_MAT = 5204  # Survey on the Use of Published Material  // Enquête sur l'utilisation de documents publiés
     ON_FIRST_NAT_POINT_OF_SALE_EXEMPTION_SURV = 5205  # Ontario First Nations Point-of-Sale Exemption Survey  // Enquête sur l'exemption au point de vente accordée aux Premières Nations de l'Ontario
@@ -690,7 +885,9 @@ class Survey(Enum):
     MON_NAT_GAS_STOR_SURV = 5210  # Monthly Natural Gas Storage Survey  // Enquête mensuelle sur l'entreposage du gaz naturel
     SEC_BROKERAGE_SVC_PRICE_IDX = 5211  # Securities Brokerage Services Price Index  // Indice des prix des services de courtage de valeurs mobilières
     INFRA_CONST_PRICE_IDX = 5212  # Infrastructure Construction Price Index  // Indice des prix de la construction des infrastructures
-    RES_PROP_EVAL = 5213  # Residential Property Values  // Valeurs des propriétés résidentielles
+    RES_PROP_EVAL = (
+        5213  # Residential Property Values  // Valeurs des propriétés résidentielles
+    )
     FARM_OPER_EXP_AND_DEPR_CHARGES = 5214  # Farm Operating Expenses and Depreciation Charges  // Dépenses d'exploitation agricoles et frais d'amortissement
     MON_NAT_GAS_DIST_SURV = 5215  # Monthly Natural Gas Distribution Survey  // Enquête mensuelle sur la distribution du gaz naturel
     RES_AND_DEV_IN_THE_HIGHER_EDU_SECT = 5216  # Research and Development in the Higher Education Sector  // Recherche et développement dans le secteur de l'enseignement supérieur
@@ -703,12 +900,16 @@ class Survey(Enum):
     FREIGHT_RAIL_SVC_PRICE_IDX = 5224  # Freight Rail Services Price Index  // Indice des prix des services de transport ferroviaire de marchandises
     MODEL_BASED_PRINCIPAL_FIELD_CROP_EST = 5225  # Model-based Principal Field Crop Estimates  // Estimations modélisées des principales grandes cultures
     NU_GOV_EMPLOY_SURV = 5226  # Nunavut Government Employee Survey  // Enquête auprès des fonctionnaires du gouvernement du Nunavut
-    EVAL_OF_INVENT_CHANGE = 5227  # Value of Inventory Change  // Valeur de la variation des stocks
+    EVAL_OF_INVENT_CHANGE = (
+        5227  # Value of Inventory Change  // Valeur de la variation des stocks
+    )
     CAN_EMPLOY_EMPLOY_DYN_DATABASE = 5228  # Canadian Employer-Employee Dynamics Database  // Base de données sur la dynamique canadienne entre employeurs et employés
     DIRECT_PAYMENTS_TO_AGRIC_PROD = 5229  # Direct Payments to Agriculture Producers  // Paiements directs versés aux producteurs agricoles
     ACT_OF_FGN_MAJ_OWNER_AFFL_IN_CAN = 5230  # Activities of Foreign Majority-Owned Affiliates in Canada  // Activité au Canada des sociétés affiliées à participation majoritaire étrangère
     CAN_NATL_HLTH_SURV = 5231  # Canadian National Health Survey  // Enquête nationale canadienne sur la santé
-    NATL_TRVL_SURV = 5232  # National Travel Survey  // Enquête nationale sur les voyages
+    NATL_TRVL_SURV = (
+        5232  # National Travel Survey  // Enquête nationale sur les voyages
+    )
     CAN_HLTH_SURV_ON_CHILD_AND_YOUTH = 5233  # Canadian Health Survey on Children and Youth  // Enquête canadienne sur la santé des enfants et des jeunes
     SURV_ON_SEX_MISCOND_IN_THE_CAN_ARMED_FORCES = 5235  # Survey on Sexual Misconduct in the Canadian Armed Forces  // Sondage sur les inconduites sexuelles dans les Forces armées canadiennes
     EXPERIMENTAL_NEW_CONDO_APT_PRICE_IDX = 5236  # Experimental New Condominium Apartment Price Index  // Indice expérimental des prix des appartements en copropriété neufs
@@ -733,25 +934,37 @@ class Survey(Enum):
     STUD_ON_INTL_MONEY_TRANSPORT = 5258  # Study on International Money Transfers  // Étude sur les transferts de fonds internationaux
     CAN_ARMED_FORCES_HLTH_SURV = 5259  # Canadian Armed Forces Health Survey  // L'Enquête sur la santé dans les Forces armées canadiennes
     CAN_VICTIM_SVC_IND = 5260  # Canadian Victim Services Indicators  // Indicateurs canadiens des services aux victimes
-    VISITOR_TRVL_SURV = 5261  # Visitor Travel Survey  // L'Enquête sur les voyages des visiteurs
-    NATL_CANNABIS_SURV = 5262  # National Cannabis Survey  // Enquête nationale sur le cannabis
-    CROWDSOURCING = 5263  # Crowdsourcing - Cannabis  // Approche Participative - Cannabis
+    VISITOR_TRVL_SURV = (
+        5261  # Visitor Travel Survey  // L'Enquête sur les voyages des visiteurs
+    )
+    NATL_CANNABIS_SURV = (
+        5262  # National Cannabis Survey  // Enquête nationale sur le cannabis
+    )
+    CROWDSOURCING = (
+        5263  # Crowdsourcing - Cannabis  // Approche Participative - Cannabis
+    )
     CAN_FREIGHT_ANAL_FRAMEWORK = 5264  # Canadian Freight Analysis Framework  // Le Cadre d'analyse du fret canadien
     DGTL_ECON_SURV = 5265  # Digital Economy Survey  // Enquête sur l'économie numérique
     CAN_HLTH_SURV_ON_SENIORS = 5267  # Canadian Health Survey on Seniors  // Enquête canadienne sur la santé des aînés
     FIN_MKT_STAT_FROM_THE_TORONTO_STOCK_EX = 5268  # Financial market statistics from the Toronto Stock Exchange  // Statistiques des marchés financiers de la Bourse de Toronto
-    CAN_HOUSING_SURV = 5269  # Canadian Housing Survey  // Enquête canadienne sur le logement
+    CAN_HOUSING_SURV = (
+        5269  # Canadian Housing Survey  // Enquête canadienne sur le logement
+    )
     INDIG_PPL_SURV_NU_INUIT_SUPP = 5270  # Indigenous Peoples Survey - Nunavut Inuit Supplement  // Enquête auprès des peuples autochtones - Supplément sur les Inuit du Nunavut
     SURV_ON_HOME_HLTH_CARE_AND_REL_SVC = 5271  # Survey on Home Health Care and Related Services  // Enquête sur les soins à domicile et les services connexes
     MED_ASSIST_IN_DYING_2019_AND_2020 = 5273  # Medical Assistance in Dying, 2019 and 2020  // Aide médicale à mourir, 2019 et 2020
     THE_CAN_IDX_OF_MULTIPLE_DEPR = 5274  # The Canadian Index of Multiple Deprivation  // L'Indice canadien de défavorisation multiple
     PROD_DEL_OF_MAJ_GRAINS_CAN_AND_SEL_PROV = 5275  # Producer Deliveries of Major Grains, Canada and selected provinces  // Livraisons des producteurs des principaux grains, Canada et certaines provinces
-    AB_SPATIAL_PRICE_IDX = 5276  # Alberta Spatial Price Index  // Indice des prix spatial de l’Alberta
+    AB_SPATIAL_PRICE_IDX = (
+        5276  # Alberta Spatial Price Index  // Indice des prix spatial de l’Alberta
+    )
     SURV_ON_IND_SAFETY_IN_THE_POSTSEC_STUD_POP = 5279  # Survey on Individual Safety in the Postsecondary Student Population  // Enquête sur la sécurité individuelle au sein de la population étudiante postsecondaire
     WASTEWATER_BASED_EST_OF_DRUG_CONS = 5280  # Wastewater-based estimates of drug consumption  // Estimation de la consommation de drogues basée sur l'analyse des eaux usées
     NS_RE_CONTACT_ANAL_FILE = 5281  # Nova Scotia re-contact analytical file  // Fichier analytique sur les contacts subséquents en Nouvelle-Écosse
     CALLS_FOR_SVC_PILOT_PROJ_IN_SK = 5282  # Calls for Service Pilot Project in Saskatchewan  // Projet pilote sur les demandes de service en Saskatchewan
-    SURV_ON_MAT_HLTH = 5283  # Survey on Maternal Health  // Enquête sur la santé maternelle
+    SURV_ON_MAT_HLTH = (
+        5283  # Survey on Maternal Health  // Enquête sur la santé maternelle
+    )
     WKLY_RAIL_PERF_IND_TRANSPORT_CAN = 5284  # Weekly Rail Performance Indicators, Transport Canada  // Indicateurs de performance hebdomadaires du secteur ferroviaire, Transports Canada
     SEC_STAT = 5285  # Securities Statistics  // Statistiques sur les titres financiers
     THE_OPEN_DATABASE_OF_BLDG = 5286  # The Open Database of Buildings (ODB)  // La Base de données ouverte sur les immeubles (BDOI)
@@ -760,7 +973,9 @@ class Survey(Enum):
     CAN_ALC_AND_DRUGS_SURV = 5289  # Canadian Alcohol and Drugs Survey (CADS)  // Enquête canadienne sur l'alcool et les drogues (ECAD)
     SURV_ON_SEX_MISCOND_AT_WORK = 5290  # Survey on Sexual Misconduct at Work  // Enquête sur les inconduites sexuelles au travail
     SURV_OF_INTEL_PROP_AWARE_AND_USE = 5291  # Survey of Intellectual Property Awareness and Use  // Enquête sur la connaissance et l'utilisation de la propriété intellectuelle
-    TRANSPORT_CAN_IN_BRIEF = 5292  # Transport Canada in brief  // Transports Canada en bref
+    TRANSPORT_CAN_IN_BRIEF = (
+        5292  # Transport Canada in brief  // Transports Canada en bref
+    )
     MON_RENEWABLE_FUEL_AND_HYDROGEN_SURV = 5294  # Monthly Renewable Fuel and Hydrogen Survey (MRFHS)  // Enquête mensuelle sur les carburants renouvelables et l'hydrogène (EMCRH)
     CAN_INTL_MERCH_TRADE_BY_IND_FOR_ALL_COUNTRIES = 5295  # Canadian international merchandise trade by industry for all countries  // Commerce international de marchandises du Canada par industrie pour tous les pays
     SURV_ON_HLTH_RES_PRIO = 5296  # Survey on Health Research Priorities  // Enquête sur les priorités de recherche en santé
@@ -775,15 +990,21 @@ class Survey(Enum):
     NEW_MOTOR_VEHIC_REG_SURV = 5307  # New Motor Vehicle Registration Survey  // Enquête sur l'immatriculation des véhicules automobiles neufs
     CAN_PERSPECTIVES_SURV_SERIES = 5311  # Canadian Perspectives Survey Series (CPSS)  // Série d'enquêtes sur les perspectives canadiennes (SEPC)
     SURV_OF_EMPLOY_UNDER_FED_JURISDICTION = 5312  # Survey of Employees under Federal Jurisdiction  // Enquête auprès des employés relevant de la compétence fédérale
-    SURV_ON_QUAL_OF_EMPLOY = 5313  # Survey on Quality of Employment  // Enquête sur la qualité de l'emploi
+    SURV_ON_QUAL_OF_EMPLOY = (
+        5313  # Survey on Quality of Employment  // Enquête sur la qualité de l'emploi
+    )
     CAN_EXT_TRADE_CLASS_BY_BROAD_ECON_CAT = 5314  # Canada's external trade classified by Broad Economic Categories  // Le commerce extérieur du Canada selon la Classification par grandes catégories économiques
     SURV_ON_SAV_FOR_PERS_WITH_DIABL = 5315  # Survey on Savings for Persons with Disabilities  // Enquête sur l'épargne pour les personnes handicapées
     SURV_OF_EMPLOY_ON_WORKERS_SKILLS = 5317  # Survey of Employers on Workers' Skills  // Enquête auprès des employeurs sur les compétences du personnel
     CAN_SURV_ON_BUS_COND = 5318  # Canadian Survey on Business Conditions  // Enquête canadienne sur la situation des entreprises
-    COVID_19_EPIDEM_REP = 5319  # COVID-19 epidemiological reports  // Rapports épidémiologiques COVID-19
+    COVID_19_EPIDEM_REP = (
+        5319  # COVID-19 epidemiological reports  // Rapports épidémiologiques COVID-19
+    )
     IMPACTS_OF_THE_COVID_19_PANDEMIC_ON_POSTSEC_STUD = 5320  # Impacts of the COVID-19 pandemic on postsecondary students (ICPPS)  // Répercussions de la pandémie de COVID-19 sur les étudiants du niveau postsecondaire (RPCENP)
     IMPACTS_OF_COVID_19_ON_CANADIANS_DATA_COLLECTION_SERIES = 5323  # Impacts of COVID-19 on Canadians: Data Collection Series  // Répercussions de la COVID-19 sur les Canadiens : série de collecte de données
-    WKLY_AIRCRAFT_MVMT = 5325  # Weekly Aircraft Movements  // Mouvements d'aéronefs hebdomadaires
+    WKLY_AIRCRAFT_MVMT = (
+        5325  # Weekly Aircraft Movements  // Mouvements d'aéronefs hebdomadaires
+    )
     PULSE_SURV_ON_COVID_19_AND_ITS_IMPACTS_ON_PUB_SVC_EMPLOY = 5326  #  Pulse Survey on COVID-19 and its Impacts on Public Service Employees  // Sondage éclair sur la COVID-19 et ses répercussions sur les fonctionnaires fédéraux
     SURV_OF_THE_CAN_EMERG_BUS_ACCT = 5327  # Survey of the Canada Emergency Business Account  // Enquête sur le Compte d’urgence pour les entreprises canadiennes
     IMPACTS_OF_COVID_19_ON_CAN_VICTIM_SVC = 5328  # Impacts of COVID-19 on Canadian Victim Services  // Répercussions de la COVID-19 sur les services aux victimes au Canada
@@ -803,17 +1024,23 @@ class Survey(Enum):
     SURV_ON_ACCESSIBILITY_IN_FED_SECT_ORG = 5345  # Survey on Accessibility in Federal Sector Organizations (SAFSO)  // l'Enquête sur l’accessibilité dans les organisations du secteur public (EAOSP)
     SURV_ON_ACCESS_TO_HLTH_CARE_AND_PHARM_DURING_THE_PANDEMIC = 5346  # Survey on Access to Health Care and Pharmaceuticals During the Pandemic  // Enquête sur l'accès aux soins de santé et aux produits pharmaceutiques pendant la pandémie
     COVID_19_VACC_COV_SURV = 5347  # COVID-19 Vaccination Coverage Survey  // Enquête sur la couverture vaccinale contre la COVID-19
-    HOUSE_OF_COMMONS_CAN = 5348  # House of Commons Canada  // Chambre des Communes Canada
+    HOUSE_OF_COMMONS_CAN = (
+        5348  # House of Commons Canada  // Chambre des Communes Canada
+    )
     NORTHERN_CAN_INET_USE_SURV = 5349  # Northern Canada Internet Use Survey (NCIUS)  // Enquête sur l'utilisation d'Internet dans le Nord canadien (EUINC)
     EXEC_WORK_AND_HLTH_SURV = 5350  # Executive Work and Health Survey (EWHS)  // Sondage sur le travail et la santé des cadres supérieurs (STSCS)
     BAND_GOV_MGMT_SYS = 5351  # Band Governance Management System (5351)  // Système d'information sur l'administration des bandes (5351)
-    PORT_OF_CAN_SOC = 5352  # Portrait of Canadian Society  // Portrait de la société canadienne
+    PORT_OF_CAN_SOC = (
+        5352  # Portrait of Canadian Society  // Portrait de la société canadienne
+    )
     AGRIC_AND_AGRI_FOOD_LAB_STAT_PROG = 5353  # Agriculture and Agri-Food Labour Statistics Program  // Programme de statistiques sur la main-d'œuvre agricole et agroalimentaire
     CAN_SOC_SURV = 5354  # Canadian Social Survey  // Enquête sociale canadienne
     SURV_ON_THE_OFF_LANG_MIN_POP = 5355  # Survey on the Official Language Minority Population (SOLMP)  // Enquête sur la population de langue officielle en situation minoritaire (EPLOSM)
     EMERG_AND_RECOV_BFT = 5356  # Emergency and recovery benefits  // Prestations d'urgence et de la relance économique
     CAN_TOUR_ACT_TRACK = 5357  # Canadian Tourism Activity Tracker  // Outil de suivi de l'activité touristique canadienne
-    NATL_CULT_IND = 5360  # National Culture Indicators  // Indicateurs nationaux de la culture
+    NATL_CULT_IND = (
+        5360  # National Culture Indicators  // Indicateurs nationaux de la culture
+    )
     SIMCOE_MUSKOKA_OPIOID_OVERDOSE_COHORT = 5361  # Simcoe Muskoka Opioid Overdose Cohort  // Cohorte de Simcoe Muskoka formée de victimes d’une surdose d'opioïdes
     SURV_ON_HLTH_CARE_WORKERS_EXP_DURING_THE_PANDEMIC = 5362  # Survey on Health Care Workers' Experiences During the Pandemic  // Enquête sur les expériences vécues par les travailleurs de la santé pendant la pandémie
     PROV_AND_TERR_CULT_IND = 5364  # Provincial and Territorial Culture Indicators  // Indicateurs provinciaux et territoriaux de la culture
@@ -825,7 +1052,9 @@ class Survey(Enum):
     CAN_SURV_ON_EARLY_LEARN_AND_CHILD_CARE = 5371  # Canadian Survey on Early Learning and Child Care (CSELCC)  // Enquête canadienne sur l'apprentissage et la garde des jeunes enfants (ECAGJE)
     COVID_19_RESTRIC_IDX_DLY = 5373  # Covid 19 Restrictions indexes; Daily  // Indices des restrictions liées à la COVID-19 (indices quotidiens)
     COVID_19_RESTRIC_IDX_MON = 5374  # Covid 19 Restrictions indexes; Monthly  // Indices des restrictions liées à la COVID-19 (indices menuelles)
-    LAB_MKT_IND = 5375  # Labour Market Indicators  // Indicateurs sur le marché du travail
+    LAB_MKT_IND = (
+        5375  # Labour Market Indicators  // Indicateurs sur le marché du travail
+    )
     CAN_SYS_OF_ENV_ECON_ACCT_ENV_TAX_STAT = 5376  # Canadian System of Environmental-Economic Accounts - Environmental tax statistics  // Système de comptabilité économique et environnementale du Canada - Statistiques sur les taxes environnementales
     LAB_MKT_AND_SOCIO_ECON_IND = 5377  # Labour Market and Socio-economic Indicators  // Indicateurs socio-économiques et du marché du travail
     SURV_SERIES_ON_PPL_AND_THEIR_COMM = 5378  # Survey Series on People and their Communities  // Série d'enquêtes sur les gens et leurs communautés
@@ -852,18 +1081,26 @@ class Survey(Enum):
     SURV_SERIES_ON_FIRST_NAT_PPL_METIS_AND_INUIT = 5410  # Survey Series on First Nations People, Métis and Inuit  // Série d'enquêtes auprès des membres des Premières Nations, des Métis et des Inuit
     INDIG_PPL_ECON_ACCT = 5412  # Indigenous Peoples Economic Account (IPEA)  // Compte économique des peuples autochtones (CEPA)
     RES_RENO_PRICE_IDX = 5413  # Residential Renovation Price Index  // Indice des prix de la rénovation résidentielle
-    SURV_SERIES_ON_ACCESSIBILITY = 5414  # Survey Series on Accessibility  // Série d'enquêtes sur l'accessibilité
+    SURV_SERIES_ON_ACCESSIBILITY = (
+        5414  # Survey Series on Accessibility  // Série d'enquêtes sur l'accessibilité
+    )
     PAN_CAN_EDU_IND_PROG = 5420  # Pan-Canadian Education Indicators Program (PCEIP)  // Programme d'indicateurs pancanadiens de l'éducation (PIPCE)
     CAN_CEN_HLTH_AND_ENV_COHORT = 5422  # Canadian Census Health and Environment Cohort  // Cohorte santé et environnement du Recensement canadien
     INFRA_ECON_ACCT = 5423  # Infrastructure economic account  // Compte économique de l'infrastructure
-    QTR_RENT_STAT = 5427  # Quarterly Rent Statistics  // Statistiques trimestrielles sur les loyers
+    QTR_RENT_STAT = (
+        5427  # Quarterly Rent Statistics  // Statistiques trimestrielles sur les loyers
+    )
     HOUSING_AND_TRANSPORT_COSTS_IDX = 5430  # Housing and Transportation Costs Index  // Indice des coûts de logement et de transport
     CAN_IDX_OF_SOC_RESIL_AND_VUL_TO_NAT_HAZ = 5431  # Canadian indexes of social resilience and vulnerability to natural hazards  // Indices canadiens de résilience et de vulnérabilité sociales aux dangers naturels
     RURAL_CAN_TRADE_PROFILES = 5437  # Rural Canada Trade Profiles (RCTP)  // Profils du commerce au Canada Rural (PCCR)
     CAN_CYCLING_NET_DATABASE = 5440  # Canadian Cycling Network Database  // Base de données sur les réseaux cyclables du Canada
     CAN_PUB_TRANSPORT_NET_DATABASE = 5441  # Canadian Public Transit Network Database (CPTND)  // La Base de données sur les réseaux de transport en commun du Canada (BDRTCC)
-    THE_OPEN_DATABASE_OF_GREENHOUSES = 5443  # The Open Database of Greenhouses  // Base de données ouverte des serres
-    LINKABLE_FILE_ENV = 6000  # Linkable File Environment  // Environnement de fichiers couplables
+    THE_OPEN_DATABASE_OF_GREENHOUSES = (
+        5443  # The Open Database of Greenhouses  // Base de données ouverte des serres
+    )
+    LINKABLE_FILE_ENV = (
+        6000  # Linkable File Environment  // Environnement de fichiers couplables
+    )
     BANK_OF_CAN = 7502  # Bank of Canada  // Banque du Canada
     DANGEROUS_GOODS_ACCIDENT_INFO_SYS = 7503  # Dangerous Goods Accident Information System - Transport Canada  // Système d'information sur les accidents concernant les marchandises dangereuses - Transports Canada
     EMPLOY_AND_SOC_DEV_CAN = 7504  # Employment and Social Development Canada  // Emploi et Développement Canada
@@ -871,7 +1108,9 @@ class Survey(Enum):
     STOCK_EX_STAT = 7506  # Stock Exchange Statistics  // Statistiques de la bourse
     CAN_LIFE_AND_HLTH_INS_ASSOC_INC = 7507  # Canadian Life and Health Insurance Association Inc.  // Association canadienne des compagnies d'assurances de personnes inc.
     OFF_OF_THE_SUPERINTENDENT_OF_BANKRUPTCY_CAN = 7508  # Office of the Superintendent of Bankruptcy Canada  // Bureau du surintendant des faillites Canada
-    PUB_HLTH_AGN_OF_CAN = 7509  # Public Health Agency of Canada  // Agence de santé publique du Canada
+    PUB_HLTH_AGN_OF_CAN = (
+        7509  # Public Health Agency of Canada  // Agence de santé publique du Canada
+    )
     SCOTIAMCLEOD = 7510  # ScotiaMcLeod  // ScotiaMcLeod
     CAN_VEHIC_MFG_ASSOC = 7512  # Canadian Vehicle Manufacturers' Association  // Association canadienne des constructeurs de véhicules
     DEPT_OF_FIN = 7514  # Department of Finance  // Ministère des Finances
@@ -895,4 +1134,3 @@ class Survey(Enum):
     CEN_OF_AGRIC_ENV_GEO_AGGREGATIONS_OF_CEN_FARM_UNITS = 8012  # Census of Agriculture: Environmental Geography Aggregations of Census Farm Units  // Recensement de l'agriculture : agrégations des fermes de recensement aux géographies environnementales
     LONG_EMPLOY_ANAL_PROG = 8013  # Longitudinal Employment Analysis Program  // Programme d'analyse longitudinale de l'emploi
     RESP_SEL_STUD_FOR_THE_GEN_SOC_SURV = 8014  # Respondent Selection Study for the General Social Survey  // Étude sur la sélection des répondants pour l'Enquête sociale générale
-

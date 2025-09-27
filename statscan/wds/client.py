@@ -17,13 +17,13 @@ from .models.series import Series, ChangedSeriesData
 
 # Conservative timeout configuration for reliable operation in all environments
 DEFAULT_WDS_TIMEOUT = Timeout(
-    connect=30.0,   # Connection timeout - increased for reliability
-    read=90.0,      # Read timeout - generous for large responses
-    write=30.0,     # Write timeout - increased for reliability
-    pool=15.0       # Pool timeout - increased for connection management
+    connect=30.0,  # Connection timeout - increased for reliability
+    read=90.0,  # Read timeout - generous for large responses
+    write=30.0,  # Write timeout - increased for reliability
+    pool=15.0,  # Pool timeout - increased for connection management
 )
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 logger = logging.getLogger(__name__)
 
@@ -31,22 +31,23 @@ logger = logging.getLogger(__name__)
 class Client(AsyncClient):
     """
     Statistics Canada Web Data Service (WDS) API Client.
-    
+
     📚 OFFICIAL DOCUMENTATION: https://www.statcan.gc.ca/en/developers/wds/user-guide
-    
+
     This client implements all WDS API endpoints as specified in the official
     Statistics Canada WDS User Guide. All method implementations follow the
     exact specifications and parameter requirements documented in the guide.
-    
+
     For API usage, endpoints, rate limits, and troubleshooting, always refer
     to the official WDS User Guide at the URL above.
     """
 
     def __init__(
-        self, 
-        base_url: str = WDS_URL, 
-        timeout: TimeoutTypes = DEFAULT_WDS_TIMEOUT, 
-        **kwargs):
+        self,
+        base_url: str = WDS_URL,
+        timeout: TimeoutTypes = DEFAULT_WDS_TIMEOUT,
+        **kwargs,
+    ):
         """
         Initialize the WDS client (subclass of httpx.AsyncClient).
 
@@ -78,7 +79,7 @@ class Client(AsyncClient):
             set[str]: A set of code set names that were updated."""
         self.codesets = await self.get_code_sets()
         return set(self.codesets.keys())
-  
+
     async def update_cubes(self) -> set[int]:
         """
         Update the internal cube manager with the latest cubes from the WDS API.
@@ -91,10 +92,12 @@ class Client(AsyncClient):
                 self.cube_manager.add_cube(cube)
                 new_cubes.add(cube.productId)
             except CubeExistsError:
-                logger.debug(f"Cube with product ID {cube.productId} already exists. Replacing.")
+                logger.debug(
+                    f"Cube with product ID {cube.productId} already exists. Replacing."
+                )
                 self.cube_manager.add_cube(cube, replace=True)
         return new_cubes
-    
+
     async def update_cube(self, product_id: int) -> Cube:
         """
         Update or add a specific cube by its product ID.
@@ -103,7 +106,7 @@ class Client(AsyncClient):
             product_id (int): The product ID of the cube to update or add.
         """
         cube = await self.get_cube_metadata(product_id=product_id)
-        self.cube_manager.add_cube(cube,replace=True)
+        self.cube_manager.add_cube(cube, replace=True)
         return cube
 
     async def update(self, codesets: bool = True, cubes: bool = True) -> None:
@@ -114,14 +117,13 @@ class Client(AsyncClient):
     def cubes(self) -> dict[int, Cube]:
         return self.cube_manager.cubes
 
-
     async def get_changed_series_list(self) -> list[Series]:
         coro = WDSRequests.get_changed_series_list(client=self)
         data = await WDSRequests.execute_and_extract(coro, model=Series)
         if not isinstance(data, list):
             raise TypeError(f"Expected data to be a list of {Series}. Got {type(data)}")
         return data
-        
+
     async def get_changed_cube_list(self, change_date: datetime | date) -> list[Cube]:
         """
         Get a list of changed cubes for a specific date.
@@ -131,10 +133,7 @@ class Client(AsyncClient):
         Returns:
             list[Cube]: A list of changed cubes.
         """
-        coro = WDSRequests.get_changed_cube_list(
-            client=self, 
-            change_date=change_date
-        )
+        coro = WDSRequests.get_changed_cube_list(client=self, change_date=change_date)
         data = await WDSRequests.execute_and_extract(coro, model=Cube)
         if not isinstance(data, list):
             raise TypeError(f"Expected data to be a {list} of {Cube}. Got {type(data)}")
@@ -149,17 +148,16 @@ class Client(AsyncClient):
         Returns:
             Cube: The Cube object populated with the returned metadata.
         """
-        coro = WDSRequests.get_cube_metadata(
-            client=self, 
-            product_id=product_id
-        )
+        coro = WDSRequests.get_cube_metadata(client=self, product_id=product_id)
         data = await WDSRequests.execute_and_extract(coro, model=Cube)
         if isinstance(data, list) and len(data) == 1:
             return data[0]
         elif isinstance(data, Cube):
             return data
         else:
-            raise TypeError(f"Expected data to be a {Cube} or list[{Cube}] with one item. Got {type(data)}")
+            raise TypeError(
+                f"Expected data to be a {Cube} or list[{Cube}] with one item. Got {type(data)}"
+            )
 
     async def get_series_info_from_cube_pid_coord(
         self, product_id: int, coordinate: str | Coordinate
@@ -173,8 +171,7 @@ class Client(AsyncClient):
             Series: The Series object populated with the returned information.
         """
         coro = WDSRequests.get_series_info_from_cube_pid_coord(
-            client=self, 
-            product_id=product_id, coordinate=str(coordinate)
+            client=self, product_id=product_id, coordinate=str(coordinate)
         )
         data = await WDSRequests.execute_and_extract(coro, model=Series)
         if not isinstance(data, Series):
@@ -191,10 +188,7 @@ class Client(AsyncClient):
         Returns:
             Series: The Series object populated with the returned information.
         """
-        coro = WDSRequests.get_series_info_from_vector(
-            client=self, 
-            vector_id=vector_id
-        )
+        coro = WDSRequests.get_series_info_from_vector(client=self, vector_id=vector_id)
         data = await WDSRequests.execute_and_extract(coro, model=Series)
         if not isinstance(data, Series):
             raise TypeError(f"Expected data to be a Series. Got {type(data)}")
@@ -240,8 +234,7 @@ class Client(AsyncClient):
             Series: The Series object populated with the returned information.
         """
         coro = WDSRequests.get_changed_series_data_from_cube_pid_coord(
-            client=self, 
-            product_id=product_id, coordinate=str(coordinate)
+            client=self, product_id=product_id, coordinate=str(coordinate)
         )
         data = await WDSRequests.execute_and_extract(coro, model=Series)
         if not isinstance(data, Series):
@@ -259,8 +252,7 @@ class Client(AsyncClient):
             Series: The Series object populated with the returned information.
         """
         coro = WDSRequests.get_changed_series_data_from_vector(
-            client=self,
-            vector_id=vector_id
+            client=self, vector_id=vector_id
         )
         data = await WDSRequests.execute_and_extract(coro, model=Series)
         if not isinstance(data, Series):
@@ -282,21 +274,22 @@ class Client(AsyncClient):
             ChangedSeriesData: The ChangedSeriesData object populated with the returned information.
         """
         coro = WDSRequests.get_data_from_cube_pid_coord_and_latest_n_periods(
-            client=self, 
-            product_id=product_id, 
-            coordinate=str(coordinate), 
-            n=n
+            client=self, product_id=product_id, coordinate=str(coordinate), n=n
         )
         data = await WDSRequests.execute_and_extract(coro, model=ChangedSeriesData)
-        
+
         # Handle list response (API returns list with one item)
         if isinstance(data, list):
             if len(data) != 1:
-                raise ValueError(f"Expected exactly one ChangedSeriesData object, got {len(data)}")
+                raise ValueError(
+                    f"Expected exactly one ChangedSeriesData object, got {len(data)}"
+                )
             data = data[0]
-        
+
         if not isinstance(data, ChangedSeriesData):
-            raise TypeError(f"Expected data to be a {ChangedSeriesData}. Got {type(data)}")
+            raise TypeError(
+                f"Expected data to be a {ChangedSeriesData}. Got {type(data)}"
+            )
         return data
 
     async def get_data_from_vector_and_latest_n_periods(
@@ -313,9 +306,7 @@ class Client(AsyncClient):
             Series: The Series object populated with the returned information.
         """
         coro = WDSRequests.get_data_from_vector_and_latest_n_periods(
-            client=self, 
-            vector_id=vector_id, 
-            n=n
+            client=self, vector_id=vector_id, n=n
         )
         data = await WDSRequests.execute_and_extract(coro, model=Series)
         if not isinstance(data, Series):
@@ -337,14 +328,13 @@ class Client(AsyncClient):
             dict: A dictionary mapping vector IDs to their corresponding Series objects.
         """
         coro = WDSRequests.get_bulk_vector_data_by_range(
-            client=self, 
-            vector_ids=vector_ids, 
-            start=start, 
-            end=end
+            client=self, vector_ids=vector_ids, start=start, end=end
         )
         data = await WDSRequests.execute_and_extract(coro, model=Vector)
         if not isinstance(data, list):
-            raise TypeError(f"Expected data to be a {list} of {Vector}. Got {type(data)}")
+            raise TypeError(
+                f"Expected data to be a {list} of {Vector}. Got {type(data)}"
+            )
         return data
 
     async def get_data_from_vector_by_reference_period_range(
@@ -362,14 +352,13 @@ class Client(AsyncClient):
             list[Vector]: A list of Vector objects populated with the returned information.
         """
         coro = WDSRequests.get_data_from_vector_by_reference_period_range(
-            client=self, 
-            vector_ids=vector_ids, 
-            start=start, 
-            end=end
+            client=self, vector_ids=vector_ids, start=start, end=end
         )
         data = await WDSRequests.execute_and_extract(coro, model=Vector)
         if not isinstance(data, list):
-            raise TypeError(f"Expected data to be a {list} of {Vector}. Got {type(data)}")
+            raise TypeError(
+                f"Expected data to be a {list} of {Vector}. Got {type(data)}"
+            )
         return data
 
     # TODO: implement get_full_table_download_[csv,sdmx]
@@ -387,27 +376,29 @@ class Client(AsyncClient):
         return data
 
     # =======================
-    # Geographic & Population Methods 
+    # Geographic & Population Methods
     # =======================
 
-    async def get_population(self, identifier: str | int, product_id: int = 98100002) -> int | None:
+    async def get_population(
+        self, identifier: str | int, product_id: int = 98100002
+    ) -> int | None:
         """
         Get population for a location by name or member ID.
-        
+
         Args:
             identifier: Location name (str) or member ID (int)
             product_id: Product ID for population data (default: 98100002)
-            
+
         Returns:
             Population count or None if not found
-            
+
         Example:
             client = Client()
             population = await client.get_population("Saugeen Shores")
             population = await client.get_population(2314)  # by member ID
         """
         from .geographic import GeographicEntity
-        
+
         if isinstance(identifier, int):
             # Direct member ID lookup
             entity = await GeographicEntity.from_member_id(identifier, self)
@@ -418,57 +409,60 @@ class Client(AsyncClient):
                 cube = await self.get_cube_metadata(product_id)
                 if not cube.dimensions:
                     return None
-                    
+
                 # Find geographic dimension and search members
                 geo_dim = None
                 for dim in cube.dimensions:
-                    if 'geography' in dim.dimensionNameEn.lower() or 'geographic' in dim.dimensionNameEn.lower():
+                    if (
+                        "geography" in dim.dimensionNameEn.lower()
+                        or "geographic" in dim.dimensionNameEn.lower()
+                    ):
                         geo_dim = dim
                         break
-                
+
                 if not geo_dim or not geo_dim.member:
                     return None
-                
+
                 # Search for matching member
                 search_lower = identifier.lower()
                 for member in geo_dim.member:
                     if search_lower in member.memberNameEn.lower():
-                        entity = await GeographicEntity.from_member_id(member.memberId, self)
+                        entity = await GeographicEntity.from_member_id(
+                            member.memberId, self
+                        )
                         return entity.population if entity else None
-                        
+
             except Exception:
                 pass
-                
+
         return None
 
     async def get_location_data(
-        self, 
-        identifier: str | int, 
-        format: str = "population", 
+        self,
+        identifier: str | int,
+        format: str = "population",
         periods: int = 1,
-        product_id: int = 98100002
+        product_id: int = 98100002,
     ) -> Any:
         """
         Get location data in various formats.
-        
+
         Args:
             identifier: Location name or member ID
             format: 'population', 'array', 'dataframe', or 'entity'
             periods: Number of time periods to retrieve
             product_id: Product ID to query
-            
+
         Returns:
             Data in the requested format
-            
+
         Example:
             client = Client()
             pop = await client.get_location_data("Saugeen Shores", "population")
             df = await client.get_location_data(2314, "dataframe", periods=5)
         """
         from .geographic import GeographicEntity
-        import pandas as pd
-        import numpy as np
-        
+
         # Get the geographic entity
         if isinstance(identifier, int):
             entity = await GeographicEntity.from_member_id(identifier, self)
@@ -482,12 +476,21 @@ class Client(AsyncClient):
             try:
                 cube = await self.get_cube_metadata(product_id)
                 if cube.dimensions:
-                    geo_dim = next((d for d in cube.dimensions if 'geography' in d.dimensionNameEn.lower()), None)
+                    geo_dim = next(
+                        (
+                            d
+                            for d in cube.dimensions
+                            if "geography" in d.dimensionNameEn.lower()
+                        ),
+                        None,
+                    )
                     if geo_dim and geo_dim.member:
                         search_lower = identifier.lower()
                         for member in geo_dim.member:
                             if search_lower in member.memberNameEn.lower():
-                                entity = await GeographicEntity.from_member_id(member.memberId, self)
+                                entity = await GeographicEntity.from_member_id(
+                                    member.memberId, self
+                                )
                                 break
                         else:
                             return None
@@ -497,10 +500,10 @@ class Client(AsyncClient):
                     return None
             except Exception:
                 return None
-                
+
         if not entity:
             return None
-            
+
         if format == "population":
             return entity.population
         elif format == "array":
@@ -512,17 +515,19 @@ class Client(AsyncClient):
         else:
             raise ValueError(f"Unknown format: {format}")
 
-    async def search_locations(self, query: str, product_id: int = 98100002) -> list[tuple[int, str]]:
+    async def search_locations(
+        self, query: str, product_id: int = 98100002
+    ) -> list[tuple[int, str]]:
         """
         Search for locations by partial name match.
-        
+
         Args:
             query: Search query string
             product_id: Product ID to search in (default: 98100002)
-            
+
         Returns:
             List of (member_id, name) tuples
-            
+
         Example:
             client = Client()
             results = await client.search_locations("saugeen")
@@ -532,20 +537,27 @@ class Client(AsyncClient):
             cube = await self.get_cube_metadata(product_id)
             if not cube.dimensions:
                 return []
-                
+
             # Find geographic dimension
-            geo_dim = next((d for d in cube.dimensions if 'geography' in d.dimensionNameEn.lower()), None)
+            geo_dim = next(
+                (
+                    d
+                    for d in cube.dimensions
+                    if "geography" in d.dimensionNameEn.lower()
+                ),
+                None,
+            )
             if not geo_dim or not geo_dim.member:
                 return []
-            
+
             # Search members
             query_lower = query.lower()
             matches = []
             for member in geo_dim.member:
                 if query_lower in member.memberNameEn.lower():
                     matches.append((member.memberId, member.memberNameEn))
-                    
+
             return matches[:10]  # Limit results
-            
+
         except Exception:
             return []

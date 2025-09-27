@@ -1,0 +1,194 @@
+# ======================================================================================
+#  Reusable Quality Assurance/Quality Control (QA/QC) Workflow
+# ======================================================================================
+#
+# Description:
+#   This workflow provides a centralized and reusable set of quality assurance checks.
+#   It is designed to be called by other workflows (e.g., Pull Request validation,
+#   release builds) to ensure consistent code quality and standards across the project.
+#
+# Features:
+#   - Runs on multiple Python versions.
+#   - Installs dependencies from requirements files.
+#   - Performs linting with Ruff (with optional auto-fixing).
+#   - Conducts static type checking with MyPy.
+#   - Scans for security vulnerabilities with Bandit and pip-audit.
+#   - Executes the test suite with Pytest.
+#   - Can build the package and upload artifacts.
+#
+# Inputs:
+#   - `build`: Set to `true` to build the package (for releases).
+#   - `lint`: Set to `true` to run the linter.
+#   - `lint-fix`: Set to `true` to enable linter auto-fixes.
+#   - `test`: Set to `true` to run tests.
+#   - `typing`: Set to `true` to run static type checking.
+#   - `dependency-audit`: Set to `true` to audit dependencies.
+#   - `security`: Set to `true` to run static security analysis.
+#
+# Outputs:
+#   - `lint_fix_changes`: Returns `true` if the linter made changes to the code.
+#
+# ======================================================================================
+
+name: "Reusable QA/QC"
+
+on:
+  workflow_call:
+    inputs:
+      build:
+        description: 'Whether to run build steps (true for releases, false for PRs)'
+        required: false
+        type: boolean
+        default: false
+      lint:
+        description: 'Run lint checks (Ruff)?'
+        required: false
+        type: boolean
+        default: true
+      lint-fix:
+        description: 'Allow lint tool to attempt auto-fixes (e.g., Ruff)'
+        required: false
+        type: boolean
+        default: false
+      test:
+        description: 'Run test suite?'
+        required: false
+        type: boolean
+        default: true
+      typing:
+        description: 'Run static typing checks (MyPy)?'
+        required: false
+        type: boolean
+        default: false
+      dependency-audit:
+        description: 'Run dependency supply-chain audit (pip-audit)?'
+        required: false
+        type: boolean
+        default: false
+      security:
+        description: 'Run static security scan with Bandit?'
+        required: false
+        type: boolean
+        default: false
+    outputs:
+      lint_fix_changes:
+        description: 'Whether the lint tool made changes (true/false)'
+        value: ${{ jobs.qa-checks.outputs.lint_fix_changes }}
+
+jobs:
+  # ======================================================================================
+  # Job: Quality Assurance Checks
+  # ======================================================================================
+  qa-checks:
+    name: "QA Checks on Python ${{ matrix.python-version }}"
+    runs-on: ubuntu-latest
+    outputs:
+      lint_fix_changes: ${{ steps.lint-fix.outputs.lint_changed }}
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      # ----------------------------------------------------------------------------------
+      # Step: Set up Environment
+      # ----------------------------------------------------------------------------------
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Checkout repository (shallow)
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Discover Package Name
+        id: discover-package
+        uses: ./.github/actions/discover_package
+        with:
+          workdir: ${{ github.workspace }}
+
+      # ----------------------------------------------------------------------------------
+      # Step: Install Dependencies
+      # ----------------------------------------------------------------------------------
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # All dev dependencies, including tools and test libraries, are in requirements.dev.txt
+          # This includes an editable install of the package itself.
+          echo "Attempting to install dev requirements with PEP 517 build isolation..."
+          python -m pip install -r requirements.dev.txt || {
+            echo "Install with build isolation failed. Retrying with --no-build-isolation."
+            # This fallback is for projects where build-time metadata needs access to
+            # runtime dependencies, which is not ideal but can be a necessary workaround.
+            python -m pip install --no-build-isolation -r requirements.dev.txt
+          }
+
+      # ----------------------------------------------------------------------------------
+      # Step: Linting and Formatting
+      # ----------------------------------------------------------------------------------
+      - name: Lint and Auto-fix (Ruff)
+        id: lint-fix
+        if: ${{ inputs['lint-fix'] }}
+        run: |
+          # Run ruff with auto-fix enabled.
+          ruff check --fix .
+          # Stage changes and check if the git tree is dirty.
+          git add -A
+          if ! git diff --cached --quiet; then
+            echo "lint_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "lint_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit Lint Fixes
+        if: ${{ steps.lint-fix.outputs.lint_changed == 'true' }}
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: apply automated linting fixes"
+          commit_options: "--no-verify" # Prevents running pre-commit hooks on the commit
+
+      - name: Lint Check (Ruff)
+        # Run the linter in check-only mode if linting is enabled AND auto-fixing was not.
+        # If auto-fixing ran, a failure would have already occurred on unfixable errors.
+        if: ${{ inputs.lint && !inputs['lint-fix'] }}
+        run: ruff check .
+
+      # ----------------------------------------------------------------------------------
+      # Step: Static Analysis and Security
+      # ----------------------------------------------------------------------------------
+      - name: Type Check (MyPy)
+        if: ${{ inputs.typing }}
+        run: mypy ${{ steps.discover-package.outputs.package_name }}
+
+      - name: Dependency Audit (pip-audit)
+        if: ${{ inputs['dependency-audit'] }}
+        run: pip-audit --fail-on-vuln
+
+      - name: Security Scan (Bandit)
+        if: ${{ inputs.security }}
+        run: bandit -r ${{ steps.discover-package.outputs.package_name }} -lll
+
+      # ----------------------------------------------------------------------------------
+      # Step: Testing
+      # ----------------------------------------------------------------------------------
+      - name: Run Tests (pytest)
+        if: ${{ inputs.test }}
+        run: python -m pytest tests/ -v --tb=short
+
+      # ----------------------------------------------------------------------------------
+      # Step: Build and Upload
+      # ----------------------------------------------------------------------------------
+      - name: Build Package
+        if: ${{ inputs.build }}
+        run: |
+          python -m pip install --upgrade build
+          python -m build --no-isolation
+
+      - name: Upload Build Artifacts
+        if: ${{ inputs.build }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-package-${{ matrix.python-version }}
+          path: dist/*

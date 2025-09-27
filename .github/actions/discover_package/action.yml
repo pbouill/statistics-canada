@@ -1,0 +1,37 @@
+name: Discover Package
+
+description: |
+  Reusable composite action that inspects the repository to discover package
+  metadata. The action runs the bundled `discover_package.py` script and
+  exposes fields from VersionInfo such as package name, version, build time,
+  and the current commit hash. Consumers can use these outputs in downstream
+  workflows (linting, build, release orchestration).
+
+inputs:
+  workdir:
+    description: 'The working directory, which should be the root of the package.'
+    required: true
+
+outputs:
+  package_name:
+    description: 'The name of the Python package.'
+    value: ${{ steps.discover.outputs.package_name }}
+  version:
+    description: 'The package version as reported by VersionInfo.'
+    value: ${{ steps.discover.outputs.version }}
+  build_time:
+    description: 'Build timestamp returned by VersionInfo (if available).'
+    value: ${{ steps.discover.outputs.build_time }}
+  commit:
+    description: 'Commit hash associated with the current source tree.'
+    value: ${{ steps.discover.outputs.commit }}
+
+runs:
+  using: "composite"
+  steps:
+    - id: discover
+      name: Run package discovery script
+      shell: bash
+      working-directory: ${{ inputs.workdir }}
+      run: |
+        python -u "${{ github.action_path }}/discover_package.py"

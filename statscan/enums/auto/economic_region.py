@@ -12,7 +12,10 @@ class EconomicRegion(ProvinceGeoCode):
     Value: ERUID_REIDU
     Prefix: PREABBR_PRAABBREV
     """
-    ALTA_ATHABASCA_GRANDE_PRAIRIE_PEACE_RIVER = 4870  # Athabasca--Grande Prairie--Peace River
+
+    ALTA_ATHABASCA_GRANDE_PRAIRIE_PEACE_RIVER = (
+        4870  # Athabasca--Grande Prairie--Peace River
+    )
     ALTA_BANFF_JASPER_ROCKY_MOUNTAIN_HOUSE = 4840  # Banff--Jasper--Rocky Mountain House
     ALTA_CALGARY = 4830  # Calgary
     ALTA_CAMROSE_DRUMHELLER = 4820  # Camrose--Drumheller
@@ -22,12 +25,16 @@ class EconomicRegion(ProvinceGeoCode):
     ALTA_WOOD_BUFFALO_COLD_LAKE = 4880  # Wood Buffalo--Cold Lake
     BC_CARIBOO = 5950  # Cariboo
     BC_KOOTENAY = 5940  # Kootenay
-    BC_LOWER_MAINLAND_SOUTHWEST = 5920  # Lower Mainland--Southwest / Lower Mainland--Sud-ouest
+    BC_LOWER_MAINLAND_SOUTHWEST = (
+        5920  # Lower Mainland--Southwest / Lower Mainland--Sud-ouest
+    )
     BC_NECHAKO = 5970  # Nechako
     BC_NORTHEAST = 5980  # Northeast / Nord-est
     BC_NORTH_COAST = 5960  # North Coast / Côte-nord
     BC_THOMPSON_OKANAGAN = 5930  # Thompson--Okanagan
-    BC_VANCOUVER_ISLAND_AND_COAST = 5910  # Vancouver Island and Coast / Île de Vancouver et la côte
+    BC_VANCOUVER_ISLAND_AND_COAST = (
+        5910  # Vancouver Island and Coast / Île de Vancouver et la côte
+    )
     MAN_INTERLAKE = 4660  # Interlake
     MAN_NORTH = 4680  # North / Nord
     MAN_NORTH_CENTRAL = 4640  # North Central / Centre nord
@@ -43,7 +50,9 @@ class EconomicRegion(ProvinceGeoCode):
     NB_SAINT_JOHN_ST_STEPHEN = 1330  # Saint John--St. Stephen
     NL_AVALON_PENINSULA = 1010  # Avalon Peninsula
     NL_NOTRE_DAME_CENTRAL_BONAVISTA_BAY = 1040  # Notre Dame--Central Bonavista Bay
-    NL_SOUTH_COAST_BURIN_PENINSULA = 1020  # South Coast--Burin Peninsula / Côte-sud--Burin Peninsula
+    NL_SOUTH_COAST_BURIN_PENINSULA = (
+        1020  # South Coast--Burin Peninsula / Côte-sud--Burin Peninsula
+    )
     NL_WEST_COAST_NORTHERN_PENINSULA_LABRADOR = 1030  # West Coast--Northern Peninsula--Labrador / Côte-ouest--Northern Peninsula--Labrador
     NS_ANNAPOLIS_VALLEY = 1230  # Annapolis Valley
     NS_CAPE_BRETON = 1210  # Cape Breton
@@ -51,7 +60,9 @@ class EconomicRegion(ProvinceGeoCode):
     NS_NORTH_SHORE = 1220  # North Shore / Côte-nord
     NS_SOUTHERN = 1240  # Southern / Sud
     NVT_NUNAVUT = 6210  # Nunavut
-    NWT_NORTHWEST_TERRITORIES = 6110  # Northwest Territories / Territoires du Nord-Ouest
+    NWT_NORTHWEST_TERRITORIES = (
+        6110  # Northwest Territories / Territoires du Nord-Ouest
+    )
     ONT_HAMILTON_NIAGARA_PENINSULA = 3550  # Hamilton--Niagara Peninsula
     ONT_KINGSTON_PEMBROKE = 3515  # Kingston--Pembroke
     ONT_KITCHENER_WATERLOO_BARRIE = 3540  # Kitchener--Waterloo--Barrie
