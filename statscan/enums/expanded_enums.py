@@ -254,7 +254,7 @@ class ExpandedStatisticType(Enum):
 class DimensionValueDiscovery:
     """Utility class to help discover and catalog new dimension values from API responses."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.discovered_values: dict[str, set[str]] = {}
 
     def analyze_response(self, response_data: dict) -> None:

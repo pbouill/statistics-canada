@@ -2,32 +2,7 @@ from mcp.server.fastmcp import FastMCP
 from httpx import Response
 import inspect
 
-
-try:
-    from build_info import BuildInfo
-except ImportError as ie:
-    PKG_INFO_MODULE_NAME = "package_info"
-    import sys
-    import importlib.util
-    from pathlib import Path
-
-    # Import VersionInfo using relative path
-    _current_dir = Path(__file__).parent
-    _package_info_path = _current_dir.parent / f"{PKG_INFO_MODULE_NAME}.py"
-    _spec = importlib.util.spec_from_file_location(
-        PKG_INFO_MODULE_NAME, _package_info_path
-    )
-    if _spec is None:
-        raise ImportError(
-            f"Could not create a module spec for {PKG_INFO_MODULE_NAME} at {_package_info_path}"
-        ) from ie
-    _package_info = importlib.util.module_from_spec(_spec)
-    sys.modules[PKG_INFO_MODULE_NAME] = _package_info
-    if _spec.loader is None:
-        raise ImportError(f"Could not load {_package_info_path}") from ie
-    _spec.loader.exec_module(_package_info)
-    BuildInfo = _package_info.VersionInfo  # type: ignore[misc]
-
+import statscan
 from statscan.wds.requests import WDSRequests
 from statscan.wds.client import Client
 
@@ -45,9 +20,8 @@ async def get_codes() -> dict:
 
 
 @mcp.resource("resource://version")
-def get_version() -> dict:
-    vi = BuildInfo.from_version_file()
-    return vi.to_dict()
+def get_version() -> str:
+    return statscan.__version__
 
 
 @mcp.resource("wds://requests")

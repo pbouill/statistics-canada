@@ -359,7 +359,7 @@ if __name__ == "__main__":
         logger.error(msg)
         parser.error(msg)
         raise SystemExit(2)
-    
+
     parser.add_argument(
         "-l",
         "--log-level",
@@ -399,14 +399,14 @@ if __name__ == "__main__":
         "-c",
         "--commit",
         type=str,
-        help="The commit hash to include in the version file."
+        help="The commit hash to include in the version file.",
     )
     create_group.add_argument(
         "-t",
         "--build-time",
         type=datetime.fromisoformat,
-        help="The build time to include in the version file."
-    )   
+        help="The build time (iso-8601 format) to include in the version file.",
+    )
     create_group.add_argument(
         "--dry-run",
         action="store_true",
@@ -433,7 +433,19 @@ if __name__ == "__main__":
         dest="version_file",
         type=str,
         default=DEFAULT_VERSION_FILE_NAME,
-        help=f"Version file name (default: {DEFAULT_VERSION_FILE_NAME}.",
+        help=f"Version file name (default: {DEFAULT_VERSION_FILE_NAME}).",
+    )
+    gen_grp.add_argument(
+        "-p",
+        "--property",
+        type=str,
+        choices=[
+            'version',
+            'commit',
+            'branch',
+            'build_time'
+        ],
+        help="Only the specified property will be returned, otherwise the full JSON object is returned.",
     )
 
     args = parser.parse_args()
@@ -457,7 +469,7 @@ if __name__ == "__main__":
         args.read = True
 
     if args.version_string:  # quick exit if all we need is a new version string
-        print(get_version_str(()))
+        print(get_version_str(args.build_time))
         sys.exit(0)
 
     else:
@@ -465,7 +477,7 @@ if __name__ == "__main__":
         if not repo_path.exists() or not repo_path.is_dir():
             raise_log_parser_error(f"Invalid repository path: {repo_path}")
         logger.debug(f"Using repository path: {repo_path}")
-            
+
         version_file: Path = repo_path / args.version_file
         logger.info(f"Using version file path: {version_file}")
 
@@ -495,8 +507,14 @@ if __name__ == "__main__":
             if args.dry_run:
                 logger.info(f"Dry run: would update version file at: {version_file}")
             else:
-                fp = bi.update_version_file(version_file=version_file)
-                logger.info(f"Updated version file at: {fp}")
-        print(bi.to_json())
+                if bi.update_version_file(version_file=version_file):
+                    logger.info(f"Updated version file at: {version_file}")
+                else:
+                    logger.info(f"No update needed for version file at: {version_file}")
+
+        if args.property:
+            print(str(getattr(bi, args.property)))
+        else:
+            print(bi.to_json())
 
         sys.exit(0)

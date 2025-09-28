@@ -7,6 +7,7 @@ from statscan.wds.client import Client
 from statscan.wds.models.cube import Cube
 
 from tools.enum_writer import AbstractEnumWriter, EnumEntry, InvalidEnumValueError
+from tools.word_tracker import get_word_tracker
 
 
 logger = logging.getLogger(__name__)
@@ -111,8 +112,6 @@ class ProductIdEnumWriter(AbstractEnumWriter):
         # Update tracking settings
         self.track_words = track_words
         if track_words:
-            from tools.cli.word_tracker import get_word_tracker
-
             self.word_tracker = get_word_tracker()
         else:
             self.word_tracker = None

@@ -38,7 +38,7 @@ class CubeStructure:
 class WDSStructureDiscovery:
     """Tool for discovering WDS coordinate structures and creating enums."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.client = Client()
         self.discovered_cubes: dict[int, CubeStructure] = {}
         self.common_dimensions: dict[str, set[str]] = defaultdict(set)
@@ -263,7 +263,7 @@ from enum import Enum
 
     async def save_discovery_results(
         self, filename: str = "wds_structure_discovery.json"
-    ):
+    ) -> None:
         """Save discovery results to JSON file."""
 
         # Convert to serializable format
@@ -298,7 +298,7 @@ from enum import Enum
         print(f"📁 Discovery results saved to {filename}")
 
 
-async def main():
+async def main() -> None:
     """Run WDS structure discovery."""
 
     print("🔍 WDS Structure Discovery Tool")

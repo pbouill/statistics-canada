@@ -6,7 +6,8 @@ This script validates the abbreviations.py file for quality and consistency.
 
 import sys
 import argparse
-from pathlib import Path
+
+from tools.abbreviations import DEFAULT_ABBREVIATIONS
 
 
 def validate_abbreviations(check_only=False, qa_mode=False):
@@ -20,10 +21,6 @@ def validate_abbreviations(check_only=False, qa_mode=False):
         3: Critical errors (file not found, import failures)
     """
     try:
-        # Try to import the abbreviations module
-        sys.path.insert(0, str(Path(__file__).parent))
-        from abbreviations import DEFAULT_ABBREVIATIONS
-
         # Basic validation - check if the dictionary is properly structured
         if not isinstance(DEFAULT_ABBREVIATIONS, dict):
             if qa_mode:
@@ -58,10 +55,6 @@ def validate_abbreviations(check_only=False, qa_mode=False):
 
         return 0
 
-    except ImportError as e:
-        if qa_mode:
-            print(f"💥 Failed to import abbreviations module: {e}")
-        return 3
     except Exception as e:
         if qa_mode:
             print(f"💥 Critical error during validation: {e}")

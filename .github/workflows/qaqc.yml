@@ -35,11 +35,6 @@ name: "Reusable QA/QC"
 on:
   workflow_call:
     inputs:
-      build:
-        description: 'Whether to run build steps (true for releases, false for PRs)'
-        required: false
-        type: boolean
-        default: false
       lint:
         description: 'Run lint checks (Ruff)?'
         required: false
@@ -103,11 +98,6 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Discover Package Name
-        id: discover-package
-        uses: ./.github/actions/discover_package
-        with:
-          workdir: ${{ github.workspace }}
 
       # ----------------------------------------------------------------------------------
       # Step: Install Dependencies
@@ -115,15 +105,7 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          # All dev dependencies, including tools and test libraries, are in requirements.dev.txt
-          # This includes an editable install of the package itself.
-          echo "Attempting to install dev requirements with PEP 517 build isolation..."
-          python -m pip install -r requirements.dev.txt || {
-            echo "Install with build isolation failed. Retrying with --no-build-isolation."
-            # This fallback is for projects where build-time metadata needs access to
-            # runtime dependencies, which is not ideal but can be a necessary workaround.
-            python -m pip install --no-build-isolation -r requirements.dev.txt
-          }
+          python -m pip install -r requirements.dev.txt
 
       # ----------------------------------------------------------------------------------
       # Step: Linting and Formatting
@@ -160,15 +142,23 @@ jobs:
       # ----------------------------------------------------------------------------------
       - name: Type Check (MyPy)
         if: ${{ inputs.typing }}
-        run: mypy ${{ steps.discover-package.outputs.package_name }}
+        run: mypy --show-error-codes --show-traceback .
 
       - name: Dependency Audit (pip-audit)
         if: ${{ inputs['dependency-audit'] }}
-        run: pip-audit --fail-on-vuln
+        run: pip-audit -v -r requirements.txt
 
       - name: Security Scan (Bandit)
+        id: bandit-scan
         if: ${{ inputs.security }}
-        run: bandit -r ${{ steps.discover-package.outputs.package_name }} -lll
+        run: bandit -r . -lll -o bandit-report.json -f json
+
+      - name: Upload Bandit Report
+        if: ${{ inputs.security }}
+        uses: actions/upload-artifact@v4
+        with:
+          path: bandit-report.json
+          name: bandit-report-${{ matrix.python-version }}.json
 
       # ----------------------------------------------------------------------------------
       # Step: Testing
@@ -176,19 +166,3 @@ jobs:
       - name: Run Tests (pytest)
         if: ${{ inputs.test }}
         run: python -m pytest tests/ -v --tb=short
-
-      # ----------------------------------------------------------------------------------
-      # Step: Build and Upload
-      # ----------------------------------------------------------------------------------
-      - name: Build Package
-        if: ${{ inputs.build }}
-        run: |
-          python -m pip install --upgrade build
-          python -m build --no-isolation
-
-      - name: Upload Build Artifacts
-        if: ${{ inputs.build }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: python-package-${{ matrix.python-version }}
-          path: dist/*

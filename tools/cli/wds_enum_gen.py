@@ -8,8 +8,8 @@ import asyncio
 import sys
 from pathlib import Path
 import argparse
-from tools.wds_productid_enum_gen import ProductIdEnumWriter
-from tools.wds_code_enum_gen import CodeSetEnumWriter
+from tools.cli.wds_productid_enum_gen import ProductIdEnumWriter
+from tools.cli.wds_code_enum_gen import CodeSetEnumWriter
 from tools.word_tracker import get_word_tracker, reset_word_tracker
 from statscan.util.log import configure_logging
 

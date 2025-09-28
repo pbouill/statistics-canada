@@ -38,11 +38,10 @@ class Series(Base):
                 return value
         return None
 
-    def get_values_by_order(self) -> list[Value]:
-        """Get values sorted by their order property."""
-        ordered = [v for v in self.values if v.order is not None]
-        # mypy expects the key to return a comparable (not Optional), so we filter None above
-        return sorted(ordered, key=lambda x: x.order)
+    # def get_values_by_order(self) -> list[Value]:
+    #     """Get values sorted by their order property."""
+    #     values_
+    #     s = sorted([v for v in self.values if v.order is not None], key=lambda x: x.order)  # type: ignore[arg-type]
 
     @property
     def has_ordered_values(self) -> bool:
