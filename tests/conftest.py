@@ -6,8 +6,15 @@ that support raw response data and specialized data extraction.
 """
 
 import pytest
-from unittest.mock import patch
 from httpx import Timeout
+
+from statscan.wds.client import Client as WDSClient
+from tests.data_store import WDSDataPaths, SESSION_DATA_SAVED_ATTR
+from tests.wds.test_requests import (
+    TestCodeSets,
+    TestCubesListLite,
+    TestCubeMeta,
+)
 
 
 def pytest_addoption(parser):
@@ -16,19 +23,16 @@ def pytest_addoption(parser):
         "--no-mock",
         action="store_true",
         default=False,
-        help="Disable mocking and run network tests instead"
+        help="Disable mocking and run network tests instead",
     )
-
-from statscan.wds.client import Client as WDSClient
-from tests.data_store import WDSDataPaths, SESSION_DATA_SAVED_ATTR
-from tests.wds.test_requests import TestCodeSets, TestCubesListLite, TestCubeMeta
 
 
 TRACKED_TESTS = {
-    TestCodeSets.test_get_codesets.__name__:  WDSDataPaths.CODESETS.name,
+    TestCodeSets.test_get_codesets.__name__: WDSDataPaths.CODESETS.name,
     TestCubesListLite.test_get_cubeslistlite.__name__: WDSDataPaths.CUBESLIST_LITE.name,
     TestCubeMeta.test_get_cubemetadata.__name__: WDSDataPaths.CUBEMETA.name,
 }
+
 
 def pytest_collection_modifyitems(config, items: list[pytest.Item]):
     """
@@ -38,13 +42,13 @@ def pytest_collection_modifyitems(config, items: list[pytest.Item]):
     # Separate network tests from others
     network_tests = []
     other_tests = []
-    
+
     for item in items:
         if item.get_closest_marker("network"):
             network_tests.append(item)
         else:
             other_tests.append(item)
-    
+
     # Reorder: network tests first, then others
     items[:] = network_tests + other_tests
 
@@ -56,7 +60,9 @@ def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo):
     """
     if call.when == "call":
         if data_path_name := TRACKED_TESTS.get(item.name):
-            if not isinstance(sd := getattr(item.session, SESSION_DATA_SAVED_ATTR, None), dict):
+            if not isinstance(
+                sd := getattr(item.session, SESSION_DATA_SAVED_ATTR, None), dict
+            ):
                 sd = {}
                 setattr(item.session, SESSION_DATA_SAVED_ATTR, sd)
             sd[data_path_name] = (item.name, call.excinfo)
@@ -70,13 +76,14 @@ def wds_client() -> WDSClient:
     """
     # Relaxed timeout configuration for test reliability in CI environments
     test_timeout = Timeout(
-        connect=60.0,   # Extended connection timeout for slow CI environments
-        read=180.0,     # Extended read timeout for large API responses
-        write=60.0,     # Extended write timeout for reliability
-        pool=30.0       # Extended pool timeout for connection management
+        connect=60.0,  # Extended connection timeout for slow CI environments
+        read=180.0,  # Extended read timeout for large API responses
+        write=60.0,  # Extended write timeout for reliability
+        pool=30.0,  # Extended pool timeout for connection management
     )
-    
+
     return WDSClient(timeout=test_timeout)
+
 
 @pytest.fixture(scope="session")
 def codesets_data(request: pytest.FixtureRequest) -> dict:

@@ -50,7 +50,9 @@ class CubeManager:
         """
         if cube.productId in self.product_ids:
             if not replace:
-                raise CubeExistsError(f"Cube with product ID {cube.productId} already exists. Cannot add {cube}")
+                raise CubeExistsError(
+                    f"Cube with product ID {cube.productId} already exists. Cannot add {cube}"
+                )
             else:
                 return self.update_cube(cube)
         else:

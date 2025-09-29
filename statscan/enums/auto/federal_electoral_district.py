@@ -12,6 +12,7 @@ class FederalElectoralDistrict(ProvinceGeoCode):
     Value: FEDUID_CEFIDU
     Prefix: PREABBR_PRAABBREV
     """
+
     ALTA_BANFF_AIRDRIE = 48001  # Banff--Airdrie
     ALTA_BATTLE_RIVER_CROWFOOT = 48002  # Battle River--Crowfoot
     ALTA_BOW_RIVER = 48003  # Bow River
@@ -50,7 +51,9 @@ class FederalElectoralDistrict(ProvinceGeoCode):
     BC_BURNABY_NORTH_SEYMOUR = 59002  # Burnaby North--Seymour / Burnaby-Nord--Seymour
     BC_BURNABY_SOUTH = 59003  # Burnaby South / Burnaby-Sud
     BC_CARIBOO_PRINCE_GEORGE = 59004  # Cariboo--Prince George
-    BC_CENTRAL_OKANAGAN_SIMILKAMEEN_NICOLA = 59005  # Central Okanagan--Similkameen--Nicola
+    BC_CENTRAL_OKANAGAN_SIMILKAMEEN_NICOLA = (
+        59005  # Central Okanagan--Similkameen--Nicola
+    )
     BC_CHILLIWACK_HOPE = 59006  # Chilliwack--Hope
     BC_CLOVERDALE_LANGLEY_CITY = 59007  # Cloverdale--Langley City
     BC_COQUITLAM_PORT_COQUITLAM = 59008  # Coquitlam--Port Coquitlam
@@ -71,13 +74,21 @@ class FederalElectoralDistrict(ProvinceGeoCode):
     BC_NORTH_VANCOUVER = 59021  # North Vancouver
     BC_PITT_MEADOWS_MAPLE_RIDGE = 59022  # Pitt Meadows--Maple Ridge
     BC_PORT_MOODY_COQUITLAM = 59023  # Port Moody--Coquitlam
-    BC_PRINCE_GEORGE_PEACE_RIVER_NORTHERN_ROCKIES = 59024  # Prince George--Peace River--Northern Rockies
+    BC_PRINCE_GEORGE_PEACE_RIVER_NORTHERN_ROCKIES = (
+        59024  # Prince George--Peace River--Northern Rockies
+    )
     BC_RICHMOND_CENTRE = 59025  # Richmond Centre / Richmond-Centre
     BC_SAANICH_GULF_ISLANDS = 59027  # Saanich--Gulf Islands
     BC_SKEENA_BULKLEY_VALLEY = 59028  # Skeena--Bulkley Valley
-    BC_SOUTH_OKANAGAN_WEST_KOOTENAY = 59029  # South Okanagan--West Kootenay / Okanagan-Sud--Kootenay-Ouest
-    BC_SOUTH_SURREY_WHITE_ROCK = 59030  # South Surrey--White Rock / Surrey-Sud--White Rock
-    BC_STEVESTON_RICHMOND_EAST = 59031  # Steveston--Richmond East / Steveston--Richmond-Est
+    BC_SOUTH_OKANAGAN_WEST_KOOTENAY = (
+        59029  # South Okanagan--West Kootenay / Okanagan-Sud--Kootenay-Ouest
+    )
+    BC_SOUTH_SURREY_WHITE_ROCK = (
+        59030  # South Surrey--White Rock / Surrey-Sud--White Rock
+    )
+    BC_STEVESTON_RICHMOND_EAST = (
+        59031  # Steveston--Richmond East / Steveston--Richmond-Est
+    )
     BC_SURREY_CENTRE = 59032  # Surrey Centre / Surrey-Centre
     BC_SURREY_NEWTON = 59033  # Surrey--Newton
     BC_VANCOUVER_CENTRE = 59034  # Vancouver Centre / Vancouver-Centre
@@ -87,16 +98,22 @@ class FederalElectoralDistrict(ProvinceGeoCode):
     BC_VANCOUVER_QUADRA = 59039  # Vancouver Quadra
     BC_VANCOUVER_SOUTH = 59040  # Vancouver South / Vancouver-Sud
     BC_VICTORIA = 59041  # Victoria
-    BC_WEST_VANCOUVER_SUNSHINE_COAST_SEA_TO_SKY_COUNTRY = 59042  # West Vancouver--Sunshine Coast--Sea to Sky Country
+    BC_WEST_VANCOUVER_SUNSHINE_COAST_SEA_TO_SKY_COUNTRY = (
+        59042  # West Vancouver--Sunshine Coast--Sea to Sky Country
+    )
     MAN_BRANDON_SOURIS = 46001  # Brandon--Souris
-    MAN_CHARLESWOOD_ST_JAMES_ASSINIBOIA_HEADINGLEY = 46002  # Charleswood--St. James--Assiniboia--Headingley
+    MAN_CHARLESWOOD_ST_JAMES_ASSINIBOIA_HEADINGLEY = (
+        46002  # Charleswood--St. James--Assiniboia--Headingley
+    )
     MAN_CHURCHILL_KEEWATINOOK_ASKI = 46003  # Churchill--Keewatinook Aski
     MAN_DAUPHIN_SWAN_RIVER_NEEPAWA = 46004  # Dauphin--Swan River--Neepawa
     MAN_ELMWOOD_TRANSCONA = 46005  # Elmwood--Transcona
     MAN_KILDONAN_ST_PAUL = 46006  # Kildonan--St. Paul
     MAN_PORTAGE_LISGAR = 46007  # Portage--Lisgar
     MAN_PROVENCHER = 46008  # Provencher
-    MAN_SAINT_BONIFACE_SAINT_VITAL = 46009  # Saint Boniface--Saint Vital / Saint-Boniface--Saint-Vital
+    MAN_SAINT_BONIFACE_SAINT_VITAL = (
+        46009  # Saint Boniface--Saint Vital / Saint-Boniface--Saint-Vital
+    )
     MAN_SELKIRK_INTERLAKE_EASTMAN = 46010  # Selkirk--Interlake--Eastman
     MAN_WINNIPEG_CENTRE = 46011  # Winnipeg Centre / Winnipeg-Centre
     MAN_WINNIPEG_NORTH = 46012  # Winnipeg North / Winnipeg-Nord
@@ -109,7 +126,9 @@ class FederalElectoralDistrict(ProvinceGeoCode):
     NB_MADAWASKA_RESTIGOUCHE = 13005  # Madawaska--Restigouche
     NB_MIRAMICHI_GRAND_LAKE = 13006  # Miramichi--Grand Lake
     NB_MONCTON_RIVERVIEW_DIEPPE = 13007  # Moncton--Riverview--Dieppe
-    NB_NEW_BRUNSWICK_SOUTHWEST = 13008  # New Brunswick Southwest / Nouveau-Brunswick-Sud-Ouest
+    NB_NEW_BRUNSWICK_SOUTHWEST = (
+        13008  # New Brunswick Southwest / Nouveau-Brunswick-Sud-Ouest
+    )
     NB_SAINT_JOHN_ROTHESAY = 13009  # Saint John--Rothesay
     NB_TOBIQUE_MACTAQUAC = 13010  # Tobique--Mactaquac
     NL_AVALON = 10001  # Avalon
@@ -118,7 +137,9 @@ class FederalElectoralDistrict(ProvinceGeoCode):
     NL_LABRADOR = 10004  # Labrador
     NL_LONG_RANGE_MOUNTAINS = 10005  # Long Range Mountains
     NL_ST_JOHNS_EAST = 10006  # St. John's East / St. John's-Est
-    NL_ST_JOHNS_SOUTH_MOUNT_PEARL = 10007  # St. John's South--Mount Pearl / St. John's-Sud--Mount Pearl
+    NL_ST_JOHNS_SOUTH_MOUNT_PEARL = (
+        10007  # St. John's South--Mount Pearl / St. John's-Sud--Mount Pearl
+    )
     NS_CAPE_BRETON_CANSO = 12001  # Cape Breton--Canso
     NS_CENTRAL_NOVA = 12002  # Central Nova / Nova-Centre
     NS_CUMBERLAND_COLCHESTER = 12003  # Cumberland--Colchester
@@ -131,7 +152,9 @@ class FederalElectoralDistrict(ProvinceGeoCode):
     NS_SYDNEY_VICTORIA = 12010  # Sydney--Victoria
     NS_WEST_NOVA = 12011  # West Nova / Nova-Ouest
     NVT_NUNAVUT = 62001  # Nunavut
-    NWT_NORTHWEST_TERRITORIES = 61001  # Northwest Territories / Territoires du Nord-Ouest
+    NWT_NORTHWEST_TERRITORIES = (
+        61001  # Northwest Territories / Territoires du Nord-Ouest
+    )
     ONT_AJAX = 35001  # Ajax
     ONT_ALGOMA_MANITOULIN_KAPUSKASING = 35002  # Algoma--Manitoulin--Kapuskasing
     ONT_AURORA_OAK_RIDGES_RICHMOND_HILL = 35003  # Aurora--Oak Ridges--Richmond Hill
@@ -168,19 +191,27 @@ class FederalElectoralDistrict(ProvinceGeoCode):
     ONT_HALDIMAND_NORFOLK = 35033  # Haldimand--Norfolk
     ONT_HALIBURTON_KAWARTHA_LAKES_BROCK = 35034  # Haliburton--Kawartha Lakes--Brock
     ONT_HAMILTON_CENTRE = 35035  # Hamilton Centre / Hamilton-Centre
-    ONT_HAMILTON_EAST_STONEY_CREEK = 35036  # Hamilton East--Stoney Creek / Hamilton-Est--Stoney Creek
+    ONT_HAMILTON_EAST_STONEY_CREEK = (
+        35036  # Hamilton East--Stoney Creek / Hamilton-Est--Stoney Creek
+    )
     ONT_HAMILTON_MOUNTAIN = 35037  # Hamilton Mountain
-    ONT_HAMILTON_WEST_ANCASTER_DUNDAS = 35038  # Hamilton West--Ancaster--Dundas / Hamilton-Ouest--Ancaster--Dundas
+    ONT_HAMILTON_WEST_ANCASTER_DUNDAS = (
+        35038  # Hamilton West--Ancaster--Dundas / Hamilton-Ouest--Ancaster--Dundas
+    )
     ONT_HASTINGS_LENNOX_AND_ADDINGTON = 35039  # Hastings--Lennox and Addington
     ONT_HUMBER_RIVER_BLACK_CREEK = 35121  # Humber River--Black Creek
     ONT_HURON_BRUCE = 35040  # Huron--Bruce
     ONT_KANATA_CARLETON = 35041  # Kanata--Carleton
     ONT_KENORA = 35042  # Kenora
-    ONT_KINGSTON_AND_THE_ISLANDS = 35044  # Kingston and the Islands / Kingston et les Îles
+    ONT_KINGSTON_AND_THE_ISLANDS = (
+        35044  # Kingston and the Islands / Kingston et les Îles
+    )
     ONT_KING_VAUGHAN = 35043  # King--Vaughan
     ONT_KITCHENER_CENTRE = 35045  # Kitchener Centre / Kitchener-Centre
     ONT_KITCHENER_CONESTOGA = 35046  # Kitchener--Conestoga
-    ONT_KITCHENER_SOUTH_HESPELER = 35047  # Kitchener South--Hespeler / Kitchener-Sud--Hespeler
+    ONT_KITCHENER_SOUTH_HESPELER = (
+        35047  # Kitchener South--Hespeler / Kitchener-Sud--Hespeler
+    )
     ONT_LAMBTON_KENT_MIDDLESEX = 35048  # Lambton--Kent--Middlesex
     ONT_LANARK_FRONTENAC_KINGSTON = 35049  # Lanark--Frontenac--Kingston
     ONT_LEEDS_GRENVILLE_THOUSAND_ISLANDS_AND_RIDEAU_LAKES = 35050  # Leeds--Grenville--Thousand Islands and Rideau Lakes / Leeds--Grenville--Thousand Islands et Rideau Lakes
@@ -192,7 +223,9 @@ class FederalElectoralDistrict(ProvinceGeoCode):
     ONT_MARKHAM_UNIONVILLE = 35056  # Markham--Unionville
     ONT_MILTON = 35057  # Milton
     ONT_MISSISSAUGA_CENTRE = 35058  # Mississauga Centre / Mississauga-Centre
-    ONT_MISSISSAUGA_EAST_COOKSVILLE = 35059  # Mississauga East--Cooksville / Mississauga-Est--Cooksville
+    ONT_MISSISSAUGA_EAST_COOKSVILLE = (
+        35059  # Mississauga East--Cooksville / Mississauga-Est--Cooksville
+    )
     ONT_MISSISSAUGA_ERIN_MILLS = 35060  # Mississauga--Erin Mills
     ONT_MISSISSAUGA_LAKESHORE = 35061  # Mississauga--Lakeshore
     ONT_MISSISSAUGA_MALTON = 35062  # Mississauga--Malton
@@ -204,9 +237,13 @@ class FederalElectoralDistrict(ProvinceGeoCode):
     ONT_NIAGARA_WEST = 35068  # Niagara West / Niagara-Ouest
     ONT_NICKEL_BELT = 35069  # Nickel Belt
     ONT_NIPISSING_TIMISKAMING = 35070  # Nipissing--Timiskaming
-    ONT_NORTHUMBERLAND_PETERBOROUGH_SOUTH = 35071  # Northumberland--Peterborough South / Northumberland--Peterborough-Sud
+    ONT_NORTHUMBERLAND_PETERBOROUGH_SOUTH = (
+        35071  # Northumberland--Peterborough South / Northumberland--Peterborough-Sud
+    )
     ONT_OAKVILLE = 35072  # Oakville
-    ONT_OAKVILLE_NORTH_BURLINGTON = 35073  # Oakville North--Burlington / Oakville-Nord--Burlington
+    ONT_OAKVILLE_NORTH_BURLINGTON = (
+        35073  # Oakville North--Burlington / Oakville-Nord--Burlington
+    )
     ONT_ORLÉANS = 35076  # Orléans
     ONT_OSHAWA = 35074  # Oshawa
     ONT_OTTAWA_CENTRE = 35075  # Ottawa Centre / Ottawa-Centre
@@ -237,7 +274,9 @@ class FederalElectoralDistrict(ProvinceGeoCode):
     ONT_SUDBURY = 35103  # Sudbury
     ONT_THORNHILL = 35104  # Thornhill
     ONT_THUNDER_BAY_RAINY_RIVER = 35105  # Thunder Bay--Rainy River
-    ONT_THUNDER_BAY_SUPERIOR_NORTH = 35106  # Thunder Bay--Superior North / Thunder Bay--Supérieur-Nord
+    ONT_THUNDER_BAY_SUPERIOR_NORTH = (
+        35106  # Thunder Bay--Superior North / Thunder Bay--Supérieur-Nord
+    )
     ONT_TIMMINS_JAMES_BAY = 35107  # Timmins--James Bay / Timmins--Baie James
     ONT_TORONTO_CENTRE = 35108  # Toronto Centre / Toronto-Centre
     ONT_TORONTO_DANFORTH = 35109  # Toronto--Danforth
@@ -262,9 +301,13 @@ class FederalElectoralDistrict(ProvinceGeoCode):
     QUE_AHUNTSIC_CARTIERVILLE = 24003  # Ahuntsic-Cartierville
     QUE_ALFRED_PELLAN = 24004  # Alfred-Pellan
     QUE_ARGENTEUIL_LA_PETITE_NATION = 24005  # Argenteuil--La Petite-Nation
-    QUE_AVIGNON_LA_MITIS_MATANE_MATAPÉDIA = 24006  # Avignon--La Mitis--Matane--Matapédia
+    QUE_AVIGNON_LA_MITIS_MATANE_MATAPÉDIA = (
+        24006  # Avignon--La Mitis--Matane--Matapédia
+    )
     QUE_BEAUCE = 24007  # Beauce
-    QUE_BEAUPORT_CÔTE_DE_BEAUPRÉ_ÎLE_DORLÉANS_CHARLEVOIX = 24020  # Beauport--Côte-de-Beaupré--Île dOrléans--Charlevoix
+    QUE_BEAUPORT_CÔTE_DE_BEAUPRÉ_ÎLE_DORLÉANS_CHARLEVOIX = (
+        24020  # Beauport--Côte-de-Beaupré--Île dOrléans--Charlevoix
+    )
     QUE_BEAUPORT_LIMOILOU = 24008  # Beauport--Limoilou
     QUE_BELLECHASSE_LES_ETCHEMINS_LÉVIS = 24010  # Bellechasse--Les Etchemins--Lévis
     QUE_BELOEIL_CHAMBLY = 24011  # Beloeil--Chambly
@@ -304,20 +347,26 @@ class FederalElectoralDistrict(ProvinceGeoCode):
     QUE_MIRABEL = 24048  # Mirabel
     QUE_MONTARVILLE = 24049  # Montarville
     QUE_MONTCALM = 24050  # Montcalm
-    QUE_MONTMAGNY_LISLET_KAMOURASKA_RIVIÈRE_DU_LOUP = 24051  # Montmagny--L'Islet--Kamouraska--Rivière-du-Loup
+    QUE_MONTMAGNY_LISLET_KAMOURASKA_RIVIÈRE_DU_LOUP = (
+        24051  # Montmagny--L'Islet--Kamouraska--Rivière-du-Loup
+    )
     QUE_MONT_ROYAL = 24052  # Mont-Royal / Mount Royal
     QUE_MÉGANTIC_LÉRABLE = 24047  # Mégantic--L'Érable
     QUE_NOTRE_DAME_DE_GRÂCE_WESTMOUNT = 24053  # Notre-Dame-de-Grâce--Westmount
     QUE_OUTREMONT = 24054  # Outremont
     QUE_PAPINEAU = 24055  # Papineau
     QUE_PIERREFONDS_DOLLARD = 24056  # Pierrefonds--Dollard
-    QUE_PIERRE_BOUCHER_LES_PATRIOTES_VERCHÈRES = 24014  # Pierre-Boucher--Les Patriotes--Verchères
+    QUE_PIERRE_BOUCHER_LES_PATRIOTES_VERCHÈRES = (
+        24014  # Pierre-Boucher--Les Patriotes--Verchères
+    )
     QUE_PONTIAC = 24057  # Pontiac
     QUE_PORTNEUF_JACQUES_CARTIER = 24058  # Portneuf--Jacques-Cartier
     QUE_QUÉBEC = 24059  # Québec
     QUE_REPENTIGNY = 24060  # Repentigny
     QUE_RICHMOND_ARTHABASKA = 24061  # Richmond--Arthabaska
-    QUE_RIMOUSKI_NEIGETTE_TÉMISCOUATA_LES_BASQUES = 24018  # Rimouski-Neigette--Témiscouata--Les Basques
+    QUE_RIMOUSKI_NEIGETTE_TÉMISCOUATA_LES_BASQUES = (
+        24018  # Rimouski-Neigette--Témiscouata--Les Basques
+    )
     QUE_RIVIÈRE_DES_MILLE_ÎLES = 24062  # Rivière-des-Mille-Îles
     QUE_RIVIÈRE_DU_NORD = 24063  # Rivière-du-Nord
     QUE_ROSEMONT_LA_PETITE_PATRIE = 24064  # Rosemont--La Petite-Patrie
@@ -333,10 +382,14 @@ class FederalElectoralDistrict(ProvinceGeoCode):
     QUE_THÉRÈSE_DE_BLAINVILLE = 24013  # Thérèse-De Blainville
     QUE_TROIS_RIVIÈRES = 24076  # Trois-Rivières
     QUE_VAUDREUIL_SOULANGES = 24074  # Vaudreuil--Soulanges
-    QUE_VILLE_MARIE_LE_SUD_OUEST_ÎLE_DES_SOEURS = 24077  # Ville-Marie--Le Sud-Ouest--Île-des-Soeurs
+    QUE_VILLE_MARIE_LE_SUD_OUEST_ÎLE_DES_SOEURS = (
+        24077  # Ville-Marie--Le Sud-Ouest--Île-des-Soeurs
+    )
     QUE_VIMY = 24078  # Vimy
     SASK_BATTLEFORDS_LLOYDMINSTER = 47001  # Battlefords--Lloydminster
-    SASK_CARLTON_TRAIL_EAGLE_CREEK = 47004  # Carlton Trail--Eagle Creek / Sentier Carlton--Eagle Creek
+    SASK_CARLTON_TRAIL_EAGLE_CREEK = (
+        47004  # Carlton Trail--Eagle Creek / Sentier Carlton--Eagle Creek
+    )
     SASK_CYPRESS_HILLS_GRASSLANDS = 47002  # Cypress Hills--Grasslands
     SASK_DESNETHÉ_MISSINIPPI_CHURCHILL_RIVER = 47003  # Desnethé--Missinippi--Churchill River / Desnethé--Missinippi--Rivière Churchill
     SASK_MOOSE_JAW_LAKE_CENTRE_LANIGAN = 47005  # Moose Jaw--Lake Centre--Lanigan

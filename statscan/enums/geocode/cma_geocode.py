@@ -6,7 +6,7 @@ class CensusMetropolitanAreaGeoCode(FloatGeoCode):
     """
     Enum for Census Metropolitan Areas (CMAs) in Canada.
     """
-    
+
     @property
     def cmauid(self) -> str:
         """
@@ -18,7 +18,7 @@ class CensusMetropolitanAreaGeoCode(FloatGeoCode):
             The unique identifier for the census metropolitan area.
         """
         return self.uid[:3]
-    
+
     @property
     def census_metropolitan_area(self) -> CensusMetropolitanArea:
         """
@@ -33,7 +33,7 @@ class CensusMetropolitanAreaGeoCode(FloatGeoCode):
             if cma.uid == self.cmauid:
                 return cma
         raise ValueError(f"Census Metropolitan Area with UID {self.cmauid} not found.")
-    
+
     @property
     def province_territory(self) -> ProvinceTerritory:
         """

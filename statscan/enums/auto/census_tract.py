@@ -13,6 +13,7 @@ class CensusTract(CensusMetropolitanAreaGeoCode):
     Description: CMANAME_RMRNOM
     Prefix: (custom)
     """
+
     ALTA_CALGARY_000101 = 8250001.01  # 0001.01 (Calgary)
     ALTA_CALGARY_000102 = 8250001.02  # 0001.02 (Calgary)
     ALTA_CALGARY_000103 = 8250001.03  # 0001.03 (Calgary)
@@ -2564,125 +2565,363 @@ class CensusTract(CensusMetropolitanAreaGeoCode):
     ONT_KINGSTON_011301 = 5210113.01  # 0113.01 (Kingston)
     ONT_KINGSTON_011302 = 5210113.02  # 0113.02 (Kingston)
     ONT_KINGSTON_020000 = 5210200.0  # 0200.00 (Kingston)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000101 = 5410001.01  # 0001.01 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000103 = 5410001.03  # 0001.03 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000105 = 5410001.05  # 0001.05 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000106 = 5410001.06  # 0001.06 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000201 = 5410002.01  # 0002.01 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000202 = 5410002.02  # 0002.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000203 = 5410002.03  # 0002.03 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000204 = 5410002.04  # 0002.04 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000206 = 5410002.06  # 0002.06 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000207 = 5410002.07  # 0002.07 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000209 = 5410002.09  # 0002.09 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000212 = 5410002.12  # 0002.12 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000213 = 5410002.13  # 0002.13 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000214 = 5410002.14  # 0002.14 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000215 = 5410002.15  # 0002.15 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000300 = 5410003.0  # 0003.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000401 = 5410004.01  # 0004.01 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000402 = 5410004.02  # 0004.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000501 = 5410005.01  # 0005.01 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000502 = 5410005.02  # 0005.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000600 = 5410006.0  # 0006.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000700 = 5410007.0  # 0007.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000801 = 5410008.01  # 0008.01 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000802 = 5410008.02  # 0008.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000804 = 5410008.04  # 0008.04 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000805 = 5410008.05  # 0008.05 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000806 = 5410008.06  # 0008.06 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000901 = 5410009.01  # 0009.01 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000902 = 5410009.02  # 0009.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000904 = 5410009.04  # 0009.04 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000905 = 5410009.05  # 0009.05 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001000 = 5410010.0  # 0010.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001100 = 5410011.0  # 0011.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001200 = 5410012.0  # 0012.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001300 = 5410013.0  # 0013.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001402 = 5410014.02  # 0014.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001403 = 5410014.03  # 0014.03 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001404 = 5410014.04  # 0014.04 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001406 = 5410014.06  # 0014.06 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001408 = 5410014.08  # 0014.08 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001409 = 5410014.09  # 0014.09 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001500 = 5410015.0  # 0015.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001600 = 5410016.0  # 0016.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001700 = 5410017.0  # 0017.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001800 = 5410018.0  # 0018.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001900 = 5410019.0  # 0019.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_002000 = 5410020.0  # 0020.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_002100 = 5410021.0  # 0021.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_002200 = 5410022.0  # 0022.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_002300 = 5410023.0  # 0023.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_002400 = 5410024.0  # 0024.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_002500 = 5410025.0  # 0025.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010000 = 5410100.0  # 0100.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010101 = 5410101.01  # 0101.01 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010102 = 5410101.02  # 0101.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010103 = 5410101.03  # 0101.03 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010104 = 5410101.04  # 0101.04 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010200 = 5410102.0  # 0102.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010300 = 5410103.0  # 0103.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010400 = 5410104.0  # 0104.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010500 = 5410105.0  # 0105.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010601 = 5410106.01  # 0106.01 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010602 = 5410106.02  # 0106.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010603 = 5410106.03  # 0106.03 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010701 = 5410107.01  # 0107.01 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010702 = 5410107.02  # 0107.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010802 = 5410108.02  # 0108.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010803 = 5410108.03  # 0108.03 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010804 = 5410108.04  # 0108.04 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010901 = 5410109.01  # 0109.01 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010902 = 5410109.02  # 0109.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010905 = 5410109.05  # 0109.05 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010907 = 5410109.07  # 0109.07 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010908 = 5410109.08  # 0109.08 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010909 = 5410109.09  # 0109.09 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010910 = 5410109.1  # 0109.10 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_011000 = 5410110.0  # 0110.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_011104 = 5410111.04  # 0111.04 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_011105 = 5410111.05  # 0111.05 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_011107 = 5410111.07  # 0111.07 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_011108 = 5410111.08  # 0111.08 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_011109 = 5410111.09  # 0111.09 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_011110 = 5410111.1  # 0111.10 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012002 = 5410120.02  # 0120.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012003 = 5410120.03  # 0120.03 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012004 = 5410120.04  # 0120.04 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012100 = 5410121.0  # 0121.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012201 = 5410122.01  # 0122.01 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012202 = 5410122.02  # 0122.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012301 = 5410123.01  # 0123.01 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012302 = 5410123.02  # 0123.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012400 = 5410124.0  # 0124.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012500 = 5410125.0  # 0125.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012601 = 5410126.01  # 0126.01 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012602 = 5410126.02  # 0126.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012605 = 5410126.05  # 0126.05 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012608 = 5410126.08  # 0126.08 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012609 = 5410126.09  # 0126.09 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012610 = 5410126.1  # 0126.10 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012611 = 5410126.11  # 0126.11 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012612 = 5410126.12  # 0126.12 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012613 = 5410126.13  # 0126.13 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012701 = 5410127.01  # 0127.01 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012702 = 5410127.02  # 0127.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012800 = 5410128.0  # 0128.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012901 = 5410129.01  # 0129.01 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012902 = 5410129.02  # 0129.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_013001 = 5410130.01  # 0130.01 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_013002 = 5410130.02  # 0130.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_013101 = 5410131.01  # 0131.01 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_013103 = 5410131.03  # 0131.03 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_013105 = 5410131.05  # 0131.05 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_013106 = 5410131.06  # 0131.06 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_014001 = 5410140.01  # 0140.01 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_014002 = 5410140.02  # 0140.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_015100 = 5410151.0  # 0151.00 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_015201 = 5410152.01  # 0152.01 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_015202 = 5410152.02  # 0152.02 (Kitchener - Cambridge - Waterloo)
-    ONT_KITCHENER_CAMBRIDGE_WATERLOO_015300 = 5410153.0  # 0153.00 (Kitchener - Cambridge - Waterloo)
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000101 = (
+        5410001.01  # 0001.01 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000103 = (
+        5410001.03  # 0001.03 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000105 = (
+        5410001.05  # 0001.05 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000106 = (
+        5410001.06  # 0001.06 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000201 = (
+        5410002.01  # 0002.01 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000202 = (
+        5410002.02  # 0002.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000203 = (
+        5410002.03  # 0002.03 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000204 = (
+        5410002.04  # 0002.04 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000206 = (
+        5410002.06  # 0002.06 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000207 = (
+        5410002.07  # 0002.07 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000209 = (
+        5410002.09  # 0002.09 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000212 = (
+        5410002.12  # 0002.12 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000213 = (
+        5410002.13  # 0002.13 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000214 = (
+        5410002.14  # 0002.14 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000215 = (
+        5410002.15  # 0002.15 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000300 = (
+        5410003.0  # 0003.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000401 = (
+        5410004.01  # 0004.01 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000402 = (
+        5410004.02  # 0004.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000501 = (
+        5410005.01  # 0005.01 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000502 = (
+        5410005.02  # 0005.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000600 = (
+        5410006.0  # 0006.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000700 = (
+        5410007.0  # 0007.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000801 = (
+        5410008.01  # 0008.01 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000802 = (
+        5410008.02  # 0008.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000804 = (
+        5410008.04  # 0008.04 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000805 = (
+        5410008.05  # 0008.05 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000806 = (
+        5410008.06  # 0008.06 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000901 = (
+        5410009.01  # 0009.01 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000902 = (
+        5410009.02  # 0009.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000904 = (
+        5410009.04  # 0009.04 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_000905 = (
+        5410009.05  # 0009.05 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001000 = (
+        5410010.0  # 0010.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001100 = (
+        5410011.0  # 0011.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001200 = (
+        5410012.0  # 0012.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001300 = (
+        5410013.0  # 0013.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001402 = (
+        5410014.02  # 0014.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001403 = (
+        5410014.03  # 0014.03 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001404 = (
+        5410014.04  # 0014.04 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001406 = (
+        5410014.06  # 0014.06 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001408 = (
+        5410014.08  # 0014.08 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001409 = (
+        5410014.09  # 0014.09 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001500 = (
+        5410015.0  # 0015.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001600 = (
+        5410016.0  # 0016.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001700 = (
+        5410017.0  # 0017.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001800 = (
+        5410018.0  # 0018.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_001900 = (
+        5410019.0  # 0019.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_002000 = (
+        5410020.0  # 0020.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_002100 = (
+        5410021.0  # 0021.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_002200 = (
+        5410022.0  # 0022.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_002300 = (
+        5410023.0  # 0023.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_002400 = (
+        5410024.0  # 0024.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_002500 = (
+        5410025.0  # 0025.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010000 = (
+        5410100.0  # 0100.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010101 = (
+        5410101.01  # 0101.01 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010102 = (
+        5410101.02  # 0101.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010103 = (
+        5410101.03  # 0101.03 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010104 = (
+        5410101.04  # 0101.04 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010200 = (
+        5410102.0  # 0102.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010300 = (
+        5410103.0  # 0103.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010400 = (
+        5410104.0  # 0104.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010500 = (
+        5410105.0  # 0105.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010601 = (
+        5410106.01  # 0106.01 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010602 = (
+        5410106.02  # 0106.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010603 = (
+        5410106.03  # 0106.03 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010701 = (
+        5410107.01  # 0107.01 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010702 = (
+        5410107.02  # 0107.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010802 = (
+        5410108.02  # 0108.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010803 = (
+        5410108.03  # 0108.03 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010804 = (
+        5410108.04  # 0108.04 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010901 = (
+        5410109.01  # 0109.01 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010902 = (
+        5410109.02  # 0109.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010905 = (
+        5410109.05  # 0109.05 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010907 = (
+        5410109.07  # 0109.07 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010908 = (
+        5410109.08  # 0109.08 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010909 = (
+        5410109.09  # 0109.09 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_010910 = (
+        5410109.1  # 0109.10 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_011000 = (
+        5410110.0  # 0110.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_011104 = (
+        5410111.04  # 0111.04 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_011105 = (
+        5410111.05  # 0111.05 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_011107 = (
+        5410111.07  # 0111.07 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_011108 = (
+        5410111.08  # 0111.08 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_011109 = (
+        5410111.09  # 0111.09 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_011110 = (
+        5410111.1  # 0111.10 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012002 = (
+        5410120.02  # 0120.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012003 = (
+        5410120.03  # 0120.03 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012004 = (
+        5410120.04  # 0120.04 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012100 = (
+        5410121.0  # 0121.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012201 = (
+        5410122.01  # 0122.01 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012202 = (
+        5410122.02  # 0122.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012301 = (
+        5410123.01  # 0123.01 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012302 = (
+        5410123.02  # 0123.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012400 = (
+        5410124.0  # 0124.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012500 = (
+        5410125.0  # 0125.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012601 = (
+        5410126.01  # 0126.01 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012602 = (
+        5410126.02  # 0126.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012605 = (
+        5410126.05  # 0126.05 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012608 = (
+        5410126.08  # 0126.08 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012609 = (
+        5410126.09  # 0126.09 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012610 = (
+        5410126.1  # 0126.10 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012611 = (
+        5410126.11  # 0126.11 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012612 = (
+        5410126.12  # 0126.12 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012613 = (
+        5410126.13  # 0126.13 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012701 = (
+        5410127.01  # 0127.01 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012702 = (
+        5410127.02  # 0127.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012800 = (
+        5410128.0  # 0128.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012901 = (
+        5410129.01  # 0129.01 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_012902 = (
+        5410129.02  # 0129.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_013001 = (
+        5410130.01  # 0130.01 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_013002 = (
+        5410130.02  # 0130.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_013101 = (
+        5410131.01  # 0131.01 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_013103 = (
+        5410131.03  # 0131.03 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_013105 = (
+        5410131.05  # 0131.05 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_013106 = (
+        5410131.06  # 0131.06 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_014001 = (
+        5410140.01  # 0140.01 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_014002 = (
+        5410140.02  # 0140.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_015100 = (
+        5410151.0  # 0151.00 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_015201 = (
+        5410152.01  # 0152.01 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_015202 = (
+        5410152.02  # 0152.02 (Kitchener - Cambridge - Waterloo)
+    )
+    ONT_KITCHENER_CAMBRIDGE_WATERLOO_015300 = (
+        5410153.0  # 0153.00 (Kitchener - Cambridge - Waterloo)
+    )
     ONT_LONDON_000102 = 5550001.02  # 0001.02 (London)
     ONT_LONDON_000103 = 5550001.03  # 0001.03 (London)
     ONT_LONDON_000105 = 5550001.05  # 0001.05 (London)
@@ -2909,237 +3148,699 @@ class CensusTract(CensusMetropolitanAreaGeoCode):
     ONT_OSHAWA_020501 = 5320205.01  # 0205.01 (Oshawa)
     ONT_OSHAWA_020502 = 5320205.02  # 0205.02 (Oshawa)
     ONT_OSHAWA_020600 = 5320206.0  # 0206.00 (Oshawa)
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000104 = 5050001.04  # 0001.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000105 = 5050001.05  # 0001.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000106 = 5050001.06  # 0001.06 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000107 = 5050001.07  # 0001.07 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000108 = 5050001.08  # 0001.08 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000109 = 5050001.09  # 0001.09 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000110 = 5050001.1  # 0001.10 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000201 = 5050002.01  # 0002.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000202 = 5050002.02  # 0002.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000204 = 5050002.04  # 0002.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000205 = 5050002.05  # 0002.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000206 = 5050002.06  # 0002.06 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000300 = 5050003.0  # 0003.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000400 = 5050004.0  # 0004.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000500 = 5050005.0  # 0005.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000600 = 5050006.0  # 0006.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000701 = 5050007.01  # 0007.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000702 = 5050007.02  # 0007.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000703 = 5050007.03  # 0007.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000800 = 5050008.0  # 0008.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000900 = 5050009.0  # 0009.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001000 = 5050010.0  # 0010.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001101 = 5050011.01  # 0011.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001103 = 5050011.03  # 0011.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001104 = 5050011.04  # 0011.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001200 = 5050012.0  # 0012.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001300 = 5050013.0  # 0013.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001400 = 5050014.0  # 0014.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001500 = 5050015.0  # 0015.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001600 = 5050016.0  # 0016.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001700 = 5050017.0  # 0017.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001800 = 5050018.0  # 0018.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001900 = 5050019.0  # 0019.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002001 = 5050020.01  # 0020.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002002 = 5050020.02  # 0020.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002100 = 5050021.0  # 0021.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002200 = 5050022.0  # 0022.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002301 = 5050023.01  # 0023.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002302 = 5050023.02  # 0023.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002400 = 5050024.0  # 0024.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002500 = 5050025.0  # 0025.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002600 = 5050026.0  # 0026.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002700 = 5050027.0  # 0027.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002800 = 5050028.0  # 0028.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002900 = 5050029.0  # 0029.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003000 = 5050030.0  # 0030.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003100 = 5050031.0  # 0031.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003201 = 5050032.01  # 0032.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003202 = 5050032.02  # 0032.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003301 = 5050033.01  # 0033.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003302 = 5050033.02  # 0033.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003400 = 5050034.0  # 0034.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003500 = 5050035.0  # 0035.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003600 = 5050036.0  # 0036.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003701 = 5050037.01  # 0037.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003702 = 5050037.02  # 0037.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003800 = 5050038.0  # 0038.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003900 = 5050039.0  # 0039.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004000 = 5050040.0  # 0040.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004100 = 5050041.0  # 0041.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004200 = 5050042.0  # 0042.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004300 = 5050043.0  # 0043.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004400 = 5050044.0  # 0044.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004501 = 5050045.01  # 0045.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004502 = 5050045.02  # 0045.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004600 = 5050046.0  # 0046.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004700 = 5050047.0  # 0047.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004800 = 5050048.0  # 0048.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004900 = 5050049.0  # 0049.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005000 = 5050050.0  # 0050.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005100 = 5050051.0  # 0051.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005200 = 5050052.0  # 0052.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005300 = 5050053.0  # 0053.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005400 = 5050054.0  # 0054.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005500 = 5050055.0  # 0055.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005600 = 5050056.0  # 0056.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005700 = 5050057.0  # 0057.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005800 = 5050058.0  # 0058.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005900 = 5050059.0  # 0059.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_006000 = 5050060.0  # 0060.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_006100 = 5050061.0  # 0061.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_006201 = 5050062.01  # 0062.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_006202 = 5050062.02  # 0062.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_010000 = 5050100.0  # 0100.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_010100 = 5050101.0  # 0101.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_010200 = 5050102.0  # 0102.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_010300 = 5050103.0  # 0103.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_010400 = 5050104.0  # 0104.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_011000 = 5050110.0  # 0110.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012001 = 5050120.01  # 0120.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012002 = 5050120.02  # 0120.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012003 = 5050120.03  # 0120.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012101 = 5050121.01  # 0121.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012102 = 5050121.02  # 0121.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012201 = 5050122.01  # 0122.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012202 = 5050122.02  # 0122.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012203 = 5050122.03  # 0122.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012301 = 5050123.01  # 0123.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012303 = 5050123.03  # 0123.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012304 = 5050123.04  # 0123.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012401 = 5050124.01  # 0124.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012402 = 5050124.02  # 0124.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012403 = 5050124.03  # 0124.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012404 = 5050124.04  # 0124.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012501 = 5050125.01  # 0125.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012502 = 5050125.02  # 0125.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012503 = 5050125.03  # 0125.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012504 = 5050125.04  # 0125.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012505 = 5050125.05  # 0125.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012507 = 5050125.07  # 0125.07 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012508 = 5050125.08  # 0125.08 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012509 = 5050125.09  # 0125.09 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012510 = 5050125.1  # 0125.10 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012511 = 5050125.11  # 0125.11 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012604 = 5050126.04  # 0126.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012605 = 5050126.05  # 0126.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012606 = 5050126.06  # 0126.06 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012607 = 5050126.07  # 0126.07 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012608 = 5050126.08  # 0126.08 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012609 = 5050126.09  # 0126.09 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012700 = 5050127.0  # 0127.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013001 = 5050130.01  # 0130.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013002 = 5050130.02  # 0130.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013101 = 5050131.01  # 0131.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013102 = 5050131.02  # 0131.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013200 = 5050132.0  # 0132.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013300 = 5050133.0  # 0133.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013400 = 5050134.0  # 0134.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013501 = 5050135.01  # 0135.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013502 = 5050135.02  # 0135.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013503 = 5050135.03  # 0135.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013601 = 5050136.01  # 0136.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013602 = 5050136.02  # 0136.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013702 = 5050137.02  # 0137.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013703 = 5050137.03  # 0137.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013704 = 5050137.04  # 0137.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013705 = 5050137.05  # 0137.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013800 = 5050138.0  # 0138.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013900 = 5050139.0  # 0139.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014001 = 5050140.01  # 0140.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014003 = 5050140.03  # 0140.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014004 = 5050140.04  # 0140.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014005 = 5050140.05  # 0140.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014006 = 5050140.06  # 0140.06 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014007 = 5050140.07  # 0140.07 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014104 = 5050141.04  # 0141.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014109 = 5050141.09  # 0141.09 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014110 = 5050141.1  # 0141.10 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014111 = 5050141.11  # 0141.11 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014113 = 5050141.13  # 0141.13 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014114 = 5050141.14  # 0141.14 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014116 = 5050141.16  # 0141.16 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014117 = 5050141.17  # 0141.17 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014118 = 5050141.18  # 0141.18 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014119 = 5050141.19  # 0141.19 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014120 = 5050141.2  # 0141.20 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014121 = 5050141.21  # 0141.21 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014122 = 5050141.22  # 0141.22 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014123 = 5050141.23  # 0141.23 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014124 = 5050141.24  # 0141.24 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014125 = 5050141.25  # 0141.25 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014126 = 5050141.26  # 0141.26 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_015103 = 5050151.03  # 0151.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_015104 = 5050151.04  # 0151.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_015105 = 5050151.05  # 0151.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_015106 = 5050151.06  # 0151.06 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_015108 = 5050151.08  # 0151.08 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_015109 = 5050151.09  # 0151.09 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_015110 = 5050151.1  # 0151.10 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_015111 = 5050151.11  # 0151.11 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016002 = 5050160.02  # 0160.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016004 = 5050160.04  # 0160.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016005 = 5050160.05  # 0160.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016006 = 5050160.06  # 0160.06 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016007 = 5050160.07  # 0160.07 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016009 = 5050160.09  # 0160.09 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016011 = 5050160.11  # 0160.11 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016012 = 5050160.12  # 0160.12 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016013 = 5050160.13  # 0160.13 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016014 = 5050160.14  # 0160.14 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016015 = 5050160.15  # 0160.15 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016103 = 5050161.03  # 0161.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016104 = 5050161.04  # 0161.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016105 = 5050161.05  # 0161.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016106 = 5050161.06  # 0161.06 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016202 = 5050162.02  # 0162.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016203 = 5050162.03  # 0162.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016204 = 5050162.04  # 0162.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017001 = 5050170.01  # 0170.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017003 = 5050170.03  # 0170.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017004 = 5050170.04  # 0170.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017005 = 5050170.05  # 0170.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017008 = 5050170.08  # 0170.08 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017009 = 5050170.09  # 0170.09 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017010 = 5050170.1  # 0170.10 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017011 = 5050170.11  # 0170.11 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017012 = 5050170.12  # 0170.12 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017013 = 5050170.13  # 0170.13 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017103 = 5050171.03  # 0171.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017105 = 5050171.05  # 0171.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017106 = 5050171.06  # 0171.06 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017107 = 5050171.07  # 0171.07 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017111 = 5050171.11  # 0171.11 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017112 = 5050171.12  # 0171.12 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017113 = 5050171.13  # 0171.13 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017114 = 5050171.14  # 0171.14 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017115 = 5050171.15  # 0171.15 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_018001 = 5050180.01  # 0180.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_018002 = 5050180.02  # 0180.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_018101 = 5050181.01  # 0181.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_018102 = 5050181.02  # 0181.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_018200 = 5050182.0  # 0182.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_018300 = 5050183.0  # 0183.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_018400 = 5050184.0  # 0184.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_019001 = 5050190.01  # 0190.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_019002 = 5050190.02  # 0190.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_019101 = 5050191.01  # 0191.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_019102 = 5050191.02  # 0191.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_020001 = 5050200.01  # 0200.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_020002 = 5050200.02  # 0200.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_020100 = 5050201.0  # 0201.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_030001 = 5050300.01  # 0300.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_030002 = 5050300.02  # 0300.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_030100 = 5050301.0  # 0301.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_030200 = 5050302.0  # 0302.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_040000 = 5050400.0  # 0400.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_100000 = 5051000.0  # 1000.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_100100 = 5051001.0  # 1001.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_200000 = 5052000.0  # 2000.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_200100 = 5052001.0  # 2001.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
-    ONT_OTTAWA_GATINEAU_ONTARIO_PART_200200 = 5052002.0  # 2002.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000104 = (
+        5050001.04  # 0001.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000105 = (
+        5050001.05  # 0001.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000106 = (
+        5050001.06  # 0001.06 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000107 = (
+        5050001.07  # 0001.07 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000108 = (
+        5050001.08  # 0001.08 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000109 = (
+        5050001.09  # 0001.09 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000110 = (
+        5050001.1  # 0001.10 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000201 = (
+        5050002.01  # 0002.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000202 = (
+        5050002.02  # 0002.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000204 = (
+        5050002.04  # 0002.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000205 = (
+        5050002.05  # 0002.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000206 = (
+        5050002.06  # 0002.06 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000300 = (
+        5050003.0  # 0003.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000400 = (
+        5050004.0  # 0004.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000500 = (
+        5050005.0  # 0005.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000600 = (
+        5050006.0  # 0006.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000701 = (
+        5050007.01  # 0007.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000702 = (
+        5050007.02  # 0007.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000703 = (
+        5050007.03  # 0007.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000800 = (
+        5050008.0  # 0008.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_000900 = (
+        5050009.0  # 0009.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001000 = (
+        5050010.0  # 0010.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001101 = (
+        5050011.01  # 0011.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001103 = (
+        5050011.03  # 0011.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001104 = (
+        5050011.04  # 0011.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001200 = (
+        5050012.0  # 0012.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001300 = (
+        5050013.0  # 0013.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001400 = (
+        5050014.0  # 0014.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001500 = (
+        5050015.0  # 0015.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001600 = (
+        5050016.0  # 0016.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001700 = (
+        5050017.0  # 0017.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001800 = (
+        5050018.0  # 0018.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_001900 = (
+        5050019.0  # 0019.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002001 = (
+        5050020.01  # 0020.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002002 = (
+        5050020.02  # 0020.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002100 = (
+        5050021.0  # 0021.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002200 = (
+        5050022.0  # 0022.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002301 = (
+        5050023.01  # 0023.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002302 = (
+        5050023.02  # 0023.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002400 = (
+        5050024.0  # 0024.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002500 = (
+        5050025.0  # 0025.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002600 = (
+        5050026.0  # 0026.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002700 = (
+        5050027.0  # 0027.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002800 = (
+        5050028.0  # 0028.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_002900 = (
+        5050029.0  # 0029.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003000 = (
+        5050030.0  # 0030.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003100 = (
+        5050031.0  # 0031.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003201 = (
+        5050032.01  # 0032.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003202 = (
+        5050032.02  # 0032.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003301 = (
+        5050033.01  # 0033.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003302 = (
+        5050033.02  # 0033.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003400 = (
+        5050034.0  # 0034.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003500 = (
+        5050035.0  # 0035.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003600 = (
+        5050036.0  # 0036.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003701 = (
+        5050037.01  # 0037.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003702 = (
+        5050037.02  # 0037.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003800 = (
+        5050038.0  # 0038.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_003900 = (
+        5050039.0  # 0039.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004000 = (
+        5050040.0  # 0040.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004100 = (
+        5050041.0  # 0041.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004200 = (
+        5050042.0  # 0042.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004300 = (
+        5050043.0  # 0043.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004400 = (
+        5050044.0  # 0044.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004501 = (
+        5050045.01  # 0045.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004502 = (
+        5050045.02  # 0045.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004600 = (
+        5050046.0  # 0046.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004700 = (
+        5050047.0  # 0047.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004800 = (
+        5050048.0  # 0048.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_004900 = (
+        5050049.0  # 0049.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005000 = (
+        5050050.0  # 0050.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005100 = (
+        5050051.0  # 0051.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005200 = (
+        5050052.0  # 0052.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005300 = (
+        5050053.0  # 0053.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005400 = (
+        5050054.0  # 0054.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005500 = (
+        5050055.0  # 0055.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005600 = (
+        5050056.0  # 0056.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005700 = (
+        5050057.0  # 0057.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005800 = (
+        5050058.0  # 0058.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_005900 = (
+        5050059.0  # 0059.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_006000 = (
+        5050060.0  # 0060.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_006100 = (
+        5050061.0  # 0061.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_006201 = (
+        5050062.01  # 0062.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_006202 = (
+        5050062.02  # 0062.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_010000 = (
+        5050100.0  # 0100.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_010100 = (
+        5050101.0  # 0101.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_010200 = (
+        5050102.0  # 0102.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_010300 = (
+        5050103.0  # 0103.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_010400 = (
+        5050104.0  # 0104.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_011000 = (
+        5050110.0  # 0110.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012001 = (
+        5050120.01  # 0120.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012002 = (
+        5050120.02  # 0120.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012003 = (
+        5050120.03  # 0120.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012101 = (
+        5050121.01  # 0121.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012102 = (
+        5050121.02  # 0121.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012201 = (
+        5050122.01  # 0122.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012202 = (
+        5050122.02  # 0122.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012203 = (
+        5050122.03  # 0122.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012301 = (
+        5050123.01  # 0123.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012303 = (
+        5050123.03  # 0123.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012304 = (
+        5050123.04  # 0123.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012401 = (
+        5050124.01  # 0124.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012402 = (
+        5050124.02  # 0124.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012403 = (
+        5050124.03  # 0124.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012404 = (
+        5050124.04  # 0124.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012501 = (
+        5050125.01  # 0125.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012502 = (
+        5050125.02  # 0125.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012503 = (
+        5050125.03  # 0125.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012504 = (
+        5050125.04  # 0125.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012505 = (
+        5050125.05  # 0125.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012507 = (
+        5050125.07  # 0125.07 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012508 = (
+        5050125.08  # 0125.08 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012509 = (
+        5050125.09  # 0125.09 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012510 = (
+        5050125.1  # 0125.10 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012511 = (
+        5050125.11  # 0125.11 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012604 = (
+        5050126.04  # 0126.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012605 = (
+        5050126.05  # 0126.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012606 = (
+        5050126.06  # 0126.06 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012607 = (
+        5050126.07  # 0126.07 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012608 = (
+        5050126.08  # 0126.08 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012609 = (
+        5050126.09  # 0126.09 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_012700 = (
+        5050127.0  # 0127.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013001 = (
+        5050130.01  # 0130.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013002 = (
+        5050130.02  # 0130.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013101 = (
+        5050131.01  # 0131.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013102 = (
+        5050131.02  # 0131.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013200 = (
+        5050132.0  # 0132.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013300 = (
+        5050133.0  # 0133.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013400 = (
+        5050134.0  # 0134.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013501 = (
+        5050135.01  # 0135.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013502 = (
+        5050135.02  # 0135.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013503 = (
+        5050135.03  # 0135.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013601 = (
+        5050136.01  # 0136.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013602 = (
+        5050136.02  # 0136.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013702 = (
+        5050137.02  # 0137.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013703 = (
+        5050137.03  # 0137.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013704 = (
+        5050137.04  # 0137.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013705 = (
+        5050137.05  # 0137.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013800 = (
+        5050138.0  # 0138.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_013900 = (
+        5050139.0  # 0139.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014001 = (
+        5050140.01  # 0140.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014003 = (
+        5050140.03  # 0140.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014004 = (
+        5050140.04  # 0140.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014005 = (
+        5050140.05  # 0140.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014006 = (
+        5050140.06  # 0140.06 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014007 = (
+        5050140.07  # 0140.07 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014104 = (
+        5050141.04  # 0141.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014109 = (
+        5050141.09  # 0141.09 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014110 = (
+        5050141.1  # 0141.10 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014111 = (
+        5050141.11  # 0141.11 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014113 = (
+        5050141.13  # 0141.13 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014114 = (
+        5050141.14  # 0141.14 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014116 = (
+        5050141.16  # 0141.16 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014117 = (
+        5050141.17  # 0141.17 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014118 = (
+        5050141.18  # 0141.18 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014119 = (
+        5050141.19  # 0141.19 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014120 = (
+        5050141.2  # 0141.20 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014121 = (
+        5050141.21  # 0141.21 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014122 = (
+        5050141.22  # 0141.22 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014123 = (
+        5050141.23  # 0141.23 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014124 = (
+        5050141.24  # 0141.24 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014125 = (
+        5050141.25  # 0141.25 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_014126 = (
+        5050141.26  # 0141.26 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_015103 = (
+        5050151.03  # 0151.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_015104 = (
+        5050151.04  # 0151.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_015105 = (
+        5050151.05  # 0151.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_015106 = (
+        5050151.06  # 0151.06 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_015108 = (
+        5050151.08  # 0151.08 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_015109 = (
+        5050151.09  # 0151.09 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_015110 = (
+        5050151.1  # 0151.10 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_015111 = (
+        5050151.11  # 0151.11 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016002 = (
+        5050160.02  # 0160.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016004 = (
+        5050160.04  # 0160.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016005 = (
+        5050160.05  # 0160.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016006 = (
+        5050160.06  # 0160.06 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016007 = (
+        5050160.07  # 0160.07 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016009 = (
+        5050160.09  # 0160.09 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016011 = (
+        5050160.11  # 0160.11 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016012 = (
+        5050160.12  # 0160.12 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016013 = (
+        5050160.13  # 0160.13 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016014 = (
+        5050160.14  # 0160.14 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016015 = (
+        5050160.15  # 0160.15 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016103 = (
+        5050161.03  # 0161.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016104 = (
+        5050161.04  # 0161.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016105 = (
+        5050161.05  # 0161.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016106 = (
+        5050161.06  # 0161.06 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016202 = (
+        5050162.02  # 0162.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016203 = (
+        5050162.03  # 0162.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_016204 = (
+        5050162.04  # 0162.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017001 = (
+        5050170.01  # 0170.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017003 = (
+        5050170.03  # 0170.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017004 = (
+        5050170.04  # 0170.04 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017005 = (
+        5050170.05  # 0170.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017008 = (
+        5050170.08  # 0170.08 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017009 = (
+        5050170.09  # 0170.09 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017010 = (
+        5050170.1  # 0170.10 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017011 = (
+        5050170.11  # 0170.11 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017012 = (
+        5050170.12  # 0170.12 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017013 = (
+        5050170.13  # 0170.13 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017103 = (
+        5050171.03  # 0171.03 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017105 = (
+        5050171.05  # 0171.05 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017106 = (
+        5050171.06  # 0171.06 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017107 = (
+        5050171.07  # 0171.07 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017111 = (
+        5050171.11  # 0171.11 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017112 = (
+        5050171.12  # 0171.12 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017113 = (
+        5050171.13  # 0171.13 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017114 = (
+        5050171.14  # 0171.14 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_017115 = (
+        5050171.15  # 0171.15 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_018001 = (
+        5050180.01  # 0180.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_018002 = (
+        5050180.02  # 0180.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_018101 = (
+        5050181.01  # 0181.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_018102 = (
+        5050181.02  # 0181.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_018200 = (
+        5050182.0  # 0182.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_018300 = (
+        5050183.0  # 0183.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_018400 = (
+        5050184.0  # 0184.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_019001 = (
+        5050190.01  # 0190.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_019002 = (
+        5050190.02  # 0190.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_019101 = (
+        5050191.01  # 0191.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_019102 = (
+        5050191.02  # 0191.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_020001 = (
+        5050200.01  # 0200.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_020002 = (
+        5050200.02  # 0200.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_020100 = (
+        5050201.0  # 0201.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_030001 = (
+        5050300.01  # 0300.01 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_030002 = (
+        5050300.02  # 0300.02 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_030100 = (
+        5050301.0  # 0301.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_030200 = (
+        5050302.0  # 0302.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_040000 = (
+        5050400.0  # 0400.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_100000 = (
+        5051000.0  # 1000.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_100100 = (
+        5051001.0  # 1001.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_200000 = (
+        5052000.0  # 2000.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_200100 = (
+        5052001.0  # 2001.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
+    ONT_OTTAWA_GATINEAU_ONTARIO_PART_200200 = (
+        5052002.0  # 2002.00 (Ottawa - Gatineau (Ontario part / partie de l'Ontario))
+    )
     ONT_PETERBOROUGH_000101 = 5290001.01  # 0001.01 (Peterborough)
     ONT_PETERBOROUGH_000102 = 5290001.02  # 0001.02 (Peterborough)
     ONT_PETERBOROUGH_000200 = 5290002.0  # 0002.00 (Peterborough)
@@ -5717,90 +6418,258 @@ class CensusTract(CensusMetropolitanAreaGeoCode):
     QUE_MONTRÉAL_240000 = 4622400.0  # 2400.00 (Montréal)
     QUE_MONTRÉAL_240100 = 4622401.0  # 2401.00 (Montréal)
     QUE_MONTRÉAL_240200 = 4622402.0  # 2402.00 (Montréal)
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050000 = 5050500.0  # 0500.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050100 = 5050501.0  # 0501.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050200 = 5050502.0  # 0502.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050300 = 5050503.0  # 0503.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050401 = 5050504.01  # 0504.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050403 = 5050504.03  # 0504.03 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050404 = 5050504.04  # 0504.04 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050405 = 5050504.05  # 0504.05 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050500 = 5050505.0  # 0505.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050600 = 5050506.0  # 0506.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050700 = 5050507.0  # 0507.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050800 = 5050508.0  # 0508.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050900 = 5050509.0  # 0509.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_051001 = 5050510.01  # 0510.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_051002 = 5050510.02  # 0510.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_051101 = 5050511.01  # 0511.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_051102 = 5050511.02  # 0511.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_060000 = 5050600.0  # 0600.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_060101 = 5050601.01  # 0601.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_060102 = 5050601.02  # 0601.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_060103 = 5050601.03  # 0601.03 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_060201 = 5050602.01  # 0602.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_060202 = 5050602.02  # 0602.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_060203 = 5050602.03  # 0602.03 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061001 = 5050610.01  # 0610.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061002 = 5050610.02  # 0610.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061100 = 5050611.0  # 0611.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061201 = 5050612.01  # 0612.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061202 = 5050612.02  # 0612.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061301 = 5050613.01  # 0613.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061303 = 5050613.03  # 0613.03 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061304 = 5050613.04  # 0613.04 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061306 = 5050613.06  # 0613.06 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061307 = 5050613.07  # 0613.07 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_062001 = 5050620.01  # 0620.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_062003 = 5050620.03  # 0620.03 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_062004 = 5050620.04  # 0620.04 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_063002 = 5050630.02  # 0630.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_063003 = 5050630.03  # 0630.03 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_063004 = 5050630.04  # 0630.04 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_063101 = 5050631.01  # 0631.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_063102 = 5050631.02  # 0631.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_070001 = 5050700.01  # 0700.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_070003 = 5050700.03  # 0700.03 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_070004 = 5050700.04  # 0700.04 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_071001 = 5050710.01  # 0710.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_071002 = 5050710.02  # 0710.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_071100 = 5050711.0  # 0711.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_071200 = 5050712.0  # 0712.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_080000 = 5050800.0  # 0800.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_081001 = 5050810.01  # 0810.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_081002 = 5050810.02  # 0810.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_081101 = 5050811.01  # 0811.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_081102 = 5050811.02  # 0811.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082001 = 5050820.01  # 0820.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082002 = 5050820.02  # 0820.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082102 = 5050821.02  # 0821.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082103 = 5050821.03  # 0821.03 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082104 = 5050821.04  # 0821.04 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082202 = 5050822.02  # 0822.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082203 = 5050822.03  # 0822.03 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082207 = 5050822.07  # 0822.07 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082208 = 5050822.08  # 0822.08 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082209 = 5050822.09  # 0822.09 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082210 = 5050822.1  # 0822.10 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082211 = 5050822.11  # 0822.11 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_084000 = 5050840.0  # 0840.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_084104 = 5050841.04  # 0841.04 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_084106 = 5050841.06  # 0841.06 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_084108 = 5050841.08  # 0841.08 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_084109 = 5050841.09  # 0841.09 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_084110 = 5050841.1  # 0841.10 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_084111 = 5050841.11  # 0841.11 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_085000 = 5050850.0  # 0850.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090000 = 5050900.0  # 0900.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090100 = 5050901.0  # 0901.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090200 = 5050902.0  # 0902.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090300 = 5050903.0  # 0903.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090400 = 5050904.0  # 0904.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090500 = 5050905.0  # 0905.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090600 = 5050906.0  # 0906.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090700 = 5050907.0  # 0907.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090800 = 5050908.0  # 0908.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
-    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090900 = 5050909.0  # 0909.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050000 = (
+        5050500.0  # 0500.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050100 = (
+        5050501.0  # 0501.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050200 = (
+        5050502.0  # 0502.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050300 = (
+        5050503.0  # 0503.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050401 = (
+        5050504.01  # 0504.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050403 = (
+        5050504.03  # 0504.03 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050404 = (
+        5050504.04  # 0504.04 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050405 = (
+        5050504.05  # 0504.05 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050500 = (
+        5050505.0  # 0505.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050600 = (
+        5050506.0  # 0506.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050700 = (
+        5050507.0  # 0507.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050800 = (
+        5050508.0  # 0508.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_050900 = (
+        5050509.0  # 0509.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_051001 = (
+        5050510.01  # 0510.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_051002 = (
+        5050510.02  # 0510.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_051101 = (
+        5050511.01  # 0511.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_051102 = (
+        5050511.02  # 0511.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_060000 = (
+        5050600.0  # 0600.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_060101 = (
+        5050601.01  # 0601.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_060102 = (
+        5050601.02  # 0601.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_060103 = (
+        5050601.03  # 0601.03 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_060201 = (
+        5050602.01  # 0602.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_060202 = (
+        5050602.02  # 0602.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_060203 = (
+        5050602.03  # 0602.03 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061001 = (
+        5050610.01  # 0610.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061002 = (
+        5050610.02  # 0610.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061100 = (
+        5050611.0  # 0611.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061201 = (
+        5050612.01  # 0612.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061202 = (
+        5050612.02  # 0612.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061301 = (
+        5050613.01  # 0613.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061303 = (
+        5050613.03  # 0613.03 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061304 = (
+        5050613.04  # 0613.04 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061306 = (
+        5050613.06  # 0613.06 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_061307 = (
+        5050613.07  # 0613.07 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_062001 = (
+        5050620.01  # 0620.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_062003 = (
+        5050620.03  # 0620.03 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_062004 = (
+        5050620.04  # 0620.04 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_063002 = (
+        5050630.02  # 0630.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_063003 = (
+        5050630.03  # 0630.03 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_063004 = (
+        5050630.04  # 0630.04 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_063101 = (
+        5050631.01  # 0631.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_063102 = (
+        5050631.02  # 0631.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_070001 = (
+        5050700.01  # 0700.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_070003 = (
+        5050700.03  # 0700.03 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_070004 = (
+        5050700.04  # 0700.04 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_071001 = (
+        5050710.01  # 0710.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_071002 = (
+        5050710.02  # 0710.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_071100 = (
+        5050711.0  # 0711.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_071200 = (
+        5050712.0  # 0712.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_080000 = (
+        5050800.0  # 0800.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_081001 = (
+        5050810.01  # 0810.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_081002 = (
+        5050810.02  # 0810.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_081101 = (
+        5050811.01  # 0811.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_081102 = (
+        5050811.02  # 0811.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082001 = (
+        5050820.01  # 0820.01 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082002 = (
+        5050820.02  # 0820.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082102 = (
+        5050821.02  # 0821.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082103 = (
+        5050821.03  # 0821.03 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082104 = (
+        5050821.04  # 0821.04 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082202 = (
+        5050822.02  # 0822.02 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082203 = (
+        5050822.03  # 0822.03 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082207 = (
+        5050822.07  # 0822.07 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082208 = (
+        5050822.08  # 0822.08 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082209 = (
+        5050822.09  # 0822.09 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082210 = (
+        5050822.1  # 0822.10 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_082211 = (
+        5050822.11  # 0822.11 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_084000 = (
+        5050840.0  # 0840.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_084104 = (
+        5050841.04  # 0841.04 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_084106 = (
+        5050841.06  # 0841.06 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_084108 = (
+        5050841.08  # 0841.08 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_084109 = (
+        5050841.09  # 0841.09 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_084110 = (
+        5050841.1  # 0841.10 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_084111 = (
+        5050841.11  # 0841.11 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_085000 = (
+        5050850.0  # 0850.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090000 = (
+        5050900.0  # 0900.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090100 = (
+        5050901.0  # 0901.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090200 = (
+        5050902.0  # 0902.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090300 = (
+        5050903.0  # 0903.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090400 = (
+        5050904.0  # 0904.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090500 = (
+        5050905.0  # 0905.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090600 = (
+        5050906.0  # 0906.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090700 = (
+        5050907.0  # 0907.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090800 = (
+        5050908.0  # 0908.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
+    QUE_OTTAWA_GATINEAU_PARTIE_DU_QUÉBEC_090900 = (
+        5050909.0  # 0909.00 (Ottawa - Gatineau (partie du Québec / Quebec part))
+    )
     QUE_QUÉBEC_000101 = 4210001.01  # 0001.01 (Québec)
     QUE_QUÉBEC_000102 = 4210001.02  # 0001.02 (Québec)
     QUE_QUÉBEC_000200 = 4210002.0  # 0002.00 (Québec)

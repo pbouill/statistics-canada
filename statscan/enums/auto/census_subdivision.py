@@ -12,6 +12,7 @@ class CensusSubdivision(CensusDivisionGeoCode):
     Value: CSDUID_SDRIDU
     Prefix: PREABBR_PRAABBREV
     """
+
     ALTA_ACADIA_NO_34 = 4804001  # Acadia No. 34
     ALTA_ACME = 4805044  # Acme
     ALTA_AIRDRIE = 4806021  # Airdrie
@@ -188,12 +189,22 @@ class CensusSubdivision(CensusDivisionGeoCode):
     ALTA_HUGHENDEN = 4807006  # Hughenden
     ALTA_HUSSAR = 4805019  # Hussar
     ALTA_HYTHE = 4819008  # Hythe
-    ALTA_IMPROVEMENT_DISTRICT_NO_12_JASPER_PARK = 4815037  # Improvement District No. 12 Jasper Park
-    ALTA_IMPROVEMENT_DISTRICT_NO_13_ELK_ISLAND = 4810068  # Improvement District No. 13 Elk Island
-    ALTA_IMPROVEMENT_DISTRICT_NO_24_WOOD_BUFFALO = 4816051  # Improvement District No. 24 Wood Buffalo
-    ALTA_IMPROVEMENT_DISTRICT_NO_25_WILLMORE_WILDERNESS = 4814028  # Improvement District No. 25 Willmore Wilderness
+    ALTA_IMPROVEMENT_DISTRICT_NO_12_JASPER_PARK = (
+        4815037  # Improvement District No. 12 Jasper Park
+    )
+    ALTA_IMPROVEMENT_DISTRICT_NO_13_ELK_ISLAND = (
+        4810068  # Improvement District No. 13 Elk Island
+    )
+    ALTA_IMPROVEMENT_DISTRICT_NO_24_WOOD_BUFFALO = (
+        4816051  # Improvement District No. 24 Wood Buffalo
+    )
+    ALTA_IMPROVEMENT_DISTRICT_NO_25_WILLMORE_WILDERNESS = (
+        4814028  # Improvement District No. 25 Willmore Wilderness
+    )
     ALTA_IMPROVEMENT_DISTRICT_NO_349 = 4812038  # Improvement District No. 349
-    ALTA_IMPROVEMENT_DISTRICT_NO_4_WATERTON = 4803003  # Improvement District No. 4 Waterton
+    ALTA_IMPROVEMENT_DISTRICT_NO_4_WATERTON = (
+        4803003  # Improvement District No. 4 Waterton
+    )
     ALTA_IMPROVEMENT_DISTRICT_NO_9_BANFF = 4815032  # Improvement District No. 9 Banff
     ALTA_INNISFAIL = 4808008  # Innisfail
     ALTA_INNISFREE = 4810031  # Innisfree
@@ -587,7 +598,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     BC_COMOX_1 = 5926801  # Comox 1
     BC_COMOX_VALLEY_A = 5926021  # Comox Valley A
     BC_COMOX_VALLEY_B_LAZO_NORTH = 5926022  # Comox Valley B (Lazo North)
-    BC_COMOX_VALLEY_C_PUNTLEDGE_BLACK_CREEK = 5926024  # Comox Valley C (Puntledge - Black Creek)
+    BC_COMOX_VALLEY_C_PUNTLEDGE_BLACK_CREEK = (
+        5926024  # Comox Valley C (Puntledge - Black Creek)
+    )
     BC_COQUITLAM = 5915034  # Coquitlam
     BC_COQUITLAM_1 = 5915805  # Coquitlam 1
     BC_COQUITLAM_2 = 5915804  # Coquitlam 2
@@ -1078,7 +1091,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     BC_STRATHCONA_A = 5924048  # Strathcona A
     BC_STRATHCONA_B = 5924052  # Strathcona B
     BC_STRATHCONA_C = 5924054  # Strathcona C
-    BC_STRATHCONA_D_OYSTER_BAY_BUTTLE_LAKE = 5924042  # Strathcona D (Oyster Bay - Buttle Lake)
+    BC_STRATHCONA_D_OYSTER_BAY_BUTTLE_LAKE = (
+        5924042  # Strathcona D (Oyster Bay - Buttle Lake)
+    )
     BC_STRYEN_9 = 5933873  # Stryen 9
     BC_STULLAWHEETS_8 = 5909841  # Stullawheets 8
     BC_ST_MARYS = 5901808  # St. Mary's
@@ -1110,16 +1125,34 @@ class CensusSubdivision(CensusDivisionGeoCode):
     BC_THOMAS_POINT_5 = 5943817  # Thomas Point 5
     BC_THOMAS_POINT_5A = 5943826  # Thomas Point 5A
     BC_THOMAS_SQUINAS_RANCH_2A = 5941845  # Thomas Squinas Ranch 2A
-    BC_THOMPSON_NICOLA_A_WELLS_GRAY_COUNTRY = 5933068  # Thompson-Nicola A (Wells Gray Country)
-    BC_THOMPSON_NICOLA_B_THOMPSON_HEADWATERS = 5933070  # Thompson-Nicola B (Thompson Headwaters)
-    BC_THOMPSON_NICOLA_E_BONAPARTE_PLATEAU = 5933032  # Thompson-Nicola E (Bonaparte Plateau)
-    BC_THOMPSON_NICOLA_I_BLUE_SKY_COUNTRY = 5933037  # Thompson-Nicola I (Blue Sky Country)
-    BC_THOMPSON_NICOLA_J_COPPER_DESERT_COUNTRY = 5933039  # Thompson-Nicola J (Copper Desert Country)
+    BC_THOMPSON_NICOLA_A_WELLS_GRAY_COUNTRY = (
+        5933068  # Thompson-Nicola A (Wells Gray Country)
+    )
+    BC_THOMPSON_NICOLA_B_THOMPSON_HEADWATERS = (
+        5933070  # Thompson-Nicola B (Thompson Headwaters)
+    )
+    BC_THOMPSON_NICOLA_E_BONAPARTE_PLATEAU = (
+        5933032  # Thompson-Nicola E (Bonaparte Plateau)
+    )
+    BC_THOMPSON_NICOLA_I_BLUE_SKY_COUNTRY = (
+        5933037  # Thompson-Nicola I (Blue Sky Country)
+    )
+    BC_THOMPSON_NICOLA_J_COPPER_DESERT_COUNTRY = (
+        5933039  # Thompson-Nicola J (Copper Desert Country)
+    )
     BC_THOMPSON_NICOLA_L_GRASSLANDS = 5933060  # Thompson-Nicola L (Grasslands)
-    BC_THOMPSON_NICOLA_M_BEAUTIFUL_NICOLA_VALLEY_NORTH = 5933008  # Thompson-Nicola M (Beautiful Nicola Valley - North)
-    BC_THOMPSON_NICOLA_N_BEAUTIFUL_NICOLA_VALLEY_SOUTH = 5933012  # Thompson-Nicola N (Beautiful Nicola Valley - South)
-    BC_THOMPSON_NICOLA_O_LOWER_NORTH_THOMPSON = 5933072  # Thompson-Nicola O (Lower North Thompson)
-    BC_THOMPSON_NICOLA_P_RIVERS_AND_THE_PEAKS = 5933044  # Thompson-Nicola P (Rivers and the Peaks)
+    BC_THOMPSON_NICOLA_M_BEAUTIFUL_NICOLA_VALLEY_NORTH = (
+        5933008  # Thompson-Nicola M (Beautiful Nicola Valley - North)
+    )
+    BC_THOMPSON_NICOLA_N_BEAUTIFUL_NICOLA_VALLEY_SOUTH = (
+        5933012  # Thompson-Nicola N (Beautiful Nicola Valley - South)
+    )
+    BC_THOMPSON_NICOLA_O_LOWER_NORTH_THOMPSON = (
+        5933072  # Thompson-Nicola O (Lower North Thompson)
+    )
+    BC_THOMPSON_NICOLA_P_RIVERS_AND_THE_PEAKS = (
+        5933044  # Thompson-Nicola P (Rivers and the Peaks)
+    )
     BC_TIN_WIS_11 = 5923825  # Tin Wis 11
     BC_TIPELLA_7 = 5909848  # Tipella 7
     BC_TLAA_GAA_AAWTLAAS_28 = 5947823  # Tlaa Gaa Aawtlaas 28
@@ -1207,7 +1240,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     MAN_BROKENHEAD = 4612054  # Brokenhead
     MAN_BROKENHEAD_4 = 4613062  # Brokenhead 4
     MAN_BUFFALO_POINT_36 = 4601070  # Buffalo Point 36
-    MAN_CANUPAWAKPA_DAKOTA_FIRST_NATION_OAK_LAKE_59 = 4606029  # Canupawakpa Dakota First Nation (Oak Lake 59)
+    MAN_CANUPAWAKPA_DAKOTA_FIRST_NATION_OAK_LAKE_59 = (
+        4606029  # Canupawakpa Dakota First Nation (Oak Lake 59)
+    )
     MAN_CARBERRY = 4607068  # Carberry
     MAN_CARMAN = 4603074  # Carman
     MAN_CARTIER = 4610043  # Cartier
@@ -1231,12 +1266,20 @@ class CensusSubdivision(CensusDivisionGeoCode):
     MAN_DELORAINE_WINCHESTER = 4605038  # Deloraine-Winchester
     MAN_DE_SALABERRY = 4602032  # De Salaberry
     MAN_DIVISION_NO_17_UNORGANIZED = 4617092  # Division No. 17, Unorganized
-    MAN_DIVISION_NO_18_UNORGANIZED_EAST_PART = 4618091  # Division No. 18, Unorganized, East Part
-    MAN_DIVISION_NO_18_UNORGANIZED_WEST_PART = 4618093  # Division No. 18, Unorganized, West Part
+    MAN_DIVISION_NO_18_UNORGANIZED_EAST_PART = (
+        4618091  # Division No. 18, Unorganized, East Part
+    )
+    MAN_DIVISION_NO_18_UNORGANIZED_WEST_PART = (
+        4618093  # Division No. 18, Unorganized, West Part
+    )
     MAN_DIVISION_NO_19_UNORGANIZED = 4619045  # Division No. 19, Unorganized
     MAN_DIVISION_NO_1_UNORGANIZED = 4601094  # Division No.  1, Unorganized
-    MAN_DIVISION_NO_20_UNORGANIZED_NORTH_PART = 4620069  # Division No. 20, Unorganized, North Part
-    MAN_DIVISION_NO_20_UNORGANIZED_SOUTH_PART = 4620066  # Division No. 20, Unorganized, South Part
+    MAN_DIVISION_NO_20_UNORGANIZED_NORTH_PART = (
+        4620069  # Division No. 20, Unorganized, North Part
+    )
+    MAN_DIVISION_NO_20_UNORGANIZED_SOUTH_PART = (
+        4620066  # Division No. 20, Unorganized, South Part
+    )
     MAN_DIVISION_NO_21_UNORGANIZED = 4621078  # Division No. 21, Unorganized
     MAN_DIVISION_NO_22_UNORGANIZED = 4622046  # Division No. 22, Unorganized
     MAN_DIVISION_NO_23_UNORGANIZED = 4623062  # Division No. 23, Unorganized
@@ -1874,7 +1917,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     NL_GASKIERS_POINT_LA_HAYE = 1001174  # Gaskiers-Point La Haye
     NL_GAULTOIS = 1003012  # Gaultois
     NL_GILLAMS = 1005015  # Gillams
-    NL_GLENBURNIE_BIRCHY_HEAD_SHOAL_BROOK = 1009030  # Glenburnie-Birchy Head-Shoal Brook
+    NL_GLENBURNIE_BIRCHY_HEAD_SHOAL_BROOK = (
+        1009030  # Glenburnie-Birchy Head-Shoal Brook
+    )
     NL_GLENWOOD = 1006012  # Glenwood
     NL_GLOVERTOWN = 1007044  # Glovertown
     NL_GOOSE_COVE_EAST = 1009039  # Goose Cove East
@@ -1888,7 +1933,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     NL_HAPPY_VALLEY_GOOSE_BAY = 1010025  # Happy Valley-Goose Bay
     NL_HARBOUR_BRETON = 1003008  # Harbour Breton
     NL_HARBOUR_GRACE = 1001379  # Harbour Grace
-    NL_HARBOUR_MAIN_CHAPELS_COVE_LAKEVIEW = 1001469  # Harbour Main-Chapel's Cove-Lakeview
+    NL_HARBOUR_MAIN_CHAPELS_COVE_LAKEVIEW = (
+        1001469  # Harbour Main-Chapel's Cove-Lakeview
+    )
     NL_HARE_BAY = 1007049  # Hare Bay
     NL_HAWKES_BAY = 1009018  # Hawke's Bay
     NL_HEARTS_CONTENT = 1001325  # Heart's Content
@@ -1923,11 +1970,15 @@ class CensusSubdivision(CensusDivisionGeoCode):
     NL_LITTLE_BAY_ISLANDS = 1008064  # Little Bay Islands
     NL_LITTLE_BURNT_BAY = 1008045  # Little Burnt Bay
     NL_LOGY_BAY_MIDDLE_COVE_OUTER_COVE = 1001511  # Logy Bay-Middle Cove-Outer Cove
-    NL_LONG_HARBOUR_MOUNT_ARLINGTON_HEIGHTS = 1001263  # Long Harbour-Mount Arlington Heights
+    NL_LONG_HARBOUR_MOUNT_ARLINGTON_HEIGHTS = (
+        1001263  # Long Harbour-Mount Arlington Heights
+    )
     NL_LORDS_COVE = 1002013  # Lord's Cove
     NL_LOURDES = 1004037  # Lourdes
     NL_LUMSDEN = 1008004  # Lumsden
-    NL_LUSHES_BIGHT_BEAUMONT_BEAUMONT_NORTH = 1008056  # Lushes Bight-Beaumont-Beaumont North
+    NL_LUSHES_BIGHT_BEAUMONT_BEAUMONT_NORTH = (
+        1008056  # Lushes Bight-Beaumont-Beaumont North
+    )
     NL_MAIN_BROOK = 1009028  # Main Brook
     NL_MAKKOVIK = 1011020  # Makkovik
     NL_MARYSTOWN = 1002024  # Marystown
@@ -1941,7 +1992,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     NL_MILLTOWN_HEAD_OF_BAY_DESPOIR = 1003018  # Milltown-Head of Bay d'Espoir
     NL_MINGS_BIGHT = 1008095  # Ming's Bight
     NL_MORRISVILLE = 1003020  # Morrisville
-    NL_MOUNT_CARMEL_MITCHELLS_BROOK_ST_CATHERINES = 1001197  # Mount Carmel-Mitchells Brook-St. Catherine's
+    NL_MOUNT_CARMEL_MITCHELLS_BROOK_ST_CATHERINES = (
+        1001197  # Mount Carmel-Mitchells Brook-St. Catherine's
+    )
     NL_MOUNT_MORIAH = 1005033  # Mount Moriah
     NL_MOUNT_PEARL = 1001542  # Mount Pearl
     NL_MUSGRAVETOWN = 1007032  # Musgravetown
@@ -1979,7 +2032,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     NL_PORT_ANSON = 1008062  # Port Anson
     NL_PORT_AU_CHOIX = 1009022  # Port au Choix
     NL_PORT_AU_PORT_EAST = 1004021  # Port au Port East
-    NL_PORT_AU_PORT_WEST_AGUATHUNA_FELIX_COVE = 1004042  # Port au Port West-Aguathuna-Felix Cove
+    NL_PORT_AU_PORT_WEST_AGUATHUNA_FELIX_COVE = (
+        1004042  # Port au Port West-Aguathuna-Felix Cove
+    )
     NL_PORT_BLANDFORD = 1007036  # Port Blandford
     NL_PORT_HOPE_SIMPSON = 1010009  # Port Hope Simpson
     NL_PORT_KIRWAN = 1001140  # Port Kirwan
@@ -2011,7 +2066,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     NL_SEAL_COVE_FORTUNE_BAY = 1003010  # Seal Cove (Fortune Bay)
     NL_SEAL_COVE_WHITE_BAY = 1008091  # Seal Cove (White Bay)
     NL_SHESHATSHIU_3 = 1010802  # Sheshatshiu 3
-    NL_SMALL_POINT_ADAMS_COVE_BLACKHEAD_BROAD_COVE = 1001352  # Small Point-Adam's Cove-Blackhead-Broad Cove
+    NL_SMALL_POINT_ADAMS_COVE_BLACKHEAD_BROAD_COVE = (
+        1001352  # Small Point-Adam's Cove-Blackhead-Broad Cove
+    )
     NL_SOUTHERN_HARBOUR = 1001267  # Southern Harbour
     NL_SOUTH_BROOK = 1008059  # South Brook
     NL_SOUTH_RIVER = 1001434  # South River
@@ -2035,7 +2092,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     NL_ST_MARYS = 1001178  # St. Mary's
     NL_ST_PAULS = 1009020  # St. Pauls
     NL_ST_SHOTTS = 1001120  # St. Shott's
-    NL_ST_VINCENTS_ST_STEPHENS_PETERS_RIVER = 1001169  # St. Vincent's-St. Stephen's-Peter's River
+    NL_ST_VINCENTS_ST_STEPHENS_PETERS_RIVER = (
+        1001169  # St. Vincent's-St. Stephen's-Peter's River
+    )
     NL_SUMMERFORD = 1008033  # Summerford
     NL_SUNNYSIDE = 1001277  # Sunnyside
     NL_TERRA_NOVA = 1007040  # Terra Nova
@@ -2242,7 +2301,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     ONT_ALDERVILLE_FIRST_NATION = 3514027  # Alderville First Nation
     ONT_ALFRED_AND_PLANTAGENET = 3502023  # Alfred and Plantagenet
     ONT_ALGOMA_UNORGANIZED_NORTH_PART = 3557095  # Algoma, Unorganized, North Part
-    ONT_ALGOMA_UNORGANIZED_SOUTH_EAST_PART = 3557094  # Algoma, Unorganized, South East Part
+    ONT_ALGOMA_UNORGANIZED_SOUTH_EAST_PART = (
+        3557094  # Algoma, Unorganized, South East Part
+    )
     ONT_ALGONQUIN_HIGHLANDS = 3546018  # Algonquin Highlands
     ONT_ALNWICK = 3514024  # Alnwick/Haldimand
     ONT_AMARANTH = 3522008  # Amaranth
@@ -2323,9 +2384,13 @@ class CensusSubdivision(CensusDivisionGeoCode):
     ONT_CHATHAM_KENT = 3536020  # Chatham-Kent
     ONT_CHATSWORTH = 3542037  # Chatsworth
     ONT_CHIEFS_POINT_NO_28 = 3541056  # Chief's Point No. 28
-    ONT_CHIPPEWAS_OF_GEORGINA_ISLAND_FIRST_NATION = 3519076  # Chippewas of Georgina Island First Nation
+    ONT_CHIPPEWAS_OF_GEORGINA_ISLAND_FIRST_NATION = (
+        3519076  # Chippewas of Georgina Island First Nation
+    )
     ONT_CHIPPEWAS_OF_RAMA_FIRST_NATION = 3543050  # Chippewas of Rama First Nation
-    ONT_CHIPPEWAS_OF_THE_THAMES_FIRST_NATION_42 = 3539017  # Chippewas of the Thames First Nation 42
+    ONT_CHIPPEWAS_OF_THE_THAMES_FIRST_NATION_42 = (
+        3539017  # Chippewas of the Thames First Nation 42
+    )
     ONT_CHISHOLM = 3548031  # Chisholm
     ONT_CHRISTIAN_ISLAND_30 = 3543069  # Christian Island 30
     ONT_CHRISTIAN_ISLAND_30A = 3543070  # Christian Island 30A
@@ -2336,8 +2401,12 @@ class CensusSubdivision(CensusDivisionGeoCode):
     ONT_COBOURG = 3514021  # Cobourg
     ONT_COCHRANE = 3556042  # Cochrane
     ONT_COCHRANE_UNORGANIZED_NORTH_PART = 3556092  # Cochrane, Unorganized, North Part
-    ONT_COCHRANE_UNORGANIZED_SOUTH_EAST_PART = 3556098  # Cochrane, Unorganized, South East Part
-    ONT_COCHRANE_UNORGANIZED_SOUTH_WEST_PART = 3556091  # Cochrane, Unorganized, South West Part
+    ONT_COCHRANE_UNORGANIZED_SOUTH_EAST_PART = (
+        3556098  # Cochrane, Unorganized, South East Part
+    )
+    ONT_COCHRANE_UNORGANIZED_SOUTH_WEST_PART = (
+        3556091  # Cochrane, Unorganized, South West Part
+    )
     ONT_COCKBURN_ISLAND = 3551034  # Cockburn Island
     ONT_COLEMAN = 3554001  # Coleman
     ONT_COLLINGWOOD = 3543031  # Collingwood
@@ -2499,7 +2568,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     ONT_LONG_LAKE_58 = 3558068  # Long Lake 58
     ONT_LOYALIST = 3511005  # Loyalist
     ONT_LUCAN_BIDDULPH = 3539060  # Lucan Biddulph
-    ONT_MACDONALD_MEREDITH_AND_ABERDEEN_ADDITIONAL = 3557051  # Macdonald, Meredith and Aberdeen Additional
+    ONT_MACDONALD_MEREDITH_AND_ABERDEEN_ADDITIONAL = (
+        3557051  # Macdonald, Meredith and Aberdeen Additional
+    )
     ONT_MACHAR = 3549054  # Machar
     ONT_MACHIN = 3560021  # Machin
     ONT_MADAWASKA_VALLEY = 3547030  # Madawaska Valley
@@ -2573,7 +2644,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     ONT_NIPISSING_UNORGANIZED_NORTH_PART = 3548094  # Nipissing, Unorganized, North Part
     ONT_NIPISSING_UNORGANIZED_SOUTH_PART = 3548091  # Nipissing, Unorganized, South Part
     ONT_NORFOLK_COUNTY = 3528052  # Norfolk County
-    ONT_NORTHEASTERN_MANITOULIN_AND_THE_ISLANDS = 3551017  # Northeastern Manitoulin and the Islands
+    ONT_NORTHEASTERN_MANITOULIN_AND_THE_ISLANDS = (
+        3551017  # Northeastern Manitoulin and the Islands
+    )
     ONT_NORTHERN_BRUCE_PENINSULA = 3541069  # Northern Bruce Peninsula
     ONT_NORTHWEST_ANGLE_33B = 3560060  # Northwest Angle 33B
     ONT_NORTH_ALGONA_WILBERFORCE = 3547070  # North Algona Wilberforce
@@ -2594,7 +2667,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     ONT_OBADJIWAN_15E = 3557092  # Obadjiwan 15E
     ONT_OCONNOR = 3558016  # O'Connor
     ONT_OIL_SPRINGS = 3538018  # Oil Springs
-    ONT_OJIBWAY_NATION_OF_SAUGEEN_SAVANT_LAKE = 3558080  # Ojibway Nation of Saugeen (Savant Lake)
+    ONT_OJIBWAY_NATION_OF_SAUGEEN_SAVANT_LAKE = (
+        3558080  # Ojibway Nation of Saugeen (Savant Lake)
+    )
     ONT_OLIVER_PAIPOONGE = 3558011  # Oliver Paipoonge
     ONT_ONEIDA_41 = 3539021  # Oneida 41
     ONT_OPASATIKA = 3556073  # Opasatika
@@ -2610,8 +2685,12 @@ class CensusSubdivision(CensusDivisionGeoCode):
     ONT_PAPINEAU_CAMERON = 3548013  # Papineau-Cameron
     ONT_PARRY_ISLAND_FIRST_NATION = 3549073  # Parry Island First Nation
     ONT_PARRY_SOUND = 3549032  # Parry Sound
-    ONT_PARRY_SOUND_UNORGANIZED_CENTRE_PART = 3549096  # Parry Sound, Unorganized, Centre Part
-    ONT_PARRY_SOUND_UNORGANIZED_NORTH_EAST_PART = 3549095  # Parry Sound, Unorganized, North East Part
+    ONT_PARRY_SOUND_UNORGANIZED_CENTRE_PART = (
+        3549096  # Parry Sound, Unorganized, Centre Part
+    )
+    ONT_PARRY_SOUND_UNORGANIZED_NORTH_EAST_PART = (
+        3549095  # Parry Sound, Unorganized, North East Part
+    )
     ONT_PAYS_PLAT_51 = 3558063  # Pays Plat 51
     ONT_PEAWANUCK = 3560091  # Peawanuck
     ONT_PELEE = 3537001  # Pelee
@@ -2749,8 +2828,12 @@ class CensusSubdivision(CensusDivisionGeoCode):
     ONT_THUNDER_BAY = 3558004  # Thunder Bay
     ONT_THUNDER_BAY_UNORGANIZED = 3558090  # Thunder Bay, Unorganized
     ONT_TILLSONBURG = 3532004  # Tillsonburg
-    ONT_TIMISKAMING_UNORGANIZED_EAST_PART = 3554091  # Timiskaming, Unorganized, East Part
-    ONT_TIMISKAMING_UNORGANIZED_WEST_PART = 3554094  # Timiskaming, Unorganized, West Part
+    ONT_TIMISKAMING_UNORGANIZED_EAST_PART = (
+        3554091  # Timiskaming, Unorganized, East Part
+    )
+    ONT_TIMISKAMING_UNORGANIZED_WEST_PART = (
+        3554094  # Timiskaming, Unorganized, West Part
+    )
     ONT_TIMMINS = 3556027  # Timmins
     ONT_TINY = 3543068  # Tiny
     ONT_TORONTO = 3520005  # Toronto
@@ -2880,7 +2963,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     PEI_SOURIS_0 = 1101035  # Souris
     PEI_SOURIS_1 = 1101036  # Souris
     PEI_SOURIS_WEST = 1101033  # Souris West
-    PEI_STANLEY_BRIDGE_HOPE_RIVER_BAYVIEW_CAVENDISH_AND_NORTH_RUSTICO = 1102045  # Stanley Bridge, Hope River, Bayview, Cavendish and North Rustico
+    PEI_STANLEY_BRIDGE_HOPE_RIVER_BAYVIEW_CAVENDISH_AND_NORTH_RUSTICO = (
+        1102045  # Stanley Bridge, Hope River, Bayview, Cavendish and North Rustico
+    )
     PEI_STRATFORD = 1102080  # Stratford
     PEI_ST_FELIX = 1103053  # St. Felix
     PEI_ST_LOUIS = 1103057  # St. Louis
@@ -3052,7 +3137,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     QUE_COURCELLES = 2430090  # Courcelles
     QUE_COWANSVILLE = 2446080  # Cowansville
     QUE_CRABTREE = 2461013  # Crabtree
-    QUE_CÔTE_NORD_DU_GOLFE_DU_SAINT_LAURENT = 2498015  # Côte-Nord-du-Golfe-du-Saint-Laurent
+    QUE_CÔTE_NORD_DU_GOLFE_DU_SAINT_LAURENT = (
+        2498015  # Côte-Nord-du-Golfe-du-Saint-Laurent
+    )
     QUE_CÔTE_SAINT_LUC = 2466058  # Côte-Saint-Luc
     QUE_DANVILLE = 2440047  # Danville
     QUE_DAVELUYVILLE = 2439152  # Daveluyville
@@ -3444,7 +3531,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     QUE_NORMANDIN = 2492040  # Normandin
     QUE_NORMÉTAL = 2487115  # Normétal
     QUE_NORTH_HATLEY = 2445050  # North Hatley
-    QUE_NOTRE_DAME_AUXILIATRICE_DE_BUCKLAND = 2419010  # Notre-Dame-Auxiliatrice-de-Buckland
+    QUE_NOTRE_DAME_AUXILIATRICE_DE_BUCKLAND = (
+        2419010  # Notre-Dame-Auxiliatrice-de-Buckland
+    )
     QUE_NOTRE_DAME_DES_ANGES = 2423015  # Notre-Dame-des-Anges
     QUE_NOTRE_DAME_DES_BOIS = 2430010  # Notre-Dame-des-Bois
     QUE_NOTRE_DAME_DES_MONTS = 2415025  # Notre-Dame-des-Monts
@@ -3471,7 +3560,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     QUE_NOTRE_DAME_DU_NORD = 2485090  # Notre-Dame-du-Nord
     QUE_NOTRE_DAME_DU_PORTAGE = 2412080  # Notre-Dame-du-Portage
     QUE_NOTRE_DAME_DU_ROSAIRE = 2418040  # Notre-Dame-du-Rosaire
-    QUE_NOTRE_DAME_DU_SACRÉ_COEUR_DISSOUDUN = 2433085  # Notre-Dame-du-Sacré-Coeur-d'Issoudun
+    QUE_NOTRE_DAME_DU_SACRÉ_COEUR_DISSOUDUN = (
+        2433085  # Notre-Dame-du-Sacré-Coeur-d'Issoudun
+    )
     QUE_NOUVELLE = 2406020  # Nouvelle
     QUE_NOYAN = 2456015  # Noyan
     QUE_NUTASHKUAN = 2498806  # Nutashkuan
@@ -3617,7 +3708,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     QUE_SAINTE_BÉATRIX = 2462020  # Sainte-Béatrix
     QUE_SAINTE_CATHERINE = 2467030  # Sainte-Catherine
     QUE_SAINTE_CATHERINE_DE_HATLEY = 2445060  # Sainte-Catherine-de-Hatley
-    QUE_SAINTE_CATHERINE_DE_LA_JACQUES_CARTIER = 2422005  # Sainte-Catherine-de-la-Jacques-Cartier
+    QUE_SAINTE_CATHERINE_DE_LA_JACQUES_CARTIER = (
+        2422005  # Sainte-Catherine-de-la-Jacques-Cartier
+    )
     QUE_SAINTE_CHRISTINE = 2448020  # Sainte-Christine
     QUE_SAINTE_CHRISTINE_DAUVERGNE = 2434105  # Sainte-Christine-d'Auvergne
     QUE_SAINTE_CLAIRE = 2419055  # Sainte-Claire
@@ -3630,7 +3723,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     QUE_SAINTE_CÉCILE_DE_WHITTON = 2430050  # Sainte-Cécile-de-Whitton
     QUE_SAINTE_EDWIDGE_DE_CLIFTON = 2444055  # Sainte-Edwidge-de-Clifton
     QUE_SAINTE_EULALIE = 2450005  # Sainte-Eulalie
-    QUE_SAINTE_EUPHÉMIE_SUR_RIVIÈRE_DU_SUD = 2418035  # Sainte-Euphémie-sur-Rivière-du-Sud
+    QUE_SAINTE_EUPHÉMIE_SUR_RIVIÈRE_DU_SUD = (
+        2418035  # Sainte-Euphémie-sur-Rivière-du-Sud
+    )
     QUE_SAINTE_FAMILLE_DE_LÎLE_DORLÉANS = 2420010  # Sainte-Famille-de-l'Île-d'Orléans
     QUE_SAINTE_FLAVIE = 2409085  # Sainte-Flavie
     QUE_SAINTE_FLORENCE = 2407010  # Sainte-Florence
@@ -3660,7 +3755,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     QUE_SAINTE_LUCIE_DES_LAURENTIDES = 2478020  # Sainte-Lucie-des-Laurentides
     QUE_SAINTE_LUCIE_DE_BEAUREGARD = 2418020  # Sainte-Lucie-de-Beauregard
     QUE_SAINTE_MADELEINE = 2454025  # Sainte-Madeleine
-    QUE_SAINTE_MADELEINE_DE_LA_RIVIÈRE_MADELEINE = 2404005  # Sainte-Madeleine-de-la-Rivière-Madeleine
+    QUE_SAINTE_MADELEINE_DE_LA_RIVIÈRE_MADELEINE = (
+        2404005  # Sainte-Madeleine-de-la-Rivière-Madeleine
+    )
     QUE_SAINTE_MARCELLINE_DE_KILDARE = 2462030  # Sainte-Marcelline-de-Kildare
     QUE_SAINTE_MARGUERITE = 2426035  # Sainte-Marguerite
     QUE_SAINTE_MARGUERITE_DU_LAC_MASSON = 2477012  # Sainte-Marguerite-du-Lac-Masson
@@ -3829,7 +3926,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     QUE_SAINT_FLAVIEN = 2433052  # Saint-Flavien
     QUE_SAINT_FORTUNAT = 2431030  # Saint-Fortunat
     QUE_SAINT_FRANÇOIS_DASSISE = 2406055  # Saint-François-d'Assise
-    QUE_SAINT_FRANÇOIS_DE_LA_RIVIÈRE_DU_SUD = 2418060  # Saint-François-de-la-Rivière-du-Sud
+    QUE_SAINT_FRANÇOIS_DE_LA_RIVIÈRE_DU_SUD = (
+        2418060  # Saint-François-de-la-Rivière-du-Sud
+    )
     QUE_SAINT_FRANÇOIS_DE_LÎLE_DORLÉANS = 2420005  # Saint-François-de-l'Île-d'Orléans
     QUE_SAINT_FRANÇOIS_DE_SALES = 2491015  # Saint-François-de-Sales
     QUE_SAINT_FRANÇOIS_DU_LAC = 2450128  # Saint-François-du-Lac
@@ -3882,7 +3981,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     QUE_SAINT_ISIDORE_DE_CLIFTON = 2441012  # Saint-Isidore-de-Clifton
     QUE_SAINT_JACQUES = 2463013  # Saint-Jacques
     QUE_SAINT_JACQUES_DE_LEEDS = 2431140  # Saint-Jacques-de-Leeds
-    QUE_SAINT_JACQUES_LE_MAJEUR_DE_WOLFESTOWN = 2431025  # Saint-Jacques-le-Majeur-de-Wolfestown
+    QUE_SAINT_JACQUES_LE_MAJEUR_DE_WOLFESTOWN = (
+        2431025  # Saint-Jacques-le-Majeur-de-Wolfestown
+    )
     QUE_SAINT_JACQUES_LE_MINEUR = 2468040  # Saint-Jacques-le-Mineur
     QUE_SAINT_JANVIER_DE_JOLY = 2433065  # Saint-Janvier-de-Joly
     QUE_SAINT_JEAN_BAPTISTE = 2457033  # Saint-Jean-Baptiste
@@ -3923,7 +4024,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     QUE_SAINT_LOUIS_DE_BLANDFORD = 2439170  # Saint-Louis-de-Blandford
     QUE_SAINT_LOUIS_DE_GONZAGUE_0 = 2428035  # Saint-Louis-de-Gonzague
     QUE_SAINT_LOUIS_DE_GONZAGUE_1 = 2470035  # Saint-Louis-de-Gonzague
-    QUE_SAINT_LOUIS_DE_GONZAGUE_DU_CAP_TOURMENTE = 2421015  # Saint-Louis-de-Gonzague-du-Cap-Tourmente
+    QUE_SAINT_LOUIS_DE_GONZAGUE_DU_CAP_TOURMENTE = (
+        2421015  # Saint-Louis-de-Gonzague-du-Cap-Tourmente
+    )
     QUE_SAINT_LOUIS_DU_HA_HA = 2413080  # Saint-Louis-du-Ha! Ha!
     QUE_SAINT_LUCIEN = 2449030  # Saint-Lucien
     QUE_SAINT_LUC_DE_BELLECHASSE = 2428060  # Saint-Luc-de-Bellechasse
@@ -4502,7 +4605,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     SASK_GREIG_LAKE = 4717053  # Greig Lake
     SASK_GRENFELL = 4705029  # Grenfell
     SASK_GRIFFIN_NO_66 = 4702042  # Griffin No. 66
-    SASK_GRIZZLY_BEARS_HEAD_110_AND_LEAN_MAN_111 = 4712832  # Grizzly Bear's Head 110 and Lean Man 111
+    SASK_GRIZZLY_BEARS_HEAD_110_AND_LEAN_MAN_111 = (
+        4712832  # Grizzly Bear's Head 110 and Lean Man 111
+    )
     SASK_GULL_LAKE = 4708011  # Gull Lake
     SASK_GULL_LAKE_NO_139 = 4708009  # Gull Lake No. 139
     SASK_HAFFORD = 4716022  # Hafford
@@ -5010,7 +5115,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     SASK_ST_PHILIPS_NO_301 = 4709042  # St. Philips No. 301
     SASK_ST_WALBURG = 4717036  # St. Walburg
     SASK_SUCCESS = 4708036  # Success
-    SASK_SUCKER_RIVER_156C_NEMEBIEN_RIVER_156C = 4718811  # Sucker River 156C (Nemebien River 156C)
+    SASK_SUCKER_RIVER_156C_NEMEBIEN_RIVER_156C = (
+        4718811  # Sucker River 156C (Nemebien River 156C)
+    )
     SASK_SUNSET_COVE = 4706076  # Sunset Cove
     SASK_SUN_VALLEY = 4707045  # Sun Valley
     SASK_SURPRISE_VALLEY_NO_9 = 4702014  # Surprise Valley No. 9
@@ -5083,7 +5190,9 @@ class CensusSubdivision(CensusDivisionGeoCode):
     SASK_WAVERLEY_NO_44 = 4703022  # Waverley No. 44
     SASK_WAWKEN_NO_93 = 4701076  # Wawken No. 93
     SASK_WAWOTA = 4701078  # Wawota
-    SASK_WA_PII_MOOS_TOOSIS_WHITE_CALF_83A = 4706820  # Wa-Pii Moos-Toosis (White Calf) 83A
+    SASK_WA_PII_MOOS_TOOSIS_WHITE_CALF_83A = (
+        4706820  # Wa-Pii Moos-Toosis (White Calf) 83A
+    )
     SASK_WEBB = 4708008  # Webb
     SASK_WEBB_NO_138 = 4708006  # Webb No. 138
     SASK_WEEKES = 4714009  # Weekes

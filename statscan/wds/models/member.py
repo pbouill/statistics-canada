@@ -3,7 +3,6 @@ from typing import Iterator, Optional, Any
 from pydantic import field_validator
 
 from statscan.enums.auto.wds.classification_type import ClassificationType
-from statscan.enums.auto.wds.uom import Uom
 
 from .base import WDSBaseModel
 
@@ -14,7 +13,9 @@ class Member(WDSBaseModel):
     memberNameEn: str
     memberNameFr: str
     classificationCode: Optional[int] = None  # API can return null
-    classificationTypeCode: Optional[ClassificationType | int | str] = None  # API returns string
+    classificationTypeCode: Optional[ClassificationType | int | str] = (
+        None  # API returns string
+    )
     geoLevel: Optional[int] = None  # API can return null
     vintage: Optional[int] = None  # API can return null
     terminated: bool
@@ -45,7 +46,9 @@ class MemberManager:
     def add_member(self, member: Member, replace: bool = False) -> None:
         if (existing_member := self.members.get(member.memberId)) is not None:
             if not replace:
-                raise ValueError(f"Member with ID {member.memberId} already exists. Cannot add {member}")
+                raise ValueError(
+                    f"Member with ID {member.memberId} already exists. Cannot add {member}"
+                )
             else:
                 self.remove_member(existing_member)
         self.__members.append(member)

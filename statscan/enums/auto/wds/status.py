@@ -8,15 +8,25 @@ class Status(Enum):
     """
     Automatically generated Enum for Status
     """
+
     NORMAL = 0  # normal  // normal
     NOT_AVAIL_FOR_A_SPECIFIC_REF_PERIOD = 1  # not available for a specific reference period  // indisponible pour une période de référence précise
-    LESS_THAN_THE_LIMIT_OF_DETECT = 10  # less than the limit of detection  // inférieur à la limite de détection
+    LESS_THAN_THE_LIMIT_OF_DETECT = (
+        10  # less than the limit of detection  // inférieur à la limite de détection
+    )
     EVAL_ROUNDED_TO_0 = 2  # value rounded to 0 (zero) where there is a meaningful distinction between true zero and the value that was rounded  // valeur arrondie à 0 (zéro) là où il y a une distinction importante entre le zéro absolu et la valeur arrondie
-    DATA_QUAL_EXCELLENT = 3  # data quality: excellent  // qualité des données : excellente
-    DATA_QUAL_VERY_GOOD = 4  # data quality: very good  // qualité des données : très bonne
+    DATA_QUAL_EXCELLENT = (
+        3  # data quality: excellent  // qualité des données : excellente
+    )
+    DATA_QUAL_VERY_GOOD = (
+        4  # data quality: very good  // qualité des données : très bonne
+    )
     DATA_QUAL_GOOD = 5  # data quality: good  // qualité des données : bonne
-    DATA_QUAL_ACCEPT = 6  # data quality: acceptable  // qualité des données : acceptable
+    DATA_QUAL_ACCEPT = (
+        6  # data quality: acceptable  // qualité des données : acceptable
+    )
     USE_WITH_CAUTION = 7  # use with caution  // à utiliser avec prudence
-    TOO_UNRELIABLE_TO_BE_PUB = 8  # too unreliable to be published  // trop peu fiable pour être publié
+    TOO_UNRELIABLE_TO_BE_PUB = (
+        8  # too unreliable to be published  // trop peu fiable pour être publié
+    )
     NA = 9  # not applicable  // n'ayant pas lieu de figurer
-

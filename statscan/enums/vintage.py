@@ -5,6 +5,7 @@ class Vintage(Enum):
     """
     Enum for valid census years
     """
+
     CENSUS_2021 = 2021  # Census 2021
     # CENSUS_2016 = 2016  # Census 2016
     # CENSUS_2011 = 2011  # Census 2011
@@ -19,10 +20,10 @@ class Vintage(Enum):
     def __str__(self) -> str:
         """
         String representation of the Vintage enum.
-        
+
         Returns
         -------
         str
             The string representation of the vintage year.
         """
-        return f'{self.value:04d}'
+        return f"{self.value:04d}"

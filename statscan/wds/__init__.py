@@ -8,10 +8,9 @@ All implementations follow the specifications in the official WDS User Guide.
 
 Key Components:
 - Client: Main async WDS API client (statscan.wds.client.Client)
-- Models: Pydantic models for WDS responses 
+- Models: Pydantic models for WDS responses
 - Requests: Low-level HTTP request handlers
 
 For API documentation, endpoints, usage examples, and troubleshooting,
 refer to the official WDS User Guide linked above.
 """
-

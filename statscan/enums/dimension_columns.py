@@ -6,11 +6,11 @@ and dimension identifiers in census datasets.
 """
 
 from enum import Enum, StrEnum
-from typing import Optional
 
 
 class DimensionColumn(StrEnum):
     """Standard dimension column names in census datasets."""
+
     GENDER = "Gender"
     CENSUS_PROFILE_CHARACTERISTIC = "Census Profile Characteristic"
     STATISTIC_TYPE = "Statistic Type"
@@ -22,7 +22,7 @@ class DimensionColumn(StrEnum):
     SCALAR_ID = "SCALAR_ID"
     VECTOR = "Vector"
     COORDINATE = "Coordinate"
-    
+
     @property
     def description(self) -> str:
         """Get description of the dimension column."""
@@ -37,13 +37,14 @@ class DimensionColumn(StrEnum):
             DimensionColumn.SCALAR_FACTOR: "Scaling factor for values",
             DimensionColumn.SCALAR_ID: "Scaling factor identifier",
             DimensionColumn.VECTOR: "Vector identifier for the dataset",
-            DimensionColumn.COORDINATE: "Coordinate within the data structure"
+            DimensionColumn.COORDINATE: "Coordinate within the data structure",
         }
         return descriptions.get(self, f"Dimension: {self.value}")
 
 
 class MetadataColumn(StrEnum):
     """Standard metadata column names in census datasets."""
+
     SERIES_KEY = "series_key"
     TIME_PERIOD = "time_period"
     VALUE = "value"
@@ -52,7 +53,7 @@ class MetadataColumn(StrEnum):
     SYMBOL = "SYMBOL"
     TERMINATED = "TERMINATED"
     DECIMALS = "DECIMALS"
-    
+
     @property
     def description(self) -> str:
         """Get description of the metadata column."""
@@ -64,20 +65,21 @@ class MetadataColumn(StrEnum):
             MetadataColumn.STATUS: "Status of the data point",
             MetadataColumn.SYMBOL: "Symbol indicating data quality or type",
             MetadataColumn.TERMINATED: "Whether the series is terminated",
-            MetadataColumn.DECIMALS: "Number of decimal places for the value"
+            MetadataColumn.DECIMALS: "Number of decimal places for the value",
         }
         return descriptions.get(self, f"Metadata: {self.value}")
 
 
 class SeriesKeyPosition(Enum):
     """Positions within series keys for different dimensions."""
+
     GENDER = 0
     CHARACTERISTIC = 1
     STATISTIC_TYPE = 2
     GEOGRAPHY = 3
     UOM = 4
     SCALAR = 5
-    
+
     @property
     def column_name(self) -> str:
         """Get the corresponding dimension column name."""
@@ -87,52 +89,54 @@ class SeriesKeyPosition(Enum):
             SeriesKeyPosition.STATISTIC_TYPE: DimensionColumn.STATISTIC_TYPE,
             SeriesKeyPosition.GEOGRAPHY: DimensionColumn.GEOGRAPHY,
             SeriesKeyPosition.UOM: DimensionColumn.UOM_ID,
-            SeriesKeyPosition.SCALAR: DimensionColumn.SCALAR_ID
+            SeriesKeyPosition.SCALAR: DimensionColumn.SCALAR_ID,
         }
         return mapping.get(self, f"series_key_dim_{self.value}")
 
 
 class ColumnType(Enum):
     """Types of columns in census datasets."""
+
     DIMENSION = "dimension"
     METADATA = "metadata"
     SERIES_KEY_COMPONENT = "series_key_component"
     DERIVED = "derived"
-    
+
     @property
     def description(self) -> str:
         descriptions = {
             ColumnType.DIMENSION: "Dimension that defines data categorization",
             ColumnType.METADATA: "Metadata about the data points",
             ColumnType.SERIES_KEY_COMPONENT: "Component extracted from series key",
-            ColumnType.DERIVED: "Derived or calculated column"
+            ColumnType.DERIVED: "Derived or calculated column",
         }
         return descriptions.get(self, "Unknown column type")
 
 
 class ValueType(Enum):
     """Types of values that can appear in census data."""
+
     NUMERIC = "numeric"
     TEXT = "text"
     CODE = "code"
     MISSING = "missing"
     NOT_AVAILABLE = "not_available"
     CONFIDENTIAL = "confidential"
-    
+
     @classmethod
-    def from_value(cls, value) -> 'ValueType':
+    def from_value(cls, value) -> "ValueType":
         """Determine value type from actual value."""
-        if value is None or str(value).strip() == '':
+        if value is None or str(value).strip() == "":
             return cls.MISSING
-        
+
         str_value = str(value).strip().upper()
-        
+
         # Check for special codes
-        if str_value in ['..', '...', 'X', 'F']:
+        if str_value in ["..", "...", "X", "F"]:
             return cls.CONFIDENTIAL
-        elif str_value in ['0', '.']:
+        elif str_value in ["0", "."]:
             return cls.NOT_AVAILABLE
-        
+
         # Try to convert to numeric
         try:
             float(value)

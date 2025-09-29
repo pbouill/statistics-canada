@@ -180,3 +180,7 @@ cython_debug/
 scratch/
 debug/
 debug_*
+
+# Local pip wheelhouse used for act/docker local testing
+.wheelhouse/
+.wheelhouse.tar.gz

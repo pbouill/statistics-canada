@@ -20,6 +20,7 @@ class TestCodeSets:
         assert ResponseKeys.STATUS in codesets_data
         assert codesets_data[ResponseKeys.STATUS] == RESPONSE_SUCCESS_STR
 
+
 class TestCubesListLite:
     @pytest.mark.network
     @pytest.mark.asyncio
@@ -45,13 +46,10 @@ class TestCubeMeta:
     @pytest.mark.network
     @pytest.mark.asyncio
     async def test_get_cubemetadata(
-        self, 
-        wds_client: Client, 
-        first_cube_product_id: int
+        self, wds_client: Client, first_cube_product_id: int
     ) -> None:
         response = await WDSRequests.get_cube_metadata(
-            client=wds_client, 
-            product_id=first_cube_product_id
+            client=wds_client, product_id=first_cube_product_id
         )
         response.raise_for_status()
         data = response.json()
@@ -67,5 +65,5 @@ class TestCubeMeta:
         assert ResponseKeys.OBJECT in first_cubemeta
         first_cubemeta_object = first_cubemeta[ResponseKeys.OBJECT]
         assert isinstance(first_cubemeta_object, dict)
-        assert 'productId' in first_cubemeta_object
-        assert int(first_cubemeta_object['productId']) == first_cube_product_id
+        assert "productId" in first_cubemeta_object
+        assert int(first_cubemeta_object["productId"]) == first_cube_product_id

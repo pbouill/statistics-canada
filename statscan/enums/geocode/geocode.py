@@ -116,15 +116,15 @@ class GeoCode(Enum):
         Return the unique identifier for this enum.
         This is usually the last nchar characters of the enum value.
         """
-        return f'{self.value:0{self.get_nchars()}}'  # Ensure the UID is zero-padded to nchar length
+        return f"{self.value:0{self.get_nchars()}}"  # Ensure the UID is zero-padded to nchar length
 
     @property
     def code(self) -> str:
         """
         Return the geo code for this enum.
         """
-        return f'{self.schema.value}{self.uid}'
-    
+        return f"{self.schema.value}{self.uid}"
+
     @classmethod
     def from_code(cls, code: str) -> Self:
         """
@@ -141,10 +141,12 @@ class GeoCode(Enum):
             The corresponding GeoCode enum instance.
         """
         if not code.startswith(schema := cls.get_schema()):
-            raise ValueError(f'Unexpected schema prefix in code: {code}. Expected prefix: {schema}')
-        uid = code[len(schema):]
+            raise ValueError(
+                f"Unexpected schema prefix in code: {code}. Expected prefix: {schema}"
+            )
+        uid = code[len(schema) :]
         return cls.from_uid(uid)
-    
+
     @classmethod
     def from_uid(cls, uid: str) -> Self:
         """
@@ -161,6 +163,7 @@ class GeoCode(Enum):
             The corresponding GeoCode enum instance.
         """
         return cls(int(uid))
+
 
 class FloatGeoCode(GeoCode):
     """
@@ -179,15 +182,15 @@ class FloatGeoCode(GeoCode):
             The number of decimal places in the geographic code.
         """
         raise NotImplementedError(f"{cls.__name__} must implement get_nprecision()")
-    
+
     @property
     def uid(self) -> str:
         """
         Return the unique identifier for this enum as a string with the specified precision.
         This is usually the last nchar characters of the enum value, formatted to nprecision.
         """
-        return f'{self.value:0{self.get_nchars()}.{self.get_nprecision()}f}'  # Format to nprecision decimal places
-    
+        return f"{self.value:0{self.get_nchars()}.{self.get_nprecision()}f}"  # Format to nprecision decimal places
+
     @classmethod
     def from_uid(cls, uid: str) -> Self:
         """

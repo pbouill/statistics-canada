@@ -1,7 +1,7 @@
-from datetime import datetime, date
+from datetime import datetime
 from typing import Optional, Any
 
-from pydantic import field_validator, model_validator, Field
+from pydantic import field_validator, Field
 
 from statscan.enums.wds.wds_response_status import WDSResponseStatus
 from statscan.enums.auto.wds.frequency import Frequency
@@ -10,10 +10,8 @@ from statscan.enums.auto.wds.survey import Survey
 from statscan.enums.auto.wds.status import Status
 
 from .base import WDSBaseModel
-from .footnote import Footnote
 from .dimension import Dimension
 from .correction import Correction
-
 
 
 class CubeExistsError(ValueError):
@@ -31,20 +29,26 @@ class Cube(WDSBaseModel):
     cubeEndDate: datetime
 
     releaseTime: datetime
-    archiveStatusCode: Optional[Status | int | str] = None  # API returns string, model expects int
+    archiveStatusCode: Optional[Status | int | str] = (
+        None  # API returns string, model expects int
+    )
     archiveStatusEn: Optional[str] = None
     archiveStatusFr: Optional[str] = None
-    subjectCode: Optional[list[Subject | int | str]] = None  # API returns list of strings
-    surveyCode: Optional[list[Survey | int | str]] = None  # API returns list of strings  
+    subjectCode: Optional[list[Subject | int | str]] = (
+        None  # API returns list of strings
+    )
+    surveyCode: Optional[list[Survey | int | str]] = None  # API returns list of strings
     frequencyCode: Frequency | int  # API may return int
     correction: Optional[list[Correction]] = None  # API field name
-    correctionFootnote: Optional[list[Correction]] = None  # API field name  
+    correctionFootnote: Optional[list[Correction]] = None  # API field name
     issueDate: Optional[datetime] = None
 
     # full cube attributes
     nbSeriesCube: Optional[int] = None
     nbDatapointsCube: Optional[int] = None
-    dimensions: Optional[list[Dimension]] = Field(None, alias="dimension")  # API uses singular "dimension"
+    dimensions: Optional[list[Dimension]] = Field(
+        None, alias="dimension"
+    )  # API uses singular "dimension"
     geoAttribute: Optional[list] = None  # TODO: proper typing required
 
     @field_validator("productId", mode="before")
@@ -76,7 +80,9 @@ class Cube(WDSBaseModel):
             return [int(item) for item in v]
         return v
 
-    @field_validator("cubeStartDate", "cubeEndDate", "releaseTime", "issueDate", mode="before")
+    @field_validator(
+        "cubeStartDate", "cubeEndDate", "releaseTime", "issueDate", mode="before"
+    )
     @classmethod
     def convert_date_strings(cls, v: Any) -> Optional[datetime]:
         """Convert date strings to datetime objects"""
@@ -84,7 +90,7 @@ class Cube(WDSBaseModel):
             return None
         if isinstance(v, str):
             # Handle different date formats from API
-            if 'T' in v:
+            if "T" in v:
                 # "2022-02-09T08:30" format
                 return datetime.fromisoformat(v)
             else:
@@ -92,7 +98,7 @@ class Cube(WDSBaseModel):
                 return datetime.fromisoformat(f"{v}T00:00:00")
         return v
 
-    @property 
+    @property
     def corrections(self) -> list[Correction]:
         """Combined corrections from both API fields"""
         result = []
@@ -101,5 +107,3 @@ class Cube(WDSBaseModel):
         if self.correctionFootnote:
             result.extend(self.correctionFootnote)
         return result
-
-

@@ -1,6 +1,6 @@
 from datetime import datetime, date
 
-from pydantic import BaseModel, field_validator
+from pydantic import field_validator
 
 from statscan.enums.auto.wds.frequency import Frequency
 from statscan.enums.auto.wds.scalar import Scalar
@@ -14,7 +14,7 @@ from .base import WDSBaseModel
 class DataPoint(WDSBaseModel):
     refPer: date | str
     refPer2: date | str | None = None
-    refPerRaw: date | str  
+    refPerRaw: date | str
     refPerRaw2: date | str | None = None
     value: float | int
     decimals: int
@@ -24,17 +24,17 @@ class DataPoint(WDSBaseModel):
     securityLevelCode: SecurityLevel | int
     releaseTime: datetime | str
     frequencyCode: Frequency | int
-    
-    @field_validator('refPer2', 'refPerRaw2', mode='before')
+
+    @field_validator("refPer2", "refPerRaw2", mode="before")
     @classmethod
     def validate_optional_date_fields(cls, v):
         """Handle empty strings for optional date fields"""
-        if v == '' or v is None:
+        if v == "" or v is None:
             return None
         return v
-    
-    @field_validator('scalarFactorCode', mode='before')
-    @classmethod 
+
+    @field_validator("scalarFactorCode", mode="before")
+    @classmethod
     def validate_scalar_factor_code(cls, v):
         """Convert integer to Scalar enum if needed"""
         if isinstance(v, int):
@@ -43,8 +43,8 @@ class DataPoint(WDSBaseModel):
             except ValueError:
                 return v
         return v
-        
-    @field_validator('symbolCode', mode='before')
+
+    @field_validator("symbolCode", mode="before")
     @classmethod
     def validate_symbol_code(cls, v):
         """Convert integer to Symbol enum if needed"""
@@ -54,8 +54,8 @@ class DataPoint(WDSBaseModel):
             except ValueError:
                 return v
         return v
-        
-    @field_validator('statusCode', mode='before') 
+
+    @field_validator("statusCode", mode="before")
     @classmethod
     def validate_status_code(cls, v):
         """Convert integer to Status enum if needed"""
@@ -65,8 +65,8 @@ class DataPoint(WDSBaseModel):
             except ValueError:
                 return v
         return v
-        
-    @field_validator('securityLevelCode', mode='before')
+
+    @field_validator("securityLevelCode", mode="before")
     @classmethod
     def validate_security_level_code(cls, v):
         """Convert integer to SecurityLevel enum if needed"""
@@ -76,8 +76,8 @@ class DataPoint(WDSBaseModel):
             except ValueError:
                 return v
         return v
-        
-    @field_validator('frequencyCode', mode='before')
+
+    @field_validator("frequencyCode", mode="before")
     @classmethod
     def validate_frequency_code(cls, v):
         """Convert integer to Frequency enum if needed"""

@@ -8,6 +8,6 @@ class SecurityLevel(Enum):
     """
     Automatically generated Enum for SecurityLevel
     """
+
     PUB = 0  # public  // public
     SUPPR = 1  # suppressed to meet the confidentiality requirements of the Statistics Act  // confidentiel en vertu des dispositions de la Loi sur la statistique
-

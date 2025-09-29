@@ -8,6 +8,7 @@ class Frequency(Enum):
     """
     Automatically generated Enum for Frequency
     """
+
     DLY = 1  # Daily  // Quotidienne
     SEMI_ANN = 11  # Semi-annual  // Semestrielle
     ANN = 12  # Annual  // Annuelle
@@ -25,4 +26,3 @@ class Frequency(Enum):
     MON = 6  # Monthly  // Mensuelle
     BIOMON = 7  # Bimonthly  // Aux 2 mois
     QTR = 9  # Quarterly  // Trimestrielle
-

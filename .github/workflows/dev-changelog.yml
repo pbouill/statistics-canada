@@ -1,3 +1,7 @@
+# Smart changelog updater
+# Trigger: runs when a pull request is closed into the `dev` branch.
+# Purpose: analyze the PR's changed files; if package-relevant changes are present,
+#          update CHANGELOG.md automatically and commit the change.
 name: Smart Changelog Update
 
 on:
@@ -10,68 +14,41 @@ permissions:
   pull-requests: read
 
 jobs:
-  check-changes:
+  analyze-changes:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     outputs:
-      has-package-changes: ${{ steps.check.outputs.has_changes }}
-      skip-changelog: ${{ steps.check.outputs.skip }}
+      has-package-changes: ${{ steps.analysis.outputs.has_changes }}
+      skip-changelog: ${{ steps.analysis.outputs.skip }}
     steps:
-    - name: Check if PR contains package changes
-      id: check
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Analyze files for package relevance
+      id: analysis
       env:
         PR_NUMBER: ${{ github.event.pull_request.number }}
         GH_TOKEN: ${{ github.token }}
       run: |
-        echo "Checking PR #$PR_NUMBER for package-relevant changes"
-        
-        # Get list of changed files (using GitHub API since we don't have repo checked out)
+        echo "Analyzing PR #$PR_NUMBER for package-relevant changes"
+
+        # Fetch changed files for the PR (handles standard result size; PRs with
+        # >100 files should be rare for package changes; adjust pagination if needed)
         CHANGED_FILES=$(curl -s -H "Authorization: token $GH_TOKEN" \
           "https://api.github.com/repos/${{ github.repository }}/pulls/$PR_NUMBER/files" | \
-          jq -r '.[].filename')
-        
-        echo "Changed files:"
+          jq -r 'map(.filename) | .[]')
+
+        echo "Files changed in PR #$PR_NUMBER:" 
         echo "$CHANGED_FILES"
-        
-        HAS_PACKAGE_CHANGES=false
-        
-        # Check each changed file against package patterns
-        while IFS= read -r file; do
-          if [ -z "$file" ]; then continue; fi
-          
-          echo "Checking file: $file"
-          
-          # Package-relevant patterns (shared logic available in .github/scripts/file-patterns.sh for future refactoring)
-          if [[ "$file" =~ ^statscan/ ]] || \
-             [[ "$file" =~ ^pyproject\.toml$ ]] || \
-             [[ "$file" =~ ^setup\.py$ ]] || \
-             [[ "$file" =~ ^requirements.*\.txt$ ]] || \
-             [[ "$file" =~ ^README\.md$ ]] || \
-             [[ "$file" =~ ^LICENSE$ ]]; then
-            echo "  ✅ Package-relevant file found: $file"
-            HAS_PACKAGE_CHANGES=true
-            break
-          fi
-          
-          # Skip infrastructure-only files
-          if [[ "$file" =~ ^\.github/ ]] || \
-             [[ "$file" =~ ^docs/ ]] || \
-             [[ "$file" =~ ^tools/ ]] || \
-             [[ "$file" =~ ^examples/ ]] || \
-             [[ "$file" =~ ^scratch/ ]] || \
-             [[ "$file" =~ ^tests/.*\.py$ ]]; then
-            echo "  ⏭️  Infrastructure file: $file"
-            continue
-          fi
-          
-          # If we reach here, it's an unknown file type - be conservative
-          echo "  ❓ Unknown file type, being conservative: $file"
-          HAS_PACKAGE_CHANGES=true
-          break
-          
-        done <<< "$CHANGED_FILES"
-        
-        if [ "$HAS_PACKAGE_CHANGES" = true ]; then
+
+        # Determine if any of the changed files are package-relevant using the
+        # helper script. The script reads newline-separated filenames from stdin
+        # and prints exactly 'true' or 'false'.
+        HAS_PACKAGE_CHANGES=$(echo "$CHANGED_FILES" | python .github/scripts/check_package_changes.py)
+
+        if [ "$HAS_PACKAGE_CHANGES" = "true" ]; then
           echo "✅ PR contains package changes - changelog update needed"
           echo "has_changes=true" >> $GITHUB_OUTPUT
           echo "skip=false" >> $GITHUB_OUTPUT
@@ -82,91 +59,39 @@ jobs:
         fi
 
   update-changelog:
-    needs: check-changes
-    if: needs.check-changes.outputs.skip-changelog == 'false'
+    needs: analyze-changes
+    if: needs.analyze-changes.outputs.skip-changelog == 'false'
     runs-on: ubuntu-latest
     steps:
-    - name: Generate App Token
-      id: app-token
-      uses: actions/create-github-app-token@v1
-      with:
-        app-id: ${{ secrets.CHANGELOG_BOT_APP_ID }}
-        private-key: ${{ secrets.CHANGELOG_BOT_PRIVATE_KEY }}
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        token: ${{ steps.app-token.outputs.token }}
-        fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
 
-    - name: Configure Git
-      run: |
-        git config user.name "seawall-changelog-bot[bot]"
-        git config user.email "seawall-changelog-bot[bot]@users.noreply.github.com"
+      - name: Update changelog
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          python .github/scripts/update_changelog.py "$PR_NUMBER" "$PR_TITLE" "$PR_AUTHOR" "$PR_URL"
 
-    - name: Update changelog
-      env:
-        PR_NUMBER: ${{ github.event.pull_request.number }}
-        PR_TITLE: ${{ github.event.pull_request.title }}
-        PR_AUTHOR: ${{ github.event.pull_request.user.login }}
-        PR_URL: ${{ github.event.pull_request.html_url }}
-        GH_TOKEN: ${{ steps.app-token.outputs.token }}
-      run: |
-        echo "Processing PR #$PR_NUMBER: $PR_TITLE"
-        echo "Author: $PR_AUTHOR"
-        
-        # Create changelog entry
-        CHANGELOG_ENTRY="- $PR_TITLE ([#$PR_NUMBER]($PR_URL)) by @$PR_AUTHOR"
-        
-        # Check if CHANGELOG.md exists
-        if [ ! -f "CHANGELOG.md" ]; then
-          echo "Creating new CHANGELOG.md"
-          cat > CHANGELOG.md << 'EOF'
-        # Changelog
-
-        All notable changes to this project will be documented in this file.
-
-        The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-        and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
-        ## [Unreleased]
-
-        EOF
-        fi
-        
-        # Check if entry already exists
-        if grep -q "\[#$PR_NUMBER\]" CHANGELOG.md; then
-          echo "⏭️  Entry for PR #$PR_NUMBER already exists in changelog"
-          exit 0
-        fi
-        
-        # Find the [Unreleased] section and add the entry
-        if grep -q "## \[Unreleased\]" CHANGELOG.md; then
-          # Insert the new entry after the [Unreleased] line
-          awk -v entry="$CHANGELOG_ENTRY" '
-            /^## \[Unreleased\]/ { print; print ""; print entry; next }
-            { print }
-          ' CHANGELOG.md > CHANGELOG.md.tmp
-          mv CHANGELOG.md.tmp CHANGELOG.md
-          
-          echo "✅ Added entry to changelog"
-        else
-          echo "❌ Could not find [Unreleased] section in changelog"
-          exit 1
-        fi
-        
-        # Commit the changes
-        git add CHANGELOG.md
-        git commit -m "📝 Add PR #$PR_NUMBER to changelog
-
-        $CHANGELOG_ENTRY
-
-        [skip ci]"
-        git push
+      - name: Commit changelog update
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "📝 Add PR #${{ github.event.pull_request.number }} to changelog"
+          file_pattern: CHANGELOG.md
+          tagging_message: 'changelog-update-${{ github.event.pull_request.number }}'
 
   skip-changelog:
-    needs: check-changes
-    if: needs.check-changes.outputs.skip-changelog == 'true'
+    needs: analyze-changes
+    if: needs.analyze-changes.outputs.skip-changelog == 'true'
     runs-on: ubuntu-latest
     steps:
     - name: Log skip reason

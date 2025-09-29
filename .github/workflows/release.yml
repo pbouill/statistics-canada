@@ -1,0 +1,83 @@
+name: 'Manual: Create and Publish Release'
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for creating the release'
+        required: true
+        default: 'Routine release.'
+
+
+jobs:
+  create-release-branch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+      - name: Checkout dev branch
+        uses: actions/checkout@v4
+        with:
+          ref: 'dev'
+          fetch-depth: 1
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Update version file
+        run: python build_info.py -u
+
+      - name: Install build dependencies
+        run: python -m pip install --upgrade build
+
+      - name: Build to generate version number
+        id: build_version
+        run: |
+          python -m build --no-isolation
+          VERSION=$(python -c "from statscan._version import __version__; print(__version__)")
+          echo "package_version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Generated version: $VERSION"
+
+      - name: Update Changelog
+        run: python .github/scripts/update_release_changelog.py ${{ steps.build_version.outputs.package_version }}
+
+      - name: Commit version and changelog files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add statscan/_version.py CHANGELOG.md
+          git commit -m "chore: Prepare release ${{ steps.build_version.outputs.package_version }}"
+
+      - name: Final Build for Publishing
+        run: python -m build --no-isolation
+
+      - name: Publish package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+      - name: Push changes to dev and merge to main
+        run: |
+          git push origin dev
+          git fetch origin main
+          git checkout main
+          git merge dev -m "feat: Merge release ${{ steps.build_version.outputs.package_version }} into main"
+          git push origin main
+
+      - name: Create Git Tag and GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: "v${{ steps.build_version.outputs.package_version }}"
+          name: "Release ${{ steps.build_version.outputs.package_version }}"
+          body_path: "CHANGELOG.md"
+          prerelease: false
+
+      - name: Merge main back to dev
+        run: |
+          git fetch origin dev
+          git checkout dev
+          git merge main -m "chore: Sync main back to dev after release"
+          git push origin dev

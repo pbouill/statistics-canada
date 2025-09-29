@@ -12,6 +12,7 @@ class DesignatedPlace(ProvinceGeoCode):
     Value: DPLUID_LDIDU
     Prefix: PREABBR_PRAABBREV
     """
+
     ALTA_ACADIA_VALLEY = 480001  # Acadia Valley
     ALTA_AETNA = 480302  # Aetna
     ALTA_ALCOMDALE = 480311  # Alcomdale
@@ -215,7 +216,9 @@ class DesignatedPlace(ProvinceGeoCode):
     ALTA_MOUNTAIN_VIEW = 480147  # Mountain View
     ALTA_MULHURST_BAY = 480148  # Mulhurst Bay
     ALTA_NAMAKA = 480150  # Namaka
-    ALTA_NAMAO_RIDGE_AND_STURGEON_VIEW_ESTATES = 480151  # Namao Ridge and Sturgeon View Estates
+    ALTA_NAMAO_RIDGE_AND_STURGEON_VIEW_ESTATES = (
+        480151  # Namao Ridge and Sturgeon View Estates
+    )
     ALTA_NESTOW = 480152  # Nestow
     ALTA_NEVIS = 480153  # Nevis
     ALTA_NEWBROOK = 480154  # Newbrook
@@ -806,7 +809,9 @@ class DesignatedPlace(ProvinceGeoCode):
     NB_ALDOUANE = 130001  # Aldouane
     NB_ANSE_BLEUE = 130003  # Anse-Bleue
     NB_ATHOLVILLE = 130241  # Atholville
-    NB_BAIE_DU_PETIT_POKEMOUCHE = 130005  # Baie du Petit Pokemouche / Baie du Petit-Pokemouche
+    NB_BAIE_DU_PETIT_POKEMOUCHE = (
+        130005  # Baie du Petit Pokemouche / Baie du Petit-Pokemouche
+    )
     NB_BAIE_STE_ANNE = 130006  # Baie Ste. Anne / Baie-Sainte-Anne
     NB_BAIE_VERTE = 130007  # Baie-Verte
     NB_BAKER_BROOK = 130247  # Baker Brook
@@ -878,7 +883,9 @@ class DesignatedPlace(ProvinceGeoCode):
     NB_LEECH = 130159  # Leech
     NB_LINCOLN = 130187  # Lincoln
     NB_LORNE = 130235  # Lorne
-    NB_LOWER_NEWCASTLE_RUSSELLVILLE_PART_B = 130203  # Lower Newcastle-Russellville part B / partie B
+    NB_LOWER_NEWCASTLE_RUSSELLVILLE_PART_B = (
+        130203  # Lower Newcastle-Russellville part B / partie B
+    )
     NB_MADRAN = 130143  # Madran
     NB_MALTEMPEC = 130113  # Maltempec
     NB_MANN_MOUNTAIN = 130051  # Mann Mountain
@@ -888,12 +895,20 @@ class DesignatedPlace(ProvinceGeoCode):
     NB_MURRAY_CORNER = 130055  # Murray Corner
     NB_NAUWIGEWAUK = 130176  # Nauwigewauk
     NB_NEVERS_ROAD = 130188  # Nevers Road
-    NB_NEW_BANDON_SALMON_BEACH_PART_A = 130211  # New Bandon-Salmon Beach part A / partie A
-    NB_NEW_BANDON_SALMON_BEACH_PART_B = 130212  # New Bandon-Salmon Beach part B / partie B
+    NB_NEW_BANDON_SALMON_BEACH_PART_A = (
+        130211  # New Bandon-Salmon Beach part A / partie A
+    )
+    NB_NEW_BANDON_SALMON_BEACH_PART_B = (
+        130212  # New Bandon-Salmon Beach part B / partie B
+    )
     NB_NOONAN = 130189  # Noonan
     NB_NORTH_TETAGOUCHE = 130128  # North Tetagouche
-    NB_NOTRE_DAME_DES_ÉRABLES_PART_A = 130223  # Notre-Dame-des-Érables part A / partie A
-    NB_NOTRE_DAME_DES_ÉRABLES_PART_B = 130224  # Notre-Dame-des-Érables part B / partie B
+    NB_NOTRE_DAME_DES_ÉRABLES_PART_A = (
+        130223  # Notre-Dame-des-Érables part A / partie A
+    )
+    NB_NOTRE_DAME_DES_ÉRABLES_PART_B = (
+        130224  # Notre-Dame-des-Érables part B / partie B
+    )
     NB_OAK_POINT_BARTIBOG_BRIDGE = 130059  # Oak Point - Bartibog Bridge
     NB_OSWALD_GRAY = 130190  # Oswald Gray
     NB_PEPPER_CREEK = 130233  # Pepper Creek
@@ -930,11 +945,15 @@ class DesignatedPlace(ProvinceGeoCode):
     NB_SAINTE_ROSE_PART_A = 130181  # Sainte-Rose part A / partie A
     NB_SAINTE_ROSE_PART_B = 130232  # Sainte-Rose part B / partie B
     NB_SAINT_ANDRÉ = 130242  # Saint-André
-    NB_SAINT_ANDRÉ_LEBLANC_OFFICE = 130183  # Saint-André & LeBlanc Office / Saint-André & Leblanc Office
+    NB_SAINT_ANDRÉ_LEBLANC_OFFICE = (
+        130183  # Saint-André & LeBlanc Office / Saint-André & Leblanc Office
+    )
     NB_SAINT_FRANÇOIS = 130246  # Saint-François
     NB_SAINT_HILAIRE = 130245  # Saint-Hilaire
     NB_SAINT_IGNACE = 130174  # Saint-Ignace
-    NB_SAINT_IRÉNÉE_AND_ALDERWOOD = 130109  # Saint Irénée and Alderwood / Saint Irénée et Alderwood
+    NB_SAINT_IRÉNÉE_AND_ALDERWOOD = (
+        130109  # Saint Irénée and Alderwood / Saint Irénée et Alderwood
+    )
     NB_SAINT_PONS = 130085  # Saint-Pons
     NB_SAINT_SAUVEUR = 130089  # Saint-Sauveur
     NB_SAUMAREZ = 130137  # Saumarez
@@ -946,9 +965,13 @@ class DesignatedPlace(ProvinceGeoCode):
     NB_SHEDIAC_CAPE = 130167  # Shediac Cape
     NB_SOMERVILLE = 130079  # Somerville
     NB_STE_CÉCILE = 130091  # Ste. Cécile / Sainte Cécile
-    NB_ST_JEAN_BAPTISTE_DE_RESTIGOUCHE = 130081  # St.-Jean Baptiste-de-Restigouche / Saint-Jean-Baptiste-de-Restigouche
+    NB_ST_JEAN_BAPTISTE_DE_RESTIGOUCHE = (
+        130081  # St.-Jean Baptiste-de-Restigouche / Saint-Jean-Baptiste-de-Restigouche
+    )
     NB_ST_MARGARETS = 130082  # St. Margarets
-    NB_ST_MARTIN_DE_RESTIGOUCHE = 130084  # St. Martin-de-Restigouche / St-Martin-de-Restigouche
+    NB_ST_MARTIN_DE_RESTIGOUCHE = (
+        130084  # St. Martin-de-Restigouche / St-Martin-de-Restigouche
+    )
     NB_ST_SIMON = 130087  # St. Simon
     NB_SUNNY_CORNER = 130092  # Sunny Corner
     NB_TABUSINTAC = 130093  # Tabusintac
@@ -980,7 +1003,9 @@ class DesignatedPlace(ProvinceGeoCode):
     NL_BISCAY_BAY = 100384  # Biscay Bay
     NL_BLACK_DUCK = 100140  # Black Duck
     NL_BLACK_DUCK_BROOK_AND_WINTERHOUSE = 100132  # Black Duck Brook and Winterhouse
-    NL_BLACK_DUCK_COVE_NORTHERN_PENINSULA = 100144  # Black Duck Cove, Northern Peninsula
+    NL_BLACK_DUCK_COVE_NORTHERN_PENINSULA = (
+        100144  # Black Duck Cove, Northern Peninsula
+    )
     NL_BLACK_TICKLE_DOMINO = 100263  # Black Tickle-Domino
     NL_BLAKETOWN = 100219  # Blaketown
     NL_BLOOMFIELD = 100366  # Bloomfield
@@ -997,8 +1022,12 @@ class DesignatedPlace(ProvinceGeoCode):
     NL_BUNYANS_COVE = 100184  # Bunyan's Cove
     NL_BURGOYNES_COVE = 100231  # Burgoynes Cove
     NL_BURNSIDE_ST_CHADS = 100250  # Burnside-St. Chads
-    NL_BURNT_COVE_ST_MICHAELS_BAULINE_SOUTH = 100365  # Burnt Cove, St. Michael's, Bauline South
-    NL_BURNT_POINT_GULL_ISLAND_NORTHERN_BAY = 100370  # Burnt Point-Gull Island-Northern Bay
+    NL_BURNT_COVE_ST_MICHAELS_BAULINE_SOUTH = (
+        100365  # Burnt Cove, St. Michael's, Bauline South
+    )
+    NL_BURNT_POINT_GULL_ISLAND_NORTHERN_BAY = (
+        100370  # Burnt Point-Gull Island-Northern Bay
+    )
     NL_CALVERT = 100265  # Calvert
     NL_CAMPBELLS_CREEK = 100133  # Campbells Creek
     NL_CANNINGS_COVE = 100243  # Canning's Cove
@@ -1066,7 +1095,9 @@ class DesignatedPlace(ProvinceGeoCode):
     NL_HUMBER_VILLAGE = 100194  # Humber Village
     NL_INDIAN_COVE = 100174  # Indian Cove
     NL_ISLAND_HARBOUR = 100276  # Island Harbour
-    NL_JACKSONS_COVE_LANGDONS_COVE_SILVERDALE = 100190  # Jackson's Cove-Langdon's Cove-Silverdale
+    NL_JACKSONS_COVE_LANGDONS_COVE_SILVERDALE = (
+        100190  # Jackson's Cove-Langdon's Cove-Silverdale
+    )
     NL_JEAN_DE_BAIE = 100102  # Jean de Baie
     NL_KNIGHTS_COVE_STOCK_COVE = 100364  # Knights Cove - Stock Cove
     NL_LADLE_COVE = 100363  # Ladle Cove
@@ -1074,7 +1105,9 @@ class DesignatedPlace(ProvinceGeoCode):
     NL_LANSE_AUX_MEADOWS_TO_QUIRPON = 100354  # L'Anse aux Meadows to Quirpon
     NL_LAURENCETON = 100152  # Laurenceton
     NL_LA_POILE = 100113  # La Poile
-    NL_LITTLE_HARBOUR_EAST_PLACENTIA_BAY = 100224  # Little Harbour (East), Placentia Bay
+    NL_LITTLE_HARBOUR_EAST_PLACENTIA_BAY = (
+        100224  # Little Harbour (East), Placentia Bay
+    )
     NL_LITTLE_RAPIDS = 100195  # Little Rapids
     NL_LITTLE_ST_LAWRENCE = 100100  # Little St. Lawrence
     NL_LODGE_BAY = 100260  # Lodge Bay
@@ -1097,7 +1130,9 @@ class DesignatedPlace(ProvinceGeoCode):
     NL_NAMELESS_COVE = 100216  # Nameless Cove
     NL_NEWMANS_COVE = 100246  # Newman's Cove
     NL_NEWVILLE = 100176  # Newville
-    NL_NEW_CHELSEA_NEW_MELBOURNE_BROWNSDALE_SIBLEYS_COVE_LEAD_COVE = 100230  # New Chelsea-New Melbourne-Brownsdale-Sibley's Cove-Lead Cove
+    NL_NEW_CHELSEA_NEW_MELBOURNE_BROWNSDALE_SIBLEYS_COVE_LEAD_COVE = (
+        100230  # New Chelsea-New Melbourne-Brownsdale-Sibley's Cove-Lead Cove
+    )
     NL_NEW_HARBOUR_TRINITY_BAY = 100225  # New Harbour, Trinity Bay
     NL_NOGGIN_COVE = 100168  # Noggin Cove
     NL_NORMANS_BAY = 100277  # Norman's Bay
@@ -1126,7 +1161,9 @@ class DesignatedPlace(ProvinceGeoCode):
     NL_RANDOM_ISLAND_WEST = 100242  # Random Island West
     NL_RANDOM_SOUND_WEST = 100382  # Random Sound West
     NL_RATTLING_BROOK = 100198  # Rattling Brook
-    NL_REEFS_HARBOUR_SHOAL_COVE_WEST_NEW_FEROLLE = 100149  # Reefs Harbour-Shoal Cove West-New Ferolle
+    NL_REEFS_HARBOUR_SHOAL_COVE_WEST_NEW_FEROLLE = (
+        100149  # Reefs Harbour-Shoal Cove West-New Ferolle
+    )
     NL_ROACHES_LINE = 100255  # Roaches Line
     NL_ROCK_HARBOUR = 100279  # Rock Harbour
     NL_SEARSTON = 100123  # Searston
@@ -1583,7 +1620,9 @@ class DesignatedPlace(ProvinceGeoCode):
     SASK_KAYVILLE = 470063  # Kayville
     SASK_KETCHEN = 470064  # Ketchen
     SASK_KHEDIVE = 470224  # Khedive
-    SASK_KIMOSOM_PWATINAHK_203_DESCHAMBAULT_LAKE = 470251  # Kimosom Pwatinahk 203 (Deschambault Lake)
+    SASK_KIMOSOM_PWATINAHK_203_DESCHAMBAULT_LAKE = (
+        470251  # Kimosom Pwatinahk 203 (Deschambault Lake)
+    )
     SASK_KOPPS_KOVE = 470151  # Kopp's Kove
     SASK_KRONAU = 470065  # Kronau
     SASK_KUROKI = 470066  # Kuroki
@@ -1696,7 +1735,9 @@ class DesignatedPlace(ProvinceGeoCode):
     SASK_WYMARK = 470145  # Wymark
     SASK_YELLOW_CREEK = 470197  # Yellow Creek
     YT_CARMACKS_LANDING_SETTLEMENT = 600001  # Carmacks Landing Settlement
-    YT_TWO_MILE_AND_TWO_AND_ONE_HALF_MILE_VILLAGE = 600002  # Two Mile and Two and One-Half Mile Village
+    YT_TWO_MILE_AND_TWO_AND_ONE_HALF_MILE_VILLAGE = (
+        600002  # Two Mile and Two and One-Half Mile Village
+    )
 
     @classmethod
     def get_schema(cls) -> Schema:

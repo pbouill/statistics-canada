@@ -15,7 +15,7 @@ class Base(BaseModel):
         """
         return data
 
-    @model_validator(mode='before')
+    @model_validator(mode="before")
     @classmethod
     def process_data(cls, data: dict) -> dict:
         """
@@ -25,19 +25,25 @@ class Base(BaseModel):
         # Handle None data
         if data is None:
             return {}
-        
+
         # Handle non-dict data
         if not isinstance(data, dict):
-            logger.warning(f"[{cls.__name__}] Expected dict but got {type(data)}: {data}")
+            logger.warning(
+                f"[{cls.__name__}] Expected dict but got {type(data)}: {data}"
+            )
             return {}
-        
+
         # Let subclasses preprocess the data first
         data = cls._preprocess_data(data)
-        
+
         extra_fields = set(data.keys()) - set(cls.model_fields.keys())
         if extra_fields:
             # Check if any of the extra fields are aliases of existing fields
-            field_aliases = {field_info.alias for field_info in cls.model_fields.values() if field_info.alias}
+            field_aliases = {
+                field_info.alias
+                for field_info in cls.model_fields.values()
+                if field_info.alias
+            }
             # Remove fields that are actually aliases from the extra fields
             extra_fields -= field_aliases
 

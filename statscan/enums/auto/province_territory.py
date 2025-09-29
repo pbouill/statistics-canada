@@ -11,6 +11,7 @@ class ProvinceTerritory(GeoCode):
     Name: PRENAME_PRANOM
     Value: PRUID_PRIDU
     """
+
     ALBERTA = 48  # Alberta
     BRITISH_COLUMBIA = 59  # British Columbia
     MANITOBA = 46  # Manitoba

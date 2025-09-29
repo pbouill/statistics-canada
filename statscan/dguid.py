@@ -1,4 +1,4 @@
-from typing import Optional, Self, Any
+from typing import Optional
 from dataclasses import dataclass
 import pandas as pd
 import logging
@@ -9,19 +9,20 @@ from statscan.enums.frequency import Frequency
 from statscan.enums.geocode.geocode import GeoCode
 from statscan.enums.stats_filter import StatsFilter
 from statscan.enums.wds.wds import Detail, Format
-from statscan.enums.auto import get_geocode_from_str
 from statscan.util.get_data import get_sdmx_data, make_census_profile_key
 from statscan.sdmx.response import SDMXResponse
 
 
 logger = logging.getLogger(__name__)
 
+
 @dataclass
 class DGUID:
-    '''
+    """
     Data Geographic Unique Identifier (DGUID) for StatsCan datasets.
     see: https://www12.statcan.gc.ca/wds-sdw/2021profile-profil2021-eng.cfm
-    '''
+    """
+
     geocode: GeoCode
     vintage: Vintage = Vintage.CENSUS_2021  # Default vintage is Census 2021
     _sdmx_response: Optional[SDMXResponse] = None  # Cached data response, if available
@@ -31,14 +32,14 @@ class DGUID:
     def schema(self) -> Schema:
         """
         Get the schema for the DGUID.
-        
+
         Returns
         -------
         Schema
             The schema associated with the DGUID.
         """
         return self.geocode.schema
-    
+
     @property
     def data_flow(self) -> str:
         """
@@ -50,18 +51,24 @@ class DGUID:
         """
         return self.schema.data_flow
 
-    def key(self, frequency: Frequency = Frequency.A5, stats_filter: Optional[StatsFilter] = None) -> str:
+    def key(
+        self,
+        frequency: Frequency = Frequency.A5,
+        stats_filter: Optional[StatsFilter] = None,
+    ) -> str:
         """
         Generate a 5-dimension SDMX key for this DGUID.
-        
+
         Returns:
             str: A 5-dimension key compatible with Census Profile SDMX API.
         """
-        return make_census_profile_key(dguid=str(self), frequency=frequency, stats_filter=stats_filter)
+        return make_census_profile_key(
+            dguid=str(self), frequency=frequency, stats_filter=stats_filter
+        )
 
     def __str__(self) -> str:
-        return f'{self.vintage.value}{self.geocode.code}'
-    
+        return f"{self.vintage.value}{self.geocode.code}"
+
     async def _get_sdmx_response(
         self,
         frequency: Frequency = Frequency.A5,
@@ -82,7 +89,7 @@ class DGUID:
         """
         resp = await get_sdmx_data(
             flow_ref=self.data_flow,
-            dguid=f'{self}',
+            dguid=f"{self}",
             frequency=frequency,
             stats_filter=stats_filter,
             format=Format.JSONDATA,
@@ -93,7 +100,7 @@ class DGUID:
         sdmx_response = SDMXResponse.model_validate(obj=raw_data)
         sdmx_response._raw_data = raw_data  # Store raw data for DataFrame conversion
         return sdmx_response
-    
+
     async def update(
         self,
         frequency: Frequency = Frequency.A5,
@@ -108,13 +115,17 @@ class DGUID:
         """
         timeout = timeout or self.DEFAULT_TIMEOUT
         self._sdmx_response = await self._get_sdmx_response(
-                frequency=frequency,
-                stats_filter=stats_filter,
-                detail=detail,
-                timeout=timeout,
+            frequency=frequency,
+            stats_filter=stats_filter,
+            detail=detail,
+            timeout=timeout,
         )
-        logger.debug("Updated SDMX response for %s (flow=%s, freq=%s)", self, self.data_flow, frequency)
-        
+        logger.debug(
+            "Updated SDMX response for %s (flow=%s, freq=%s)",
+            self,
+            self.data_flow,
+            frequency,
+        )
 
     @property
     def sdmx_response(self) -> Optional[SDMXResponse]:
@@ -122,12 +133,12 @@ class DGUID:
         Get the cached SDMX response for this DGUID.
         """
         return self._sdmx_response
-    
+
     @property
     def dataframe(self) -> Optional[pd.DataFrame]:
         """
         Get the cached SDMX response data as a DataFrame.
-        
+
         Returns
         -------
         pd.DataFrame
@@ -146,7 +157,7 @@ class DGUID:
             df = self.sdmx_response.get_population_data()
             if df is None or df.empty:
                 return df
-            needed = {'Gender', 'Characteristic', 'Value'}
+            needed = {"Gender", "Characteristic", "Value"}
             if not needed.issubset(df.columns):
                 return df
             return df
@@ -154,36 +165,46 @@ class DGUID:
             return None
 
     # Convenience: ensure updated
-    async def ensure_updated(self, timeout: Optional[float] = None, **update_kwargs) -> None:
+    async def ensure_updated(
+        self, timeout: Optional[float] = None, **update_kwargs
+    ) -> None:
         """Ensure data is loaded; pass extra kwargs to update() (e.g., raise_on_error=True)."""
         if self.sdmx_response is None:
             await self.update(timeout=timeout, **update_kwargs)
 
     # Generic characteristic lookup helpers
-    def _characteristic_selector(self, characteristic_substr: str, gender: Optional[str] = None) -> Optional[pd.Series]:
+    def _characteristic_selector(
+        self, characteristic_substr: str, gender: Optional[str] = None
+    ) -> Optional[pd.Series]:
         if self.dataframe is None:
             return None
         df = self.dataframe
-        if 'Characteristic' not in df.columns:
+        if "Characteristic" not in df.columns:
             return None
-        mask = df['Characteristic'].astype(str).str.contains(characteristic_substr, case=False, na=False)
-        if gender and 'Gender' in df.columns:
-            mask &= (df['Gender'] == gender)
+        mask = (
+            df["Characteristic"]
+            .astype(str)
+            .str.contains(characteristic_substr, case=False, na=False)
+        )
+        if gender and "Gender" in df.columns:
+            mask &= df["Gender"] == gender
         subset = df[mask]
         if subset.empty:
             return None
         # Prefer a non-null Value
-        if 'Value' in subset.columns:
-            non_null = subset[subset['Value'].notna()]
+        if "Value" in subset.columns:
+            non_null = subset[subset["Value"].notna()]
             if not non_null.empty:
                 return non_null.iloc[0]
         return subset.iloc[0]
 
-    def get_characteristic_value(self, characteristic_substr: str, gender: Optional[str] = 'Total - Gender') -> Optional[float]:
+    def get_characteristic_value(
+        self, characteristic_substr: str, gender: Optional[str] = "Total - Gender"
+    ) -> Optional[float]:
         row = self._characteristic_selector(characteristic_substr, gender)
         if row is None:
             return None
-        val = row.get('Value')
+        val = row.get("Value")
         try:
             return float(val)  # type: ignore[arg-type]
         except (TypeError, ValueError):
@@ -192,30 +213,34 @@ class DGUID:
     # Specific convenience properties
     @property
     def total_population_2021(self) -> Optional[int]:
-        val = self.get_characteristic_value('Population, 2021')
+        val = self.get_characteristic_value("Population, 2021")
         return int(val) if val is not None else None
 
     @property
     def population_change_2016_2021(self) -> Optional[float]:
-        return self.get_characteristic_value('Population percentage change, 2016 to 2021')
+        return self.get_characteristic_value(
+            "Population percentage change, 2016 to 2021"
+        )
 
     @property
     def land_area_km2(self) -> Optional[float]:
-        return self.get_characteristic_value('Land area in square kilometres')
+        return self.get_characteristic_value("Land area in square kilometres")
 
     @property
     def population_density(self) -> Optional[float]:
-        return self.get_characteristic_value('Population density per square kilometre')
+        return self.get_characteristic_value("Population density per square kilometre")
 
     # --- Demographic slice helpers ---
-    def _slice_by_terms(self, terms: list[str], must_have: Optional[list[str]] = None) -> Optional[pd.DataFrame]:
+    def _slice_by_terms(
+        self, terms: list[str], must_have: Optional[list[str]] = None
+    ) -> Optional[pd.DataFrame]:
         if self.dataframe is None:
             return None
         df = self.dataframe
-        if 'Characteristic' not in df.columns:
+        if "Characteristic" not in df.columns:
             return None
         mask = pd.Series(False, index=df.index)
-        lower_char = df['Characteristic'].astype(str).str.lower()
+        lower_char = df["Characteristic"].astype(str).str.lower()
         for t in terms:
             mask |= lower_char.str.contains(t, na=False)
         if must_have:
@@ -230,34 +255,38 @@ class DGUID:
         if self.dataframe is None:
             return None
         df = self.dataframe
-        if 'Gender' not in df.columns:
+        if "Gender" not in df.columns:
             return None
-        if 'Characteristic' not in df.columns:
+        if "Characteristic" not in df.columns:
             return None
         # pick characteristics where we have multiple genders
-        grouped = df.groupby(['Characteristic']).filter(lambda g: g['Gender'].nunique() > 1)
+        grouped = df.groupby(["Characteristic"]).filter(
+            lambda g: g["Gender"].nunique() > 1
+        )
         return grouped if not grouped.empty else None
 
     @property
     def age_demographics_df(self) -> Optional[pd.DataFrame]:
         """Age-related demographic DataFrame (standardized)."""
-        return self._slice_by_terms(['age'])
+        return self._slice_by_terms(["age"])
 
     @property
     def income_statistics(self) -> Optional[pd.DataFrame]:
         """Income related statistics subset (includes groups, median, average, etc.)."""
-        return self._slice_by_terms(['income'])
+        return self._slice_by_terms(["income"])
 
-    def get_income_stat(self, stat_substr: str, gender: Optional[str] = 'Total - Gender') -> Optional[float]:
+    def get_income_stat(
+        self, stat_substr: str, gender: Optional[str] = "Total - Gender"
+    ) -> Optional[float]:
         return self.get_characteristic_value(stat_substr, gender)
 
     async def get_dataframe(self, timeout: Optional[float] = None) -> pd.DataFrame:
         """
         Get data as a DataFrame, updating if needed.
-        
+
         Args:
             timeout: Request timeout in seconds
-            
+
         Returns:
             DataFrame with the data
         """
@@ -267,13 +296,15 @@ class DGUID:
             return pd.DataFrame()
         return self.sdmx_response.dataframe
 
-    async def get_response(self, timeout: Optional[float] = None) -> Optional['SDMXResponse']:
+    async def get_response(
+        self, timeout: Optional[float] = None
+    ) -> Optional["SDMXResponse"]:
         """
         Get the SDMX response, updating if needed.
-        
+
         Args:
             timeout: Request timeout in seconds
-            
+
         Returns:
             The SDMX response
         """
@@ -281,7 +312,9 @@ class DGUID:
             await self.update(timeout=timeout)
         return self.sdmx_response
 
-    async def get_population_data(self, timeout: Optional[float] = None) -> pd.DataFrame:
+    async def get_population_data(
+        self, timeout: Optional[float] = None
+    ) -> pd.DataFrame:
         """Async retrieval of population data (empty DataFrame if unavailable)."""
         if self.sdmx_response is None:
             await self.update(timeout=timeout)
@@ -293,13 +326,15 @@ class DGUID:
         except Exception:
             return pd.DataFrame()
 
-    async def get_age_demographics(self, timeout: Optional[float] = None) -> pd.DataFrame:
+    async def get_age_demographics(
+        self, timeout: Optional[float] = None
+    ) -> pd.DataFrame:
         """
         Get age demographic data, updating if needed.
-        
+
         Args:
             timeout: Request timeout in seconds
-            
+
         Returns:
             DataFrame with age demographic data
         """
@@ -309,37 +344,49 @@ class DGUID:
             return pd.DataFrame()
         return self.sdmx_response.get_age_demographics()
 
-    async def get_gender_demographics(self, timeout: Optional[float] = None) -> pd.DataFrame:
+    async def get_gender_demographics(
+        self, timeout: Optional[float] = None
+    ) -> pd.DataFrame:
         """
         Get gender demographic data, updating if needed.
-        
+
         Args:
             timeout: Request timeout in seconds
-            
+
         Returns:
             DataFrame with gender demographic data
         """
         await self.ensure_updated(timeout=timeout)
-        return self.gender_demographics if self.gender_demographics is not None else pd.DataFrame()
+        return (
+            self.gender_demographics
+            if self.gender_demographics is not None
+            else pd.DataFrame()
+        )
 
-    async def get_income_statistics(self, timeout: Optional[float] = None) -> pd.DataFrame:
+    async def get_income_statistics(
+        self, timeout: Optional[float] = None
+    ) -> pd.DataFrame:
         """
         Get income statistics, updating if needed.
-        
+
         Args:
             timeout: Request timeout in seconds
-            
+
         Returns:
             DataFrame with income statistics
         """
         await self.ensure_updated(timeout=timeout)
-        return self.income_statistics if self.income_statistics is not None else pd.DataFrame()
+        return (
+            self.income_statistics
+            if self.income_statistics is not None
+            else pd.DataFrame()
+        )
 
     @property
     def url(self) -> str:
         """
         Get the URL for accessing this DGUID's data.
-        
+
         Returns:
             The SDMX API URL for this DGUID
         """

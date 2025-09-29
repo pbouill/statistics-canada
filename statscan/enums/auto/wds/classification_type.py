@@ -8,6 +8,7 @@ class ClassificationType(Enum):
     """
     Automatically generated Enum for ClassificationType
     """
+
     GEO = 1  # Geography  // Géographie
     HFCE = 10  # HFCE  // DCFM
     HS_6_DGTL_LVL = 11  # HS 6-digit level  // SH niveau 6
@@ -52,7 +53,9 @@ class ClassificationType(Enum):
     HLTH_REG_2017 = 47  # Health regions 2017  // Régions sociosanitaires de 2017
     NOC2016 = 48  # NOC2016  // CNP2016
     WHO_INTL_STAT_CLASS_OF_DISEASES_AND_REL_HLTH_PROB_NINTH_REVISION = 49  # World Health Organization, International Statistical Classification of Diseases and Related Health Problems, Ninth Revision (ICD-9) and Tenth Revision (ICD-10)  // Organisation mondiale de la Santé, Classification statistique internationale des maladies et des problèmes de santé connexes, Neuvième révision (CIM-9) et Dixième révision (CIM-10)
-    BUS_SECT_IND = 5  # Business sector industries  // Les industries du secteur des entreprises
+    BUS_SECT_IND = (
+        5  # Business sector industries  // Les industries du secteur des entreprises
+    )
     CIP2016VAR = 50  # CIP2016VAR  // CPE2016VAR
     NAICS2017V2 = 51  # NAICS2017v2  // SCIAN2017v2
     CIP2016VARPG = 52  # CIP2016VARPG  // CPE2016VARRP
@@ -73,9 +76,13 @@ class ClassificationType(Enum):
     SCCAI2018 = 66  # SCCAI2018  // CTPZI2018
     SCCAIV2018 = 67  # SCCAIV2018  // CTPZIV2018
     CIP2016VCANNABIS = 68  # CIP2016VCannabis  // CPE2016VCannabis
-    CIP2016VCANNABISPRIMARY = 69  # CIP2016VCannabisPrimary  // CPE2016VCannabisPrincipaux
+    CIP2016VCANNABISPRIMARY = (
+        69  # CIP2016VCannabisPrimary  // CPE2016VCannabisPrincipaux
+    )
     CGFS2014 = 7  # CGFS2014  // SFPC2014
-    CIP2016VARCANNABISSTEMANDBHASE = 70  # CIP2016VARCannabisSTEMandBHASE  // CPE2016VARCannabisSTGMetSACHES
+    CIP2016VARCANNABISSTEMANDBHASE = (
+        70  # CIP2016VARCannabisSTEMandBHASE  // CPE2016VARCannabisSTGMetSACHES
+    )
     LFSSPEC2017 = 71  # LFSSPEC2017  // EPASPEC2017
     HS_4_DGTL_LVL = 72  # HS 4-digit level  // HS niveau 4
     SCCAI2019 = 73  # SCCAI2019  // CTPZI2019
@@ -89,8 +96,12 @@ class ClassificationType(Enum):
     CIP2021VARPG = 80  # CIP2021VARPG  // CPE2021VARRP
     CIP2021VARSTEMANDBHASE = 81  # CIP2021VARSTEMandBHASE  // CPE2021VARSTIMetSACHES
     NAICS2022V1 = 82  # NAICS2022v1  // SCIAN2022v1
-    CIP2021VCANNABISPRIMARY = 83  # CIP2021VCannabisPrimary  // CPE2021VCannabisPrincipaux
-    CIP2021VARCANNABISSTEMANDBHASE = 84  # CIP2021VARCannabisSTEMandBHASE  // CPE2021VARCannabisSTIMetSACHES
+    CIP2021VCANNABISPRIMARY = (
+        83  # CIP2021VCannabisPrimary  // CPE2021VCannabisPrincipaux
+    )
+    CIP2021VARCANNABISSTEMANDBHASE = (
+        84  # CIP2021VARCannabisSTEMandBHASE  // CPE2021VARCannabisSTIMetSACHES
+    )
     CIP2021VCANNABIS = 85  # CIP2021VCannabis  // CPE2021VCannabis
     CIP2021 = 86  # CIP2021  // CPE2021
     SCCAI2022 = 87  # SCCAI2022  // CTPZI2022
@@ -98,4 +109,3 @@ class ClassificationType(Enum):
     CIP2021VALTERNATIVE = 89  # CIP2021VAlternative  // CPE2021VAlternatifs
     CIP2011SPEC = 9  # CIP2011SPEC  // CPE2011SPEC
     NULL = 90  # NULL  // NULL
-

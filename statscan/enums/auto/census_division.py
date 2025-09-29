@@ -12,6 +12,7 @@ class CensusDivision(ProvinceGeoCode):
     Value: CDUID_DRIDU
     Prefix: PREABBR_PRAABBREV
     """
+
     ALTA_DIVISION_NO_1 = 4801  # Division No.  1
     ALTA_DIVISION_NO_10 = 4810  # Division No. 10
     ALTA_DIVISION_NO_11 = 4811  # Division No. 11
@@ -204,7 +205,9 @@ class CensusDivision(ProvinceGeoCode):
     QUE_CHARLEVOIX = 2416  # Charlevoix
     QUE_CHARLEVOIX_EST = 2415  # Charlevoix-Est
     QUE_COATICOOK = 2444  # Coaticook
-    QUE_COMMUNAUTÉ_MARITIME_DES_ÎLES_DE_LA_MADELEINE = 2401  # Communauté maritime des Îles-de-la-Madeleine
+    QUE_COMMUNAUTÉ_MARITIME_DES_ÎLES_DE_LA_MADELEINE = (
+        2401  # Communauté maritime des Îles-de-la-Madeleine
+    )
     QUE_DAUTRAY = 2452  # D'Autray
     QUE_DEUX_MONTAGNES = 2472  # Deux-Montagnes
     QUE_DRUMMOND = 2449  # Drummond

@@ -12,7 +12,7 @@ class Sender(Base):
     names: Optional[dict[str, str]] = None  # language -> name mapping (optional)
     contacts: Optional[list] = None  # Optional contacts field
 
-    def get_display_name(self, lang: str = 'en') -> str:
+    def get_display_name(self, lang: str = "en") -> str:
         """Get the display name in the specified language, defaulting to 'en'."""
         if self.names:
             return self.names.get(lang, self.name)
@@ -20,7 +20,7 @@ class Sender(Base):
 
 
 class Metadata(Base):
-    response_schema: str = Field(alias='schema')
+    response_schema: str = Field(alias="schema")
     id: str
     prepared: datetime
     test: Optional[bool] = None
@@ -30,6 +30,6 @@ class Metadata(Base):
     @classmethod
     def _preprocess_data(cls, data: dict) -> dict:
         # Allow tests providing 'schema' or 'response_schema'
-        if 'response_schema' in data and 'schema' not in data:
-            data['schema'] = data['response_schema']
+        if "response_schema" in data and "schema" not in data:
+            data["schema"] = data["response_schema"]
         return data

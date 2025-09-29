@@ -1,0 +1,178 @@
+# ======================================================================================
+#  Reusable Quality Assurance/Quality Control (QA/QC) Workflow
+# ======================================================================================
+#
+# Description:
+#   This workflow provides a centralized and reusable set of quality assurance checks.
+#   It is designed to be called by other workflows (e.g., Pull Request validation,
+#   release builds) to ensure consistent code quality and standards across the project.
+#
+# Features:
+#   - Runs on multiple Python versions.
+#   - Installs dependencies from requirements files.
+#   - Performs linting with Ruff (with optional auto-fixing).
+#   - Conducts static type checking with MyPy.
+#   - Scans for security vulnerabilities with Bandit and pip-audit.
+#   - Executes the test suite with Pytest.
+#   - Can build the package and upload artifacts.
+#
+# Inputs:
+#   - `build`: Set to `true` to build the package (for releases).
+#   - `lint`: Set to `true` to run the linter.
+#   - `lint-fix`: Set to `true` to enable linter auto-fixes.
+#   - `test`: Set to `true` to run tests.
+#   - `typing`: Set to `true` to run static type checking.
+#   - `dependency-audit`: Set to `true` to audit dependencies.
+#   - `security`: Set to `true` to run static security analysis.
+#
+# Outputs:
+#   - `lint_fix_changes`: Returns `true` if the linter made changes to the code.
+#
+# ======================================================================================
+
+name: "Reusable QA/QC"
+
+on:
+  workflow_call:
+    inputs:
+      lint:
+        description: 'Run lint checks (Ruff)?'
+        required: false
+        type: boolean
+        default: true
+      lint-fix:
+        description: 'Allow lint tool to attempt auto-fixes (e.g., Ruff)'
+        required: false
+        type: boolean
+        default: true
+      test:
+        description: 'Run test suite?'
+        required: false
+        type: boolean
+        default: true
+      typing:
+        description: 'Run static typing checks (MyPy)?'
+        required: false
+        type: boolean
+        default: true
+      dependency-audit:
+        description: 'Run dependency supply-chain audit (pip-audit)?'
+        required: false
+        type: boolean
+        default: true
+      security:
+        description: 'Run static security scan with Bandit?'
+        required: false
+        type: boolean
+        default: true
+    outputs:
+      lint_fix_changes:
+        description: 'Whether the lint tool made changes (true/false)'
+        value: ${{ jobs.cleanup-checks.outputs.lint_fix_changes }}
+      bandit_report:
+        description: 'Bandit security report artifact name'
+        value: ${{ jobs.cleanup-checks.outputs.bandit_report }}
+
+jobs:
+  # ======================================================================================
+  # Job: Cleanup, Lint, Type, Security (Python 3.13 only)
+  # ======================================================================================
+
+  cleanup-checks:
+    name: "Cleanup, Lint, Type, Security (Python 3.13)"
+    runs-on: ubuntu-latest
+    outputs:
+      lint_fix_changes: ${{ steps.lint-fix.outputs.lint_changed }}
+      bandit_report: ${{ steps.upload-bandit.outputs.artifact-name }}
+    steps:
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v6
+        with:
+          python-version: 3.13
+
+      - name: Checkout repository (shallow)
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.dev.txt
+
+      - name: Lint and Auto-fix (Ruff)
+        id: lint-fix
+        if: ${{ inputs['lint-fix'] }}
+        run: |
+          ruff check --fix .
+          git add -A
+          if ! git diff --cached --quiet; then
+            echo "lint_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "lint_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit Lint Fixes
+        if: ${{ steps.lint-fix.outputs.lint_changed == 'true' }}
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: apply automated linting fixes"
+          commit_options: "--no-verify"
+
+      - name: Lint Check (Ruff)
+        if: ${{ inputs.lint && !inputs['lint-fix'] }}
+        run: ruff check .
+
+      - name: Type Check (MyPy)
+        if: ${{ inputs.typing }}
+        run: mypy --show-error-codes --show-traceback .
+
+      - name: Dependency Audit (pip-audit)
+        if: ${{ inputs['dependency-audit'] }}
+        run: pip-audit -v -r requirements.txt
+
+      - name: Security Scan (Bandit)
+        id: bandit-scan
+        if: ${{ inputs.security }}
+        run: bandit -r . -lll -o bandit-report.json -f json
+
+      - name: Upload Bandit Report
+        id: upload-bandit
+        if: ${{ inputs.security }}
+        uses: actions/upload-artifact@v4
+        with:
+          path: bandit-report.json
+          name: bandit-report.json
+
+  
+  # ======================================================================================
+  # Job: Test (Python 3.11, 3.12, 3.13)
+  # ======================================================================================
+  test:
+    name: "Test (Python ${{ matrix.python-version }})"
+    runs-on: ubuntu-latest
+    needs: cleanup-checks
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Checkout repository (shallow)
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.dev.txt
+
+      - name: Run Tests (pytest)
+        if: ${{ inputs.test }}
+        run: python -m pytest tests/ -v --tb=short
+ 

@@ -1,4 +1,3 @@
-
 from statscan.wds.models.code import CodeSets, CodeSet, Code
 from statscan.wds.models.cube import Cube
 from statscan.enums.auto.wds.scalar import Scalar
@@ -12,8 +11,8 @@ class TestWDSModels:
         assert "object" in codesets_data
         codesets = CodeSets.model_validate(codesets_data["object"])
         assert isinstance(codesets, CodeSets)
-        assert 'scalar' in codesets
-        scalar_codeset = codesets['scalar']
+        assert "scalar" in codesets
+        scalar_codeset = codesets["scalar"]
         assert isinstance(scalar_codeset, CodeSet)
         units_code = scalar_codeset.find_code(desc_en=Scalar.UNITS.name.lower())
         assert isinstance(units_code, Code)
@@ -27,5 +26,3 @@ class TestWDSModels:
         first_cube_data = cubeslist_lite_data[0]
         cube = Cube.model_validate(first_cube_data)
         assert isinstance(cube, Cube)
-
-    
