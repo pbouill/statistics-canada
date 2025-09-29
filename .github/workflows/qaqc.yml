@@ -44,7 +44,7 @@ on:
         description: 'Allow lint tool to attempt auto-fixes (e.g., Ruff)'
         required: false
         type: boolean
-        default: false
+        default: true
       test:
         description: 'Run test suite?'
         required: false
@@ -54,69 +54,57 @@ on:
         description: 'Run static typing checks (MyPy)?'
         required: false
         type: boolean
-        default: false
+        default: true
       dependency-audit:
         description: 'Run dependency supply-chain audit (pip-audit)?'
         required: false
         type: boolean
-        default: false
+        default: true
       security:
         description: 'Run static security scan with Bandit?'
         required: false
         type: boolean
-        default: false
+        default: true
     outputs:
       lint_fix_changes:
         description: 'Whether the lint tool made changes (true/false)'
-        value: ${{ jobs.qa-checks.outputs.lint_fix_changes }}
+        value: ${{ jobs.cleanup-checks.outputs.lint_fix_changes }}
+      bandit_report:
+        description: 'Bandit security report artifact name'
+        value: ${{ jobs.cleanup-checks.outputs.bandit_report }}
 
 jobs:
   # ======================================================================================
-  # Job: Quality Assurance Checks
+  # Job: Cleanup, Lint, Type, Security (Python 3.13 only)
   # ======================================================================================
-  qa-checks:
-    name: "QA Checks on Python ${{ matrix.python-version }}"
+
+  cleanup-checks:
+    name: "Cleanup, Lint, Type, Security (Python 3.13)"
     runs-on: ubuntu-latest
     outputs:
       lint_fix_changes: ${{ steps.lint-fix.outputs.lint_changed }}
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.11", "3.12"]
-
+      bandit_report: ${{ steps.upload-bandit.outputs.artifact-name }}
     steps:
-      # ----------------------------------------------------------------------------------
-      # Step: Set up Environment
-      # ----------------------------------------------------------------------------------
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python 3.13
         uses: actions/setup-python@v6
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: 3.13
 
       - name: Checkout repository (shallow)
         uses: actions/checkout@v5
         with:
           fetch-depth: 1
 
-
-      # ----------------------------------------------------------------------------------
-      # Step: Install Dependencies
-      # ----------------------------------------------------------------------------------
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r requirements.dev.txt
 
-      # ----------------------------------------------------------------------------------
-      # Step: Linting and Formatting
-      # ----------------------------------------------------------------------------------
       - name: Lint and Auto-fix (Ruff)
         id: lint-fix
         if: ${{ inputs['lint-fix'] }}
         run: |
-          # Run ruff with auto-fix enabled.
           ruff check --fix .
-          # Stage changes and check if the git tree is dirty.
           git add -A
           if ! git diff --cached --quiet; then
             echo "lint_changed=true" >> $GITHUB_OUTPUT
@@ -129,17 +117,12 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: apply automated linting fixes"
-          commit_options: "--no-verify" # Prevents running pre-commit hooks on the commit
+          commit_options: "--no-verify"
 
       - name: Lint Check (Ruff)
-        # Run the linter in check-only mode if linting is enabled AND auto-fixing was not.
-        # If auto-fixing ran, a failure would have already occurred on unfixable errors.
         if: ${{ inputs.lint && !inputs['lint-fix'] }}
         run: ruff check .
 
-      # ----------------------------------------------------------------------------------
-      # Step: Static Analysis and Security
-      # ----------------------------------------------------------------------------------
       - name: Type Check (MyPy)
         if: ${{ inputs.typing }}
         run: mypy --show-error-codes --show-traceback .
@@ -154,15 +137,42 @@ jobs:
         run: bandit -r . -lll -o bandit-report.json -f json
 
       - name: Upload Bandit Report
+        id: upload-bandit
         if: ${{ inputs.security }}
         uses: actions/upload-artifact@v4
         with:
           path: bandit-report.json
-          name: bandit-report-${{ matrix.python-version }}.json
+          name: bandit-report.json
 
-      # ----------------------------------------------------------------------------------
-      # Step: Testing
-      # ----------------------------------------------------------------------------------
+  
+  # ======================================================================================
+  # Job: Test (Python 3.11, 3.12, 3.13)
+  # ======================================================================================
+  test:
+    name: "Test (Python ${{ matrix.python-version }})"
+    runs-on: ubuntu-latest
+    needs: cleanup-checks
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Checkout repository (shallow)
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.dev.txt
+
       - name: Run Tests (pytest)
         if: ${{ inputs.test }}
         run: python -m pytest tests/ -v --tb=short
+ 

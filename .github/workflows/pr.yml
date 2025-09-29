@@ -10,8 +10,4 @@ jobs:
   qa-qc:
     # Skip if triggered by a bot / qaqc.yml
     if: ${{ github.actor != 'github-actions[bot]' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: QA/QC Checks
-        id: qaqc
-        uses: ./.github/workflows/qaqc.yml
+    uses: ./.github/workflows/qaqc.yml
