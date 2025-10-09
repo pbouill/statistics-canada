@@ -18,6 +18,10 @@ data: dict[str, int | str] = {}                                # ✅ CORRECT
 - **Install**: `pip install -r requirements.dev.txt` (editable mode)
 - **Build**: `python -m build --no-isolation` (version auto-generated in `_version.py`)
 - **Test**: `python -m pytest tests/ -v` (all tests must be pytest-compatible)
+- **Code quality**: ALL code must pass both linters before commit:
+  - Ruff linting: `ruff check --fix .` (auto-fixes most issues)
+  - Type checking: `mypy --exclude-gitignore --show-error-codes --show-traceback .`
+  - Pre-commit hook runs both automatically (see `tools/git/pre-commit.sh`)
 - **Code generation**:
   - Geographic enums: `python tools/generate_enums.py` (never edit `enums/auto/` directly)
   - WDS enums: `python tools/cli/wds_enum_gen.py --type all --verbose`
@@ -47,6 +51,22 @@ data: dict[str, int | str] = {}                                # ✅ CORRECT
 - **Geographic enums**: Inherit by containment (see `enums/geocode/`). Use auto-generated files only.
 - **Abbreviation system**: Managed via `tools/abbreviations.py`, `substitution.py`, and CLI tools. Always validate with `tools/review_abbreviations.py` before commit.
 - **Type annotations**: Use Python 3.11+ native types (e.g., `list[str]`, `str | None`). Never use legacy `List`, `Dict`, `Optional`, etc.
+- **Code style enforcement**:
+  - **88-character line limit** (configurable in `pyproject.toml`)
+  - **Google-style docstrings** (D100-D417 rules enforced)
+  - **Imperative mood** in docstrings ("Get data", not "Gets data")
+  - **No bare except-pass blocks** (S110): Use logging instead
+    ```python
+    # ❌ WRONG
+    except Exception:
+        pass
+    
+    # ✅ CORRECT
+    except Exception as e:
+        logger.warning("Operation failed: %s", e)
+    ```
+  - **Named constants** for magic values (PLR2004)
+  - **Import sorting** (I001): stdlib → third-party → local
 
 ## Integration & Automation
 
@@ -83,6 +103,11 @@ data: dict[str, int | str] = {}                                # ✅ CORRECT
 - Update both code and visual docs for workflow/architecture changes
 - Cross-reference workflow files and diagrams for accuracy
 - Use color-coded status: 🟢 Active, 🟠 Ready, 🔵 Proposed, ⚪ Legacy
+- **CRITICAL: All code edits MUST be ruff and mypy compliant**:
+  - Run `ruff check --fix .` after making changes
+  - Run `mypy --exclude-gitignore --show-error-codes --show-traceback .` to verify types
+  - Pre-commit hook will reject non-compliant code
+  - Maintain 100% compliance: 0 ruff errors, 0 mypy errors
 
 ---
 For full architecture, workflow, and troubleshooting details, see `/docs/charts/README.md` and `/docs/charts/workflow_diagram.md`.

@@ -4,7 +4,10 @@ This file provides a framework for systematically expanding the enum coverage
 as new dimension values are discovered from actual API responses.
 """
 
+import logging
 from enum import Enum
+
+logger = logging.getLogger(__name__)
 
 
 class ExpandedGender(Enum):
@@ -378,8 +381,12 @@ async def discover_new_dimensions():  # noqa: PLC0415
         try:
             response_data = await dguid._get_census_data(timeout=15)
             discovery.analyze_response(response_data)
-        except Exception:  # noqa: S110
-            pass  # Silently skip failed requests in discovery mode
+        except Exception as e:
+            logger.debug(
+                "Discovery request failed for %s (expected in discovery mode): %s",
+                dguid,
+                e,
+            )
 
     # Generate report
     discovery.get_dimension_report()
