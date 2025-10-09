@@ -1,5 +1,6 @@
-from importlib.metadata import packages_distributions, version  
-import os  # unused import for Ruff to fix
+"""Statistics Canada Python API client and utilities."""
+
+from importlib.metadata import packages_distributions, version
 from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
 
@@ -8,11 +9,11 @@ __all__ = ["__version__"]
 
 
 def _initialize_version() -> str:
-    """
-    Initializes the package version.
+    """Initialize the package version.
 
     Tries to get the version from installed package metadata first.
     Falls back to reading from a local _version.py file for development.
+
     """
     try:
         # This is the primary method: get the version from installed package metadata
@@ -24,7 +25,7 @@ def _initialize_version() -> str:
         repo_root = Path(__file__).parent.parent
         version_file_path = repo_root / "_version.py"
         if not version_file_path.exists():
-            return 'unknown-no-version-file'  
+            return 'unknown-no-version-file'
 
         spec = spec_from_file_location("_version", version_file_path)
         if not spec or spec.loader is None:
@@ -37,6 +38,6 @@ def _initialize_version() -> str:
         except AttributeError:
             return 'unknown-no-version-attribute'
         except Exception:
-            return 'unknown-exec-error'  
-        
-__version__ = _initialize_version()  
+            return 'unknown-exec-error'
+
+__version__ = _initialize_version()

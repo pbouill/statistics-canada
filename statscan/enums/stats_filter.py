@@ -1,14 +1,13 @@
-"""
-Comprehensive statistics filter enums for Statistics Canada census data.
+"""Comprehensive statistics filter enums for Statistics Canada census data.
 
 This module provides a unified filtering system with extensive enum coverage
 for gender, census characteristics, and statistic types, along with convenience
 factory methods for common filter combinations.
 """
 
-from enum import Enum
-from typing import Optional, Self, Any
 from dataclasses import dataclass
+from enum import Enum
+from typing import Any, Self
 
 
 class Gender(Enum):
@@ -20,6 +19,7 @@ class Gender(Enum):
 
     @property
     def description(self) -> str:
+        """Get description of the gender category."""
         descriptions = {
             Gender.TOTAL_GENDER: "Total population, all genders",
             Gender.MALE: "Male population",
@@ -93,37 +93,60 @@ class CensusProfileCharacteristic(Enum):
     def description(self) -> str:
         """Get human-readable description of the characteristic."""
         descriptions = {
-            CensusProfileCharacteristic.POPULATION_COUNT: "Total population count",
-            CensusProfileCharacteristic.POPULATION_DENSITY_PER_KM2: "Population density per square kilometer",
+            CensusProfileCharacteristic.POPULATION_COUNT: (
+                "Total population count"
+            ),
+            CensusProfileCharacteristic.POPULATION_DENSITY_PER_KM2: (
+                "Population density per square kilometer"
+            ),
             CensusProfileCharacteristic.MEDIAN_AGE: "Median age of population",
-            CensusProfileCharacteristic.TOTAL_HOUSEHOLDS: "Total number of households",
-            CensusProfileCharacteristic.AVERAGE_HOUSEHOLD_SIZE: "Average number of persons per household",
-            CensusProfileCharacteristic.TOTAL_DWELLINGS: "Total number of dwellings",
-            CensusProfileCharacteristic.MEDIAN_HOUSEHOLD_INCOME: "Median total household income",
+            CensusProfileCharacteristic.TOTAL_HOUSEHOLDS: (
+                "Total number of households"
+            ),
+            CensusProfileCharacteristic.AVERAGE_HOUSEHOLD_SIZE: (
+                "Average number of persons per household"
+            ),
+            CensusProfileCharacteristic.TOTAL_DWELLINGS: (
+                "Total number of dwellings"
+            ),
+            CensusProfileCharacteristic.MEDIAN_HOUSEHOLD_INCOME: (
+                "Median total household income"
+            ),
             # Add more as needed
         }
         return descriptions.get(self, f"Census characteristic {self.value}")
 
     @property
-    def category(self) -> str:
+    def category(self) -> str:  # noqa: PLR0911
         """Get the category this characteristic belongs to."""
-        if self.value < 100:
+        # Category ranges
+        household_max = 100
+        dwelling_max = 200
+        housing_max = 300
+        language_max = 400
+        immigration_max = 500
+        education_max = 600
+        employment_max = 700
+        income_max = 800
+        other_max = 900
+
+        if self.value < household_max:
             return "Population and Age"
-        elif self.value < 200:
+        elif self.value < dwelling_max:
             return "Households"
-        elif self.value < 300:
+        elif self.value < housing_max:
             return "Dwellings"
-        elif self.value < 400:
+        elif self.value < language_max:
             return "Housing Types"
-        elif self.value < 500:
+        elif self.value < immigration_max:
             return "Language"
-        elif self.value < 600:
+        elif self.value < education_max:
             return "Immigration and Citizenship"
-        elif self.value < 700:
+        elif self.value < employment_max:
             return "Education"
-        elif self.value < 800:
+        elif self.value < income_max:
             return "Employment"
-        elif self.value < 900:
+        elif self.value < other_max:
             return "Income"
         else:
             return "Other"
@@ -142,6 +165,7 @@ class StatisticType(Enum):
 
     @property
     def description(self) -> str:
+        """Get description of the statistic type."""
         descriptions = {
             StatisticType.COUNT: "Absolute count or number",
             StatisticType.PERCENTAGE: "Percentage of total population/group",
@@ -158,17 +182,20 @@ class StatisticType(Enum):
 class StatsFilter:
     """Comprehensive statistics filter with dimension support."""
 
-    gender: Optional[Gender] = None
-    census_profile_characteristic: Optional[CensusProfileCharacteristic] = None
-    statistic_type: Optional[StatisticType] = None
+    gender: Gender | None = None
+    census_profile_characteristic: CensusProfileCharacteristic | None = None
+    statistic_type: StatisticType | None = None
 
     def __str__(self) -> str:
         """Get a string representation of the StatsFilter."""
-        return (
-            f"{self.gender.value if self.gender else ''}."
-            f"{self.census_profile_characteristic.value if self.census_profile_characteristic else ''}."
-            f"{self.statistic_type.value if self.statistic_type else ''}"
+        gender_val = self.gender.value if self.gender else ""
+        char_val = (
+            self.census_profile_characteristic.value
+            if self.census_profile_characteristic
+            else ""
         )
+        stat_val = self.statistic_type.value if self.statistic_type else ""
+        return f"{gender_val}.{char_val}.{stat_val}"
 
     @classmethod
     def from_str(cls, filter_str: str) -> Self:
@@ -233,10 +260,12 @@ class CommonFilters:
 
     @staticmethod
     def population_by_gender(gender: Gender) -> StatsFilter:
-        """Population count by specific gender."""
+        """Get population count by specific gender."""
         return StatsFilter(
             gender=gender,
-            census_profile_characteristic=CensusProfileCharacteristic.POPULATION_COUNT,
+            census_profile_characteristic=(
+                CensusProfileCharacteristic.POPULATION_COUNT
+            ),
             statistic_type=StatisticType.COUNT,
         )
 

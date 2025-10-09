@@ -1,11 +1,11 @@
-"""
-Some default abbreviation mappings for enum generation.
+"""Some default abbreviation mappings for enum generation.
 
 Note:
     Many abbreviations are extended via morphogenic variants.
     Sensible root words can be tested with:
         tools.substitution.SubstitutionEngine._generate_variants_static()
     No sense in adding duplicates :)
+
 """
 
 DEFAULT_ABBREVIATIONS = {

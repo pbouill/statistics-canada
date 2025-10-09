@@ -1,24 +1,26 @@
-from typing import Union, Optional
+"""SDMX series dimension models."""
 
 from ....base import Base
 from ..value import Value
 
 
 class Series(Base):
-    """
-    Represents a series dimension in SDMX.
-    Based on actual structure: {id (str), name (str), names (dict), keyPosition (int), roles (list), values (list)}
+    """Represents a series dimension in SDMX.
+
+    Based on actual structure: {id (str), name (str), names (dict),
+    keyPosition (int), roles (list), values (list)}.
+
     """
 
     id: str
     name: str
-    names: Optional[dict[str, str]] = None  # language -> name mapping
-    keyPosition: Optional[int] = None
-    roles: Optional[list[str]] = None
+    names: dict[str, str] | None = None  # language -> name mapping
+    keyPosition: int | None = None  # noqa: N815
+    roles: list[str] | None = None
     values: list[Value] = []
-    annotations: Optional[list[int]] = None
+    annotations: list[int] | None = None
 
-    def __getitem__(self, key: Union[int, str]) -> Value:
+    def __getitem__(self, key: int | str) -> Value:
         """Get a value by its ID."""
         for value in self.values:
             if value.id == key:
@@ -31,7 +33,7 @@ class Series(Base):
             return self.names.get(language, self.name)
         return self.name
 
-    def get_value_by_name(self, name: str, language: str = "en") -> Optional[Value]:
+    def get_value_by_name(self, name: str, language: str = "en") -> Value | None:
         """Get a value by its name or display name."""
         for value in self.values:
             if value.name == name or value.get_display_name(language) == name:
@@ -41,7 +43,10 @@ class Series(Base):
     # def get_values_by_order(self) -> list[Value]:
     #     """Get values sorted by their order property."""
     #     values_
-    #     s = sorted([v for v in self.values if v.order is not None], key=lambda x: x.order)  # type: ignore[arg-type]
+    #     s = sorted(
+    #         [v for v in self.values if v.order is not None],
+    #         key=lambda x: x.order
+    #     )  # type: ignore[arg-type]
 
     @property
     def has_ordered_values(self) -> bool:

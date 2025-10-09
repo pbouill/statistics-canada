@@ -1,22 +1,26 @@
-"""
-WDS Geographic Entity System
+"""WDS Geographic Entity System.
 
 Provides a comprehensive system for working with Statistics Canada geographic data,
 including location identification, coordinate translation, and data retrieval.
 """
 
 from __future__ import annotations
+
+import logging
 from dataclasses import dataclass
 from typing import Any
-import pandas as pd
-import numpy as np
 
-from .client import Client as WDS
-from .coordinate import create_enhanced_demographic_dataframe
-from .models.datapoint import DataPoint
+import numpy as np
+import pandas as pd
+
+from ..enums.auto.wds.scalar import Scalar
 from ..enums.auto.wds.status import Status
 from ..enums.auto.wds.symbol import Symbol
-from ..enums.auto.wds.scalar import Scalar
+from .client import Client as WDSClient
+from .coordinate import create_enhanced_demographic_dataframe
+from .models.datapoint import DataPoint
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -36,11 +40,11 @@ class GeographicEntity:
 
     @classmethod
     async def from_member_id(
-        cls, member_id: int, client: WDS | None = None
+        cls, member_id: int, client: WDSClient | None = None
     ) -> GeographicEntity:
         """Create a GeographicEntity by discovering its properties from the WDS API."""
         if client is None:
-            client = WDS()
+            client = WDSClient()
 
         # Get population data to validate the member ID
         coordinate = f"{member_id}.1.0.0.0.0.0.0.0.0"
@@ -65,7 +69,11 @@ class GeographicEntity:
                         coordinate=coordinate,
                     )
 
-            except Exception:
+            except Exception as e:
+                logger.debug(
+                    f"Failed to get data for member {member_id} "
+                    f"from product {product_id}: {e}"
+                )
                 continue  # Try next product ID
 
         # Return basic entity even if we can't get population
@@ -73,7 +81,7 @@ class GeographicEntity:
 
     @classmethod
     async def from_name(
-        cls, name: str, client: WDS | None = None
+        cls, name: str, client: WDSClient | None = None
     ) -> GeographicEntity | None:
         """Find a GeographicEntity by searching for a location name."""
         # This would require a lookup table or search functionality
@@ -81,11 +89,11 @@ class GeographicEntity:
         return None
 
     async def get_population_data(
-        self, client: WDS | None = None, periods: int = 1
+        self, client: WDSClient | None = None, periods: int = 1
     ) -> list[DataPoint]:
         """Get population data for this geographic entity."""
         if client is None:
-            client = WDS()
+            client = WDSClient()
 
         # Try multiple product IDs in order of preference
         product_ids = [
@@ -108,13 +116,16 @@ class GeographicEntity:
                 ):
                     return result.vectorDataPoint
 
-            except Exception:
+            except Exception as e:
+                logger.debug(
+                    f"Failed to get population data from product {product_id}: {e}"
+                )
                 continue  # Try next product ID
 
         return []  # No data found in any product ID
 
     async def get_data_as_array(
-        self, client: WDS | None = None, periods: int = 10
+        self, client: WDSClient | None = None, periods: int = 10
     ) -> np.ndarray:
         """Get population data as a numpy array."""
         data = await self.get_population_data(client, periods)
@@ -123,7 +134,7 @@ class GeographicEntity:
 
     async def get_data_as_dataframe(
         self,
-        client: WDS | None = None,
+        client: WDSClient | None = None,
         periods: int = 10,
         include_quality_info: bool = True,
     ) -> pd.DataFrame:
@@ -187,21 +198,25 @@ class GeographicEntity:
         return pd.DataFrame(records)
 
     def __str__(self) -> str:
+        """Return human-readable string representation of the geographic entity."""
         name_part = f" ({self.name})" if self.name else ""
         pop_part = f", Population: {self.population:,}" if self.population else ""
         return f"Member ID {self.member_id}{name_part}{pop_part}"
 
     def __repr__(self) -> str:
-        return f"GeographicEntity(member_id={self.member_id}, name={self.name!r}, population={self.population})"
+        """Return detailed string representation for debugging."""
+        return (
+            f"GeographicEntity(member_id={self.member_id}, "
+            f"name={self.name!r}, population={self.population})"
+        )
 
     async def get_demographic_dataframe(
         self,
         demographic_type: str = "age_gender",
         census_year: int = 2021,
-        client: WDS | None = None,
+        client: WDSClient | None = None,
     ) -> pd.DataFrame:
-        """
-        Get demographic breakdown data as a clean, enum-based pandas DataFrame.
+        """Get demographic breakdown data as a clean, enum-based pandas DataFrame.
 
         Uses the enhanced coordinate system and consistent enum-based columns.
 
@@ -213,10 +228,12 @@ class GeographicEntity:
             client: WDS client to use
 
         Returns:
-            pandas.DataFrame: Clean demographic data with enum-based status/symbol columns
+            pandas.DataFrame: Clean demographic data with enum-based
+                status/symbol columns
+
         """
         if client is None:
-            from statscan.wds.client import Client
+            from statscan.wds.client import Client  # noqa: PLC0415
 
             client = Client()
 
@@ -227,8 +244,10 @@ class GeographicEntity:
         }
 
         if demographic_type not in product_map:
+            available = list(product_map.keys())
             raise ValueError(
-                f"Unknown demographic_type: {demographic_type}. Available: {list(product_map.keys())}"
+                f"Unknown demographic_type: {demographic_type}. "
+                f"Available: {available}"
             )
 
         product_id = product_map[demographic_type]
@@ -244,7 +263,7 @@ class GeographicEntity:
             max_characteristics=20,  # Limit for performance
         )
 
-    def get_data_quality_info(self, data_point: DataPoint) -> str:
+    def get_data_quality_info(self, data_point: DataPoint) -> str:  # noqa: PLR0912
         """Get a human-readable description of data point quality and symbols."""
         parts = []
 

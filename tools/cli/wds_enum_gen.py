@@ -1,37 +1,38 @@
 #!/usr/bin/env python3
-"""
-Main entry point for running WDS enum generation.
+"""Main entry point for running WDS enum generation.
 This runs both ProductID and CodeSet enum generators with our optimized performance.
 """
 
+import argparse
 import asyncio
 import sys
 from pathlib import Path
-import argparse
-from tools.cli.wds_productid_enum_gen import ProductIdEnumWriter
-from tools.cli.wds_code_enum_gen import CodeSetEnumWriter
-from tools.word_tracker import get_word_tracker, reset_word_tracker
+
 from statscan.util.log import configure_logging
+from tools.cli.wds_code_enum_gen import CodeSetEnumWriter
+from tools.cli.wds_productid_enum_gen import ProductIdEnumWriter
+from tools.word_tracker import get_word_tracker, reset_word_tracker
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate WDS enums with optimized performance and abbreviation analysis",
+        description="Generate WDS enums with optimized performance and abbreviation \
+            analysis",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
     # Generate all enums
     python tools/wds_enum_gen.py
-    
+
     # Generate with word tracking for abbreviation analysis
     python tools/wds_enum_gen.py --track-words
-    
+
     # Generate ProductID enums only
     python tools/wds_enum_gen.py --type product
-    
+
     # Generate specific codeset with tracking
     python tools/wds_enum_gen.py --type codeset --codeset frequency --track-words
-    
+
 Word Tracking:
     The --track-words flag enables analysis of non-substituted words during enum
     generation to identify potential abbreviation opportunities. This helps optimize
@@ -48,7 +49,9 @@ Word Tracking:
     parser.add_argument(
         "--codeset",
         type=str,
-        help="Specific codeset to generate (e.g., 'uom', 'classification_type'). Use 'python tools/wds_code_enum_gen.py' to see available codesets. Only valid with --type codeset",
+        help="Specific codeset to generate (e.g., 'uom', 'classification_type'). \
+            Use 'python tools/wds_code_enum_gen.py' to see available codesets. \
+            Only valid with --type codeset",
     )
     parser.add_argument(
         "--output-dir",
@@ -119,7 +122,8 @@ Word Tracking:
                     track_words=args.track_words,
                 )
                 print(
-                    f"✅ CodeSet enums generated: {len(codeset_files)} files in {args.output_dir}"
+                    f"✅ CodeSet enums generated: {len(codeset_files)} files in \
+                        {args.output_dir}"
                 )
 
         # Generate word analysis report if tracking was enabled
@@ -127,7 +131,8 @@ Word Tracking:
             word_tracker = get_word_tracker()
             if word_tracker.word_stats:
                 print(
-                    f"\n📊 Tracked {len(word_tracker.word_stats)} unique words during generation"
+                    f"\n📊 Tracked {len(word_tracker.word_stats)} unique words \
+                        during generation"
                 )
 
                 # Save tracking data
@@ -155,16 +160,19 @@ Word Tracking:
                     for i, (word, stats) in enumerate(candidates[:10], 1):
                         print(
                             f"  {i:2d}. '{word}' (frequency: {stats.frequency}, "
-                            f"potential savings: {stats.total_potential_savings:.0f} chars)"
+                            f"potential savings: {stats.total_potential_savings:.0f} \
+                            chars)"
                         )
 
                     print(f"\n📄 Full analysis saved to: {report_file}")
                     print(
-                        "💡 Use this data to update tools/abbreviations.py with high-impact abbreviations"
+                        "💡 Use this data to update tools/abbreviations.py with \
+                            high-impact abbreviations"
                     )
                 else:
                     print(
-                        "✅ No significant abbreviation opportunities found - system is well optimized!"
+                        "✅ No significant abbreviation opportunities found - system is\
+                            well optimized!"
                     )
             else:
                 print("⚠️  No words tracked during generation")

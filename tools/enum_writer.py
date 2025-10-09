@@ -1,24 +1,20 @@
+import inspect
+import logging
+import re
 import sys
+import unicodedata
 from abc import ABC, abstractmethod
+from collections.abc import Callable, Generator, Iterable, Mapping, Sequence
+from contextlib import contextmanager
+from datetime import UTC, datetime
+from enum import Enum
 from pathlib import Path
 from typing import (
-    Iterable,
-    Optional,
-    TextIO,
-    Generator,
-    Callable,
-    Mapping,
-    Sequence,
     Any,
+    TextIO,
 )
-from datetime import datetime, timezone
-import re
-from enum import Enum
-import logging
-from contextlib import contextmanager
-import inspect
 
-import unicodedata
+from tqdm import tqdm
 
 import statscan.enums.auto
 from tools.substitution import SubstitutionEngine
@@ -42,13 +38,12 @@ class InvalidEnumCommentError(ValueError):
 
 
 class EnumEntry:
-    """
-    A dataclass representing a single entry in an enum.
+    """A dataclass representing a single entry in an enum.
 
     Note: this class is not responsible for checking uniqueness of enum keys
     """
 
-    def __init__(self, name: str, value: int, comment: Optional[str] = None):
+    def __init__(self, name: str, value: int, comment: str | None = None):
         # Clean and validate inputs before assignment
         if isinstance(comment, str) and "\n" in comment:
             # Clean newlines and other problematic characters from comments
@@ -83,7 +78,7 @@ class EnumEntry:
             )
 
     @staticmethod
-    def validate_comment(comment: Optional[str]) -> None:
+    def validate_comment(comment: str | None) -> None:
         if comment is not None and not isinstance(comment, str):
             raise InvalidEnumCommentError(
                 f"Enum comment must be a {str} or None, got {type(comment)}"
@@ -99,8 +94,7 @@ class EnumEntry:
 
     @staticmethod
     def clean_name(s: str, upper_case: bool = True) -> str:
-        """
-        Clean an enum name by replacing or removing invalid characters.
+        """Clean an enum name by replacing or removing invalid characters.
         Uses caching for better performance with repeated strings.
         """
         if not isinstance(s, str):
@@ -162,7 +156,7 @@ class EnumEntry:
     @staticmethod
     def prepare_name(
         s: str,
-        subs_engine: Optional[SubstitutionEngine] = None,
+        subs_engine: SubstitutionEngine | None = None,
         upper_case: bool = True,
     ) -> str:
         s_new = s
@@ -195,11 +189,11 @@ class EnumEntry:
         self._value = v
 
     @property
-    def comment(self) -> Optional[str]:
+    def comment(self) -> str | None:
         return self._comment
 
     @comment.setter
-    def comment(self, c: Optional[str]):
+    def comment(self, c: str | None):
         if c is not None and not isinstance(c, str):
             raise InvalidEnumCommentError(
                 f"Enum comment must be a {str} or None, got {type(c)}"
@@ -209,12 +203,15 @@ class EnumEntry:
         self._comment = c
 
     def __str__(self) -> str:
+        # Strip trailing whitespace from comment to comply with ruff W291
+        comment_str = self.comment.rstrip() if self.comment else ""
         return f"{self.name} = {self.value}" + (
-            f"  # {self.comment}" if self.comment else ""
+            f"  # {comment_str}" if comment_str else ""
         )
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(name={self.name!r}, value={self.value!r}, comment={self.comment!r})"
+        return f"{self.__class__.__name__}(name={self.name!r}, value={self.value!r}, \
+            comment={self.comment!r})"
 
 
 class AbstractEnumWriter(ABC):
@@ -222,11 +219,11 @@ class AbstractEnumWriter(ABC):
     subs_engine: SubstitutionEngine = SubstitutionEngine()
 
     def __init__(self, track_words: bool = False):
-        """
-        Initialize the enum writer.
+        """Initialize the enum writer.
 
         Args:
             track_words: If True, track non-substituted words for abbreviation analysis
+
         """
         self.track_words = track_words
         self.word_tracker = get_word_tracker() if track_words else None
@@ -237,16 +234,16 @@ class AbstractEnumWriter(ABC):
         source_identifier: str = "unknown",
         truncate: bool = True,
     ) -> str:
-        """
-        Process text through substitution engine and track words if enabled.
+        """Process text through substitution engine and track words if enabled.
 
         Args:
             original_text: Original text to process
-            source_identifier: Identifier for the source (e.g., "ProductID", "CodeSet:frequency")
+            source_identifier: Identifier for the source (e.g., "ProductID")
             truncate: Whether to apply truncation during substitution
 
         Returns:
             Processed text after substitution
+
         """
         if not original_text:
             return original_text
@@ -266,15 +263,13 @@ class AbstractEnumWriter(ABC):
 
     @abstractmethod
     def generate_enum_entries(self, data: Any, *args, **kwargs) -> Iterable[EnumEntry]:
-        """
-        Abstract method to generate enum entries.
+        """Abstract method to generate enum entries.
         """
         pass
 
     @abstractmethod
     def process(self, *args, **kwargs) -> Any:
-        """
-        Abstract method to process data end-to-end (fetch, generate, write).
+        """Abstract method to process data end-to-end (fetch, generate, write).
         This should be the main entry point for each enum writer.
         """
         pass
@@ -284,12 +279,11 @@ class AbstractEnumWriter(ABC):
     def enum_file(
         cls,
         fp: Path,
-        imports: Mapping[str, Optional[str | Iterable[str]]],
+        imports: Mapping[str, str | Iterable[str] | None],
         overwrite: bool = False,
+        module_docstring: str | None = None,
     ) -> Generator[TextIO, None, None]:
-        """
-        Context manager to write an enum file.
-        """
+        """Context manager to write an enum file."""
         fp.parent.mkdir(parents=True, exist_ok=True)
         if not overwrite and fp.exists():
             raise FileExistsError(
@@ -297,14 +291,32 @@ class AbstractEnumWriter(ABC):
             )
         try:
             with fp.open(mode="w") as f:
+                # Write generation header as comments (preserves old style)
                 f.write(
-                    f"# !! This file is automatically generated by: {Path(__file__).name}\n"
+                    f"# !! This file is automatically generated by: "
+                    f"{Path(__file__).name}\n"
                 )
-                f.write(f"#     date: {datetime.now(tz=timezone.utc).isoformat()}\n\n")
-                for import_module, import_items in imports.items():
+                f.write(f"#     date: {datetime.now(tz=UTC).isoformat()}\n")
+
+                # Write module docstring (required by ruff D100)
+                if module_docstring:
+                    f.write(f'"""{module_docstring}"""\n')
+                else:
+                    # Default module docstring
+                    f.write('"""Auto-generated enum module.\n\n')
+                    f.write(f'Generated from {fp.stem} data.\n')
+                    f.write('"""\n')
+
+                f.write("\n")
+
+                # Write imports (sorted for ruff I001 compliance)
+                for import_module in sorted(imports.keys()):
+                    import_items = imports[import_module]
                     if import_items:
                         if isinstance(import_items, str):
                             import_items = [import_items]
+                        else:
+                            import_items = sorted(import_items)
                         f.write(
                             f"from {import_module} import {', '.join(import_items)}\n"
                         )
@@ -318,8 +330,7 @@ class AbstractEnumWriter(ABC):
         entries: Sequence[EnumEntry],
         check_case: bool = True,
     ) -> None:
-        """
-        Validate the enum entries for uniqueness and correctness.
+        """Validate the enum entries for uniqueness and correctness.
         """
         duplicate_names = cls.get_duplicate_names(entries)
         if duplicate_names:
@@ -342,9 +353,10 @@ class AbstractEnumWriter(ABC):
 
     @classmethod
     def get_duplicate_names(cls, entries: Sequence[EnumEntry]) -> dict[int, EnumEntry]:
-        """
-        Get a dictionary of duplicate entries (name) where the key is the index of the
-        entry in the provided list.
+        """Get a dictionary of duplicate entries.
+
+        Key: Index of teh entry in the provided list
+        Value: The EnumEntry object
         """
         names: set[str] = set()
         duplicate_entries: dict[int, EnumEntry] = {}
@@ -356,9 +368,10 @@ class AbstractEnumWriter(ABC):
 
     @classmethod
     def get_duplicate_values(cls, entries: Iterable[EnumEntry]) -> dict[int, EnumEntry]:
-        """
-        Get a dictionary of duplicate entries (value) where the key is the index of the
-        entry in the provided list
+        """Get a dictionary of duplicate entries.
+
+        Where the key is the index of the entry in the provided list and the value is \
+        the EnumEntry.
         """
         values: set[int] = set()
         duplicate_entries: dict[int, EnumEntry] = {}
@@ -375,8 +388,7 @@ class AbstractEnumWriter(ABC):
         entry: EnumEntry,
         indent: int = 0,
     ) -> None:
-        """
-        Write a single enum entry to the file.
+        """Write a single enum entry to the file.
         """
         f.write(" " * indent + str(entry) + "\n")
 
@@ -387,8 +399,7 @@ class AbstractEnumWriter(ABC):
         method: Callable,
         indent: int = 0,
     ) -> None:
-        """
-        Write a method to the file.
+        """Write a method to the file.
         """
         if isinstance(method, property):
             cls.write_method(f, method.fget, indent=indent)
@@ -410,15 +421,14 @@ class AbstractEnumWriter(ABC):
         cls,
         f: TextIO,
         entries: Iterable[EnumEntry],
-        cls_template: Optional[type[Enum]] = None,
-        cls_name: Optional[str] = None,
-        cls_bases: Optional[tuple[type, ...]] = None,
+        cls_template: type[Enum] | None = None,
+        cls_name: str | None = None,
+        cls_bases: tuple[type, ...] | None = None,
         skip_methods: bool = False,
         skip_auto: bool = True,
         indent: int = 0,
     ) -> None:
-        """
-        Write the enum class definition to the file.
+        """Write the enum class definition to the file.
         """
         if not cls_template:
             if not cls_name:
@@ -439,13 +449,24 @@ class AbstractEnumWriter(ABC):
             + f"class {cls_name}({', '.join(b.__name__ for b in cls_bases)}):\n"
         )
         cls_indent = indent + 4
-        f.write(" " * cls_indent + '"""\n')
-        f.write(" " * cls_indent + f"Automatically generated Enum for {cls_name}\n")
+
+        # Write class docstring (one-line format for ruff D200 compliance)
         if cls_template and cls_template.__doc__:
-            f.write(" " * cls_indent + "\n")
+            # Multi-line docstring if template has extended docs
+            f.write(" " * cls_indent + '"""')
+            f.write(f"Automatically generated Enum for {cls_name}.\n")
+            f.write(" " * cls_indent + "\n")  # Blank line after summary (D205)
             for line in cls_template.__doc__.splitlines():
                 f.write(" " * cls_indent + line.strip() + "\n")
-        f.write(" " * cls_indent + '"""\n')
+            f.write(" " * cls_indent + '"""\n')
+        else:
+            # One-line docstring (D200 compliance)
+            f.write(
+                " " * cls_indent
+                + f'"""Automatically generated Enum for {cls_name}."""\n'
+            )
+
+        f.write("\n")  # Blank line after class docstring (D204)
 
         for e in entries:
             cls.write_enum_entry(f=f, entry=e, indent=cls_indent)
@@ -495,20 +516,20 @@ class AbstractEnumWriter(ABC):
         entries: Sequence[EnumEntry],
         original_names: Sequence[str],
     ) -> None:
-        """
-        Resolve duplicate enum names by applying substitutions/removing truncation, and appending suffixes.
+        """Resolve duplicate enum names.
+
+        Apply substitutions/remove truncation, append suffixes.
         """
         if (n_entries := len(entries)) != (n_original := len(original_names)):
             raise ValueError(
-                f"Entries length {n_entries} does not match original names length {n_original}"
+                f"Entries length {n_entries} does not match original names length \
+                    {n_original}"
             )
 
         if duplicates := cls.get_duplicate_names(entries):
             logger.info(f"Resolving {len(duplicates)} duplicate enum names...")
 
             # first pass try removing truncation
-            from tqdm import tqdm
-
             for idx, e in tqdm(
                 duplicates.items(), desc="Removing truncation", unit="name"
             ):
@@ -535,8 +556,8 @@ class AbstractEnumWriter(ABC):
                         dupe_names[e.name] = []
                     dupe_names[e.name].append(e)
 
-                for same_name, same_name_entries in tqdm(
-                    dupe_names.items(), desc="Adding suffixes", unit="group"
+                for same_name_entries in tqdm(
+                    dupe_names.values(), desc="Adding suffixes", unit="group"
                 ):
                     # sort the list based on the value
                     same_name_entries.sort(key=lambda x: x.value)
@@ -552,5 +573,6 @@ class AbstractEnumWriter(ABC):
             # we've done all we could... raise the error
             if duplicates := cls.get_duplicate_names(entries):
                 raise InvalidEnumNameError(
-                    f"Duplicate enum names remain after resolution: {list(duplicates.values())}"
+                    f"Duplicate enum names remain after resolution: \
+                        {list(duplicates.values())}"
                 )

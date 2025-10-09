@@ -1,15 +1,25 @@
-# This file provides basic mappings for the build process
-import os
-import sys
-from typing import Optional, Self, ClassVar, Any, Union, get_args, get_origin
-from pathlib import Path
-from datetime import datetime, timezone
-from dataclasses import dataclass, field, fields, asdict, Field
-from enum import StrEnum, auto
+"""Build information utilities for version management and git repository metadata.
+
+This module provides    ref_path = git_path / ref
+    if not ref_path.exists():
+        raise FileNotFoundError(
+            f'Reference file "{ref_path.resolve()}" not found. '
+            "Please ensure the reference exists in the git repository."
+        )ities for generating version strings, managing build
+metadata, and interacting with git repositories. It supports both local
+development and CI/CD environments like GitHub Actions.
+"""
+
 import json
 import logging
+import os
+import sys
 import tomllib
-
+from dataclasses import Field, asdict, dataclass, field, fields
+from datetime import UTC, datetime
+from enum import StrEnum, auto
+from pathlib import Path
+from typing import Any, ClassVar, Self, Union, get_args, get_origin
 
 logger = logging.getLogger(name=__name__)
 
@@ -20,9 +30,7 @@ DEFAULT_REPOSITORY_PATH: Path = Path.cwd()
 
 
 class GitHubActionEnvVars(StrEnum):
-    """
-    Environment variables used in GitHub Actions.
-    """
+    """Environment variables used in GitHub Actions."""
 
     @staticmethod
     def _generate_next_value_(
@@ -40,53 +48,56 @@ class GitHubActionEnvVars(StrEnum):
     GITHUB_WORKSPACE = auto()  # The GitHub workspace directory path.
 
     @property
-    def env_value(self) -> Optional[str]:
-        """
-        Get the value of the environment variable.
+    def env_value(self) -> str | None:
+        """Get the value of the environment variable.
+
         Returns:
             str: The value of the environment variable.
+
         """
         return os.getenv(self.value)
 
 
 def print_dir_contents(path: Path, level: int = 0, max_level: int = 1) -> None:
-    """
-    Print the contents of a directory.
+    """Print the contents of a directory.
+
     Args:
-        path (Path): The path to the directory.
-        level (int): The current level of recursion.
+        path: The path to the directory.
+        level: The current level of recursion.
+        max_level: Maximum depth of directory traversal.
+
     """
-    print(f"{'  ' * level}{path}/")
     for item in path.iterdir():
         if item.is_dir():
             if level >= max_level:
-                print(f"{'  ' * (level + 1)}- {item.name}/ (max level reached)")
                 continue
             else:
                 print_dir_contents(item, level + 1, max_level)
                 continue
         else:
-            print(f"{'  ' * (level + 1)}- {item.name} ({item.stat().st_size} bytes)")
             continue
 
 
 def get_head_ref_path(git_path: Path) -> Path:
-    """
-    Get the current git HEAD reference.
+    """Get the current git HEAD reference.
+
     Args:
         git_path (Path): The path to the git repository.
+
     Returns:
         str: The current git HEAD reference.
+
     """
     # git_path default is repo root .git directory; try repo_dir or cwd
     head_path = git_path / "HEAD"
 
     if not head_path.exists():
         raise FileNotFoundError(
-            f'HEAD file path "{head_path.resolve()}" not found. Please ensure you are in a valid git repository.'
+            f'HEAD file path "{head_path.resolve()}" not found. '
+            "Please ensure you are in a valid git repository."
         )
 
-    ref: Optional[str] = None
+    ref: str | None = None
     with head_path.open() as f:
         for line in f.readlines():
             if line.startswith("ref:"):
@@ -99,48 +110,73 @@ def get_head_ref_path(git_path: Path) -> Path:
     ref_path = git_path / ref
     if not ref_path.exists():
         raise FileNotFoundError(
-            f'Reference file "{ref_path.resolve()}" not found. Please ensure the reference exists in the git repository.'
+            f'Reference file "{ref_path.resolve()}" not found. Please '
+            "ensure the reference exists in the git repository."
         )
 
     return ref_path
 
 
-def get_commit_hash(repo_path: Optional[Path] = None) -> tuple[str, str]:
-    """
-    Get the current git commit hash.
+def get_commit_hash(repo_path: Path | None = None) -> tuple[str, str]:
+    """Get the current git commit hash.
+
     Args:
-        repo_dir (Path): The path to the git repository. If None, uses the current directory.
+        repo_path: The path to the git repository. If None, uses the current
+            directory.
+
     Returns:
-        tuple[str, str]: The current git branch name and commit hash.
+        Tuple of (branch_name, commit_hash).
+
     """
     repo_path = repo_path or Path.cwd()
     git_path = repo_path / _GIT_DIR_NAME
 
     if not git_path.exists():
         raise FileNotFoundError(
-            f"Git repository not found in {git_path.resolve()}. Please ensure you are in a valid git repository."
+            f"Git repository not found in {git_path.resolve()}. "
+            "Please ensure you are in a valid git repository."
         )
 
     git_ref_path = get_head_ref_path(git_path=git_path)
 
     with git_ref_path.open() as f:
         commit = f.read().strip()
-    
+
     ref = git_ref_path.relative_to(git_path / 'refs/heads/')
     return str(ref), commit
 
 
 def get_utc_timestamp() -> datetime:
     """Get the current UTC timestamp."""
-    return datetime.now(tz=timezone.utc)
+    return datetime.now(tz=UTC)
 
-def get_version_str(dt: Optional[datetime]) -> str:
-    """Create or convert a datetime to a version string of the form YYYY.M.D.HHMMSS."""
+
+def get_version_str(dt: datetime | None) -> str:
+    """Create a version string from datetime.
+
+    Format: YYYY.M.D.HHMMSS
+
+    Args:
+        dt: Datetime to convert. If None, uses current UTC time.
+
+    Returns:
+        Version string in the format YYYY.M.D.HHMMSS.
+
+    """
     dt = dt or get_utc_timestamp()
     return f"{dt.year}.{dt.month}.{dt.day}.{dt.hour:02d}{dt.minute:02d}{dt.second:02d}"
 
-def version_str_to_datetime(version: str) -> datetime:
 
+def version_str_to_datetime(version: str) -> datetime:
+    """Convert a version string to datetime.
+
+    Args:
+        version: Version string in format YYYY.M.D.HHMMSS.
+
+    Returns:
+        Datetime object with UTC timezone.
+
+    """
     year, month, day, time_part = version.split(".")
     hour = int(time_part[0:2])
     minute = int(time_part[2:4])
@@ -152,26 +188,33 @@ def version_str_to_datetime(version: str) -> datetime:
         hour=hour,
         minute=minute,
         second=second,
-        tzinfo=timezone.utc
+        tzinfo=UTC
     )
 
 def get_pyproject(repo_path: Path) -> dict[str, Any]:
-    """
-    Load and parse the pyproject.toml file from the given path.
+    """Load and parse the pyproject.toml file from the given path.
+
     Args:
-        path (Path): The path to the directory containing pyproject.toml.
+        repo_path: The path to the directory containing pyproject.toml.
+
     Returns:
-        dict: The parsed pyproject.toml content.
+        The parsed pyproject.toml content.
+
     """
     pyproject_path = repo_path / _PYPROJECT_FILE_NAME
     if not pyproject_path.exists():
-        raise FileNotFoundError(f"pyproject.toml not found at {pyproject_path.resolve()}")
+        raise FileNotFoundError(
+            f"pyproject.toml not found at {pyproject_path.resolve()}"
+        )
     with pyproject_path.open("rb") as f:
         return tomllib.load(f)
 
 
 class BuildInfoEncoder(json.JSONEncoder):
+    """JSON encoder for BuildInfo objects."""
+
     def default(self, obj: Any) -> Any:
+        """Encode datetime and Path objects for JSON serialization."""
         if isinstance(obj, datetime):
             return obj.isoformat()
         elif isinstance(obj, Path):
@@ -181,22 +224,28 @@ class BuildInfoEncoder(json.JSONEncoder):
 
 @dataclass
 class BuildInfo:
+    """Build information container for version and git metadata."""
+
     SUPPORTED_TYPES: ClassVar = (int, float, str, bool)
     repo_path: Path
     build_time: datetime = field(
         default_factory=get_utc_timestamp
     )
-    commit: Optional[str] = None
-    branch: Optional[str] = None
+    commit: str | None = None
+    branch: str | None = None
 
     def __post_init__(self) -> None:
+        """Initialize build info from repository or environment variables."""
         if not isinstance(self.repo_path, Path):
             self.repo_path = Path(self.repo_path)
         if None in (self.commit, self.branch):
             commit = GitHubActionEnvVars.GITHUB_SHA.env_value
             branch = GitHubActionEnvVars.GITHUB_REF.env_value
             if all([commit, branch]):
-                logger.info("Using GitHub Actions environment variables for commit and branch")
+                logger.info(
+                    "Using GitHub Actions environment variables for "
+                    "commit and branch"
+                )
                 self.commit = commit
                 self.branch = branch
             else:
@@ -204,20 +253,24 @@ class BuildInfo:
                 self.branch, self.commit = get_commit_hash(repo_path=self.repo_path)
 
     @property  # type: ignore[no-redef]
-    def version(self) -> Optional[str]:
+    def version(self) -> str | None:
+        """Get the version string from build time."""
         if self.build_time:
             return get_version_str(dt=self.build_time)
         else:
             return None
 
     def update_commit_hash_from_repo(self):
+        """Update commit hash by reading from the git repository."""
         self.commit = get_commit_hash(repo_path=self.repo_path)
 
     @classmethod
-    def from_version_file(cls, file_path: Path) -> Self:
-        """
-        Load version information from a file.
-        Raises ValueError if any required fields are missing from the file.
+    def from_version_file(cls, file_path: Path) -> Self:  # noqa: PLR0912
+        """Load version information from a file.
+
+        Raises:
+            ValueError: If any required fields are missing from the file.
+
         """
         kwargs: dict[str, Any] = {}
 
@@ -235,8 +288,9 @@ class BuildInfo:
                 value_str: str
                 key, value_str = line.split("=", 1)  # Split only on first =
 
+                max_key_type_parts = 2  # key:type format
                 if len(key_type := key.split(":")) > 1:
-                    if len(key_type) > 2:
+                    if len(key_type) > max_key_type_parts:
                         raise ValueError(
                             f"Cannot parse key: {key_type[0]}. {key_type=}"
                         )
@@ -275,13 +329,15 @@ class BuildInfo:
                                     value = False
                                 else:
                                     raise ValueError(
-                                        f"Invalid boolean value for key {key}: {value_str}"
+                                        f"Invalid boolean value for key "
+                                        f"{key}: {value_str}"
                                     )
                             else:
                                 value = v_type(value_str)
                         else:
                             raise TypeError(
-                                f"Unsupported type {v_type} for key {key}. Supported types are: {cls.SUPPORTED_TYPES}"
+                                f"Unsupported type {v_type} for key {key}. "
+                                f"Supported types are: {cls.SUPPORTED_TYPES}"
                             )
 
                     if v_type in fld_types:
@@ -292,13 +348,14 @@ class BuildInfo:
                         continue
         return cls(repo_path=file_path.parent, **kwargs)
 
-    def write_version_file(self, version_file: Optional[Path] = None) -> Path:
-        """
-        Write the version number and build metadata to a file.
-        """
+    def write_version_file(self, version_file: Path | None = None) -> Path:
+        """Write the version number and build metadata to a file."""
         version_file = version_file or (self.repo_path / DEFAULT_VERSION_FILE_NAME)
         with open(file=version_file, mode="w") as f:
-            f.write(f"# This file is automatically generated by ../{Path(__file__).name} \n")
+            f.write(
+                f"# This file is automatically generated by "
+                f"../{Path(__file__).name} \n"
+            )
             f.write(f"__version__: str = '{self.version}'\n")
             for fld in fields(self):
                 if fld.name == "repo_path":
@@ -313,6 +370,7 @@ class BuildInfo:
         return version_file
 
     def to_dict(self) -> dict[str, Any]:
+        """Convert BuildInfo to dictionary including properties."""
         d = asdict(self)
         # add props to dict
         for k, v in self.__class__.__dict__.items():
@@ -321,18 +379,22 @@ class BuildInfo:
         return d
 
     def to_json(self) -> str:
+        """Convert BuildInfo to JSON string."""
         d = self.to_dict()
         return json.dumps(d, indent=2, skipkeys=True, cls=BuildInfoEncoder)
 
     def update_version_file(self, version_file: Path) -> bool:
-        """
-        Update the version file with the current version information.
+        """Update the version file with the current version information.
+
         If the commit hash matches the existing file, no update is performed.
 
         Returns:
-            bool: True if the file was updated, False if no update was needed.
+            True if the file was updated, False if no update was needed.
+
         """
-        bi = self.from_version_file(file_path=version_file) if version_file.exists() else None
+        bi = self.from_version_file(file_path=version_file) if (
+            version_file.exists()
+        ) else None
 
         if bi:
             if self.commit == bi.commit:
@@ -342,7 +404,8 @@ class BuildInfo:
                 logger.info(f"Updating version file {version_file}.")
         else:
             logger.info(
-                f"Version file {version_file} does not exist. Creating new version file."
+                f"Version file {version_file} does not exist. "
+                "Creating new version file."
             )
         self.write_version_file(version_file=version_file)
         return True
@@ -352,10 +415,12 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(
-        description="build_info utilities: generate version strings and read/write _version.py"
+        description="build_info utilities: generate version strings and "
+        "read/write _version.py"
     )
 
     def raise_log_parser_error(msg: str) -> None:
+        """Log error and raise parser error."""
         logger.error(msg)
         parser.error(msg)
         raise SystemExit(2)
@@ -363,7 +428,10 @@ if __name__ == "__main__":
     parser.add_argument(
         "-l",
         "--log-level",
-        help="Set the logging level (e.g., DEBUG, INFO, WARNING, ERROR, CRITICAL or corresponding integer values).",
+        help=(
+            "Set the logging level (e.g., DEBUG, INFO, WARNING, ERROR, "
+            "CRITICAL or corresponding integer values)."
+        ),
     )
     func_group = parser.add_mutually_exclusive_group()
     func_group.add_argument(
@@ -445,7 +513,10 @@ if __name__ == "__main__":
             'branch',
             'build_time'
         ],
-        help="Only the specified property will be returned, otherwise the full JSON object is returned.",
+        help=(
+            "Only the specified property will be returned, otherwise the "
+            "full JSON object is returned."
+        ),
     )
 
     args = parser.parse_args()
@@ -469,7 +540,6 @@ if __name__ == "__main__":
         args.read = True
 
     if args.version_string:  # quick exit if all we need is a new version string
-        print(get_version_str(args.build_time))
         sys.exit(0)
 
     else:
@@ -488,11 +558,14 @@ if __name__ == "__main__":
             if args.commit:
                 kwargs['commit'] = args.commit
             bi = BuildInfo(
-                repo_path=repo_path, 
+                repo_path=repo_path,
                 **kwargs
             )
             if args.dry_run:
-                logger.info(f"Dry run: would create new version file at: {version_file}")
+                logger.info(
+                    f"Dry run: would create new version file at: "
+                    f"{version_file}"
+                )
             else:
                 fp = bi.write_version_file(version_file=version_file)
                 logger.info(f"Created new version file at: {fp}")
@@ -506,15 +579,14 @@ if __name__ == "__main__":
                 bi.build_time = args.build_time
             if args.dry_run:
                 logger.info(f"Dry run: would update version file at: {version_file}")
+            elif bi.update_version_file(version_file=version_file):
+                logger.info(f"Updated version file at: {version_file}")
             else:
-                if bi.update_version_file(version_file=version_file):
-                    logger.info(f"Updated version file at: {version_file}")
-                else:
-                    logger.info(f"No update needed for version file at: {version_file}")
+                logger.info(f"No update needed for version file at: {version_file}")
 
         if args.property:
-            print(str(getattr(bi, args.property)))
+            pass
         else:
-            print(bi.to_json())
+            pass
 
         sys.exit(0)

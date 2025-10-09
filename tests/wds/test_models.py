@@ -1,6 +1,7 @@
-from statscan.wds.models.code import CodeSets, CodeSet, Code
-from statscan.wds.models.cube import Cube
 from statscan.enums.auto.wds.scalar import Scalar
+from statscan.wds.models.code import Code, CodeSet, CodeSets
+from statscan.wds.models.cube import Cube
+
 # from statscan.enums.auto.wds.product_id import ProductID
 
 

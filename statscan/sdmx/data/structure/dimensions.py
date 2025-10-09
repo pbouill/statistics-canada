@@ -1,16 +1,14 @@
-from typing import Optional
+"""SDMX dimension models for data structure organization."""
 
 from ...base import Base
-from .dimension.series import Series
 from .dimension.observation import Observation
+from .dimension.series import Series
 
 
 class Dimensions(Base):
-    """
-    Represents the dimensions of a data structure in SDMX.
-    """
+    """Represents the dimensions of a data structure in SDMX."""
 
-    dataSet: list = []
+    dataSet: list = []  # noqa: N815
     series: list[Series] = []
     observation: list[Observation] = []
 
@@ -41,18 +39,20 @@ class Dimensions(Base):
                 return series
         raise KeyError(f"Series with ID '{key}' not found.")
 
-    def get_series_by_key_position(self, key_position: int) -> Optional[Series]:
+    def get_series_by_key_position(self, key_position: int) -> Series | None:
         """Get a series by its key position."""
         matches = [s for s in self.series if s.keyPosition == key_position]
         if len(matches) == 0:
             return None
         elif len(matches) > 1:
+            series_ids = ", ".join(s.id for s in matches)
             raise ValueError(
-                f"Multiple series found with key position '{key_position}': {', '.join(s.id for s in matches)}"
+                f"Multiple series found with key position '{key_position}': "
+                f"{series_ids}"
             )
         return matches[0]
 
-    def get_series_by_name(self, name: str, language: str = "en") -> Optional[Series]:
+    def get_series_by_name(self, name: str, language: str = "en") -> Series | None:
         """Get a series by its name or display name."""
         for series in self.series:
             if series.name == name or series.get_display_name(language) == name:
@@ -61,7 +61,7 @@ class Dimensions(Base):
 
     def get_observation_by_name(
         self, name: str, language: str = "en"
-    ) -> Optional[Observation]:
+    ) -> Observation | None:
         """Get an observation by its name or display name."""
         for obs in self.observation:
             if obs.name == name or obs.get_display_name(language) == name:

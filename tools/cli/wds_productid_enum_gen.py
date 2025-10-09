@@ -1,14 +1,13 @@
-from pathlib import Path
-from typing import Iterable
 import logging
+from collections.abc import Iterable
+from pathlib import Path
+
 from tqdm import tqdm
 
 from statscan.wds.client import Client
 from statscan.wds.models.cube import Cube
-
 from tools.enum_writer import AbstractEnumWriter, EnumEntry, InvalidEnumValueError
 from tools.word_tracker import get_word_tracker
-
 
 logger = logging.getLogger(__name__)
 
@@ -33,12 +32,12 @@ class ProductIdEnumWriter(AbstractEnumWriter):
             if pid in entries_dict:
                 raise InvalidEnumValueError(f"Duplicate productId detected: {pid}")
 
-            titleEn = cube.cubeTitleEn or f"PRODUCT_{pid}"
-            original_names.append(titleEn)
+            title_en = cube.cubeTitleEn or f"PRODUCT_{pid}"
+            original_names.append(title_en)
 
             # Process text with substitution and word tracking
             name = self.process_text_with_substitution(
-                original_text=titleEn, source_identifier="ProductID", truncate=True
+                original_text=title_en, source_identifier="ProductID", truncate=True
             )
 
             try:
@@ -77,8 +76,7 @@ class ProductIdEnumWriter(AbstractEnumWriter):
         fp: Path,
         overwrite: bool = False,
     ) -> Path:
-        """
-        Main processing method that fetches data, generates enums, and writes files.
+        """Main processing method that fetches data, generates enums, and writes files.
 
         Args:
             fp: Output file path
@@ -86,6 +84,7 @@ class ProductIdEnumWriter(AbstractEnumWriter):
 
         Returns:
             Path to the generated file
+
         """
         logger.info("Starting ProductID enum processing...")
 
@@ -121,6 +120,7 @@ class ProductIdEnumWriter(AbstractEnumWriter):
 
 if __name__ == "__main__":
     import asyncio
+
     from statscan.util.log import configure_logging
 
     configure_logging(level=logging.DEBUG)

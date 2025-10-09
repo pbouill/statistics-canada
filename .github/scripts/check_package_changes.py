@@ -1,3 +1,8 @@
+"""Check if changed files should trigger package operations.
+
+This script determines whether file changes warrant package versioning,
+building, or publishing operations. Used in CI/CD workflows.
+"""
 
 import argparse
 import re
@@ -23,33 +28,40 @@ INFRASTRUCTURE_PATTERNS = [
 ]
 
 def should_trigger_package_operations(changed_files):
-    """
-    Determines if the changed files should trigger package operations.
+    """Check if changed files should trigger package operations.
+
+    Args:
+        changed_files: List of file paths that have changed.
+
+    Returns:
+        True if package operations should be triggered, False otherwise.
+
     """
     for file in changed_files:
         if not file:
             continue
 
         if any(pattern.match(file) for pattern in PACKAGE_PATTERNS):
-            print(f"  ✅ Package-relevant file found: {file}", file=sys.stderr)
             return True
 
         if any(pattern.match(file) for pattern in INFRASTRUCTURE_PATTERNS):
-            print(f"  ⏭️  Infrastructure file: {file}", file=sys.stderr)
             continue
 
         # Unknown file type - be conservative
-        print(f"  ❓ Unknown file type, being conservative: {file}", file=sys.stderr)
         return True
 
     return False
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Check if changed files are package-relevant.")
-    parser.add_argument("files", nargs="*", help="List of changed files from stdin.")
+    parser = argparse.ArgumentParser(
+        description="Check if changed files are package-relevant."
+    )
+    parser.add_argument(
+        "files", nargs="*", help="List of changed files from stdin."
+    )
     args = parser.parse_args()
 
-    files_to_check = []
+    files_to_check: list[str] = []
     if not sys.stdin.isatty():
         files_to_check.extend(line.strip() for line in sys.stdin)
 
@@ -57,12 +69,11 @@ if __name__ == "__main__":
         files_to_check.extend(args.files)
 
     if not files_to_check:
-        print("false")
         sys.exit(0)
 
 
     if should_trigger_package_operations(files_to_check):
-        print("true")
+        pass
     else:
-        print("false")
+        pass
 

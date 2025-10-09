@@ -72,3 +72,48 @@ asyncio_default_fixture_loop_scope = "session"
 asyncio_default_test_loop_scope = "session"
 
 # Network tests are automatically prioritized by pytest_collection_modifyitems hook
+
+[tool.ruff]
+# Set the target Python version for compatibility checks.
+target-version = "py312"
+# Align the line length with the formatter for consistent styling.
+line-length = 88
+
+# --- Linting Configuration ---
+[tool.ruff.lint]
+# Select the default rules plus a comprehensive set of common plugins.
+# F: Pyflakes errors
+# E, W: Pycodestyle errors and warnings
+# I: isort for import sorting
+# B: flake8-bugbear for common bugs
+# UP: pyupgrade for modern syntax
+# N: PEP 8 naming conventions
+# S: bandit for security issues
+# D: pydocstyle for docstrings
+# T20: flake8-print for `print` statements
+# PLC, PLE, PLR, PLW: Pylint rules
+select = ["F", "E", "W", "I", "B", "UP", "N", "S", "D", "T20", "PLC", "PLE", "PLR", "PLW"]
+
+# Ignore rules that may not be suitable for your project.
+# Example: D203 (1 blank line required before class docstring) can conflict with other formatters.
+ignore = ["D203", "D213"]
+
+# Treat all rules in the `select` list as fixable. This overrides Ruff's default safety checks.
+# Be aware: This will attempt to fix all linting issues, including potentially destructive ones.
+fixable = ["ALL"]
+
+# --- Formatting Configuration ---
+[tool.ruff.format]
+# The format section controls how Ruff formats your code.
+# The formatter handles fixes for styling issues, such as line length.
+# This section ensures consistent formatting alongside linting autofixes.
+quote-style = "single"
+indent-style = "tab"
+
+# Disable specific rules for specific directories or files.
+[tool.ruff.lint.per-file-ignores]
+"tools/*" = ["T20", "PLW", "PLR", "D"]
+"tests/*" = ["S101", "D", "E501", "PLR2004"]
+"statscan/wds/models/*" = ["N815"]
+# Auto-generated enums: allow non-ASCII names (French/Indigenous) and long lines (census data)
+"statscan/enums/auto/**/*.py" = ["E501", "PLC2401"]

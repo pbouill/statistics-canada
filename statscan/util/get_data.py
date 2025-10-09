@@ -1,18 +1,21 @@
-from typing import Optional, Iterable, Any
-from pathlib import Path
-import mimetypes
+"""Utility functions for downloading and retrieving Statistics Canada data.
 
+This module provides async helpers for downloading files, unpacking data,
+building API keys, and querying the Census Profile SDMX API and WDS endpoints.
+"""
 import logging
+import mimetypes
+from collections.abc import Iterable
+from pathlib import Path
+from typing import Any
 
 import pandas as pd
 from httpx import AsyncClient, Response
 
-
-from statscan.url import CENSUS_SDMX_BASE_URL
-from statscan.enums.wds.wds import Detail, Format, WDSMETADATAMIME
 from statscan.enums.frequency import Frequency
 from statscan.enums.stats_filter import StatsFilter
-
+from statscan.enums.wds.wds import WDSMETADATAMIME, Detail, Format
+from statscan.url import CENSUS_SDMX_BASE_URL
 
 DEFAULT_DATA_PATH = Path("data")
 DEFAULT_ENCODINGS = ("latin1", "utf-8", "utf-16")
@@ -27,18 +30,20 @@ logger = logging.getLogger(__name__)
 async def download_data(
     url: str,
     data_dir: Path = DEFAULT_DATA_PATH,
-    file_name: Optional[str] = None,
+    file_name: str | None = None,
     overwrite: bool = False,
 ) -> Path:
-    """
-    Download data from the specified URL and save it to the given path.
+    """Download data from the specified URL and save it to the given path.
 
     Args:
-        url (str): The URL to download data from.
-        path (Path): The local path where the data will be saved.
+        url: The URL to download data from.
+        data_dir: The local directory where the data will be saved.
+        file_name: Name for the downloaded file. If None, uses URL filename.
+        overwrite: Whether to overwrite existing files.
 
     Returns:
-        Path: The path to the downloaded data file.
+        The path to the downloaded data file.
+
     """
     if not data_dir.exists():
         data_dir.mkdir(parents=True, exist_ok=True)
@@ -60,14 +65,15 @@ async def download_data(
 def unpack_to_dataframe(
     file_path: Path, encodings: Iterable[str] = DEFAULT_ENCODINGS
 ) -> pd.DataFrame:
-    """
-    Unzip a file and return its contents as a pandas DataFrame.
+    """Unzip a file and return its contents as a pandas DataFrame.
 
     Args:
-        zip_path (Path): The path to the zip file.
+        file_path: The path to the file to read.
+        encodings: Sequence of encodings to try when reading the file.
 
     Returns:
-        pd.DataFrame: The contents of the specified file as a DataFrame.
+        The contents of the specified file as a DataFrame.
+
     """
     logger.debug(f"Unpacking file {file_path} to DataFrame")
     for enc in encodings:
@@ -83,22 +89,23 @@ def unpack_to_dataframe(
 def make_key(
     frequency: Frequency,
     dguid: str | Iterable[str],
-    stats_filter: Optional[StatsFilter],
+    stats_filter: StatsFilter | None,
 ) -> str:
-    """
-    Create a key for the WDS API based on frequency and dguid.
+    """Create a key for the WDS API based on frequency and dguid.
 
     Args:
-        frequency (Frequency): The frequency of the data.
-        dguid (str | Iterable[str]): The dguid(s) to include in the key.
-        stats_filter (StatsFilter, optional): Statistical filter for the statistics.
+        frequency: The frequency of the data.
+        dguid: The dguid(s) to include in the key.
+        stats_filter: Statistical filter for the statistics.
 
     Returns:
-        str: The formatted key string.
+        The formatted key string.
 
     Note:
-        This function is deprecated for SDMX usage. Use make_census_profile_key() instead
-        for Census Profile SDMX API calls which require 5 dimensions.
+        This function is deprecated for SDMX usage. Use
+        make_census_profile_key() instead for Census Profile SDMX API
+        calls which require 5 dimensions.
+
     """
     stats_filter = stats_filter or StatsFilter()
     if not isinstance(dguid, str):
@@ -106,18 +113,17 @@ def make_key(
     return f"{frequency.name}.{dguid}.{stats_filter}"
 
 
-def make_census_profile_key(
+def make_census_profile_key(  # noqa: PLR0913
     dguid: str | Iterable[str],
     frequency: Frequency = Frequency.A5,
-    stats_filter: Optional[StatsFilter] = None,
+    stats_filter: StatsFilter | None = None,
     time_period: str = "2021",
     characteristic: str = "1",
     gender_statistic: str = "1",
 ) -> str:
-    """
-    Create a 5-dimension key for the Census Profile SDMX API.
+    """Create a 5-dimension key for the Census Profile SDMX API.
 
-    The Census Profile SDMX API requires exactly 5 dimensions in this order:
+    The Census Profile SDMX API requires exactly 5 dimensions in order:
     1. Reference Area (DGUID)
     2. Time Period (year)
     3. Frequency (e.g., A5 for annual)
@@ -125,15 +131,15 @@ def make_census_profile_key(
     5. Gender/Statistic (demographic breakdown)
 
     Args:
-        dguid (str | Iterable[str]): The DGUID(s) for geographic area(s).
-        frequency (Frequency): The frequency (default: A5).
-        stats_filter (StatsFilter, optional): Additional filter (currently unused).
-        time_period (str): The time period/year (default: "2021").
-        characteristic (str): The characteristic dimension (default: "1").
-        gender_statistic (str): The gender/statistic dimension (default: "1").
+        dguid: The DGUID(s) for geographic area(s).
+        frequency: The frequency (default: A5).
+        stats_filter: Additional filter (currently unused).
+        time_period: The time period/year (default: "2021").
+        characteristic: The characteristic dimension (default: "1").
+        gender_statistic: The gender/statistic dimension (default: "1").
 
     Returns:
-        str: The 5-dimension key string (e.g., "2021A000535570.2021.A5.1.1").
+        The 5-dimension key string (e.g., "2021A000535570.2021.A5.1.1").
 
     Examples:
         >>> make_census_profile_key("2021A000535570")
@@ -141,6 +147,7 @@ def make_census_profile_key(
 
         >>> make_census_profile_key(["2021A000535570", "2021A000535571"])
         "2021A000535570+2021A000535571.2021.A5.1.1"
+
     """
     # Handle multiple DGUIDs
     if not isinstance(dguid, str):
@@ -158,46 +165,47 @@ def make_census_profile_key(
     return ".".join(key_parts)
 
 
-async def get_sdmx_data(
+async def get_sdmx_data(  # noqa: PLR0913
     flow_ref: str,
     dguid: str | Iterable[str],
     frequency: Frequency = Frequency.A5,
-    stats_filter: Optional[StatsFilter] = None,
+    stats_filter: StatsFilter | None = None,
     base_url: str = CENSUS_SDMX_BASE_URL,
     resource: str = DEFAULT_RESOURCE,
     agency: str = DEFAULT_AGENCY,
-    detail: Optional[Detail] = None,
-    format: Optional[Format] = None,
-    parameters: Optional[dict[str, Any]] = None,
-    timeout: Optional[float] = None,
-    client_kwargs: Optional[dict[str, Any]] = None,
+    detail: Detail | None = None,
+    format: Format | None = None,
+    parameters: dict[str, Any] | None = None,
+    timeout: float | None = None,
+    client_kwargs: dict[str, Any] | None = None,
 ) -> Response:
-    """
-    Get SDMX data from the Census Profile SDMX API.
+    """Get SDMX data from the Census Profile SDMX API.
 
     Args:
-        flow_ref (str): The dataflow reference to query (e.g., 'DF_CSD', 'DF_CD', 'DF_PR').
-        dguid (str | Iterable[str]): The DGUID(s) for the geographic area(s).
-        frequency (Frequency): The frequency of the data (default: A5 for annual).
-        stats_filter (StatsFilter, optional): Statistical filter for additional dimensions.
-        base_url (str): The base URL for the Census Profile SDMX API.
-        resource (str): Deprecated - kept for compatibility but not used.
-        agency (str): Deprecated - kept for compatibility but not used.
-        detail (Detail, optional): The level of detail for the data.
-        format (Format, optional): The format of the data to return.
-        parameters (dict, optional): Additional query parameters.
-        timeout (float, optional): Request timeout in seconds.
-        client_kwargs (dict, optional): Additional arguments for the HTTP client.
+        flow_ref: The dataflow reference to query (e.g., 'DF_CSD',
+            'DF_CD', 'DF_PR').
+        dguid: The DGUID(s) for the geographic area(s).
+        frequency: The frequency of the data (default: A5 for annual).
+        stats_filter: Statistical filter for additional dimensions.
+        base_url: The base URL for the Census Profile SDMX API.
+        resource: Deprecated - kept for compatibility but not used.
+        agency: Deprecated - kept for compatibility but not used.
+        detail: The level of detail for the data.
+        format: The format of the data to return.
+        parameters: Additional query parameters.
+        timeout: Request timeout in seconds.
+        client_kwargs: Additional arguments for the HTTP client.
 
     Returns:
-        Response: The HTTP response containing SDMX data.
+        The HTTP response containing SDMX data.
 
     Raises:
         HTTPError: If the API request fails.
 
     Note:
-        This function uses the Statistics Canada Census Profile SDMX API which requires
-        exactly 5 dimensions in the key. The API expects the following dimension order:
+        This function uses the Statistics Canada Census Profile SDMX API
+        which requires exactly 5 dimensions in the key. The API expects
+        the following dimension order:
         1. Reference Area (DGUID)
         2. Time Period (year)
         3. Frequency (e.g., A5)
@@ -210,8 +218,8 @@ async def get_sdmx_data(
         - DF_PR: Provinces/territories
         - DF_CMACA: Census metropolitan areas
         - And others (see get_dataflows() for complete list)
-    """
 
+    """
     # Generate the 5-dimension key required by the Census Profile SDMX API
     key = make_census_profile_key(
         dguid=dguid, frequency=frequency, stats_filter=stats_filter
@@ -244,6 +252,18 @@ async def get_codes(
     agency: str = DEFAULT_AGENCY,
     content_type: str = mimetypes.types_map[".json"],
 ) -> Response:
+    """Fetch geographic code lists from the Census Profile SDMX API.
+
+    Args:
+        base_url: The base URL for the Census Profile SDMX API.
+        resource: The codelist resource identifier.
+        agency: The agency identifier.
+        content_type: The MIME type for the response.
+
+    Returns:
+        The HTTP response containing the codelist data.
+
+    """
     url = f"{base_url}/codelist/{agency}/{resource}/latest"
     logger.debug(f"Fetching codes from {url} with content type {content_type}")
     async with AsyncClient() as client:
@@ -257,11 +277,11 @@ async def get_dataflows(
     agency: str = DEFAULT_AGENCY,
     content_type: str = mimetypes.types_map[".json"],
 ) -> Response:
-    """
-    Get the available data flows from the WDS API.
+    """Get the available data flows from the WDS API.
 
     Returns:
         Response: The API response containing the data flows.
+
     """
     url = f"{base_url}/dataflow/{agency}/all/latest"
     logger.debug(f"Fetching data flows from {url}")
@@ -277,20 +297,23 @@ async def get_metadata(
     agency: str = DEFAULT_AGENCY,
     content_type: str = WDSMETADATAMIME.SDMX_JSON,
 ) -> Response:
-    """
-    Get metadata for a specific flow from the WDS API.
+    """Get metadata for a specific flow from the WDS API.
+
     Args:
         flow_ref (str): The flow reference to query.
         base_url (str): The base URL for the WDS API.
         agency (str): The agency to query.
         content_type (str): The content type for the response.
+
     Returns:
         Response: The API response containing the metadata.
+
     """
     url = f"{base_url}/dataflow/{agency}/{flow_ref}"
     parameters = {"references": "all"}
     logger.debug(
-        f"Fetching metadata from {url} with parameters {parameters} and content type {content_type}"
+        f"Fetching metadata from {url} with parameters {parameters} "
+        f"and content type {content_type}"
     )
     async with AsyncClient() as client:
         response = await client.get(

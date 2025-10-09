@@ -1,17 +1,22 @@
-from typing import Optional, Dict, List
+"""SDMX dataset models including links and series data."""
+
 from ...base import Base
 from .series import Series
 
 
 class Link(Base):
+    """Link reference in SDMX dataset."""
+
     urn: str
     rel: str
 
 
 class Dataset(Base):
-    """
-    Represents a dataset in SDMX response.
-    Based on actual structure: {structure (int), action (str), links (list), annotations (list), series (dict)}
+    """Represents a dataset in SDMX response.
+
+    Based on actual structure: {structure (int), action (str), links (list),
+    annotations (list), series (dict)}.
+
     """
 
     structure: int
@@ -24,19 +29,19 @@ class Dataset(Base):
         """Get a series by its ID."""
         return self.series[key]
 
-    def get_series_by_key_parts(self, *key_parts) -> Optional[Series]:
+    def get_series_by_key_parts(self, *key_parts) -> Series | None:
         """Get a series by its key parts (convenience method)."""
         key = ":".join(str(part) for part in key_parts)
         return self.series.get(key)
 
-    def get_all_observations(self) -> Dict[str, Dict[int, List[Optional[float]]]]:
+    def get_all_observations(self) -> dict[str, dict[int, list[float | None]]]:
         """Get all observations from all series."""
         return {
             series_key: series.observations
             for series_key, series in self.series.items()
         }
 
-    def get_series_keys(self) -> List[str]:
+    def get_series_keys(self) -> list[str]:
         """Get all series keys."""
         return list(self.series.keys())
 
@@ -50,16 +55,16 @@ class Dataset(Base):
         return len(self.series)
 
     def filter_series_by_attributes(
-        self, attribute_values: List[Optional[int]]
-    ) -> Dict[str, Series]:
-        """
-        Filter series by their attribute values.
+        self, attribute_values: list[int | None]
+    ) -> dict[str, Series]:
+        """Filter series by their attribute values.
 
         Args:
             attribute_values: List of attribute values to match
 
         Returns:
             Dictionary of matching series
+
         """
         filtered = {}
         for key, series in self.series.items():
@@ -68,16 +73,16 @@ class Dataset(Base):
         return filtered
 
     def get_series_with_annotations(
-        self, annotation_refs: List[int]
-    ) -> Dict[str, Series]:
-        """
-        Get series that have specific annotation references.
+        self, annotation_refs: list[int]
+    ) -> dict[str, Series]:
+        """Get series that have specific annotation references.
 
         Args:
             annotation_refs: List of annotation reference IDs
 
         Returns:
             Dictionary of matching series
+
         """
         filtered = {}
         for key, series in self.series.items():

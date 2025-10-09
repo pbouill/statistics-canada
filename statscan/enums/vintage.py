@@ -1,10 +1,10 @@
+"""Census vintage (year) enumeration."""
+
 from enum import Enum
 
 
 class Vintage(Enum):
-    """
-    Enum for valid census years
-    """
+    """Enum for valid census years."""
 
     CENSUS_2021 = 2021  # Census 2021
     # CENSUS_2016 = 2016  # Census 2016
@@ -18,12 +18,12 @@ class Vintage(Enum):
     # CENSUS_1976 = 1976  # Census 1976
 
     def __str__(self) -> str:
-        """
-        String representation of the Vintage enum.
+        """Return string representation of the vintage year.
 
         Returns
         -------
         str
             The string representation of the vintage year.
+
         """
         return f"{self.value:04d}"

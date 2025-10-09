@@ -1,12 +1,16 @@
+"""Geographic schema (GeoLevel) enumeration for StatsCan DGUIDs."""
+
 from __future__ import annotations
+
+from enum import Enum, StrEnum
 from typing import Self
-from enum import StrEnum, Enum
 
 
 class Schema(StrEnum):
-    """
-    Enum for GeoLevel values used in StatsCan DGUID.
-    see: https://www12.statcan.gc.ca/census-recensement/2021/ref/dict/az/definition-eng.cfm
+    """Enum for GeoLevel values used in StatsCan DGUID.
+
+    See: https://www12.statcan.gc.ca/census-recensement/2021/ref/dict/az/definition-eng.cfm.
+
     """
 
     CAN = "A0000"  # Canada
@@ -23,7 +27,8 @@ class Schema(StrEnum):
     CA = "S0504"  # [CMADGUID] Census Agglomeration
     CT = "S0507"  # Census Tract
     MIZ = "S0509"  # [CMADGUID] Metropolitan Influenced Zone
-    OUTSIDE_CA = "S0517"  # [CMADGUID] Census Subdivision in a Territory outside a Census Agglomeration
+    # [CMADGUID] Census Subdivision in a Territory outside Census Agglomeration
+    OUTSIDE_CA = "S0517"
 
     POPCTR = "S0510"  # Population Centre
     DA = "S0512"  # Dissemination Area
@@ -31,9 +36,9 @@ class Schema(StrEnum):
 
     @classmethod
     def from_dguid(cls, dguid: str) -> Self:
-        """
-        Get the GeoLevel enum from a DGUID string.
-        {Year:4}{GeoLevel:5}{ProvinceTerritory:2}{UniqueIdentifier:}
+        """Get the GeoLevel enum from a DGUID string.
+
+        Format: {Year:4}{GeoLevel:5}{ProvinceTerritory:2}{UniqueIdentifier:}.
 
         Parameters
         ----------
@@ -44,66 +49,67 @@ class Schema(StrEnum):
         -------
         GeoLevel
             The corresponding GeoLevel enum value.
+
         """
         return cls(dguid[4:9])
 
     @property
     def is_administrative_area(self) -> bool:
-        """
-        Check if the GeoLevel is an administrative area.
+        """Check if the GeoLevel is an administrative area.
 
         Returns
         -------
         bool
             True if the GeoLevel is an administrative area, False otherwise.
+
         """
         return self.value.startswith("A")
 
     @property
     def is_statistical_area(self) -> bool:
-        """
-        Check if the GeoLevel is a statistical area.
+        """Check if the GeoLevel is a statistical area.
 
         Returns
         -------
         bool
             True if the GeoLevel is a statistical area, False otherwise.
+
         """
         return self.value.startswith("S")
 
     @property
     def is_combined_area(self) -> bool:
-        """
-        Check if the GeoLevel is a combined area.
+        """Check if the GeoLevel is a combined area.
 
         Returns
         -------
         bool
             True if the GeoLevel is a combined area, False otherwise.
+
         """
         return self.value.startswith("C")
 
     @property
     def is_blended_area(self) -> bool:
-        """
-        Check if the GeoLevel is a blended area.
+        """Check if the GeoLevel is a blended area.
 
         Returns
         -------
         bool
             True if the GeoLevel is a blended area, False otherwise.
+
         """
         return self.value.startswith("B")
 
     @property
     def data_flow(self) -> str:
-        """
-        Get the data flow for the GeoLevel.
+        """Get the data flow for the GeoLevel.
 
         Returns
         -------
         str
             The data flow for the GeoLevel.
+
         """
         if self in (Schema.CMA, Schema.CA, Schema.MIZ, Schema.OUTSIDE_CA):
             return "DF_CMACA"
@@ -111,9 +117,7 @@ class Schema(StrEnum):
 
 
 class SACType(Enum):
-    """
-    see: https://www12.statcan.gc.ca/census-recensement/2021/geo/ref/domain-domaine/index2021-eng.cfm?lang=e&id=SACtype&getgeo=Continue
-    """
+    """see: https://www12.statcan.gc.ca/census-recensement/2021/geo/ref/domain-domaine/index2021-eng.cfm?lang=e&id=SACtype&getgeo=Continue."""
 
     CMA = 1  # Census Subdivision within a Census Metropolitan Area
     CA_WITH_CT = 2  # Census Subdivision within a Census Agglomeration with Census Tract

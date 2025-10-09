@@ -1,5 +1,4 @@
-"""
-Enhanced response handlers for Statistics Canada SDMX data.
+"""Enhanced response handlers for Statistics Canada SDMX data.
 
 This module provides classes to process and transform raw SDMX JSON responses
 into more user-friendly formats including pandas DataFrames.
@@ -10,18 +9,17 @@ into more user-friendly formats including pandas DataFrames.
 """
 
 import warnings
-from typing import Any, Optional, ClassVar, Self
-
 from dataclasses import dataclass
+from typing import Any, ClassVar, Self
 
 import pandas as pd
 
 from statscan.enums.stats_filter import (
-    Gender,
     CensusProfileCharacteristic,
+    CommonFilters,
+    Gender,
     StatisticType,
     StatsFilter,
-    CommonFilters,
 )
 
 # Deprecation warning
@@ -69,8 +67,7 @@ class SeriesInfo:
 
 
 class CensusData:
-    """
-    Enhanced wrapper for Statistics Canada SDMX JSON responses.
+    """Enhanced wrapper for Statistics Canada SDMX JSON responses.
 
     Provides automatic dimension decoding, data transformation, and
     convenient access methods. Data is stored as a DataFrame for
@@ -80,23 +77,23 @@ class CensusData:
     COMMON_FILTERS: ClassVar[type] = CommonFilters
 
     def __init__(self, dataframe: pd.DataFrame):
-        """
-        Initialize with a DataFrame containing census data.
+        """Initialize with a DataFrame containing census data.
 
         Args:
             dataframe: The DataFrame containing all census data with columns for
                       dimensions, series_key, time_period, and value
+
         """
         self._dataframe = dataframe
 
     @property
     def dataframe(self) -> pd.DataFrame:
-        """
-        Get the enhanced DataFrame with meaningful dimension columns.
+        """Get the enhanced DataFrame with meaningful dimension columns.
 
         Returns:
             DataFrame with decoded dimension names as columns, plus dimension
             components for reference, time periods, and values
+
         """
         return self._dataframe
 
@@ -165,14 +162,14 @@ class CensusData:
 
     @classmethod
     def from_raw_response(cls, raw_response: dict[str, Any]) -> "CensusData":
-        """
-        Create a CensusData instance from a raw SDMX JSON response.
+        """Create a CensusData instance from a raw SDMX JSON response.
 
         Args:
             raw_response: The raw JSON response from Statistics Canada API
 
         Returns:
             CensusData instance with parsed data
+
         """
         # Parse dimensions
         dimensions = cls._parse_dimensions(raw_response)
@@ -245,7 +242,10 @@ class CensusData:
     def _decode_series_key(
         series_key: str, dimensions: dict[str, DimensionInfo]
     ) -> dict[str, str]:
-        """Decode a series key using dimension information and map to enum values when possible."""
+        """Decode a series key using dimension information.
+
+        Maps to enum values when possible.
+        """
         decoded = {}
         key_parts = series_key.split(":")
 
@@ -272,9 +272,9 @@ class CensusData:
         return decoded
 
     @staticmethod
-    def _map_to_enum_value(
+    def _map_to_enum_value(  # noqa: PLR0911, PLR0912
         dimension_name: str, human_readable_value: str
-    ) -> Optional[Any]:
+    ) -> Any | None:
         """Map human-readable dimension values to enum values when possible."""
         if not human_readable_value:
             return None
@@ -367,8 +367,7 @@ class CensusData:
 
     @staticmethod
     def _create_dataframe(series_info: list[SeriesInfo]) -> pd.DataFrame:
-        """
-        Create the DataFrame from parsed series data with enhanced structure.
+        """Create the DataFrame from parsed series data with enhanced structure.
 
         Uses meaningful dimension names as column headers, with series key components
         available for reference and analysis.
@@ -378,6 +377,7 @@ class CensusData:
 
         Returns:
             DataFrame with meaningful dimension columns plus time periods and values
+
         """
         rows = []
 
@@ -400,7 +400,8 @@ class CensusData:
 
         df = pd.DataFrame(rows)
 
-        # Reorder columns: meaningful dimensions first, then dimension components, then metadata
+        # Reorder columns: meaningful dimensions first, then dimension
+        # components, then metadata
         meaningful_dims = [
             col
             for col in df.columns
@@ -423,8 +424,7 @@ class CensusData:
 
     @classmethod
     def from_dataframe(cls, dataframe: pd.DataFrame) -> Self:
-        """
-        Create a CensusData instance from an existing DataFrame.
+        """Create a CensusData instance from an existing DataFrame.
 
         This is useful when you have pre-processed data or want to create
         a CensusData instance from a subset of data. The DataFrame should
@@ -435,17 +435,17 @@ class CensusData:
 
         Returns:
             CensusData instance
+
         """
         return cls(dataframe)
 
     def filter_series(
         self,
-        gender: Optional[str] = None,
-        characteristic: Optional[str] = None,
-        statistic_type: Optional[str] = None,
+        gender: str | None = None,
+        characteristic: str | None = None,
+        statistic_type: str | None = None,
     ) -> list[SeriesInfo]:
-        """
-        Filter series by dimension values.
+        """Filter series by dimension values.
 
         Args:
             gender: Filter by gender dimension
@@ -454,6 +454,7 @@ class CensusData:
 
         Returns:
             List of SeriesInfo matching the filters
+
         """
         filtered = []
 
@@ -482,15 +483,17 @@ class CensusData:
 
         return filtered
 
-    def filter_by_enhanced_filter(self, stats_filter: StatsFilter) -> list[SeriesInfo]:
-        """
-        Filter series using StatsFilter with enum values.
+    def filter_by_enhanced_filter(  # noqa: PLR0912
+        self, stats_filter: StatsFilter
+    ) -> list[SeriesInfo]:
+        """Filter series using StatsFilter with enum values.
 
         Args:
             stats_filter: StatsFilter with enum-based filtering
 
         Returns:
             List of SeriesInfo matching the filter
+
         """
         filtered = []
 
@@ -509,7 +512,8 @@ class CensusData:
                     if gender_name.lower() not in str(series_gender).lower():
                         matches = False
 
-            # Check characteristic filter - now supports both enum values and string matching
+            # Check characteristic filter - supports both enum values and
+            # string matching
             if stats_filter.census_profile_characteristic:
                 series_char = series.dimensions.get(
                     "Characteristic", ""
@@ -525,7 +529,8 @@ class CensusData:
                     if char_name.lower() not in str(series_char).lower():
                         matches = False
 
-            # Check statistic type filter - now supports both enum values and string matching
+            # Check statistic type filter - supports both enum values and
+            # string matching
             if stats_filter.statistic_type:
                 series_stat = series.dimensions.get(
                     "Statistic", ""
@@ -547,11 +552,11 @@ class CensusData:
         return filtered
 
     def get_characteristics_by_category(self) -> dict[str, list[str]]:
-        """
-        Group available characteristics by category.
+        """Group available characteristics by category.
 
         Returns:
             Dict mapping category names to lists of characteristics
+
         """
         characteristics: dict[str, list[str]] = {}
 
@@ -679,12 +684,11 @@ class CensusData:
 
     def filter_by_enum(
         self,
-        gender: Optional[Gender] = None,
-        characteristic: Optional[CensusProfileCharacteristic] = None,
-        statistic_type: Optional[StatisticType] = None,
+        gender: Gender | None = None,
+        characteristic: CensusProfileCharacteristic | None = None,
+        statistic_type: StatisticType | None = None,
     ) -> pd.DataFrame:
-        """
-        Filter data using enum values directly.
+        """Filter data using enum values directly.
 
         Args:
             gender: Gender enum value to filter by
@@ -693,13 +697,17 @@ class CensusData:
 
         Returns:
             Filtered DataFrame
+
         """
         df = self.dataframe
 
         if gender:
             if "Gender" in df.columns:
-                # Filter by enum value directly (more efficient) or fallback to name matching
-                mask = (df["Gender"] == gender) | df["Gender"].astype(str).str.contains(
+                # Filter by enum value directly (more efficient) or fallback
+                # to name matching
+                mask = (df["Gender"] == gender) | df["Gender"].astype(
+                    str
+                ).str.contains(
                     gender.name.replace("_", " ").title(), case=False, na=False
                 )
                 df = df[mask]
@@ -760,8 +768,7 @@ class CensusData:
     def get_top_characteristics(
         self, n: int = 10, by_value: bool = True
     ) -> pd.DataFrame:
-        """
-        Get the top N characteristics by value or other criteria.
+        """Get the top N characteristics by value or other criteria.
 
         Args:
             n: Number of top characteristics to return
@@ -769,6 +776,7 @@ class CensusData:
 
         Returns:
             DataFrame with top characteristics
+
         """
         df = self.dataframe
         if "value" not in df.columns:
@@ -800,14 +808,14 @@ class CensusData:
         return top_data
 
     def filter_by_stats_filter(self, stats_filter: StatsFilter) -> pd.DataFrame:
-        """
-        Filter DataFrame using a StatsFilter with efficient enum-based filtering.
+        """Filter DataFrame using a StatsFilter with efficient enum-based filtering.
 
         Args:
             stats_filter: StatsFilter with enum-based filtering
 
         Returns:
             Filtered DataFrame
+
         """
         return self.filter_by_enum(
             gender=stats_filter.gender,
@@ -816,11 +824,11 @@ class CensusData:
         )
 
     def describe_structure(self) -> dict[str, Any]:
-        """
-        Get a comprehensive description of the data structure.
+        """Get a comprehensive description of the data structure.
 
         Returns:
             Dictionary describing the dataset structure
+
         """
         df = self.dataframe
 
@@ -854,11 +862,12 @@ class CensusData:
         }
 
     def get_population_summary(self) -> dict[str, Any]:
-        """
-        Get a summary of the population data including total, male, female, and ratio.
+        """Get population data summary.
 
         Returns:
-            Dictionary with population summary statistics
+            Dictionary with population summary statistics including total, male,
+            female, and ratio.
+
         """
         df = self.dataframe
         if "Gender" not in df.columns or "value" not in df.columns:
@@ -894,17 +903,16 @@ class CensusData:
         }
 
     def get_dimension_correlation(self) -> pd.DataFrame:
-        """
-        Calculate correlation between numeric dimensions in the data.
+        """Calculate correlation between numeric dimensions in the data.
 
         Returns:
             DataFrame with correlation coefficients between dimensions
+
         """
         return self.dataframe.select_dtypes(include=["number"]).corr()
 
     def get_cross_tabulation(self, row_dim: str, col_dim: str) -> pd.DataFrame:
-        """
-        Create a cross-tabulation between two dimensions.
+        """Create a cross-tabulation between two dimensions.
 
         Args:
             row_dim: Dimension to use for rows
@@ -912,55 +920,56 @@ class CensusData:
 
         Returns:
             Cross-tabulation DataFrame
+
         """
         return pd.crosstab(
             self.dataframe[row_dim], self.dataframe[col_dim], margins=True
         )
 
     def filter_by_gender_enum(self, gender: Gender) -> pd.DataFrame:
-        """
-        Filter data by Gender enum value.
+        """Filter data by Gender enum value.
 
         Args:
             gender: Gender enum value
 
         Returns:
             Filtered DataFrame
+
         """
         return self.filter_by_enum(gender=gender)
 
     def filter_by_characteristic_enum(
         self, characteristic: CensusProfileCharacteristic
     ) -> pd.DataFrame:
-        """
-        Filter data by CensusProfileCharacteristic enum value.
+        """Filter data by CensusProfileCharacteristic enum value.
 
         Args:
             characteristic: CensusProfileCharacteristic enum value
 
         Returns:
             Filtered DataFrame
+
         """
         return self.filter_by_enum(characteristic=characteristic)
 
     def filter_by_statistic_enum(self, statistic_type: StatisticType) -> pd.DataFrame:
-        """
-        Filter data by StatisticType enum value.
+        """Filter data by StatisticType enum value.
 
         Args:
             statistic_type: StatisticType enum value
 
         Returns:
             Filtered DataFrame
+
         """
         return self.filter_by_enum(statistic_type=statistic_type)
 
     def get_unique_enum_values(self) -> dict[str, list[Any]]:
-        """
-        Get unique enum values present in the DataFrame for each dimension.
+        """Get unique enum values present in the DataFrame for each dimension.
 
         Returns:
             Dictionary mapping dimension names to lists of unique enum values
+
         """
         result: dict[str, list] = {}
         df = self.dataframe
@@ -998,14 +1007,14 @@ class CensusData:
         return result
 
     def get_dimension_values_sample(self, limit: int = 10) -> dict[str, list[str]]:
-        """
-        Get a sample of unique dimension values for each column to help with mapping.
+        """Get a sample of unique dimension values for each column to help with mapping.
 
         Args:
             limit: Maximum number of unique values to return per dimension
 
         Returns:
             Dictionary mapping dimension names to lists of sample values
+
         """
         result = {}
         df = self.dataframe

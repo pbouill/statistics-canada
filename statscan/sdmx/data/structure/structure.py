@@ -1,25 +1,23 @@
-from typing import Optional
+"""SDMX structure models for data organization and metadata."""
 
-from statscan.sdmx.data.structure.dimension.series import Series
 from statscan.sdmx.data.structure.attributes import Attribute
+from statscan.sdmx.data.structure.dimension.series import Series
 
 from ...base import Base
-from .attributes import Attributes
 from .annotation import Annotation
+from .attributes import Attributes
 from .dimensions import Dimensions
 
 
 class Structure(Base):
-    """
-    Represents a data structure in SDMX.
-    """
+    """Represents a data structure in SDMX."""
 
     name: str
     names: dict[str, str]  # language -> name mapping
     dimensions: Dimensions
     attributes: Attributes
     annotations: list[Annotation] = []
-    dataSets: list = []
+    dataSets: list = []  # noqa: N815
 
     @property
     def annotation_dict(self) -> dict[str | int, Annotation]:
@@ -30,7 +28,7 @@ class Structure(Base):
             if annotation.text is not None
         }
 
-    def get_annotation(self, text: str | int) -> Optional[Annotation]:
+    def get_annotation(self, text: str | int) -> Annotation | None:
         """Get an annotation by its text or ID."""
         for annotation in self.annotations:
             if annotation.text == text:
@@ -50,16 +48,17 @@ class Structure(Base):
         """Get a series attribute by ID."""
         return self.attributes[attribute_id]
 
-    def cross_reference_annotation(self, annotation_ref: int) -> Optional[Annotation]:
+    def cross_reference_annotation(self, annotation_ref: int) -> Annotation | None:
         """Cross-reference an annotation by its reference number."""
         return self.get_annotation(annotation_ref)
 
     def get_dimension_value_by_attribute(
         self, dimension_id: str, attribute_id: str, value_id: int | str
     ):
-        """
-        Get a dimension value and its corresponding attribute value.
+        """Get a dimension value and its corresponding attribute value.
+
         Returns a tuple of (dimension_value, attribute_value).
+
         """
         try:
             dimension = self.dimensions[dimension_id]

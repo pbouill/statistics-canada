@@ -2,13 +2,12 @@ import json
 from enum import StrEnum, auto
 
 import pytest
-from httpx import Response, Request
+from httpx import Request, Response
 
-from statscan.wds.client import Client
-from statscan.wds.requests import WDSRequests
-from statscan.wds.models.code import CodeSets, CodeSet, Code
 from statscan.enums.auto.wds.scalar import Scalar
-
+from statscan.wds.client import Client
+from statscan.wds.models.code import Code, CodeSet, CodeSets
+from statscan.wds.requests import WDSRequests
 from tests.mock_method import mock_method
 
 

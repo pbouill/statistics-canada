@@ -1,24 +1,26 @@
-from typing import Optional, Any
-import pandas as pd
+"""SDMX API response handling and DataFrame conversion utilities."""
+
 import logging
+from typing import Any
+
+import pandas as pd
 
 from statscan.sdmx.data.dataset.dataset import Dataset
 from statscan.sdmx.data.structure.structure import Structure
-from .base import Base
-from .meta import Metadata
-from .data.data import Data
-from .data.structure.annotation import Annotation
-from .data.structure.dimension.series import Series as SeriesDimension
-from .data.structure.attributes import Attribute
-from .data.dataset.series import Series as DatasetSeries
 
+from .base import Base
+from .data.data import Data
+from .data.dataset.series import Series as DatasetSeries
+from .data.structure.annotation import Annotation
+from .data.structure.attributes import Attribute
+from .data.structure.dimension.series import Series as SeriesDimension
+from .meta import Metadata
 
 logger = logging.getLogger(__name__)
 
 
 class SDMXResponse(Base):
-    """
-    Represents a response from an SDMX data request.
+    """Represents a response from an SDMX data request.
 
     Provides access to metadata, data structures, dimensions, attributes,
     and convenience methods for cross-referencing annotations and values.
@@ -27,7 +29,7 @@ class SDMXResponse(Base):
     meta: Metadata
     data: Data
     errors: list = []
-    _raw_data: Optional[dict[str, Any]] = None
+    _raw_data: dict[str, Any] | None = None
 
     @property
     def structures(self) -> list[Structure]:
@@ -40,10 +42,9 @@ class SDMXResponse(Base):
         return self.data.dataSets
 
     def get_annotation(
-        self, annotation_ref: str | int | bool, structure: Optional[Structure] = None
-    ) -> Optional[Annotation]:
-        """
-        Cross-reference an annotation by its reference ID, text, or boolean value.
+        self, annotation_ref: str | int | bool, structure: Structure | None = None
+    ) -> Annotation | None:
+        """Cross-reference an annotation by its reference ID, text, or boolean value.
 
         Args:
             annotation_ref: The annotation reference (ID, text, or boolean value)
@@ -51,6 +52,7 @@ class SDMXResponse(Base):
 
         Returns:
             The annotation if found, None otherwise
+
         """
         if structure is None:
             structure = self.primary_structure
@@ -74,15 +76,17 @@ class SDMXResponse(Base):
                 return a
         return None
 
-    def get_annotations_by_type(self, annotation_type: str) -> list[Annotation]:
-        """
-        Get annotations of a specific type from the primary structure.
+    def get_annotations_by_type(  # noqa: PLR0912
+        self, annotation_type: str
+    ) -> list[Annotation]:
+        """Get annotations of a specific type from the primary structure.
 
         Args:
             annotation_type: The type of annotation to search for
 
         Returns:
             List of annotations matching the specified type
+
         """
         structure = self.primary_structure
         matches: list[Annotation] = []
@@ -111,25 +115,25 @@ class SDMXResponse(Base):
         return matches
 
     @property
-    def primary_structure(self) -> Optional[Structure]:
+    def primary_structure(self) -> Structure | None:
         """Get the primary (first) data structure."""
         if self.structures:
             return self.structures[0]
         return None
 
     @property
-    def primary_dataset(self) -> Optional[Dataset]:
+    def primary_dataset(self) -> Dataset | None:
         """Get the primary (first) dataset."""
         if self.datasets:
             return self.datasets[0]
         return None
 
     def get_dimension_summary(self) -> dict[str, dict]:
-        """
-        Get a summary of all dimensions and their value counts.
+        """Get a summary of all dimensions and their value counts.
 
         Returns:
             Dictionary with dimension summaries
+
         """
         structure = self.primary_structure
         if (
@@ -158,8 +162,7 @@ class SDMXResponse(Base):
     def cross_reference_dimension_attribute(
         self, dimension_id: str, attribute_id: str, value_id: int | str
     ):
-        """
-        Cross-reference a dimension value with its corresponding attribute value.
+        """Cross-reference a dimension value with its corresponding attribute value.
 
         Args:
             dimension_id: The dimension ID
@@ -168,6 +171,7 @@ class SDMXResponse(Base):
 
         Returns:
             Tuple of (dimension_value, attribute_value) or (None, None) if not found
+
         """
         structure = self.primary_structure
         if not structure:
@@ -180,13 +184,13 @@ class SDMXResponse(Base):
             else (None, None)
         )
 
-    def to_dataframe(self) -> pd.DataFrame:
-        """
-        Convert the SDMX response to a pandas DataFrame.
+    def to_dataframe(self) -> pd.DataFrame:  # noqa: PLR0912
+        """Convert the SDMX response to a pandas DataFrame.
 
         Returns:
             DataFrame with decoded dimension names as columns, plus
             time periods and values
+
         """
         if not self._raw_data:
             return pd.DataFrame()
@@ -262,21 +266,23 @@ class SDMXResponse(Base):
 
     @property
     def dataframe(self) -> pd.DataFrame:
-        """
-        Get the response data as a pandas DataFrame.
+        """Get the response data as a pandas DataFrame.
 
         Returns:
             DataFrame representation of the SDMX response
+
         """
         return self.to_dataframe().pipe(self._standardize_dataframe)
 
     # --- New helper methods ---
-    def _standardize_dataframe(self, df: pd.DataFrame) -> pd.DataFrame:
+    def _standardize_dataframe(self, df: pd.DataFrame) -> pd.DataFrame:  # noqa: PLR0912
         """Standardize column naming and value normalization for downstream tests.
+
         - Rename 'value' -> 'Value'
         - Identify & rename probable Gender column
         - Identify & rename characteristic/measure column as 'Characteristic'
-        - Ensure numeric conversion of Value
+        - Ensure numeric conversion of Value.
+
         """
         if df.empty:
             return df
@@ -376,11 +382,11 @@ class SDMXResponse(Base):
         return df
 
     def get_population_data(self) -> pd.DataFrame:
-        """
-        Filter for population-related data.
+        """Filter for population-related data.
 
         Returns:
             DataFrame containing only population data
+
         """
         df = self.dataframe
         if df.empty:
@@ -406,11 +412,11 @@ class SDMXResponse(Base):
         return df[population_mask]
 
     def get_age_demographics(self) -> pd.DataFrame:
-        """
-        Filter for age-related demographic data.
+        """Filter for age-related demographic data.
 
         Returns:
             DataFrame containing age demographic data
+
         """
         df = self.dataframe
         if df.empty:
@@ -433,11 +439,11 @@ class SDMXResponse(Base):
         return df[age_mask]
 
     def get_household_statistics(self) -> pd.DataFrame:
-        """
-        Filter for household-related statistics.
+        """Filter for household-related statistics.
 
         Returns:
             DataFrame containing household statistics
+
         """
         df = self.dataframe
         if df.empty:
@@ -464,15 +470,15 @@ class SDMXResponse(Base):
                 household_mask |= col_mask
         return df[household_mask]
 
-    def get_series_dimension(self, dimension_id: str) -> Optional[SeriesDimension]:
-        """
-        Get a series dimension by its ID.
+    def get_series_dimension(self, dimension_id: str) -> SeriesDimension | None:
+        """Get a series dimension by its ID.
 
         Args:
             dimension_id: The ID of the dimension
 
         Returns:
             The series dimension if found, None otherwise
+
         """
         structure = self.primary_structure
         if not structure:
@@ -484,15 +490,15 @@ class SDMXResponse(Base):
                     return dim
         return None
 
-    def get_series_attribute(self, attribute_id: str) -> Optional[Attribute]:
-        """
-        Get a series attribute by its ID.
+    def get_series_attribute(self, attribute_id: str) -> Attribute | None:
+        """Get a series attribute by its ID.
 
         Args:
             attribute_id: The ID of the attribute
 
         Returns:
             The series attribute if found, None otherwise
+
         """
         structure = self.primary_structure
         if not structure:
@@ -504,15 +510,15 @@ class SDMXResponse(Base):
                     return attr
         return None
 
-    def get_dataset_series(self, series_key: str) -> Optional[DatasetSeries]:
-        """
-        Get a dataset series by its key.
+    def get_dataset_series(self, series_key: str) -> DatasetSeries | None:
+        """Get a dataset series by its key.
 
         Args:
             series_key: The series key
 
         Returns:
             The dataset series if found, None otherwise
+
         """
         dataset = self.primary_dataset
         if not dataset:
@@ -523,11 +529,11 @@ class SDMXResponse(Base):
         return None
 
     def get_attribute_summary(self) -> dict[str, dict]:
-        """
-        Get a summary of all attributes and their properties.
+        """Get a summary of all attributes and their properties.
 
         Returns:
             Dictionary with attribute summaries
+
         """
         structure = self.primary_structure
         if not structure or not getattr(structure, "attributes", None):
@@ -551,7 +557,10 @@ class SDMXResponse(Base):
     # --- Added/extended methods for enhanced tests ---
     def search_values(self, query: str, case: bool = False) -> dict[str, list[str]]:
         """Search dimension and attribute values containing a query string.
-        Returns dict with 'dimensions' and 'attributes' lists of matches."""
+
+        Returns dict with 'dimensions' and 'attributes' lists of matches.
+
+        """
         results: dict[str, list[str]] = {"dimensions": [], "attributes": []}
         structure = self.primary_structure
         if not structure:

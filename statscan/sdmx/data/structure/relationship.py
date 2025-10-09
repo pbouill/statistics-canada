@@ -1,16 +1,14 @@
-from typing import Optional
+"""SDMX relationship models for dimension and attribute connections."""
 
 from ...base import Base
 
 
 class Relationship(Base):
-    """
-    Represents a relationship between dimensions or attributes in SDMX.
-    """
+    """Represents a relationship between dimensions or attributes in SDMX."""
 
-    dimensions: Optional[list[str]] = None
-    observation: Optional[dict] = None
-    primaryMeasure: Optional[str] = None
+    dimensions: list[str] | None = None
+    observation: dict | None = None
+    primaryMeasure: str | None = None  # noqa: N815
 
     def has_dimension_relationship(self) -> bool:
         """Check if this relationship has dimension relationships."""

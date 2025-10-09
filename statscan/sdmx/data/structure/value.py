@@ -1,4 +1,5 @@
-from typing import Optional, Union, List
+"""SDMX value models for dimension and codelist entries."""
+
 from datetime import datetime
 
 from pydantic import field_validator
@@ -7,23 +8,25 @@ from ...base import Base
 
 
 class Value(Base):
-    """
-    Represents a value in an SDMX dimension or codelist.
-    Based on actual structure: {start (str), end (str), id (str), name (str), names (dict)}
+    """Represents a value in an SDMX dimension or codelist.
+
+    Based on actual structure: {start (str), end (str), id (str), name (str),
+    names (dict)}.
+
     """
 
-    id: Union[int, str]  # Can be either int or string
-    order: Optional[int] = None
+    id: int | str  # Can be either int or string
+    order: int | None = None
     name: str
-    names: Optional[dict[str, str]] = None  # language -> name mapping
+    names: dict[str, str] | None = None  # language -> name mapping
     # For time dimensions
-    start: Optional[datetime] = None
-    end: Optional[datetime] = None
+    start: datetime | None = None
+    end: datetime | None = None
     # Hierarchical relationships
-    parent: Optional[str] = None
-    parents: Optional[List[str]] = None
+    parent: str | None = None
+    parents: list[str] | None = None
     # Reference to annotations
-    annotations: Optional[List[int]] = None
+    annotations: list[int] | None = None
 
     @field_validator("start", "end", mode="before")
     @classmethod
@@ -48,7 +51,7 @@ class Value(Base):
         return self.start is not None or self.end is not None
 
     @property
-    def time_range_text(self) -> Optional[str]:
+    def time_range_text(self) -> str | None:
         """Get a human-readable time range if this is a time period."""
         if not self.is_time_period:
             return None

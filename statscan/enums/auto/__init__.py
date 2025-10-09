@@ -1,8 +1,14 @@
+"""Auto-generated geographic enums.
+
+This module provides access to auto-generated geographic enumeration classes
+for Canadian census data, including provinces, census divisions, subdivisions,
+and other geographic hierarchies.
+"""
+
 import logging
 
 from statscan.enums.geocode.geocode import GeoCode
-from statscan.util.pkg import get_subpkg_subcls
-
+from statscan.util.pkg import get_submodule_subcls
 
 logger = logging.getLogger(name=__name__)
 
@@ -15,9 +21,7 @@ except ImportError as e:
     )
 
     class ProvinceTerritory(GeoCode):  # type: ignore[no-redef]
-        """
-        Placeholder class for ProvinceTerritory enum.
-        """
+        """Placeholder class for ProvinceTerritory enum."""
 
         pass
 
@@ -30,9 +34,7 @@ except ImportError as e:
     )
 
     class CensusDivision(GeoCode):  # type: ignore[no-redef]
-        """
-        Placeholder class for CensusDivision enum.
-        """
+        """Placeholder class for CensusDivision enum."""
 
         pass
 
@@ -45,9 +47,7 @@ except ImportError as e:
     )
 
     class CensusMetropolitanArea(GeoCode):  # type: ignore[no-redef]
-        """
-        Placeholder class for CensusMetropolitanArea enum.
-        """
+        """Placeholder class for CensusMetropolitanArea enum."""
 
         pass
 
@@ -59,12 +59,11 @@ __all__ = [
     "CensusMetropolitanArea",
 ]
 
-ALL_GEOCODES: dict[str, type[GeoCode]] = get_subpkg_subcls(cls=GeoCode)
+ALL_GEOCODES: dict[str, type[GeoCode]] = get_submodule_subcls(cls=GeoCode)
 
 
 def get_geocode_from_str(geocode: str) -> GeoCode:
-    """
-    Get a GeoCode enum instance from a string.
+    """Get a GeoCode enum instance from a string.
 
     Args:
         geocode (str): The string representation of the geocode.
@@ -74,6 +73,7 @@ def get_geocode_from_str(geocode: str) -> GeoCode:
 
     Raises:
         ValueError: If the geocode string does not match any known geocode.
+
     """
     for gcls in ALL_GEOCODES.values():
         if geocode.startswith(gcls.get_schema().value):

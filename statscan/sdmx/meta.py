@@ -1,5 +1,6 @@
+"""SDMX metadata and sender information models."""
+
 from datetime import datetime
-from typing import Optional
 
 from pydantic import Field
 
@@ -7,10 +8,12 @@ from .base import Base
 
 
 class Sender(Base):
+    """Sender information for SDMX responses."""
+
     id: str
     name: str
-    names: Optional[dict[str, str]] = None  # language -> name mapping (optional)
-    contacts: Optional[list] = None  # Optional contacts field
+    names: dict[str, str] | None = None  # language -> name mapping (optional)
+    contacts: list | None = None  # Optional contacts field
 
     def get_display_name(self, lang: str = "en") -> str:
         """Get the display name in the specified language, defaulting to 'en'."""
@@ -20,11 +23,13 @@ class Sender(Base):
 
 
 class Metadata(Base):
+    """Metadata for SDMX responses including sender and language information."""
+
     response_schema: str = Field(alias="schema")
     id: str
     prepared: datetime
-    test: Optional[bool] = None
-    contentLanguages: Optional[list[str]] = None
+    test: bool | None = None
+    contentLanguages: list[str] | None = None  # noqa: N815
     sender: Sender
 
     @classmethod

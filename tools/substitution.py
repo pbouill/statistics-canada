@@ -1,14 +1,12 @@
-import re
-from typing import Optional
 import logging
+import re
 
-from tools.abbreviations import DEFAULT_ABBREVIATIONS
-
-# Assume these runtime/dev dependencies exist in the environment; allow ImportError to surface
-from tqdm import tqdm
-from nltk.corpus import wordnet as wn  # type: ignore[import-untyped]
 import nltk  # type: ignore[import-untyped]
 import pyinflect  # type: ignore[import-untyped]
+from nltk.corpus import wordnet as wn  # type: ignore[import-untyped]
+from tqdm import tqdm
+
+from tools.abbreviations import DEFAULT_ABBREVIATIONS
 
 logger = logging.getLogger(__name__)
 
@@ -16,6 +14,8 @@ logger = logging.getLogger(__name__)
 class SubstitutionEngine:
     # Class-level cache for shared substitution lookups
     _global_lookup_cache: dict[tuple, dict[str, str]] = {}
+    MAX_SUBSTITUTIONS = 10  # Reasonable limit to maintain readability
+    MAX_VARIANTS = 50  # Balance between coverage and efficiency
 
     def __init__(
         self,
@@ -69,7 +69,8 @@ class SubstitutionEngine:
             self._global_lookup_cache[cache_key] = self._preprocessed_substitutions
 
         logger.info(
-            f"✓ Built and cached {len(self._preprocessed_substitutions)} substitution patterns"
+            f"✓ Built and cached {len(self._preprocessed_substitutions)} \
+                substitution patterns"
         )
 
     @property
@@ -82,12 +83,12 @@ class SubstitutionEngine:
         gen_inflections: bool,
         gen_deriv_rel: bool,
     ) -> dict[str, str]:
-        """
-        Build an optimized lookup table for fast substitution.
+        """Build an optimized lookup table for fast substitution.
         Ordered by: containment relationships first, then length (longest first).
         """
         logger.info(
-            f"Building substitution lookup with inflections={gen_inflections}, derivations={gen_deriv_rel}"
+            f"Building substitution lookup with inflections={gen_inflections}, \
+                derivations={gen_deriv_rel}"
         )
 
         # Collect all term -> abbreviation mappings
@@ -124,7 +125,8 @@ class SubstitutionEngine:
 
         # Remove duplicates while preserving order (first occurrence wins)
         logger.info(
-            f"Removing duplicates from {len(term_abbrev_pairs)} term-abbreviation pairs..."
+            f"Removing duplicates from {len(term_abbrev_pairs)} \
+                term-abbreviation pairs..."
         )
         seen = set()
         unique_pairs = []
@@ -140,14 +142,14 @@ class SubstitutionEngine:
         unique_pairs.sort(key=lambda pair: -len(pair[0]))
 
         logger.info(
-            f"✓ Built {len(unique_pairs)} unique substitution patterns from {len(abbreviation_map)} abbreviations"
+            f"✓ Built {len(unique_pairs)} unique substitution patterns from \
+                {len(abbreviation_map)} abbreviations"
         )
         return dict(unique_pairs)
 
     @staticmethod
     def get_all_inflections(word: str) -> dict[str, tuple[str]]:
-        """
-        Generate all inflected forms of a given word using pyinflect.
+        """Generate all inflected forms of a given word using pyinflect.
         Returns a set of inflected forms.
         """
         return pyinflect.getAllInflections(word)
@@ -231,39 +233,39 @@ class SubstitutionEngine:
         word: str,
         include_inflections: bool = True,
         include_deriv_rel: bool = True,
+        max_variants: int = 50,
     ) -> set[str]:
         """Static variant generation for use during class construction."""
         variants: set[str] = set([word])
 
         # Reasonable limits for variant generation quality vs. scope
-        MAX_VARIANTS = 50  # Balance between coverage and efficiency
 
-        if include_deriv_rel and len(variants) < MAX_VARIANTS:
+        if include_deriv_rel and len(variants) < max_variants:
             try:
                 lemmas = SubstitutionEngine.get_all_deriv_rel_forms(word)
                 new_variants = set(lemma.name().replace("_", " ") for lemma in lemmas)
                 # Limit the number of variants we add
-                variants.update(list(new_variants)[: MAX_VARIANTS - len(variants)])
-            except Exception:
-                pass  # Keep original word if derivation fails
+                variants.update(list(new_variants)[: max_variants - len(variants)])
+            except Exception as e:
+                logger.debug(f"Derivation failed for '{word}': {e}")
 
-        if include_inflections and len(variants) < MAX_VARIANTS:
+        if include_inflections and len(variants) < max_variants:
             original_variants = list(variants)[
                 :10
             ]  # Only process first 10 to avoid explosion
             for v in original_variants:
-                if len(variants) >= MAX_VARIANTS:
+                if len(variants) >= max_variants:
                     break
                 try:
                     inflections = SubstitutionEngine.get_all_inflections(v)
                     for forms in inflections.values():
-                        if len(variants) >= MAX_VARIANTS:
+                        if len(variants) >= max_variants:
                             break
                         variants.update(
                             list(forms)[:5]
                         )  # Limit forms per inflection type
-                except Exception:
-                    pass  # Keep original variants if inflection fails
+                except Exception as e:  # Keep original variants if inflection fails
+                    logger.debug(f"Inflection failed for '{v}': {e}")
 
         return variants
 
@@ -271,10 +273,10 @@ class SubstitutionEngine:
         self,
         text: str,
         truncate: bool = True,
-        truncation_patterns: Optional[list[str]] = None,
+        truncation_patterns: list[str] | None = None,
     ) -> str:
-        """
-        Apply optimized substitutions using pre-computed lookup table with caching.
+        """Apply optimized substitutions using pre-computed lookup table with caching.
+
         Uses class-level caching for maximum performance across multiple instances.
         """
         if truncate:
@@ -287,12 +289,11 @@ class SubstitutionEngine:
         if not hasattr(self, "_compiled_patterns"):
             self._compiled_patterns: dict[str, re.Pattern] = {}
 
-        # Apply substitutions in optimized order (limited to prevent excessive processing)
+        # Apply substitutions in optimized order (prevent excessive processing)
         substitution_count = 0
-        MAX_SUBSTITUTIONS = 10  # Reasonable limit to maintain readability
 
         for full_term, abbrev in self.preprocessed_substitutions.items():
-            if substitution_count >= MAX_SUBSTITUTIONS:
+            if substitution_count >= self.MAX_SUBSTITUTIONS:
                 break
 
             # Use cached compiled pattern
@@ -326,15 +327,17 @@ class SubstitutionEngine:
         return result
 
     @staticmethod
-    def truncate(s: str, truncation_patterns: Optional[list[str]] = None) -> str:
-        """
-        Truncate a string at the first occurrence of any specified pattern.
+    def truncate(s: str, truncation_patterns: list[str] | None = None) -> str:
+        """Truncate a string at the first occurrence of any specified pattern.
+
         Args:
             s: The input string to truncate.
             truncation_patterns: List of patterns to look for truncation points.
                                  Defaults to common patterns if None.
+
         Returns:
             The truncated string, or the original string if no patterns found.
+
         """
         if not s:
             return s
@@ -353,55 +356,62 @@ class SubstitutionEngine:
 
     @staticmethod
     def snake_to_camel(s: str) -> str:
-        """
-        Convert a snake_case string to CamelCase.
+        """Convert a snake_case string to CamelCase.
+
         Args:
             s (str): The input snake_case string.
+
         Returns:
             str: The converted CamelCase string.
+
         """
         components = s.split("_")
         return "".join(x.title() for x in components if x)
 
     @staticmethod
     def camel_to_snake(s: str) -> str:
-        """
-        Convert a CamelCase string to snake_case.
+        """Convert a CamelCase string to snake_case.
+
         Args:
             s (str): The input CamelCase string.
+
         Returns:
             str: The converted snake_case string.
+
         """
         s_snake = re.sub(r"(?<!^)(?=[A-Z])", "_", s).lower()
         return s_snake
 
     @staticmethod
     def camel_to_title(s: str) -> str:
-        """
-        Convert a titleCaseString to TitleCaseString (first letter capitalized).
-        """
+        """Convert a titleCaseString to TitleCaseString (first letter capitalized)."""
         return s[0].upper() + (s[1:] if len(s) > 1 else "")
 
     @staticmethod
     def sub_chars(
-        s: str, sub_chars: set[str], replacement: Optional[str] = None
+        s: str, sub_chars: set[str], replacement: str | None = None
     ) -> str:
-        """
-        Substitute or remove characters in a string.
+        """Substitute or remove characters in a string.
+
         Args:
             s (str): The input string.
             sub_chars (set[str]): A set of characters to be substituted or removed.
-            replacement (Optional[str]): The string to replace each character in sub_chars with.
-                                        If None, the characters are removed.
+            replacement (Optional[str]): The string to replace each character in
+                                         sub_chars with. If None, the characters are
+                                         removed.
+
         Returns:
             str: The modified string with specified characters substituted or removed.
+
         Raises:
             ValueError: If sub_chars contains non-single-character strings.
+
         """
         for c in sub_chars:
             if not isinstance(c, str) or len(c) != 1:
                 raise ValueError(
-                    f"sub_chars must be a set of single-character strings, got {c} of type {type(c)}"
+                    f"sub_chars must be a set of single-character strings, got {c} of \
+                        type {type(c)}"
                 )
         replacement = replacement or ""
         return re.sub(f"[{re.escape(''.join(sub_chars))}]", replacement, s)

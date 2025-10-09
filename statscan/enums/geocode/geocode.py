@@ -1,3 +1,5 @@
+"""Base geographic code classes and attribute column enumerations."""
+
 from enum import Enum, StrEnum, auto
 from typing import Self
 
@@ -5,11 +7,11 @@ from statscan.enums.schema import Schema
 
 
 class GeoAttributeColumn2021(StrEnum):
+    """Geographic attribute column names for 2021 Census data."""
+
     @staticmethod
     def _generate_next_value_(name, start, count, last_values):
-        """
-        Return the lower-cased version of the member name.
-        """
+        """Return the lower-cased version of the member name."""
         return name.upper()
 
     PRUID_PRIDU = auto()
@@ -78,57 +80,55 @@ class GeoAttributeColumn2021(StrEnum):
 
 
 class GeoCode(Enum):
-    """
-    Base class for all geographic codes used in StatsCan DGUIDs.
-    """
+    """Base class for all geographic codes used in StatsCan DGUIDs."""
 
     @classmethod
     def get_schema(cls) -> Schema:
-        """
-        Get the schema for this geographic code.
+        """Get the schema for this geographic code.
 
         Returns
         -------
         Schema
             The schema associated with this geographic code.
+
         """
         raise NotImplementedError(f"{cls.__name__} must implement get_schema()")
 
     @classmethod
     def get_nchars(cls) -> int:
-        """
-        Get the number of characters for this geographic code.
+        """Get the number of characters for this geographic code.
 
         Returns
         -------
         int
             The number of characters in the geographic code.
+
         """
         raise NotImplementedError(f"{cls.__name__} must implement get_nchars()")
 
     @property
     def schema(self) -> Schema:
+        """Get the schema for this geographic code."""
         return self.get_schema()
 
     @property
     def uid(self) -> str:
-        """
-        Return the unique identifier for this enum.
+        """Return the unique identifier for this enum.
+
         This is usually the last nchar characters of the enum value.
+
         """
-        return f"{self.value:0{self.get_nchars()}}"  # Ensure the UID is zero-padded to nchar length
+        # Ensure the UID is zero-padded to nchar length
+        return f"{self.value:0{self.get_nchars()}}"
 
     @property
     def code(self) -> str:
-        """
-        Return the geo code for this enum.
-        """
+        """Return the geo code for this enum."""
         return f"{self.schema.value}{self.uid}"
 
     @classmethod
     def from_code(cls, code: str) -> Self:
-        """
-        Create a GeoCode instance from a string code.
+        """Create a GeoCode instance from a string code.
 
         Parameters
         ----------
@@ -139,6 +139,7 @@ class GeoCode(Enum):
         -------
         GeoCode
             The corresponding GeoCode enum instance.
+
         """
         if not code.startswith(schema := cls.get_schema()):
             raise ValueError(
@@ -149,8 +150,7 @@ class GeoCode(Enum):
 
     @classmethod
     def from_uid(cls, uid: str) -> Self:
-        """
-        Create a GeoCode instance from a string UID.
+        """Create a GeoCode instance from a string UID.
 
         Parameters
         ----------
@@ -161,40 +161,44 @@ class GeoCode(Enum):
         -------
         GeoCode
             The corresponding GeoCode enum instance.
+
         """
         return cls(int(uid))
 
 
 class FloatGeoCode(GeoCode):
-    """
-    Base class for geographic codes that are represented as floating-point numbers.
+    """Base class for geographic codes with floating-point numbers.
+
     This is useful for geocodes that may have decimal values.
+
     """
 
     @classmethod
     def get_nprecision(cls) -> int:
-        """
-        Get the number of decimal places for this geographic code.
+        """Get the number of decimal places for this geographic code.
 
         Returns
         -------
         int
             The number of decimal places in the geographic code.
+
         """
         raise NotImplementedError(f"{cls.__name__} must implement get_nprecision()")
 
     @property
     def uid(self) -> str:
+        """Return the unique identifier as a string with specified precision.
+
+        This is usually the last nchar characters of the enum value,
+        formatted to nprecision.
+
         """
-        Return the unique identifier for this enum as a string with the specified precision.
-        This is usually the last nchar characters of the enum value, formatted to nprecision.
-        """
-        return f"{self.value:0{self.get_nchars()}.{self.get_nprecision()}f}"  # Format to nprecision decimal places
+        # Format to nprecision decimal places
+        return f"{self.value:0{self.get_nchars()}.{self.get_nprecision()}f}"
 
     @classmethod
     def from_uid(cls, uid: str) -> Self:
-        """
-        Create a FloatGeoCode instance from a string UID.
+        """Create a FloatGeoCode instance from a string UID.
 
         Parameters
         ----------
@@ -205,5 +209,6 @@ class FloatGeoCode(GeoCode):
         -------
         FloatGeoCode
             The corresponding FloatGeoCode enum instance.
+
         """
         return cls(float(uid))

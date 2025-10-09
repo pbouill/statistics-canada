@@ -1,5 +1,4 @@
-"""
-Pytest configuration and shared fixtures.
+"""Pytest configuration and shared fixtures.
 
 Imports both legacy fixtures (for compatibility) and new enhanced fixtures
 that support raw response data and specialized data extraction.
@@ -9,11 +8,11 @@ import pytest
 from httpx import Timeout
 
 from statscan.wds.client import Client as WDSClient
-from tests.data_store import WDSDataPaths, SESSION_DATA_SAVED_ATTR
+from tests.data_store import SESSION_DATA_SAVED_ATTR, WDSDataPaths
 from tests.wds.test_requests import (
     TestCodeSets,
-    TestCubesListLite,
     TestCubeMeta,
+    TestCubesListLite,
 )
 
 
@@ -35,8 +34,7 @@ TRACKED_TESTS = {
 
 
 def pytest_collection_modifyitems(config, items: list[pytest.Item]):
-    """
-    Modify test collection to prioritize network tests.
+    """Modify test collection to prioritize network tests.
     This ensures network tests run first to generate fresh data.
     """
     # Separate network tests from others
@@ -54,8 +52,7 @@ def pytest_collection_modifyitems(config, items: list[pytest.Item]):
 
 
 def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo):
-    """
-    Hook that runs after each test stage (setup, call, teardown).
+    """Hook that runs after each test stage (setup, call, teardown).
     We use it to check if API requests tests have failed and track successful data saves.
     """
     if call.when == "call":
@@ -70,8 +67,7 @@ def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo):
 
 @pytest.fixture(scope="session")
 def wds_client() -> WDSClient:
-    """
-    Provides a WDS client instance configured with relaxed timeout settings
+    """Provides a WDS client instance configured with relaxed timeout settings
     for reliable test execution in CI/CD environments.
     """
     # Relaxed timeout configuration for test reliability in CI environments

@@ -1,27 +1,31 @@
 #!/usr/bin/env python3
-"""
-WDS Coordinate System
+"""WDS Coordinate System.
 
-This module provides a unified, enhanced Coordinate class for the Statistics Canada WDS API.
-The Coordinate class integrates:
+This module provides a unified, enhanced Coordinate class for the
+Statistics Canada WDS API. The Coordinate class integrates:
 - Pydantic model compatibility for WDS API responses
 - Advanced parameter mapping to dimension members
 - Interactive coordinate building from dimension parameters
 - Enhanced DataFrame creation with enum-based columns
 """
 
+import logging
+from collections.abc import Generator
 from dataclasses import dataclass
-from typing import Any, Generator, Optional
+from typing import Any
+
+import pandas as pd
 from pydantic import GetCoreSchemaHandler
 from pydantic_core import core_schema
-import pandas as pd
 
-from .models.member import Member, MemberManager
-from .models.dimension import DimensionManager
+from statscan.enums.auto.wds.scalar import Scalar
 from statscan.enums.auto.wds.status import Status
 from statscan.enums.auto.wds.symbol import Symbol
-from statscan.enums.auto.wds.scalar import Scalar
 
+from .models.dimension import DimensionManager
+from .models.member import Member, MemberManager
+
+logger = logging.getLogger(__name__)
 
 @dataclass
 class CoordinateParameter:
@@ -33,12 +37,12 @@ class CoordinateParameter:
     member_name: str
 
     def __str__(self) -> str:
+        """Return a human-readable string representation."""
         return f"{self.dimension_name}: {self.member_name} (ID: {self.member_id})"
 
 
 class Coordinate:
-    """
-    Enhanced coordinate class for WDS API integration with Pydantic models.
+    """Enhanced coordinate class for WDS API integration with Pydantic models.
 
     Provides both basic coordinate functionality and advanced interactive features:
     - Pydantic model integration for WDS API responses
@@ -50,9 +54,17 @@ class Coordinate:
     def __init__(
         self,
         coord_str: str,
-        member_manager: Optional[MemberManager] = None,
-        dimension_manager: Optional[DimensionManager] = None,
+        member_manager: MemberManager | None = None,
+        dimension_manager: DimensionManager | None = None,
     ):
+        """Initialize a Coordinate instance.
+
+        Args:
+            coord_str: The coordinate string (e.g., "1.2.3.4.0.0.0.0.0.0").
+            member_manager: Optional manager for member lookups.
+            dimension_manager: Optional manager for dimension context.
+
+        """
         self.__coord_str = coord_str
         self.member_manager = member_manager
         self.dimension_manager = dimension_manager
@@ -79,13 +91,15 @@ class Coordinate:
     def __get_pydantic_core_schema__(
         cls, source_type: Any, handler: GetCoreSchemaHandler
     ) -> core_schema.CoreSchema:
-        """
-        Defines the Pydantic V2 Core Schema for the Coordinate class.
+        """Define the Pydantic V2 Core Schema for the Coordinate class.
 
         This schema tells Pydantic to:
-        1.  Expect a string as input.
-        2.  Call this class's constructor (`__init__`) with the string to validate it and create an instance.
-        3.  Also allow instances of `Coordinate` to pass through validation unmodified.
+        1. Expect a string as input.
+        2. Call this class's constructor (`__init__`) with the string to
+           validate it and create an instance.
+        3. Also allow instances of `Coordinate` to pass through validation
+           unmodified.
+
         """
         # This validator function will be called with the input string
         # and should return an instance of Coordinate.
@@ -105,17 +119,20 @@ class Coordinate:
         )
 
     def __getitem__(self, idx) -> Member:
+        """Get a member by index in the coordinate."""
         if self.member_manager is None:
             raise ValueError("MemberManager is not set.")
         return self.member_manager[self.member_ids[idx]]
 
     def __iter__(self) -> Generator[Member, Any, None]:
+        """Iterate over all members in the coordinate."""
         if self.member_manager is None:
             raise ValueError("MemberManager is not set.")
         for member_id in self.member_ids:
             yield self.member_manager[member_id]
 
     def __str__(self):
+        """Return the coordinate string representation."""
         return self.__coord_str
 
     # Enhanced Interactive Features
@@ -159,17 +176,16 @@ class Coordinate:
                         member_name=member_name,
                     )
                 )
-            else:
-                # Dimension not found or member_id is 0 (unused dimension)
-                if member_id != 0:
-                    parameters.append(
-                        CoordinateParameter(
-                            dimension_position=dimension_position,
-                            dimension_name=f"Unknown Dimension {dimension_position}",
-                            member_id=member_id,
-                            member_name=f"Member {member_id}",
-                        )
+            # Dimension not found or member_id is 0 (unused dimension)
+            elif member_id != 0:
+                parameters.append(
+                    CoordinateParameter(
+                        dimension_position=dimension_position,
+                        dimension_name=f"Unknown Dimension {dimension_position}",
+                        member_id=member_id,
+                        member_name=f"Member {member_id}",
                     )
+                )
 
         return parameters
 
@@ -206,8 +222,7 @@ class Coordinate:
         dimension_manager: DimensionManager,
         **dimension_values: dict[str, str | int],
     ) -> "Coordinate":
-        """
-        Build a coordinate from dimension parameters.
+        """Build a coordinate from dimension parameters.
 
         Args:
             dimension_manager: Manager with dimension metadata
@@ -220,6 +235,7 @@ class Coordinate:
                 Gender="Men+",
                 Age="Total - Age"
             )
+
         """
         member_ids = [0] * 10  # Default WDS coordinate length
 
@@ -265,7 +281,7 @@ class Coordinate:
     # DataFrame Creation Methods
 
     @classmethod
-    def create_demographic_dataframe(
+    def create_demographic_dataframe(  # noqa: PLR0913
         cls,
         data_points: list[Any],
         coordinates: list["Coordinate"],
@@ -274,8 +290,7 @@ class Coordinate:
         geographic_name: str,
         census_year: int = 2021,
     ) -> pd.DataFrame:
-        """
-        Create a clean demographic DataFrame using enums and coordinates.
+        """Create a clean demographic DataFrame using enums and coordinates.
 
         Args:
             data_points: List of WDS data points with values and metadata
@@ -287,10 +302,11 @@ class Coordinate:
 
         Returns:
             Clean pandas DataFrame with consistent enum-based columns
+
         """
         records = []
 
-        for i, (dp, coord) in enumerate(zip(data_points, coordinates)):
+        for _i, (dp, coord) in enumerate(zip(data_points, coordinates, strict=False)):
             if not dp or not coord:
                 continue
 
@@ -389,7 +405,7 @@ class Coordinate:
         return pd.DataFrame(records)
 
     @classmethod
-    def _assess_data_quality(
+    def _assess_data_quality(  # noqa: PLR0911
         cls, data_point: Any, status_enum: Status | None, symbol_enum: Symbol | None
     ) -> str:
         """Assess data quality with human-readable description."""
@@ -418,7 +434,7 @@ class Coordinate:
         return "✅ Normal"
 
     @classmethod
-    async def create_enhanced_demographic_dataframe(
+    async def create_enhanced_demographic_dataframe(  # noqa: PLR0913, PLR0912
         cls,
         entity_member_id: int,
         entity_name: str,
@@ -428,8 +444,10 @@ class Coordinate:
         census_year: int = 2021,
         max_characteristics: int = 20,
     ) -> pd.DataFrame:
-        """
-        Create an enhanced demographic DataFrame with coordinates and enum-based columns.
+        """Create enhanced demographic DataFrame with coordinates.
+
+        Create an enhanced demographic DataFrame with coordinates and
+        enum-based columns.
 
         This is a complete demographic DataFrame creation method that uses:
         - Unified coordinate system
@@ -437,11 +455,17 @@ class Coordinate:
         - Clean parameter-based column names
         - Better data quality assessment
         """
+        # Dimension indices for census data structure
+        min_dimensions = 3
+        year_dim_idx = 1
+        char_dim_idx = 2
+        gender_dim_idx = 3
+
         try:
             # Get cube metadata to understand dimensions
             cube = await client.get_cube_metadata(product_id)
 
-            if not cube.dimensions or len(cube.dimensions) < 3:
+            if not cube.dimensions or len(cube.dimensions) < min_dimensions:
                 return pd.DataFrame(
                     [
                         {
@@ -453,7 +477,7 @@ class Coordinate:
                 )
 
             # Create dimension manager
-            from .models.dimension import DimensionManager
+            from .models.dimension import DimensionManager  # noqa: PLC0415
 
             dim_manager = DimensionManager(cube.dimensions)
 
@@ -462,9 +486,21 @@ class Coordinate:
             data_points = []
 
             # Find key dimensions
-            year_dim = cube.dimensions[1] if len(cube.dimensions) > 1 else None
-            char_dim = cube.dimensions[2] if len(cube.dimensions) > 2 else None
-            gender_dim = cube.dimensions[3] if len(cube.dimensions) > 3 else None
+            year_dim = (
+                cube.dimensions[year_dim_idx]
+                if len(cube.dimensions) > year_dim_idx
+                else None
+            )
+            char_dim = (
+                cube.dimensions[char_dim_idx]
+                if len(cube.dimensions) > char_dim_idx
+                else None
+            )
+            gender_dim = (
+                cube.dimensions[gender_dim_idx]
+                if len(cube.dimensions) > gender_dim_idx
+                else None
+            )
 
             # Find census year member ID
             year_member_id = 1  # Default
@@ -480,12 +516,22 @@ class Coordinate:
                     if gender_dim and gender_dim.member:
                         # Process each gender
                         for gender_member in gender_dim.member:
-                            coord_string = f"{entity_member_id}.{year_member_id}.{char_member.memberId}.{gender_member.memberId}.0.0.0.0.0.0"
+                            coord_string = (
+                                f"{entity_member_id}.{year_member_id}."
+                                f"{char_member.memberId}.{gender_member.memberId}."
+                                "0.0.0.0.0.0"
+                            )
                             coord = cls(coord_string, dimension_manager=dim_manager)
 
                             try:
-                                data_result = await client.get_data_from_cube_pid_coord_and_latest_n_periods(
-                                    product_id=product_id, coordinate=coord_string, n=1
+                                # Get data from WDS API
+                                get_data_func = (
+                                    client.get_data_from_cube_pid_coord_and_latest_n_periods
+                                )
+                                data_result = await get_data_func(
+                                    product_id=product_id,
+                                    coordinate=coord_string,
+                                    n=1,
                                 )
 
                                 if (
@@ -496,17 +542,29 @@ class Coordinate:
                                     coordinates.append(coord)
                                     data_points.append(data_result.vectorDataPoint[0])
 
-                            except Exception:
-                                # Skip failed coordinates
+                            except Exception as e:
+                                # Skip failed coordinates (common)
+                                logger.debug(
+                                    f"Skipping coordinate {coord_string}: {e}"
+                                )
                                 continue
                     else:
                         # No gender dimension
-                        coord_string = f"{entity_member_id}.{year_member_id}.{char_member.memberId}.0.0.0.0.0.0.0"
+                        coord_string = (
+                            f"{entity_member_id}.{year_member_id}."
+                            f"{char_member.memberId}.0.0.0.0.0.0.0"
+                        )
                         coord = cls(coord_string, dimension_manager=dim_manager)
 
                         try:
-                            data_result = await client.get_data_from_cube_pid_coord_and_latest_n_periods(
-                                product_id=product_id, coordinate=coord_string, n=1
+                            # Get data from WDS API
+                            get_data_func = (
+                                client.get_data_from_cube_pid_coord_and_latest_n_periods
+                            )
+                            data_result = await get_data_func(
+                                product_id=product_id,
+                                coordinate=coord_string,
+                                n=1,
                             )
 
                             if (
@@ -517,7 +575,9 @@ class Coordinate:
                                 coordinates.append(coord)
                                 data_points.append(data_result.vectorDataPoint[0])
 
-                        except Exception:
+                        except Exception as e:
+                            # Skip failed coordinates
+                            logger.debug(f"Skipping coordinate {coord_string}: {e}")
                             continue
 
             # Create enhanced DataFrame using the class method
@@ -557,26 +617,26 @@ class Coordinate:
 
 # Backward compatibility aliases for existing imports
 class EnhancedDataFrameBuilder:
-    """
-    Deprecated: DataFrame creation methods are now available as Coordinate class methods.
+    """Deprecated DataFrame creation methods.
+
     Use Coordinate.create_demographic_dataframe() instead.
     """
 
     @staticmethod
     def create_demographic_dataframe(*args, **kwargs):
-        """Deprecated: Use Coordinate.create_demographic_dataframe() instead."""
+        """Use Coordinate.create_demographic_dataframe() instead."""
         return Coordinate.create_demographic_dataframe(*args, **kwargs)
 
     @staticmethod
     def _assess_data_quality(*args, **kwargs):
-        """Deprecated: Use Coordinate._assess_data_quality() instead."""
+        """Use Coordinate._assess_data_quality() instead."""
         return Coordinate._assess_data_quality(*args, **kwargs)
 
 
 # Backward compatibility function
 async def create_enhanced_demographic_dataframe(*args, **kwargs):
-    """
-    Deprecated: Use Coordinate.create_enhanced_demographic_dataframe() instead.
+    """Use Coordinate.create_enhanced_demographic_dataframe() instead.
+
     This function is maintained for backward compatibility.
     """
     return await Coordinate.create_enhanced_demographic_dataframe(*args, **kwargs)
