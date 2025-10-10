@@ -49,7 +49,7 @@ def to_dot_path(module_path: Path) -> str:
 
 
 def cleanstr(s: str) -> str:
-    """Clean a string by remove leading/trailing whitespace..
+    """Clean a string by removing leading/trailing whitespace..
     """
     for char in (" ", "-"):  # Replace spaces, hyphens, and periods with underscores
         s = s.replace(char, "_")
