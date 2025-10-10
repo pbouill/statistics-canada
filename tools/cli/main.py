@@ -121,8 +121,8 @@ def show_debug_tools():
         print(f"   • {tool.name}")
 
     print(
-        f"\nTo run a debug tool: cd scratch && python \
-            {debug_tools[0].name if debug_tools else 'tool_name.py'}"
+        f"\nTo run a debug tool: cd scratch && python "
+        f"{debug_tools[0].name if debug_tools else 'tool_name.py'}"
     )
     print("Note: Debug tools are in scratch/ to keep main tools/ directory clean")
 

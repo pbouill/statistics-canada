@@ -218,13 +218,13 @@ class UnifiedEnumProcessor:
             print("\n🏆 Top 5 Abbreviation Opportunities:")
             for i, (word, stats) in enumerate(candidates[:5], 1):
                 print(
-                    f"  {i}. '{word}' → freq:{stats.frequency}, \
-                        savings:{stats.total_potential_savings:.0f}"
+                    f"  {i}. '{word}' → freq:{stats.frequency}, "
+                    f"savings:{stats.total_potential_savings:.0f}"
                 )
         else:
             print(
-                "✅ No significant abbreviation opportunities found - system is well \
-                    optimized!"
+                "✅ No significant abbreviation opportunities found - system is well "
+                "optimized!"
             )
 
 

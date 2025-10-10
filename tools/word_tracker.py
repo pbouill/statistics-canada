@@ -289,8 +289,8 @@ class WordTracker:
 
                     report_lines.append(
                         f"| {i} | `{word}` | {stats.frequency} | "
-                        f"{stats.avg_length_impact:.1f} | \
-                            {stats.total_potential_savings:.0f} | "
+                        f"{stats.avg_length_impact:.1f} | "
+                        f"{stats.total_potential_savings:.0f} | "
                         f"{stats.priority_score:.0f} | {sources_str} |"
                     )
 
@@ -299,8 +299,10 @@ class WordTracker:
                 report_lines.extend(
                     [
                         "🏆 TOP ABBREVIATION CANDIDATES",
-                        f"{'Rank':<4} {'Word':<20} {'Freq':<6} {'AvgSave':<8} \
-                            {'TotalSave':<10} {'Score':<8} Sources",
+                        (
+                            f"{'Rank':<4} {'Word':<20} {'Freq':<6} {'AvgSave':<8} "
+                            f"{'TotalSave':<10} {'Score':<8} Sources"
+                        ),
                         "-" * 80,
                     ]
                 )
@@ -312,14 +314,15 @@ class WordTracker:
 
                     report_lines.append(
                         f"{i:<4} {word:<20} {stats.frequency:<6} "
-                        f"{stats.avg_length_impact:<8.1f} \
-                            {stats.total_potential_savings:<10.0f} "
+                        f"{stats.avg_length_impact:<8.1f} "
+                        f"{stats.total_potential_savings:<10.0f} "
                         f"{stats.priority_score:<8.0f} {sources_str}"
                     )
 
             if len(candidates) > 25:
-                report_lines.append(f"... and {len(candidates) - 25} more \
-                                    candidates")
+                report_lines.append(
+                    f"... and {len(candidates) - 25} more candidates"
+                )
 
         if format_markdown:
             report_lines.extend(["---", "", "## 📋 Recommendations", ""])
@@ -371,8 +374,8 @@ class WordTracker:
                             stats.total_potential_savings for _, stats in words
                         )
                         report_lines.append(
-                            f"- **{source}**: {len(words)} words, \
-                                ~{total_savings:.0f} char savings"
+                            f"- **{source}**: {len(words)} words, "
+                            f"~{total_savings:.0f} char savings"
                         )
                 else:
                     report_lines.extend(["📊 **Impact by Source:**"])
@@ -382,8 +385,8 @@ class WordTracker:
                             stats.total_potential_savings for _, stats in words
                         )
                         report_lines.append(
-                            f"   • {source}: {len(words)} words, \
-                                ~{total_savings:.0f} char savings"
+                            f"   • {source}: {len(words)} words, "
+                            f"~{total_savings:.0f} char savings"
                         )
 
             # Suggested abbreviations for top candidates
@@ -395,8 +398,8 @@ class WordTracker:
                 total_impact = savings * stats.frequency
                 report_lines.append(
                     f"   • '{word}' → '{suggested_abbrev}' "
-                    f"(saves {savings} chars × {stats.frequency} \
-                    uses = {total_impact} total)"
+                    f"(saves {savings} chars × {stats.frequency} "
+                    f"uses = {total_impact} total)"
                 )
 
         else:

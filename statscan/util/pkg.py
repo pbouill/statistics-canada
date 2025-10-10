@@ -216,8 +216,9 @@ def get_submodule_subcls[T](
     else:
         module = module_from_caller(frame_level=2)
 
-    logger.debug(f"finding subclasses of {cls.__name__} in {module_path} \
-        using {cls_test_methods=}"
+    logger.debug(
+        f"finding subclasses of {cls.__name__} in {module_path} "
+        f"using {cls_test_methods=}"
     )
 
     for submod_info in pkgutil.iter_modules(module.__path__):
@@ -242,13 +243,15 @@ def get_submodule_subcls[T](
                             break
             if mod_cls not in excluded:
                 if name not in subcls:
-                    logger.debug(f"[{submod_name}] including {mod_cls} \
-                    ({cls.__name__} subclass)"
+                    logger.debug(
+                        f"[{submod_name}] including {mod_cls} "
+                        f"({cls.__name__} subclass)"
                     )
                     subcls[name] = mod_cls
             else:
-                logger.warning(f"[{submod_name}] {name} ({mod_cls}) \
-                    already exists in subcls. Skipping..."
+                logger.warning(
+                    f"[{submod_name}] {name} ({mod_cls}) "
+                    f"already exists in subcls. Skipping..."
                 )
 
     return subcls

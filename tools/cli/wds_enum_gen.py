@@ -122,8 +122,8 @@ Word Tracking:
                     track_words=args.track_words,
                 )
                 print(
-                    f"✅ CodeSet enums generated: {len(codeset_files)} files in \
-                        {args.output_dir}"
+                    f"✅ CodeSet enums generated: {len(codeset_files)} files in "
+                    f"{args.output_dir}"
                 )
 
         # Generate word analysis report if tracking was enabled
@@ -131,8 +131,8 @@ Word Tracking:
             word_tracker = get_word_tracker()
             if word_tracker.word_stats:
                 print(
-                    f"\n📊 Tracked {len(word_tracker.word_stats)} unique words \
-                        during generation"
+                    f"\n📊 Tracked {len(word_tracker.word_stats)} unique words "
+                    f"during generation"
                 )
 
                 # Save tracking data
@@ -160,14 +160,14 @@ Word Tracking:
                     for i, (word, stats) in enumerate(candidates[:10], 1):
                         print(
                             f"  {i:2d}. '{word}' (frequency: {stats.frequency}, "
-                            f"potential savings: {stats.total_potential_savings:.0f} \
-                            chars)"
+                            f"potential savings: {stats.total_potential_savings:.0f} "
+                            f"chars)"
                         )
 
                     print(f"\n📄 Full analysis saved to: {report_file}")
                     print(
-                        "💡 Use this data to update tools/abbreviations.py with \
-                            high-impact abbreviations"
+                        "💡 Use this data to update tools/abbreviations.py with "
+                        "high-impact abbreviations"
                     )
                 else:
                     print(
