@@ -69,11 +69,11 @@ if __name__ == "__main__":
         files_to_check.extend(args.files)
 
     if not files_to_check:
+        print("false")
         sys.exit(0)
 
-
     if should_trigger_package_operations(files_to_check):
-        pass
+        print("true")
     else:
-        pass
+        print("false")
 

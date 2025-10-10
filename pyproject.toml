@@ -119,6 +119,10 @@ indent-style = "tab"
 
 # Disable specific rules for specific directories or files
 [tool.ruff.lint.per-file-ignores]
+".github/scripts/*" = [
+	"T20",  # flake8-print: Scripts need to print output for workflows
+	"D",    # pydocstyle: Documentation not required for workflow scripts
+]
 "tools/*" = [
 	"T20",  # flake8-print: Allow print statements in dev tools
 	"PLW",  # Pylint warnings: Not critical for dev tools
@@ -144,8 +148,7 @@ indent-style = "tab"
 "statscan/enums/auto/**/*.py" = ["E501", "PLC2401"]
 
 [tool.mypy]
-# Mypy type checking configuration
-# Matches pre-commit hook: mypy --show-error-codes --show-traceback
+# Mypy type checking configuration  
 
 # Show error codes for easier lookup and fixing
 show_error_codes = true
@@ -154,10 +157,11 @@ show_error_codes = true
 show_traceback = true
 
 # Exclude files/directories in .gitignore automatically
+# NOTE: This doesn't seem to work reliably in mypy 1.18.2, so we explicitly list critical dirs
 exclude_gitignore = true
 
-# Performance: use incremental mode (default, but explicit)
-incremental = true
-
-# Skip type checking for third-party libraries without stubs
-ignore_missing_imports = true
+# Explicitly exclude directories to avoid scanning (regex patterns)
+exclude = [
+    "statscan/enums/auto/.*",  # Large auto-generated enum files (8000+ lines)
+    "^\\.[^/]+/",              # All dot-prefixed directories (.venv/, .mypy_cache/, .pytest_cache/, etc.)
+]
