@@ -13,7 +13,7 @@
 #   - Performs linting with Ruff (with optional auto-fixing).
 #   - Conducts static type checking with MyPy.
 #   - Scans for security vulnerabilities with Ruff's bandit rules and pip-audit.
-#   - Executes the test suite with Pytest.
+#   - Executes the test suite with Pytest (network tests disabled by default).
 #   - Can build the package and upload artifacts.
 #
 # Inputs:

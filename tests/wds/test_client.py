@@ -1,5 +1,4 @@
 import json
-from enum import StrEnum, auto
 
 import pytest
 from httpx import Request, Response
@@ -28,29 +27,19 @@ class MockWDSResponse(Response):
         )
 
 
-class WDSTestDependencies(StrEnum):
-    CODESETS = auto()
-
-
 class TestWDSClient:
     """Test WDS Client functionality using mocked responses with local test data."""
 
     @mock_method(WDSRequests.get_code_sets)
-    @pytest.mark.dependency(name="codesets")
     @pytest.mark.asyncio
     async def test_update_codesets_mocked(
         self,
         mock_get_code_sets,
-        request: pytest.FixtureRequest,
         wds_client: Client,
         codesets_data: dict,
     ):
-        """Test update_codesets using mocked responses."""
-        # Skip if --no-mock option is used
-        if request.config.getoption("--no-mock"):
-            pytest.skip("Mocking disabled via --no-mock, use network test instead")
-
-        # Set up the mock to use our mock method
+        """Test update_codesets using mocked responses from tests/data."""
+        # Set up the mock to return our test data
         async def mock_side_effect(client: Client):
             return MockWDSResponse(codesets_data)
 
@@ -60,30 +49,28 @@ class TestWDSClient:
         assert isinstance(codeset_names, set)
         mock_get_code_sets.assert_called_once_with(client=wds_client)
 
-    @pytest.mark.dependency(name="codesets")
     @pytest.mark.asyncio
     @pytest.mark.network
-    async def test_update_codesets_network(
-        self, request: pytest.FixtureRequest, wds_client: Client
-    ):
-        """Test update_codesets with real network calls - only runs when network tests are enabled."""
-        # Skip if mocking is enabled (default behavior unless --no-mock is used)
-        if not request.config.getoption("--no-mock"):
-            pytest.skip("Mocking enabled (default), use --no-mock to run network tests")
+    async def test_update_codesets_network(self, wds_client: Client):
+        """Test update_codesets with real network calls.
 
+        Only runs when --network flag is provided.
+        Generates/updates test fixture data in tests/data/ directory.
+        """
         codeset_names = await wds_client.update_codesets()
         assert isinstance(codeset_names, set)
 
-    @pytest.mark.dependency(depends=["codesets"])
     def test_codesets(self, wds_client: Client):
-        """Test codesets property after updating codesets."""
-        # codesets should be populated based on our dependencies
-        assert isinstance(wds_client.codesets, CodeSets)
+        """Test codesets property using mocked data.
 
-        # Now, codesets should be an instance of CodeSets
+        This test runs after update_codesets_mocked populates the client.
+        """
+        # codesets should be populated from the mocked update
         assert isinstance(wds_client.codesets, CodeSets)
         assert "scalar" in wds_client.codesets.keys()
+
         scalar_codeset = wds_client.codesets[Scalar.__name__.lower()]
         assert isinstance(scalar_codeset, CodeSet)
+
         units_code = scalar_codeset[Scalar.UNITS.value]
         assert isinstance(units_code, Code)

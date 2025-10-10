@@ -61,17 +61,12 @@ dependencies = {file = ["requirements.txt"]}
 
 [tool.pytest.ini_options]
 markers = [
-    "dependency: tests that require network or external dependencies",
-    "network: tests that make live network calls to generate fixtures",
-    "mock: tests that use mocked responses instead of live API calls",
-    "slow: tests that take a long time to run"
+    "network: tests that make live network calls to generate fixtures (opt-in with --network)"
 ]
 # Configure pytest-asyncio to use session-scoped event loops
 # This allows session-scoped async fixtures to work properly
 asyncio_default_fixture_loop_scope = "session"
 asyncio_default_test_loop_scope = "session"
-
-# Network tests are automatically prioritized by pytest_collection_modifyitems hook
 
 [tool.ruff]
 # Set the target Python version for compatibility checks.

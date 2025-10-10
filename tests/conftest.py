@@ -1,7 +1,7 @@
 """Pytest configuration and shared fixtures.
 
-Imports both legacy fixtures (for compatibility) and new enhanced fixtures
-that support raw response data and specialized data extraction.
+Provides fixtures for loading test data from tests/data/ directory.
+Network tests are disabled by default and must be explicitly enabled with --network flag.
 """
 
 import pytest
@@ -18,10 +18,10 @@ from tests.wds.test_requests import (
 def pytest_addoption(parser):
     """Add custom command-line options for pytest."""
     parser.addoption(
-        "--no-mock",
+        "--network",
         action="store_true",
         default=False,
-        help="Disable mocking and run network tests instead",
+        help="Enable network tests (disabled by default to avoid timeouts in CI/CD)",
     )
 
 
@@ -33,21 +33,37 @@ TRACKED_TESTS = {
 
 
 def pytest_collection_modifyitems(config, items: list[pytest.Item]):
-    """Modify test collection to prioritize network tests.
-    This ensures network tests run first to generate fresh data.
+    """Modify test collection based on command-line flags.
+
+    By default (without --network):
+    - Network tests are automatically skipped
+    - Tests use mocked data from tests/data/ directory
+
+    With --network flag:
+    - Network tests run first to generate/update fixture data
+    - Then mocked tests run using the fresh data
     """
-    # Separate network tests from others
-    network_tests = []
-    other_tests = []
+    network_enabled = config.getoption("--network")
 
-    for item in items:
-        if item.get_closest_marker("network"):
-            network_tests.append(item)
-        else:
-            other_tests.append(item)
+    if not network_enabled:
+        # Skip all network tests by default
+        skip_network = pytest.mark.skip(reason="Network tests disabled (use --network to enable)")
+        for item in items:
+            if item.get_closest_marker("network"):
+                item.add_marker(skip_network)
+    else:
+        # When network tests ARE enabled, prioritize them to generate fresh data first
+        network_tests = []
+        other_tests = []
 
-    # Reorder: network tests first, then others
-    items[:] = network_tests + other_tests
+        for item in items:
+            if item.get_closest_marker("network"):
+                network_tests.append(item)
+            else:
+                other_tests.append(item)
+
+        # Reorder: network tests first, then others
+        items[:] = network_tests + other_tests
 
 
 def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo):
