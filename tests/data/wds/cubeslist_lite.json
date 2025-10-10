@@ -24,8 +24,8 @@
         "cubeTitleEn": "Central government debt",
         "cubeTitleFr": "Dette du gouvernement central",
         "cubeStartDate": "2009-04-01T04:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-09-02T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -43,8 +43,8 @@
         "cubeTitleEn": "Government of Canada debt securities: Gross new issues, retirements and net new issues, par value, Bank of Canada",
         "cubeTitleFr": "Titres d’emprunt du gouvernement du Canada : émissions brutes, remboursements et émissions nettes, valeur nominale, Banque du Canada",
         "cubeStartDate": "1975-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-08-25T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-09-26T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -287,8 +287,8 @@
         "cubeTitleEn": "Statement of government operations and balance sheet, government finance statistics, quarterly",
         "cubeTitleFr": "Situation des opérations des administrations publiques et bilan, statistiques de finances publiques, trimestrielles",
         "cubeStartDate": "1990-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-06-27T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-09-26T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2018,8 +2018,8 @@
         "cubeTitleEn": "Government of Canada direct and guaranteed securities and loans, Bank of Canada",
         "cubeTitleFr": "Titres et emprunts émis ou garantis par le Gouvernement canadien, Banque du Canada",
         "cubeStartDate": "1946-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-03T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-02T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2170,8 +2170,8 @@
         "cubeTitleEn": "Financial market statistics, last Wednesday unless otherwise stated, Bank of Canada",
         "cubeTitleFr": "Statistiques du marché financier, au dernier mercredi sauf indication contraire, Banque du Canada",
         "cubeStartDate": "1934-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-08-29T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-03T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2189,8 +2189,8 @@
         "cubeTitleEn": "Selected United States dollar interest rates, last Wednesday unless otherwise stated, Bank of Canada",
         "cubeTitleFr": "Quelques taux d'intérêt pratiqués aux États-Unis, au dernier mercredi sauf indication contraire, Banque du Canada",
         "cubeStartDate": "1925-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-03T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2265,8 +2265,8 @@
         "cubeTitleEn": "Canada's official international reserves, millions of United States dollars, Bank of Canada, monthly",
         "cubeTitleFr": "Réserves canadiennes officielles de liquidités internationales, en millions de dollars États-Unis, Banque du Canada, mensuel",
         "cubeStartDate": "1951-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-08T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2303,8 +2303,8 @@
         "cubeTitleEn": "Government of Canada bonds outstanding, shown at par value, by currency of payments",
         "cubeTitleFr": "Encours des obligations du gouvernement du Canada classé selon la valeur nominale et la monnaie de paiement",
         "cubeStartDate": "1975-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-08-25T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-09-26T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2341,8 +2341,8 @@
         "cubeTitleEn": "Fisher commodity price index, United States dollar terms, Bank of Canada, monthly",
         "cubeTitleFr": "Indice Fisher des prix des produits de base, établi en dollars des États-Unis, Banque du Canada, mensuel",
         "cubeStartDate": "1972-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-19T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-03T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2360,8 +2360,8 @@
         "cubeTitleEn": "Central government operations: budgetary balance, non-budgetary transactions, and financial source/requirement",
         "cubeTitleFr": "Opérations du gouvernement central : solde budgétaire, opérations non budgétaire et ressources ou besoins financiers",
         "cubeStartDate": "2009-04-01T04:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-09-02T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2386,7 +2386,7 @@
         "cubeTitleFr": "Banques à charte, relevé des prêts hypothécaires, fin de période, Banque du Canada",
         "cubeStartDate": "1982-01-01T05:00:00Z",
         "cubeEndDate": "2025-04-01T04:00:00Z",
-        "releaseTime": "2025-09-02T12:30:00Z",
+        "releaseTime": "2025-10-01T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2423,8 +2423,8 @@
         "cubeTitleEn": "Bank of Canada, assets and liabilities, Wednesdays",
         "cubeTitleFr": "Banque du Canada, actif et passif, les mercredis",
         "cubeStartDate": "1980-12-03T05:00:00Z",
-        "cubeEndDate": "2025-09-17T04:00:00Z",
-        "releaseTime": "2025-09-22T12:30:00Z",
+        "cubeEndDate": "2025-10-01T04:00:00Z",
+        "releaseTime": "2025-10-06T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2462,8 +2462,8 @@
         "cubeTitleEn": "Selected United States dollar interest rates, Wednesdays, Bank of Canada",
         "cubeTitleFr": "Quelques taux d'intérêt pratiqués aux États-Unis, les mercredis, Banque du Canada",
         "cubeStartDate": "1954-07-07T04:00:00Z",
-        "cubeEndDate": "2025-09-10T04:00:00Z",
-        "releaseTime": "2025-09-19T12:30:00Z",
+        "cubeEndDate": "2025-09-24T04:00:00Z",
+        "releaseTime": "2025-10-03T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2481,8 +2481,8 @@
         "cubeTitleEn": "Bank of Canada, money market and other interest rates",
         "cubeTitleFr": "Taux du marché monétaire et autres taux d'intérêt, Banque du Canada",
         "cubeStartDate": "1960-07-22T04:00:00Z",
-        "cubeEndDate": "2025-09-22T04:00:00Z",
-        "releaseTime": "2025-09-24T12:30:00Z",
+        "cubeEndDate": "2025-10-07T04:00:00Z",
+        "releaseTime": "2025-10-09T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2500,8 +2500,8 @@
         "cubeTitleEn": "Canada's official international reserves, millions of United States dollars, Bank of Canada, daily",
         "cubeTitleFr": "Réserves canadiennes officielles de liquidités internationales, en millions de dollars États-Unis, Banque du Canada, quotidien",
         "cubeStartDate": "1999-07-08T04:00:00Z",
-        "cubeEndDate": "2025-09-15T04:00:00Z",
-        "releaseTime": "2025-09-18T12:30:00Z",
+        "cubeEndDate": "2025-10-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2538,8 +2538,8 @@
         "cubeTitleEn": "Fisher commodity price index, United States dollar terms, Bank of Canada, Fisher commodity price index, United States dollar terms, Bank of Canada, weekly",
         "cubeTitleFr": "Indice Fisher des prix des produits de base, établi en dollars des États-Unis, Banque du Canada, hebdomadaire",
         "cubeStartDate": "1972-01-05T05:00:00Z",
-        "cubeEndDate": "2025-09-17T04:00:00Z",
-        "releaseTime": "2025-09-19T12:30:00Z",
+        "cubeEndDate": "2025-10-01T04:00:00Z",
+        "releaseTime": "2025-10-03T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2557,8 +2557,8 @@
         "cubeTitleEn": "Financial market statistics, as at Tuesday, Bank of Canada",
         "cubeTitleFr": "Statistiques du marché financier, données du mardi, Banque du Canada",
         "cubeStartDate": "1992-11-24T05:00:00Z",
-        "cubeEndDate": "2025-09-16T04:00:00Z",
-        "releaseTime": "2025-09-18T12:30:00Z",
+        "cubeEndDate": "2025-10-07T04:00:00Z",
+        "releaseTime": "2025-10-09T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2576,8 +2576,8 @@
         "cubeTitleEn": "Financial market statistics, as at Wednesday, Bank of Canada",
         "cubeTitleFr": "Statistiques du marché financier, données du mercredi, Banque du Canada",
         "cubeStartDate": "1957-01-02T05:00:00Z",
-        "cubeEndDate": "2025-09-17T04:00:00Z",
-        "releaseTime": "2025-09-19T12:30:00Z",
+        "cubeEndDate": "2025-10-01T04:00:00Z",
+        "releaseTime": "2025-10-03T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2595,8 +2595,8 @@
         "cubeTitleEn": "Financial Soundness Indicators, Canada",
         "cubeTitleFr": "Indicateurs de solidité financière, Canada",
         "cubeStartDate": "2005-01-01T05:00:00Z",
-        "cubeEndDate": "2024-07-01T04:00:00Z",
-        "releaseTime": "2024-12-18T13:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -7813,8 +7813,8 @@
         "cubeTitleEn": "International merchandise trade for all countries and by Principal Trading Partners, monthly",
         "cubeTitleFr": "Commerce international de marchandises pour tous les pays et les principaux partenaires commerciaux, mensuel",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -9582,8 +9582,8 @@
         "cubeTitleEn": "Merchandise imports and exports, customs-based, by Harmonized commodity description and coding system (HS) section, Canada, provinces and territories, United States, states",
         "cubeTitleFr": "Importations et exportations de marchandises, base douanière, selon le Système harmonisé de désignation et de codification des marchandises (SH), Canada, provinces et territoires, États-Unis, États",
         "cubeStartDate": "1990-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -10105,7 +10105,7 @@
         "cubeTitleFr": "Commerce international de marchandises pour tous les pays et les principaux partenaires commerciaux, trimestriel",
         "cubeStartDate": "1997-01-01T05:00:00Z",
         "cubeEndDate": "2025-04-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -10440,8 +10440,8 @@
         "cubeTitleEn": "International trade in services, monthly",
         "cubeTitleFr": "Commerce international de services, mensuelle",
         "cubeStartDate": "2007-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -10498,8 +10498,8 @@
         "cubeTitleEn": "CIMT - Default view 01 - INVISIBLE",
         "cubeTitleFr": "CIMT - Default view 01 - INVISIBLE",
         "cubeStartDate": "1988-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -10515,8 +10515,8 @@
         "cubeTitleEn": "CIMT - Default view 01 - INVISIBLE",
         "cubeTitleFr": "CIMT - Default view 01 - INVISIBLE",
         "cubeStartDate": "2014-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -10532,8 +10532,8 @@
         "cubeTitleEn": "CIMT - Default view 01 - INVISIBLE",
         "cubeTitleFr": "CIMT - Default view 01 - INVISIBLE",
         "cubeStartDate": "2014-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -10549,8 +10549,8 @@
         "cubeTitleEn": "CIMT - Default view 01 - INVISIBLE",
         "cubeTitleFr": "CIMT - Default view 01 - INVISIBLE",
         "cubeStartDate": "1988-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -10566,8 +10566,8 @@
         "cubeTitleEn": "CIMT - Default view 01 - INVISIBLE",
         "cubeTitleFr": "CIMT - Default view 01 - INVISIBLE",
         "cubeStartDate": "2014-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -10583,8 +10583,8 @@
         "cubeTitleEn": "CIMT - Default view 01 - INVISIBLE",
         "cubeTitleFr": "CIMT - Default view 01 - INVISIBLE",
         "cubeStartDate": "2014-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -10782,8 +10782,8 @@
         "cubeTitleEn": "International merchandise trade by commodity, monthly",
         "cubeTitleFr": "Commerce international de marchandises par classification des produits, mensuel",
         "cubeStartDate": "1988-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -10803,7 +10803,7 @@
         "cubeTitleFr": "Commerce international de marchandises par classification des produits, trimestriel",
         "cubeStartDate": "1988-01-01T05:00:00Z",
         "cubeEndDate": "2025-04-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -10842,8 +10842,8 @@
         "cubeTitleEn": "International merchandise trade by commodity, chained 2017 dollars, monthly",
         "cubeTitleFr": "Commerce international de marchandises par classification des produits, dollars enchaînés 2017, mensuel",
         "cubeStartDate": "2017-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -10862,7 +10862,7 @@
         "cubeTitleFr": "Commerce international de marchandises par classification des produits, dollars enchaînés 2017, trimestriel",
         "cubeStartDate": "2017-01-01T05:00:00Z",
         "cubeEndDate": "2025-04-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -10880,8 +10880,8 @@
         "cubeTitleEn": "International merchandise trade, by commodity, price and volume indexes, monthly",
         "cubeTitleFr": "Commerce international de marchandises par classification des produits, indices de prix et de volume, mensuel",
         "cubeStartDate": "2017-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -10900,7 +10900,7 @@
         "cubeTitleFr": "Commerce international de marchandises par classification des produits, indices de prix et de volume, trimestriel",
         "cubeStartDate": "2017-01-01T05:00:00Z",
         "cubeEndDate": "2025-04-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -10994,8 +10994,8 @@
         "cubeTitleEn": "Merchandise imports and exports, customs-based, by free trade agreement and by commodity",
         "cubeTitleFr": "Importations et exportations de marchandises, sur une base douanière, par l'accord de libre-échange et par produits",
         "cubeStartDate": "1988-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -11013,8 +11013,8 @@
         "cubeTitleEn": "International merchandise trade by province, commodity, and Principal Trading Partners",
         "cubeTitleFr": "Commerce international de marchandises par province, par produit et les principaux partenaires commerciaux",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -11032,8 +11032,8 @@
         "cubeTitleEn": "Canadian international merchandise trade by industry for all countries, monthly",
         "cubeTitleFr": "Le commerce international de marchandises du Canada selon l'industrie pour tous les pays, mensuel",
         "cubeStartDate": "2002-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -11051,8 +11051,8 @@
         "cubeTitleEn": "Canadian international merchandise trade by mode of transport, customs-based, monthly",
         "cubeTitleFr": "Commerce international de marchandises du Canada par mode de transport, sur une base douanière, mensuel",
         "cubeStartDate": "1988-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -11070,8 +11070,8 @@
         "cubeTitleEn": "Canadian international merchandise trade for imports by country of origin and country of export, customs-based, monthly",
         "cubeTitleFr": "Commerce international de marchandises du Canada pour les importations par pays d’origine et pays d’exportation, sur une base douanière, mensuel",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -11089,8 +11089,8 @@
         "cubeTitleEn": "Canadian international merchandise trade for total exports, domestic exports and re-exports, customs-based, monthly",
         "cubeTitleFr": "Commerce international de marchandises du Canada pour les exportations totales, les exportations nationales et les réexportations, sur une base douanière, mensuel",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "12"
@@ -16408,8 +16408,8 @@
         "cubeTitleEn": "Anthropometry measures of the household population",
         "cubeTitleFr": "Mesures d'anthropométrie de la population à domicile",
         "cubeStartDate": "2009-01-01T05:00:00Z",
-        "cubeEndDate": "2019-01-01T05:00:00Z",
-        "releaseTime": "2020-10-14T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-02T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "13"
@@ -17372,8 +17372,8 @@
         "cubeTitleEn": "Overweight and obesity based on measured body mass index, by age group and sex",
         "cubeTitleFr": "Embonpoint et obésité selon l'indice de masse corporelle mesuré, selon le groupe d'âge et le sexe",
         "cubeStartDate": "2009-01-01T05:00:00Z",
-        "cubeEndDate": "2019-01-01T05:00:00Z",
-        "releaseTime": "2020-10-14T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-02T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "13"
@@ -24694,8 +24694,8 @@
         "cubeTitleEn": "Provisional weekly death counts, by age group and sex",
         "cubeTitleFr": "Nombre provisoire de décès hebdomadaires, selon le groupe d'âge et le sexe",
         "cubeStartDate": "2010-01-09T05:00:00Z",
-        "cubeEndDate": "2025-07-05T04:00:00Z",
-        "releaseTime": "2025-09-11T12:30:00Z",
+        "cubeEndDate": "2025-08-02T04:00:00Z",
+        "releaseTime": "2025-10-09T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "13"
@@ -24939,8 +24939,8 @@
         "cubeTitleEn": "Previous releases and revisions to provisional weekly death counts",
         "cubeTitleFr": "Diffusions antérieures et révisions du nombre provisoire de décès hebdomadaire",
         "cubeStartDate": "2010-01-09T05:00:00Z",
-        "cubeEndDate": "2025-07-05T04:00:00Z",
-        "releaseTime": "2025-09-11T12:30:00Z",
+        "cubeEndDate": "2025-08-02T04:00:00Z",
+        "releaseTime": "2025-10-09T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "13"
@@ -25475,8 +25475,8 @@
         "cubeTitleEn": "Provisional weekly death counts, by selected grouped causes of death",
         "cubeTitleFr": "Nombre provisoire de décès hebdomadaires, selon certains groupes de causes de décès",
         "cubeStartDate": "2010-01-09T05:00:00Z",
-        "cubeEndDate": "2025-07-05T04:00:00Z",
-        "releaseTime": "2025-09-11T12:30:00Z",
+        "cubeEndDate": "2025-08-02T04:00:00Z",
+        "releaseTime": "2025-10-09T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "13"
@@ -26845,8 +26845,8 @@
         "cubeTitleEn": "Provisional weekly age-standardized mortality rates, by sex",
         "cubeTitleFr": "Taux de mortalité hebdomadaires provisoires normalisés selon l'âge, selon le sexe",
         "cubeStartDate": "2019-01-05T05:00:00Z",
-        "cubeEndDate": "2025-07-05T04:00:00Z",
-        "releaseTime": "2025-09-11T12:30:00Z",
+        "cubeEndDate": "2025-08-02T04:00:00Z",
+        "releaseTime": "2025-10-09T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "13"
@@ -28406,6 +28406,25 @@
         "frequencyCode": 18,
         "corrections": [],
         "issueDate": "2025-08-13T04:00:00Z"
+    },
+    {
+        "productId": 13100965,
+        "cansimId": null,
+        "cubeTitleEn": "Average blood pressure and heart rate measured using an OMRON blood pressure monitor, by age group and sex",
+        "cubeTitleFr": "Tension artérielle et fréquence cardiaque moyennes mesurées à l'aide d'un tensiomètre OMRON, par groupe d'âge et par sexe",
+        "cubeStartDate": "2024-01-01T05:00:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-02T12:30:00Z",
+        "archived": "2",
+        "subjectCode": [
+            "13"
+        ],
+        "surveyCode": [
+            "5071"
+        ],
+        "frequencyCode": 18,
+        "corrections": [],
+        "issueDate": "2025-10-02T04:00:00Z"
     },
     {
         "productId": 14100001,
@@ -32248,8 +32267,8 @@
         "cubeTitleEn": "Employment by industry, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Emploi selon l'industrie, données mensuelles non désaisonnalisées",
         "cubeStartDate": "2001-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -32286,8 +32305,8 @@
         "cubeTitleEn": "Average weekly earnings by industry, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Rémunération hebdomadaire moyenne selon l'industrie, données mensuelles non désaisonnalisées",
         "cubeStartDate": "2001-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -32336,8 +32355,8 @@
         "cubeTitleEn": "Average hourly earnings for employees paid by the hour, by industry, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Rémunération horaire moyenne des salariés rémunérés à l'heure, selon l'industrie, données mensuelles non désaisonnalisées",
         "cubeStartDate": "2001-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -32436,8 +32455,8 @@
         "cubeTitleEn": "Average hourly earnings (including overtime) for salaried employees, by industry, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Rémunération horaire moyenne (incluant le temps supplémentaire) des employés à salaire fixe, selon l'industrie, données mensuelles non désaisonnalisées",
         "cubeStartDate": "2001-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -32486,8 +32505,8 @@
         "cubeTitleEn": "Standard work week for salaried employees, by industry, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Semaine normale de travail des employés à salaire fixe, selon l'industrie, données mensuelles non désaisonnalisées",
         "cubeStartDate": "2001-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -32536,8 +32555,8 @@
         "cubeTitleEn": "Fixed weighted index of average hourly earnings for all employees, by industry, monthly",
         "cubeTitleFr": "Indice à pondération fixe de la rémunération horaire moyenne pour l'ensemble des salariés, selon l'industrie, données mensuelles",
         "cubeStartDate": "2001-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -32555,8 +32574,8 @@
         "cubeTitleEn": "Employment for all employees by enterprise size, quarterly, unadjusted for seasonality",
         "cubeTitleFr": "Emploi pour l'ensemble des salariés selon la taille d'entreprise, données trimestrielles non désaisonnalisées",
         "cubeStartDate": "2001-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-06-26T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -32593,8 +32612,8 @@
         "cubeTitleEn": "Average weekly earnings (including overtime) for all employees by enterprise size, quarterly, unadjusted for seasonality",
         "cubeTitleFr": "Rémunération hebdomadaire moyenne (incluant le temps supplémentaire) pour l'ensemble des salariés selon la taille d'entreprise, données trimestrielles non désaisonnalisées",
         "cubeStartDate": "2001-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-06-26T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -32631,8 +32650,8 @@
         "cubeTitleEn": "Average weekly hours (including overtime) for employees paid by the hour, by enterprise size, quarterly, unadjusted for seasonality",
         "cubeTitleFr": "Heures hebdomadaires moyennes (incluant le temps supplémentaire) des salariés rémunérés à l'heure, selon la taille d'entreprise, données trimestrielles non désaisonnalisées",
         "cubeStartDate": "2001-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-06-26T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -32669,8 +32688,8 @@
         "cubeTitleEn": "Employment and average weekly earnings (including overtime) for all employees by industry, monthly, seasonally adjusted, Canada",
         "cubeTitleFr": "Emploi et rémunération hebdomadaire moyenne (incluant le temps supplémentaire) pour l'ensemble des salariés selon l'industrie, données mensuelles désaisonnalisées, Canada",
         "cubeStartDate": "2001-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -32694,8 +32713,8 @@
         "cubeTitleEn": "Employment, average hourly and weekly earnings, and average weekly hours by industry, monthly, seasonally adjusted",
         "cubeTitleFr": "Emploi, rémunération horaire et hebdomadaire moyenne et heures hebdomadaires moyennes selon l'industrie, données mensuelles désaisonnalisées",
         "cubeStartDate": "2001-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -32713,8 +32732,8 @@
         "cubeTitleEn": "Employment, average hourly and weekly earnings (including overtime), and average weekly hours for the industrial aggregate excluding unclassified businesses, monthly, seasonally adjusted",
         "cubeTitleFr": "Emploi, rémunération horaire et hebdomadaire moyenne (incluant le temps supplémentaire) et heures hebdomadaires moyennes pour l'ensemble des industries excluant les entreprises non classifiées, données mensuelles désaisonnalisées",
         "cubeStartDate": "2001-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -32738,8 +32757,8 @@
         "cubeTitleEn": "Employment and average weekly earnings (including overtime) for all employees by province and territory, monthly, seasonally adjusted",
         "cubeTitleFr": "Emploi et rémunération hebdomadaire moyenne (incluant le temps supplémentaire) pour l'ensemble des salariés selon la province et le territoire, données mensuelles, désaisonnalisées",
         "cubeStartDate": "2001-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -33335,8 +33354,8 @@
         "cubeTitleEn": "Average weekly hours for employees paid by the hour, by industry, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Heures hebdomadaires moyennes des salariés rémunérés à l'heure, selon l'industrie, données mensuelles non désaisonnalisées",
         "cubeStartDate": "2001-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -35514,8 +35533,8 @@
         "cubeTitleEn": "Job vacancies, payroll employees, and job vacancy rate by provinces and territories, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Postes vacants, employés salariés et taux de postes vacants selon les provinces et territoires, données mensuelles non désaisonnalisées",
         "cubeStartDate": "2015-04-01T04:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -35533,8 +35552,8 @@
         "cubeTitleEn": "Job vacancies, payroll employees, and job vacancy rate by industry sector, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Postes vacants, employés salariés, et taux de postes vacants selon le secteur de l'industrie, données mensuelles non désaisonnalisées",
         "cubeStartDate": "2015-04-01T04:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -36165,8 +36184,8 @@
         "cubeTitleEn": "Job vacancies, payroll employees, and job vacancy rate by industry sector, monthly, adjusted for seasonality",
         "cubeTitleFr": "Postes vacants, employés salariés et taux de postes vacants selon le secteur de l'industrie, données mensuelles désaisonnalisées",
         "cubeStartDate": "2015-04-01T04:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -36700,8 +36719,8 @@
         "cubeTitleEn": "Job vacancies, payroll employees, and job vacancy rate by provinces and territories, monthly, adjusted for seasonality",
         "cubeTitleFr": "Postes vacants, employés salariés et taux de postes vacants selon les provinces et territoires, données mensuelles désaisonnalisées",
         "cubeStartDate": "2015-04-01T04:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -38573,8 +38592,8 @@
         "cubeTitleEn": "Historical (real-time) releases of real manufacturing sales, orders, inventory owned and inventory to sales ratio, 2017 dollars, seasonally adjusted",
         "cubeTitleFr": "Diffusions historiques (temps réel) de valeur réelle des ventes, des commandes, des stocks possédés et le ratio des stocks aux ventes des industries manufacturières, en dollars de 2017, désaisonnalisées",
         "cubeStartDate": "2002-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-29T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "16"
@@ -38598,8 +38617,8 @@
         "cubeTitleEn": "Historical (real-time) releases manufacturing capacity utilization rates",
         "cubeTitleFr": "Diffusions historiques (temps réel) des taux d’utilisation de la capacité de fabrication",
         "cubeStartDate": "2017-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-29T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "16"
@@ -38636,8 +38655,8 @@
         "cubeTitleEn": "Lumber production, shipments, and stocks by species, monthly",
         "cubeTitleFr": "Bois Sciés, production, livraisons et stocks par espèces, données mensuelles",
         "cubeStartDate": "2014-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-10-03T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "16"
@@ -38971,8 +38990,8 @@
         "cubeTitleEn": "Tobacco, sales and inventories, monthly production",
         "cubeTitleFr": "Tabac, production, ventes et écoulement, données mensuelles",
         "cubeStartDate": "2004-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "16"
@@ -39009,8 +39028,8 @@
         "cubeTitleEn": "Wood chips production, shipments and stocks, monthly",
         "cubeTitleFr": "Copeaux de bois production, livraisons et stocks, données mensuelles",
         "cubeStartDate": "2012-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-10-03T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "16"
@@ -45706,8 +45725,8 @@
         "cubeTitleEn": "Informatics professional services price indexes, annual",
         "cubeTitleFr": "Indices des prix des services professionnels en informatique, annuel",
         "cubeStartDate": "2015-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-05-13T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-09-26T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "18"
@@ -46491,8 +46510,8 @@
         "cubeTitleEn": "Freight Rail Services Price Index, quarterly",
         "cubeTitleFr": "Indice des prix des services de transport ferroviaire de marchandises, trimestriel",
         "cubeStartDate": "2018-01-01T05:00:00Z",
-        "cubeEndDate": "2025-04-01T04:00:00Z",
-        "releaseTime": "2025-06-30T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "18"
@@ -46953,6 +46972,31 @@
         "issueDate": "2016-07-27T04:00:00Z"
     },
     {
+        "productId": 18100205,
+        "cansimId": "327-0056",
+        "cubeTitleEn": "New housing price index, monthly",
+        "cubeTitleFr": "Indice des prix des logements neufs, mensuel",
+        "cubeStartDate": "1981-01-01T05:00:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-09-23T12:30:00Z",
+        "archived": "2",
+        "subjectCode": [
+            "18"
+        ],
+        "surveyCode": [
+            "2310"
+        ],
+        "frequencyCode": 6,
+        "corrections": [
+            {
+                "correctionDate": "2025-09-25T04:00:00Z",
+                "correctionNoteEn": "On September 25, 2025, the August 2025 data for Calgary, Alberta, Prairies and Canada for the land-only and house-only components were corrected. The other estimates available were unchanged.",
+                "correctionNoteFr": "Le 25 septembre 2025, les données d'août 2025 pour Calgary, l'Alberta, les Prairies et le Canada concernant les composantes « terrain seulement » et « maison seulement » ont été corrigées. Les autres estimations disponibles sont restées inchangées."
+            }
+        ],
+        "issueDate": "2017-03-09T05:00:00Z"
+    },
+    {
         "productId": 18100206,
         "cansimId": "332-0023",
         "cubeTitleEn": "Consulting Services Price Index, quarterly, inactive",
@@ -47072,8 +47116,8 @@
         "cubeTitleEn": "Freight Rail Services Price Index, monthly",
         "cubeTitleFr": "Indice des prix des services de transport ferroviaire de marchandises, mensuel",
         "cubeStartDate": "2018-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-08-29T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "18"
@@ -47699,8 +47743,8 @@
         "cubeTitleEn": "Monthly average retail prices for selected products",
         "cubeTitleFr": "Prix de détail moyens mensuels pour certains produits",
         "cubeStartDate": "2017-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-04T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-01T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "18"
@@ -47813,8 +47857,8 @@
         "cubeTitleEn": "Retail services price index, monthly",
         "cubeTitleFr": "Indice des prix des services du commerce de détail, mensuel",
         "cubeStartDate": "2008-01-01T05:00:00Z",
-        "cubeEndDate": "2025-03-01T05:00:00Z",
-        "releaseTime": "2025-06-20T12:30:00Z",
+        "cubeEndDate": "2025-06-01T04:00:00Z",
+        "releaseTime": "2025-10-01T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "18"
@@ -47838,8 +47882,8 @@
         "cubeTitleEn": "Retail services price index, quarterly",
         "cubeTitleFr": "Indice des prix des services du commerce de détail, trimestriel",
         "cubeStartDate": "2008-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-06-20T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-10-01T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "18"
@@ -47958,8 +48002,8 @@
         "cubeTitleEn": "Farm input price index, quarterly",
         "cubeTitleFr": "Indice des prix des entrées dans l'agriculture, trimestriel",
         "cubeStartDate": "2002-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-07-09T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-10-08T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "18"
@@ -47977,8 +48021,8 @@
         "cubeTitleEn": "Historical (real-time) releases of Consumer Price Index (CPI) statistics, measures of core inflation - Bank of Canada definitions",
         "cubeTitleFr": "Diffusions historiques (temps réel) des statistiques de l'Indice des prix à la consommation (IPC), mesures de l'inflation fondamentale - définitions de la Banque du Canada",
         "cubeStartDate": "1989-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-02T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "18"
@@ -48262,8 +48306,8 @@
         "cubeTitleEn": "Couriers and messengers services price index, monthly",
         "cubeTitleFr": "Indice des prix des services de messagerie et de messagers, mensuel",
         "cubeStartDate": "2010-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-08-29T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "18"
@@ -48300,8 +48344,8 @@
         "cubeTitleEn": "Wholesale services price index, monthly",
         "cubeTitleFr": "Indice des prix des services du commerce de gros, mensuel",
         "cubeStartDate": "2008-01-01T05:00:00Z",
-        "cubeEndDate": "2025-03-01T05:00:00Z",
-        "releaseTime": "2025-06-20T12:30:00Z",
+        "cubeEndDate": "2025-06-01T04:00:00Z",
+        "releaseTime": "2025-10-01T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "18"
@@ -48319,8 +48363,8 @@
         "cubeTitleEn": "Wholesale services price index, quarterly",
         "cubeTitleFr": "Indice des prix des services du commerce de gros, trimestriel",
         "cubeStartDate": "2008-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-06-20T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-10-01T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "18"
@@ -48338,8 +48382,8 @@
         "cubeTitleEn": "Commercial and industrial machinery and equipment rental and leasing services price index, quarterly",
         "cubeTitleFr": "Indice des prix des services de location et de location à bail de machines et de matériel d'usage commercial et industriel, trimestriel",
         "cubeStartDate": "2006-07-01T04:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-07-03T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-10-02T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "18"
@@ -48357,8 +48401,8 @@
         "cubeTitleEn": "Commercial and industrial machinery and equipment rental and leasing services price index, monthly",
         "cubeTitleFr": "Indice des prix des services de location et de location à bail de machines et de matériel d'usage commercial et industriel, mensuel",
         "cubeStartDate": "2006-07-01T04:00:00Z",
-        "cubeEndDate": "2025-03-01T05:00:00Z",
-        "releaseTime": "2025-07-03T12:30:00Z",
+        "cubeEndDate": "2025-06-01T04:00:00Z",
+        "releaseTime": "2025-10-02T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "18"
@@ -48414,8 +48458,8 @@
         "cubeTitleEn": "Machinery and equipment price index, by commodity, monthly",
         "cubeTitleFr": "Indice des prix des machines et du matériel, selon le produit, mensuel",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-29T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "18"
@@ -48433,8 +48477,8 @@
         "cubeTitleEn": "Machinery and equipment price index, by industry of purchase, monthly",
         "cubeTitleFr": "Indice des prix des machines et du matériel, par industrie d'achat, mensuel",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-29T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "18"
@@ -48706,8 +48750,8 @@
         "cubeTitleEn": "Historical (real-time) releases of wholesale sales, price and volume, seasonally adjusted",
         "cubeTitleFr": "Diffusions historiques (temps réel) des ventes de grossistes, prix et volume, désaisonnalisées",
         "cubeStartDate": "2004-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-25T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "20"
@@ -48988,8 +49032,8 @@
         "cubeTitleEn": "Historical (real-time) releases of wholesale trade, inventories",
         "cubeTitleFr": "Diffusions historiques (temps réel) du commerce de gros, stocks",
         "cubeStartDate": "1993-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-25T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "20"
@@ -49929,8 +49973,8 @@
         "cubeTitleEn": "Quarterly retail commodity sales",
         "cubeTitleFr": "Ventes trimestrielles des marchandises vendues au détail",
         "cubeStartDate": "2023-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-07-08T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "20"
@@ -50148,8 +50192,8 @@
         "cubeTitleEn": "Monthly retail commodity sales",
         "cubeTitleFr": "Ventes mensuelles des marchandises vendues au détail",
         "cubeStartDate": "2023-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-09-08T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "20"
@@ -50167,8 +50211,8 @@
         "cubeTitleEn": "Historical (real-time) releases of monthly retail trade, sales",
         "cubeTitleFr": "Diffusions historiques (temps réel) du commerce de détail mensuel, ventes",
         "cubeStartDate": "2017-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-09-08T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "20"
@@ -50187,8 +50231,8 @@
         "cubeTitleEn": "Historical (real-time) releases of monthly retail sales, price, and volume",
         "cubeTitleFr": "Diffusions historiques (temps réel) des ventes au détail mensuelles, prix et volume",
         "cubeStartDate": "2017-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-09-08T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "20"
@@ -50340,8 +50384,8 @@
         "cubeTitleEn": "Travel arrangement services, summary statistics",
         "cubeTitleFr": "Services de préparation de voyages, statistiques sommaires",
         "cubeStartDate": "2012-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-10-01T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-06T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "21"
@@ -50359,8 +50403,8 @@
         "cubeTitleEn": "Travel arrangement services, industry expenditures",
         "cubeTitleFr": "Services de préparation de voyages, dépenses de l'industrie",
         "cubeStartDate": "2013-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-10-01T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-06T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "21"
@@ -50568,8 +50612,8 @@
         "cubeTitleEn": "Consumer goods rental, summary statistics",
         "cubeTitleFr": "Location de biens de consommation, statistiques sommaires",
         "cubeStartDate": "2012-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-12-02T13:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-02T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "21"
@@ -50587,8 +50631,8 @@
         "cubeTitleEn": "Consumer goods rental, industry expenditures",
         "cubeTitleFr": "Location de biens de consommation, dépenses de l'industrie",
         "cubeStartDate": "2013-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-12-02T13:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-02T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "21"
@@ -50606,8 +50650,8 @@
         "cubeTitleEn": "Consumer goods rental, sales by type of client",
         "cubeTitleFr": "Location de biens de consommation, ventes selon le type de client",
         "cubeStartDate": "2013-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-12-02T13:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-02T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "21"
@@ -50644,8 +50688,8 @@
         "cubeTitleEn": "Monthly survey of food services and drinking places",
         "cubeTitleFr": "Enquête mensuelle sur les services de restauration et débits de boissons",
         "cubeStartDate": "1998-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-29T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-26T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "21"
@@ -52761,8 +52805,8 @@
         "cubeTitleEn": "Travel arrangement services, distribution of sales by type of service provided",
         "cubeTitleFr": "Services de préparation de voyages, répartition des ventes selon le genre de service fourni",
         "cubeStartDate": "2018-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-10-01T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-06T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "21"
@@ -53312,8 +53356,8 @@
         "cubeTitleEn": "Surveying and mapping services, summary statistics",
         "cubeTitleFr": "Services de prospection, d'arpentage et de cartographie, statistiques sommaires",
         "cubeStartDate": "2012-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-10-18T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-06T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "21"
@@ -53350,8 +53394,8 @@
         "cubeTitleEn": "Surveying and mapping services, industry expenditures",
         "cubeTitleFr": "Services de prospection, d'arpentage et de cartographie, dépenses de l'industrie",
         "cubeStartDate": "2013-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-10-18T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-06T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "21"
@@ -53369,8 +53413,8 @@
         "cubeTitleEn": "Surveying and mapping services, sales by type of client",
         "cubeTitleFr": "Services de prospection, d'arpentage et de cartographie, ventes selon le type de client",
         "cubeStartDate": "2013-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-10-18T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-06T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "21"
@@ -53949,7 +53993,13 @@
             "4710"
         ],
         "frequencyCode": 13,
-        "corrections": [],
+        "corrections": [
+            {
+                "correctionDate": "2025-10-06T04:00:00Z",
+                "correctionNoteEn": "On October 6, 2025, structural formatting corrections were applied to the “Total advertising sales” and “Total circulation sales” dimensions. Specifically, the sub-category “Specialized community newspapers (advertising sales)” was repositioned to ensure accurate roll-up visualization. Please note that while the structure was adjusted, all individual data points remain correct and unchanged.",
+                "correctionNoteFr": "Le 6 octobre 2025, des corrections ont été apportées à la structure des dimensions « Total des ventes publicitaires » et « Total des ventes de diffusion ». Plus précisément, la sous-catégorie des « Journaux communautaires spécialisés (ventes publicitaires) » a été repositionnée afin d’assurer une visualisation correcte de l’agrégation. Veuillez noter que bien que la structure ait été ajustée, toutes les données individuelles demeurent exactes et inchangées."
+            }
+        ],
         "issueDate": "2016-03-31T04:00:00Z"
     },
     {
@@ -53968,7 +54018,13 @@
             "4710"
         ],
         "frequencyCode": 13,
-        "corrections": [],
+        "corrections": [
+            {
+                "correctionDate": "2025-10-06T04:00:00Z",
+                "correctionNoteEn": "On October 6, 2025, structural formatting corrections were applied to the “Advertising sales” dimension. Specifically, the sub-category “Specialized community newspapers (advertising sales)” was repositioned to ensure accurate roll-up visualization. Please note that while the structure was adjusted, all individual data points remain correct and unchanged.",
+                "correctionNoteFr": "Le 6 octobre 2025, des corrections ont été apportées à la structure de la dimension « Ventes publicitaires ». Plus précisément, la sous-catégorie des « Journaux communautaires spécialisés (ventes publicitaires) » a été repositionnée afin d’assurer une visualisation correcte de l’agrégation. Veuillez noter que bien que la structure ait été ajustée, toutes les données individuelles demeurent exactes et inchangées."
+            }
+        ],
         "issueDate": "2016-03-31T04:00:00Z"
     },
     {
@@ -53987,7 +54043,13 @@
             "4710"
         ],
         "frequencyCode": 13,
-        "corrections": [],
+        "corrections": [
+            {
+                "correctionDate": "2025-10-06T04:00:00Z",
+                "correctionNoteEn": "On October 6, 2025, structural formatting corrections were applied to the “Total circulation sales” dimension. Specifically, sub-categories under “Digital newspapers” and “Printed newspapers” were repositioned to ensure accurate roll-up visualization. Please note that while the structure was adjusted, all individual data points remain correct and unchanged.",
+                "correctionNoteFr": "Le 6 octobre 2025, des corrections ont été apportées à la structure de la dimension « Total des ventes de diffusion ». Plus précisément, les sous-catégories des « Journaux numériques » et des « Journaux imprimés » ont été repositionnées afin d’assurer une visualisation correcte des agrégations. Veuillez noter que bien que la structure ait été ajustée, toutes les données individuelles demeurent exactes et inchangées."
+            }
+        ],
         "issueDate": "2016-03-31T04:00:00Z"
     },
     {
@@ -54006,7 +54068,13 @@
             "4710"
         ],
         "frequencyCode": 13,
-        "corrections": [],
+        "corrections": [
+            {
+                "correctionDate": "2025-10-06T04:00:00Z",
+                "correctionNoteEn": "On October 6, 2025, structural formatting corrections were applied to the “Total advertising sales” dimension. Specifically, the sub-category “Specialized community newspapers (digital)” was repositioned to ensure accurate roll-up visualization. Please note that while the structure was adjusted, all individual data points remain correct and unchanged.",
+                "correctionNoteFr": "Le 6 octobre 2025, des corrections ont été apportées à la structure de la dimension « Total des ventes publicitaires ». Plus précisément, la sous-catégorie des « Journaux communautaires spécialisés (numériques) » a été repositionnée afin d’assurer une visualisation correcte de l’agrégation. Veuillez noter que bien que la structure ait été ajustée, toutes les données individuelles demeurent exactes et inchangées."
+            }
+        ],
         "issueDate": "2016-03-31T04:00:00Z"
     },
     {
@@ -54281,8 +54349,8 @@
         "cubeTitleEn": "Surveying and mapping services, sales by type of goods and services",
         "cubeTitleFr": "Services de prospection, d'arpentage et de cartographie, ventes selon le type de produit et service",
         "cubeStartDate": "2013-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-10-18T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-06T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "21"
@@ -54756,8 +54824,8 @@
         "cubeTitleEn": "Travel arrangement services, sales by type of client",
         "cubeTitleFr": "Services de préparation de voyages, ventes selon le type de client",
         "cubeStartDate": "2014-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-10-01T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-06T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "21"
@@ -54794,8 +54862,8 @@
         "cubeTitleEn": "Travel arrangement services, e-commerce sales",
         "cubeTitleFr": "Services de préparation de voyages, ventes provenant du commerce électronique",
         "cubeStartDate": "2016-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-10-01T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-06T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "21"
@@ -55123,8 +55191,8 @@
         "cubeTitleEn": "Travel arrangement services, distribution of revenue by destination",
         "cubeTitleFr": "Services de préparation de voyages, répartition des ventes selon la destination",
         "cubeStartDate": "2016-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-10-01T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-06T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "21"
@@ -59209,8 +59277,8 @@
         "cubeTitleEn": "Operating and financial statistics for major Canadian airlines, monthly",
         "cubeTitleFr": "Statistiques d'exploitation et financières des principaux transporteurs aériens canadiens, mensuel",
         "cubeStartDate": "1981-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-27T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "23"
@@ -63003,8 +63071,8 @@
         "cubeTitleEn": "Domestic and international Itinerant aircraft movements, total of all airports with NAV CANADA towers, weekly",
         "cubeTitleFr": "Mouvements itinérants intérieurs et internationaux d'aéronefs, total de tous les aéroports dotés d'une tour de contrôle de NAV CANADA, hebdomadaire",
         "cubeStartDate": "2019-12-28T05:00:00Z",
-        "cubeEndDate": "2025-09-06T04:00:00Z",
-        "releaseTime": "2025-09-24T12:30:00Z",
+        "cubeEndDate": "2025-09-20T04:00:00Z",
+        "releaseTime": "2025-10-08T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "23"
@@ -63098,8 +63166,8 @@
         "cubeTitleEn": "Aircraft movements, by class of operation, airports with NAV CANADA services and other selected airports, monthly",
         "cubeTitleFr": "Mouvements d’aéronefs, par classe de vol, dans les aéroports offrant des services de NAV CANADA et d’autres aéroports sélectionnés, mensuel",
         "cubeStartDate": "2019-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-27T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "23"
@@ -63117,8 +63185,8 @@
         "cubeTitleEn": "Aircraft movements, by civil and military movements, airports with NAV CANADA services and other selected airports, monthly",
         "cubeTitleFr": "Mouvements d’aéronefs par mouvements civils et militaires, dans les aéroports offrant des services de NAV CANADA et d’autres aéroports sélectionnés, mensuel",
         "cubeStartDate": "2022-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-27T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "23"
@@ -63136,8 +63204,8 @@
         "cubeTitleEn": "Itinerant movements, by type of operation, airports with NAV CANADA services and other selected airports, monthly",
         "cubeTitleFr": "Mouvements itinérants, par type d’exploitation, dans les aéroports offrant des services de NAV CANADA et d’autres aéroports sélectionnés, mensuel",
         "cubeStartDate": "2022-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-27T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "23"
@@ -63155,8 +63223,8 @@
         "cubeTitleEn": "Itinerant movements, by flight rules and runway 88, at airports with NAV CANADA services and other selected airports, monthly",
         "cubeTitleFr": "Mouvements itinérants, par règles de vol et piste 88, dans les aéroports offrant des services de NAV CANADA et d’autres aéroports sélectionnés, mensuel",
         "cubeStartDate": "2022-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-27T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "23"
@@ -63174,8 +63242,8 @@
         "cubeTitleEn": "Itinerant movements, by type of power plant, at airports with NAV CANADA services and other selected airports, monthly",
         "cubeTitleFr": "Mouvements itinérants, par groupe motopropulseur, dans les aéroports offrant des services de NAV CANADA et d’autres aéroports sélectionnés, mensuel",
         "cubeStartDate": "2022-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-27T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "23"
@@ -63193,8 +63261,8 @@
         "cubeTitleEn": "Itinerant movements, by aircraft maximum take-off weight, at airports with NAV CANADA services and other selected airports, monthly",
         "cubeTitleFr": "Mouvements itinérants, par poids maximum au décollage des aéronefs, dans les aéroports offrant des services de NAV CANADA et d’autres aéroports sélectionnés, mensuel",
         "cubeStartDate": "2022-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-27T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "23"
@@ -63212,8 +63280,8 @@
         "cubeTitleEn": "Domestic and international itinerant movements, by type of operation, at airports with NAV CANADA services and other selected airports, monthly",
         "cubeTitleFr": "Mouvements itinérants intérieurs et internationaux, par type d’exploitation, dans les aéroports offrant des services de NAV CANADA et d’autres aéroports sélectionnés, mensuel",
         "cubeStartDate": "2019-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-27T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "23"
@@ -63231,8 +63299,8 @@
         "cubeTitleEn": "Aircraft movements, by geography, airports with NAV CANADA services and other selected airports, monthly",
         "cubeTitleFr": "Mouvements d’aéronefs, par région géographique, dans les aéroports offrant des services de NAV CANADA et d’autres aéroports sélectionnés, mensuel",
         "cubeStartDate": "2022-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-27T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "23"
@@ -63250,8 +63318,8 @@
         "cubeTitleEn": "Domestic and international itinerant movements, by geography, airports with NAV CANADA services and other selected airports, monthly",
         "cubeTitleFr": "Mouvements itinérants intérieurs et internationaux, par région géographique, dans les aéroports offrant des services de NAV CANADA et d’autres aéroports sélectionnés, mensuel",
         "cubeStartDate": "2022-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-27T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "23"
@@ -63436,8 +63504,8 @@
         "cubeTitleEn": "Screened passenger traffic at the largest airports in Canada",
         "cubeTitleFr": "Nombre de passagers ayant fait l’objet d’un contrôle dans les plus grands aéroports du Canada",
         "cubeStartDate": "2019-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-09-26T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "23"
@@ -64963,8 +65031,8 @@
         "cubeTitleEn": "Electric power generation, monthly generation by type of electricity",
         "cubeTitleFr": "Production de l'énergie électrique, production mensuelle selon le type d'électricité",
         "cubeStartDate": "2008-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-09-02T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "25"
@@ -64982,8 +65050,8 @@
         "cubeTitleEn": "Electric power generation, monthly receipts, deliveries and availability",
         "cubeTitleFr": "Production de l'énergie électrique, réceptions, livraisons et disponibilité, mensuel",
         "cubeStartDate": "2008-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-09-02T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "25"
@@ -65416,8 +65484,8 @@
         "cubeTitleEn": "Natural gas liquids and sulphur products from processing plants, monthly supply",
         "cubeTitleFr": "Produits de liquides du gaz naturel et de soufre en provenance des usines de traitement, approvisionnement mensuel",
         "cubeStartDate": "1989-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-09-02T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "25"
@@ -65590,8 +65658,8 @@
         "cubeTitleEn": "Coal coke plant, monthly statistics",
         "cubeTitleFr": "Usines de coke de charbon, statistiques mensuelles",
         "cubeStartDate": "2008-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-09-02T13:20:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "25"
@@ -65609,8 +65677,8 @@
         "cubeTitleEn": "Coal, monthly production and exports",
         "cubeTitleFr": "Charbon, production et exportations, mensuel",
         "cubeStartDate": "2008-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-09-02T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "25"
@@ -65781,8 +65849,8 @@
         "cubeTitleEn": "Supply and disposition of natural gas, monthly (data in thousands)",
         "cubeTitleFr": "Approvisionnements et utilisations du gaz naturel, mensuel (données en milliers)",
         "cubeStartDate": "2016-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-09-02T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "25"
@@ -65951,8 +66019,8 @@
         "cubeTitleEn": "Supply and disposition of crude oil and equivalent",
         "cubeTitleFr": "Approvisionnement et utilisation du pétrole brut et équivalent",
         "cubeStartDate": "2016-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-09-02T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "25"
@@ -65976,8 +66044,8 @@
         "cubeTitleEn": "Oil and gas extraction capital expenditures and expenses",
         "cubeTitleFr": "Dépenses en immobilisations et frais d’exploitation de l’industrie de l’extraction de pétrole et de gaz",
         "cubeStartDate": "2015-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-09-25T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "25"
@@ -65995,8 +66063,8 @@
         "cubeTitleEn": "Oil and gas extraction revenues, expenses and balance sheet",
         "cubeTitleFr": "Revenus, dépenses et bilan de l'industrie de l'extraction de pétrole et de gaz",
         "cubeStartDate": "2015-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-09-25T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "25"
@@ -66129,8 +66197,8 @@
         "cubeTitleEn": "Consolidated Energy Statistics",
         "cubeTitleFr": "Statistiques consolidées de l'énergie",
         "cubeStartDate": "2020-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-09-02T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "25"
@@ -66158,8 +66226,8 @@
         "cubeTitleEn": "Petroleum products by supply and disposition, monthly",
         "cubeTitleFr": "Approvisionnement et utilisation de produits pétroliers, mensuel",
         "cubeStartDate": "2019-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-09-02T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "25"
@@ -66181,8 +66249,8 @@
         "cubeTitleEn": "Renewable fuel plant statistics, supply and disposition, monthly",
         "cubeTitleFr": "Statistiques sur les usines à carburants renouvelables, approvisionnement et utilisation, mensuel",
         "cubeStartDate": "2020-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-09-02T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "25"
@@ -74009,6 +74077,101 @@
         "issueDate": "2024-02-20T05:00:00Z"
     },
     {
+        "productId": 27100405,
+        "cansimId": null,
+        "cubeTitleEn": "Research and development activities in Canadian higher education, by type of institution",
+        "cubeTitleFr": "Activités de recherche et développement au sein de l'enseignement supérieur canadien, selon le type d'institution",
+        "cubeStartDate": "2023-01-01T05:00:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
+        "archived": "2",
+        "subjectCode": [
+            "27"
+        ],
+        "surveyCode": [
+            "5393"
+        ],
+        "frequencyCode": 18,
+        "corrections": [],
+        "issueDate": "2025-09-29T04:00:00Z"
+    },
+    {
+        "productId": 27100406,
+        "cansimId": null,
+        "cubeTitleEn": "Intellectual property, outputs and management in Canadian higher education, by type of institution",
+        "cubeTitleFr": "Propriété intellectuelle, résultats et gestion au sein de l'enseignement supérieur canadien, selon le type d'institution",
+        "cubeStartDate": "2023-01-01T05:00:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
+        "archived": "2",
+        "subjectCode": [
+            "27"
+        ],
+        "surveyCode": [
+            "5393"
+        ],
+        "frequencyCode": 18,
+        "corrections": [],
+        "issueDate": "2025-09-29T04:00:00Z"
+    },
+    {
+        "productId": 27100407,
+        "cansimId": null,
+        "cubeTitleEn": "Technology transfers in Canadian higher education, by type of institution",
+        "cubeTitleFr": "Transferts de technologie au sein de l'enseignement supérieur canadien, selon le type d'institution",
+        "cubeStartDate": "2023-01-01T05:00:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
+        "archived": "2",
+        "subjectCode": [
+            "27"
+        ],
+        "surveyCode": [
+            "5393"
+        ],
+        "frequencyCode": 18,
+        "corrections": [],
+        "issueDate": "2025-09-29T04:00:00Z"
+    },
+    {
+        "productId": 27100408,
+        "cansimId": null,
+        "cubeTitleEn": "Commercialization of intellectual property and encountered obstacles in Canadian higher education, by type of institution",
+        "cubeTitleFr": "Commercialisation de la propriété intellectuelle et obstacles rencontrés au sein de l'enseignement supérieur canadien, selon le type d'institution",
+        "cubeStartDate": "2023-01-01T05:00:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
+        "archived": "2",
+        "subjectCode": [
+            "27"
+        ],
+        "surveyCode": [
+            "5393"
+        ],
+        "frequencyCode": 18,
+        "corrections": [],
+        "issueDate": "2025-09-29T04:00:00Z"
+    },
+    {
+        "productId": 27100409,
+        "cansimId": null,
+        "cubeTitleEn": "Support for small and medium enterprises in Canadian higher education, by type of institution",
+        "cubeTitleFr": "Soutien aux petites et moyennes entreprises dans l'enseignement supérieur canadien, selon le type d'institution",
+        "cubeStartDate": "2023-01-01T05:00:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
+        "archived": "2",
+        "subjectCode": [
+            "27"
+        ],
+        "surveyCode": [
+            "5393"
+        ],
+        "frequencyCode": 18,
+        "corrections": [],
+        "issueDate": "2025-09-29T04:00:00Z"
+    },
+    {
         "productId": 32100001,
         "cansimId": "003-0033",
         "cubeTitleEn": "Stocks of specified dairy products",
@@ -74151,7 +74314,7 @@
         "cubeTitleFr": "Stocks de céréales et oléagineux au 31 mars, au 31 juillet, et au 31 décembre",
         "cubeStartDate": "1980-03-01T05:00:00Z",
         "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-09T12:30:00Z",
+        "releaseTime": "2025-10-08T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "32"
@@ -74269,7 +74432,7 @@
         "cubeTitleFr": "Bilan des grains au Canada",
         "cubeStartDate": "1996-12-01T05:00:00Z",
         "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-09T12:30:00Z",
+        "releaseTime": "2025-10-08T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "32"
@@ -74297,8 +74460,8 @@
         "cubeTitleEn": "Supply and disposition of corn",
         "cubeTitleFr": "Bilan du maïs",
         "cubeStartDate": "1996-12-01T05:00:00Z",
-        "cubeEndDate": "2025-03-01T05:00:00Z",
-        "releaseTime": "2025-05-08T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-08T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "32"
@@ -74319,7 +74482,7 @@
         "cubeTitleFr": "Bilan des grains dans les fermes",
         "cubeStartDate": "2001-12-01T05:00:00Z",
         "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-09T12:30:00Z",
+        "releaseTime": "2025-10-08T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "32"
@@ -76491,8 +76654,8 @@
         "cubeTitleEn": "Placement of chicks and turkey poults for production",
         "cubeTitleFr": "Placement de poussins et dindons pour la production",
         "cubeStartDate": "1970-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "32"
@@ -76510,8 +76673,8 @@
         "cubeTitleEn": "Production and disposition of eggs, monthly",
         "cubeTitleFr": "Production et écoulement d'œufs, mensuel",
         "cubeStartDate": "1951-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "32"
@@ -76529,8 +76692,8 @@
         "cubeTitleEn": "Stocks of frozen poultry meat",
         "cubeTitleFr": "Stocks de viande de volaille congelée",
         "cubeStartDate": "1976-05-01T04:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "32"
@@ -76548,8 +76711,8 @@
         "cubeTitleEn": "Stocks of frozen eggs and edible dried eggs",
         "cubeTitleFr": "Stocks d'oeufs congelés et oeufs comestibles sèches",
         "cubeStartDate": "1976-05-01T04:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "32"
@@ -76735,8 +76898,8 @@
         "cubeTitleEn": "Report of processed eggs production",
         "cubeTitleFr": "Rapport de la production d'oeufs transformés",
         "cubeStartDate": "1980-09-06T04:00:00Z",
-        "cubeEndDate": "2025-06-28T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-08-02T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "32"
@@ -76754,8 +76917,8 @@
         "cubeTitleEn": "Laying type pullet, chick placements",
         "cubeTitleFr": "Placements de poussins femelles du type de ponte",
         "cubeStartDate": "1980-01-05T05:00:00Z",
-        "cubeEndDate": "2025-06-28T04:00:00Z",
-        "releaseTime": "2025-08-28T12:30:00Z",
+        "cubeEndDate": "2025-08-02T04:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "32"
@@ -80718,8 +80881,8 @@
         "cubeTitleEn": "Producer deliveries of major grains",
         "cubeTitleFr": "Livraisons des producteurs des principaux grains",
         "cubeStartDate": "1966-08-01T04:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-08-25T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "32"
@@ -80738,8 +80901,8 @@
         "cubeTitleEn": "Crushing statistics of major oilseeds",
         "cubeTitleFr": "Statistiques des broyages des principaux oléagineux",
         "cubeStartDate": "1971-08-01T04:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-08-25T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "32"
@@ -83421,8 +83584,8 @@
         "cubeTitleEn": "Foreign-controlled enterprises in Canada, counts by operating revenue size groups",
         "cubeTitleFr": "Entreprises sous contrôle étranger au Canada, nombre selon la tranche de revenu d’exploitation",
         "cubeStartDate": "1999-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-09T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-02T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "33"
@@ -83997,8 +84160,8 @@
         "cubeTitleEn": "Daily average foreign exchange rates in Canadian dollars, Bank of Canada",
         "cubeTitleFr": "Taux de change moyens quotidiens en dollars canadiens, Banque du Canada",
         "cubeStartDate": "1981-05-04T04:00:00Z",
-        "cubeEndDate": "2025-09-22T04:00:00Z",
-        "releaseTime": "2025-09-24T12:30:00Z",
+        "cubeEndDate": "2025-10-07T04:00:00Z",
+        "releaseTime": "2025-10-09T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "33"
@@ -86421,8 +86584,8 @@
         "cubeTitleEn": "Monthly average foreign exchange rates in Canadian dollars, Bank of Canada",
         "cubeTitleFr": "Taux de change moyens mensuels en dollars canadiens, Banque du Canada",
         "cubeStartDate": "1981-05-01T04:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-03T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-03T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "33"
@@ -88314,8 +88477,8 @@
         "cubeTitleEn": "Experimental estimates for business openings and closures for Canada, provinces and territories, census metropolitan areas, seasonally adjusted",
         "cubeTitleFr": "Estimations expérimentales pour les entreprises nouvellement ouvertes et les entreprises nouvellement fermées pour le Canada, les provinces et territoires, et les régions métropolitaines de recensement, données désaisonnalisées",
         "cubeStartDate": "2015-01-01T05:00:00Z",
-        "cubeEndDate": "2025-05-01T04:00:00Z",
-        "releaseTime": "2025-08-26T12:30:00Z",
+        "cubeEndDate": "2025-06-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "33"
@@ -94268,8 +94431,8 @@
         "cubeTitleEn": "Foreign-controlled enterprises in Canada, by financial characteristics and selected country of control",
         "cubeTitleFr": "Entreprises étrangères au Canada, selon les variables financières et le pays de contrôle",
         "cubeStartDate": "2010-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-09T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-02T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "33"
@@ -97072,8 +97235,8 @@
         "cubeTitleEn": "Experimental estimates for business openings and closures by employment size for Canada, provinces and territories, census metropolitan areas, seasonally adjusted",
         "cubeTitleFr": "Estimations expérimentales pour les entreprises nouvellement ouvertes et les entreprises nouvellement fermées selon la taille de l’emploi pour le Canada, les provinces et territoires, et les régions métropolitaines de recensement, données désaisonnalisées",
         "cubeStartDate": "2015-01-01T05:00:00Z",
-        "cubeEndDate": "2025-05-01T04:00:00Z",
-        "releaseTime": "2025-08-26T12:30:00Z",
+        "cubeEndDate": "2025-06-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "33"
@@ -109402,8 +109565,8 @@
         "cubeTitleEn": "Adult criminal courts, number of cases and charges by type of decision",
         "cubeTitleFr": "Tribunaux de juridiction criminelle pour adultes, nombre de causes et d'accusations selon le type de décision",
         "cubeStartDate": "1994-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109421,8 +109584,8 @@
         "cubeTitleEn": "Adult criminal courts, cases by length of elapsed time",
         "cubeTitleFr": "Tribunaux de juridiction criminelle pour adultes, causes selon la durée de traitement",
         "cubeStartDate": "1994-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109440,8 +109603,8 @@
         "cubeTitleEn": "Adult criminal courts, cases by median elapsed time in days",
         "cubeTitleFr": "Tribunaux de juridiction criminelle pour adultes, causes selon la durée médiane de traitement en jours",
         "cubeStartDate": "1994-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109459,8 +109622,8 @@
         "cubeTitleEn": "Adult criminal courts, guilty cases by type of sentence",
         "cubeTitleFr": "Tribunaux de juridiction criminelle pour adultes, causes avec condamnation selon le type de peine",
         "cubeStartDate": "1994-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109478,8 +109641,8 @@
         "cubeTitleEn": "Adult criminal courts, guilty cases by most serious sentence",
         "cubeTitleFr": "Tribunaux de juridiction criminelle pour adultes, causes avec condamnation selon la peine la plus sévère",
         "cubeStartDate": "1994-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109497,8 +109660,8 @@
         "cubeTitleEn": "Adult criminal courts, guilty cases by length of custody",
         "cubeTitleFr": "Tribunaux de juridiction criminelle pour adultes, causes avec condamnation selon la durée du placement sous garde",
         "cubeStartDate": "1994-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109522,8 +109685,8 @@
         "cubeTitleEn": "Adult criminal courts, guilty cases by mean and median length of custody",
         "cubeTitleFr": "Tribunaux de juridiction criminelle pour adultes, causes avec condamnation selon la durée moyenne et la durée médiane du placement sous garde",
         "cubeStartDate": "1994-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109547,8 +109710,8 @@
         "cubeTitleEn": "Adult criminal courts, guilty cases by length of probation",
         "cubeTitleFr": "Tribunaux de juridiction criminelle pour adultes, causes avec condamnation selon la durée de la probation",
         "cubeStartDate": "1994-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109566,8 +109729,8 @@
         "cubeTitleEn": "Adult criminal courts, guilty cases by mean and median length of probation",
         "cubeTitleFr": "Tribunaux de juridiction criminelle pour adultes, causes avec condamnation selon la durée moyenne et la durée médiane de la probation",
         "cubeStartDate": "1994-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109585,8 +109748,8 @@
         "cubeTitleEn": "Adult criminal courts, guilty cases by amount of fine",
         "cubeTitleFr": "Tribunaux de juridiction criminelle pour adultes, causes avec condamnation selon le montant de l'amende",
         "cubeStartDate": "1994-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109604,8 +109767,8 @@
         "cubeTitleEn": "Adult criminal courts, guilty cases by mean and median amount of fine",
         "cubeTitleFr": "Tribunaux de juridiction criminelle pour adultes, causes avec condamnation selon le montant moyen et le montant médian de l'amende",
         "cubeStartDate": "1994-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109623,8 +109786,8 @@
         "cubeTitleEn": "Youth courts, number of cases and charges by type of decision",
         "cubeTitleFr": "Tribunaux de la jeunesse, nombre de causes et d'accusations selon le type de décision",
         "cubeStartDate": "1991-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109642,8 +109805,8 @@
         "cubeTitleEn": "Youth courts, cases by length of elapsed time",
         "cubeTitleFr": "Tribunaux de la jeunesse, causes selon la durée de traitement",
         "cubeStartDate": "1991-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109661,8 +109824,8 @@
         "cubeTitleEn": "Youth courts, cases by median elapsed time in days",
         "cubeTitleFr": "Tribunaux de la jeunesse, causes selon la durée médiane de traitement en jours",
         "cubeStartDate": "1991-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109680,8 +109843,8 @@
         "cubeTitleEn": "Youth courts, guilty cases by type of sentence",
         "cubeTitleFr": "Tribunaux de la jeunesse, causes avec condamnation selon le type de peine",
         "cubeStartDate": "1991-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109699,8 +109862,8 @@
         "cubeTitleEn": "Youth courts, guilty cases by most serious sentence",
         "cubeTitleFr": "Tribunaux de la jeunesse, causes avec condamnation selon la peine la plus sévère",
         "cubeStartDate": "1991-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109718,8 +109881,8 @@
         "cubeTitleEn": "Youth courts, guilty cases by length of custody",
         "cubeTitleFr": "Tribunaux de la jeunesse, causes avec condamnation selon la durée du placement sous garde",
         "cubeStartDate": "1991-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109743,8 +109906,8 @@
         "cubeTitleEn": "Youth courts, guilty cases by mean and median length of custody",
         "cubeTitleFr": "Tribunaux de la jeunesse, causes avec condamnation selon la durée moyenne et la durée médiane du placement sous garde",
         "cubeStartDate": "1991-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109768,8 +109931,8 @@
         "cubeTitleEn": "Youth courts, guilty cases by length of probation",
         "cubeTitleFr": "Tribunaux de la jeunesse, causes avec condamnation selon la durée de la probation",
         "cubeStartDate": "1991-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109787,8 +109950,8 @@
         "cubeTitleEn": "Youth courts, guilty cases by mean and median length of probation",
         "cubeTitleFr": "Tribunaux de la jeunesse, causes avec condamnation selon la durée moyenne et la durée médiane de la probation",
         "cubeStartDate": "1991-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109806,8 +109969,8 @@
         "cubeTitleEn": "Youth courts, guilty cases by amount of fine",
         "cubeTitleFr": "Tribunaux de la jeunesse, causes avec condamnation selon le montant de l'amende",
         "cubeStartDate": "1991-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -109825,8 +109988,8 @@
         "cubeTitleEn": "Youth courts, guilty cases by mean and median amount of fine",
         "cubeTitleFr": "Tribunaux de la jeunesse, causes avec condamnation selon le montant moyen et le montant médian de l'amende",
         "cubeStartDate": "1991-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -112287,8 +112450,8 @@
         "cubeTitleEn": "Key indicator results and absolute change for annual data, adult criminal court and youth court",
         "cubeTitleFr": "Résultats des indicateurs clés et différences absolues pour les données annuelles, tribunaux de juridiction criminelle pour adultes et les tribunaux de la jeunesse",
         "cubeStartDate": "2005-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -112306,8 +112469,8 @@
         "cubeTitleEn": "Year-over-year and 10-year relative change of key indicators for annual data, adult criminal court and youth court",
         "cubeTitleFr": "Variation relative d’année en année et sur 10 ans des indicateurs clés pour les données annuelles, tribunaux de juridiction criminelle pour adultes et les tribunaux de la jeunesse",
         "cubeStartDate": "2005-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2024-10-03T12:30:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-07T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "35"
@@ -117336,8 +117499,8 @@
         "cubeTitleEn": "Tourism demand in Canada, constant prices",
         "cubeTitleFr": "Demande touristiques au Canada, prix constants",
         "cubeStartDate": "1986-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-06-26T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-09-26T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -117355,8 +117518,8 @@
         "cubeTitleEn": "Supply of tourism commodities, constant prices",
         "cubeTitleFr": "Offre de biens et services touristiques, prix constants",
         "cubeStartDate": "1986-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-06-26T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-09-26T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -117374,8 +117537,8 @@
         "cubeTitleEn": "Jobs generated by tourism",
         "cubeTitleFr": "Emplois générés par le tourisme",
         "cubeStartDate": "1986-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-06-26T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-09-26T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -117393,8 +117556,8 @@
         "cubeTitleEn": "Tourism demand, implicit price indexes, seasonally adjusted",
         "cubeTitleFr": "Demande touristique, indices implicites de prix, désaisonnalisées",
         "cubeStartDate": "1986-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-06-26T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-09-26T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -117412,8 +117575,8 @@
         "cubeTitleEn": "Tourism gross domestic product, constant prices",
         "cubeTitleFr": "Produit intérieur brut touristique, prix constants",
         "cubeStartDate": "1986-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-06-26T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-09-26T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -117431,8 +117594,8 @@
         "cubeTitleEn": "Tourism share of gross domestic product at basic prices",
         "cubeTitleFr": "Part du tourisme au produit intérieur brut aux prix de base",
         "cubeStartDate": "1986-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-06-26T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-09-26T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -121242,8 +121405,8 @@
         "cubeTitleEn": "Gross domestic product (GDP) at basic prices, by industry, monthly",
         "cubeTitleFr": "Produit intérieur brut (PIB) aux prix de base, par industries, mensuel",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-08-29T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-09-26T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -121528,7 +121691,7 @@
         "cubeTitleFr": "Produit intérieur brut (PIB) aux prix de base, par industries, moyenne trimestrielle",
         "cubeStartDate": "1997-01-01T05:00:00Z",
         "cubeEndDate": "2025-04-01T04:00:00Z",
-        "releaseTime": "2025-08-29T12:30:00Z",
+        "releaseTime": "2025-09-26T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -121762,8 +121925,8 @@
         "cubeTitleEn": "Government revenue attributable to tourism, summary indicators, annual",
         "cubeTitleFr": "Recettes des administrations publiques attribuables au tourisme, indicateurs sommaires du tourisme, annuel",
         "cubeStartDate": "2012-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-09-23T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-09-26T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -121781,8 +121944,8 @@
         "cubeTitleEn": "Government revenue attributable to tourism, by level of government",
         "cubeTitleFr": "Recettes des administrations publiques attribuables au tourisme, selon le palier d'administration publique",
         "cubeStartDate": "2012-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-09-23T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-09-26T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -121800,8 +121963,8 @@
         "cubeTitleEn": "Government revenue attributable to tourism, by source of revenue",
         "cubeTitleFr": "Recettes des administrations publiques attribuables au tourisme, selon la source",
         "cubeStartDate": "2012-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-09-23T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-09-26T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -121819,8 +121982,8 @@
         "cubeTitleEn": "Government revenue attributable to tourism, by product",
         "cubeTitleFr": "Recettes des administrations publiques attribuables au tourisme, par produit",
         "cubeStartDate": "2012-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-09-23T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-09-26T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -121838,8 +122001,8 @@
         "cubeTitleEn": "Government revenue attributable to tourism, by industry",
         "cubeTitleFr": "Recettes des administrations publiques attribuables au tourisme, par industrie",
         "cubeStartDate": "2012-01-01T05:00:00Z",
-        "cubeEndDate": "2023-01-01T05:00:00Z",
-        "releaseTime": "2024-09-23T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-09-26T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -122383,8 +122546,8 @@
         "cubeTitleEn": "Historical (real-time) releases of gross domestic product (GDP) at basic prices, by industry, monthly",
         "cubeTitleFr": "Diffusions historiques (temps réel) du produit intérieur brut (PIB) aux prix de base, par industries, mensuel",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-09-08T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-10-06T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -125607,8 +125770,8 @@
         "cubeTitleEn": "Distributions of household economic accounts, wealth, by characteristic, Canada, quarterly",
         "cubeTitleFr": "Comptes économiques répartis pour le secteur des ménages, patrimoine, par caractéristique, Canada, trimestrielle",
         "cubeStartDate": "2010-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-07-16T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-10-09T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -125626,8 +125789,8 @@
         "cubeTitleEn": "Distributions of household economic accounts, wealth, Canada, regions and provinces, quarterly",
         "cubeTitleFr": "Comptes économiques répartis pour le secteur des ménages, patrimoine, Canada, régions et provinces, trimestrielle",
         "cubeStartDate": "2010-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-07-16T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-10-09T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -125645,8 +125808,8 @@
         "cubeTitleEn": "Distributions of household economic accounts, income, consumption and saving, by characteristic, quarterly",
         "cubeTitleFr": "Comptes économiques répartis pour le secteur des ménages, revenu, consommation et épargne, par caractéristique, trimestrielle",
         "cubeStartDate": "2020-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-07-16T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-10-09T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -125670,8 +125833,8 @@
         "cubeTitleEn": "Distributions of household economic accounts, income, consumption and saving, Canada, provinces and territories, quarterly",
         "cubeTitleFr": "Comptes économiques répartis pour le secteur des ménages, revenu, consommation et épargne, Canada, provinces et territoires, trimestrielle",
         "cubeStartDate": "2020-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-07-16T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-10-09T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -125689,8 +125852,8 @@
         "cubeTitleEn": "Distributions of household economic accounts, wealth indicators, by characteristic, Canada, quarterly",
         "cubeTitleFr": "Comptes économiques répartis pour le secteur des ménages, indicateurs du patrimoine, par caractéristique, Canada, trimestrielle",
         "cubeStartDate": "2010-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-07-16T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-10-09T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -125708,8 +125871,8 @@
         "cubeTitleEn": "Distributions of household economic accounts, wealth indicators, Canada, regions and provinces, quarterly",
         "cubeTitleFr": "Comptes économiques répartis pour le secteur des ménages, indicateurs du patrimoine, Canada, régions et provinces, trimestrielle",
         "cubeStartDate": "2010-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-07-16T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-10-09T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -125746,8 +125909,8 @@
         "cubeTitleEn": "Distributions of household economic accounts, number of households, by income quintile and by socio-demographic characteristic, quarterly",
         "cubeTitleFr": "Comptes économiques répartis pour le secteur des ménages, nombre de ménages, par quintile de revenu et par caractéristique socio-démographique, trimestrielle",
         "cubeStartDate": "2020-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-07-16T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-10-09T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "36"
@@ -126532,6 +126695,44 @@
         "frequencyCode": 9,
         "corrections": [],
         "issueDate": "2025-02-28T05:00:00Z"
+    },
+    {
+        "productId": 36100707,
+        "cansimId": null,
+        "cubeTitleEn": "Economic contribution of critical mineral production based on the Natural Resources Satellite Account, by commodity, Canada",
+        "cubeTitleFr": "Contribution économique de la production de minéraux critiques selon le Compte satellite des ressources naturelles, par produit, Canada",
+        "cubeStartDate": "2019-01-01T05:00:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-06T12:30:00Z",
+        "archived": "2",
+        "subjectCode": [
+            "36"
+        ],
+        "surveyCode": [
+            "5438"
+        ],
+        "frequencyCode": 12,
+        "corrections": [],
+        "issueDate": "2025-10-06T04:00:00Z"
+    },
+    {
+        "productId": 36100708,
+        "cansimId": null,
+        "cubeTitleEn": "Economic contribution of critical mineral production, by Natural Resources Canada prioritized group, Canada",
+        "cubeTitleFr": "Contribution économique de la production de minéraux critiques, par groupe prioritaire de Ressources naturelles Canada, Canada",
+        "cubeStartDate": "2019-01-01T05:00:00Z",
+        "cubeEndDate": "2023-01-01T05:00:00Z",
+        "releaseTime": "2025-10-06T12:30:00Z",
+        "archived": "2",
+        "subjectCode": [
+            "360399"
+        ],
+        "surveyCode": [
+            "5438"
+        ],
+        "frequencyCode": 12,
+        "corrections": [],
+        "issueDate": "2025-10-06T04:00:00Z"
     },
     {
         "productId": 37100001,
@@ -136141,8 +136342,8 @@
         "cubeTitleEn": "Irrigation volume by province and drainage region",
         "cubeTitleFr": "Volume d'irrigation selon la province et la région de drainage",
         "cubeStartDate": "2010-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2023-10-17T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-03T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "38"
@@ -136160,8 +136361,8 @@
         "cubeTitleEn": "Irrigation volume by crop type",
         "cubeTitleFr": "Volume d'irrigation selon le type de culture",
         "cubeStartDate": "2010-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2023-10-17T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-03T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "38"
@@ -136179,8 +136380,8 @@
         "cubeTitleEn": "Total area that received irrigation by crop type",
         "cubeTitleFr": "Superficie totale des terres ayant été irriguées selon le type de culture",
         "cubeStartDate": "2010-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2023-10-17T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-03T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "38"
@@ -136198,8 +136399,8 @@
         "cubeTitleEn": "Number of farms by irrigation status",
         "cubeTitleFr": "Nombre de fermes selon l'état de l'irrigation",
         "cubeStartDate": "2010-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2023-10-17T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-03T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "38"
@@ -136214,12 +136415,12 @@
     {
         "productId": 38100243,
         "cansimId": "153-0138",
-        "cubeTitleEn": "Number of farms that stopped irrigating or did not irrigate by reason",
-        "cubeTitleFr": "Nombre de fermes qui ont cessé d'irriguer ou qui n'ont pas irrigué selon la raison",
+        "cubeTitleEn": "Number of farms that stopped irrigating or did not irrigate by reason, inactive",
+        "cubeTitleFr": "Nombre de fermes qui ont cessé d'irriguer ou qui n'ont pas irrigué selon la raison, inactif",
         "cubeStartDate": "2012-01-01T05:00:00Z",
         "cubeEndDate": "2022-01-01T05:00:00Z",
         "releaseTime": "2023-10-17T12:30:00Z",
-        "archived": "2",
+        "archived": "1",
         "subjectCode": [
             "38"
         ],
@@ -136228,17 +136429,17 @@
         ],
         "frequencyCode": 18,
         "corrections": [],
-        "issueDate": "2015-09-09T04:00:00Z"
+        "issueDate": null
     },
     {
         "productId": 38100244,
         "cansimId": "153-0139",
-        "cubeTitleEn": "Number of farms by irrigation method",
-        "cubeTitleFr": "Nombre de fermes selon le méthode d'irrigation",
+        "cubeTitleEn": "Number of farms by irrigation method, inactive",
+        "cubeTitleFr": "Nombre de fermes selon le méthode d'irrigation, inactif",
         "cubeStartDate": "2010-01-01T05:00:00Z",
         "cubeEndDate": "2022-01-01T05:00:00Z",
         "releaseTime": "2023-10-17T12:30:00Z",
-        "archived": "2",
+        "archived": "1",
         "subjectCode": [
             "38"
         ],
@@ -136247,17 +136448,17 @@
         ],
         "frequencyCode": 18,
         "corrections": [],
-        "issueDate": "2015-09-09T04:00:00Z"
+        "issueDate": null
     },
     {
         "productId": 38100245,
         "cansimId": "153-0140",
-        "cubeTitleEn": "Farms by irrigation method and crop type",
-        "cubeTitleFr": "Fermes selon le méthode d'irrigation et le type de culture",
+        "cubeTitleEn": "Farms by irrigation method and crop type, inactive",
+        "cubeTitleFr": "Fermes selon le méthode d'irrigation et le type de culture, inactif",
         "cubeStartDate": "2010-01-01T05:00:00Z",
         "cubeEndDate": "2022-01-01T05:00:00Z",
         "releaseTime": "2023-10-17T12:30:00Z",
-        "archived": "2",
+        "archived": "1",
         "subjectCode": [
             "38"
         ],
@@ -136266,7 +136467,7 @@
         ],
         "frequencyCode": 18,
         "corrections": [],
-        "issueDate": "2015-09-09T04:00:00Z"
+        "issueDate": null
     },
     {
         "productId": 38100246,
@@ -136274,8 +136475,8 @@
         "cubeTitleEn": "Number of farms and percentage of irrigation water by water source",
         "cubeTitleFr": "Nombre de fermes et pourcentage d'eau d'irrigation selon la source d'eau",
         "cubeStartDate": "2010-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2023-10-17T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-03T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "38"
@@ -136290,12 +136491,12 @@
     {
         "productId": 38100247,
         "cansimId": "153-0142",
-        "cubeTitleEn": "Number of farms and percentage of off-farm water by irrigation water source",
-        "cubeTitleFr": "Nombre de fermes et le pourcentage de l'eau d'irrigation provenant de l'extérieur de la ferme selon les sources d'eau d'irrigation",
+        "cubeTitleEn": "Number of farms and percentage of off-farm water by irrigation water source, inactive",
+        "cubeTitleFr": "Nombre de fermes et le pourcentage de l'eau d'irrigation provenant de l'extérieur de la ferme selon les sources d'eau d'irrigation, inactif",
         "cubeStartDate": "2010-01-01T05:00:00Z",
         "cubeEndDate": "2022-01-01T05:00:00Z",
         "releaseTime": "2023-10-17T12:30:00Z",
-        "archived": "2",
+        "archived": "1",
         "subjectCode": [
             "38"
         ],
@@ -136304,17 +136505,17 @@
         ],
         "frequencyCode": 18,
         "corrections": [],
-        "issueDate": "2015-09-09T04:00:00Z"
+        "issueDate": null
     },
     {
         "productId": 38100248,
         "cansimId": "153-0143",
-        "cubeTitleEn": "Number of farms by reason for using an off-farm irrigation water source",
-        "cubeTitleFr": "Nombre de fermes selon la raison de l'utilisation d'eau irrigation provenant de l'extérieur de la ferme",
+        "cubeTitleEn": "Number of farms by reason for using an off-farm irrigation water source, inactive",
+        "cubeTitleFr": "Nombre de fermes selon la raison de l'utilisation d'eau irrigation provenant de l'extérieur de la ferme, inactif",
         "cubeStartDate": "2010-01-01T05:00:00Z",
         "cubeEndDate": "2022-01-01T05:00:00Z",
         "releaseTime": "2023-10-17T12:30:00Z",
-        "archived": "2",
+        "archived": "1",
         "subjectCode": [
             "38"
         ],
@@ -136323,7 +136524,7 @@
         ],
         "frequencyCode": 18,
         "corrections": [],
-        "issueDate": "2015-09-09T04:00:00Z"
+        "issueDate": null
     },
     {
         "productId": 38100249,
@@ -136331,8 +136532,8 @@
         "cubeTitleEn": "Number of farms by water and energy conservation practices",
         "cubeTitleFr": "Nombre de fermes selon les pratiques de conservation de l'eau et de l'énergie",
         "cubeStartDate": "2010-01-01T05:00:00Z",
-        "cubeEndDate": "2022-01-01T05:00:00Z",
-        "releaseTime": "2023-10-17T12:30:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-10-03T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "38"
@@ -136928,8 +137129,8 @@
         "cubeTitleEn": "Natural resources satellite account, indicators",
         "cubeTitleFr": "Compte satellite des ressources naturelles, indicateurs",
         "cubeStartDate": "2007-01-01T05:00:00Z",
-        "cubeEndDate": "2025-01-01T05:00:00Z",
-        "releaseTime": "2025-06-30T12:30:00Z",
+        "cubeEndDate": "2025-04-01T04:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "38"
@@ -141368,6 +141569,25 @@
         "issueDate": "2025-03-19T04:00:00Z"
     },
     {
+        "productId": 42100107,
+        "cansimId": null,
+        "cubeTitleEn": "Shared Health Priorities indicators for children and youth aged 1 to 17 years, parent reported",
+        "cubeTitleFr": "Indicateurs liés aux priorités partagées en santé pour les enfants et les jeunes âgés de 1 à 17 ans, déclarés par les parents",
+        "cubeStartDate": "2024-01-01T05:00:00Z",
+        "cubeEndDate": "2024-01-01T05:00:00Z",
+        "releaseTime": "2025-09-29T12:30:00Z",
+        "archived": "2",
+        "subjectCode": [
+            "42"
+        ],
+        "surveyCode": [
+            "5233"
+        ],
+        "frequencyCode": 12,
+        "corrections": [],
+        "issueDate": "2025-09-29T04:00:00Z"
+    },
+    {
         "productId": 43100001,
         "cansimId": "075-0007",
         "cubeTitleEn": "Historical statistics, immigration to Canada, by age, sex and marital status",
@@ -145582,12 +145802,12 @@
     {
         "productId": 46100038,
         "cansimId": null,
-        "cubeTitleEn": "Single and multiple residential property owners: Demographic data and value of properties owned",
-        "cubeTitleFr": "Propriétaires détenant une seule ou de multiples propriétés résidentielles : données démographiques et valeur des propriétés détenues",
+        "cubeTitleEn": "Single and multiple residential property owners: Demographic data and value of properties owned, inactive",
+        "cubeTitleFr": "Propriétaires détenant une seule ou de multiples propriétés résidentielles : données démographiques et valeur des propriétés détenues, inactif",
         "cubeStartDate": "2018-01-01T05:00:00Z",
         "cubeEndDate": "2022-01-01T05:00:00Z",
         "releaseTime": "2024-12-09T13:30:00Z",
-        "archived": "2",
+        "archived": "1",
         "subjectCode": [
             "46"
         ],
@@ -145596,7 +145816,7 @@
         ],
         "frequencyCode": 18,
         "corrections": [],
-        "issueDate": "2019-09-27T04:00:00Z"
+        "issueDate": null
     },
     {
         "productId": 46100039,
@@ -145841,12 +146061,12 @@
     {
         "productId": 46100051,
         "cansimId": null,
-        "cubeTitleEn": "Total family income and characteristics of residential property owners by family type",
-        "cubeTitleFr": "Revenu familial total et les caractéristiques des propriétaires de propriétés résidentielles par type de famille",
+        "cubeTitleEn": "Total family income and characteristics of residential property owners by family type, inactive",
+        "cubeTitleFr": "Revenu familial total et les caractéristiques des propriétaires de propriétés résidentielles par type de famille, inactif",
         "cubeStartDate": "2018-01-01T05:00:00Z",
         "cubeEndDate": "2022-01-01T05:00:00Z",
         "releaseTime": "2024-12-09T13:30:00Z",
-        "archived": "2",
+        "archived": "1",
         "subjectCode": [
             "46"
         ],
@@ -145855,17 +146075,17 @@
         ],
         "frequencyCode": 12,
         "corrections": [],
-        "issueDate": "2021-03-18T04:00:00Z"
+        "issueDate": null
     },
     {
         "productId": 46100052,
         "cansimId": null,
-        "cubeTitleEn": "Single and multiple residential property owners by immigration characteristics",
-        "cubeTitleFr": "Propriétaires détenant une seule ou de multiples propriétés résidentielles par caractéristiques d'immigration",
+        "cubeTitleEn": "Single and multiple residential property owners by immigration characteristics, inactive",
+        "cubeTitleFr": "Propriétaires détenant une seule ou de multiples propriétés résidentielles par caractéristiques d'immigration, inactif",
         "cubeStartDate": "2018-01-01T05:00:00Z",
         "cubeEndDate": "2022-01-01T05:00:00Z",
         "releaseTime": "2024-12-09T13:30:00Z",
-        "archived": "2",
+        "archived": "1",
         "subjectCode": [
             "46"
         ],
@@ -145874,7 +146094,7 @@
         ],
         "frequencyCode": 12,
         "corrections": [],
-        "issueDate": "2021-03-18T04:00:00Z"
+        "issueDate": null
     },
     {
         "productId": 46100053,
@@ -146050,12 +146270,12 @@
     {
         "productId": 46100062,
         "cansimId": null,
-        "cubeTitleEn": "Residential property buyers: Demographic data, first-time home buyer status, and price-to-income ratio",
-        "cubeTitleFr": "Acheteurs de propriétés résidentielles: données démographiques, statut d'acheteur d'une première maison et ratio prix-revenu",
+        "cubeTitleEn": "Residential property buyers: Demographic data, first-time home buyer status, and price-to-income ratio, inactive",
+        "cubeTitleFr": "Acheteurs de propriétés résidentielles: données démographiques, statut d'acheteur d'une première maison et ratio prix-revenu, inactif",
         "cubeStartDate": "2018-01-01T05:00:00Z",
         "cubeEndDate": "2021-01-01T05:00:00Z",
         "releaseTime": "2024-12-09T13:30:00Z",
-        "archived": "2",
+        "archived": "1",
         "subjectCode": [
             "46"
         ],
@@ -146064,7 +146284,7 @@
         ],
         "frequencyCode": 12,
         "corrections": [],
-        "issueDate": "2022-04-12T04:00:00Z"
+        "issueDate": null
     },
     {
         "productId": 46100063,
@@ -146704,6 +146924,82 @@
             }
         ],
         "issueDate": "2025-07-30T04:00:00Z"
+    },
+    {
+        "productId": 46100096,
+        "cansimId": null,
+        "cubeTitleEn": "Residential property owners by number of residential properties owned and demographic characteristics",
+        "cubeTitleFr": "Propriétaires de propriétés résidentielles selon le nombre de propriétés résidentielles détenues et les caractéristiques démographiques",
+        "cubeStartDate": "2022-01-01T05:00:00Z",
+        "cubeEndDate": "2022-01-01T05:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
+        "archived": "2",
+        "subjectCode": [
+            "46"
+        ],
+        "surveyCode": [
+            "5257"
+        ],
+        "frequencyCode": 12,
+        "corrections": [],
+        "issueDate": "2025-09-25T04:00:00Z"
+    },
+    {
+        "productId": 46100097,
+        "cansimId": null,
+        "cubeTitleEn": "Residential property owners by family type and other demographic characteristics",
+        "cubeTitleFr": "Propriétaires de propriétés résidentielles selon le type de famille et d’autres caractéristiques démographiques",
+        "cubeStartDate": "2022-01-01T05:00:00Z",
+        "cubeEndDate": "2022-01-01T05:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
+        "archived": "2",
+        "subjectCode": [
+            "46"
+        ],
+        "surveyCode": [
+            "5257"
+        ],
+        "frequencyCode": 12,
+        "corrections": [],
+        "issueDate": "2025-09-25T04:00:00Z"
+    },
+    {
+        "productId": 46100098,
+        "cansimId": null,
+        "cubeTitleEn": "Residential property owners by immigration characteristics",
+        "cubeTitleFr": "Propriétaires de propriétés résidentielles selon les caractéristiques d’immigration",
+        "cubeStartDate": "2022-01-01T05:00:00Z",
+        "cubeEndDate": "2022-01-01T05:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
+        "archived": "2",
+        "subjectCode": [
+            "46"
+        ],
+        "surveyCode": [
+            "5257"
+        ],
+        "frequencyCode": 12,
+        "corrections": [],
+        "issueDate": "2025-09-25T04:00:00Z"
+    },
+    {
+        "productId": 46100099,
+        "cansimId": null,
+        "cubeTitleEn": "Price-to-income ratio of residential property buyers by first-time home buyer status",
+        "cubeTitleFr": "Ratio prix-revenu des acheteurs de propriétés résidentielles selon le statut de premier acheteur",
+        "cubeStartDate": "2021-01-01T05:00:00Z",
+        "cubeEndDate": "2021-01-01T05:00:00Z",
+        "releaseTime": "2025-09-25T12:30:00Z",
+        "archived": "2",
+        "subjectCode": [
+            "46"
+        ],
+        "surveyCode": [
+            "5257"
+        ],
+        "frequencyCode": 12,
+        "corrections": [],
+        "issueDate": "2025-09-25T04:00:00Z"
     },
     {
         "productId": 98100001,

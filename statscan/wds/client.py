@@ -30,11 +30,13 @@ from .models.vector import Vector
 from .requests import WDSRequests
 
 # Conservative timeout configuration for reliable operation in all environments
+# Note: Connect timeout increased to 120s to handle intermittent TLS handshake
+# delays observed with Statistics Canada servers, particularly affecting Python 3.13+
 DEFAULT_WDS_TIMEOUT = Timeout(
-    connect=30.0,  # Connection timeout - increased for reliability
-    read=90.0,  # Read timeout - generous for large responses
-    write=30.0,  # Write timeout - increased for reliability
-    pool=15.0,  # Pool timeout - increased for connection management
+    connect=120.0,  # Connection timeout - increased for TLS handshake reliability
+    read=180.0,  # Read timeout - generous for large responses
+    write=60.0,  # Write timeout - increased for reliability
+    pool=30.0,  # Pool timeout - increased for connection management
 )
 
 T = TypeVar("T")
@@ -59,6 +61,7 @@ class Client(AsyncClient):
         self,
         base_url: str = WDS_URL,
         timeout: TimeoutTypes = DEFAULT_WDS_TIMEOUT,
+        http2: bool = False,  # Disable HTTP/2 for better compatibility
         **kwargs,
     ):
         """Initialize the WDS client (subclass of httpx.AsyncClient).
@@ -66,14 +69,14 @@ class Client(AsyncClient):
         Args:
             base_url: The base URL for the WDS API. Defaults to WDS_URL.
             timeout: The timeout configuration to use when sending requests.
-                Defaults to 30 seconds.
+                Defaults to 120 seconds for connect, 180s for read.
+            http2: Enable HTTP/2 support. Defaults to False for reliability.
             **kwargs: Additional keyword arguments passed to AsyncClient:
                 - auth: Authentication class to use when sending requests
                 - params: Query parameters to include in request URLs
                 - headers: Dictionary of HTTP headers for requests
                 - cookies: Dictionary of Cookie items for requests
                 - verify: SSL verification (True, False, or ssl.SSLContext)
-                - http2: Boolean for HTTP/2 support
                 - proxy: A proxy URL where all traffic should be routed
                 - limits: The limits configuration to use
                 - max_redirects: Maximum number of redirect responses
@@ -84,7 +87,7 @@ class Client(AsyncClient):
         """
         self.codesets: CodeSets | None = None
         self.cube_manager: CubeManager = CubeManager()
-        super().__init__(base_url=base_url, timeout=timeout, **kwargs)
+        super().__init__(base_url=base_url, timeout=timeout, http2=http2, **kwargs)
 
     async def update_codesets(self) -> set[str]:
         """Update the internal codesets with the latest from the WDS API.

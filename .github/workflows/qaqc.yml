@@ -131,7 +131,6 @@ jobs:
     needs: cleanup-checks
     strategy:
       fail-fast: false
-      max-parallel: 1  # Run tests sequentially to avoid API rate limits
       matrix:
         python-version: ["3.12", "3.13", "3.14"]
     steps:

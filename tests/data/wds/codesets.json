@@ -1716,7 +1716,7 @@
             {
                 "memberUomCode": 363,
                 "memberUomEn": "Millimetres of mercury",
-                "memberUomFr": "Millimtres de mercure"
+                "memberUomFr": "Millimètres de mercure"
             },
             {
                 "memberUomCode": 364,
@@ -6781,6 +6781,11 @@
                 "surveyFr": "Série d'enquêtes sur l'accessibilité"
             },
             {
+                "surveyCode": "5416",
+                "surveyEn": "Living with a Life-limiting Illness: Access to Care and Related Experiences (LLLI-ACRE)",
+                "surveyFr": "Vivre avec une maladie limitant l'espérance de vie : accès aux soins et expériences connexes (VMLEV-ASEC)"
+            },
+            {
                 "surveyCode": "5420",
                 "surveyEn": "Pan-Canadian Education Indicators Program (PCEIP)",
                 "surveyFr": "Programme d'indicateurs pancanadiens de l'éducation (PIPCE)"
@@ -6814,6 +6819,11 @@
                 "surveyCode": "5437",
                 "surveyEn": "Rural Canada Trade Profiles (RCTP)",
                 "surveyFr": "Profils du commerce au Canada Rural (PCCR)"
+            },
+            {
+                "surveyCode": "5438",
+                "surveyEn": "Natural Resources Satellite Account - Critical Minerals Extension",
+                "surveyFr": "Compte satellite des ressources naturelles - extension des minéraux critiques"
             },
             {
                 "surveyCode": "5440",
@@ -10551,8 +10561,13 @@
             },
             {
                 "classificationTypeCode": 90,
-                "classificationTypeEn": "NULL",
-                "classificationTypeFr": "NULL"
+                "classificationTypeEn": "IOIC2022Link1961",
+                "classificationTypeFr": "CIES2022lien1961"
+            },
+            {
+                "classificationTypeCode": 91,
+                "classificationTypeEn": "Null2",
+                "classificationTypeFr": "Null2"
             }
         ],
         "securityLevel": [
