@@ -1,0 +1,4 @@
+# Additional development-only dependencies not needed by specialized tooling
+ipykernel>=6.30.1    # Jupyter kernel support for interactive development
+build>=1.3.0         # Build system for creating distributions
+setuptools>=80.9.0   # Enhanced setuptools for package management

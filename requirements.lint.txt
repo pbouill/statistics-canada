@@ -1,0 +1,2 @@
+# Linting and formatting tools
+ruff>=0.13.1  # Linting, formatting, and security checks (S rules replace bandit)

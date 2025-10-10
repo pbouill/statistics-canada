@@ -1,0 +1,2 @@
+# Security audit tool for dependency vulnerability scanning
+pip-audit>=2.9.0
