@@ -30,7 +30,8 @@ classifiers = [
 ]
 dynamic = [
     "version", 
-    "dependencies"
+    "dependencies",
+    "optional-dependencies"
 ]
 
 [project.urls]
@@ -58,6 +59,26 @@ exclude = [
 [tool.setuptools.dynamic]
 version = {attr = "_version.__version__"}
 dependencies = {file = ["requirements.txt"]}
+# User-facing optional features
+optional-dependencies.mcp = {file = ["requirements.mcp.txt"]}
+# Development and CI/CD tools (dev-* prefix)
+optional-dependencies.dev-tools = {file = ["requirements.tools.txt"]}
+optional-dependencies.dev-testing = {file = ["requirements.testing.txt"]}
+optional-dependencies.dev-typing = {file = ["requirements.typing.txt"]}
+optional-dependencies.dev-lint = {file = ["requirements.lint.txt"]}
+optional-dependencies.dev-audit = {file = ["requirements.audit.txt"]}
+optional-dependencies.dev-extra = {file = ["requirements.dev-extra.txt"]}
+# Convenience bundles (note: requirements.txt already included via dependencies)
+optional-dependencies.all = {file = ["requirements.mcp.txt"]}
+optional-dependencies.dev = {file = [
+    "requirements.tools.txt",
+    "requirements.testing.txt",
+    "requirements.typing.txt",
+    "requirements.lint.txt",
+    "requirements.audit.txt",
+    "requirements.mcp.txt",
+    "requirements.dev-extra.txt"
+]}
 
 [tool.pytest.ini_options]
 markers = [
