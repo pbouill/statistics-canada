@@ -161,7 +161,17 @@ show_traceback = true
 exclude_gitignore = true
 
 # Explicitly exclude directories to avoid scanning (regex patterns)
+# Note: Paths may be relative (./path) or absolute, so patterns must account for this
 exclude = [
-    "statscan/enums/auto/.*",  # Large auto-generated enum files (8000+ lines)
+    "statscan/enums/auto",     # Large auto-generated enum files (8000+ lines) - match directory name
     "^\\.[^/]+/",              # All dot-prefixed directories (.venv/, .mypy_cache/, .pytest_cache/, etc.)
 ]
+
+# Skip type-checking for specific modules (prevents mypy from loading huge auto-generated enums)
+# This is critical: even with exclude above, mypy still type-checks imports from these modules
+# when checking files that import them (e.g., statscan/wds/client.py imports ProductID)
+[[tool.mypy.overrides]]
+module = "statscan.enums.auto.*"
+ignore_errors = true
+follow_imports = "skip"
+disallow_untyped_defs = false
