@@ -14,14 +14,15 @@ data: dict[str, int | str] = {}                                # ✅ CORRECT
 
 ## Key Development Workflows
 
-- **Environment**: Python 3.11+ required. Always activate venv: `source .venv/bin/activate`
+- **Environment**: Python 3.12+ required (3.14 preferred). Always activate venv: `source .venv/bin/activate`
 - **Install**: `pip install -r requirements.dev.txt` (editable mode)
 - **Build**: `python -m build --no-isolation` (version auto-generated in `_version.py`)
 - **Test**: `python -m pytest tests/ -v` (all tests must be pytest-compatible)
-- **Code quality**: ALL code must pass both linters before commit:
+- **Code quality**: ALL Python code must pass both linters before commit:
   - Ruff linting: `ruff check --fix .` (auto-fixes most issues)
   - Type checking: `mypy --exclude-gitignore --show-error-codes --show-traceback .`
   - Pre-commit hook runs both automatically (see `tools/git/pre-commit.sh`)
+  - **IMPORTANT**: Only run linters when editing Python files (`.py`). Skip for config/docs (`.toml`, `.yml`, `.md`, etc.)
 - **Code generation**:
   - Geographic enums: `python tools/generate_enums.py` (never edit `enums/auto/` directly)
   - WDS enums: `python tools/cli/wds_enum_gen.py --type all --verbose`
@@ -50,7 +51,8 @@ data: dict[str, int | str] = {}                                # ✅ CORRECT
   ```
 - **Geographic enums**: Inherit by containment (see `enums/geocode/`). Use auto-generated files only.
 - **Abbreviation system**: Managed via `tools/abbreviations.py`, `substitution.py`, and CLI tools. Always validate with `tools/review_abbreviations.py` before commit.
-- **Type annotations**: Use Python 3.11+ native types (e.g., `list[str]`, `str | None`). Never use legacy `List`, `Dict`, `Optional`, etc.
+- **Type annotations**: Use Python 3.12+ native types (e.g., `list[str]`, `str | None`). Never use legacy `List`, `Dict`, `Optional`, etc.
+- **PEP 695 syntax**: Use new-style generic type parameters (`def func[T](cls: type[T], ...)`) for Python 3.12+ compatibility.
 - **Code style enforcement**:
   - **88-character line limit** (configurable in `pyproject.toml`)
   - **Google-style docstrings** (D100-D417 rules enforced)

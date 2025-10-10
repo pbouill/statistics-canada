@@ -79,16 +79,16 @@ jobs:
   # ======================================================================================
 
   cleanup-checks:
-    name: "Cleanup, Lint, Type, Security (Python 3.13)"
+    name: "Cleanup, Lint, Type, Security (Python 3.14)"
     runs-on: ubuntu-latest
     outputs:
       lint_fix_changes: ${{ steps.lint-fix.outputs.lint_changed }}
       bandit_report: ${{ steps.upload-bandit.outputs.artifact-name }}
     steps:
-      - name: Set up Python 3.13
+      - name: Set up Python 3.14
         uses: actions/setup-python@v6
         with:
-          python-version: 3.13
+          python-version: 3.14
 
       - name: Checkout repository (shallow)
         uses: actions/checkout@v5
@@ -146,7 +146,7 @@ jobs:
 
   
   # ======================================================================================
-  # Job: Test (Python 3.11, 3.12, 3.13)
+  # Job: Test (Python 3.12, 3.13, 3.14)
   # ======================================================================================
   test:
     name: "Test (Python ${{ matrix.python-version }})"
@@ -155,7 +155,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11", "3.12", "3.13"]
+        python-version: ["3.12", "3.13", "3.14"]
     steps:
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v6
