@@ -69,8 +69,8 @@ class SubstitutionEngine:
             self._global_lookup_cache[cache_key] = self._preprocessed_substitutions
 
         logger.info(
-            f"✓ Built and cached {len(self._preprocessed_substitutions)} \
-                substitution patterns"
+            f"✓ Built and cached {len(self._preprocessed_substitutions)} "
+            f"substitution patterns"
         )
 
     @property
@@ -87,8 +87,8 @@ class SubstitutionEngine:
         Ordered by: containment relationships first, then length (longest first).
         """
         logger.info(
-            f"Building substitution lookup with inflections={gen_inflections}, \
-                derivations={gen_deriv_rel}"
+            f"Building substitution lookup with inflections={gen_inflections}, "
+            f"derivations={gen_deriv_rel}"
         )
 
         # Collect all term -> abbreviation mappings
@@ -125,8 +125,8 @@ class SubstitutionEngine:
 
         # Remove duplicates while preserving order (first occurrence wins)
         logger.info(
-            f"Removing duplicates from {len(term_abbrev_pairs)} \
-                term-abbreviation pairs..."
+            f"Removing duplicates from {len(term_abbrev_pairs)} "
+            f"term-abbreviation pairs..."
         )
         seen = set()
         unique_pairs = []
@@ -142,8 +142,8 @@ class SubstitutionEngine:
         unique_pairs.sort(key=lambda pair: -len(pair[0]))
 
         logger.info(
-            f"✓ Built {len(unique_pairs)} unique substitution patterns from \
-                {len(abbreviation_map)} abbreviations"
+            f"✓ Built {len(unique_pairs)} unique substitution patterns from "
+            f"{len(abbreviation_map)} abbreviations"
         )
         return dict(unique_pairs)
 
@@ -410,8 +410,8 @@ class SubstitutionEngine:
         for c in sub_chars:
             if not isinstance(c, str) or len(c) != 1:
                 raise ValueError(
-                    f"sub_chars must be a set of single-character strings, got {c} of \
-                        type {type(c)}"
+                    f"sub_chars must be a set of single-character strings, got {c} of "
+                    f"type {type(c)}"
                 )
         replacement = replacement or ""
         return re.sub(f"[{re.escape(''.join(sub_chars))}]", replacement, s)

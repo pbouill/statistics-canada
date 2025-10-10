@@ -3,19 +3,15 @@ from collections.abc import Callable
 from typing import Any
 from unittest.mock import patch
 
-import pytest
-
 
 def mock_method(method: Callable[..., Any]) -> Callable[..., Any]:
     """Decorator that patches methods using method references for refactor-safety.
-
-    Automatically applies @pytest.mark.mock marker for consistent test categorization.
 
     Args:
         method: The actual method reference (e.g., WDSRequests.get_code_sets)
 
     Returns:
-        A decorated function with both patch and pytest.mark.mock applied
+        A decorated function with the patch applied
 
     Usage:
         @mock_method(WDSRequests.get_code_sets)
@@ -27,9 +23,6 @@ def mock_method(method: Callable[..., Any]) -> Callable[..., Any]:
 
     def decorator(func):
         # Apply the patch decorator
-        patched_func = patch(target)(func)
-        # Apply the mock marker
-        marked_func = pytest.mark.mock(patched_func)
-        return marked_func
+        return patch(target)(func)
 
     return decorator

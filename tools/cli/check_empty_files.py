@@ -293,8 +293,8 @@ class EmptyFileChecker:
                 print(f"  ❌ {error_msg}")
 
         print(
-            f"\n📊 Summary: {deleted_count}/{len(files_to_delete)} files deleted \
-                successfully"
+            f"\n📊 Summary: {deleted_count}/{len(files_to_delete)} files deleted "
+            f"successfully"
         )
 
         if errors:

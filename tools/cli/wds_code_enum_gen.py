@@ -160,8 +160,8 @@ class CodeSetEnumWriter(AbstractEnumWriter):
         # Fetch all codesets first
         codesets = await self.get_all_codesets()
         logger.info(
-            f"Codesets fetched, starting enum generation for {len(codesets)} \
-                codesets..."
+            f"Codesets fetched, starting enum generation for {len(codesets)} "
+            f"codesets..."
         )
 
         # Use the existing write_codesets_enums method to avoid duplication

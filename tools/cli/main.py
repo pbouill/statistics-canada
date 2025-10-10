@@ -43,14 +43,18 @@ def print_menu():
 def run_geographic_enums():
     """Generate geographic enums from census data."""
     print("\n🏗️ Generating geographic enums from census data...")
-    subprocess.run(  # noqa: S603
-        [
-            sys.executable,
-            "tools/generate_enums.py"
-        ],
-        check=False,
-        cwd=project_root
-    )
+    try:
+        subprocess.run(  # noqa: S603
+            [
+                sys.executable,
+                "tools/generate_enums.py"
+            ],
+            check=True,
+            cwd=project_root
+        )
+    except subprocess.CalledProcessError as e:
+        print(f"❌ Error generating geographic enums: {e}")
+        raise
 
 
 def run_wds_enums():
@@ -117,8 +121,8 @@ def show_debug_tools():
         print(f"   • {tool.name}")
 
     print(
-        f"\nTo run a debug tool: cd scratch && python \
-            {debug_tools[0].name if debug_tools else 'tool_name.py'}"
+        f"\nTo run a debug tool: cd scratch && python "
+        f"{debug_tools[0].name if debug_tools else 'tool_name.py'}"
     )
     print("Note: Debug tools are in scratch/ to keep main tools/ directory clean")
 

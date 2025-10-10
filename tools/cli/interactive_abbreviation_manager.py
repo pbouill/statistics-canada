@@ -39,8 +39,8 @@ class InteractiveAbbreviationManager:
 
             if word_tracker.word_stats:
                 print(
-                    f"📊 Loaded {len(word_tracker.word_stats)} tracked words from: \
-                        {tracking_file}"
+                    f"📊 Loaded {len(word_tracker.word_stats)} tracked words from: "
+                    f"{tracking_file}"
                 )
                 return word_tracker
             else:
@@ -65,13 +65,13 @@ class InteractiveAbbreviationManager:
             return []
 
         print(
-            f"\n🎯 ABBREVIATION OPPORTUNITIES FROM WORD TRACKING \
-                ({len(candidates)} found)"
+            f"\n🎯 ABBREVIATION OPPORTUNITIES FROM WORD TRACKING "
+            f"({len(candidates)} found)"
         )
         print("=" * 80)
         print(
-            f"{'#':<3} {'Word':<20} {'Freq':<6} {'Savings':<8} {'Suggested':<12} \
-            {'Sources'}"
+            f"{'#':<3} {'Word':<20} {'Freq':<6} {'Savings':<8} {'Suggested':<12} "
+            f"{'Sources'}"
         )
         print("-" * 80)
 
@@ -82,8 +82,8 @@ class InteractiveAbbreviationManager:
                 sources_str += "..."
 
             print(
-                f"{i:<3} {word:<20} {stats.frequency:<6} \
-                    {stats.total_potential_savings:<8.0f} "
+                f"{i:<3} {word:<20} {stats.frequency:<6} "
+                f"{stats.total_potential_savings:<8.0f} "
                 f"{suggested:<12} {sources_str}"
             )
 
@@ -107,8 +107,8 @@ class InteractiveAbbreviationManager:
             print(f"\n📝 Candidate #{i}: '{word}'")
             print(f"   📊 Frequency: {stats.frequency} occurrences")
             print(
-                f"   💰 Potential savings: {stats.total_potential_savings:.0f} \
-                    characters"
+                f"   💰 Potential savings: {stats.total_potential_savings:.0f} "
+                f"characters"
             )
             print(f"   📍 Sources: {', '.join(sorted(stats.sources))}")
 
@@ -130,8 +130,8 @@ class InteractiveAbbreviationManager:
                         )
                     else:
                         print(
-                            f"   ❌ Morphological coverage issue: '{sugg}' doesn't \
-                                generate '{word}'"
+                            f"   ❌ Morphological coverage issue: '{sugg}' doesn't "
+                            f"generate '{word}'"
                         )
                         print(f"      Generated variants: {sorted(variants)[:5]}...")
                 except Exception as e:
@@ -140,8 +140,8 @@ class InteractiveAbbreviationManager:
             while True:
                 choice = (
                     input(
-                        f"\n   Choose action \
-                            [1=Accept '{sugg}', 2=Custom, 3=Skip, 4=Quit, ?=Help]: "
+                        f"\n   Choose action "
+                        f"[1=Accept '{sugg}', 2=Custom, 3=Skip, 4=Quit, ?=Help]: "
                     )
                     .strip()
                     .lower()
@@ -169,14 +169,14 @@ class InteractiveAbbreviationManager:
                             continue
                         if not re.match(r"^[a-z][a-z0-9_]*$", custom):
                             print(
-                                "   ❌ Abbreviation must start with letter and contain \
-                                    only lowercase letters, numbers, and underscores"
+                                "   ❌ Abbreviation must start with letter and contain "
+                                "only lowercase letters, numbers, and underscores"
                             )
                             continue
                         if custom in self.abbreviations:
                             print(
-                                f"   ⚠️  Abbreviation '{custom}' already exists with \
-                                    values: {self.abbreviations[custom]}"
+                                f"   ⚠️  Abbreviation '{custom}' already exists with "
+                                f"values: {self.abbreviations[custom]}"
                             )
                             confirm = (
                                 input("   Add to existing entry? [y/n]: ")
@@ -187,8 +187,8 @@ class InteractiveAbbreviationManager:
                                 self._add_abbreviation(custom, word)
                                 added_count += 1
                                 print(
-                                    f"   ✅ Added to existing: '{custom}' → \
-                                        {self.abbreviations[custom]}"
+                                    f"   ✅ Added to existing: '{custom}' → "
+                                    f"{self.abbreviations[custom]}"
                                 )
                                 break
                         else:
@@ -202,17 +202,17 @@ class InteractiveAbbreviationManager:
                                     )
                                     if word.lower() in {v.lower() for v in variants}:
                                         print(
-                                            f"   ✅ Custom abbreviation works: \
-                                                '{custom}' → {word}"
+                                            f"   ✅ Custom abbreviation works: "
+                                            f"'{custom}' → {word}"
                                         )
                                     else:
                                         print(
-                                            f"   ⚠️  Custom abbreviation may not cover \
-                                                '{word}'"
+                                            f"   ⚠️  Custom abbreviation may not cover "
+                                            f"'{word}'"
                                         )
                                         print(
-                                            f"      Generated variants: \
-                                                {sorted(variants)[:5]}..."
+                                            f"      Generated variants: "
+                                            f"{sorted(variants)[:5]}..."
                                         )
                                         confirm = (
                                             input("   Use anyway? [y/n]: ")
@@ -236,8 +236,8 @@ class InteractiveAbbreviationManager:
                     break
                 elif choice in ["4", "quit", "q"]:
                     print(
-                        f"   🛑 Quitting abbreviation addition (added {added_count} so \
-                            far)"
+                        f"   🛑 Quitting abbreviation addition (added {added_count} so "
+                        f"far)"
                     )
                     return added_count
                 else:
@@ -246,8 +246,8 @@ class InteractiveAbbreviationManager:
                     )
 
         print(
-            f"\n✅ Abbreviation addition complete! Added {added_count} new \
-                abbreviations."
+            f"\n✅ Abbreviation addition complete! Added {added_count} new "
+            f"abbreviations."
         )
         return added_count
 
@@ -313,8 +313,10 @@ class InteractiveAbbreviationManager:
 
         # Check if suggested abbreviation already exists
         if suggested in self.abbreviations:
-            return f"Abbreviation '{suggested}' already exists: \
-                {self.abbreviations[suggested]}"
+            return (
+                f"Abbreviation '{suggested}' already exists: "
+                f"{self.abbreviations[suggested]}"
+            )
 
         return None
 
@@ -365,8 +367,10 @@ class InteractiveAbbreviationManager:
                                     "current": values,
                                     "proposed": [key],
                                     "covered_terms": sorted(covered_values),
-                                    "description": f"Morphological variants of '{key}' \
-                                        cover all explicit terms",
+                                    "description": (
+                                        f"Morphological variants of '{key}' "
+                                        f"cover all explicit terms"
+                                    ),
                                 }
                             )
 
@@ -412,8 +416,8 @@ class InteractiveAbbreviationManager:
             try:
                 variants = self.subs_engine._generate_variants_static(opp["key"])
                 print(
-                    f"   🧬 **{opp['key']}** morphological variants: \
-                        {sorted(variants)[:10]}..."
+                    f"   🧬 **{opp['key']}** morphological variants: "
+                    f"{sorted(variants)[:10]}..."
                 )
                 print(f"   ✅ Coverage confirmed: {opp['covered_terms']}")
             except Exception as e:

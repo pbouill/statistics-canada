@@ -40,7 +40,7 @@ if [ -d ".venv" ]; then
 fi
 
 # Get list of staged Python files
-STAGED_PY_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.py$')
+STAGED_PY_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.py$' || true)
 # Check if requirements.txt is being modified
 REQUIREMENTS_CHANGED=$(git diff --cached --name-only --diff-filter=ACM | grep -c 'requirements.*\.txt$')
 

@@ -2342,7 +2342,7 @@
         "cubeTitleFr": "Indice Fisher des prix des produits de base, établi en dollars des États-Unis, Banque du Canada, mensuel",
         "cubeStartDate": "1972-01-01T05:00:00Z",
         "cubeEndDate": "2025-09-01T04:00:00Z",
-        "releaseTime": "2025-10-03T12:30:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2462,8 +2462,8 @@
         "cubeTitleEn": "Selected United States dollar interest rates, Wednesdays, Bank of Canada",
         "cubeTitleFr": "Quelques taux d'intérêt pratiqués aux États-Unis, les mercredis, Banque du Canada",
         "cubeStartDate": "1954-07-07T04:00:00Z",
-        "cubeEndDate": "2025-09-24T04:00:00Z",
-        "releaseTime": "2025-10-03T12:30:00Z",
+        "cubeEndDate": "2025-10-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2481,8 +2481,8 @@
         "cubeTitleEn": "Bank of Canada, money market and other interest rates",
         "cubeTitleFr": "Taux du marché monétaire et autres taux d'intérêt, Banque du Canada",
         "cubeStartDate": "1960-07-22T04:00:00Z",
-        "cubeEndDate": "2025-10-07T04:00:00Z",
-        "releaseTime": "2025-10-09T12:30:00Z",
+        "cubeEndDate": "2025-10-08T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2538,8 +2538,8 @@
         "cubeTitleEn": "Fisher commodity price index, United States dollar terms, Bank of Canada, Fisher commodity price index, United States dollar terms, Bank of Canada, weekly",
         "cubeTitleFr": "Indice Fisher des prix des produits de base, établi en dollars des États-Unis, Banque du Canada, hebdomadaire",
         "cubeStartDate": "1972-01-05T05:00:00Z",
-        "cubeEndDate": "2025-10-01T04:00:00Z",
-        "releaseTime": "2025-10-03T12:30:00Z",
+        "cubeEndDate": "2025-10-08T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -2576,8 +2576,8 @@
         "cubeTitleEn": "Financial market statistics, as at Wednesday, Bank of Canada",
         "cubeTitleFr": "Statistiques du marché financier, données du mercredi, Banque du Canada",
         "cubeStartDate": "1957-01-02T05:00:00Z",
-        "cubeEndDate": "2025-10-01T04:00:00Z",
-        "releaseTime": "2025-10-03T12:30:00Z",
+        "cubeEndDate": "2025-10-08T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "10"
@@ -28804,8 +28804,8 @@
         "cubeTitleEn": "Labour force characteristics by gender and detailed age group, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Caractéristiques de la population active selon le genre et le groupe d'âge détaillé, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -28842,8 +28842,8 @@
         "cubeTitleEn": "Labour force characteristics by educational attainment, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Caractéristiques de la population active selon le niveau de scolarité atteint, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1990-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -28880,8 +28880,8 @@
         "cubeTitleEn": "Unemployment rate, participation rate, and employment rate by type of student during school months, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Taux de chômage, taux d'activité et taux d'emploi selon le type d'étudiant durant les mois d'étude, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -28899,8 +28899,8 @@
         "cubeTitleEn": "Labour force characteristics by industry, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Caractéristiques de la population active selon l'industrie, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -28975,8 +28975,8 @@
         "cubeTitleEn": "Employment by class of worker, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Emploi selon la catégorie de travailleur, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -29013,8 +29013,8 @@
         "cubeTitleEn": "Part-time employment by reason, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Emploi à temps partiel selon la raison, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -29051,8 +29051,8 @@
         "cubeTitleEn": "Usual hours worked by job type (main or all jobs), monthly, unadjusted for seasonality",
         "cubeTitleFr": "Heures habituellement travaillées selon le type d'emploi (principal ou tous), données mensuelles non désaisonnalisées",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -29089,8 +29089,8 @@
         "cubeTitleEn": "Actual hours worked by job type (main or all jobs), monthly, unadjusted for seasonality",
         "cubeTitleFr": "Heures effectivement travaillées selon le type d'emploi (principal ou tous), données mensuelles non désaisonnalisées",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -29127,8 +29127,8 @@
         "cubeTitleEn": "Usual hours worked by industry, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Heures habituellement travaillées selon l'industrie, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1987-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -29165,8 +29165,8 @@
         "cubeTitleEn": "Actual hours worked by industry, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Heures effectivement travaillées selon l'industrie, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1987-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -29279,8 +29279,8 @@
         "cubeTitleEn": "Average usual and actual hours worked in a reference week by type of work (full- and part-time), monthly, unadjusted for seasonality",
         "cubeTitleFr": "Moyenne des heures habituellement et effectivement travaillées durant la semaine de référence selon le type de travail (temps plein et temps partiel), données mensuelles non désaisonnalisées",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -29336,8 +29336,8 @@
         "cubeTitleEn": "Multiple jobholders by industry, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Personnes ayant plus d'un emploi selon l'industrie, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1987-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -29393,8 +29393,8 @@
         "cubeTitleEn": "Multiple jobholders by usual hours worked at all jobs, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Personnes ayant plus d'un emploi selon le nombre d'heures habituellement travaillées à tous les emplois, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -29431,8 +29431,8 @@
         "cubeTitleEn": "Job tenure by type of work (full- and part-time), monthly, unadjusted for seasonality",
         "cubeTitleFr": "Durée de l'emploi selon le type de travail (temps plein et temps partiel), données mensuelles non désaisonnalisées",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -29507,8 +29507,8 @@
         "cubeTitleEn": "Job tenure by industry, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Durée de l'emploi selon l'industrie, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1987-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -29583,8 +29583,8 @@
         "cubeTitleEn": "Unemployment by type of work sought and search method, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Chômeurs selon le type de travail recherché et la méthode de recherche, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -29678,8 +29678,8 @@
         "cubeTitleEn": "Employee wages by industry, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Salaires des employés selon l'industrie, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -29716,8 +29716,8 @@
         "cubeTitleEn": "Employee wages by job permanency and union coverage, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Salaires des employés selon la permanence de l'emploi et la couverture syndicale, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -29754,8 +29754,8 @@
         "cubeTitleEn": "Employment by establishment size, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Emploi selon la taille d'établissement, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -29792,8 +29792,8 @@
         "cubeTitleEn": "Union coverage by industry, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Couverture syndicale selon l'industrie, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -29830,8 +29830,8 @@
         "cubeTitleEn": "Job permanency (permanent and temporary) by industry, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Permanence de l'emploi (permanent et temporaire) selon l'industrie, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -29906,8 +29906,8 @@
         "cubeTitleEn": "Employees working overtime (weekly) by industry, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Employés travaillant à temps supplémentaire (hebdomadaire) selon l'industrie, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -29944,8 +29944,8 @@
         "cubeTitleEn": "Supplementary unemployment rates, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Taux supplémentaires du chômage, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -30138,8 +30138,8 @@
         "cubeTitleEn": "Labour force characteristics of immigrants by educational attainment, three-month moving average, unadjusted for seasonality",
         "cubeTitleFr": "Caractéristiques de la population active chez les immigrants selon le niveau de scolarité atteint, moyennes mobiles de trois mois, données non désaisonnalisées",
         "cubeStartDate": "2006-03-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -30593,8 +30593,8 @@
         "cubeTitleEn": "Weekly wage distributions by type of work, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Répartition des salaires hebdomadaires selon le type de travail, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -30745,8 +30745,8 @@
         "cubeTitleEn": "Labour force characteristics by educational degree, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Caractéristiques de la population active selon le diplôme scolaire, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1990-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -30821,8 +30821,8 @@
         "cubeTitleEn": "Hours lost by reason of absence, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Heures perdues selon la raison d'absence, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -30859,8 +30859,8 @@
         "cubeTitleEn": "Activity prior to unemployment, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Activité antérieure au chômage, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -30897,8 +30897,8 @@
         "cubeTitleEn": "Reason for leaving job during previous year, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Raison pour avoir quitté l'emploi durant l'année précédente, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -30935,8 +30935,8 @@
         "cubeTitleEn": "Reason for not looking for work, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Raison pour ne pas chercher d'emploi, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -33951,8 +33951,8 @@
         "cubeTitleEn": "Unemployment rate and employment rate by type of student during summer months, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Taux de chômage et taux d'emploi selon le type d'étudiant au cours des mois d'été, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1977-05-01T04:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -33970,8 +33970,8 @@
         "cubeTitleEn": "Labour force characteristics, monthly, seasonally adjusted and trend-cycle",
         "cubeTitleFr": "Caractéristiques de la population active, données mensuelles désaisonnalisées et la tendance-cycle",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -33989,8 +33989,8 @@
         "cubeTitleEn": "Employment by class of worker, monthly, seasonally adjusted and unadjusted",
         "cubeTitleFr": "Emploi selon la catégorie de travailleur, données mensuelles désaisonnalisées et non désaisonnalisées",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -34008,8 +34008,8 @@
         "cubeTitleEn": "Actual hours worked at main job by industry, monthly, seasonally adjusted, last 5 months",
         "cubeTitleFr": "Heures effectivement travaillées à l'emploi principal selon l'industrie, données mensuelles désaisonnalisées, 5 derniers mois",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -34052,8 +34052,8 @@
         "cubeTitleEn": "Labour force characteristics by industry, monthly, seasonally adjusted, last 5 months",
         "cubeTitleFr": "Caractéristiques de la population active selon l'industrie, données mensuelles désaisonnalisées, 5 derniers mois",
         "cubeStartDate": "1987-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -34077,8 +34077,8 @@
         "cubeTitleEn": "Labour force characteristics by territory, three-month moving average, seasonally adjusted and unadjusted",
         "cubeTitleFr": "Caractéristiques de la population active selon le territoire, moyennes mobiles de trois mois, données désaisonnalisées et non désaisonnalisées",
         "cubeStartDate": "1992-03-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -34419,8 +34419,8 @@
         "cubeTitleEn": "Employment by occupation, monthly, seasonally adjusted, last 5 months",
         "cubeTitleFr": "Emploi selon la profession, données mensuelles désaisonnalisées, 5 derniers mois",
         "cubeStartDate": "1987-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -34615,8 +34615,8 @@
         "cubeTitleEn": "Average usual hours and wages by selected characteristics, monthly, unadjusted for seasonality, last 5 months",
         "cubeTitleFr": "Heures habituelles et salaires moyens selon certaines caractéristiques, données mensuelles non désaisonnalisées, 5 derniers mois",
         "cubeStartDate": "2001-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -35025,8 +35025,8 @@
         "cubeTitleEn": "Duration of unemployment, monthly, seasonally adjusted",
         "cubeTitleFr": "Durée du chômage, données mensuelles désaisonnalisées",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -35196,8 +35196,8 @@
         "cubeTitleEn": "Regional unemployment rates used by the Employment Insurance program, three-month moving average, seasonally adjusted",
         "cubeTitleFr": "Taux de chômage selon la région utilisée par le programme d'assurance-emploi, moyennes mobiles de trois mois, données désaisonnalisées",
         "cubeStartDate": "2014-10-01T04:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -35215,8 +35215,8 @@
         "cubeTitleEn": "Employment by industry, monthly, seasonally adjusted and unadjusted, and trend-cycle, last 5 months",
         "cubeTitleFr": "Emploi selon l'industrie, données mensuelles désaisonnalisées et non désaisonnalisées, et tendance-cycle, 5 derniers mois",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -35571,8 +35571,8 @@
         "cubeTitleEn": "Labour force characteristics by visible minority group, three-month moving averages, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Caractéristiques de la population active selon le groupe de minorités visibles, moyennes mobiles de trois mois, données mensuelles non désaisonnalisées",
         "cubeStartDate": "2022-03-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -35590,8 +35590,8 @@
         "cubeTitleEn": "Employment and unemployment rate, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Emploi et taux de chômage, données mensuelles non désaisonnalisées",
         "cubeStartDate": "2011-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -35628,8 +35628,8 @@
         "cubeTitleEn": "Employment by class of worker and industry, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Emploi selon la catégorie de travailleur et l'industrie, données mensuelles non désaisonnalisées",
         "cubeStartDate": "2011-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -35995,8 +35995,8 @@
         "cubeTitleEn": "Labour force characteristics by family structure, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Caractéristiques de la population active selon la structure de la famille, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1976-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -36089,8 +36089,8 @@
         "cubeTitleEn": "Labour force characteristics by detailed Indigenous group living off reserve, three-month moving averages, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Caractéristiques de la population active selon le groupe autochtone détaillé vivant hors réserve, moyennes mobiles de trois mois, données mensuelles non désaisonnalisées",
         "cubeStartDate": "2007-03-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -36498,8 +36498,8 @@
         "cubeTitleEn": "Labour force characteristics by occupation, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Caractéristiques de la population active selon la profession, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1987-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -36517,8 +36517,8 @@
         "cubeTitleEn": "Usual hours worked by occupation, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Heures habituellement travaillées selon la profession, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1987-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -36536,8 +36536,8 @@
         "cubeTitleEn": "Actual hours worked by occupation, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Heures effectivement travaillées selon la profession, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1987-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -36555,8 +36555,8 @@
         "cubeTitleEn": "Multiple jobholders by occupation, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Personnes ayant plus d'un emploi selon la profession, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1987-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -36574,8 +36574,8 @@
         "cubeTitleEn": "Job tenure by occupation, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Durée de l'emploi selon la profession, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1987-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -36593,8 +36593,8 @@
         "cubeTitleEn": "Employee wages by occupation, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Salaire des employés selon la profession, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -36618,8 +36618,8 @@
         "cubeTitleEn": "Employees working overtime (weekly) by occupation, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Employés travaillant à temps supplémentaire (hebdomadaire) selon la profession, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -36637,8 +36637,8 @@
         "cubeTitleEn": "Weekly wage distributions by occupation, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Répartition des salaires hebdomadaires selon la profession, données mensuelles non désaisonnalisées",
         "cubeStartDate": "1997-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -36971,8 +36971,8 @@
         "cubeTitleEn": "Labour force characteristics, selected census subdivisions, three-month moving averages, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Caractéristiques de la population active, certaines subdivisions de recensement, moyennes mobiles de trois mois, données mensuelles non désaisonnalisées",
         "cubeStartDate": "2022-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -37200,8 +37200,8 @@
         "cubeTitleEn": "Labour force characteristics by census metropolitan area, three-month moving average, unadjusted for seasonality",
         "cubeTitleFr": "Caractéristiques de la population active selon la région métropolitaine de recensement, moyennes mobiles de trois mois, données non désaisonnalisées",
         "cubeStartDate": "2011-03-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -37225,8 +37225,8 @@
         "cubeTitleEn": "Labour force characteristics by census metropolitan area, three-month moving average, seasonally adjusted",
         "cubeTitleFr": "Caractéristiques de la population active selon la région métropolitaine de recensement, moyennes mobiles de trois mois, données désaisonnalisées",
         "cubeStartDate": "2011-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -37244,8 +37244,8 @@
         "cubeTitleEn": "Labour force characteristics by Montréal, Toronto and Vancouver census metropolitan areas, monthly, seasonally adjusted",
         "cubeTitleFr": "Caractéristiques de la population active selon les régions métropolitaine de recensement de Montréal, Toronto et Vancouver, données mensuelles désaisonnalisées",
         "cubeStartDate": "2011-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -37282,8 +37282,8 @@
         "cubeTitleEn": "Labour force characteristics by economic region, three-month moving average, unadjusted for seasonality",
         "cubeTitleFr": "Caractéristiques de la population active selon la région économique, moyennes mobiles de trois mois, données non désaisonnalisées",
         "cubeStartDate": "2011-03-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -37345,8 +37345,8 @@
         "cubeTitleEn": "Employment characteristics by economic region, three-month moving average, unadjusted for seasonality",
         "cubeTitleFr": "Caractéristiques de l'emploi selon la région économique, moyennes mobiles de trois mois, données non désaisonnalisées",
         "cubeStartDate": "2011-03-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -37383,8 +37383,8 @@
         "cubeTitleEn": "Employment characteristics by census metropolitan area, three-month moving average, unadjusted for seasonality",
         "cubeTitleFr": "Caractéristiques de l'emploi selon la région métropolitaine de recensement, moyennes mobiles de trois mois, données non désaisonnalisées",
         "cubeStartDate": "2011-03-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -37459,8 +37459,8 @@
         "cubeTitleEn": "Labour force characteristics of immigrants, three-month moving average, unadjusted for seasonality",
         "cubeTitleFr": "Caractéristiques de la population active des immigrants, moyennes mobiles de trois mois, données non désaisonnalisées",
         "cubeStartDate": "2006-03-01T05:00:00Z",
-        "cubeEndDate": "2025-08-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-09-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -37633,8 +37633,8 @@
         "cubeTitleEn": "Small area estimates of labour force characteristics for sub-provincial areas, monthly, unadjusted for seasonality",
         "cubeTitleFr": "Estimation sur petits domaines des caractéristiques de la population active pour des zones infraprovinciales, données mensuelles non désaisonnalisées",
         "cubeStartDate": "2021-11-01T04:00:00Z",
-        "cubeEndDate": "2025-06-01T04:00:00Z",
-        "releaseTime": "2025-09-05T12:30:00Z",
+        "cubeEndDate": "2025-07-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "14"
@@ -64529,8 +64529,8 @@
         "cubeTitleEn": "Leading indicator, International visitors entering or returning to Canada by air, by country of residence and traveller type",
         "cubeTitleFr": "Indicateur avancé, Visiteurs internationaux entrant ou revenant au Canada par voie aérienne, selon le pays de résidence et le type de voyageur",
         "cubeStartDate": "2018-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-31T04:00:00Z",
-        "releaseTime": "2025-09-10T12:30:00Z",
+        "cubeEndDate": "2025-09-30T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "24"
@@ -64554,8 +64554,8 @@
         "cubeTitleEn": "Leading indicator, International visitors entering or returning to Canada by land, by vehicle type, vehicle licence plate and traveller type",
         "cubeTitleFr": "Indicateur avancé, Visiteurs internationaux entrant ou revenant au Canada par voie terrestre, selon le type de véhicule, la plaque d’immatriculation du véhicule et le type de voyageur",
         "cubeStartDate": "2017-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-31T04:00:00Z",
-        "releaseTime": "2025-09-10T12:30:00Z",
+        "cubeEndDate": "2025-09-30T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "24"
@@ -64573,8 +64573,8 @@
         "cubeTitleEn": "Leading indicator, Vehicles entering Canada by land, by vehicle type and licence plate",
         "cubeTitleFr": "Indicateur avancé, Véhicules entrant au Canada par voie terrestre, selon le type de véhicule et la plaque d’immatriculation",
         "cubeStartDate": "2017-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-31T04:00:00Z",
-        "releaseTime": "2025-09-10T12:30:00Z",
+        "cubeEndDate": "2025-09-30T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "24"
@@ -64598,8 +64598,8 @@
         "cubeTitleEn": "Leading indicator, Trucks and drivers entering or returning to Canada, by vehicle licence plate",
         "cubeTitleFr": "Indicateur avancé, Camions et camionneurs entrant ou revenant au Canada, selon la plaque d’immatriculation du véhicule",
         "cubeStartDate": "2019-01-01T05:00:00Z",
-        "cubeEndDate": "2025-08-31T04:00:00Z",
-        "releaseTime": "2025-09-10T12:30:00Z",
+        "cubeEndDate": "2025-09-30T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "24"
@@ -75794,8 +75794,8 @@
         "cubeTitleEn": "Farm product prices, crops and livestock",
         "cubeTitleFr": "Prix des produits agricoles, cultures et bétail",
         "cubeStartDate": "1980-01-01T05:00:00Z",
-        "cubeEndDate": "2025-07-01T04:00:00Z",
-        "releaseTime": "2025-09-11T12:30:00Z",
+        "cubeEndDate": "2025-08-01T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "32"
@@ -84160,8 +84160,8 @@
         "cubeTitleEn": "Daily average foreign exchange rates in Canadian dollars, Bank of Canada",
         "cubeTitleFr": "Taux de change moyens quotidiens en dollars canadiens, Banque du Canada",
         "cubeStartDate": "1981-05-04T04:00:00Z",
-        "cubeEndDate": "2025-10-07T04:00:00Z",
-        "releaseTime": "2025-10-09T12:30:00Z",
+        "cubeEndDate": "2025-10-08T04:00:00Z",
+        "releaseTime": "2025-10-10T12:30:00Z",
         "archived": "2",
         "subjectCode": [
             "33"

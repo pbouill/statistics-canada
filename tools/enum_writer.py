@@ -210,8 +210,10 @@ class EnumEntry:
         )
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(name={self.name!r}, value={self.value!r}, \
-            comment={self.comment!r})"
+        return (
+            f"{self.__class__.__name__}(name={self.name!r}, value={self.value!r}, "
+            f"comment={self.comment!r})"
+        )
 
 
 class AbstractEnumWriter(ABC):
@@ -522,8 +524,8 @@ class AbstractEnumWriter(ABC):
         """
         if (n_entries := len(entries)) != (n_original := len(original_names)):
             raise ValueError(
-                f"Entries length {n_entries} does not match original names length \
-                    {n_original}"
+                f"Entries length {n_entries} does not match original names length "
+                f"{n_original}"
             )
 
         if duplicates := cls.get_duplicate_names(entries):
@@ -573,6 +575,6 @@ class AbstractEnumWriter(ABC):
             # we've done all we could... raise the error
             if duplicates := cls.get_duplicate_names(entries):
                 raise InvalidEnumNameError(
-                    f"Duplicate enum names remain after resolution: \
-                        {list(duplicates.values())}"
+                    f"Duplicate enum names remain after resolution: "
+                    f"{list(duplicates.values())}"
                 )
