@@ -12,7 +12,7 @@
 #   - Installs dependencies from requirements files.
 #   - Performs linting with Ruff (with optional auto-fixing).
 #   - Conducts static type checking with MyPy.
-#   - Scans for security vulnerabilities with Bandit and pip-audit.
+#   - Scans for security vulnerabilities with Ruff's bandit rules and pip-audit.
 #   - Executes the test suite with Pytest.
 #   - Can build the package and upload artifacts.
 #
@@ -23,7 +23,6 @@
 #   - `test`: Set to `true` to run tests.
 #   - `typing`: Set to `true` to run static type checking.
 #   - `dependency-audit`: Set to `true` to audit dependencies.
-#   - `security`: Set to `true` to run static security analysis.
 #
 # Outputs:
 #   - `lint_fix_changes`: Returns `true` if the linter made changes to the code.
@@ -60,22 +59,14 @@ on:
         required: false
         type: boolean
         default: true
-      security:
-        description: 'Run static security scan with Bandit?'
-        required: false
-        type: boolean
-        default: true
     outputs:
       lint_fix_changes:
         description: 'Whether the lint tool made changes (true/false)'
         value: ${{ jobs.cleanup-checks.outputs.lint_fix_changes }}
-      bandit_report:
-        description: 'Bandit security report artifact name'
-        value: ${{ jobs.cleanup-checks.outputs.bandit_report }}
 
 jobs:
   # ======================================================================================
-  # Job: Cleanup, Lint, Type, Security (Python 3.13 only)
+  # Job: Cleanup, Lint, Type, Security (Python 3.14 only)
   # ======================================================================================
 
   cleanup-checks:
@@ -83,7 +74,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       lint_fix_changes: ${{ steps.lint-fix.outputs.lint_changed }}
-      bandit_report: ${{ steps.upload-bandit.outputs.artifact-name }}
     steps:
       - name: Set up Python 3.14
         uses: actions/setup-python@v6
@@ -130,19 +120,6 @@ jobs:
       - name: Dependency Audit (pip-audit)
         if: ${{ inputs['dependency-audit'] }}
         run: pip-audit -v -r requirements.txt
-
-      - name: Security Scan (Bandit)
-        id: bandit-scan
-        if: ${{ inputs.security }}
-        run: bandit -r . -lll -o bandit-report.json -f json
-
-      - name: Upload Bandit Report
-        id: upload-bandit
-        if: ${{ inputs.security }}
-        uses: actions/upload-artifact@v4
-        with:
-          path: bandit-report.json
-          name: bandit-report.json
 
   
   # ======================================================================================

@@ -284,7 +284,7 @@ class Coordinate:
     def create_demographic_dataframe(  # noqa: PLR0913
         cls,
         data_points: list[Any],
-        coordinates: list[Coordinate],
+        coordinates: list[Self],
         product_id: int,
         demographic_type: str,
         geographic_name: str,

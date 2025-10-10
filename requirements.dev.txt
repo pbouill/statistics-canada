@@ -21,7 +21,6 @@ types-tqdm>=4.67.0
 
  
 # Development tooling
-ruff>=0.13.1
+ruff>=0.13.1  # Linting, formatting, and security checks (S rules replace bandit)
 mypy>=1.18.2
-bandit>=1.8.6
 pip-audit>=2.9.0

@@ -81,22 +81,29 @@ line-length = 88
 
 # --- Linting Configuration ---
 [tool.ruff.lint]
-# Select the default rules plus a comprehensive set of common plugins.
-# F: Pyflakes errors
-# E, W: Pycodestyle errors and warnings
-# I: isort for import sorting
-# B: flake8-bugbear for common bugs
-# UP: pyupgrade for modern syntax
-# N: PEP 8 naming conventions
-# S: bandit for security issues
-# D: pydocstyle for docstrings
-# T20: flake8-print for `print` statements
-# PLC, PLE, PLR, PLW: Pylint rules
-select = ["F", "E", "W", "I", "B", "UP", "N", "S", "D", "T20", "PLC", "PLE", "PLR", "PLW"]
+# Select the default rules plus a comprehensive set of common plugins
+select = [
+	"F",    # Pyflakes errors
+	"E",    # Pycodestyle errors
+	"W",    # Pycodestyle warnings
+	"I",    # isort for import sorting
+	"B",    # flake8-bugbear for common bugs
+	"UP",   # pyupgrade for modern syntax
+	"N",    # PEP 8 naming conventions
+	"S",    # bandit/flake8-bandit security rules (Python 3.14 compatible, replaces standalone bandit)
+	"D",    # pydocstyle for docstrings
+	"T20",  # flake8-print for `print` statements
+	"PLC",  # Pylint convention rules
+	"PLE",  # Pylint error rules
+	"PLR",  # Pylint refactor rules
+	"PLW",  # Pylint warning rules
+]
 
-# Ignore rules that may not be suitable for your project.
-# Example: D203 (1 blank line required before class docstring) can conflict with other formatters.
-ignore = ["D203", "D213"]
+# Ignore rules that may not be suitable for your project
+ignore = [
+	"D203",  # 1 blank line required before class docstring (conflicts with D211)
+	"D213",  # Multi-line docstring summary should start at the second line (conflicts with D212)
+]
 
 # Treat all rules in the `select` list as fixable. This overrides Ruff's default safety checks.
 # Be aware: This will attempt to fix all linting issues, including potentially destructive ones.
@@ -110,10 +117,28 @@ fixable = ["ALL"]
 quote-style = "single"
 indent-style = "tab"
 
-# Disable specific rules for specific directories or files.
+# Disable specific rules for specific directories or files
 [tool.ruff.lint.per-file-ignores]
-"tools/*" = ["T20", "PLW", "PLR", "D"]
-"tests/*" = ["S101", "D", "E501", "PLR2004"]
+"tools/*" = [
+	"T20",  # flake8-print: Allow print statements in dev tools
+	"PLW",  # Pylint warnings: Not critical for dev tools
+	"PLR",  # Pylint refactor: Not critical for dev tools
+	"D",    # pydocstyle: Documentation not required for dev tools
+	"S",    # Security checks: Not needed for dev tools
+]
+"tests/*" = [
+	"S101",    # Assert used: Required for pytest
+	"D",       # pydocstyle: Documentation not required for tests
+	"E501",    # Line too long: Test data can be long
+	"PLR2004", # Magic value used in comparison: Common in tests
+]
+"examples/*" = [
+	"S",   # Security checks: Examples may show patterns to avoid
+	"T20", # flake8-print: Print statements needed for demos
+]
+"scratch/*" = [
+	"ALL",  # Scratch files are temporary debug/analysis scripts
+]
 "statscan/wds/models/*" = ["N815"]
 # Auto-generated enums: allow non-ASCII names (French/Indigenous) and long lines (census data)
 "statscan/enums/auto/**/*.py" = ["E501", "PLC2401"]
