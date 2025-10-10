@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
-"""
-Empty File Checker and Cleanup Tool
+"""Empty File Checker and Cleanup Tool
 
 This tool scans the codebase for empty files, provides a summary,
 and offers interactive deletion with safety checks.
 
 Usage:
     python tools/check_empty_files.py [--dry-run] [--include-hidden] [--exclude-dirs DIR1,DIR2]
-"""
+"""  # noqa: E501
 
+import argparse
+import fnmatch
 import os
 import sys
+from collections.abc import Generator
 from pathlib import Path
-from typing import Generator
-import argparse
 
 
 class EmptyFileChecker:
@@ -75,8 +75,6 @@ class EmptyFileChecker:
         # Skip directories matching patterns (like *.egg-info)
         for pattern in self.exclude_dirs:
             if "*" in pattern:
-                import fnmatch
-
                 if fnmatch.fnmatch(dir_name, pattern):
                     return True
 
@@ -97,12 +95,12 @@ class EmptyFileChecker:
 
         return False
 
-    def find_empty_files(self) -> Generator[Path, None, None]:
-        """
-        Recursively find all empty files in the codebase.
+    def find_empty_files(self) -> Generator[Path]:
+        """Recursively find all empty files in the codebase.
 
         Yields:
             Path objects for empty files
+
         """
         for root, dirs, files in os.walk(self.root_path):
             root_path = Path(root)
@@ -121,19 +119,19 @@ class EmptyFileChecker:
                 try:
                     if file_path.is_file() and file_path.stat().st_size == 0:
                         yield file_path
-                except (OSError, IOError):
+                except OSError:
                     # Skip files we can't read (permissions, etc.)
                     continue
 
     def categorize_empty_files(self, empty_files: list[Path]) -> dict[str, list[Path]]:
-        """
-        Categorize empty files by type/location for better organization.
+        """Categorize empty files by type/location for better organization.
 
         Args:
             empty_files: List of empty file paths
 
         Returns:
             Dictionary mapping categories to file lists
+
         """
         categories: dict[str, list[Path]] = {
             "Python Files": [],
@@ -189,11 +187,11 @@ class EmptyFileChecker:
                     print(f"  • {relative_path}")
 
     def interactive_cleanup(self, categorized_files: dict[str, list[Path]]) -> None:
-        """
-        Interactive interface for selecting which empty files to delete.
+        """Interactive interface for selecting which empty files to delete.
 
         Args:
             categorized_files: Dictionary of categorized empty files
+
         """
         total_files = sum(len(files) for files in categorized_files.values())
 
@@ -273,11 +271,11 @@ class EmptyFileChecker:
             print("\n✅ No files selected for deletion")
 
     def _delete_files(self, files_to_delete: list[Path]) -> None:
-        """
-        Delete the specified files with error handling.
+        """Delete the specified files with error handling.
 
         Args:
             files_to_delete: List of file paths to delete
+
         """
         deleted_count = 0
         errors = []
@@ -288,14 +286,15 @@ class EmptyFileChecker:
                 deleted_count += 1
                 relative_path = file_path.relative_to(self.root_path)
                 print(f"  ✅ Deleted: {relative_path}")
-            except (OSError, IOError) as e:
+            except OSError as e:
                 relative_path = file_path.relative_to(self.root_path)
                 error_msg = f"Failed to delete {relative_path}: {e}"
                 errors.append(error_msg)
                 print(f"  ❌ {error_msg}")
 
         print(
-            f"\n📊 Summary: {deleted_count}/{len(files_to_delete)} files deleted successfully"
+            f"\n📊 Summary: {deleted_count}/{len(files_to_delete)} files deleted \
+                successfully"
         )
 
         if errors:

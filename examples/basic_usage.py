@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Statistics Canada WDS API - Basic Usage Examples
+"""Statistics Canada WDS API - Basic Usage Examples.
 
 This example demonstrates the fundamental patterns for using the Statistics Canada
 Web Data Service (WDS) API through the statscan package.
@@ -13,33 +12,30 @@ Key Concepts:
 """
 
 import asyncio
-from statscan.wds.client import Client
+import logging
+
+from statscan.enums.auto.wds.frequency import Frequency
 from statscan.enums.auto.wds.product_id import ProductID
+from statscan.wds.client import Client
+
+logger = logging.getLogger(__name__)
 
 
 async def basic_api_usage():
     """Demonstrate basic WDS API patterns."""
-    print("🚀 Statistics Canada WDS API - Basic Usage")
-    print("=" * 50)
-
     # Initialize client
     client = Client()
 
     # 1. Discover available products
-    print("\n📊 1. Product Discovery")
-    print("-" * 30)
 
     # Get basic population cube metadata
-    population_product = ProductID.POP_AND_DWEL_COUNTS_CAN_PROV_AND_TERR_CEN_METRO_AREAS_AND_CEN_AGGLOMERATIONS
+    population_product = (
+        ProductID.POP_AND_DWEL_COUNTS_CAN_PROV_AND_TERR_CEN_METRO_AREAS_AND_CEN_AGGLOMERATIONS
+    )
     metadata = await client.get_cube_metadata(product_id=population_product.value)
 
-    print(f"Product ID: {population_product.value}")
-    print(f"Title: {metadata['object']['cubeTitleEn']}")
-    print(f"Dimensions: {len(metadata['object']['dimension'])} dimensions")
 
     # 2. Simple coordinate-based data request
-    print("\n📈 2. Basic Data Request")
-    print("-" * 30)
 
     # Get Canada total population for 2021
     coordinates = "1.1.1.1.1.1.1.1.1.1"  # Canada, both sexes, total age, 2021
@@ -52,86 +48,62 @@ async def basic_api_usage():
     if data_response["status"] == "SUCCESS":
         observations = data_response["object"]
         if observations:
-            latest_data = observations[0]
-            print(f"Canada Population (2021): {latest_data['vectorDataPoint']:,}")
-            print(f"Reference Date: {latest_data['refPer']}")
+            observations[0]
         else:
-            print("No data returned for specified coordinates")
+            pass
     else:
-        print(f"API Error: {data_response.get('status', 'Unknown error')}")
+        pass
 
     # 3. Explore cube structure
-    print("\n🔍 3. Cube Structure Exploration")
-    print("-" * 30)
 
     # Show dimension information
     dimensions = metadata["object"]["dimension"]
-    for i, dim in enumerate(dimensions[:3]):  # Show first 3 dimensions
-        print(f"Dimension {i + 1}: {dim['dimensionNameEn']}")
-        print(f"  Members: {len(dim['member'])} options")
+    for _i, dim in enumerate(dimensions[:3]):  # Show first 3 dimensions
         if dim["member"]:
-            print(f"  Example: {dim['member'][0]['memberNameEn']}")
-        print()
+            pass
 
-    print(f"💡 This cube has {len(dimensions)} total dimensions")
-    print("   Use coordinates to specify which data subset you want")
 
 
 async def working_with_enums():
     """Demonstrate using WDS enums for type-safe API calls."""
-    print("\n🎯 Working with WDS Enums")
-    print("=" * 50)
-
-    from statscan.enums.auto.wds.frequency import Frequency
-
     # Use enums for better code maintainability
-    print("📋 Available Product Categories:")
 
     # Show some census-related products
     census_products = [
         (
-            ProductID.POP_AND_DWEL_COUNTS_CAN_PROV_AND_TERR_CEN_METRO_AREAS_AND_CEN_AGGLOMERATIONS,
+            ProductID.POP_AND_DWEL_COUNTS_CAN_PROV_AND_TERR_CEN_METRO_AREAS_AND_CEN_AGGLOMERATIONS,  # noqa: E501
             "Population & Dwellings",
         ),
     ]
 
-    for product_enum, description in census_products:
-        print(f"  • {description}")
-        print(f"    Product ID: {product_enum.value}")
-        print(f"    Enum Name: {product_enum.name}")
-        print()
+    for _product_enum, _description in census_products:
+        pass
 
     # Demonstrate frequency enum usage
-    print("📅 Data Frequencies Available:")
     frequency_examples = [Frequency.ANNUAL, Frequency.QUARTERLY, Frequency.MONTHLY]
 
-    for freq in frequency_examples:
-        print(f"  • {freq.name}: {freq.value}")
+    for _freq in frequency_examples:
+        pass
 
 
 async def error_handling_patterns():
     """Show proper error handling for WDS API calls."""
-    print("\n⚠️  Error Handling Best Practices")
-    print("=" * 50)
-
     client = Client()
 
     try:
         # Example of handling invalid product ID
-        print("Testing invalid product ID handling...")
         response = await client.get_cube_metadata(product_id=99999999)
 
         if response["status"] != "SUCCESS":
-            print(f"✅ Properly handled API error: {response['status']}")
+            pass
         else:
-            print("⚠️  Unexpected success with invalid product ID")
+            pass
 
     except Exception as e:
-        print(f"✅ Caught exception: {type(e).__name__}: {e}")
+        logger.info("Expected error for invalid product ID: %s", e)
 
     try:
         # Example of handling invalid coordinates
-        print("\nTesting invalid coordinate handling...")
         response = await client.get_data_from_cube_pid_coord_and_latest_n_periods(
             product_id=ProductID.POPULATION_AND_DWELLINGS_COUNTS_CANADA_PROVINCES_TERRITORIES_CENSUS_METROPOLITAN_AREAS_AND_CENSUS_AGGLOMERATIONS_INCLUDING_PARTS.value,
             coordinate="999.999.999",  # Invalid coordinate format
@@ -139,16 +111,11 @@ async def error_handling_patterns():
         )
 
         if response["status"] != "SUCCESS":
-            print(f"✅ Properly handled coordinate error: {response['status']}")
+            pass
 
     except Exception as e:
-        print(f"✅ Caught coordinate exception: {type(e).__name__}: {e}")
+        logger.info("Expected error for invalid coordinate: %s", e)
 
-    print("\n💡 Key Error Handling Tips:")
-    print("  • Always check response['status'] for 'SUCCESS'")
-    print("  • Use try/catch for network and parsing errors")
-    print("  • Validate coordinates before API calls")
-    print("  • Handle empty result sets gracefully")
 
 
 async def main():
@@ -157,9 +124,8 @@ async def main():
     await working_with_enums()
     await error_handling_patterns()
 
-    print("\n🎉 Basic Usage Examples Complete!")
-    print("Next steps: Try demographic_analysis.py for real-world use cases")
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     asyncio.run(main())

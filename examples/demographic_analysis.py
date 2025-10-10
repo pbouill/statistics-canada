@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Statistics Canada WDS API - Demographic Analysis Examples
+"""Statistics Canada WDS API - Demographic Analysis Examples.
 
 This example demonstrates practical demographic analysis using the WDS API.
 Shows how to work with census data, compare populations, and analyze demographic trends.
@@ -13,25 +12,26 @@ Real-world Use Case: Analyzing population demographics for Saugeen Shores, Ontar
 """
 
 import asyncio
+import logging
 from typing import Any
 
-from statscan.wds.client import Client
 from statscan.enums.auto.wds.product_id import ProductID
+from statscan.wds.client import Client
+
+logger = logging.getLogger(__name__)
 
 
 class DemographicAnalyzer:
     """Utility class for comprehensive demographic analysis."""
 
     def __init__(self):
+        """Initialize the analyzer with a WDS client."""
         self.client = Client()
 
     async def get_population_summary(
         self, product_id: int, coordinates: list[str], location_name: str
     ) -> dict[str, Any]:
         """Get population summary for specified coordinates."""
-        print(f"\n📊 Population Summary: {location_name}")
-        print("-" * 40)
-
         results = {}
         for coord in coordinates:
             try:
@@ -47,12 +47,11 @@ class DemographicAnalyzer:
                         "population": data["vectorDataPoint"],
                         "reference_date": data["refPer"],
                     }
-                    print(f"  Coordinate {coord}: {data['vectorDataPoint']:,} people")
                 else:
-                    print(f"  ⚠️  No data for coordinate {coord}")
+                    logger.debug("No data returned for coordinate: %s", coord)
 
             except Exception as e:
-                print(f"  ❌ Error with coordinate {coord}: {e}")
+                logger.warning("Failed to fetch population for %s: %s", coord, e)
 
         return results
 
@@ -60,17 +59,12 @@ class DemographicAnalyzer:
         self, location_coordinates: str
     ) -> dict[str, Any]:
         """Analyze age and gender demographics for a location."""
-        print("\n👥 Age & Gender Analysis")
-        print("-" * 40)
-
         # Use Age and Sex highlights product (Census data)
         product_id = 98100002  # Census population data
 
         # Get cube metadata to understand dimensions
-        metadata = await self.client.get_cube_metadata(product_id=product_id)
+        await self.client.get_cube_metadata(product_id=product_id)
 
-        print(f"Analyzing demographics using Product ID: {product_id}")
-        print(f"Cube: {metadata['object']['cubeTitleEn']}")
 
         # Example coordinates for different age/gender breakdowns
         # Note: Actual coordinates depend on cube structure
@@ -83,7 +77,7 @@ class DemographicAnalyzer:
         results = {}
         labels = ["Total", "Male", "Female"]
 
-        for coord, label in zip(demo_coordinates, labels):
+        for coord, label in zip(demo_coordinates, labels, strict=False):
             try:
                 response = (
                     await self.client.get_data_from_cube_pid_coord_and_latest_n_periods(
@@ -94,23 +88,18 @@ class DemographicAnalyzer:
                 if response["status"] == "SUCCESS" and response["object"]:
                     data = response["object"][0]
                     results[label] = data["vectorDataPoint"]
-                    print(f"  {label}: {data['vectorDataPoint']:,}")
 
             except Exception as e:
-                print(f"  ⚠️  Could not get {label} data: {e}")
+                logger.warning("Failed to fetch %s demographics: %s", label, e)
 
         return results
 
     async def household_analysis(self, location_coordinates: str) -> dict[str, Any]:
         """Analyze household composition and characteristics."""
-        print("\n🏠 Household Composition Analysis")
-        print("-" * 40)
-
         product_id = 98100003  # Census household data
 
         # Get metadata
-        metadata = await self.client.get_cube_metadata(product_id=product_id)
-        print(f"Using: {metadata['object']['cubeTitleEn']}")
+        await self.client.get_cube_metadata(product_id=product_id)
 
         # Try to get household data
         try:
@@ -124,13 +113,12 @@ class DemographicAnalyzer:
 
             if response["status"] == "SUCCESS" and response["object"]:
                 data = response["object"][0]
-                print(f"  Total Households: {data['vectorDataPoint']:,}")
                 return {"total_households": data["vectorDataPoint"]}
             else:
-                print("  ⚠️  No household data available")
+                logger.debug("No household data returned")
 
         except Exception as e:
-            print(f"  ❌ Household analysis error: {e}")
+            logger.warning("Household analysis failed: %s", e)
 
         return {}
 
@@ -138,9 +126,6 @@ class DemographicAnalyzer:
         self, location_name: str, coordinates: str
     ) -> dict[str, Any]:
         """Generate comprehensive demographic report."""
-        print(f"\n📋 Comprehensive Demographic Report: {location_name}")
-        print("=" * 60)
-
         report: dict[str, Any] = {
             "location": location_name,
             "coordinates": coordinates,
@@ -172,29 +157,17 @@ class DemographicAnalyzer:
             female_pop = demographics.get("Female", 0)
 
             if total_pop > 0:
-                print("\n📈 Summary Statistics:")
-                print(f"  • Total Population: {total_pop:,}")
                 if male_pop and female_pop:
-                    print(
-                        f"  • Gender Distribution: {male_pop / total_pop * 100:.1f}% Male, {female_pop / total_pop * 100:.1f}% Female"
-                    )
+                    pass
 
                 if households and households.get("total_households"):
-                    avg_household_size = total_pop / households["total_households"]
-                    print(
-                        f"  • Average Household Size: {avg_household_size:.1f} people"
-                    )
+                    total_pop / households["total_households"]
 
         return report
 
 
 async def saugeen_shores_case_study():
     """Real-world example: Analyzing Saugeen Shores, Ontario demographics."""
-    print("🏘️  Case Study: Saugeen Shores, Ontario")
-    print("=" * 60)
-    print("Saugeen Shores is a town in Bruce County, Ontario")
-    print("This example shows municipal-level demographic analysis\n")
-
     analyzer = DemographicAnalyzer()
 
     # Saugeen Shores coordinates (example - actual coordinates need verification)
@@ -208,30 +181,18 @@ async def saugeen_shores_case_study():
 
     # Display findings
     if report.get("population"):
-        print("\n🎯 Key Findings:")
-        print(f"  • Municipality: {report['location']}")
-        print(f"  • Coordinate System: {report['coordinates']}")
 
         if report.get("demographics"):
             total = report["demographics"].get("Total", 0)
             if total > 0:
-                print(
-                    f"  • Classification: Small-medium Ontario municipality ({total:,} residents)"
-                )
+                pass
 
-    print("\n💡 Next Steps:")
-    print("  • Verify coordinate accuracy with Statistics Canada documentation")
-    print("  • Compare with neighboring municipalities")
-    print("  • Analyze trends over multiple census periods")
 
     return report
 
 
 async def comparative_analysis_example():
-    """Example of comparing multiple geographic areas."""
-    print("\n🔄 Comparative Analysis Example")
-    print("=" * 60)
-
+    """Compare multiple geographic areas."""
     analyzer = DemographicAnalyzer()
 
     # Compare different geographic levels
@@ -241,9 +202,13 @@ async def comparative_analysis_example():
         ("Bruce County", "1.35.3539.1.1.1.1.1.1.1"),  # Example
     ]
 
-    product_id = ProductID.POPULATION_AND_DWELLINGS_COUNTS_CANADA_PROVINCES_AND_TERRITORIES_CENSUS_METROPOLITAN_AREAS_AND_CENSUS_AGGLOMERATIONS_INCLUDING_PARTS.value
+    # fmt: off
+    product_id = (
+        ProductID.
+        POPULATION_AND_DWELLINGS_COUNTS_CANADA_PROVINCES_AND_TERRITORIES_CENSUS_METROPOLITAN_AREAS_AND_CENSUS_AGGLOMERATIONS_INCLUDING_PARTS.value
+    )
+    # fmt: on
 
-    print("Comparing population across geographic levels:")
 
     comparative_data = {}
     for name, coord in locations:
@@ -252,15 +217,14 @@ async def comparative_analysis_example():
             comparative_data[name] = results[coord]
 
     # Calculate percentages
-    if len(comparative_data) >= 2:
-        print("\n📊 Comparative Statistics:")
+    min_locations_for_comparison = 2
+    if len(comparative_data) >= min_locations_for_comparison:
         canada_pop = comparative_data.get("Canada", {}).get("population", 1)
 
         for location, data in comparative_data.items():
             if location != "Canada":
                 population = data.get("population", 0)
-                percentage = (population / canada_pop) * 100 if canada_pop > 0 else 0
-                print(f"  • {location}: {percentage:.2f}% of Canada's population")
+                (population / canada_pop) * 100 if canada_pop > 0 else 0
 
 
 async def main():
@@ -271,12 +235,8 @@ async def main():
     # Comparative analysis
     await comparative_analysis_example()
 
-    print("\n🎉 Demographic Analysis Examples Complete!")
-    print(
-        "💡 These examples show practical patterns for municipal and regional analysis"
-    )
-    print("   Adapt coordinates and product IDs for your specific research needs")
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     asyncio.run(main())

@@ -1,20 +1,22 @@
-from typing import Optional
+"""SDMX annotation models for metadata and text descriptions."""
+
 from pydantic import field_validator
 
 from ...base import Base
 
 
 class Annotation(Base):
-    """
-    Represents an annotation in SDMX structures.
-    Based on the actual SDMX structure: {type (str), text (str), texts (dict)}
+    """Represents an annotation in SDMX structures.
+
+    Based on the actual SDMX structure: {type (str), text (str), texts (dict)}.
+
     """
 
-    id: Optional[str] = None  # Make optional to handle incomplete annotations
-    text: Optional[str | int | bool] = None
-    title: Optional[str] = None
-    type: Optional[str] = None  # Make optional to handle incomplete annotations
-    texts: Optional[dict[str, str]] = None  # language -> text mapping
+    id: str | None = None  # Make optional to handle incomplete annotations
+    text: str | int | bool | None = None
+    title: str | None = None
+    type: str | None = None  # Make optional to handle incomplete annotations
+    texts: dict[str, str] | None = None  # language -> text mapping
 
     def get_display_text(self, language: str = "en") -> str:
         """Get the display text in the specified language, fallback to text."""
@@ -25,7 +27,8 @@ class Annotation(Base):
         return str(self.text) if self.text is not None else ""
 
     @field_validator("text", mode="before")
-    def validate_text(cls, value: str | int | bool) -> str | int | bool:
+    def validate_text(self, value: str | int | bool) -> str | int | bool:
+        """Validate and convert text values to appropriate types."""
         if isinstance(value, str):
             if value.isdigit():
                 return int(value)
@@ -41,7 +44,7 @@ class Annotation(Base):
         )
 
     @property
-    def boolean_value(self) -> Optional[bool]:
+    def boolean_value(self) -> bool | None:
         """Get the boolean value if this is a boolean flag."""
         if isinstance(self.text, bool):
             return self.text

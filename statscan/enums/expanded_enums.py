@@ -1,11 +1,13 @@
-"""
-Template for expanding enhanced enums based on discovered SDMX dimension values.
+"""Template for expanding enhanced enums based on discovered SDMX dimension values.
 
 This file provides a framework for systematically expanding the enum coverage
 as new dimension values are discovered from actual API responses.
 """
 
+import logging
 from enum import Enum
+
+logger = logging.getLogger(__name__)
 
 
 class ExpandedGender(Enum):
@@ -20,6 +22,7 @@ class ExpandedGender(Enum):
 
     @property
     def description(self) -> str:
+        """Get description of the gender category."""
         descriptions = {
             ExpandedGender.TOTAL_GENDER: "Total population, all genders",
             ExpandedGender.MALE: "Male population",
@@ -29,11 +32,11 @@ class ExpandedGender(Enum):
 
 
 class ExpandedCensusProfileCharacteristic(Enum):
-    """
-    Expanded census profile characteristics based on comprehensive 2021 Census Profile.
+    """Expanded census profile characteristics.
 
-    This enum should be expanded as new characteristics are discovered in the data.
-    The values below represent the most commonly used characteristics.
+    Based on comprehensive 2021 Census Profile. This enum should be expanded
+    as new characteristics are discovered in the data. The values below
+    represent the most commonly used characteristics.
     """
 
     # Population and Demographics (1-99)
@@ -177,44 +180,73 @@ class ExpandedCensusProfileCharacteristic(Enum):
         """Get human-readable description of the characteristic."""
         # This would be a comprehensive mapping - showing just a few examples
         descriptions = {
-            ExpandedCensusProfileCharacteristic.POPULATION_COUNT: "Total population count",
-            ExpandedCensusProfileCharacteristic.POPULATION_DENSITY_PER_KM2: "Population density per square kilometer",
-            ExpandedCensusProfileCharacteristic.MEDIAN_AGE: "Median age of population",
-            ExpandedCensusProfileCharacteristic.TOTAL_HOUSEHOLDS: "Total number of households",
-            ExpandedCensusProfileCharacteristic.AVERAGE_HOUSEHOLD_SIZE: "Average number of persons per household",
-            ExpandedCensusProfileCharacteristic.TOTAL_DWELLINGS: "Total number of dwellings",
-            ExpandedCensusProfileCharacteristic.MEDIAN_HOUSEHOLD_INCOME: "Median total household income",
+            ExpandedCensusProfileCharacteristic.POPULATION_COUNT: (
+                "Total population count"
+            ),
+            ExpandedCensusProfileCharacteristic.POPULATION_DENSITY_PER_KM2: (
+                "Population density per square kilometer"
+            ),
+            ExpandedCensusProfileCharacteristic.MEDIAN_AGE: (
+                "Median age of population"
+            ),
+            ExpandedCensusProfileCharacteristic.TOTAL_HOUSEHOLDS: (
+                "Total number of households"
+            ),
+            ExpandedCensusProfileCharacteristic.AVERAGE_HOUSEHOLD_SIZE: (
+                "Average number of persons per household"
+            ),
+            ExpandedCensusProfileCharacteristic.TOTAL_DWELLINGS: (
+                "Total number of dwellings"
+            ),
+            ExpandedCensusProfileCharacteristic.MEDIAN_HOUSEHOLD_INCOME: (
+                "Median total household income"
+            ),
         }
         return descriptions.get(self, f"Census characteristic {self.value}")
 
     @property
-    def category(self) -> str:
+    def category(self) -> str:  # noqa: PLR0911, PLR0912
         """Get the category this characteristic belongs to."""
-        if self.value < 100:
+        # Category ranges
+        pop_demo_max = 100
+        age_max = 200
+        household_max = 300
+        dwelling_max = 400
+        housing_max = 500
+        marital_max = 600
+        language_max = 700
+        immigration_max = 800
+        indigenous_max = 900
+        visible_minority_max = 1000
+        education_max = 1100
+        employment_max = 1200
+        income_max = 1300
+
+        if self.value < pop_demo_max:
             return "Population and Demographics"
-        elif self.value < 200:
+        elif self.value < age_max:
             return "Age Characteristics"
-        elif self.value < 300:
+        elif self.value < household_max:
             return "Households"
-        elif self.value < 400:
+        elif self.value < dwelling_max:
             return "Dwellings"
-        elif self.value < 500:
+        elif self.value < housing_max:
             return "Housing Types"
-        elif self.value < 600:
+        elif self.value < marital_max:
             return "Marital Status"
-        elif self.value < 700:
+        elif self.value < language_max:
             return "Language"
-        elif self.value < 800:
+        elif self.value < immigration_max:
             return "Immigration and Citizenship"
-        elif self.value < 900:
+        elif self.value < indigenous_max:
             return "Indigenous Identity"
-        elif self.value < 1000:
+        elif self.value < visible_minority_max:
             return "Visible Minority"
-        elif self.value < 1100:
+        elif self.value < education_max:
             return "Education"
-        elif self.value < 1200:
+        elif self.value < employment_max:
             return "Employment"
-        elif self.value < 1300:
+        elif self.value < income_max:
             return "Income"
         else:
             return "Other"
@@ -236,25 +268,36 @@ class ExpandedStatisticType(Enum):
 
     @property
     def description(self) -> str:
+        """Get description of the statistic type."""
         descriptions = {
             ExpandedStatisticType.COUNT: "Absolute count or number",
-            ExpandedStatisticType.PERCENTAGE: "Percentage of total population/group",
-            ExpandedStatisticType.RATE: "Rate per 1,000 or 100,000 population",
+            ExpandedStatisticType.PERCENTAGE: (
+                "Percentage of total population/group"
+            ),
+            ExpandedStatisticType.RATE: (
+                "Rate per 1,000 or 100,000 population"
+            ),
             ExpandedStatisticType.MEDIAN: "Median (middle) value",
             ExpandedStatisticType.AVERAGE: "Mean or average value",
             ExpandedStatisticType.RATIO: "Ratio between two values",
             ExpandedStatisticType.INDEX: "Index value relative to base",
             ExpandedStatisticType.DENSITY: "Density measure per area unit",
             ExpandedStatisticType.CHANGE: "Absolute change from previous period",
-            ExpandedStatisticType.PERCENT_CHANGE: "Percentage change from previous period",
+            ExpandedStatisticType.PERCENT_CHANGE: (
+                "Percentage change from previous period"
+            ),
         }
         return descriptions.get(self, "Unknown statistic type")
 
 
 class DimensionValueDiscovery:
-    """Utility class to help discover and catalog new dimension values from API responses."""
+    """Utility class to discover new dimension values from API responses.
+
+    Helps catalog new dimension values from API responses.
+    """
 
     def __init__(self) -> None:
+        """Initialize the discovery utility."""
         self.discovered_values: dict[str, set[str]] = {}
 
     def analyze_response(self, response_data: dict) -> None:
@@ -284,15 +327,16 @@ class DimensionValueDiscovery:
 
     def get_dimension_report(self) -> str:
         """Generate a report of discovered dimension values."""
+        max_preview_values = 10
         report = "Discovered Dimension Values:\n\n"
 
         for dim_name, values in self.discovered_values.items():
             report += f"{dim_name} ({len(values)} values):\n"
             sorted_values = sorted(list(values))
-            for value in sorted_values[:10]:  # Show first 10
+            for value in sorted_values[:max_preview_values]:  # Show first 10
                 report += f"  - {value}\n"
-            if len(values) > 10:
-                report += f"  ... and {len(values) - 10} more\n"
+            if len(values) > max_preview_values:
+                report += f"  ... and {len(values) - max_preview_values} more\n"
             report += "\n"
 
         return report
@@ -316,10 +360,12 @@ class DimensionValueDiscovery:
 
 
 # Usage example for dimension discovery
-async def discover_new_dimensions():
-    """Example of how to discover new dimension values from API responses."""
-    from statscan.dguid import DGUID
-    from statscan.enums.auto.census_subdivision import CensusSubdivision
+async def discover_new_dimensions():  # noqa: PLC0415
+    """Discover new dimension values from API responses."""
+    from statscan.dguid import DGUID  # noqa: PLC0415
+    from statscan.enums.auto.census_subdivision import (  # noqa: PLC0415
+        CensusSubdivision,
+    )
 
     # Create discovery utility
     discovery = DimensionValueDiscovery()
@@ -336,24 +382,24 @@ async def discover_new_dimensions():
             response_data = await dguid._get_census_data(timeout=15)
             discovery.analyze_response(response_data)
         except Exception as e:
-            print(f"Error getting data for {dguid}: {e}")
+            logger.debug(
+                "Discovery request failed for %s (expected in discovery mode): %s",
+                dguid,
+                e,
+            )
 
     # Generate report
-    report = discovery.get_dimension_report()
-    print(report)
+    discovery.get_dimension_report()
 
     # Get suggestions for specific dimensions
-    gender_suggestions = discovery.suggest_enum_additions("Gender")
-    print(f"Gender enum suggestions: {gender_suggestions}")
+    discovery.suggest_enum_additions("Gender")
 
-    char_suggestions = discovery.suggest_enum_additions("Census Profile Characteristic")
-    print(f"Characteristic enum suggestions (first 10): {char_suggestions[:10]}")
+    discovery.suggest_enum_additions("Census Profile Characteristic")
 
 
 if __name__ == "__main__":
 
-    print("This is a template file for expanding enums.")
-    print("Run discover_new_dimensions() to analyze actual API responses.")
+    pass
 
     # Uncomment to run discovery:
     # asyncio.run(discover_new_dimensions())

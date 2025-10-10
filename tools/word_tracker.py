@@ -1,19 +1,18 @@
 #!/usr/bin/env python3
-"""
-Word Tracking System for Abbreviation Opportunity Analysis.
+"""Word Tracking System for Abbreviation Opportunity Analysis.
 
 This module provides a comprehensive system for tracking non-substituted words
 during WDS enum generation to identify potential abbreviation candidates.
 """
 
-import re
-from collections import defaultdict
-from dataclasses import dataclass, field
-from pathlib import Path
-from typing import Dict, List, Set, Tuple, Optional
 import json
 import logging
-from datetime import datetime, timezone
+import re
+import sys
+from collections import defaultdict
+from dataclasses import dataclass, field
+from datetime import UTC, datetime
+from pathlib import Path
 
 from tools.substitution import SubstitutionEngine
 
@@ -26,8 +25,8 @@ class WordStats:
 
     word: str
     frequency: int = 0
-    contexts: Set[str] = field(default_factory=set)
-    sources: Set[str] = field(default_factory=set)  # Which generator/dataset
+    contexts: set[str] = field(default_factory=set)
+    sources: set[str] = field(default_factory=set)  # Which generator/dataset
     max_length_impact: int = 0  # Maximum chars saved if abbreviated
     avg_length_impact: float = 0.0  # Average chars saved per occurrence
 
@@ -58,8 +57,7 @@ class WordStats:
 
 
 class WordTracker:
-    """
-    Tracks and analyzes non-substituted words during enum generation.
+    """Tracks and analyzes non-substituted words during enum generation.
 
     This class provides functionality to:
     1. Track words that don't get abbreviated
@@ -67,18 +65,17 @@ class WordTracker:
     3. Generate prioritized abbreviation recommendations
     """
 
-    def __init__(self, subs_engine: Optional[SubstitutionEngine] = None):
+    def __init__(self, subs_engine: SubstitutionEngine | None = None):
         self.subs_engine = subs_engine or SubstitutionEngine()
-        self.word_stats: Dict[str, WordStats] = {}
-        self.session_id = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+        self.word_stats: dict[str, WordStats] = {}
+        self.session_id = datetime.now(UTC).strftime("%Y%m%d_%H%M%S")
         self.min_word_length = 4  # Only track words >= 4 chars
         self.max_tracked_words = 10000  # Prevent memory overflow
 
     def track_text_processing(
         self, original_text: str, substituted_text: str, source: str = "unknown"
-    ) -> Dict[str, int]:
-        """
-        Track the processing of text through substitution engine.
+    ) -> dict[str, int]:
+        """Track the processing of text through substitution engine.
 
         Args:
             original_text: Original text before substitution
@@ -87,6 +84,7 @@ class WordTracker:
 
         Returns:
             Dictionary of non-substituted words and their lengths
+
         """
         # Extract words from original text
         original_words = self._extract_words(original_text)
@@ -126,7 +124,7 @@ class WordTracker:
 
         return non_substituted
 
-    def _extract_words(self, text: str) -> List[str]:
+    def _extract_words(self, text: str) -> list[str]:
         """Extract meaningful words from text."""
         # Remove common delimiters and extract alphabetic sequences
         words = re.findall(r"[A-Za-z]{3,}", text)
@@ -184,9 +182,8 @@ class WordTracker:
 
     def get_abbreviation_candidates(
         self, min_frequency: int = 3, min_length: int = 6, max_results: int = 50
-    ) -> List[Tuple[str, WordStats]]:
-        """
-        Get prioritized list of abbreviation candidates.
+    ) -> list[tuple[str, WordStats]]:
+        """Get prioritized list of abbreviation candidates.
 
         Args:
             min_frequency: Minimum frequency to be considered
@@ -195,6 +192,7 @@ class WordTracker:
 
         Returns:
             List of (word, stats) tuples sorted by priority score
+
         """
         candidates = []
 
@@ -209,12 +207,11 @@ class WordTracker:
 
     def generate_abbreviation_report(
         self,
-        output_file: Optional[Path] = None,
+        output_file: Path | None = None,
         include_contexts: bool = False,
         format_markdown: bool = True,
     ) -> str:
-        """
-        Generate a comprehensive abbreviation opportunity report.
+        """Generate a comprehensive abbreviation opportunity report.
 
         Args:
             output_file: Optional file to write report to
@@ -223,6 +220,7 @@ class WordTracker:
 
         Returns:
             Report string
+
         """
         candidates = self.get_abbreviation_candidates()
 
@@ -273,8 +271,10 @@ class WordTracker:
                     [
                         "## 🏆 Top Abbreviation Candidates",
                         "",
-                        "| Rank | Word | Freq | Avg Save | Total Save | Priority Score | Sources |",
-                        "|------|------|------|----------|------------|----------------|---------|",
+                        "| Rank | Word | Freq | Avg Save | Total Save | Priority Score \
+                            | Sources |",
+                        "|------|------|------|----------|------------|----------------\
+                            |---------|",
                     ]
                 )
 
@@ -285,7 +285,8 @@ class WordTracker:
 
                     report_lines.append(
                         f"| {i} | `{word}` | {stats.frequency} | "
-                        f"{stats.avg_length_impact:.1f} | {stats.total_potential_savings:.0f} | "
+                        f"{stats.avg_length_impact:.1f} | \
+                            {stats.total_potential_savings:.0f} | "
                         f"{stats.priority_score:.0f} | {sources_str} |"
                     )
 
@@ -294,7 +295,8 @@ class WordTracker:
                 report_lines.extend(
                     [
                         "🏆 TOP ABBREVIATION CANDIDATES",
-                        f"{'Rank':<4} {'Word':<20} {'Freq':<6} {'AvgSave':<8} {'TotalSave':<10} {'Score':<8} Sources",
+                        f"{'Rank':<4} {'Word':<20} {'Freq':<6} {'AvgSave':<8} \
+                            {'TotalSave':<10} {'Score':<8} Sources",
                         "-" * 80,
                     ]
                 )
@@ -306,12 +308,14 @@ class WordTracker:
 
                     report_lines.append(
                         f"{i:<4} {word:<20} {stats.frequency:<6} "
-                        f"{stats.avg_length_impact:<8.1f} {stats.total_potential_savings:<10.0f} "
+                        f"{stats.avg_length_impact:<8.1f} \
+                            {stats.total_potential_savings:<10.0f} "
                         f"{stats.priority_score:<8.0f} {sources_str}"
                     )
 
             if len(candidates) > 25:
-                report_lines.append(f"... and {len(candidates) - 25} more candidates")
+                report_lines.append(f"... and {len(candidates) - 25} more \
+                                    candidates")
 
         if format_markdown:
             report_lines.extend(["---", "", "## 📋 Recommendations", ""])
@@ -334,7 +338,8 @@ class WordTracker:
                         "### 🎯 Priority Actions:",
                         "",
                         "1. Consider abbreviating top 5-10 words for immediate impact",
-                        "2. Focus on words with frequency ≥ 5 and length ≥ 8 characters",
+                        "2. Focus on words with frequency ≥ 5 and length ≥ 8 \
+                            characters",
                         "3. Target sources with highest word concentration",
                         "",
                     ]
@@ -345,7 +350,8 @@ class WordTracker:
                         "",
                         "🎯 **Priority Actions:**",
                         "1. Consider abbreviating top 5-10 words for immediate impact",
-                        "2. Focus on words with frequency ≥ 5 and length ≥ 8 characters",
+                        "2. Focus on words with frequency ≥ 5 and length ≥ 8 \
+                            characters",
                         "3. Target sources with highest word concentration",
                         "",
                     ]
@@ -361,7 +367,8 @@ class WordTracker:
                             stats.total_potential_savings for _, stats in words
                         )
                         report_lines.append(
-                            f"- **{source}**: {len(words)} words, ~{total_savings:.0f} char savings"
+                            f"- **{source}**: {len(words)} words, \
+                                ~{total_savings:.0f} char savings"
                         )
                 else:
                     report_lines.extend(["📊 **Impact by Source:**"])
@@ -371,7 +378,8 @@ class WordTracker:
                             stats.total_potential_savings for _, stats in words
                         )
                         report_lines.append(
-                            f"   • {source}: {len(words)} words, ~{total_savings:.0f} char savings"
+                            f"   • {source}: {len(words)} words, \
+                                ~{total_savings:.0f} char savings"
                         )
 
             # Suggested abbreviations for top candidates
@@ -383,7 +391,8 @@ class WordTracker:
                 total_impact = savings * stats.frequency
                 report_lines.append(
                     f"   • '{word}' → '{suggested_abbrev}' "
-                    f"(saves {savings} chars × {stats.frequency} uses = {total_impact} total)"
+                    f"(saves {savings} chars × {stats.frequency} \
+                    uses = {total_impact} total)"
                 )
 
         else:
@@ -463,7 +472,7 @@ class WordTracker:
 
         data = {
             "session_id": self.session_id,
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "total_words": len(self.word_stats),
             "word_stats": word_stats_dict,
         }
@@ -500,7 +509,7 @@ class WordTracker:
 
 
 # Global instance for easy access
-_global_word_tracker: Optional[WordTracker] = None
+_global_word_tracker: WordTracker | None = None
 
 
 def get_word_tracker():
@@ -519,6 +528,7 @@ def reset_word_tracker():
 
 if __name__ == "__main__":
     import argparse
+
     from statscan.util.log import configure_logging
 
     parser = argparse.ArgumentParser(
@@ -563,7 +573,7 @@ if __name__ == "__main__":
             print(
                 "❌ No word stats loaded. Run enum generation with word tracking first."
             )
-            exit(1)
+            sys.exit(1)
 
         print(f"📊 Loaded {len(tracker.word_stats)} tracked words")
         print("🔍 Generating abbreviation analysis report...")

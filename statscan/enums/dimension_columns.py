@@ -1,5 +1,4 @@
-"""
-Enums for census data dimension columns and metadata.
+"""Enums for census data dimension columns and metadata.
 
 This module provides enum definitions for standardizing column names
 and dimension identifiers in census datasets.
@@ -28,8 +27,12 @@ class DimensionColumn(StrEnum):
         """Get description of the dimension column."""
         descriptions = {
             DimensionColumn.GENDER: "Gender dimension (Male, Female, Total)",
-            DimensionColumn.CENSUS_PROFILE_CHARACTERISTIC: "Census characteristic being measured",
-            DimensionColumn.STATISTIC_TYPE: "Type of statistic (count, percentage, rate, etc.)",
+            DimensionColumn.CENSUS_PROFILE_CHARACTERISTIC: (
+                "Census characteristic being measured"
+            ),
+            DimensionColumn.STATISTIC_TYPE: (
+                "Type of statistic (count, percentage, rate, etc.)"
+            ),
             DimensionColumn.GEOGRAPHY: "Geographic area name",
             DimensionColumn.GEOGRAPHIC_LEVEL: "Level of geographic aggregation",
             DimensionColumn.UOM: "Unit of measurement description",
@@ -85,7 +88,9 @@ class SeriesKeyPosition(Enum):
         """Get the corresponding dimension column name."""
         mapping = {
             SeriesKeyPosition.GENDER: DimensionColumn.GENDER,
-            SeriesKeyPosition.CHARACTERISTIC: DimensionColumn.CENSUS_PROFILE_CHARACTERISTIC,
+            SeriesKeyPosition.CHARACTERISTIC: (
+                DimensionColumn.CENSUS_PROFILE_CHARACTERISTIC
+            ),
             SeriesKeyPosition.STATISTIC_TYPE: DimensionColumn.STATISTIC_TYPE,
             SeriesKeyPosition.GEOGRAPHY: DimensionColumn.GEOGRAPHY,
             SeriesKeyPosition.UOM: DimensionColumn.UOM_ID,
@@ -104,6 +109,7 @@ class ColumnType(Enum):
 
     @property
     def description(self) -> str:
+        """Get description of the column type."""
         descriptions = {
             ColumnType.DIMENSION: "Dimension that defines data categorization",
             ColumnType.METADATA: "Metadata about the data points",
@@ -124,8 +130,9 @@ class ValueType(Enum):
     CONFIDENTIAL = "confidential"
 
     @classmethod
-    def from_value(cls, value) -> "ValueType":
+    def from_value(cls, value) -> ValueType:
         """Determine value type from actual value."""
+        max_code_length = 10
         if value is None or str(value).strip() == "":
             return cls.MISSING
 
@@ -143,6 +150,8 @@ class ValueType(Enum):
             return cls.NUMERIC
         except (ValueError, TypeError):
             # Check if it's a code pattern (mostly digits/letters)
-            if len(str_value) <= 10 and any(c.isdigit() for c in str_value):
+            if len(str_value) <= max_code_length and any(
+                c.isdigit() for c in str_value
+            ):
                 return cls.CODE
             return cls.TEXT

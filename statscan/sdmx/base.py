@@ -1,26 +1,31 @@
+"""Base model class for SDMX data structures with validation."""
+
 import logging
 
 from pydantic import BaseModel, model_validator
-
 
 logger = logging.getLogger(__name__)
 
 
 class Base(BaseModel):
+    """Base model for SDMX data structures with validation and preprocessing."""
+
     @classmethod
     def _preprocess_data(cls, data: dict) -> dict:
-        """
-        Hook for subclasses to preprocess data before validation.
+        """Preprocess data before validation.
+
         Override this method in subclasses to clean up data.
+
         """
         return data
 
     @model_validator(mode="before")
     @classmethod
     def process_data(cls, data: dict) -> dict:
-        """
-        Check for extra fields in the data dictionary that are not defined in the model.
+        """Check for extra fields in the data dictionary.
+
         First allows subclasses to preprocess the data.
+
         """
         # Handle None data
         if data is None:

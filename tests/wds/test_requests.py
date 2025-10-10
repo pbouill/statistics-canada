@@ -1,8 +1,7 @@
 import pytest
 
-from statscan.wds.requests import WDSRequests, ResponseKeys, RESPONSE_SUCCESS_STR
 from statscan.wds.client import Client
-
+from statscan.wds.requests import RESPONSE_SUCCESS_STR, ResponseKeys, WDSRequests
 from tests.data_store import WDSDataPaths
 
 

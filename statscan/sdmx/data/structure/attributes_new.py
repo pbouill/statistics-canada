@@ -1,5 +1,7 @@
-from typing import Optional, Any, Union
-from datetime import datetime, date
+"""SDMX attribute models (new version) with enhanced value handling."""
+
+from datetime import date, datetime
+from typing import Any
 
 from pydantic import field_validator
 
@@ -8,16 +10,14 @@ from .relationship import Relationship
 
 
 class AttributeValue(Base):
-    """
-    Represents a value for an attribute in SDMX.
-    """
+    """Represents a value for an attribute in SDMX."""
 
-    id: Optional[Union[int, str]] = None
-    order: Optional[int] = None
-    name: Optional[str] = None
-    names: Optional[dict[str, str]] = None  # language -> name mapping
-    annotations: Optional[list[int]] = None
-    value: Optional[Any] = None
+    id: int | str | None = None
+    order: int | None = None
+    name: str | None = None
+    names: dict[str, str] | None = None  # language -> name mapping
+    annotations: list[int] | None = None
+    value: Any | None = None
 
     @field_validator("value", mode="before")
     @classmethod
@@ -52,19 +52,17 @@ class AttributeValue(Base):
 
 
 class Attribute(Base):
-    """
-    Represents an attribute in SDMX structures.
-    """
+    """Represents an attribute in SDMX structures."""
 
     id: str
     name: str
-    names: Optional[dict[str, str]] = None  # language -> name mapping
-    roles: Optional[list[str]] = None
-    relationship: Optional[Relationship] = None
+    names: dict[str, str] | None = None  # language -> name mapping
+    roles: list[str] | None = None
+    relationship: Relationship | None = None
     values: list[AttributeValue] = []
-    annotations: Optional[list[int]] = None
+    annotations: list[int] | None = None
 
-    def __getitem__(self, key: Union[int, str]) -> AttributeValue:
+    def __getitem__(self, key: int | str) -> AttributeValue:
         """Get an attribute value by its ID."""
         for value in self.values:
             if value.id == key:
@@ -79,7 +77,7 @@ class Attribute(Base):
 
     def get_value_by_name(
         self, name: str, language: str = "en"
-    ) -> Optional[AttributeValue]:
+    ) -> AttributeValue | None:
         """Get a value by its name or display name."""
         for value in self.values:
             if value.name == name or value.get_display_name(language) == name:
@@ -88,13 +86,15 @@ class Attribute(Base):
 
 
 class Attributes(Base):
-    """
-    Represents the collection of attributes in SDMX structures.
-    Based on actual structure: {dataSet (list), dimensionGroup (list), series (list), observation (list)}
+    """Represents the collection of attributes in SDMX structures.
+
+    Based on actual structure: {dataSet (list), dimensionGroup (list),
+    series (list), observation (list)}.
+
     """
 
-    dataSet: Optional[list] = None
-    dimensionGroup: Optional[list] = None
+    dataSet: list | None = None  # noqa: N815
+    dimensionGroup: list | None = None  # noqa: N815
     series: list[Attribute] = []
     observation: list[Attribute] = []
 
@@ -110,21 +110,21 @@ class Attributes(Base):
 
     def get_attribute_by_name(
         self, name: str, language: str = "en"
-    ) -> Optional[Attribute]:
+    ) -> Attribute | None:
         """Get an attribute by its name or display name."""
         for attribute in self.series + self.observation:
             if attribute.name == name or attribute.get_display_name(language) == name:
                 return attribute
         return None
 
-    def get_series_attribute(self, attribute_id: str) -> Optional[Attribute]:
+    def get_series_attribute(self, attribute_id: str) -> Attribute | None:
         """Get a series-level attribute by ID."""
         for attribute in self.series:
             if attribute.id == attribute_id:
                 return attribute
         return None
 
-    def get_observation_attribute(self, attribute_id: str) -> Optional[Attribute]:
+    def get_observation_attribute(self, attribute_id: str) -> Attribute | None:
         """Get an observation-level attribute by ID."""
         for attribute in self.observation:
             if attribute.id == attribute_id:

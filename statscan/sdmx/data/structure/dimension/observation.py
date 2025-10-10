@@ -1,25 +1,27 @@
-from typing import Optional, Union
+"""SDMX observation dimension models."""
 
+from ....base import Base
 from ..relationship import Relationship
 from ..value import Value
-from ....base import Base
 
 
 class Observation(Base):
-    """
-    Represents an observation dimension in SDMX.
-    Based on actual structure: {id (str), name (str), names (dict), keyPosition (int), roles (list), values (list)}
+    """Represents an observation dimension in SDMX.
+
+    Based on actual structure: {id (str), name (str), names (dict),
+    keyPosition (int), roles (list), values (list)}.
+
     """
 
     id: str
     name: str
-    names: Optional[dict[str, str]] = None  # language -> name mapping
-    keyPosition: Optional[int] = None
-    roles: Optional[list[str]] = None
-    relationship: Optional[Relationship] = None
+    names: dict[str, str] | None = None  # language -> name mapping
+    keyPosition: int | None = None  # noqa: N815
+    roles: list[str] | None = None
+    relationship: Relationship | None = None
     values: list[Value] = []
 
-    def __getitem__(self, key: Union[int, str]) -> Value:
+    def __getitem__(self, key: int | str) -> Value:
         """Get an observation value by its ID."""
         for value in self.values:
             if value.id == key:
@@ -32,7 +34,7 @@ class Observation(Base):
             return self.names.get(language, self.name)
         return self.name
 
-    def get_value_by_name(self, name: str, language: str = "en") -> Optional[Value]:
+    def get_value_by_name(self, name: str, language: str = "en") -> Value | None:
         """Get a value by its name or display name."""
         for value in self.values:
             if value.name == name or value.get_display_name(language) == name:
@@ -45,7 +47,7 @@ class Observation(Base):
         return any(value.is_time_period for value in self.values)
 
     @property
-    def time_range(self) -> Optional[tuple]:
+    def time_range(self) -> tuple | None:
         """Get the overall time range if this is a time dimension."""
         if not self.has_time_values:
             return None

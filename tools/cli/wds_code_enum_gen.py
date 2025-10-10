@@ -1,13 +1,12 @@
-from pathlib import Path
 import logging
+from pathlib import Path
+
 from tqdm import tqdm
 
 from statscan.wds.client import Client
 from statscan.wds.models.code import CodeSet, CodeSets
-
 from tools.enum_writer import AbstractEnumWriter, EnumEntry, InvalidEnumValueError
 from tools.word_tracker import get_word_tracker
-
 
 logger = logging.getLogger(__name__)
 
@@ -146,8 +145,7 @@ class CodeSetEnumWriter(AbstractEnumWriter):
         output_dir: Path,
         overwrite: bool = False,
     ) -> dict[str, Path]:
-        """
-        Main processing method that fetches all codesets and generates all enums.
+        """Main processing method that fetches all codesets and generates all enums.
 
         Args:
             output_dir: Output directory for generated files
@@ -155,13 +153,15 @@ class CodeSetEnumWriter(AbstractEnumWriter):
 
         Returns:
             Dictionary mapping codeset names to generated file paths
+
         """
         logger.info("Starting CodeSet enum processing...")
 
         # Fetch all codesets first
         codesets = await self.get_all_codesets()
         logger.info(
-            f"Codesets fetched, starting enum generation for {len(codesets)} codesets..."
+            f"Codesets fetched, starting enum generation for {len(codesets)} \
+                codesets..."
         )
 
         # Use the existing write_codesets_enums method to avoid duplication
@@ -179,8 +179,6 @@ class CodeSetEnumWriter(AbstractEnumWriter):
         # Update tracking settings
         self.track_words = track_words
         if track_words:
-            from tools.word_tracker import get_word_tracker
-
             self.word_tracker = get_word_tracker()
         else:
             self.word_tracker = None
@@ -193,8 +191,7 @@ class CodeSetEnumWriter(AbstractEnumWriter):
         fp: Path,
         overwrite: bool = False,
     ) -> Path:
-        """
-        Process a single codeset and generate its enum.
+        """Process a single codeset and generate its enum.
 
         Args:
             codeset_name: Name of the codeset to process
@@ -203,6 +200,7 @@ class CodeSetEnumWriter(AbstractEnumWriter):
 
         Returns:
             Path to the generated file
+
         """
         logger.info(f"Starting single codeset processing: {codeset_name}")
 
@@ -257,6 +255,7 @@ class CodeSetEnumWriter(AbstractEnumWriter):
 
 if __name__ == "__main__":
     import asyncio
+
     from statscan.util.log import configure_logging
 
     configure_logging(level=logging.DEBUG)

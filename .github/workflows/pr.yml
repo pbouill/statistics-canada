@@ -1,5 +1,8 @@
 name: PR Checks (dev)
 
+permissions:
+  contents: write
+
 on:
   pull_request:
     branches:
@@ -11,3 +14,37 @@ jobs:
     # Skip if triggered by a bot / qaqc.yml
     if: ${{ github.actor != 'github-actions[bot]' }}
     uses: ./.github/workflows/qaqc.yml
+    
+  update-changelog:
+    name: "Update Changelog"
+    runs-on: ubuntu-latest
+    needs: qa-qc
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+
+      - name: Update Changelog
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          python .github/scripts/update_changelog.py "$PR_NUMBER" "$PR_TITLE" "$PR_AUTHOR" "$PR_URL"
+
+      - name: Commit changelog update
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "📝 Update CHANGELOG.md for PR #${{ github.event.pull_request.number }} [skip ci]"
+          file_pattern: CHANGELOG.md
+          commit_options: "--no-verify"

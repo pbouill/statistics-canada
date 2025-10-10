@@ -1,4 +1,6 @@
-from typing import Optional, Any
+"""SDMX data series models with observations and attributes."""
+
+from typing import Any
 
 from pydantic import field_validator
 
@@ -6,14 +8,16 @@ from ...base import Base
 
 
 class Series(Base):
-    """
-    Represents a data series in an SDMX dataset.
-    Based on actual structure: {attributes (list), annotations (list), observations (dict)}
+    """Represents a data series in an SDMX dataset.
+
+    Based on actual structure: {attributes (list), annotations (list),
+    observations (dict)}.
+
     """
 
-    attributes: list[Optional[int]] = []
+    attributes: list[int | None] = []
     annotations: list[int] = []
-    observations: dict[int, list[Optional[float | int]]] = {}
+    observations: dict[int, list[float | int | None]] = {}
 
     @field_validator("observations", mode="before")
     @classmethod
@@ -21,11 +25,13 @@ class Series(Base):
         """Validate and clean observation data."""
         for k, v in observations.items():
             if isinstance(v, list):
-                v = [None if x == "" else x for x in v]
-            observations[k] = v
+                cleaned_v = [None if x == "" else x for x in v]
+                observations[k] = cleaned_v
+            else:
+                observations[k] = v
         return observations
 
-    def __getitem__(self, key: int) -> list[Optional[float | int]]:
+    def __getitem__(self, key: int) -> list[float | int | None]:
         """Get observations for a specific period."""
         return self.observations[key]
 
@@ -36,16 +42,16 @@ class Series(Base):
 
     @staticmethod
     def map_observation(
-        key: str | list[int], observation: list[Optional[float | int]]
-    ) -> dict[int, Optional[float | int]]:
+        key: str | list[int], observation: list[float | int | None]
+    ) -> dict[int, float | int | None]:
         """Map a single observation to a dictionary with the period as key."""
         if isinstance(key, str):
             key = Series.parse_key(key)
-        return dict(zip(key, observation))
+        return dict(zip(key, observation, strict=False))
 
     def map_observations(
         self, series_key: str
-    ) -> dict[int, dict[int, Optional[float | int]]]:
+    ) -> dict[int, dict[int, float | int | None]]:
         """Map observations from another series to this series."""
         parsed_key = self.parse_key(series_key)
         return {
@@ -59,7 +65,7 @@ class Series(Base):
 
     def get_latest_observation(
         self,
-    ) -> Optional[tuple[int, list[Optional[float | int]]]]:
+    ) -> tuple[int, list[float | int | None]] | None:
         """Get the latest observation (highest period key)."""
         if not self.observations:
             return None
@@ -68,14 +74,14 @@ class Series(Base):
 
     def get_earliest_observation(
         self,
-    ) -> Optional[tuple[int, list[Optional[float | int]]]]:
+    ) -> tuple[int, list[float | int | None]] | None:
         """Get the earliest observation (lowest period key)."""
         if not self.observations:
             return None
         earliest_period = min(self.observations.keys())
         return earliest_period, self.observations[earliest_period]
 
-    def get_non_null_observations(self) -> dict[int, list[Optional[float | int]]]:
+    def get_non_null_observations(self) -> dict[int, list[float | int | None]]:
         """Get observations that contain at least one non-null value."""
         filtered = {}
         for period, values in self.observations.items():

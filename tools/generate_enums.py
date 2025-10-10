@@ -1,21 +1,22 @@
-import sys
-from pathlib import Path
-from typing import Iterable, Optional, TextIO, Generator, Callable, Mapping
-from datetime import datetime, timezone
-import re
-from enum import Enum, StrEnum
-import logging
-from contextlib import contextmanager
 import inspect
+import logging
+import re
+import sys
+from collections.abc import Callable, Generator, Iterable, Mapping
+from contextlib import contextmanager
+from datetime import UTC, datetime
+from enum import Enum, StrEnum
+from pathlib import Path
+from typing import TextIO
 
 import pandas as pd
 
 import statscan.enums.auto
-from statscan.enums.schema import Schema, SACType
-from statscan.enums.geocode.geocode import GeoCode, GeoAttributeColumn2021
-from statscan.enums.geocode.pr_geocode import ProvinceGeoCode
 from statscan.enums.geocode.cd_geocode import CensusDivisionGeoCode
 from statscan.enums.geocode.cma_geocode import CensusMetropolitanAreaGeoCode
+from statscan.enums.geocode.geocode import GeoAttributeColumn2021, GeoCode
+from statscan.enums.geocode.pr_geocode import ProvinceGeoCode
+from statscan.enums.schema import SACType, Schema
 from statscan.url import GEO_ATTR_FILE_2021_URL
 from statscan.util.get_data import download_data, unpack_to_dataframe
 
@@ -29,8 +30,8 @@ KEY_COUNT_COLUMN = "total_keys"
 EnumMapSig = tuple[
     GeoAttributeColumn2021 | str,  # enum_name_col
     GeoAttributeColumn2021 | str,  # enum_value_col
-    Optional[GeoAttributeColumn2021 | str],  # enum_desc_col
-    Optional[GeoAttributeColumn2021 | str],  # name/key prefix
+    GeoAttributeColumn2021 | str | None,  # enum_desc_col
+    GeoAttributeColumn2021 | str | None,  # name/key prefix
 ]
 
 
@@ -48,8 +49,7 @@ def to_dot_path(module_path: Path) -> str:
 
 
 def cleanstr(s: str) -> str:
-    """
-    Clean a string by removing leading/trailing whitespace and converting to uppercase.
+    """Clean a string by removing leading/trailing whitespace..
     """
     for char in (" ", "-"):  # Replace spaces, hyphens, and periods with underscores
         s = s.replace(char, "_")
@@ -69,8 +69,7 @@ def cleanstr(s: str) -> str:
 
 
 def get_module_path(cls: type) -> Path:
-    """
-    Get the module path for a given class.
+    """Get the module path for a given class.
     """
     module_name = re.sub(
         r"([a-z0-9])([A-Z])",
@@ -85,8 +84,7 @@ def write_method(
     method: Callable,
     indent: int = 4,
 ) -> None:
-    """
-    Write a method to the file.
+    """Write a method to the file.
     """
     if isinstance(method, property):
         write_method(f, method.fget, indent=indent)
@@ -107,15 +105,14 @@ def write_method(
 def write_enum_class(
     f: TextIO,
     cls_template: type[Enum],
-    cls_name: Optional[str] = None,
-    cls_bases: Optional[tuple[type, ...]] = None,
-    df: Optional[pd.DataFrame] = None,
-    mapping: Optional[EnumMapSig] = None,
+    cls_name: str | None = None,
+    cls_bases: tuple[type, ...] | None = None,
+    df: pd.DataFrame | None = None,
+    mapping: EnumMapSig | None = None,
     skip_methods: bool = False,
     skip_auto: bool = True,
 ):
-    """
-    Write the enum class definition to the file.
+    """Write the enum class definition to the file.
     """
     cls_name = cls_name or cls_template.__name__
     cls_bases = cls_bases or cls_template.__bases__
@@ -125,19 +122,21 @@ def write_enum_class(
 
     f.write("\n\n")
     f.write(f"class {cls_name}({', '.join(b.__name__ for b in cls_bases)}):\n")
-    f.write(" " * indent + '"""\n')
-    f.write(" " * indent + f"Automatically generated Enum for {cls_name}\n")
+    # Start docstring on same line (D212 compliance)
+    f.write(" " * indent + f'"""Automatically generated Enum for {cls_name}.\n')
+    # Add blank line after summary (D205 compliance, no trailing whitespace W293)
+    f.write("\n")
     if mapping is not None:
-        name_col, val_col, desc_col, prefix_col = mapping
+        name_col, val_col, desc_col, pfx_col = mapping
 
         f.write(" " * indent + f"Name: {name_col}\n")
         f.write(" " * indent + f"Value: {val_col}\n")
         if desc_col:
             f.write(" " * indent + f"Description: {desc_col}\n")
-        if prefix_col:
+        if pfx_col:
             f.write(
                 " " * indent
-                + f"Prefix: {prefix_col if isinstance(prefix_col, Enum) else '(custom)'}\n"
+                + f"Prefix: {pfx_col if isinstance(pfx_col, Enum) else '(custom)'}\n"
             )
 
         # convert Enum columns to strings if they are Enums
@@ -147,9 +146,11 @@ def write_enum_class(
             val_col = str(val_col.value)
         if isinstance(desc_col, Enum):
             desc_col = str(desc_col.value)
-        if isinstance(prefix_col, Enum):
-            prefix_col = str(prefix_col.value)
+        if isinstance(pfx_col, Enum):
+            pfx_col = str(pfx_col.value)
     f.write(" " * indent + '"""\n')
+    # Add blank line after class docstring (D204 compliance)
+    f.write("\n")
 
     # write any class attributes, use inspect to find them
     for k, v in inspect.get_annotations(cls_template).items():
@@ -163,23 +164,15 @@ def write_enum_class(
     if df is not None:
         if mapping is None:
             raise ValueError("Mapping must be provided if DataFrame is provided.")
-        # drop duplicate values and sort by value (initially, the rows will be resorted by resolved "unique_name" later...)
+        # drop duplicate values and sort by value (initially, the rows will be resorted
+        # by resolved "unique_name" later...)
         sorted_unique_df = df.drop_duplicates(subset=[val_col]).sort_values(by=val_col)
 
         sorted_unique_df[KEY_COLUMN] = sorted_unique_df.apply(
-            lambda row: (f"{str(row[prefix_col]).split('/')[0]}_" if prefix_col else "")
+            lambda row: (f"{str(row[pfx_col]).split('/')[0]}_" if pfx_col else "")
             + str(row[name_col]).split("/")[0],
             axis=1,
         )
-
-        # sorted_unique_df = sorted_unique_df.assign(
-        #     **{
-        #         KEY_COLUMN: (
-        #             ((sorted_unique_df[prefix_col] + '_') if prefix_col else '') +
-        #             sorted_unique_df[name_col].str.split('/').str[0]  # split on '/' and take the first part (discard French portion)
-        #         )
-        #     }
-        # )
 
         # drop rows where key or value is NaN
         sorted_unique_df = sorted_unique_df.dropna(subset=[KEY_COLUMN, val_col])
@@ -215,7 +208,7 @@ def write_enum_class(
             try:
                 name: str = row[name_col]
                 value = row[val_col]
-                desc: Optional[str] = row[desc_col] if desc_col else None
+                desc: str | None = row[desc_col] if desc_col else None
             except KeyError as e:
                 logger.error(
                     f"Missing column in DataFrame: {e}. Columns: {df.columns.tolist()}"
@@ -253,12 +246,11 @@ def write_enum_class(
 @contextmanager
 def enum_file(
     fp: Path,
-    imports: Mapping[str, Optional[str | Iterable[str]]],
+    imports: Mapping[str, str | Iterable[str] | None],
     overwrite: bool = False,
-) -> Generator[TextIO, None, None]:
-    """
-    Context manager to write an enum file.
-    """
+    module_docstring: str | None = None,
+) -> Generator[TextIO]:
+    """Context manager to write an enum file."""
     fp.parent.mkdir(parents=True, exist_ok=True)
     if not overwrite and fp.exists():
         raise FileExistsError(
@@ -266,14 +258,31 @@ def enum_file(
         )
     try:
         with fp.open(mode="w") as f:
+            # Write generation header as comments (preserves old style)
             f.write(
                 f"# !! This file is automatically generated by: {Path(__file__).name}\n"
             )
-            f.write(f"#     date: {datetime.now(tz=timezone.utc).isoformat()}\n\n")
-            for import_module, import_items in imports.items():
+            f.write(f"#     date: {datetime.now(tz=UTC).isoformat()}\n")
+
+            # Write module docstring (required by ruff D100)
+            if module_docstring:
+                f.write(f'"""{module_docstring}"""\n')
+            else:
+                # Default module docstring
+                f.write('"""Auto-generated enum module.\n\n')
+                f.write(f'Generated from {fp.stem} data.\n')
+                f.write('"""\n')
+
+            f.write("\n")
+
+            # Write imports (sorted for ruff I001 compliance)
+            for import_module in sorted(imports.keys()):
+                import_items = imports[import_module]
                 if import_items:
                     if isinstance(import_items, str):
                         import_items = [import_items]
+                    else:
+                        import_items = sorted(import_items)
                     f.write(f"from {import_module} import {', '.join(import_items)}\n")
             yield f
     finally:
@@ -283,12 +292,11 @@ def enum_file(
 def write_module(
     df: pd.DataFrame,
     cls_templates: dict[type[GeoCode], EnumMapSig],
-    module_path: Optional[Path] = None,
-    imports: Optional[dict[str, Optional[str | set[str]]]] = None,
+    module_path: Path | None = None,
+    imports: dict[str, str | set[str] | None] | None = None,
     overwrite: bool = False,
 ) -> None:
-    """
-    Write the GeoCode class definition to the file.
+    """Write the GeoCode class definition to the file.
     """
     if imports is None:
         imports = {}
@@ -305,7 +313,8 @@ def write_module(
                 mod_imports = {mod_imports, b.__name__}
             else:
                 raise TypeError(
-                    f"Expected set for imports[{b.__module__}], got {type(imports[b.__module__])}"
+                    f"Expected set for imports[{b.__module__}], got \
+                        {type(imports[b.__module__])}"
                 )
             imports[b.__module__] = mod_imports
 
@@ -325,10 +334,9 @@ def write_module(
 
 def update_imports_dict(
     obj: type | Callable,
-    imports: Optional[dict[str, Optional[str | set[str]]]] = None,
-) -> dict[str, Optional[str | set[str]]]:
-    """
-    Update the imports dictionary with a module and its items.
+    imports: dict[str, str | set[str] | None] | None = None,
+) -> dict[str, str | set[str] | None]:
+    """Update the imports dictionary with a module and its items.
     """
     imports = imports or {}
     try:
@@ -336,14 +344,16 @@ def update_imports_dict(
         obj_name: str = obj.__name__
     except AttributeError as e:
         raise ValueError(
-            f"Object {obj} does not have a __module__ or __name__ attribute. Ensure it is a class or function."
+            f"Object {obj} does not have a __module__ or __name__ attribute. \
+                Ensure it is a class or function."
         ) from e
 
     if isinstance(mod_imports := imports.get(obj_mod, set()), str):
         mod_imports = {mod_imports}
     elif mod_imports is None:
         raise ValueError(
-            f'Module {obj_mod} has already been defined in the imports dict with "None", cannot append {obj_name} to import mapping.'
+            f'Module {obj_mod} has already been defined in the imports dict with \
+                {None}, cannot append {obj_name} to import mapping.'
         )
     mod_imports.add(obj_name)
     imports[obj_mod] = mod_imports
@@ -353,8 +363,8 @@ def update_imports_dict(
 def write_geocode_module(
     df: pd.DataFrame,
     cls_templates: dict[type[GeoCode], EnumMapSig],
-    module_path: Optional[Path] = None,
-    imports: Optional[dict[str, Optional[str | set[str]]]] = None,
+    module_path: Path | None = None,
+    imports: dict[str, str | set[str] | None] | None = None,
     overwrite: bool = False,
 ):
     imports = update_imports_dict(obj=Schema, imports=imports)
@@ -369,156 +379,127 @@ def write_geocode_module(
 
 
 class ProvinceTerritory(GeoCode):
-    """
-    Enum for Canadian provinces and territories.
+    """Enum for Canadian provinces and territories.
     This enum is automatically generated from the GeoAttribute data.
     see: https://www12.statcan.gc.ca/census-recensement/2021/geo/ref/domain-domaine/index2021-eng.cfm?lang=e&id=PRUID
     """
 
     @classmethod
     def get_schema(cls) -> Schema:
-        """
-        Return the Schema for this geo code type.
-        """
+        """Return the Schema for this geo code type."""
         return Schema.PR
 
     @classmethod
     def get_nchars(cls) -> int:
-        """
-        Return the number of characters in the code for this enum.
-        """
+        """Return the number of characters in the code for this enum."""
         return 2
 
 
 class CensusDivision(ProvinceGeoCode):
-    """
-    Enum for Canadian Census Divisions.
+    """Enum for Canadian Census Divisions.
+
     This enum is automatically generated from the GeoAttribute data.
     """
 
     @classmethod
     def get_schema(cls) -> Schema:
-        """
-        Return the Schema for this geo code type.
-        """
+        """Return the Schema for this geo code type."""
         return Schema.CD
 
     @classmethod
     def get_nchars(cls) -> int:
-        """
-        Return the number of characters in the code for this enum.
-        """
+        """Return the number of characters in the code for this enum."""
         return 4
 
 
 class FederalElectoralDistrict(ProvinceGeoCode):
-    """
-    Enum for Canadian Federal Electoral Districts.
+    """Enum for Canadian Federal Electoral Districts.
+
     This enum is automatically generated from the GeoAttribute data.
     """
 
     @classmethod
     def get_schema(cls) -> Schema:
-        """
-        Return the Schema for this geo code type.
-        """
+        """Return the Schema for this geo code type."""
         return Schema.FED
 
     @classmethod
     def get_nchars(cls) -> int:
-        """
-        Return the number of characters in the code for this enum.
-        """
+        """Return the number of characters in the code for this enum."""
         return 5
 
 
 class CensusSubdivision(CensusDivisionGeoCode):
-    """
-    Enum for Canadian Census Subdivisions.
+    """Enum for Canadian Census Subdivisions.
+
     This enum is automatically generated from the GeoAttribute data.
     """
 
     @classmethod
     def get_schema(cls) -> Schema:
-        """
-        Return the Schema for this geo code type.
-        """
+        """Return the Schema for this geo code type."""
         return Schema.CSD
 
     @classmethod
     def get_nchars(cls) -> int:
-        """
-        Return the number of characters in the code for this enum.
-        """
+        """Return the number of characters in the code for this enum."""
         return 7
 
 
 class DesignatedPlace(ProvinceGeoCode):
-    """
-    Enum for Canadian Designated Places.
+    """Enum for Canadian Designated Places.
+
     This enum is automatically generated from the GeoAttribute data.
     """
 
     @classmethod
     def get_schema(cls) -> Schema:
-        """
-        Return the Schema for this geo code type.
-        """
+        """Return the Schema for this geo code type."""
         return Schema.DPL
 
     @classmethod
     def get_nchars(cls) -> int:
-        """
-        Return the number of characters in the code for this enum.
-        """
+        """Return the number of characters in the code for this enum."""
         return 6
 
 
 class EconomicRegion(ProvinceGeoCode):
-    """
-    Enum for Canadian Economic Regions.
+    """Enum for Canadian Economic Regions.
+
     This enum is automatically generated from the GeoAttribute data.
     """
 
     @classmethod
     def get_schema(cls) -> Schema:
-        """
-        Return the Schema for this geo code type.
-        """
+        """Return the Schema for this geo code type."""
         return Schema.ER
 
     @classmethod
     def get_nchars(cls) -> int:
-        """
-        Return the number of characters in the code for this enum.
-        """
+        """Return the number of characters in the code for this enum."""
         return 4
 
 
 class CensusConsolidatedSubdivision(CensusDivisionGeoCode):
-    """
-    Enum for Canadian Census Agglomeration Stratified.
+    """Enum for Canadian Census Agglomeration Stratified.
+
     This enum is automatically generated from the GeoAttribute data.
     """
 
     @classmethod
     def get_schema(cls) -> Schema:
-        """
-        Return the Schema for this geo code type.
-        """
+        """Return the Schema for this geo code type."""
         return Schema.CCS
 
     @classmethod
     def get_nchars(cls) -> int:
-        """
-        Return the number of characters in the code for this enum.
-        """
+        """Return the number of characters in the code for this enum."""
         return 7
 
 
 class CensusMetropolitanArea(ProvinceGeoCode):
-    """
-    Enum for Canadian Census Metropolitan Areas.
+    """Enum for Canadian Census Metropolitan Areas.
+
     This enum is automatically generated from the GeoAttribute data.
     """
 
@@ -529,42 +510,35 @@ class CensusMetropolitanArea(ProvinceGeoCode):
 
     @classmethod
     def get_nchars(cls) -> int:
-        """
-        Return the number of characters in the code for this enum.
-        """
+        """Return the number of characters in the code for this enum."""
         return 3
 
 
 class CensusTract(CensusMetropolitanAreaGeoCode):
-    """
-    Enum for Canadian Census Tracts.
+    """Enum for Canadian Census Tracts.
+
     This enum is automatically generated from the GeoAttribute data.
     """
 
     @classmethod
     def get_schema(cls) -> Schema:
-        """
-        Return the Schema for this geo code type.
-        """
+        """Return the Schema for this geo code type."""
         return Schema.CT
 
     @classmethod
     def get_nchars(cls) -> int:
-        """
-        Return the number of characters in the code for this enum.
-        """
+        """Return the number of characters in the code for this enum."""
         return 7
 
     @classmethod
     def get_nprecision(cls) -> int:
-        """
-        Return the number of decimal places in the code for this enum.
-        """
+        """Return the number of decimal places in the code for this enum."""
         return 2
 
 
 if __name__ == "__main__":
     import asyncio
+
     from statscan.util.log import configure_logging
 
     configure_logging(level="DEBUG")
@@ -592,7 +566,7 @@ if __name__ == "__main__":
                 GeoAttributeColumn2021.CDNAME_DRNOM,  # enum_name_col
                 GeoAttributeColumn2021.CDUID_DRIDU,  # enum_value_col
                 None,  # enum_desc_col
-                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
+                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix
             ),
         },
         overwrite=True,
@@ -605,7 +579,7 @@ if __name__ == "__main__":
                 GeoAttributeColumn2021.FEDNAME_CEFNOM,  # enum_name_col
                 GeoAttributeColumn2021.FEDUID_CEFIDU,  # enum_value_col
                 None,  # enum_desc_col
-                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
+                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix
             ),
         },
         overwrite=True,
@@ -618,7 +592,7 @@ if __name__ == "__main__":
                 GeoAttributeColumn2021.CSDNAME_SDRNOM,  # enum_name_col
                 GeoAttributeColumn2021.CSDUID_SDRIDU,  # enum_value_col
                 None,  # enum_desc_col
-                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
+                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix
             )
         },
         overwrite=True,
@@ -631,7 +605,7 @@ if __name__ == "__main__":
                 GeoAttributeColumn2021.DPLNAME_LDNOM,  # enum_name_col
                 GeoAttributeColumn2021.DPLUID_LDIDU,  # enum_value_col
                 None,  # enum_desc_col
-                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
+                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix
             )
         },
         overwrite=True,
@@ -644,7 +618,7 @@ if __name__ == "__main__":
                 GeoAttributeColumn2021.ERNAME_RENOM,  # enum_name_col
                 GeoAttributeColumn2021.ERUID_REIDU,  # enum_value_col
                 None,  # enum_desc_col
-                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
+                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix
             )
         },
         overwrite=True,
@@ -657,7 +631,7 @@ if __name__ == "__main__":
                 GeoAttributeColumn2021.CCSNAME_SRUNOM,  # enum_name_col
                 GeoAttributeColumn2021.CCSUID_SRUIDU,  # enum_value_col
                 None,  # enum_desc_col
-                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
+                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix
             )
         },
         overwrite=True,
@@ -675,7 +649,7 @@ if __name__ == "__main__":
                 GeoAttributeColumn2021.CMANAME_RMRNOM,  # enum_name_col
                 GeoAttributeColumn2021.CMAPUID_RMRPIDU,  # enum_value_col
                 None,  # enum_desc_col
-                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix (abbreviation of the province)
+                GeoAttributeColumn2021.PREABBR_PRAABBREV,  # name/key prefix
             )
         },
         overwrite=True,

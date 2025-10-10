@@ -1,5 +1,4 @@
-"""
-Statistics Canada Web Data Service (WDS) API Client Package
+"""Statistics Canada Web Data Service (WDS) API Client Package.
 
 📚 OFFICIAL WDS USER GUIDE: https://www.statcan.gc.ca/en/developers/wds/user-guide
 

@@ -1,3 +1,5 @@
+"""Statistics Canada Python API client and utilities."""
+
 from importlib.metadata import packages_distributions, version
 from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
@@ -7,11 +9,11 @@ __all__ = ["__version__"]
 
 
 def _initialize_version() -> str:
-    """
-    Initializes the package version.
+    """Initialize the package version.
 
     Tries to get the version from installed package metadata first.
     Falls back to reading from a local _version.py file for development.
+
     """
     try:
         # This is the primary method: get the version from installed package metadata
@@ -37,5 +39,5 @@ def _initialize_version() -> str:
             return 'unknown-no-version-attribute'
         except Exception:
             return 'unknown-exec-error'
-        
+
 __version__ = _initialize_version()

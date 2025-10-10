@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Statistics Canada Package - Main Tool Interface
+"""Statistics Canada Package - Main Tool Interface
 
 This script provides easy access to all core package management tools:
 - Enum generation (geographic and WDS)
@@ -11,9 +10,9 @@ This script provides easy access to all core package management tools:
 Usage: python tools/main.py [action]
 """
 
+import subprocess
 import sys
 from pathlib import Path
-import subprocess
 
 # Add project root to path
 project_root = Path(__file__).parent.parent
@@ -44,15 +43,22 @@ def print_menu():
 def run_geographic_enums():
     """Generate geographic enums from census data."""
     print("\n🏗️ Generating geographic enums from census data...")
-    subprocess.run([sys.executable, "tools/generate_enums.py"], cwd=project_root)
+    subprocess.run(  # noqa: S603
+        [
+            sys.executable,
+            "tools/generate_enums.py"
+        ],
+        check=False,
+        cwd=project_root
+    )
 
 
 def run_wds_enums():
     """Generate WDS enums (product IDs and code sets)."""
     print("\n📊 Generating WDS enums...")
-    subprocess.run(
+    subprocess.run(  # noqa: S603
         [sys.executable, "tools/wds_enum_gen.py", "--type", "all", "--verbose"],
-        cwd=project_root,
+        check=False, cwd=project_root,
     )
 
 
@@ -71,8 +77,13 @@ def run_abbreviation_manager():
     print("   • Add new abbreviations from word tracking")
     print("   • Validate morphological coverage")
     print("   • Quality check abbreviation dictionary")
-    subprocess.run(
-        [sys.executable, "tools/interactive_abbreviation_manager.py"], cwd=project_root
+    subprocess.run(  # noqa: S603
+        [
+            sys.executable,
+            "tools/interactive_abbreviation_manager.py"
+        ],
+        check=False,
+        cwd=project_root
     )
 
 
@@ -83,8 +94,9 @@ def run_word_tracking():
     print("   • WDS Product ID enums")
     print("   • WDS Code Set enums")
     print("   • Geographic enums")
-    subprocess.run(
+    subprocess.run(  # noqa: S603
         [sys.executable, "tools/unified_enum_processor.py", "--track-words"],
+        check=False,
         cwd=project_root,
     )
 
@@ -105,7 +117,8 @@ def show_debug_tools():
         print(f"   • {tool.name}")
 
     print(
-        f"\nTo run a debug tool: cd scratch && python {debug_tools[0].name if debug_tools else 'tool_name.py'}"
+        f"\nTo run a debug tool: cd scratch && python \
+            {debug_tools[0].name if debug_tools else 'tool_name.py'}"
     )
     print("Note: Debug tools are in scratch/ to keep main tools/ directory clean")
 

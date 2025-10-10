@@ -1,24 +1,23 @@
 #!/usr/bin/env python3
-"""
-Quality assurance script for abbreviations dictionary validation.
+"""Quality assurance script for abbreviations dictionary validation.
 This script validates the abbreviations.py file for quality and consistency.
 """
 
-import sys
 import argparse
+import sys
 
 from tools.abbreviations import DEFAULT_ABBREVIATIONS
 
 
 def validate_abbreviations(check_only=False, qa_mode=False):
-    """
-    Validate the abbreviations dictionary.
+    """Validate the abbreviations dictionary.
 
     Returns:
         0: All checks passed, no issues found
         1: Validation errors found (must be fixed)
         2: Consolidation opportunities available (optional optimization)
         3: Critical errors (file not found, import failures)
+
     """
     try:
         # Basic validation - check if the dictionary is properly structured

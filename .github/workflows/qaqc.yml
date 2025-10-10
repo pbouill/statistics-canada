@@ -12,7 +12,7 @@
 #   - Installs dependencies from requirements files.
 #   - Performs linting with Ruff (with optional auto-fixing).
 #   - Conducts static type checking with MyPy.
-#   - Scans for security vulnerabilities with Bandit and pip-audit.
+#   - Scans for security vulnerabilities with Ruff's bandit rules and pip-audit.
 #   - Executes the test suite with Pytest.
 #   - Can build the package and upload artifacts.
 #
@@ -23,7 +23,6 @@
 #   - `test`: Set to `true` to run tests.
 #   - `typing`: Set to `true` to run static type checking.
 #   - `dependency-audit`: Set to `true` to audit dependencies.
-#   - `security`: Set to `true` to run static security analysis.
 #
 # Outputs:
 #   - `lint_fix_changes`: Returns `true` if the linter made changes to the code.
@@ -60,35 +59,26 @@ on:
         required: false
         type: boolean
         default: true
-      security:
-        description: 'Run static security scan with Bandit?'
-        required: false
-        type: boolean
-        default: true
     outputs:
       lint_fix_changes:
         description: 'Whether the lint tool made changes (true/false)'
         value: ${{ jobs.cleanup-checks.outputs.lint_fix_changes }}
-      bandit_report:
-        description: 'Bandit security report artifact name'
-        value: ${{ jobs.cleanup-checks.outputs.bandit_report }}
 
 jobs:
   # ======================================================================================
-  # Job: Cleanup, Lint, Type, Security (Python 3.13 only)
+  # Job: Cleanup, Lint, Type, Security (Python 3.14 only)
   # ======================================================================================
 
   cleanup-checks:
-    name: "Cleanup, Lint, Type, Security (Python 3.13)"
+    name: "Cleanup, Lint, Type, Security (Python 3.14)"
     runs-on: ubuntu-latest
     outputs:
       lint_fix_changes: ${{ steps.lint-fix.outputs.lint_changed }}
-      bandit_report: ${{ steps.upload-bandit.outputs.artifact-name }}
     steps:
-      - name: Set up Python 3.13
+      - name: Set up Python 3.14
         uses: actions/setup-python@v6
         with:
-          python-version: 3.13
+          python-version: 3.14
 
       - name: Checkout repository (shallow)
         uses: actions/checkout@v5
@@ -125,28 +115,15 @@ jobs:
 
       - name: Type Check (MyPy)
         if: ${{ inputs.typing }}
-        run: mypy --show-error-codes --show-traceback .
+        run: mypy .
 
       - name: Dependency Audit (pip-audit)
         if: ${{ inputs['dependency-audit'] }}
         run: pip-audit -v -r requirements.txt
 
-      - name: Security Scan (Bandit)
-        id: bandit-scan
-        if: ${{ inputs.security }}
-        run: bandit -r . -lll -o bandit-report.json -f json
-
-      - name: Upload Bandit Report
-        id: upload-bandit
-        if: ${{ inputs.security }}
-        uses: actions/upload-artifact@v4
-        with:
-          path: bandit-report.json
-          name: bandit-report.json
-
   
   # ======================================================================================
-  # Job: Test (Python 3.11, 3.12, 3.13)
+  # Job: Test (Python 3.12, 3.13, 3.14)
   # ======================================================================================
   test:
     name: "Test (Python ${{ matrix.python-version }})"
@@ -155,7 +132,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11", "3.12", "3.13"]
+        python-version: ["3.12", "3.13", "3.14"]
     steps:
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v6

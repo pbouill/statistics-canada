@@ -1,38 +1,37 @@
 #!/usr/bin/env python3
-"""
-Unified Enum Processing System
+"""Unified Enum Processing System
 
 This module provides a unified interface for processing multiple enum generators
 with optional word tracking and abbreviation analysis.
 """
 
+import argparse
 import asyncio
-from pathlib import Path
-from typing import Dict, List, Optional, Union, cast
 import logging
+from pathlib import Path
+from typing import cast
 
-from tools.cli.wds_productid_enum_gen import ProductIdEnumWriter
-from tools.cli.wds_code_enum_gen import CodeSetEnumWriter
-from tools.word_tracker import get_word_tracker, reset_word_tracker, WordTracker
 from statscan.util.log import configure_logging
+from tools.cli.wds_code_enum_gen import CodeSetEnumWriter
+from tools.cli.wds_productid_enum_gen import ProductIdEnumWriter
+from tools.word_tracker import WordTracker, get_word_tracker, reset_word_tracker
 
 logger = logging.getLogger(__name__)
 
 
 class UnifiedEnumProcessor:
-    """
-    Unified processor for handling multiple enum generators with consistent interface.
+    """Unified processor for handling multiple enum generators with consistent interface
 
     This class provides a single entry point for processing all enum types with
     optional word tracking and analysis capabilities.
     """
 
     def __init__(self, track_words: bool = False):
-        """
-        Initialize the unified processor.
+        """Initialize the unified processor.
 
         Args:
             track_words: If True, enable word tracking across all generators
+
         """
         self.track_words = track_words
 
@@ -48,23 +47,24 @@ class UnifiedEnumProcessor:
         self,
         output_dir: Path,
         overwrite: bool = False,
-        include_types: Optional[List[str]] = None,
-    ) -> Dict[str, Union[Path, Dict[str, Path]]]:
-        """
-        Process all enum types.
+        include_types: list[str] | None = None,
+    ) -> dict[str, Path | dict[str, Path]]:
+        """Process all enum types.
 
         Args:
             output_dir: Base output directory
             overwrite: Whether to overwrite existing files
-            include_types: List of types to include ("product", "codeset"), or None for all
+            include_types: List of types to include (e.g. "product", "codeset"),
+                           or None for all
 
         Returns:
             Dictionary mapping generator types to their output results
+
         """
         if include_types is None:
             include_types = ["product", "codeset"]
 
-        results: Dict[str, Union[Path, Dict[str, Path]]] = {}
+        results: dict[str, Path | dict[str, Path]] = {}
 
         logger.info(
             f"🔄 Starting unified enum processing for: {', '.join(include_types)}"
@@ -84,7 +84,7 @@ class UnifiedEnumProcessor:
             codeset_result = await self.codeset_generator.process(
                 output_dir=codeset_dir, overwrite=overwrite
             )
-            results["codeset"] = cast(Union[Path, Dict[str, Path]], codeset_result)
+            results["codeset"] = cast(Path | dict[str, Path], codeset_result)
             if isinstance(results["codeset"], dict):
                 logger.info(
                     f"✅ CodeSet processing complete: {len(results['codeset'])} files"
@@ -97,8 +97,7 @@ class UnifiedEnumProcessor:
     async def process_specific_codeset(
         self, codeset_name: str, output_file: Path, overwrite: bool = False
     ) -> Path:
-        """
-        Process a specific codeset only.
+        """Process a specific codeset only.
 
         Args:
             codeset_name: Name of the specific codeset
@@ -107,6 +106,7 @@ class UnifiedEnumProcessor:
 
         Returns:
             Path to the generated file
+
         """
         logger.info(f"🎯 Processing specific codeset: {codeset_name}")
 
@@ -117,20 +117,19 @@ class UnifiedEnumProcessor:
         logger.info(f"✅ Specific codeset processing complete: {result}")
         return result
 
-    def get_word_analysis(self) -> Optional[WordTracker]:
-        """
-        Get word tracker for analysis if word tracking is enabled.
+    def get_word_analysis(self) -> WordTracker | None:
+        """Get word tracker for analysis if word tracking is enabled.
 
         Returns:
             WordTracker instance or None if tracking is disabled
+
         """
         return get_word_tracker() if self.track_words else None
 
     def generate_word_analysis_report(
-        self, output_file: Optional[Path] = None, include_contexts: bool = True
-    ) -> Optional[str]:
-        """
-        Generate word analysis report if tracking is enabled.
+        self, output_file: Path | None = None, include_contexts: bool = True
+    ) -> str | None:
+        """Generate word analysis report if tracking is enabled.
 
         Args:
             output_file: Optional file to write report to
@@ -138,6 +137,7 @@ class UnifiedEnumProcessor:
 
         Returns:
             Report string or None if tracking is disabled
+
         """
         if not self.track_words:
             logger.warning("Word tracking is not enabled - no report generated")
@@ -162,16 +162,16 @@ class UnifiedEnumProcessor:
         return report
 
     def save_word_tracking_data(
-        self, output_file: Optional[Path] = None
-    ) -> Optional[Path]:
-        """
-        Save word tracking data if tracking is enabled.
+        self, output_file: Path | None = None
+    ) -> Path | None:
+        """Save word tracking data if tracking is enabled.
 
         Args:
             output_file: Optional file to save data to
 
         Returns:
             Path to saved file or None if tracking is disabled
+
         """
         if not self.track_words:
             logger.warning("Word tracking is not enabled - no data to save")
@@ -218,18 +218,18 @@ class UnifiedEnumProcessor:
             print("\n🏆 Top 5 Abbreviation Opportunities:")
             for i, (word, stats) in enumerate(candidates[:5], 1):
                 print(
-                    f"  {i}. '{word}' → freq:{stats.frequency}, savings:{stats.total_potential_savings:.0f}"
+                    f"  {i}. '{word}' → freq:{stats.frequency}, \
+                        savings:{stats.total_potential_savings:.0f}"
                 )
         else:
             print(
-                "✅ No significant abbreviation opportunities found - system is well optimized!"
+                "✅ No significant abbreviation opportunities found - system is well \
+                    optimized!"
             )
 
 
 async def main():
     """Example usage of the unified processor."""
-    import argparse
-
     parser = argparse.ArgumentParser(
         description="Unified enum processing with optional word tracking",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -237,13 +237,13 @@ async def main():
 Examples:
     # Process all enums with word tracking
     python tools/unified_enum_processor.py --track-words
-    
+
     # Process only ProductID enums
     python tools/unified_enum_processor.py --types product
-    
+
     # Process specific codeset with tracking
     python tools/unified_enum_processor.py --types codeset --codeset frequency --track-words
-        """,
+        """,  # noqa: E501
     )
 
     parser.add_argument(

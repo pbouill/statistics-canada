@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Statistics Canada WDS API - Advanced Coordinate System Examples
+"""Statistics Canada WDS API - Advanced Coordinate System Examples.
 
 This example demonstrates sophisticated coordinate building and manipulation
 for complex statistical queries using the WDS API.
@@ -13,9 +12,13 @@ Advanced Features:
 """
 
 import asyncio
-from typing import Any
+import logging
 from dataclasses import dataclass
+from typing import Any
+
 from statscan.wds.client import Client
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -28,6 +31,7 @@ class CoordinateBuilder:
     additional_dims: list[str] | None = None
 
     def __post_init__(self):
+        """Initialize remaining dimensions to default value."""
         if self.additional_dims is None:
             self.additional_dims = ["1"] * 7  # Default remaining dimensions to "1"
 
@@ -37,7 +41,7 @@ class CoordinateBuilder:
         coords = [self.geography, self.gender, self.age_group] + dims
         return ".".join(coords[:10])  # WDS coordinates are typically 10 dimensions
 
-    def with_geography(self, geo_code: str | int) -> "CoordinateBuilder":
+    def with_geography(self, geo_code: str | int) -> CoordinateBuilder:
         """Create new builder with different geography."""
         new_builder = CoordinateBuilder(
             geography=str(geo_code),
@@ -49,7 +53,7 @@ class CoordinateBuilder:
         )
         return new_builder
 
-    def with_gender(self, gender_code: str | int) -> "CoordinateBuilder":
+    def with_gender(self, gender_code: str | int) -> CoordinateBuilder:
         """Create new builder with different gender filter."""
         new_builder = CoordinateBuilder(
             geography=self.geography,
@@ -61,7 +65,7 @@ class CoordinateBuilder:
         )
         return new_builder
 
-    def with_age_group(self, age_code: str | int) -> "CoordinateBuilder":
+    def with_age_group(self, age_code: str | int) -> CoordinateBuilder:
         """Create new builder with different age group."""
         new_builder = CoordinateBuilder(
             geography=self.geography,
@@ -78,15 +82,13 @@ class AdvancedCoordinateSystem:
     """Advanced coordinate manipulation and data analysis."""
 
     def __init__(self):
+        """Initialize the coordinate system with a WDS client."""
         self.client = Client()
 
     async def multi_dimensional_analysis(
         self, product_id: int, base_coordinate: str
     ) -> dict[str, Any]:
         """Perform analysis across multiple dimensions simultaneously."""
-        print("🎯 Multi-Dimensional Analysis")
-        print("-" * 40)
-
         # Create coordinate variations
         builder = CoordinateBuilder()
 
@@ -113,7 +115,7 @@ class AdvancedCoordinateSystem:
                 coordinate = gender_builder.build()
 
                 try:
-                    response = await self.client.get_data_from_cube_pid_coord_and_latest_n_periods(
+                    response = await self.client.get_data_from_cube_pid_coord_and_latest_n_periods(  # noqa: E501
                         product_id=product_id, coordinate=coordinate, periods=1
                     )
 
@@ -123,15 +125,13 @@ class AdvancedCoordinateSystem:
                             "population": data["vectorDataPoint"],
                             "coordinate": coordinate,
                         }
-                        print(
-                            f"  {geo_name} - {gender_name}: {data['vectorDataPoint']:,}"
-                        )
 
                 except Exception as e:
-                    print(f"  ⚠️  {geo_name} - {gender_name}: Error - {e}")
+                    logger.debug(
+                        "Failed to fetch data for %s/%s: %s", geo_name, gender_name, e
+                    )
 
             results[geo_name] = geo_results
-            print()
 
         return results
 
@@ -139,9 +139,6 @@ class AdvancedCoordinateSystem:
         self, product_id: int, base_coordinate: str, periods: int = 5
     ) -> list[dict[str, Any]]:
         """Build coordinates for time series analysis."""
-        print("📈 Time Series Coordinate Analysis")
-        print("-" * 40)
-
         try:
             # Get multiple periods of data
             response = (
@@ -153,7 +150,6 @@ class AdvancedCoordinateSystem:
             if response["status"] == "SUCCESS" and response["object"]:
                 time_series = response["object"]
 
-                print(f"Retrieved {len(time_series)} time periods:")
 
                 results = []
                 for i, data_point in enumerate(time_series):
@@ -165,32 +161,24 @@ class AdvancedCoordinateSystem:
                     }
                     results.append(result)
 
-                    print(
-                        f"  Period {i + 1}: {data_point['refPer']} → {data_point['vectorDataPoint']:,}"
-                    )
 
                 # Calculate growth rates
                 if len(results) > 1:
-                    print("\n📊 Growth Analysis:")
                     latest = results[0]["value"]
                     previous = results[1]["value"]
 
                     if previous > 0:
-                        growth_rate = ((latest - previous) / previous) * 100
-                        print(f"  Latest Period Growth: {growth_rate:+.2f}%")
+                        ((latest - previous) / previous) * 100
 
                 return results
 
         except Exception as e:
-            print(f"❌ Time series error: {e}")
+            logger.warning("Time series analysis failed: %s", e)
 
         return []
 
     async def parameter_based_queries(self, product_id: int) -> dict[str, Any]:
         """Demonstrate parameter-based coordinate construction."""
-        print("⚙️  Parameter-Based Query Construction")
-        print("-" * 40)
-
         # Define query parameters
         query_scenarios: list[dict[str, Any]] = [
             {
@@ -221,12 +209,13 @@ class AdvancedCoordinateSystem:
         results = {}
 
         for scenario in query_scenarios:
-            print(f"\n🔍 {scenario['name']}")
-            print(f"   {scenario['description']}")
 
             # Build coordinate from parameters
             params: dict[str, str] = scenario["params"]  # type: ignore
-            coordinate = f"{params['geography']}.{params['gender']}.{params['age']}.1.1.1.1.1.1.1"
+            coordinate = (
+                f"{params['geography']}.{params['gender']}.{params['age']}"
+                ".1.1.1.1.1.1.1"
+            )
 
             try:
                 response = (
@@ -246,33 +235,25 @@ class AdvancedCoordinateSystem:
                     name: str = scenario["name"]  # type: ignore
                     results[name] = result
 
-                    print(f"   Population: {data['vectorDataPoint']:,}")
-                    print(f"   Coordinate: {coordinate}")
                 else:
-                    print("   ❌ No data returned")
+                    logger.debug("Query %s returned no data", scenario["name"])
 
             except Exception as e:
-                print(f"   ⚠️  Query error: {e}")
+                logger.debug("Query %s failed: %s", scenario["name"], e)
 
         return results
 
     async def coordinate_validation_and_debugging(self, product_id: int) -> None:
         """Demonstrate coordinate validation techniques."""
-        print("\n🔧 Coordinate Validation & Debugging")
-        print("-" * 40)
-
         # Get cube metadata for validation
         metadata = await self.client.get_cube_metadata(product_id=product_id)
 
         if metadata["status"] != "SUCCESS":
-            print("❌ Cannot validate - metadata unavailable")
             return
 
         cube = metadata["object"]
         dimensions = cube["dimension"]
 
-        print(f"Cube: {cube['cubeTitleEn']}")
-        print(f"Expected coordinate length: {len(dimensions)} dimensions")
 
         # Test various coordinate formats
         test_coordinates = [
@@ -282,7 +263,6 @@ class AdvancedCoordinateSystem:
             "999.999.999.999.999.999.999.999.999.999",  # Invalid values
         ]
 
-        print("\n🧪 Testing Coordinate Formats:")
 
         for coord in test_coordinates:
             try:
@@ -293,32 +273,25 @@ class AdvancedCoordinateSystem:
                 )
 
                 if response["status"] == "SUCCESS" and response["object"]:
-                    print(f"  ✅ {coord} → Valid (returned data)")
+                    logger.debug("Valid coordinate: %s", coord)
                 else:
-                    print(f"  ❌ {coord} → Invalid ({response['status']})")
+                    logger.debug("Invalid coordinate: %s", coord)
 
             except Exception as e:
-                print(f"  ⚠️  {coord} → Exception: {type(e).__name__}")
+                logger.debug("Coordinate test failed for %s: %s", coord, e)
 
         # Show dimension structure for reference
-        print("\n📋 Dimension Reference:")
-        for i, dim in enumerate(dimensions[:5]):  # Show first 5
-            print(
-                f"  Position {i + 1}: {dim['dimensionNameEn']} ({len(dim['member'])} options)"
-            )
+        for _i, _dim in enumerate(dimensions[:5]):  # Show first 5
+            pass
 
 
 async def advanced_aggregation_example():
     """Show complex data aggregation using coordinate manipulation."""
-    print("\n📊 Advanced Data Aggregation Example")
-    print("=" * 60)
-
     coordinator = AdvancedCoordinateSystem()
 
     # Use population cube for demonstration
     product_id = 98100002  # Census population data
 
-    print("Scenario: Comparing gender distribution across multiple geographies")
 
     # Multi-dimensional analysis
     analysis_results = await coordinator.multi_dimensional_analysis(
@@ -327,23 +300,17 @@ async def advanced_aggregation_example():
 
     # Calculate aggregated statistics
     if analysis_results:
-        print("\n📈 Aggregated Insights:")
 
-        for geography, data in analysis_results.items():
+        for _geography, data in analysis_results.items():
             if "Total" in data and "Male" in data and "Female" in data:
                 total = data["Total"]["population"]
                 male = data["Male"]["population"]
                 female = data["Female"]["population"]
 
                 if total > 0:
-                    male_pct = (male / total) * 100
-                    female_pct = (female / total) * 100
+                    (male / total) * 100
+                    (female / total) * 100
 
-                    print(f"  {geography}:")
-                    print(f"    Total Population: {total:,}")
-                    print(
-                        f"    Gender Split: {male_pct:.1f}% Male, {female_pct:.1f}% Female"
-                    )
 
 
 async def main():
@@ -354,8 +321,6 @@ async def main():
     product_id = 98100002  # Census population data
     base_coordinate = "1.1.1.1.1.1.1.1.1.1"  # Canada, total
 
-    print("🚀 Advanced Coordinate System Examples")
-    print("=" * 60)
 
     # Parameter-based queries
     await coordinator.parameter_based_queries(product_id)
@@ -369,12 +334,8 @@ async def main():
     # Advanced aggregation
     await advanced_aggregation_example()
 
-    print("\n🎉 Advanced Coordinate Examples Complete!")
-    print("💡 These patterns enable sophisticated statistical analysis")
-    print(
-        "   Combine with demographic_analysis.py for comprehensive research workflows"
-    )
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     asyncio.run(main())
