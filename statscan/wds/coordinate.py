@@ -12,7 +12,7 @@ Statistics Canada WDS API. The Coordinate class integrates:
 import logging
 from collections.abc import Generator
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, Self
 
 import pandas as pd
 from pydantic import GetCoreSchemaHandler
@@ -221,7 +221,7 @@ class Coordinate:
         cls,
         dimension_manager: DimensionManager,
         **dimension_values: dict[str, str | int],
-    ) -> Coordinate:
+    ) -> Self:
         """Build a coordinate from dimension parameters.
 
         Args:
