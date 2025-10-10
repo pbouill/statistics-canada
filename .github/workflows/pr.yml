@@ -1,5 +1,8 @@
 name: PR Checks (dev)
 
+permissions:
+  contents: write
+
 on:
   pull_request:
     branches:
