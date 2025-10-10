@@ -78,7 +78,7 @@ def test_class_method(
 def subcls_in_module[T](
     cls: type[T],
     module: ModuleType,
- ) -> Generator[tuple[str, type[T]], None, None]:
+ ) -> Generator[tuple[str, type[T]]]:
     """Find all subclasses of a given class in a specified module.
 
     This function inspects the provided module for classes that are subclasses

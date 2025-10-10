@@ -41,7 +41,7 @@ class CoordinateBuilder:
         coords = [self.geography, self.gender, self.age_group] + dims
         return ".".join(coords[:10])  # WDS coordinates are typically 10 dimensions
 
-    def with_geography(self, geo_code: str | int) -> "CoordinateBuilder":
+    def with_geography(self, geo_code: str | int) -> CoordinateBuilder:
         """Create new builder with different geography."""
         new_builder = CoordinateBuilder(
             geography=str(geo_code),
@@ -53,7 +53,7 @@ class CoordinateBuilder:
         )
         return new_builder
 
-    def with_gender(self, gender_code: str | int) -> "CoordinateBuilder":
+    def with_gender(self, gender_code: str | int) -> CoordinateBuilder:
         """Create new builder with different gender filter."""
         new_builder = CoordinateBuilder(
             geography=self.geography,
@@ -65,7 +65,7 @@ class CoordinateBuilder:
         )
         return new_builder
 
-    def with_age_group(self, age_code: str | int) -> "CoordinateBuilder":
+    def with_age_group(self, age_code: str | int) -> CoordinateBuilder:
         """Create new builder with different age group."""
         new_builder = CoordinateBuilder(
             geography=self.geography,

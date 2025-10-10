@@ -161,7 +161,7 @@ class CensusData:
         return series_list
 
     @classmethod
-    def from_raw_response(cls, raw_response: dict[str, Any]) -> "CensusData":
+    def from_raw_response(cls, raw_response: dict[str, Any]) -> CensusData:
         """Create a CensusData instance from a raw SDMX JSON response.
 
         Args:

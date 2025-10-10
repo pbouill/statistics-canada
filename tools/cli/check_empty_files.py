@@ -95,7 +95,7 @@ class EmptyFileChecker:
 
         return False
 
-    def find_empty_files(self) -> Generator[Path, None, None]:
+    def find_empty_files(self) -> Generator[Path]:
         """Recursively find all empty files in the codebase.
 
         Yields:

@@ -249,7 +249,7 @@ def enum_file(
     imports: Mapping[str, str | Iterable[str] | None],
     overwrite: bool = False,
     module_docstring: str | None = None,
-) -> Generator[TextIO, None, None]:
+) -> Generator[TextIO]:
     """Context manager to write an enum file."""
     fp.parent.mkdir(parents=True, exist_ok=True)
     if not overwrite and fp.exists():

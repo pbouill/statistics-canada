@@ -124,7 +124,7 @@ class Coordinate:
             raise ValueError("MemberManager is not set.")
         return self.member_manager[self.member_ids[idx]]
 
-    def __iter__(self) -> Generator[Member, Any, None]:
+    def __iter__(self) -> Generator[Member, Any]:
         """Iterate over all members in the coordinate."""
         if self.member_manager is None:
             raise ValueError("MemberManager is not set.")
@@ -221,7 +221,7 @@ class Coordinate:
         cls,
         dimension_manager: DimensionManager,
         **dimension_values: dict[str, str | int],
-    ) -> "Coordinate":
+    ) -> Coordinate:
         """Build a coordinate from dimension parameters.
 
         Args:
@@ -284,7 +284,7 @@ class Coordinate:
     def create_demographic_dataframe(  # noqa: PLR0913
         cls,
         data_points: list[Any],
-        coordinates: list["Coordinate"],
+        coordinates: list[Coordinate],
         product_id: int,
         demographic_type: str,
         geographic_name: str,

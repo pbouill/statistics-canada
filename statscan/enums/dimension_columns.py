@@ -130,7 +130,7 @@ class ValueType(Enum):
     CONFIDENTIAL = "confidential"
 
     @classmethod
-    def from_value(cls, value) -> "ValueType":
+    def from_value(cls, value) -> ValueType:
         """Determine value type from actual value."""
         max_code_length = 10
         if value is None or str(value).strip() == "":

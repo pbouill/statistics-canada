@@ -2,7 +2,6 @@
 
 import logging
 from dataclasses import dataclass
-from typing import Optional
 
 import pandas as pd
 
@@ -323,7 +322,7 @@ class DGUID:
 
     async def get_response(
         self, timeout: float | None = None
-    ) -> Optional["SDMXResponse"]:
+    ) -> SDMXResponse | None:
         """Get the SDMX response, updating if needed.
 
         Args:
