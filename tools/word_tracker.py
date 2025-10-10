@@ -271,10 +271,14 @@ class WordTracker:
                     [
                         "## 🏆 Top Abbreviation Candidates",
                         "",
-                        "| Rank | Word | Freq | Avg Save | Total Save | Priority Score \
-                            | Sources |",
-                        "|------|------|------|----------|------------|----------------\
-                            |---------|",
+                        (
+                            "| Rank | Word | Freq | Avg Save | Total Save | "
+                            "Priority Score | Sources |"
+                        ),
+                        (
+                            "|------|------|------|----------|------------|"
+                            "----------------|---------|"
+                        ),
                     ]
                 )
 

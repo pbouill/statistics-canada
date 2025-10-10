@@ -210,8 +210,10 @@ class EnumEntry:
         )
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(name={self.name!r}, value={self.value!r}, \
-            comment={self.comment!r})"
+        return (
+            f"{self.__class__.__name__}(name={self.name!r}, value={self.value!r}, "
+            f"comment={self.comment!r})"
+        )
 
 
 class AbstractEnumWriter(ABC):

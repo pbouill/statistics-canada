@@ -43,14 +43,18 @@ def print_menu():
 def run_geographic_enums():
     """Generate geographic enums from census data."""
     print("\n🏗️ Generating geographic enums from census data...")
-    subprocess.run(  # noqa: S603
-        [
-            sys.executable,
-            "tools/generate_enums.py"
-        ],
-        check=False,
-        cwd=project_root
-    )
+    try:
+        subprocess.run(  # noqa: S603
+            [
+                sys.executable,
+                "tools/generate_enums.py"
+            ],
+            check=True,
+            cwd=project_root
+        )
+    except subprocess.CalledProcessError as e:
+        print(f"❌ Error generating geographic enums: {e}")
+        raise
 
 
 def run_wds_enums():

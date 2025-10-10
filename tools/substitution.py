@@ -69,8 +69,8 @@ class SubstitutionEngine:
             self._global_lookup_cache[cache_key] = self._preprocessed_substitutions
 
         logger.info(
-            f"✓ Built and cached {len(self._preprocessed_substitutions)} \
-                substitution patterns"
+            f"✓ Built and cached {len(self._preprocessed_substitutions)} "
+            f"substitution patterns"
         )
 
     @property
@@ -410,8 +410,8 @@ class SubstitutionEngine:
         for c in sub_chars:
             if not isinstance(c, str) or len(c) != 1:
                 raise ValueError(
-                    f"sub_chars must be a set of single-character strings, got {c} of \
-                        type {type(c)}"
+                    f"sub_chars must be a set of single-character strings, got {c} of "
+                    f"type {type(c)}"
                 )
         replacement = replacement or ""
         return re.sub(f"[{re.escape(''.join(sub_chars))}]", replacement, s)

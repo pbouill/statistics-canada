@@ -62,17 +62,22 @@ def test_class_method(
     if (m := getattr(cls, method_name, None)) is None:
         if ignore_missing_test:
             return
-        raise MethodDNError(f"{cls.__name__} does not have method \
-                                        {method_name}.")
+        raise MethodDNError(
+            f"{cls.__name__} does not have method {method_name}."
+        )
     if not callable(m):
-        raise MethodSignatureError(f"{cls.__name__}.{method_name} is not \
-                                               callable.")
+        raise MethodSignatureError(
+            f"{cls.__name__}.{method_name} is not callable."
+        )
     if len(params := inspect.signature(m).parameters) > 0:
-        raise MethodSignatureError(f"{cls.__name__}.{method_name} has \
-                                               parameters {params}.")
+        raise MethodSignatureError(
+            f"{cls.__name__}.{method_name} has parameters {params}."
+        )
     if (test_value := m()) != target_value:
-        raise MethodValueError(f"{cls.__name__}.{method_name} returned \
-                                           {test_value}, expected {target_value}.")
+        raise MethodValueError(
+            f"{cls.__name__}.{method_name} returned {test_value}, "
+            f"expected {target_value}."
+        )
 
 
 def subcls_in_module[T](
@@ -97,14 +102,16 @@ def subcls_in_module[T](
         f"Checking module {module.__name__} for subclasses of {cls.__name__}"
     )
     for name, mod_cls in inspect.getmembers(module, predicate=inspect.isclass):
-        if not mod_cls.__module__ != module.__name__:
-            logger.debug(f"[{module.__name__}] {name} ({mod_cls}) is not in \
-                module {module.__name__} ({mod_cls.__module__}). Skipping..."
+        if mod_cls.__module__ != module.__name__:
+            logger.debug(
+                f"[{module.__name__}] {name} ({mod_cls}) is not in "
+                f"module {module.__name__} ({mod_cls.__module__}). Skipping..."
             )
             continue
         if not issubclass(mod_cls, cls) or (mod_cls is cls):
-            logger.debug(f"[{module.__name__}] {name} ({mod_cls}) is not a \
-                subclass of {cls.__name__} or is the same class. Skipping..."
+            logger.debug(
+                f"[{module.__name__}] {name} ({mod_cls}) is not a "
+                f"subclass of {cls.__name__} or is the same class. Skipping..."
             )
             continue
 
@@ -145,8 +152,9 @@ def path_from_module(module: ModuleType) -> Path:
         path = Path(module.__path__[0])
     except AttributeError as ae:
         if module.__file__ is None:
-            raise AttributeError(f"Module {module.__name__} does not have a __file__ \
-                             attribute.") from ae
+            raise AttributeError(
+                f"Module {module.__name__} does not have a __file__ attribute."
+            ) from ae
         path =  Path(module.__file__)
         if path.is_file():
             path = path.parent

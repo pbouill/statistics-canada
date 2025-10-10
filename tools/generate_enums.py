@@ -49,8 +49,7 @@ def to_dot_path(module_path: Path) -> str:
 
 
 def cleanstr(s: str) -> str:
-    """Clean a string by removing leading/trailing whitespace..
-    """
+    """Clean a string by removing leading/trailing whitespace."""
     for char in (" ", "-"):  # Replace spaces, hyphens, and periods with underscores
         s = s.replace(char, "_")
 
@@ -313,8 +312,8 @@ def write_module(
                 mod_imports = {mod_imports, b.__name__}
             else:
                 raise TypeError(
-                    f"Expected set for imports[{b.__module__}], got \
-                        {type(imports[b.__module__])}"
+                    f"Expected set for imports[{b.__module__}], got "
+                    f"{type(imports[b.__module__])}"
                 )
             imports[b.__module__] = mod_imports
 
@@ -344,16 +343,16 @@ def update_imports_dict(
         obj_name: str = obj.__name__
     except AttributeError as e:
         raise ValueError(
-            f"Object {obj} does not have a __module__ or __name__ attribute. \
-                Ensure it is a class or function."
+            f"Object {obj} does not have a __module__ or __name__ attribute. "
+            f"Ensure it is a class or function."
         ) from e
 
     if isinstance(mod_imports := imports.get(obj_mod, set()), str):
         mod_imports = {mod_imports}
     elif mod_imports is None:
         raise ValueError(
-            f'Module {obj_mod} has already been defined in the imports dict with \
-                {None}, cannot append {obj_name} to import mapping.'
+            f"Module {obj_mod} has already been defined in the imports dict with "
+            f"{None}, cannot append {obj_name} to import mapping."
         )
     mod_imports.add(obj_name)
     imports[obj_mod] = mod_imports

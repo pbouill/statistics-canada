@@ -46,8 +46,7 @@ class DataPaths(Enum):
         return data
 
     def check_stale(self, request: pytest.FixtureRequest, stacklevel: int = 2) -> None:
-        """Check if the data is stale (not generated in current session or associated test failed).
-        """
+        """Check if the data is stale (not generated in current session or associated test failed)."""
         if isinstance(
             sd := getattr(request.session, SESSION_DATA_SAVED_ATTR, None), dict
         ):
