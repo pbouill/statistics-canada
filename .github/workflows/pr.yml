@@ -14,6 +14,7 @@ jobs:
     # Skip if triggered by a bot / qaqc.yml
     if: ${{ github.actor != 'github-actions[bot]' }}
     uses: ./.github/workflows/qaqc.yml
+    
   update-changelog:
     name: "Update Changelog"
     runs-on: ubuntu-latest
@@ -44,6 +45,6 @@ jobs:
       - name: Commit changelog update
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "📝 Update CHANGELOG.md for PR #${{ github.event.pull_request.number }}"
+          commit_message: "📝 Update CHANGELOG.md for PR #${{ github.event.pull_request.number }} [skip ci]"
           file_pattern: CHANGELOG.md
           commit_options: "--no-verify"

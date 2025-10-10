@@ -38,26 +38,54 @@ def update_changelog(pr_number, pr_title, pr_author, pr_url):
             f.write(f"\n{entry}\n")
         return
 
-    with open(CHANGELOG_PATH, "r+") as f:
+    with open(CHANGELOG_PATH) as f:
         content = f.read()
 
-        if f"([#{pr_number}]" in content:
-            return
+    # Check if an entry for this PR already exists and update it
+    pr_pattern = rf"^- .+ \(\[#{pr_number}\]\(.+?\)\) by @.+$"
+    existing_match = re.search(pr_pattern, content, re.MULTILINE)
 
-        unreleased_match = re.search(r"^## [Unreleased]", content, re.MULTILINE)
+    if existing_match:
+        # Replace the existing entry with the new one
+        new_content = (
+            content[:existing_match.start()]
+            + entry
+            + content[existing_match.end():]
+        )
+    else:
+        # Add new entry after the Unreleased header
+        unreleased_match = re.search(r"^## \[Unreleased\]", content, re.MULTILINE)
 
         if unreleased_match:
+            # Find the position right after the header line
             insert_pos = unreleased_match.end()
+            # Add entry after header with proper spacing
             new_content = content[:insert_pos] + f"\n\n{entry}" + content[insert_pos:]
-            f.seek(0)
-            f.write(new_content)
         else:
-            # This case should be rare if the file is created from template
-            # Just prepend the entry at the top for now.
-            # More robust: find first `##` and insert before it.
-            new_content = CHANGELOG_TEMPLATE + f"\n{entry}\n\n" + content
-            f.seek(0)
-            f.write(new_content)
+            # No Unreleased section exists - add one at the top
+            # Find the first occurrence of "# Changelog" to insert after it
+            changelog_header = re.search(r"^# Changelog", content, re.MULTILINE)
+            if changelog_header:
+                # Insert after the header and any following blank lines/description
+                insert_pos = changelog_header.end()
+                # Skip to after the description lines if they exist
+                remaining_content = content[insert_pos:]
+                description_end = re.search(r"\n\n", remaining_content)
+                if description_end:
+                    insert_pos += description_end.end()
+
+                new_content = (
+                    content[:insert_pos]
+                    + f"\n{UNRELEASED_HEADER}\n\n{entry}\n"
+                    + content[insert_pos:]
+                )
+            else:
+                # No changelog header at all - prepend everything
+                new_content = CHANGELOG_TEMPLATE + f"\n{entry}\n\n" + content
+
+    # Write the updated content, truncating the file first
+    with open(CHANGELOG_PATH, "w") as f:
+        f.write(new_content)
 
 
 if __name__ == "__main__":
