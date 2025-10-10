@@ -71,12 +71,15 @@ class WDSRequests:
         """Execute a coroutine that returns a WDS API response.
 
         Args:
-            coro (Coroutine[Any, Any, Response]): The coroutine to execute.
-            model (Optional[type[WDSBaseModel]]): The model to parse the response
-                                                  object into.
+            coro: The coroutine to execute (should be a client HTTP request).
+            model: Optional Pydantic model to parse the response object into.
 
         Returns:
-            dict: The main object from the response.
+            Parsed response object (dict, list, or Pydantic model instance).
+
+        Raises:
+            httpx.HTTPStatusError: On HTTP errors (4xx, 5xx).
+            httpx.TimeoutException: On timeout errors.
 
         """
         resp = await coro

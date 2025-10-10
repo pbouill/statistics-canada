@@ -115,7 +115,7 @@ jobs:
 
       - name: Type Check (MyPy)
         if: ${{ inputs.typing }}
-        run: mypy --show-error-codes --show-traceback .
+        run: mypy .
 
       - name: Dependency Audit (pip-audit)
         if: ${{ inputs['dependency-audit'] }}

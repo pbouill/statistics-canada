@@ -142,3 +142,22 @@ indent-style = "tab"
 "statscan/wds/models/*" = ["N815"]
 # Auto-generated enums: allow non-ASCII names (French/Indigenous) and long lines (census data)
 "statscan/enums/auto/**/*.py" = ["E501", "PLC2401"]
+
+[tool.mypy]
+# Mypy type checking configuration
+# Matches pre-commit hook: mypy --show-error-codes --show-traceback
+
+# Show error codes for easier lookup and fixing
+show_error_codes = true
+
+# Show full traceback on internal errors for debugging
+show_traceback = true
+
+# Exclude files/directories in .gitignore automatically
+exclude_gitignore = true
+
+# Performance: use incremental mode (default, but explicit)
+incremental = true
+
+# Skip type checking for third-party libraries without stubs
+ignore_missing_imports = true

@@ -6,10 +6,12 @@ vector information, and geographic queries.
 
 Official Documentation: https://www.statcan.gc.ca/en/developers/wds/user-guide
 """
+import asyncio
 import logging
 from datetime import date, datetime
 from typing import Any, TypeVar
 
+import httpx
 import numpy as np
 import pandas as pd
 from httpx._client import AsyncClient, Timeout, TimeoutTypes
@@ -29,14 +31,26 @@ from .models.series import ChangedSeriesData, Series
 from .models.vector import Vector
 from .requests import WDSRequests
 
-# Conservative timeout configuration for reliable operation in all environments
-# Note: Connect timeout increased to 120s to handle intermittent TLS handshake
-# delays observed with Statistics Canada servers, particularly affecting Python 3.13+
+# Timeout configuration with retry strategy for reliable operation
+# Uses shorter base timeouts (30s) with automatic retry and exponential backoff
+# to handle transient connection issues more gracefully than a single long timeout.
+#
+# Retry strategy (via retry_on_timeout in requests.py):
+# - Attempt 1: 30s timeout
+# - Attempt 2: 60s timeout (after 1s wait)
+# - Attempt 3: 120s timeout (after 2s wait)
+# Total max wait: ~213s (30+60+120+waits) vs 180s single timeout
+#
+# This approach provides:
+# - Faster recovery from transient failures (DNS, TLS handshake delays)
+# - Better user experience (fails fast, retries automatically)
+# - Coverage for observed 121.64s Python 3.13 TLS issue
+# - More resilient to intermittent network issues
 DEFAULT_WDS_TIMEOUT = Timeout(
-    connect=120.0,  # Connection timeout - increased for TLS handshake reliability
-    read=180.0,  # Read timeout - generous for large responses
-    write=60.0,  # Write timeout - increased for reliability
-    pool=30.0,  # Pool timeout - increased for connection management
+    connect=30.0,  # Base connection timeout - will retry with exponential backoff
+    read=90.0,  # Read timeout - sufficient for large responses
+    write=60.0,  # Write timeout - standard for POST requests
+    pool=30.0,  # Pool timeout - connection pool management
 )
 
 T = TypeVar("T")
@@ -66,10 +80,18 @@ class Client(AsyncClient):
     ):
         """Initialize the WDS client (subclass of httpx.AsyncClient).
 
+        The client automatically retries failed requests using exponential backoff:
+        - Attempt 1: 30s connect timeout
+        - Attempt 2: 60s connect timeout (after 1s wait)
+        - Attempt 3: 120s connect timeout (after 2s wait)
+
+        This provides reliable operation while handling transient connection issues
+        more gracefully than a single long timeout.
+
         Args:
             base_url: The base URL for the WDS API. Defaults to WDS_URL.
             timeout: The timeout configuration to use when sending requests.
-                Defaults to 120 seconds for connect, 180s for read.
+                Defaults to 30s base connect timeout with exponential backoff retry.
             http2: Enable HTTP/2 support. Defaults to False for reliability.
             **kwargs: Additional keyword arguments passed to AsyncClient:
                 - auth: Authentication class to use when sending requests
@@ -87,7 +109,124 @@ class Client(AsyncClient):
         """
         self.codesets: CodeSets | None = None
         self.cube_manager: CubeManager = CubeManager()
+        self._max_retries = 3
+        self._backoff_multiplier = 2.0
         super().__init__(base_url=base_url, timeout=timeout, http2=http2, **kwargs)
+
+    async def _request_with_retry(
+        self,
+        method: str,
+        url: str,
+        **kwargs,
+    ) -> httpx.Response:
+        """Execute an HTTP request with exponential backoff retry on timeout.
+
+        This method implements automatic retry logic for transient connection
+        failures (DNS delays, TLS handshake timeouts, temporary network issues).
+
+        Retry strategy with base timeout of 30s:
+        - Attempt 1: 30s timeout
+        - Attempt 2: 60s timeout (2x multiplier, after 1s wait)
+        - Attempt 3: 120s timeout (4x multiplier, after 2s wait)
+
+        This covers the observed 121.64s Python 3.13 TLS failure while providing
+        faster recovery from transient issues.
+
+        Args:
+            method: HTTP method (GET, POST, etc.)
+            url: URL to request
+            **kwargs: Additional arguments passed to the request method
+
+        Returns:
+            Response object from httpx
+
+        Raises:
+            httpx.TimeoutException: If all retry attempts fail
+            httpx.HTTPStatusError: On HTTP errors (4xx, 5xx)
+
+        """
+        last_exception: Exception | None = None
+
+        for attempt in range(1, self._max_retries + 1):
+            # Calculate timeout for this attempt with exponential backoff
+            if isinstance(self.timeout, Timeout):
+                timeout_multiplier = self._backoff_multiplier ** (attempt - 1)
+                # Handle None values in timeout components
+                connect_timeout = (
+                    self.timeout.connect * timeout_multiplier
+                    if self.timeout.connect is not None
+                    else None
+                )
+                current_timeout = Timeout(
+                    connect=connect_timeout,
+                    read=self.timeout.read,
+                    write=self.timeout.write,
+                    pool=self.timeout.pool,
+                )
+            else:
+                current_timeout = self.timeout
+
+            try:
+                logger.debug(
+                    f"Request attempt {attempt}/{self._max_retries}: "
+                    f"{method} {url} (timeout: {current_timeout.connect}s connect)"
+                )
+
+                # Make the request with the current timeout
+                request_method = getattr(super(), method.lower())
+                response = await request_method(url, timeout=current_timeout, **kwargs)
+                return response
+
+            except (httpx.ConnectTimeout, httpx.ReadTimeout, httpx.PoolTimeout) as e:
+                last_exception = e
+                logger.warning(
+                    f"Timeout on attempt {attempt}/{self._max_retries}: {e}"
+                )
+
+                if attempt < self._max_retries:
+                    # Wait before retry with increasing delay
+                    wait_time = 1.0 * attempt  # 1s, 2s
+                    logger.info(f"Waiting {wait_time:.0f}s before retry...")
+                    await asyncio.sleep(wait_time)
+                else:
+                    logger.error(f"All {self._max_retries} attempts failed: {e}")
+                    raise
+
+            except Exception as e:
+                # Don't retry on non-timeout errors (4xx, 5xx, etc.)
+                logger.error(f"Non-retryable error: {e}")
+                raise
+
+        # Should never reach here, but just in case
+        if last_exception:
+            raise last_exception
+        raise RuntimeError("Unexpected state in _request_with_retry")
+
+    async def get(self, url: str, **kwargs) -> httpx.Response:  # type: ignore[override]
+        """Send GET request with automatic retry on timeout.
+
+        Args:
+            url: URL to request
+            **kwargs: Additional arguments passed to httpx.AsyncClient.get
+
+        Returns:
+            Response object
+
+        """
+        return await self._request_with_retry("GET", url, **kwargs)
+
+    async def post(self, url: str, **kwargs) -> httpx.Response:  # type: ignore[override]
+        """Send POST request with automatic retry on timeout.
+
+        Args:
+            url: URL to request
+            **kwargs: Additional arguments passed to httpx.AsyncClient.post
+
+        Returns:
+            Response object
+
+        """
+        return await self._request_with_retry("POST", url, **kwargs)
 
     async def update_codesets(self) -> set[str]:
         """Update the internal codesets with the latest from the WDS API.

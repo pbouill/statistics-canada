@@ -72,13 +72,17 @@ echo "$STAGED_PY_FILES" | xargs git add > /dev/null 2>&1
 print_success "✅ Ruff check passed."
 echo
 
-# 2. Run Mypy for Static Type Checking (incremental mode on staged files)
-print_info "2/3: Running Mypy (incremental)..."
-# Mypy with incremental cache - only checks modified files and dependencies
-echo "$STAGED_PY_FILES" | xargs mypy --show-error-codes --show-traceback
+# 2. Run Mypy for Static Type Checking (uses config from pyproject.toml)
+print_info "2/3: Running Mypy..."
+# Mypy now uses settings from [tool.mypy] in pyproject.toml
+# - show_error_codes = true
+# - show_traceback = true
+# - exclude_gitignore = true
+# - incremental = true
+echo "$STAGED_PY_FILES" | xargs mypy
 if [ $? -ne 0 ]; then
     print_error "Mypy found type errors. Please correct them before committing."
-    print_info "Tip: Run 'mypy --exclude-gitignore .' to see all errors"
+    print_info "Tip: Run 'mypy .' to see all errors"
     exit 1
 fi
 print_success "✅ Mypy check passed."
