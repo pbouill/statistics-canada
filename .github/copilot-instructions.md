@@ -83,6 +83,24 @@ data: dict[str, int | str] = {}                                # ✅ CORRECT
 - **Fixture system**: Use `TestFixtureManager` and StrEnum classes for path management.
 - **Execution order**: Run network tests first to generate fixtures, then functionality tests.
 - **Markers**: Use `@pytest.mark.network` for network tests, `@pytest.mark.asyncio` for async tests.
+- **Network tests**: By default, `pytest` skips network tests to avoid timeouts. Use `pytest --network` to run all tests including network tests.
+
+## Workflow Testing with Act
+
+- **Local workflow testing**: Use `act` to test GitHub Actions workflows locally before pushing
+- **Configuration**: `.actrc` contains required settings:
+  - `--container-architecture linux/amd64` for platform compatibility
+  - `-P ubuntu-latest=catthehacker/ubuntu:act-latest` for image mapping
+  - `--env PYTHON_GIL=1` to fix Python 3.14 compatibility (act sets `PYTHON_GIL=0` by default, which isn't supported)
+- **Test commands**:
+  - List jobs: `act pull_request --list`
+  - Run specific job: `act pull_request -j qa-qc`
+  - Run with verbose output: `act pull_request -j qa-qc -v`
+- **Expected limitations**:
+  - Git push operations will fail (authentication issue) - this is normal for local testing
+  - Secrets/tokens won't work unless explicitly configured
+  - Some GitHub-specific features may behave differently
+- **Best practice**: Test workflows locally with `act` before pushing to catch syntax errors and logic issues early
 
 ## Quick Reference
 

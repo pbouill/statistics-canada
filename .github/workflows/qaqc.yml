@@ -90,16 +90,25 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements.dev.txt
 
-      - name: Lint and Auto-fix (Ruff)
+      - name: Lint (Ruff) - ${{ inputs['lint-fix'] && 'Auto-fix Mode' || 'Check-only Mode' }}
         id: lint-fix
-        if: ${{ inputs['lint-fix'] }}
+        if: ${{ inputs.lint || inputs['lint-fix'] }}
         run: |
-          ruff check --fix .
-          git add -A
-          if ! git diff --cached --quiet; then
-            echo "lint_changed=true" >> $GITHUB_OUTPUT
+          if [[ "${{ inputs['lint-fix'] }}" == "true" ]]; then
+            echo "🔧 Running Ruff with auto-fix enabled..."
+            ruff check --fix .
+            git add -A
+            if ! git diff --cached --quiet; then
+              echo "lint_changed=true" >> $GITHUB_OUTPUT
+              echo "✅ Lint fixes applied"
+            else
+              echo "lint_changed=false" >> $GITHUB_OUTPUT
+              echo "✅ No lint fixes needed"
+            fi
           else
-            echo "lint_changed=false" >> $GITHUB_OUTPUT
+            echo "🔍 Running Ruff in check-only mode..."
+            ruff check .
+            echo "✅ Lint check passed"
           fi
 
       - name: Commit Lint Fixes
@@ -108,10 +117,6 @@ jobs:
         with:
           commit_message: "chore: apply automated linting fixes"
           commit_options: "--no-verify"
-
-      - name: Lint Check (Ruff)
-        if: ${{ inputs.lint && !inputs['lint-fix'] }}
-        run: ruff check .
 
       - name: Type Check (MyPy)
         if: ${{ inputs.typing }}
