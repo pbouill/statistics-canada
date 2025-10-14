@@ -15,7 +15,7 @@ data: dict[str, int | str] = {}                                # ✅ CORRECT
 ## Key Development Workflows
 
 - **Environment**: Python 3.12+ required (3.14 preferred). Always activate venv: `source .venv/bin/activate`
-- **Install**: `pip install -r requirements.dev.txt` (editable mode)
+- **Install**: `pip install -r requirements/bundles/requirements.dev.txt` (editable mode)
 - **Build**: `python -m build --no-isolation` (version auto-generated in `_version.py`)
 - **Test**: `python -m pytest tests/ -v` (all tests must be pytest-compatible)
 - **Code quality**: ALL Python code must pass both linters before commit:
@@ -23,6 +23,11 @@ data: dict[str, int | str] = {}                                # ✅ CORRECT
   - Type checking: `mypy --exclude-gitignore --show-error-codes --show-traceback .`
   - Pre-commit hook runs both automatically (see `tools/git/pre-commit.sh`)
   - **IMPORTANT**: Only run linters when editing Python files (`.py`). Skip for config/docs (`.toml`, `.yml`, `.md`, etc.)
+  - **DEVELOPMENT WORKFLOW**: When developing new features or examples:
+    1. First, get the code working and test functionality
+    2. Only run linters AFTER confirming the code works as expected
+    3. Don't waste time linting non-functional code - iterate on logic first
+    4. Use `scratch/` for experimental code that doesn't need to pass linting yet
 - **Code generation**:
   - Geographic enums: `python tools/generate_enums.py` (never edit `enums/auto/` directly)
   - WDS enums: `python tools/cli/wds_enum_gen.py --type all --verbose`
@@ -107,7 +112,7 @@ data: dict[str, int | str] = {}                                # ✅ CORRECT
 - **Setup**:
   ```bash
   source .venv/bin/activate
-  pip install -r requirements.dev.txt
+  pip install -r requirements/bundles/requirements.dev.txt
   ```
 - **Run examples**:
   ```bash

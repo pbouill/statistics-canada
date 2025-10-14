@@ -45,16 +45,11 @@ class ProductIdEnumWriter(AbstractEnumWriter):
             except ValueError:
                 name = "UNKNOWN"
 
-            if cube.cubeTitleEn and cube.cubeTitleFr:
-                desc = f"{cube.cubeTitleEn}  // {cube.cubeTitleFr}"
-            elif cube.cubeTitleEn:
-                desc = cube.cubeTitleEn
-            elif cube.cubeTitleFr:
-                desc = cube.cubeTitleFr
-            else:
-                desc = None
+            # Extract bilingual descriptions
+            desc_en = cube.cubeTitleEn
+            desc_fr = cube.cubeTitleFr
 
-            e = EnumEntry(name=name, value=pid, comment=desc)
+            e = EnumEntry(name=name, value=pid, doc_en=desc_en, doc_fr=desc_fr)
             entries_dict[pid] = e
 
         # tqdm will show completion automatically

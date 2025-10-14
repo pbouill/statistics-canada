@@ -60,24 +60,24 @@ exclude = [
 version = {attr = "_version.__version__"}
 dependencies = {file = ["requirements.txt"]}
 # User-facing optional features
-optional-dependencies.mcp = {file = ["requirements.mcp.txt"]}
+optional-dependencies.mcp = {file = ["requirements/requirements.mcp.txt"]}
 # Development and CI/CD tools (dev-* prefix)
-optional-dependencies.dev-tools = {file = ["requirements.tools.txt"]}
-optional-dependencies.dev-testing = {file = ["requirements.testing.txt"]}
-optional-dependencies.dev-typing = {file = ["requirements.typing.txt"]}
-optional-dependencies.dev-lint = {file = ["requirements.lint.txt"]}
-optional-dependencies.dev-audit = {file = ["requirements.audit.txt"]}
-optional-dependencies.dev-extra = {file = ["requirements.dev-extra.txt"]}
+optional-dependencies.dev-tools = {file = ["requirements/requirements.tools.txt"]}
+optional-dependencies.dev-testing = {file = ["requirements/requirements.testing.txt"]}
+optional-dependencies.dev-typing = {file = ["requirements/requirements.typing.txt"]}
+optional-dependencies.dev-lint = {file = ["requirements/requirements.lint.txt"]}
+optional-dependencies.dev-audit = {file = ["requirements/requirements.audit.txt"]}
+optional-dependencies.dev-extra = {file = ["requirements/requirements.dev-extra.txt"]}
 # Convenience bundles (note: requirements.txt already included via dependencies)
-optional-dependencies.all = {file = ["requirements.mcp.txt"]}
+optional-dependencies.all = {file = ["requirements/requirements.mcp.txt"]}
 optional-dependencies.dev = {file = [
-    "requirements.tools.txt",
-    "requirements.testing.txt",
-    "requirements.typing.txt",
-    "requirements.lint.txt",
-    "requirements.audit.txt",
-    "requirements.mcp.txt",
-    "requirements.dev-extra.txt"
+    "requirements/requirements.tools.txt",
+    "requirements/requirements.testing.txt",
+    "requirements/requirements.typing.txt",
+    "requirements/requirements.lint.txt",
+    "requirements/requirements.audit.txt",
+    "requirements/requirements.mcp.txt",
+    "requirements/requirements.dev-extra.txt"
 ]}
 
 [tool.pytest.ini_options]

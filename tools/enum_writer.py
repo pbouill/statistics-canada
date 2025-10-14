@@ -33,27 +33,32 @@ class InvalidEnumValueError(ValueError):
     pass
 
 
-class InvalidEnumCommentError(ValueError):
-    pass
-
-
 class EnumEntry:
     """A dataclass representing a single entry in an enum.
 
     Note: this class is not responsible for checking uniqueness of enum keys
     """
 
-    def __init__(self, name: str, value: int, comment: str | None = None):
-        # Clean and validate inputs before assignment
-        if isinstance(comment, str) and "\n" in comment:
-            # Clean newlines and other problematic characters from comments
-            comment = re.sub(r"\s+", " ", comment.strip())
-            if not comment:
-                comment = None
+    def __init__(
+        self,
+        name: str,
+        value: int,
+        doc_en: str | None = None,
+        doc_fr: str | None = None,
+    ):
+        """Initialize enum entry.
 
+        Args:
+            name: Enum member name (e.g., "ONTARIO")
+            value: Enum member value (e.g., 35)
+            doc_en: English documentation for the member
+            doc_fr: French documentation for the member
+
+        """
         self.name = name
         self.value = value
-        self.comment = comment
+        self.doc_en = doc_en
+        self.doc_fr = doc_fr
 
     @staticmethod
     def validate_name(name: str, check_case: bool = True) -> None:
@@ -76,18 +81,6 @@ class EnumEntry:
             raise InvalidEnumValueError(
                 f"Enum value must be an {int}, got {type(value)}"
             )
-
-    @staticmethod
-    def validate_comment(comment: str | None) -> None:
-        if comment is not None and not isinstance(comment, str):
-            raise InvalidEnumCommentError(
-                f"Enum comment must be a {str} or None, got {type(comment)}"
-            )
-        elif isinstance(comment, str) and "\n" in comment:
-            # Clean newlines and other problematic characters from comments
-            comment = re.sub(r"\s+", " ", comment.strip())
-            if not comment:
-                comment = None
 
     # Class-level cache for clean_name operations
     _clean_name_cache: dict[tuple[str, bool], str] = {}
@@ -188,31 +181,28 @@ class EnumEntry:
             raise InvalidEnumValueError(f"Enum value must be an {int}, got {type(v)}")
         self._value = v
 
-    @property
-    def comment(self) -> str | None:
-        return self._comment
-
-    @comment.setter
-    def comment(self, c: str | None):
-        if c is not None and not isinstance(c, str):
-            raise InvalidEnumCommentError(
-                f"Enum comment must be a {str} or None, got {type(c)}"
-            )
-        elif isinstance(c, str) and "\n" in c:
-            raise InvalidEnumCommentError("Enum comment cannot contain newlines")
-        self._comment = c
-
     def __str__(self) -> str:
-        # Strip trailing whitespace from comment to comply with ruff W291
-        comment_str = self.comment.rstrip() if self.comment else ""
-        return f"{self.name} = {self.value}" + (
-            f"  # {comment_str}" if comment_str else ""
-        )
+        """Generate enum member with bilingual docstrings using tuple syntax."""
+        if self.doc_en and self.doc_fr:
+            # Escape quotes for proper string literals
+            doc_en_escaped = self.doc_en.replace('"', '\\"')
+            doc_fr_escaped = self.doc_fr.replace('"', '\\"')
+            return (
+                f'{self.name} = {self.value}, '
+                f'"{doc_en_escaped}", "{doc_fr_escaped}"'
+            )
+        elif self.doc_en or self.doc_fr:
+            # If only one language is provided, use it for both
+            doc = (self.doc_en or self.doc_fr or "").replace('"', '\\"')
+            return f'{self.name} = {self.value}, "{doc}", "{doc}"'
+        else:
+            # No documentation
+            return f"{self.name} = {self.value}"
 
     def __repr__(self) -> str:
         return (
             f"{self.__class__.__name__}(name={self.name!r}, value={self.value!r}, "
-            f"comment={self.comment!r})"
+            f"doc_en={self.doc_en!r}, doc_fr={self.doc_fr!r})"
         )
 
 
@@ -469,6 +459,32 @@ class AbstractEnumWriter(ABC):
             )
 
         f.write("\n")  # Blank line after class docstring (D204)
+
+        # Write custom __new__ method to support bilingual member docstrings
+        new_method_sig = (
+            "def __new__(\n"
+            + " " * (cls_indent + 4)
+            + "cls,\n"
+            + " " * (cls_indent + 4)
+            + "value: int,\n"
+            + " " * (cls_indent + 4)
+            + "doc_en: str | None = None,\n"
+            + " " * (cls_indent + 4)
+            + "doc_fr: str | None = None,\n"
+            + " " * cls_indent
+            + "):\n"
+        )
+        f.write(" " * cls_indent + new_method_sig)
+        new_method_doc = '"""Create enum member with bilingual docstrings."""\n'
+        f.write(" " * (cls_indent + 4) + new_method_doc)
+        f.write(" " * (cls_indent + 4) + "obj = object.__new__(cls)\n")
+        f.write(" " * (cls_indent + 4) + "obj._value_ = value\n")
+        f.write(" " * (cls_indent + 4) + "obj.__doc_en__ = doc_en\n")
+        f.write(" " * (cls_indent + 4) + "obj.__doc_fr__ = doc_fr\n")
+        f.write(" " * (cls_indent + 4) + "# Set __doc__ to English by default\n")
+        f.write(" " * (cls_indent + 4) + "obj.__doc__ = doc_en\n")
+        f.write(" " * (cls_indent + 4) + "return obj\n")
+        f.write("\n")
 
         for e in entries:
             cls.write_enum_entry(f=f, entry=e, indent=cls_indent)

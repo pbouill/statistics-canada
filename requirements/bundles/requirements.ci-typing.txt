@@ -1,0 +1,34 @@
+# ======================================================================================
+# CI Type Checking Requirements
+# ======================================================================================
+#
+# Description:
+#   Consolidated requirements file for CI/CD type checking workflows.
+#   This file references all dependencies needed for MyPy type checking in CI.
+#
+# Usage:
+#   pip install -r requirements.ci-typing.txt
+#
+# Contents:
+#   - Core runtime dependencies (requirements.txt)
+#   - Code generation tools (requirements.tools.txt)
+#   - Test framework (requirements.testing.txt)
+#   - MCP server support (requirements.mcp.txt)
+#   - Type stubs and MyPy (requirements.typing.txt)
+#
+# ======================================================================================
+
+# Core dependencies - needed for type checking main package
+-r ../../requirements.txt
+
+# Tools dependencies - needed for type checking code generation tools
+-r ../requirements.tools.txt
+
+# Testing dependencies - needed for type checking test files
+-r ../requirements.testing.txt
+
+# MCP dependencies - needed for type checking MCP server
+-r ../requirements.mcp.txt
+
+# Type checking tools and stubs
+-r ../requirements.typing.txt

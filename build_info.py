@@ -585,8 +585,8 @@ if __name__ == "__main__":
                 logger.info(f"No update needed for version file at: {version_file}")
 
         if args.property:
-            pass
+            print(getattr(bi, args.property))  # noqa: T201
         else:
-            pass
+            print(bi.to_json())  # noqa: T201
 
         sys.exit(0)
