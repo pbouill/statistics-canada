@@ -1,0 +1,16 @@
+# Install base requirements
+-r ../../requirements.txt
+-r ../requirements.tools.txt
+
+# Install specialized requirement sets
+-r ../requirements.testing.txt
+-r ../requirements.typing.txt
+-r ../requirements.lint.txt
+-r ../requirements.audit.txt
+-r ../requirements.mcp.txt
+
+# Additional development dependencies (Jupyter, build tools, etc.)
+-r ../requirements.dev-extra.txt
+
+# Install package in editable mode (relative to CWD where pip is run)
+-e .

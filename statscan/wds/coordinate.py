@@ -21,6 +21,7 @@ from pydantic_core import core_schema
 from statscan.enums.auto.wds.scalar import Scalar
 from statscan.enums.auto.wds.status import Status
 from statscan.enums.auto.wds.symbol import Symbol
+from statscan.util import find_best_match
 
 from .models.dimension import DimensionManager
 from .models.member import Member, MemberManager
@@ -217,27 +218,54 @@ class Coordinate:
         return f"Coordinate {self.coordinate_string}:\n  " + "\n  ".join(descriptions)
 
     @classmethod
-    def build_from_parameters(
+    def build_from_parameters(  # noqa: PLR0912
         cls,
         dimension_manager: DimensionManager,
-        **dimension_values: dict[str, str | int],
+        **dimension_values: str | int,
     ) -> Self:
         """Build a coordinate from dimension parameters.
 
+        Accepts dimension values as:
+        - **int**: Direct member ID (fastest)
+        - **Enum**: Any enum with a .value attribute (e.g., CensusSubdivision)
+        - **str**: Member name for fuzzy search (case-insensitive partial match)
+
         Args:
             dimension_manager: Manager with dimension metadata
-            **dimension_values: Dimension name -> member name/ID mappings
+            **dimension_values: Dimension name -> member value mappings
+
+        Returns:
+            Coordinate object with dimension context
+
+        Raises:
+            ValueError: If dimension name or member value not found
 
         Example:
+            # Using enum
+            coord = Coordinate.build_from_parameters(
+                dim_manager,
+                Geographic=CensusSubdivision.ONT_SAUGEEN_SHORES,
+                **{"Population and dwelling counts": 1}
+            )
+
+            # Using string search
             coord = Coordinate.build_from_parameters(
                 dim_manager,
                 Geography="Canada",
-                Gender="Men+",
-                Age="Total - Age"
+                Gender="Men+"
+            )
+
+            # Using direct IDs
+            coord = Coordinate.build_from_parameters(
+                dim_manager,
+                Geographic=1,
+                Gender=2
             )
 
         """
-        member_ids = [0] * 10  # Default WDS coordinate length
+        # Initialize member_ids based on actual dimension count
+        dimension_count = len(dimension_manager.dimensions)
+        member_ids = [0] * dimension_count
 
         # Map dimension values to member IDs
         for dim_name, value in dimension_values.items():
@@ -252,22 +280,68 @@ class Coordinate:
             if not dimension:
                 raise ValueError(f"Dimension '{dim_name}' not found")
 
-            # Find member by name or ID
+            # Extract member ID from value (supports int, enum, or string)
             member_id = None
+
+            # Case 1: Direct integer ID
             if isinstance(value, int):
                 member_id = value
+                logger.debug(
+                    f"Using direct member ID {member_id} for "
+                    f"dimension '{dimension.dimensionNameEn}'"
+                )
+
+            # Case 2: Enum with .value attribute
+            elif hasattr(value, "value"):
+                member_id = value.value
+                logger.debug(
+                    f"Extracted member ID {member_id} from enum "
+                    f"for dimension '{dimension.dimensionNameEn}'"
+                )
+
+            # Case 3: String search (fuzzy matching)
             else:
-                # Search by name
                 value_str = str(value).lower()
+
                 if dimension.member:
+                    # Try exact match first
                     for member in dimension.member:
-                        if value_str in member.memberNameEn.lower():
+                        if value_str == member.memberNameEn.lower():
                             member_id = member.memberId
+                            logger.debug(
+                                f"Exact match: '{member.memberNameEn}' "
+                                f"(ID {member_id}) in dimension "
+                                f"'{dimension.dimensionNameEn}'"
+                            )
                             break
 
+                    # Fall back to fuzzy matching using utility
+                    if member_id is None:
+                        member_names = [m.memberNameEn for m in dimension.member]
+                        best_match = find_best_match(
+                            str(value), member_names, cutoff=0.6
+                        )
+
+                        if best_match:
+                            # Find the member ID for the matched name
+                            for member in dimension.member:
+                                if member.memberNameEn == best_match:
+                                    member_id = member.memberId
+                                    logger.warning(
+                                        f"Fuzzy match: Using '{member.memberNameEn}' "
+                                        f"(ID {member_id}) for search term '{value}' "
+                                        f"in dimension '{dimension.dimensionNameEn}'. "
+                                        f"Consider using exact name or member ID."
+                                    )
+                                    break
+
             if member_id is None:
+                available = [m.memberNameEn for m in dimension.member[:5]]
                 raise ValueError(
-                    f"Member '{value}' not found in dimension '{dim_name}'"
+                    f"Member '{value}' not found in dimension '{dim_name}'. "
+                    f"Available members (first 5): {available}"
+                    if dimension.member
+                    else f"Member '{value}' not found in dimension '{dim_name}'"
                 )
 
             # Set the member ID at the correct position

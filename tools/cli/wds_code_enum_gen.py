@@ -29,11 +29,11 @@ class CodeSetEnumWriter(AbstractEnumWriter):
 
         for code_value, code in code_iter:
             # Handle empty or None descriptions more efficiently
-            desc_en = code.desc_en or f"CODE_{code_value}"
+            desc_for_name = code.desc_en or f"CODE_{code_value}"
 
             # Process text with substitution and word tracking
             name = self.process_text_with_substitution(
-                original_text=desc_en,
+                original_text=desc_for_name,
                 source_identifier=f"CodeSet:{codeset_name}",
                 truncate=True,
             )
@@ -43,22 +43,16 @@ class CodeSetEnumWriter(AbstractEnumWriter):
             except ValueError:
                 name = "UNKNOWN"
 
-            # Build comment more efficiently - avoid None concatenation
-            if code.desc_en and code.desc_fr:
-                desc = f"{code.desc_en}  // {code.desc_fr}"
-            elif code.desc_en:
-                desc = code.desc_en
-            elif code.desc_fr:
-                desc = code.desc_fr
-            else:
-                desc = None
+            # Extract bilingual descriptions (can be None)
+            desc_en = code.desc_en
+            desc_fr = code.desc_fr
 
             if code_value in entries_dict:
                 raise InvalidEnumValueError(
                     f"Duplicate code value detected: {code_value}"
                 )
             entries_dict[code_value] = EnumEntry(
-                name=name, value=code_value, comment=desc
+                name=name, value=code_value, doc_en=desc_en, doc_fr=desc_fr
             )
 
         logger.info(f"Completed processing {total_codes} codes")

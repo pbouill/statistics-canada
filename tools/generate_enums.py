@@ -151,6 +151,32 @@ def write_enum_class(
     # Add blank line after class docstring (D204 compliance)
     f.write("\n")
 
+    # Add custom __new__ method to support bilingual member docstrings
+    new_method_sig = (
+        "def __new__(\n"
+        + " " * (indent + 4)
+        + "cls,\n"
+        + " " * (indent + 4)
+        + "value: int,\n"
+        + " " * (indent + 4)
+        + "doc_en: str | None = None,\n"
+        + " " * (indent + 4)
+        + "doc_fr: str | None = None,\n"
+        + " " * indent
+        + "):\n"
+    )
+    f.write(" " * indent + new_method_sig)
+    new_method_doc = '"""Create enum member with bilingual docstrings."""\n'
+    f.write(" " * (indent + 4) + new_method_doc)
+    f.write(" " * (indent + 4) + "obj = object.__new__(cls)\n")
+    f.write(" " * (indent + 4) + "obj._value_ = value\n")
+    f.write(" " * (indent + 4) + "obj.__doc_en__ = doc_en\n")
+    f.write(" " * (indent + 4) + "obj.__doc_fr__ = doc_fr\n")
+    f.write(" " * (indent + 4) + "# Set __doc__ to English by default\n")
+    f.write(" " * (indent + 4) + "obj.__doc__ = doc_en\n")
+    f.write(" " * (indent + 4) + "return obj\n")
+    f.write("\n")
+
     # write any class attributes, use inspect to find them
     for k, v in inspect.get_annotations(cls_template).items():
         print(k, v, getattr(cls_template, k, None))
@@ -213,13 +239,33 @@ def write_enum_class(
                     f"Missing column in DataFrame: {e}. Columns: {df.columns.tolist()}"
                 )
                 raise e
+
             entry = f"{row[KEY_COLUMN]} = "
             if isinstance(cls_template, StrEnum):
                 entry += f"'{value}'"
             else:
-                entry += f"{value}  # {name}"
-            if desc:
-                entry += f" ({desc})"
+                # Parse bilingual name (format: "English / French" or just "Name")
+                if " / " in name:
+                    name_en, name_fr = name.split(" / ", 1)
+                else:
+                    name_en = name_fr = name
+
+                # Build docstrings from names and optional description
+                doc_en_parts = [name_en]
+                doc_fr_parts = [name_fr]
+                if desc:
+                    # Parse bilingual description if present
+                    if " / " in desc:
+                        desc_en, desc_fr = desc.split(" / ", 1)
+                        doc_en_parts.append(f"({desc_en})")
+                        doc_fr_parts.append(f"({desc_fr})")
+                    else:
+                        doc_en_parts.append(f"({desc})")
+                        doc_fr_parts.append(f"({desc})")
+
+                doc_en = " ".join(doc_en_parts).replace('"', '\\"')
+                doc_fr = " ".join(doc_fr_parts).replace('"', '\\"')
+                entry += f'{value}, "{doc_en}", "{doc_fr}"'
             f.write(" " * indent + f"{entry}\n")
 
     if not skip_methods:
@@ -548,7 +594,7 @@ if __name__ == "__main__":
         df=df,
         cls_templates={
             ProvinceTerritory: (
-                GeoAttributeColumn2021.PRENAME_PRANOM,  # enum_name_col
+                GeoAttributeColumn2021.PRNAME_PRNOM,  # enum_name_col (bilingual)
                 GeoAttributeColumn2021.PRUID_PRIDU,  # enum_value_col
                 None,  # enum_desc_col
                 None,  # name/key prefix (not used for provinces)

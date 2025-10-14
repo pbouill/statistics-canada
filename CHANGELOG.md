@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- feat: Enhance Coordinate Building and Validation ([#20](https://github.com/pbouill/statistics-canada/pull/20)) by @pbouill
+
 - refactor: optimize CI/CD with granular requirements and clear naming … ([#19](https://github.com/pbouill/statistics-canada/pull/19)) by @pbouill
 
 - Fix: Address Copilot PR #17 review comments and code style improvements ([#18](https://github.com/pbouill/statistics-canada/pull/18)) by @pbouill
