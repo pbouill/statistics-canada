@@ -31,7 +31,7 @@ import sqlite3
 import tempfile
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Self
 
 import pandas as pd
 
@@ -785,7 +785,7 @@ class DataFrameCache:
             self.conn.close()
             logger.info("Cache connection closed")
 
-    def __enter__(self) -> DataFrameCache:
+    def __enter__(self) -> Self:
         """Context manager entry."""
         return self
 
