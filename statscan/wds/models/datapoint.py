@@ -21,7 +21,7 @@ class DataPoint(WDSBaseModel):
     refPer2: date | str | None = None
     refPerRaw: date | str
     refPerRaw2: date | str | None = None
-    value: float | int
+    value: float | int | None
     decimals: int
     scalarFactorCode: Scalar | int
     symbolCode: Symbol | int
